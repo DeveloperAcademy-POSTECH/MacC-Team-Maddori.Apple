@@ -3,7 +3,7 @@ name: "\U0001F41E Bug report"
 about: 개발 중 생긴 버그를 작성합니다.
 title: ''
 labels: "\U0001F41E Bugfix"
-assignees: MMMIIIN
+assignees: ''
 
 ---
 
