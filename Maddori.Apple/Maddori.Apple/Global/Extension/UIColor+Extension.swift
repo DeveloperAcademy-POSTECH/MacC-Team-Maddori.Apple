@@ -11,7 +11,7 @@ extension UIColor {
     
     // MARK: - background
     
-    static var backgrounWhite: UIColor {
+    static var backgroundWhite: UIColor {
         return UIColor(hex: "#FDFDFD")
     }
     

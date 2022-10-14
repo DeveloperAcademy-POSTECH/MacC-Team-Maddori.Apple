@@ -26,7 +26,7 @@ final class MainViewController: BaseViewController {
     }
     
     override func configUI() {
-        view.backgroundColor = .backgrounWhite
+        view.backgroundColor = .backgroundWhite
     }
     
     override func render() {
