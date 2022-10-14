@@ -7,17 +7,33 @@
 
 import UIKit
 
+import SnapKit
+
 final class MainViewController: BaseViewController {
-    private let testLabel: UILabel = {
-        let label = UILabel(frame: .init(origin: .init(x: 100, y: 100), size: .init(width: 100, height: 100)))
-        label.text = "Chemi"
-        label.font = .font(.thin, ofSize: 20)
-        return label
+    
+    // MARK: - property
+    
+    private let mainButton: MainButton = {
+        let button = MainButton()
+        button.title = "예시"
+        return button
     }()
+    
+    // MARK: - life cycle
+    
     override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+    
+    override func configUI() {
         view.backgroundColor = .backgrounWhite
-        print(UIFont.fontNames(forFamilyName: "Apple SD Gothic Neo"))
-        view.addSubview(testLabel)
-//        print(UIFont.familyNames)
+    }
+    
+    override func render() {
+        view.addSubview(mainButton)
+        mainButton.snp.makeConstraints {
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(20)
+            $0.centerX.equalToSuperview()
+        }
     }
 }
