@@ -8,8 +8,23 @@
 import UIKit
 
 extension UIColor {
+    
+    // MARK: - background
+    
     static var backgrounWhite: UIColor {
         return UIColor(hex: "#FDFDFD")
+    }
+    
+    // MARK: - blue
+    
+    static var mainBlue: UIColor {
+        return UIColor(hex: "#4776FB")
+    }
+    
+    // MARK: - gray
+    
+    static var disableGray: UIColor {
+        return UIColor(hex: "#E9E9E9")
     }
 }
 

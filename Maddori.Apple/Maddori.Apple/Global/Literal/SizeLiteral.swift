@@ -7,6 +7,6 @@
 
 import Foundation
 
-enum Size {
+enum SizeLiteral {
     static let leadingTrailingPadding: CGFloat = 24
 }
