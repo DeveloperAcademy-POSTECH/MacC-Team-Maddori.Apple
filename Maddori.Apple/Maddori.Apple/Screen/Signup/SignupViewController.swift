@@ -131,7 +131,7 @@ final class SignupViewController: BaseViewController {
                 let fixedText = text[text.startIndex..<endIndex]
                 textField.text = fixedText + " "
                 
-                let when = DispatchTime.now() + 0.01
+                let when = DispatchTime.now()
                 DispatchQueue.main.asyncAfter(deadline: when) {
                     self.nicknameTextField.text = String(fixedText)
                     self.setCounter(count: textField.text?.count ?? 0)
