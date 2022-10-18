@@ -33,13 +33,13 @@ final class AddReflectionViewController: BaseViewController {
         return label
     }()
     private let reflectionNameView = ReflectionNameView()
-//    private let reflectionNameLabel: UILabel = {
-//        let label = UILabel()
-//        label.text = TextLiteral.addReflectionViewControllerName
-//        label.font = .label2
-//        label.textColor = .black100
-//        return label
-//    }()
+    private let reflectionDateLabel: UILabel = {
+        let label = UILabel()
+        label.text = TextLiteral.addReflectionViewControllerDateLabel
+        label.font = .label2
+        label.textColor = .black100
+        return label
+    }()
     
     // MARK: - life cycle
     
@@ -66,6 +66,12 @@ final class AddReflectionViewController: BaseViewController {
             $0.leading.trailing.equalToSuperview().inset(24)
             $0.top.equalTo(titleLabel.snp.bottom).offset(40)
             $0.height.equalTo(103)
+        }
+        
+        view.addSubview(reflectionDateLabel)
+        reflectionDateLabel.snp.makeConstraints {
+            $0.leading.equalToSuperview().inset(24)
+            $0.top.equalTo(reflectionNameView.snp.bottom).offset(29)
         }
     }
 }

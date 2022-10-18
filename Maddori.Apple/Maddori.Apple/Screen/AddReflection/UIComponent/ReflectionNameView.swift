@@ -36,7 +36,7 @@ final class ReflectionNameView: UIView {
         textField.textColor = .black100
         return textField
     }()
-    private lazy var countTextLabel: UILabel = {
+    private let countTextLabel: UILabel = {
         let label = UILabel()
         label.text = "0/15"
         label.font = .body2
