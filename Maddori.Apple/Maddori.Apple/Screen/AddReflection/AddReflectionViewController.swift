@@ -40,6 +40,20 @@ final class AddReflectionViewController: BaseViewController {
         label.textColor = .black100
         return label
     }()
+    private lazy var datePicker: UIDatePicker = {
+        let picker = UIDatePicker()
+        let action = UIAction { [weak self] _ in
+            picker.subviews.first?.subviews.first?.subviews.first?.backgroundColor = .white300
+        }
+        picker.datePickerMode = .date
+        picker.locale = Locale(identifier: "ko_KR")
+        picker.preferredDatePickerStyle = .compact
+        picker.subviews.first?.subviews.first?.subviews.first?.backgroundColor = .white300
+        picker.subviews.first?.subviews.first?.subviews.first?.layer.borderWidth = 1
+        picker.subviews.first?.subviews.first?.subviews.first?.layer.borderColor = UIColor.gray100.cgColor
+        picker.addAction(action, for: .valueChanged)
+        return picker
+    }()
     
     // MARK: - life cycle
     
@@ -72,6 +86,12 @@ final class AddReflectionViewController: BaseViewController {
         reflectionDateLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(24)
             $0.top.equalTo(reflectionNameView.snp.bottom).offset(29)
+        }
+        
+        view.addSubview(datePicker)
+        datePicker.snp.makeConstraints {
+            $0.centerY.equalTo(reflectionDateLabel.snp.centerY)
+            $0.leading.equalTo(reflectionDateLabel.snp.trailing).offset(25)
         }
     }
 }
