@@ -7,6 +7,13 @@
 
 import UIKit
 
+enum ImageLiterals {
+    
+    // MARK: - icon
+    
+    static var icClose: UIImage { .load(systemName: "xmark")}
+}
+
 extension UIImage {
     static func load(name: String) -> UIImage {
         guard let image = UIImage(named: name, in: nil, compatibleWith: nil) else {
@@ -17,7 +24,7 @@ extension UIImage {
     }
     
     static func load(systemName: String) -> UIImage {
-        guard let image = UIImage(systemName: systemName, compatibleWith: nil) else {
+        guard let image = UIImage(systemName: systemName) else {
             return UIImage()
         }
         image.accessibilityIdentifier = systemName
