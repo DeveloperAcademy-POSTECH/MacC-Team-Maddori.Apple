@@ -9,10 +9,6 @@ import UIKit
 
 enum FontName: String {
     case regular = "AppleSDGothicNeo-Regular"
-    case thin = "AppleSDGothicNeo-Thin"
-    case ultraLight = "AppleSDGothicNeo-UltraLight"
-    case light = "AppleSDGothicNeo-Light"
-    case medium = "AppleSDGothicNeo-Medium"
     case semibold = "AppleSDGothicNeo-SemiBold"
     case bold = "AppleSDGothicNeo-Bold"
 }
@@ -20,5 +16,37 @@ enum FontName: String {
 extension UIFont {
     static func font(_ style: FontName, ofSize size: CGFloat) -> UIFont {
         return UIFont(name: style.rawValue, size: size)!
+    }
+    
+    static var title: UIFont {
+        return font(.bold, ofSize: 28)
+    }
+    
+    static var main: UIFont {
+        return font(.bold, ofSize: 18)
+    }
+    
+    static var label1: UIFont {
+        return font(.semibold, ofSize: 18)
+    }
+    
+    static var label2: UIFont {
+        return font(.semibold, ofSize: 16)
+    }
+    
+    static var body1: UIFont {
+        return font(.regular, ofSize: 16)
+    }
+    
+    static var body2: UIFont {
+        return font(.regular, ofSize: 14)
+    }
+    
+    static var caption1: UIFont {
+        return font(.regular, ofSize: 15)
+    }
+    
+    static var caption2: UIFont {
+        return font(.semibold, ofSize: 12)
     }
 }
