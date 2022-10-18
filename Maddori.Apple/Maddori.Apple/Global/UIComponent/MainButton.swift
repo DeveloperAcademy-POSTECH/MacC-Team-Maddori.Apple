@@ -12,7 +12,7 @@ import SnapKit
 final class MainButton: UIButton {
     private enum Size {
         static let width: CGFloat = UIScreen.main.bounds.width - (SizeLiteral.leadingTrailingPadding * 2)
-        static let height: CGFloat = 50
+        static let height: CGFloat = 54
     }
     
     override init(frame: CGRect) {
