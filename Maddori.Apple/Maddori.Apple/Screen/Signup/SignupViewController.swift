@@ -18,14 +18,14 @@ final class SignupViewController: BaseViewController {
     // MARK: - property
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "키고에서 사용할 \n닉네임을 입력해주세요"
+        label.text = TextLiteral.signupViewControllerTitleLabel
         label.font = .title
         label.numberOfLines = 2
         return label
     }()
     private let nicknameTextField: KigoTextField = {
         let textField = KigoTextField()
-        textField.inText = "예) 진저, 호야, 성민"
+        textField.inText = TextLiteral.signupViewControllerNicknameTextFieldPlaceHolder
         return textField
     }()
     private lazy var textLimitLabel: UILabel = {
@@ -37,7 +37,7 @@ final class SignupViewController: BaseViewController {
     }()
     private let doneButton: MainButton = {
         let button = MainButton()
-        button.title = "입력완료"
+        button.title = TextLiteral.signupViewControllerDoneButtonTitle
         button.isDisabled = true
         return button
     }()
