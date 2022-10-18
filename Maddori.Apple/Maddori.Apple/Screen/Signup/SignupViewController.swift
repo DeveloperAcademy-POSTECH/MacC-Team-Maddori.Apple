@@ -51,10 +51,6 @@ final class SignupViewController: BaseViewController {
         setupDelegate()
     }
     
-    override func configUI() {
-        super.configUI()
-    }
-    
     override func render() {
         view.addSubview(titleLabel)
         titleLabel.snp.makeConstraints {
@@ -64,7 +60,7 @@ final class SignupViewController: BaseViewController {
         
         view.addSubview(nicknameTextField)
         nicknameTextField.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.bottom).offset(39)
+            $0.top.equalTo(titleLabel.snp.bottom).offset(40)
             $0.centerX.equalToSuperview()
         }
         
