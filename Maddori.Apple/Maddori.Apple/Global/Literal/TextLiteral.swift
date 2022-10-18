@@ -16,4 +16,5 @@ enum TextLiteral {
     // MARK: - AddReflectionViewController
     
     static let addReflectionViewControllerTitle = "새로운 회고 정보를\n입력해주세요"
+    static let addReflectionViewControllerName = "회고 이름"
 }
