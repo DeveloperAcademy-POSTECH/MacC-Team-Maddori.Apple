@@ -55,6 +55,12 @@ final class SignupViewController: BaseViewController {
         return label
     }()
     
+    private let doneButton: MainButton = {
+        let button = MainButton()
+        button.title = "입력완료"
+        return button
+    }()
+    
     // MARK: - life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -84,6 +90,12 @@ final class SignupViewController: BaseViewController {
         textLimitLabel.snp.makeConstraints {
             $0.top.equalTo(nicknameTextField.snp.bottom).offset(4)
             $0.trailing.equalToSuperview().inset(27)
+        }
+        
+        view.addSubview(doneButton)
+        doneButton.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.bottom.equalTo(view.safeAreaLayoutGuide)
         }
     }
     // MARK: - function
