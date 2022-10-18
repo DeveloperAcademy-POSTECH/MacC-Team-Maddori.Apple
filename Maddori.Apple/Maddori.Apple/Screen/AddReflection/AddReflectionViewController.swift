@@ -32,6 +32,13 @@ final class AddReflectionViewController: BaseViewController {
         label.textColor = .black100
         return label
     }()
+    private let reflectionNameLabel: UILabel = {
+        let label = UILabel()
+        label.text = TextLiteral.addReflectionViewControllerName
+        label.font = .label2
+        label.textColor = .black100
+        return label
+    }()
     
     // MARK: - life cycle
     
@@ -51,6 +58,12 @@ final class AddReflectionViewController: BaseViewController {
         titleLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(24)
             $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(64)
+        }
+        
+        view.addSubview(reflectionNameLabel)
+        reflectionNameLabel.snp.makeConstraints {
+            $0.leading.equalToSuperview().inset(24)
+            $0.top.equalTo(titleLabel.snp.bottom).offset(40)
         }
     }
 }
