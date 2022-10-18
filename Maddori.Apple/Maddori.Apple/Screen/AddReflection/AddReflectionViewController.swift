@@ -117,7 +117,7 @@ final class AddReflectionViewController: BaseViewController {
         view.addSubview(timePicker)
         timePicker.snp.makeConstraints {
             $0.centerY.equalTo(reflectionDateLabel.snp.centerY)
-            $0.trailing.equalToSuperview().inset(24)
+            $0.trailing.equalToSuperview().inset(18)
         }
         
         view.addSubview(mainButton)
