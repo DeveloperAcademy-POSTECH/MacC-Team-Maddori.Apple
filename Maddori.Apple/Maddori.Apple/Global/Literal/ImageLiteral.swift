@@ -7,6 +7,13 @@
 
 import UIKit
 
+enum ImageLiterals {
+    
+    // MARK: - navigation
+    
+    static var exitButton: UIImage { .load(name: "exitButton") }
+}
+
 extension UIImage {
     static func load(name: String) -> UIImage {
         guard let image = UIImage(named: name, in: nil, compatibleWith: nil) else {

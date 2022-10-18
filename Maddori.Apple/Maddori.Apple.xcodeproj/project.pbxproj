@@ -27,6 +27,8 @@
 		395C7E1328F9841A00FC2FCA /* SizeLiteral.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395C7E1228F9841A00FC2FCA /* SizeLiteral.swift */; };
 		395C7E1628F984B300FC2FCA /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 395C7E1528F984B300FC2FCA /* SnapKit */; };
 		395C7E1828F9912700FC2FCA /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395C7E1728F9912700FC2FCA /* UIButton+Extension.swift */; };
+		525E721528FEEE8500EF3FCB /* AddFeedbackMemberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525E721428FEEE8500EF3FCB /* AddFeedbackMemberViewController.swift */; };
+		525E721728FEF2C500EF3FCB /* ExitButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525E721628FEF2C500EF3FCB /* ExitButton.swift */; };
 		7E6B662F28FE887300C3BEEF /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6B662E28FE887300C3BEEF /* UILabel+Extension.swift */; };
 /* End PBXBuildFile section */
 
@@ -52,6 +54,8 @@
 		395C7E1028F9834A00FC2FCA /* SampleDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleDTO.swift; sourceTree = "<group>"; };
 		395C7E1228F9841A00FC2FCA /* SizeLiteral.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeLiteral.swift; sourceTree = "<group>"; };
 		395C7E1728F9912700FC2FCA /* UIButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
+		525E721428FEEE8500EF3FCB /* AddFeedbackMemberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFeedbackMemberViewController.swift; sourceTree = "<group>"; };
+		525E721628FEF2C500EF3FCB /* ExitButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExitButton.swift; sourceTree = "<group>"; };
 		7E6B662E28FE887300C3BEEF /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -104,6 +108,7 @@
 		39257DD928F90EB100201E0B /* Screen */ = {
 			isa = PBXGroup;
 			children = (
+				525E721228FE9B4F00EF3FCB /* AddFeedback */,
 				39257DDF28F90F3B00201E0B /* Main */,
 			);
 			path = Screen;
@@ -162,6 +167,7 @@
 			isa = PBXGroup;
 			children = (
 				395C7E0C28F959A500FC2FCA /* MainButton.swift */,
+				525E721628FEF2C500EF3FCB /* ExitButton.swift */,
 			);
 			path = UIComponent;
 			sourceTree = "<group>";
@@ -213,6 +219,22 @@
 				39257DDD28F90EF900201E0B /* Sample.swift */,
 			);
 			path = Response;
+			sourceTree = "<group>";
+		};
+		525E721228FE9B4F00EF3FCB /* AddFeedback */ = {
+			isa = PBXGroup;
+			children = (
+				525E721328FE9C5600EF3FCB /* AddFeedbackMember */,
+			);
+			path = AddFeedback;
+			sourceTree = "<group>";
+		};
+		525E721328FE9C5600EF3FCB /* AddFeedbackMember */ = {
+			isa = PBXGroup;
+			children = (
+				525E721428FEEE8500EF3FCB /* AddFeedbackMemberViewController.swift */,
+			);
+			path = AddFeedbackMember;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -296,6 +318,7 @@
 				39257DEB28F9373900201E0B /* BaseViewController.swift in Sources */,
 				39257DDE28F90EF900201E0B /* Sample.swift in Sources */,
 				395C7E1828F9912700FC2FCA /* UIButton+Extension.swift in Sources */,
+				525E721728FEF2C500EF3FCB /* ExitButton.swift in Sources */,
 				395C7E1328F9841A00FC2FCA /* SizeLiteral.swift in Sources */,
 				39257DC528F8FEBD00201E0B /* AppDelegate.swift in Sources */,
 				39257DC728F8FEBD00201E0B /* SceneDelegate.swift in Sources */,
@@ -307,6 +330,7 @@
 				39257DED28F9378D00201E0B /* BaseCollectionViewCell.swift in Sources */,
 				39257DF328F93D8900201E0B /* TextLiteral.swift in Sources */,
 				395C7E0D28F959A500FC2FCA /* MainButton.swift in Sources */,
+				525E721528FEEE8500EF3FCB /* AddFeedbackMemberViewController.swift in Sources */,
 				39257DF528F93E4700201E0B /* UIColor+Extension.swift in Sources */,
 				395C7E0328F945B500FC2FCA /* UIFont+Extension.swift in Sources */,
 			);
