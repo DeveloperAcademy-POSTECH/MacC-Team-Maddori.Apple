@@ -66,6 +66,7 @@ final class SignupViewController: BaseViewController {
         super.viewDidLoad()
         configUI()
         render()
+        setupNotificationCenter()
     }
     
     override func configUI() {
@@ -99,8 +100,31 @@ final class SignupViewController: BaseViewController {
         }
     }
     // MARK: - function
+    private func setupNotificationCenter() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    override func endEditingView() {
+        if !doneButton.isTouchInside {
+            view.endEditing(true)
+        }
+    }
     
     // MARK: - selector
+    @objc private func keyboardWillShow(notification:NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            UIView.animate(withDuration: 0.2, animations: {
+                self.doneButton.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height + 30)
+            })
+        }
+    }
+    
+    @objc private func keyboardWillHide(notification:NSNotification) {
+        UIView.animate(withDuration: 0.2, animations: {
+            self.doneButton.transform = .identity
+        })
+    }
 }
 
 
