@@ -68,6 +68,12 @@ final class AddReflectionViewController: BaseViewController {
         picker.addAction(action, for: .valueChanged)
         return picker
     }()
+    private let mainButton: MainButton = {
+        let button = MainButton()
+        button.isDisabled = true
+        button.title = "추가하기"
+        return button
+    }()
     
     // MARK: - life cycle
     
@@ -112,6 +118,12 @@ final class AddReflectionViewController: BaseViewController {
         timePicker.snp.makeConstraints {
             $0.centerY.equalTo(reflectionDateLabel.snp.centerY)
             $0.trailing.equalToSuperview().inset(24)
+        }
+        
+        view.addSubview(mainButton)
+        mainButton.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(2)
         }
     }
 }
