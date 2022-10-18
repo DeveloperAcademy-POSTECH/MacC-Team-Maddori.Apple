@@ -16,6 +16,7 @@ final class SignupViewController: BaseViewController {
     private var nickname: String = ""
     
     // MARK: - property
+    
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = TextLiteral.signupViewControllerTitleLabel
@@ -30,7 +31,7 @@ final class SignupViewController: BaseViewController {
     }()
     private lazy var textLimitLabel: UILabel = {
         let label = UILabel()
-        label.text = "\(minLength)/\(maxLength)"
+        label.setTextWithLineHeight(text: "\(minLength)/\(maxLength)", lineHeight: 22)
         label.font = .body2
         label.textColor = .gray500
         return label
@@ -43,6 +44,7 @@ final class SignupViewController: BaseViewController {
     }()
     
     // MARK: - life cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configUI()
@@ -54,7 +56,7 @@ final class SignupViewController: BaseViewController {
     override func render() {
         view.addSubview(titleLabel)
         titleLabel.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.leadingTrailingPadding)
+            $0.top.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.topPadding)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
@@ -77,6 +79,7 @@ final class SignupViewController: BaseViewController {
         }
     }
     // MARK: - function
+    
     private func setupNotificationCenter() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -118,6 +121,7 @@ final class SignupViewController: BaseViewController {
     }
     
     // MARK: - selector
+    
     @objc private func keyboardWillShow(notification:NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             UIView.animate(withDuration: 0.2, animations: {
@@ -134,6 +138,7 @@ final class SignupViewController: BaseViewController {
 }
 
 // MARK: - Extension
+
 extension SignupViewController: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
         setCounter(count: textField.text?.count ?? 0)
