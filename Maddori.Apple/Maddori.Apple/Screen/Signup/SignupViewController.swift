@@ -23,27 +23,9 @@ final class SignupViewController: BaseViewController {
         label.numberOfLines = 2
         return label
     }()
-    private let nicknameTextField: UITextField = {
-        let textField = UITextField()
-        let attributes = [
-            NSAttributedString.Key.font : UIFont.body1,
-            NSAttributedString.Key.foregroundColor : UIColor.gray500
-        ]
-        textField.backgroundColor = .white300
-        textField.attributedPlaceholder = NSAttributedString(string: "예) 진저, 호야, 성민", attributes: attributes)
-        textField.font = .body1
-        textField.layer.cornerRadius = 10
-        textField.layer.masksToBounds = true
-        textField.layer.borderWidth = 1
-        textField.layer.borderColor = UIColor.white300.cgColor
-        textField.textAlignment = .left
-        textField.returnKeyType = .done
-        textField.autocorrectionType = .no
-        textField.autocapitalizationType = .none
-        
-        let leftPaddingView = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: 0))
-        textField.leftView = leftPaddingView
-        textField.leftViewMode = .always
+    private let nicknameTextField: KigoTextField = {
+        let textField = KigoTextField()
+        textField.inText = "예) 진저, 호야, 성민"
         return textField
     }()
     private lazy var textLimitLabel: UILabel = {
@@ -76,15 +58,14 @@ final class SignupViewController: BaseViewController {
     override func render() {
         view.addSubview(titleLabel)
         titleLabel.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).inset(Size.topPadding)
-            $0.leading.equalToSuperview().inset(Size.leadingTrailingPadding)
+            $0.top.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.leadingTrailingPadding)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
         view.addSubview(nicknameTextField)
         nicknameTextField.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(39)
-            $0.leading.trailing.equalToSuperview().inset(Size.leadingTrailingPadding)
-            $0.height.equalTo(56)
+            $0.centerX.equalToSuperview()
         }
         
         view.addSubview(textLimitLabel)
@@ -165,10 +146,4 @@ extension SignupViewController: UITextFieldDelegate {
         let hasText = nicknameTextField.hasText
         doneButton.isDisabled = !hasText
     }
-}
-
-
-enum Size {
-    static let leadingTrailingPadding: Int = 24
-    static let topPadding: Int = 20
 }
