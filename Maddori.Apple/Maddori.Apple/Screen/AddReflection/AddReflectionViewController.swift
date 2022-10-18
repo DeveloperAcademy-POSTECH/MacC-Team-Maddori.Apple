@@ -70,7 +70,6 @@ final class AddReflectionViewController: BaseViewController {
     }()
     private let mainButton: MainButton = {
         let button = MainButton()
-        button.isDisabled = true
         button.title = "추가하기"
         return button
     }()
