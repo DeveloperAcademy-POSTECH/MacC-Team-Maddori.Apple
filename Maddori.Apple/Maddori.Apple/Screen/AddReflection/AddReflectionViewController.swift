@@ -12,10 +12,17 @@ import SnapKit
 final class AddReflectionViewController: BaseViewController {
     
     // MARK: - property
-    private let closeButton: UIButton = {
-        let button = UIButton()
-        button.setImage(.load(systemName: "xmark"), for: .normal)
-        return button
+    
+    private lazy var closeButtonView: UIView = {
+        let view = UIView()
+        let button = CloseButton(type: .system)
+        button.tintColor = .black100
+        let action = UIAction { [weak self] _ in
+            self?.dismiss(animated: true)
+        }
+        button.addAction(action, for: .touchUpInside)
+        view.addSubview(button)
+        return view
     }()
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -32,8 +39,12 @@ final class AddReflectionViewController: BaseViewController {
         view.backgroundColor = .blue200
     }
     
-    override func setupNavigationBar() {
-        let item = UIBarButtonItem(customView: closeButton)
-        self.navigationItem.rightBarButtonItem = item
+    override func render() {
+        view.addSubview(closeButtonView)
+        closeButtonView.snp.makeConstraints {
+            $0.width.height.equalTo(44)
+            $0.top.equalTo(view.safeAreaLayoutGuide)
+            $0.trailing.equalToSuperview().inset(7)
+        }
     }
 }
