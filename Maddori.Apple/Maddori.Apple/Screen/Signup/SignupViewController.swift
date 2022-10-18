@@ -11,8 +11,9 @@ import SnapKit
 
 final class SignupViewController: BaseViewController {
     
-    private let minNum: Int = 0
-    private let maxNum: Int = 6
+    private let minLength: Int = 0
+    private let maxLength: Int = 6
+    private var nickname: String = ""
     
     // MARK: - property
     private let titleLabel: UILabel = {
@@ -22,7 +23,6 @@ final class SignupViewController: BaseViewController {
         label.numberOfLines = 2
         return label
     }()
-    
     private let nicknameTextField: UITextField = {
         let textField = UITextField()
         let attributes = [
@@ -46,18 +46,17 @@ final class SignupViewController: BaseViewController {
         textField.leftViewMode = .always
         return textField
     }()
-    
     private lazy var textLimitLabel: UILabel = {
         let label = UILabel()
-        label.text = "\(minNum)/\(maxNum)"
+        label.text = "\(minLength)/\(maxLength)"
         label.font = .body2
         label.textColor = .gray500
         return label
     }()
-    
     private let doneButton: MainButton = {
         let button = MainButton()
         button.title = "입력완료"
+        button.isDisabled = true
         return button
     }()
     
@@ -67,6 +66,7 @@ final class SignupViewController: BaseViewController {
         configUI()
         render()
         setupNotificationCenter()
+        setupDelegate()
     }
     
     override func configUI() {
@@ -105,9 +105,38 @@ final class SignupViewController: BaseViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
+    private func setupDelegate() {
+        nicknameTextField.delegate = self
+    }
+    
     override func endEditingView() {
         if !doneButton.isTouchInside {
             view.endEditing(true)
+        }
+    }
+    
+    private func setCounter(count: Int) {
+        if count <= maxLength {
+            textLimitLabel.text = "\(count)/\(maxLength)"
+        }
+        else {
+            textLimitLabel.text = "\(maxLength)/\(maxLength)"
+        }
+    }
+    
+    private func checkMaxLength(textField: UITextField, maxLength: Int) {
+        if let text = textField.text {
+            if text.count > maxLength {
+                let endIndex = text.index(text.startIndex, offsetBy: maxLength)
+                let fixedText = text[text.startIndex..<endIndex]
+                textField.text = fixedText + " "
+                
+                let when = DispatchTime.now() + 0.01
+                DispatchQueue.main.asyncAfter(deadline: when) {
+                    self.nicknameTextField.text = String(fixedText)
+                    self.setCounter(count: textField.text?.count ?? 0)
+                }
+            }
         }
     }
     
@@ -124,6 +153,17 @@ final class SignupViewController: BaseViewController {
         UIView.animate(withDuration: 0.2, animations: {
             self.doneButton.transform = .identity
         })
+    }
+}
+
+// MARK: - Extension
+extension SignupViewController: UITextFieldDelegate {
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        setCounter(count: textField.text?.count ?? 0)
+        checkMaxLength(textField: nicknameTextField, maxLength: maxLength)
+        
+        let hasText = nicknameTextField.hasText
+        doneButton.isDisabled = !hasText
     }
 }
 
