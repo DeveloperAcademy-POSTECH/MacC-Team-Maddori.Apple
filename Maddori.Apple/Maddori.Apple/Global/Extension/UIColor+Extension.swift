@@ -41,13 +41,13 @@ extension UIColor {
     
     // MARK: - green
     
-    static var green: UIColor {
+    static var green100: UIColor {
         return UIColor(hex: "#2AD000")
     }
     
     // MARK: - red
     
-    static var red: UIColor {
+    static var red100: UIColor {
         return UIColor(hex: "#FB4752")
     }
     
@@ -79,7 +79,7 @@ extension UIColor {
     
     // MARK: - black
     
-    static var black: UIColor {
+    static var black100: UIColor {
         return UIColor(hex: "#222222")
     }
     
@@ -104,17 +104,17 @@ extension UIColor {
     }
     
     static var gradientGrayBottom: UIColor {
-        return UIColor(hex: "#79898A")
+        return UIColor(hex: "#79808A")
     }
     
     // MARK: - gradientBlue100
     
     static var gradientBlue100Top: UIColor {
-        return UIColor(hex: "#6B737E")
+        return UIColor(hex: "#7598FC")
     }
     
     static var gradientBlue100Bottom: UIColor {
-        return UIColor(hex: "#79898A")
+        return UIColor(hex: "#8AA7FA")
     }
     
     // MARK: - gradientBlue
