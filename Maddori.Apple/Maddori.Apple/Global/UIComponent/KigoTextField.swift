@@ -44,7 +44,7 @@ final class KigoTextField: UITextField {
         self.autocorrectionType = .no
         self.autocapitalizationType = .none
         
-        let leftPaddingView = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: 0))
+        let leftPaddingView = UIView(frame: CGRect(x: 0, y: 0, width: 18, height: 0))
         self.leftView = leftPaddingView
         self.leftViewMode = .always
     }
