@@ -26,6 +26,10 @@ final class AddReflectionViewController: BaseViewController {
     }()
     private let titleLabel: UILabel = {
         let label = UILabel()
+        label.text = TextLiteral.addReflectionViewControllerTitle
+        label.numberOfLines = 2
+        label.font = .title
+        label.textColor = .black100
         return label
     }()
     
@@ -35,16 +39,18 @@ final class AddReflectionViewController: BaseViewController {
         super.viewDidLoad()
     }
     
-    override func configUI() {
-        view.backgroundColor = .blue200
-    }
-    
     override func render() {
         view.addSubview(closeButtonView)
         closeButtonView.snp.makeConstraints {
             $0.width.height.equalTo(44)
             $0.top.equalTo(view.safeAreaLayoutGuide)
             $0.trailing.equalToSuperview().inset(7)
+        }
+        
+        view.addSubview(titleLabel)
+        titleLabel.snp.makeConstraints {
+            $0.leading.equalToSuperview().inset(24)
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(64)
         }
     }
 }
