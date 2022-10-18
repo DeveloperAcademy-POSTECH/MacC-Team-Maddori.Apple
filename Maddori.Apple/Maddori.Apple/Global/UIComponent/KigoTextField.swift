@@ -27,7 +27,7 @@ final class KigoTextField: UITextField {
     
     // MARK: - property
     
-    var inText: String? {
+    var placeHolderText: String? {
         didSet { setupAttribute() }
     }
     
@@ -61,7 +61,7 @@ final class KigoTextField: UITextField {
             NSAttributedString.Key.font : UIFont.body1,
             NSAttributedString.Key.foregroundColor : UIColor.gray500
         ]
-        self.attributedPlaceholder = NSAttributedString(string: inText ?? "", attributes: attributes)
+        self.attributedPlaceholder = NSAttributedString(string: placeHolderText ?? "", attributes: attributes)
         
     }
 }

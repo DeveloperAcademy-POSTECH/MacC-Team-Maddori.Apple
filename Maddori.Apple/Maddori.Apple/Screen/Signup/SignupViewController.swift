@@ -26,7 +26,7 @@ final class SignupViewController: BaseViewController {
     }()
     private let nicknameTextField: KigoTextField = {
         let textField = KigoTextField()
-        textField.inText = TextLiteral.signupViewControllerNicknameTextFieldPlaceHolder
+        textField.placeHolderText = TextLiteral.signupViewControllerNicknameTextFieldPlaceHolder
         return textField
     }()
     private lazy var textLimitLabel: UILabel = {
@@ -125,7 +125,7 @@ final class SignupViewController: BaseViewController {
     @objc private func keyboardWillShow(notification:NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             UIView.animate(withDuration: 0.2, animations: {
-                self.doneButton.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height + 30)
+                self.doneButton.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height)
             })
         }
     }
