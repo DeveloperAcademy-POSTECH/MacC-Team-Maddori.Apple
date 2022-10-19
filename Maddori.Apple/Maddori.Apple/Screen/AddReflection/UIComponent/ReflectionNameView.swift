@@ -92,8 +92,7 @@ extension ReflectionNameView: UITextFieldDelegate {
                 let fixedText = text[text.startIndex..<endIndex]
                 textField.text = fixedText + " "
                 
-                let when = DispatchTime.now()
-                DispatchQueue.main.asyncAfter(deadline: when) {
+                DispatchQueue.main.async {
                     self.nameTextField.text = String(fixedText)
                 }
             }
