@@ -43,15 +43,14 @@ class HomeViewController: UIViewController {
     private func render() {
         view.addSubview(firstLabel)
         firstLabel.snp.makeConstraints {
-            $0.left.equalTo(view.safeAreaLayoutGuide).inset(24)
+            $0.leading.equalTo(view.safeAreaLayoutGuide).inset(24)
             $0.top.equalTo(view.safeAreaLayoutGuide).inset(24)
         }
+        
         view.addSubview(secondLabel)
         secondLabel.snp.makeConstraints {
-            $0.left.equalTo(firstLabel.snp.right).inset(-10)
+            $0.leading.equalTo(firstLabel.snp.trailing).offset(10)
             $0.top.equalTo(view.safeAreaLayoutGuide).inset(24)
         }
     }
-    
-    // MARK: - selector
 }
