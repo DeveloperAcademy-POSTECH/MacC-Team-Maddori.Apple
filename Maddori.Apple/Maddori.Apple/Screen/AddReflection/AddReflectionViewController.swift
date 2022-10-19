@@ -107,16 +107,16 @@ final class AddReflectionViewController: BaseViewController {
             $0.top.equalTo(reflectionNameView.snp.bottom).offset(29)
         }
         
-        view.addSubview(datePicker)
-        datePicker.snp.makeConstraints {
-            $0.centerY.equalTo(reflectionDateLabel.snp.centerY)
-            $0.leading.equalTo(reflectionDateLabel.snp.trailing).offset(25)
-        }
-        
         view.addSubview(timePicker)
         timePicker.snp.makeConstraints {
             $0.centerY.equalTo(reflectionDateLabel.snp.centerY)
             $0.trailing.equalToSuperview().inset(18)
+        }
+        
+        view.addSubview(datePicker)
+        datePicker.snp.makeConstraints {
+            $0.centerY.equalTo(reflectionDateLabel.snp.centerY)
+            $0.trailing.equalTo(timePicker.snp.leading).inset(2)
         }
         
         view.addSubview(mainButton)
