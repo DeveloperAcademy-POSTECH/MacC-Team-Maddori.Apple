@@ -27,6 +27,9 @@
 		395C7E1328F9841A00FC2FCA /* SizeLiteral.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395C7E1228F9841A00FC2FCA /* SizeLiteral.swift */; };
 		395C7E1628F984B300FC2FCA /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 395C7E1528F984B300FC2FCA /* SnapKit */; };
 		395C7E1828F9912700FC2FCA /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395C7E1728F9912700FC2FCA /* UIButton+Extension.swift */; };
+		525E721F28FFC89800EF3FCB /* AddFeedbackContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525E721E28FFC89800EF3FCB /* AddFeedbackContentViewController.swift */; };
+		525E722128FFC9A800EF3FCB /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525E722028FFC9A800EF3FCB /* BackButton.swift */; };
+		525E722328FFC9F600EF3FCB /* ExitButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525E722228FFC9F600EF3FCB /* ExitButton.swift */; };
 		7E6B662F28FE887300C3BEEF /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6B662E28FE887300C3BEEF /* UILabel+Extension.swift */; };
 /* End PBXBuildFile section */
 
@@ -52,6 +55,9 @@
 		395C7E1028F9834A00FC2FCA /* SampleDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleDTO.swift; sourceTree = "<group>"; };
 		395C7E1228F9841A00FC2FCA /* SizeLiteral.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeLiteral.swift; sourceTree = "<group>"; };
 		395C7E1728F9912700FC2FCA /* UIButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
+		525E721E28FFC89800EF3FCB /* AddFeedbackContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFeedbackContentViewController.swift; sourceTree = "<group>"; };
+		525E722028FFC9A800EF3FCB /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
+		525E722228FFC9F600EF3FCB /* ExitButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExitButton.swift; sourceTree = "<group>"; };
 		7E6B662E28FE887300C3BEEF /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -104,6 +110,7 @@
 		39257DD928F90EB100201E0B /* Screen */ = {
 			isa = PBXGroup;
 			children = (
+				525E721D28FFC85200EF3FCB /* AddFeedbackContent */,
 				39257DDF28F90F3B00201E0B /* Main */,
 			);
 			path = Screen;
@@ -162,6 +169,8 @@
 			isa = PBXGroup;
 			children = (
 				395C7E0C28F959A500FC2FCA /* MainButton.swift */,
+				525E722028FFC9A800EF3FCB /* BackButton.swift */,
+				525E722228FFC9F600EF3FCB /* ExitButton.swift */,
 			);
 			path = UIComponent;
 			sourceTree = "<group>";
@@ -183,8 +192,8 @@
 			isa = PBXGroup;
 			children = (
 				39257DD228F8FEBE00201E0B /* Info.plist */,
-				39257DC428F8FEBD00201E0B /* AppDelegate.swift */,
 				39257DC628F8FEBD00201E0B /* SceneDelegate.swift */,
+				39257DC428F8FEBD00201E0B /* AppDelegate.swift */,
 			);
 			path = Supports;
 			sourceTree = "<group>";
@@ -213,6 +222,14 @@
 				39257DDD28F90EF900201E0B /* Sample.swift */,
 			);
 			path = Response;
+			sourceTree = "<group>";
+		};
+		525E721D28FFC85200EF3FCB /* AddFeedbackContent */ = {
+			isa = PBXGroup;
+			children = (
+				525E721E28FFC89800EF3FCB /* AddFeedbackContentViewController.swift */,
+			);
+			path = AddFeedbackContent;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -295,10 +312,12 @@
 				395C7E0528F953D200FC2FCA /* UIViewController+Extension.swift in Sources */,
 				39257DEB28F9373900201E0B /* BaseViewController.swift in Sources */,
 				39257DDE28F90EF900201E0B /* Sample.swift in Sources */,
+				525E722128FFC9A800EF3FCB /* BackButton.swift in Sources */,
 				395C7E1828F9912700FC2FCA /* UIButton+Extension.swift in Sources */,
 				395C7E1328F9841A00FC2FCA /* SizeLiteral.swift in Sources */,
 				39257DC528F8FEBD00201E0B /* AppDelegate.swift in Sources */,
 				39257DC728F8FEBD00201E0B /* SceneDelegate.swift in Sources */,
+				525E721F28FFC89800EF3FCB /* AddFeedbackContentViewController.swift in Sources */,
 				7E6B662F28FE887300C3BEEF /* UILabel+Extension.swift in Sources */,
 				395C7E0B28F9550A00FC2FCA /* NSObject+Extension.swift in Sources */,
 				39257DEF28F937A500201E0B /* BaseTableViewCell.swift in Sources */,
@@ -308,6 +327,7 @@
 				39257DF328F93D8900201E0B /* TextLiteral.swift in Sources */,
 				395C7E0D28F959A500FC2FCA /* MainButton.swift in Sources */,
 				39257DF528F93E4700201E0B /* UIColor+Extension.swift in Sources */,
+				525E722328FFC9F600EF3FCB /* ExitButton.swift in Sources */,
 				395C7E0328F945B500FC2FCA /* UIFont+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
