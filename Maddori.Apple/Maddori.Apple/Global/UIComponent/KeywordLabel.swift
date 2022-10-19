@@ -52,12 +52,13 @@ final class KeywordLabel: UILabel {
     
     override var intrinsicContentSize: CGSize {
         let size = super.intrinsicContentSize
-        return CGSize(width: size.width + 2 * horizontalInset, height: size.height + 2 * verticalInset)
+        return CGSize(width: (horizontalInset * 2) + size.width,
+                      height: (verticalInset * 2) + size.height)
     }
     
     override var bounds: CGRect {
         didSet {
-            preferredMaxLayoutWidth = bounds.width - 2 * horizontalInset
+            preferredMaxLayoutWidth = (horizontalInset * (-2)) + bounds.width 
         }
     }
     
