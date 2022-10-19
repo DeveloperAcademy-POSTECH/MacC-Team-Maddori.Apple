@@ -29,13 +29,13 @@ final class MemberCollectionViewCell: BaseCollectionViewCell {
         label.textAlignment = .center
         return label
     }()
-    let memberShadow: UIView = {
+    private let memberShadow: UIView = {
         let view = UIView()
         view.frame = Size.frame
         view.clipsToBounds = false
         return view
     }()
-    let memberShadowLayer: CALayer = {
+    private let memberShadowLayer: CALayer = {
         let layer = CALayer()
         let shadowPath0 = UIBezierPath(roundedRect: Size.frame, cornerRadius: 8)
         layer.shadowPath = shadowPath0.cgPath
@@ -48,6 +48,10 @@ final class MemberCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - lifecycle
     
+    override func configUI() {
+        memberShadowLayer.position = memberShadow.center
+    }
+    
     override func render() {
         self.addSubview(memberShadow)
         memberShadow.snp.makeConstraints {
@@ -56,7 +60,6 @@ final class MemberCollectionViewCell: BaseCollectionViewCell {
         }
         
         memberShadow.layer.addSublayer(memberShadowLayer)
-        memberShadowLayer.position = memberShadow.center
         
         self.addSubview(memberLabel)
         memberLabel.snp.makeConstraints {

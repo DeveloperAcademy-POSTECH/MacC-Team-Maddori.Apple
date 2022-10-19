@@ -16,7 +16,7 @@ final class AddFeedbackMemberViewController: BaseViewController {
     private let exitButton = ExitButton()
     private let selectMemberLabel: UILabel = {
         let label = UILabel()
-        label.text = "피드백을 주고 싶은\n팀원을 선택해주세요"
+        label.text = TextLiteral.addFeedbackMemberViewControllerTitle
         label.font = .title
         label.textColor = .black100
         label.numberOfLines = 0
@@ -36,7 +36,7 @@ final class AddFeedbackMemberViewController: BaseViewController {
         
         view.addSubview(memberCollectionView)
         memberCollectionView.snp.makeConstraints {
-            $0.top.equalTo(selectMemberLabel.snp.bottom).offset(10)
+            $0.top.equalTo(selectMemberLabel.snp.bottom)
             $0.bottom.equalTo(view.safeAreaLayoutGuide)
             $0.leading.trailing.equalToSuperview()
         }
@@ -52,5 +52,4 @@ final class AddFeedbackMemberViewController: BaseViewController {
         navigationItem.largeTitleDisplayMode = .never
         navigationItem.rightBarButtonItem = exitButton
     }
-    
 }
