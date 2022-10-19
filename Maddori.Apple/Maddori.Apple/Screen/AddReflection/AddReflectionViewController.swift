@@ -87,20 +87,20 @@ final class AddReflectionViewController: BaseViewController {
         
         view.addSubview(titleLabel)
         titleLabel.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(24)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(64)
         }
         
         view.addSubview(reflectionNameView)
         reflectionNameView.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview().inset(24)
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.top.equalTo(titleLabel.snp.bottom).offset(40)
             $0.height.equalTo(103)
         }
         
         view.addSubview(reflectionDateLabel)
         reflectionDateLabel.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(24)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.top.equalTo(reflectionNameView.snp.bottom).offset(29)
         }
         
