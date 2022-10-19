@@ -13,23 +13,20 @@ class HomeViewController: UIViewController {
     
     // MARK: - property
     
-    private let first: KeywordLabel = {
+    private let firstLabel: KeywordLabel = {
         let keyword = KeywordLabel()
         keyword.text = "첫 번째"
-        keyword.font = UIFont.systemFont(ofSize: 18)
-        keyword.textColor = .white
-        keyword.backgroundColor = UIColor(hex: "4776FB")
+        keyword.keywordType = .defaultKeyword
+        keyword.font = UIFont.main
         return keyword
     }()
-    private let second: KeywordLabel = {
+    private let secondLabel: KeywordLabel = {
         let keyword = KeywordLabel()
         keyword.text = "첫 번째"
-        keyword.font = UIFont.systemFont(ofSize: 18)
-        keyword.textColor = .white
-        keyword.backgroundColor = UIColor(hex: "4776FB")
+        keyword.keywordType = .defaultKeyword
+        keyword.font = UIFont.main
         return keyword
     }()
-    
     
     // MARK: - life cycle
     
@@ -39,7 +36,6 @@ class HomeViewController: UIViewController {
         render()
     }
     
-    
     // MARK: - func
     
     private func configUI() {
@@ -47,9 +43,14 @@ class HomeViewController: UIViewController {
     }
     
     private func render() {
-        view.addSubview(first)
-        first.snp.makeConstraints {
+        view.addSubview(firstLabel)
+        firstLabel.snp.makeConstraints {
             $0.left.equalTo(view.safeAreaLayoutGuide).inset(24)
+            $0.top.equalTo(view.safeAreaLayoutGuide).inset(24)
+        }
+        view.addSubview(secondLabel)
+        secondLabel.snp.makeConstraints {
+            $0.left.equalTo(firstLabel.snp.right).inset(-10)
             $0.top.equalTo(view.safeAreaLayoutGuide).inset(24)
         }
     }
