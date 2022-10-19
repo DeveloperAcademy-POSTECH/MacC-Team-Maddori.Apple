@@ -41,8 +41,10 @@ class KeywordLabel: UILabel {
     
     private var customTextColor: UIColor {
         switch keywordType {
-        case .defaultKeyword, .disabledKeyword:
+        case .defaultKeyword:
             return .white100
+        case .disabledKeyword:
+            return .gray300
         default:
             return .gray600
         }
