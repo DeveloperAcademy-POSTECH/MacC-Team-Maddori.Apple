@@ -15,16 +15,14 @@ class HomeViewController: UIViewController {
     
     private let firstLabel: KeywordLabel = {
         let keyword = KeywordLabel()
-        keyword.text = "첫 번째"
         keyword.keywordType = .defaultKeyword
-        keyword.font = UIFont.main
+        keyword.text = "첫 djdkdkdk번째"
         return keyword
     }()
     private let secondLabel: KeywordLabel = {
         let keyword = KeywordLabel()
         keyword.text = "첫 번째"
-        keyword.keywordType = .defaultKeyword
-        keyword.font = UIFont.main
+        keyword.keywordType = .previewKeyword
         return keyword
     }()
     
@@ -39,7 +37,7 @@ class HomeViewController: UIViewController {
     // MARK: - func
     
     private func configUI() {
-        view.backgroundColor = .backgroundWhite
+        view.backgroundColor = .black
     }
     
     private func render() {

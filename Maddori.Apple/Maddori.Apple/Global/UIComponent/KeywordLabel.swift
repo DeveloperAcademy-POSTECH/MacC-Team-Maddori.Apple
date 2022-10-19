@@ -20,7 +20,7 @@ class KeywordLabel: UILabel {
     private let verticalInset: CGFloat = 13.0
     
     var keywordType: KeywordType?
-    // enum으로 간략화 시켰는데 default를 그냥 중복되는게 제일 많은걸로 설정함 -> 이게 옳은 방법일지, 아니면 defaultKeyword를 default로 해야할지?
+    
     private var maskedCorners: CACornerMask {
         switch keywordType {
         case .previewKeyword:
@@ -30,7 +30,7 @@ class KeywordLabel: UILabel {
         }
     }
     
-    private var labelColor: [UIColor] {
+    var labelColor: [UIColor] {
         switch keywordType {
         case .defaultKeyword:
             return [.gradientBlueTop, .gradientBlueBottom]
@@ -39,7 +39,7 @@ class KeywordLabel: UILabel {
         }
     }
     
-    private var fontColor: UIColor {
+    private var customTextColor: UIColor {
         switch keywordType {
         case .defaultKeyword, .disabledKeyword:
             return .white100
@@ -61,10 +61,21 @@ class KeywordLabel: UILabel {
     
     override func drawText(in rect: CGRect) {
         let insets = UIEdgeInsets(top: verticalInset, left: horizontalInset, bottom: verticalInset, right: horizontalInset)
+        self.font = UIFont.main
         setCornerRadius()
+        setTextColor()
         setLabelColor()
-        setFontColor()
         super.drawText(in: rect.inset(by: insets))
+//        TODO: 2차 스프린트 때 그라디언트 넣기
+//        let textLayer = CATextLayer()
+//        textLayer.frame = self.bounds
+//        textLayer.alignmentMode = .center
+//        textLayer.position = CGPoint(x: 0, y: intrinsicContentSize.height * 0.5)
+//        textLayer.fontSize = 18.0
+//        textLayer.font = UIFont.main
+//        textLayer.foregroundColor = fontColor.cgColor
+//        textLayer.string = self.text
+//        self.layer.addSublayer(textLayer)
     }
     
     private func setCornerRadius() {
@@ -74,10 +85,12 @@ class KeywordLabel: UILabel {
     }
     
     private func setLabelColor() {
-        self.setGradient(colorTop: labelColor[0], colorBottom: labelColor[1])
+        self.backgroundColor = labelColor[0]
+//         TODO: 2차 스프린트 때 그라디언트 넣기
+//         self.setGradient(colorTop: labelColor[0], colorBottom: labelColor[1])
     }
     
-    private func setFontColor() {
-        self.textColor = .black
+    private func setTextColor() {
+        self.textColor = customTextColor
     }
 }
