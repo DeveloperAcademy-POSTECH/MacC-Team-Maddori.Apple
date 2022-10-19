@@ -22,6 +22,14 @@ final class AddFeedbackContentViewController: BaseViewController {
         label.font = .title
         return label
     }()
+    private let feedbackTypeLabel: UILabel = {
+        let label = UILabel()
+        label.text = "피드백 종류"
+        label.textColor = .black100
+        label.font = .label2
+        return label
+    }()
+    private let feedbackTypeButtonView = FeebackTypeButtonView()
     
     // MARK: - lifecycle
     
@@ -30,6 +38,19 @@ final class AddFeedbackContentViewController: BaseViewController {
         addFeedbackTitleLabel.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).offset(SizeLiteral.topPadding)
             $0.leading.equalToSuperview().offset(SizeLiteral.leadingTrailingPadding)
+        }
+        
+        view.addSubview(feedbackTypeLabel)
+        feedbackTypeLabel.snp.makeConstraints {
+            $0.top.equalTo(addFeedbackTitleLabel.snp.bottom).offset(40)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+        
+        view.addSubview(feedbackTypeButtonView)
+        feedbackTypeButtonView.snp.makeConstraints {
+            $0.top.equalTo(feedbackTypeLabel.snp.bottom).offset(10)
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.centerX.equalToSuperview()
         }
     }
 
