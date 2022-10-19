@@ -13,16 +13,14 @@ final class AddReflectionViewController: BaseViewController {
     
     // MARK: - property
     
-    private lazy var closeButtonView: UIView = {
-        let view = UIView()
+    private lazy var closeButton: CloseButton = {
         let button = CloseButton(type: .system)
         button.tintColor = .black100
         let action = UIAction { [weak self] _ in
             self?.dismiss(animated: true)
         }
         button.addAction(action, for: .touchUpInside)
-        view.addSubview(button)
-        return view
+        return button
     }()
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -81,9 +79,8 @@ final class AddReflectionViewController: BaseViewController {
     }
     
     override func render() {
-        view.addSubview(closeButtonView)
-        closeButtonView.snp.makeConstraints {
-            $0.width.height.equalTo(44)
+        view.addSubview(closeButton)
+        closeButton.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide)
             $0.trailing.equalToSuperview().inset(7)
         }

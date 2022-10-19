@@ -7,13 +7,16 @@
 
 import UIKit
 
+import SnapKit
+
 final class CloseButton: UIButton {
 
     // MARK: - init
     
     override init(frame: CGRect) {
-        super.init(frame: .init(origin: .zero, size: .init(width: 44, height: 44)))
+        super.init(frame: frame)
         configUI()
+        render()
     }
     
     required init?(coder: NSCoder) {
@@ -25,5 +28,11 @@ final class CloseButton: UIButton {
     private func configUI() {
         self.setImage(ImageLiterals.icClose, for: .normal)
         self.tintColor = .white
+    }
+    
+    private func render() {
+        self.snp.makeConstraints {
+            $0.width.height.equalTo(44)
+        }
     }
 }
