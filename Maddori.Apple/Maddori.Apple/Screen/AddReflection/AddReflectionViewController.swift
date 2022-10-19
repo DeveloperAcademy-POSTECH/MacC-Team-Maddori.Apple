@@ -24,9 +24,7 @@ final class AddReflectionViewController: BaseViewController {
     }()
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = TextLiteral.addReflectionViewControllerTitle
-        label.numberOfLines = 2
-        label.font = .title
+        label.setTitleFont(text: TextLiteral.addReflectionViewControllerTitle)
         label.textColor = .black100
         return label
     }()
