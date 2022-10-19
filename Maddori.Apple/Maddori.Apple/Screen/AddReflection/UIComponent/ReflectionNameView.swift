@@ -10,6 +10,7 @@ import UIKit
 import SnapKit
 
 final class ReflectionNameView: UIView {
+    let maxLength = 15
     
     // MARK: - property
     
@@ -36,9 +37,9 @@ final class ReflectionNameView: UIView {
         textField.textColor = .black100
         return textField
     }()
-    private let countTextLabel: UILabel = {
+    private lazy var countTextLabel: UILabel = {
         let label = UILabel()
-        label.text = "0/15"
+        label.text = "0/\(maxLength)"
         label.font = .body2
         label.textColor = .gray500
         return label
@@ -78,7 +79,7 @@ final class ReflectionNameView: UIView {
     // MARK: - func
     
     private func setCountTextLabel(_ num: String) {
-        countTextLabel.text = "\(num)/15"
+        countTextLabel.text = "\(num)/\(self.maxLength)"
     }
 }
 
