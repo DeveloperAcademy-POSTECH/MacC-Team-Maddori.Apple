@@ -20,9 +20,10 @@ final class AddFeedbackMemberViewController: BaseViewController {
         label.font = .title
         label.textColor = .black100
         label.numberOfLines = 0
-        label.setLineSpacing(spacing: 4)
+        label.setLineSpacing()
         return label
     }()
+    private let memberCollectionView = MemberCollectionView()
     
     // MARK: - life cycle
     
@@ -31,6 +32,13 @@ final class AddFeedbackMemberViewController: BaseViewController {
         selectMemberLabel.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.topPadding)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+        
+        view.addSubview(memberCollectionView)
+        memberCollectionView.snp.makeConstraints {
+            $0.top.equalTo(selectMemberLabel.snp.bottom).offset(10)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide)
+            $0.leading.trailing.equalToSuperview()
         }
     }
     
