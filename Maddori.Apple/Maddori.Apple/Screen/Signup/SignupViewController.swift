@@ -110,11 +110,9 @@ final class SignupViewController: BaseViewController {
                 let endIndex = text.index(text.startIndex, offsetBy: maxLength)
                 let fixedText = text[text.startIndex..<endIndex]
                 textField.text = fixedText + " "
-                
-                let when = DispatchTime.now()
-                DispatchQueue.main.asyncAfter(deadline: when) {
+            
+                DispatchQueue.main.async {
                     self.nicknameTextField.text = String(fixedText)
-                    self.setCounter(count: textField.text?.count ?? 0)
                 }
             }
         }
