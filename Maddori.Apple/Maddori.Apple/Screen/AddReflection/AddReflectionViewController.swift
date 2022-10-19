@@ -15,7 +15,6 @@ final class AddReflectionViewController: BaseViewController {
     
     private lazy var closeButton: CloseButton = {
         let button = CloseButton(type: .system)
-        button.tintColor = .black100
         let action = UIAction { [weak self] _ in
             self?.dismiss(animated: true)
         }
@@ -77,16 +76,10 @@ final class AddReflectionViewController: BaseViewController {
     }
     
     override func render() {
-        view.addSubview(closeButton)
-        closeButton.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide)
-            $0.trailing.equalToSuperview().inset(7)
-        }
-        
         view.addSubview(titleLabel)
         titleLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(64)
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(20)
         }
         
         view.addSubview(reflectionNameView)
@@ -119,5 +112,10 @@ final class AddReflectionViewController: BaseViewController {
             $0.centerX.equalToSuperview()
             $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(2)
         }
+    }
+    
+    override func setupNavigationBar() {
+        let item = makeBarButtonItem(with: closeButton)
+        navigationItem.rightBarButtonItem = item
     }
 }

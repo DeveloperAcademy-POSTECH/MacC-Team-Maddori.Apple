@@ -44,7 +44,7 @@ final class MainViewController: BaseViewController {
     // MARK: - func
     
     private func presentAddReflectionView() {
-        let viewController = AddReflectionViewController()
+        let viewController = UINavigationController(rootViewController: AddReflectionViewController())
         viewController.modalPresentationStyle = .fullScreen
         present(viewController, animated: true)
     }
