@@ -75,7 +75,7 @@ final class SignupViewController: BaseViewController {
         view.addSubview(doneButton)
         doneButton.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.bottom.equalTo(view.safeAreaLayoutGuide)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(2)
         }
     }
     // MARK: - function
@@ -125,7 +125,7 @@ final class SignupViewController: BaseViewController {
     @objc private func keyboardWillShow(notification:NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             UIView.animate(withDuration: 0.2, animations: {
-                self.doneButton.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height)
+                self.doneButton.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height + 10)
             })
         }
     }
