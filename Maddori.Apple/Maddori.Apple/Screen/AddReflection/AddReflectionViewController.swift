@@ -68,7 +68,7 @@ final class AddReflectionViewController: BaseViewController {
     }()
     private let mainButton: MainButton = {
         let button = MainButton()
-        button.title = "추가하기"
+        button.title = TextLiteral.addReflectionViewControllerButtonText
         return button
     }()
     

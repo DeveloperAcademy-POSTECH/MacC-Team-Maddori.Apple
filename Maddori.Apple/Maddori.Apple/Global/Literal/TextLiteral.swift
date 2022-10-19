@@ -19,4 +19,5 @@ enum TextLiteral {
     static let addReflectionViewControllerName = "회고 이름"
     static let addReflectionViewControllerTextFieldPlaceHolder = "예) 1차 스프린트"
     static let addReflectionViewControllerDateLabel = "회고 일시"
+    static let addReflectionViewControllerButtonText = "추가하기"
 }
