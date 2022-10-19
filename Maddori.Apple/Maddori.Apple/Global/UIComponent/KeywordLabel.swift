@@ -14,7 +14,7 @@ enum KeywordType {
     case previewKeyword
 }
 
-class KeywordLabel: UILabel {
+final class KeywordLabel: UILabel {
     
     private let horizontalInset: CGFloat = 16.0
     private let verticalInset: CGFloat = 13.0
