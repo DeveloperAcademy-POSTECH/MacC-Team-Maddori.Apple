@@ -29,7 +29,7 @@ final class AddFeedbackContentViewController: BaseViewController {
         label.font = .label2
         return label
     }()
-    private let feedbackTypeButtonView = FeebackTypeButtonView()
+    private let feedbackTypeButtonView = FeedbackTypeButtonView()
     
     // MARK: - lifecycle
     

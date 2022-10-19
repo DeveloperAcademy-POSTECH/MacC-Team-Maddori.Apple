@@ -9,9 +9,10 @@ import UIKit
 
 import SnapKit
 
-final class FeebackTypeButtonView: UIView {
+final class FeedbackTypeButtonView: UIView {
     private enum Size {
-        static let width: CGFloat = (UIScreen.main.bounds.width - (SizeLiteral.leadingTrailingPadding * 2) - 11) / 2
+        static let buttonPadding: CGFloat = 11
+        static let width: CGFloat = (UIScreen.main.bounds.width - (SizeLiteral.leadingTrailingPadding * 2) - Size.buttonPadding) / 2
         static let height: CGFloat = 46
     }
     
@@ -26,6 +27,24 @@ final class FeebackTypeButtonView: UIView {
     
     // MARK: - property
     
+    private let continueShadowView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white100
+        view.layer.shadowOpacity = 0.2
+        view.layer.shadowRadius = 2
+        view.layer.shadowOffset = CGSize(width: 0, height: 0)
+        view.layer.cornerRadius = 10
+        return view
+    }()
+    private let stopShadowView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white100
+        view.layer.shadowOpacity = 0.2
+        view.layer.shadowRadius = 2
+        view.layer.shadowOffset = CGSize(width: 0, height: 0)
+        view.layer.cornerRadius = 10
+        return view
+    }()
     private let continueButton: UIButton = {
         let button = UIButton()
         button.setTitle("Continue", for: .normal)
@@ -50,18 +69,31 @@ final class FeebackTypeButtonView: UIView {
     // MARK: - life cycle
     
     private func render() {
-        self.addSubview(continueButton)
+        self.addSubview(continueShadowView)
+        continueShadowView.snp.makeConstraints {
+            $0.width.equalTo(Size.width)
+            $0.height.equalTo(Size.height)
+        }
+        continueShadowView.addSubview(continueButton)
         continueButton.snp.makeConstraints {
             $0.width.equalTo(Size.width)
             $0.height.equalTo(Size.height)
         }
-        
-        self.addSubview(stopButton)
+
+        self.addSubview(stopShadowView)
+        stopShadowView.snp.makeConstraints {
+            $0.width.equalTo(Size.width)
+            $0.height.equalTo(Size.height)
+            $0.leading.equalTo(continueShadowView.snp.trailing).offset(11)
+            $0.centerY.equalTo(continueShadowView)
+        }
+        stopShadowView.addSubview(stopButton)
         stopButton.snp.makeConstraints {
             $0.width.equalTo(Size.width)
             $0.height.equalTo(Size.height)
             $0.leading.equalTo(continueButton.snp.trailing).offset(11)
             $0.centerY.equalTo(continueButton)
         }
+
     }
 }
