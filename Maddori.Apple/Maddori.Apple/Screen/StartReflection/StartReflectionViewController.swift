@@ -19,6 +19,13 @@ final class StartReflectionViewController: BaseViewController {
         effectView.effect = blurEffect
         return effectView
     }()
+    private let calendarImage: UIImageView = {
+        let view = UIImageView()
+        view.image = ImageLiterals.imgCalendar
+        return view
+    }()
+    
+    // MARK: - life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +41,12 @@ final class StartReflectionViewController: BaseViewController {
             $0.leading.trailing.equalToSuperview()
             $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(100)
             $0.bottom.equalToSuperview()
+        }
+        
+        view.addSubview(calendarImage)
+        calendarImage.snp.makeConstraints {
+            $0.top.equalTo(blurView.snp.top).offset(92)
+            $0.centerX.equalToSuperview()
         }
     }
 }
