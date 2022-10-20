@@ -24,7 +24,19 @@ final class StartReflectionViewController: BaseViewController {
         view.image = ImageLiterals.imgCalendar
         return view
     }()
-    private let startPopupView = UIView()
+    private let startPopupView: UIView = {
+        let view = UIView()
+        view.clipsToBounds = true
+        view.layer.cornerRadius = 10
+        return view
+    }()
+    private let startLabel: UILabel = {
+        let label = UILabel()
+        label.text = TextLiteral.startReflectionViewControllerStartTitle
+        label.font = .main
+        label.textColor = .white100
+        return label
+    }()
     
     // MARK: - life cycle
     
@@ -58,8 +70,12 @@ final class StartReflectionViewController: BaseViewController {
         }
         
         startPopupView.layoutIfNeeded()
-        startPopupView.setGradient(colorTop: .gradientBlueTop, colorBottom: .gradientBlueBottom)
+        startPopupView.setGradient(colorTop: .gradientBlue100Top, colorBottom: .gradientBlue100Bottom)
 
-        
+        startPopupView.addSubview(startLabel)
+        startLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(59)
+            $0.centerX.equalToSuperview()
+        }
     }
 }
