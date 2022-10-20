@@ -68,14 +68,14 @@ final class StartReflectionViewController: BaseViewController {
                 
         view.addSubview(startPopupView)
         startPopupView.snp.makeConstraints {
-            $0.top.equalTo(blurView.snp.top).offset(139)
+            $0.centerY.equalToSuperview()
             $0.leading.trailing.equalToSuperview().inset(32)
             $0.height.equalTo(165)
         }
         
         view.addSubview(calendarImage)
         calendarImage.snp.makeConstraints {
-            $0.top.equalTo(blurView.snp.top).offset(92)
+            $0.bottom.equalTo(startPopupView.snp.top).inset(39)
             $0.centerX.equalToSuperview()
         }
         
