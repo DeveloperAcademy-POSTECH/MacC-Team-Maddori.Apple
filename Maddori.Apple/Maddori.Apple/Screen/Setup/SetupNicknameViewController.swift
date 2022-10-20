@@ -7,8 +7,6 @@
 
 import UIKit
 
-import SnapKit
-
 final class SetupNicknameViewController: BaseTextFieldViewController {
     
     override var titleText: String {
