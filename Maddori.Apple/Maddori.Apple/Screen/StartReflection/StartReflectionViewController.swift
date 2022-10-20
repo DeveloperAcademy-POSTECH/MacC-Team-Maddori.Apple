@@ -24,6 +24,7 @@ final class StartReflectionViewController: BaseViewController {
         view.image = ImageLiterals.imgCalendar
         return view
     }()
+    private let startPopupView = UIView()
     
     // MARK: - life cycle
     
@@ -42,11 +43,23 @@ final class StartReflectionViewController: BaseViewController {
             $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(100)
             $0.bottom.equalToSuperview()
         }
+                
+        view.addSubview(startPopupView)
+        startPopupView.snp.makeConstraints {
+            $0.top.equalTo(blurView.snp.top).offset(139)
+            $0.leading.trailing.equalToSuperview().inset(32)
+            $0.height.equalTo(165)
+        }
         
         view.addSubview(calendarImage)
         calendarImage.snp.makeConstraints {
             $0.top.equalTo(blurView.snp.top).offset(92)
             $0.centerX.equalToSuperview()
         }
+        
+        startPopupView.layoutIfNeeded()
+        startPopupView.setGradient(colorTop: .gradientBlueTop, colorBottom: .gradientBlueBottom)
+
+        
     }
 }
