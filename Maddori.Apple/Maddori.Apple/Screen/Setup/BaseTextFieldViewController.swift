@@ -37,7 +37,7 @@ class BaseTextFieldViewController: BaseViewController {
         label.textColor = .gray500
         return label
     }()
-    private let doneButton: MainButton = {
+    let doneButton: MainButton = {
         let button = MainButton()
         button.title = TextLiteral.setupNicknameViewControllerDoneButtonTitle
         button.isDisabled = true

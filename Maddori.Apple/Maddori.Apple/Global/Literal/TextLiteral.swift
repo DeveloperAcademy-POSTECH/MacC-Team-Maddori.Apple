@@ -26,4 +26,9 @@ enum TextLiteral {
     static let setupNicknameViewControllerTitleLabel = "키고에서 사용할 \n닉네임을 입력해주세요"
     static let setupNicknameViewControllerNicknameTextFieldPlaceHolder = "예) 진저, 호야, 성민"
     static let setupNicknameViewControllerDoneButtonTitle = "입력완료"
+    
+    // MARK: - JoinTeamViewController
+    
+    static let joinTeamViewControllerTitleLabel = "진저님 반가워요!\n이제 팀에 합류해주세요"
+    static let joinTeamViewControllerNicknameTextFieldPlaceHolder = "초대코드"
 }
