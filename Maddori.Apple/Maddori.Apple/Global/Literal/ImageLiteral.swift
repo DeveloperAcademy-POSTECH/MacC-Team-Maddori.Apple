@@ -12,6 +12,10 @@ enum ImageLiterals {
     // MARK: - icon
     
     static var icClose: UIImage { .load(systemName: "xmark")}
+    
+    // MARK: - image
+    
+    static var imgCalendar: UIImage { .load(name: "calendar") }
 }
 
 extension UIImage {
