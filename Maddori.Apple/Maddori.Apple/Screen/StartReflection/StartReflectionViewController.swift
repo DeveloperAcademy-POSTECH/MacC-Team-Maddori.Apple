@@ -37,6 +37,16 @@ final class StartReflectionViewController: BaseViewController {
         label.textColor = .white100
         return label
     }()
+    private let startButton: UIButton = {
+        let button = UIButton()
+        button.setTitle(TextLiteral.startReflectionViewControllerStartText, for: .normal)
+        button.titleLabel?.font = .label2
+        button.setTitleColor(.black100, for: .normal)
+        button.clipsToBounds = true
+        button.layer.cornerRadius = 10
+        button.backgroundColor = .white100
+        return button
+    }()
     
     // MARK: - life cycle
     
@@ -76,6 +86,13 @@ final class StartReflectionViewController: BaseViewController {
         startLabel.snp.makeConstraints {
             $0.top.equalToSuperview().inset(59)
             $0.centerX.equalToSuperview()
+        }
+        
+        startPopupView.addSubview(startButton)
+        startButton.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview().inset(48)
+            $0.bottom.equalToSuperview().inset(24)
+            $0.height.equalTo(42)
         }
     }
 }

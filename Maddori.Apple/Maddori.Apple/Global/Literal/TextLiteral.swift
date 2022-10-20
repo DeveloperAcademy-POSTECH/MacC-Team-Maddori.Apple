@@ -30,4 +30,5 @@ enum TextLiteral {
     // MARK: - StartReflectionViewController
     
     static let startReflectionViewControllerStartTitle = "회고 시간이 되었습니다"
+    static let startReflectionViewControllerStartText = "시작하기"
 }
