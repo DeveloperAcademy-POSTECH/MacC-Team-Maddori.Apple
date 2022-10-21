@@ -37,14 +37,18 @@ final class StartReflectionViewController: BaseViewController {
         label.textColor = .white100
         return label
     }()
-    private let startButton: UIButton = {
+    private lazy var startButton: UIButton = {
         let button = UIButton(type: .system)
+        let action = UIAction { [weak self] _ in
+            self?.dismiss(animated: true)
+        }
         button.setTitle(TextLiteral.startReflectionViewControllerStartText, for: .normal)
         button.titleLabel?.font = .label2
         button.setTitleColor(.black100, for: .normal)
         button.clipsToBounds = true
         button.layer.cornerRadius = 10
         button.backgroundColor = .white100
+        button.addAction(action, for: .touchUpInside)
         return button
     }()
     
