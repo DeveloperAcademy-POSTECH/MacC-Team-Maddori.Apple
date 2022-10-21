@@ -27,6 +27,10 @@
 		395C7E1328F9841A00FC2FCA /* SizeLiteral.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395C7E1228F9841A00FC2FCA /* SizeLiteral.swift */; };
 		395C7E1628F984B300FC2FCA /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 395C7E1528F984B300FC2FCA /* SnapKit */; };
 		395C7E1828F9912700FC2FCA /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395C7E1728F9912700FC2FCA /* UIButton+Extension.swift */; };
+		525E721528FEEE8500EF3FCB /* AddFeedbackMemberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525E721428FEEE8500EF3FCB /* AddFeedbackMemberViewController.swift */; };
+		525E721728FEF2C500EF3FCB /* ExitButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525E721628FEF2C500EF3FCB /* ExitButton.swift */; };
+		525E721A28FF0F1900EF3FCB /* MemberCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525E721928FF0F1900EF3FCB /* MemberCollectionViewCell.swift */; };
+		525E721C28FF0F5B00EF3FCB /* MemberCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525E721B28FF0F5B00EF3FCB /* MemberCollectionView.swift */; };
 		395C7E1B28FEC42900FC2FCA /* AddReflectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395C7E1A28FEC42900FC2FCA /* AddReflectionViewController.swift */; };
 		395C7E1D28FEC8C400FC2FCA /* CloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395C7E1C28FEC8C400FC2FCA /* CloseButton.swift */; };
 		395C7E2028FED7B500FC2FCA /* ReflectionNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395C7E1F28FED7B500FC2FCA /* ReflectionNameView.swift */; };
@@ -36,8 +40,9 @@
 		3E557FF82901CD3400714E46 /* KeywordCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E557FF72901CD3400714E46 /* KeywordCollectionViewLayout.swift */; };
 		3E557FFA2901CD4200714E46 /* KeywordCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E557FF92901CD4200714E46 /* KeywordCollectionViewCell.swift */; };
 		3E557FFD2901CD7400714E46 /* Keyword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E557FFC2901CD7400714E46 /* Keyword.swift */; };
+		7E2ECA102901136700A4D65C /* SetupNicknameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2ECA0F2901136700A4D65C /* SetupNicknameViewController.swift */; };
 		7E6B662F28FE887300C3BEEF /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6B662E28FE887300C3BEEF /* UILabel+Extension.swift */; };
-		D724790C28FEC8C900D67B50 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D724790B28FEC8C900D67B50 /* SignupViewController.swift */; };
+		D724790C28FEC8C900D67B50 /* BaseTextFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D724790B28FEC8C900D67B50 /* BaseTextFieldViewController.swift */; };
 		D724790E28FEEEC300D67B50 /* KigoTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D724790D28FEEEC300D67B50 /* KigoTextField.swift */; };
 /* End PBXBuildFile section */
 
@@ -63,6 +68,10 @@
 		395C7E1028F9834A00FC2FCA /* SampleDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleDTO.swift; sourceTree = "<group>"; };
 		395C7E1228F9841A00FC2FCA /* SizeLiteral.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeLiteral.swift; sourceTree = "<group>"; };
 		395C7E1728F9912700FC2FCA /* UIButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
+		525E721428FEEE8500EF3FCB /* AddFeedbackMemberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFeedbackMemberViewController.swift; sourceTree = "<group>"; };
+		525E721628FEF2C500EF3FCB /* ExitButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExitButton.swift; sourceTree = "<group>"; };
+		525E721928FF0F1900EF3FCB /* MemberCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberCollectionViewCell.swift; sourceTree = "<group>"; };
+		525E721B28FF0F5B00EF3FCB /* MemberCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberCollectionView.swift; sourceTree = "<group>"; };
 		395C7E1A28FEC42900FC2FCA /* AddReflectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReflectionViewController.swift; sourceTree = "<group>"; };
 		395C7E1C28FEC8C400FC2FCA /* CloseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseButton.swift; sourceTree = "<group>"; };
 		395C7E1F28FED7B500FC2FCA /* ReflectionNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReflectionNameView.swift; sourceTree = "<group>"; };
@@ -72,8 +81,9 @@
 		3E557FF72901CD3400714E46 /* KeywordCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordCollectionViewLayout.swift; sourceTree = "<group>"; };
 		3E557FF92901CD4200714E46 /* KeywordCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordCollectionViewCell.swift; sourceTree = "<group>"; };
 		3E557FFC2901CD7400714E46 /* Keyword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keyword.swift; sourceTree = "<group>"; };
+		7E2ECA0F2901136700A4D65C /* SetupNicknameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupNicknameViewController.swift; sourceTree = "<group>"; };
 		7E6B662E28FE887300C3BEEF /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
-		D724790B28FEC8C900D67B50 /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
+		D724790B28FEC8C900D67B50 /* BaseTextFieldViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTextFieldViewController.swift; sourceTree = "<group>"; };
 		D724790D28FEEEC300D67B50 /* KigoTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KigoTextField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -126,9 +136,11 @@
 		39257DD928F90EB100201E0B /* Screen */ = {
 			isa = PBXGroup;
 			children = (
+				525E721328FE9C5600EF3FCB /* AddFeedbackMember */,
 				395C7E1928FEC3FB00FC2FCA /* AddReflection */,
 				D724790A28FEC8A800D67B50 /* Signup */,
 				3E557FC128FE7B9200714E46 /* Home */,
+				D724790A28FEC8A800D67B50 /* Setup */,
 				39257DDF28F90F3B00201E0B /* Main */,
 			);
 			path = Screen;
@@ -187,6 +199,9 @@
 			isa = PBXGroup;
 			children = (
 				395C7E0C28F959A500FC2FCA /* MainButton.swift */,
+				525E721628FEF2C500EF3FCB /* ExitButton.swift */,
+				525E721928FF0F1900EF3FCB /* MemberCollectionViewCell.swift */,
+				525E721B28FF0F5B00EF3FCB /* MemberCollectionView.swift */,
 				395C7E1C28FEC8C400FC2FCA /* CloseButton.swift */,
 				D724790D28FEEEC300D67B50 /* KigoTextField.swift */,
 				3E557FC428FE854600714E46 /* KeywordLabel.swift */,
@@ -224,6 +239,7 @@
 				39257DEA28F9373900201E0B /* BaseViewController.swift */,
 				39257DEC28F9378D00201E0B /* BaseCollectionViewCell.swift */,
 				39257DEE28F937A500201E0B /* BaseTableViewCell.swift */,
+				D724790B28FEC8C900D67B50 /* BaseTextFieldViewController.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -245,6 +261,14 @@
 			path = Response;
 			sourceTree = "<group>";
 		};
+		525E721328FE9C5600EF3FCB /* AddFeedbackMember */ = {
+			isa = PBXGroup;
+			children = (
+				525E721428FEEE8500EF3FCB /* AddFeedbackMemberViewController.swift */,
+			);
+			path = AddFeedbackMember;
+			sourceTree = "<group>";
+		};
 		395C7E1928FEC3FB00FC2FCA /* AddReflection */ = {
 			isa = PBXGroup;
 			children = (
@@ -260,6 +284,14 @@
 				395C7E1F28FED7B500FC2FCA /* ReflectionNameView.swift */,
 			);
 			path = UIComponent;
+			sourceTree = "<group>";
+		};
+		D724790A28FEC8A800D67B50 /* Setup */ = {
+			isa = PBXGroup;
+			children = (
+				7E2ECA0F2901136700A4D65C /* SetupNicknameViewController.swift */,
+			);
+			path = Setup;
 			sourceTree = "<group>";
 		};
 		3E557FC128FE7B9200714E46 /* Home */ = {
@@ -372,6 +404,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				525E721C28FF0F5B00EF3FCB /* MemberCollectionView.swift in Sources */,
 				395C7E2028FED7B500FC2FCA /* ReflectionNameView.swift in Sources */,
 				395C7E1128F9834A00FC2FCA /* SampleDTO.swift in Sources */,
 				3E557FFA2901CD4200714E46 /* KeywordCollectionViewCell.swift in Sources */,
@@ -379,11 +412,12 @@
 				39257DEB28F9373900201E0B /* BaseViewController.swift in Sources */,
 				39257DDE28F90EF900201E0B /* Sample.swift in Sources */,
 				395C7E1828F9912700FC2FCA /* UIButton+Extension.swift in Sources */,
+				525E721728FEF2C500EF3FCB /* ExitButton.swift in Sources */,
 				3E557FC328FE7BBC00714E46 /* HomeViewController.swift in Sources */,
 				395C7E1328F9841A00FC2FCA /* SizeLiteral.swift in Sources */,
 				39257DC528F8FEBD00201E0B /* AppDelegate.swift in Sources */,
 				39257DC728F8FEBD00201E0B /* SceneDelegate.swift in Sources */,
-				D724790C28FEC8C900D67B50 /* SignupViewController.swift in Sources */,
+				D724790C28FEC8C900D67B50 /* BaseTextFieldViewController.swift in Sources */,
 				7E6B662F28FE887300C3BEEF /* UILabel+Extension.swift in Sources */,
 				395C7E0B28F9550A00FC2FCA /* NSObject+Extension.swift in Sources */,
 				3E557FFD2901CD7400714E46 /* Keyword.swift in Sources */,
@@ -396,11 +430,14 @@
 				D724790E28FEEEC300D67B50 /* KigoTextField.swift in Sources */,
 				39257DE228F90F5C00201E0B /* MainViewController.swift in Sources */,
 				39257DED28F9378D00201E0B /* BaseCollectionViewCell.swift in Sources */,
+				525E721A28FF0F1900EF3FCB /* MemberCollectionViewCell.swift in Sources */,
 				395C7E2228FEDB6500FC2FCA /* UITextField+Extension.swift in Sources */,
 				39257DF328F93D8900201E0B /* TextLiteral.swift in Sources */,
 				395C7E0D28F959A500FC2FCA /* MainButton.swift in Sources */,
+				525E721528FEEE8500EF3FCB /* AddFeedbackMemberViewController.swift in Sources */,
 				39257DF528F93E4700201E0B /* UIColor+Extension.swift in Sources */,
 				395C7E0328F945B500FC2FCA /* UIFont+Extension.swift in Sources */,
+				7E2ECA102901136700A4D65C /* SetupNicknameViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
