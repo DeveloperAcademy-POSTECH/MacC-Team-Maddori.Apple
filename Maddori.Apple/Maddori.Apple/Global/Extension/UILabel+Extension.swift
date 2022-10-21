@@ -36,16 +36,16 @@ extension UILabel {
     }
     
     func setLineSpacing() {
-            guard let text = text else { return }
-
-            let attributeString = NSMutableAttributedString(string: text)
-            let style = NSMutableParagraphStyle()
-            style.lineSpacing = 4
-            attributeString.addAttribute(.paragraphStyle,
-                                         value: style,
-                                         range: NSRange(location: 0, length: attributeString.length))
-            attributedText = attributeString
-        }
+        guard let text = text else { return }
+        
+        let attributeString = NSMutableAttributedString(string: text)
+        let style = NSMutableParagraphStyle()
+        style.lineSpacing = 4
+        attributeString.addAttribute(.paragraphStyle,
+                                     value: style,
+                                     range: NSRange(location: 0, length: attributeString.length))
+        attributedText = attributeString
+    }
     
     func setTitleFont(text: String) {
         self.text = text
