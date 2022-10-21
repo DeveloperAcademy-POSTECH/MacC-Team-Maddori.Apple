@@ -12,7 +12,7 @@ import SnapKit
 final class AddFeedbackContentViewController: BaseViewController {
     
     // MARK: - property
-    
+
     private let backButton = BackButton()
     private let exitButton = ExitButton()
     private let addFeedbackTitleLabel: UILabel = {
