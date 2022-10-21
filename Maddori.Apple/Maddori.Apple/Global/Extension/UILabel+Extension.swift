@@ -46,4 +46,11 @@ extension UILabel {
                                          range: NSRange(location: 0, length: attributeString.length))
             attributedText = attributeString
         }
+    
+    func setTitleFont(text: String) {
+        self.text = text
+        self.font = .title
+        self.setTextWithLineHeight(text: self.text, lineHeight: 38)
+        self.numberOfLines = 2
+    }
 }
