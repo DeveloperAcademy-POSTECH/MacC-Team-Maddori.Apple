@@ -15,14 +15,14 @@ final class MemberCollectionView: UIView {
     
     let memberList: [String] = ["진저", "이드", "호야", "케미", "메리"]
     private enum Size {
-        static let collectionHorizontalSpacing: CGFloat = 38
-        static let collectionVerticalSpacing: CGFloat = 40
-        static let cellWidth: CGFloat = UIScreen.main.bounds.width * 0.36
+        static let collectionHorizontalSpacing: CGFloat = 14
+        static let collectionTopSpacing: CGFloat = 40
+        static let cellWidth: CGFloat = 135
         static let cellHeight: CGFloat = 60
         static let collectionInsets = UIEdgeInsets(
-            top: collectionVerticalSpacing,
+            top: collectionTopSpacing,
             left: collectionHorizontalSpacing,
-            bottom: collectionVerticalSpacing,
+            bottom: 0,
             right: collectionHorizontalSpacing)
     }
 
@@ -33,7 +33,7 @@ final class MemberCollectionView: UIView {
         flowLayout.scrollDirection = .vertical
         flowLayout.sectionInset = Size.collectionInsets
         flowLayout.itemSize = CGSize(width: Size.cellWidth, height: Size.cellHeight)
-        flowLayout.minimumLineSpacing = 30
+        flowLayout.minimumLineSpacing = 29
         return flowLayout
     }()
     private lazy var collectionView: UICollectionView = {
@@ -67,6 +67,9 @@ final class MemberCollectionView: UIView {
 
 extension MemberCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        // FIXME: - 추후 print문 삭제하고 navigate하는 코드 넣을 예정
+        
         print(memberList[indexPath.item])
     }
 }

@@ -9,9 +9,9 @@ import UIKit
 
 enum ImageLiterals {
     
-    // MARK: - navigation
+    // MARK: - icon
     
-    static var exitButton: UIImage { .load(name: "exitButton") }
+    static var icClose: UIImage { .load(systemName: "xmark") }
 }
 
 extension UIImage {

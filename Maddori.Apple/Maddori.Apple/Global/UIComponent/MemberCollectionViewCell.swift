@@ -36,25 +36,14 @@ final class MemberCollectionViewCell: BaseCollectionViewCell {
     private let memberShadow: UIView = {
         let view = UIView()
         view.frame = Size.frame
-        view.clipsToBounds = false
+        view.layer.cornerRadius = 8
+        view.layer.shadowRadius = 2
+        view.layer.shadowOffset = CGSize(width: 0, height: 0)
+        view.layer.shadowOpacity = 0.2
         return view
-    }()
-    private let memberShadowLayer: CALayer = {
-        let layer = CALayer()
-        let shadowPath0 = UIBezierPath(roundedRect: Size.frame, cornerRadius: 8)
-        layer.shadowPath = shadowPath0.cgPath
-        layer.shadowOpacity = 0.2
-        layer.shadowRadius = 2
-        layer.shadowOffset = CGSize(width: 0, height: 0)
-        layer.bounds = Size.frame
-        return layer
     }()
     
     // MARK: - lifecycle
-    
-    override func configUI() {
-        memberShadowLayer.position = memberShadow.center
-    }
     
     override func render() {
         self.addSubview(memberShadow)
@@ -62,9 +51,7 @@ final class MemberCollectionViewCell: BaseCollectionViewCell {
             $0.width.equalTo(Size.width)
             $0.height.equalTo(Size.height)
         }
-        
-        memberShadow.layer.addSublayer(memberShadowLayer)
-        
+                
         self.addSubview(memberLabel)
         memberLabel.snp.makeConstraints {
             $0.width.equalTo(Size.width)
@@ -78,7 +65,7 @@ final class MemberCollectionViewCell: BaseCollectionViewCell {
         if isSelected {
             memberLabel.textColor = .gray300
             memberLabel.backgroundColor = .white100
-            memberShadowLayer.shadowRadius = 1
+            memberShadow.layer.shadowRadius = 1
         }
     }
 }

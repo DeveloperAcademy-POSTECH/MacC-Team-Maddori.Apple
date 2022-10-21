@@ -7,8 +7,6 @@
 
 import UIKit
 
-import SnapKit
-
 final class ExitButton: UIButton {
     
     // MARK: - init
@@ -19,13 +17,12 @@ final class ExitButton: UIButton {
     }
     
     required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        configUI()
+        fatalError("init(coder:) has not been implemented")
     }
     
     private func configUI() {
         self.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
-        self.setImage(ImageLiterals.exitButton, for: .normal)
+        self.setImage(ImageLiterals.icClose, for: .normal)
         self.tintColor = .black100
     }
 }

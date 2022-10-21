@@ -112,7 +112,7 @@
 		39257DD928F90EB100201E0B /* Screen */ = {
 			isa = PBXGroup;
 			children = (
-				525E721228FE9B4F00EF3FCB /* AddFeedback */,
+				525E721328FE9C5600EF3FCB /* AddFeedbackMember */,
 				39257DDF28F90F3B00201E0B /* Main */,
 			);
 			path = Screen;
@@ -225,14 +225,6 @@
 				39257DDD28F90EF900201E0B /* Sample.swift */,
 			);
 			path = Response;
-			sourceTree = "<group>";
-		};
-		525E721228FE9B4F00EF3FCB /* AddFeedback */ = {
-			isa = PBXGroup;
-			children = (
-				525E721328FE9C5600EF3FCB /* AddFeedbackMember */,
-			);
-			path = AddFeedback;
 			sourceTree = "<group>";
 		};
 		525E721328FE9C5600EF3FCB /* AddFeedbackMember */ = {

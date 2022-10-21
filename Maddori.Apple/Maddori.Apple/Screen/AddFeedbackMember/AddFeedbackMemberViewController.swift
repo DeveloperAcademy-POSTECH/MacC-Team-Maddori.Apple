@@ -38,7 +38,7 @@ final class AddFeedbackMemberViewController: BaseViewController {
         memberCollectionView.snp.makeConstraints {
             $0.top.equalTo(selectMemberLabel.snp.bottom)
             $0.bottom.equalTo(view.safeAreaLayoutGuide)
-            $0.leading.trailing.equalToSuperview()
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
     }
     
