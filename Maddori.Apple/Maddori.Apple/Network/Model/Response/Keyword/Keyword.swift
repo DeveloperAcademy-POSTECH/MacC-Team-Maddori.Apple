@@ -8,19 +8,25 @@
 import UIKit
 
 struct Keyword {
-    let keyword: String
+    let string: String
     let type: KeywordType
     
-    init(keyword: String, type: KeywordType) {
-        self.keyword = keyword
+    init(string: String, type: KeywordType) {
+        self.string = string
         self.type = type
     }
 }
 
+#if DEBUG
 let mockData: [Keyword] = [
-    Keyword(keyword: "첫 번째", type: .defaultKeyword),
-    Keyword(keyword: "키워드를", type: .defaultKeyword),
-    Keyword(keyword: "작성해주세요", type: .defaultKeyword),
-    Keyword(keyword: "아래", type: .defaultKeyword),
-    Keyword(keyword: "버튼으로", type: .defaultKeyword),
+    Keyword(string: "밥", type: .previewKeyword),
+    Keyword(string: "회의왕", type: .previewKeyword),
+    Keyword(string: "과몰입", type: .previewKeyword),
+    Keyword(string: "사과처럼🍎", type: .previewKeyword),
+    Keyword(string: "회고마스터", type: .previewKeyword),
+    Keyword(string: "🧨", type: .previewKeyword),
+    Keyword(string: "내돈을가져가", type: .previewKeyword),
+    Keyword(string: "패셔니스타👕", type: .previewKeyword),
+    
 ]
+#endif

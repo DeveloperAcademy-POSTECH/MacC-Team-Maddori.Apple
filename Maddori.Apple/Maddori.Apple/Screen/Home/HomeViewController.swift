@@ -12,8 +12,9 @@ import SnapKit
 class HomeViewController: BaseViewController {
     
     // MARK: - property
-    private var keywordCollectionView: KeywordCollectionView!
-    private let keywords = mockData
+    
+    private var keywordCollectionView: UICollectionView!
+    static let keywords = mockData
     
     // MARK: - life cycle
     
@@ -36,10 +37,10 @@ class HomeViewController: BaseViewController {
     
     private func setupCollectionView() {
         keywordCollectionView = KeywordCollectionView(frame: .zero, collectionViewLayout: KeywordCollectionViewLayout.init())
-        keywordCollectionView.backgroundColor = .systemGray
+        keywordCollectionView.backgroundColor = .white200
         view.addSubview(keywordCollectionView)
         keywordCollectionView.snp.makeConstraints {
-            $0.edges.equalToSuperview().inset(24)
+            $0.edges.equalToSuperview()
         }
     }
     
@@ -53,18 +54,25 @@ class HomeViewController: BaseViewController {
     }
 }
 
+// MARK: - extension
+
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return keywords.count
+        return HomeViewController.keywords.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = keywordCollectionView.dequeueReusableCell(withReuseIdentifier: "KeywordCollectionViewCell", for: indexPath) as! KeywordCollectionViewCell
-        cell.keywordLabel.text = keywords[indexPath.row].keyword
+        let keyword = HomeViewController.keywords[indexPath.row]
+        cell.keywordLabel.text = keyword.string
+        // FIXME: cell을 여기서 접근하는건 안좋은 방법일수도?
+        cell.configShadow(type: HomeViewController.keywords[indexPath.row].type)
+        cell.configLabel(type: HomeViewController.keywords[indexPath.row].type)
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return KeywordCollectionViewCell.fittingSize(availableHeight: 45, keyword: keywords[indexPath.item].keyword)
-        }
+        let size = SizeLiteral.keywordLabelHeight
+        return KeywordCollectionViewCell.fittingSize(availableHeight: size, keyword: HomeViewController.keywords[indexPath.item].string)
+    }
 }

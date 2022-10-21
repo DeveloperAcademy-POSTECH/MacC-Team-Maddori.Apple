@@ -7,48 +7,66 @@
 
 import UIKit
 
-class KeywordCollectionViewCell: UICollectionViewCell {
+import SnapKit
+
+class KeywordCollectionViewCell: BaseCollectionViewCell {
     
-    var keywordLabel: UILabel!
+    // MARK: - properties
+    
+    var keywordLabel = UILabel()
+    lazy var keywordType: KeywordType = .previewKeyword
+    
+    // MARK: - life cycle
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupCell()
-        setupLabel()
+        configCell()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        setupCell()
-        setupLabel()
     }
     
-    func setupCell() {
-        keywordLabel = UILabel()
+    // MARK: - func
+    
+    func configCell() {
         contentView.addSubview(keywordLabel)
         keywordLabel.snp.makeConstraints {
             $0.edges.equalTo(safeAreaLayoutGuide)
-            $0.edges.equalToSuperview().inset(15)
+            $0.edges.equalToSuperview().inset(SizeLiteral.keywordLabelXInset)
         }
     }
     
-    func setupLabel() {
+    func configLabel(type: KeywordType) {
         keywordLabel.textAlignment = .center
-        keywordLabel.textColor = .black
-        keywordLabel.backgroundColor = .white
-        keywordLabel.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMaxXMinYCorner, .layerMinXMinYCorner]
-        keywordLabel.layer.cornerRadius = 45 / 2
+        keywordLabel.font = .main
+        keywordLabel.layer.cornerRadius = SizeLiteral.keywordLabelHeight / 2
         keywordLabel.layer.masksToBounds = true
+        
+        keywordLabel.textColor = type.textColor
+        keywordLabel.backgroundColor = type.labelColor[0]
+        keywordLabel.layer.maskedCorners = type.maskedCorners
     }
     
-    func configure(keyword: String?) {
+    func configShadow(type: KeywordType) {
+        layer.shadowColor = type.shadowColor
+        layer.shadowOpacity = type.shadowOpacity
+        layer.shadowRadius = type.shadowRadius
+        layer.shadowOffset = type.shadowOffset
+        layer.maskedCorners = type.maskedCorners
+    }
+    
+    func configLabelText(keyword: String?) {
         keywordLabel.text = keyword
     }
     
+    func configLableType(type: KeywordType) {
+        keywordType = type
+    }
+    
     static func fittingSize(availableHeight: CGFloat, keyword: String?) -> CGSize {
-        print("\(keyword)")
         let cell = KeywordCollectionViewCell()
-        cell.configure(keyword: keyword)
+        cell.configLabelText(keyword: keyword)
         let targetSize = CGSize(width: UIView.layoutFittingCompressedSize.width, height: availableHeight)
         return cell.contentView.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: .fittingSizeLevel, verticalFittingPriority: .required)
     }
