@@ -38,7 +38,7 @@ final class StartReflectionViewController: BaseViewController {
         return label
     }()
     private let startButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.setTitle(TextLiteral.startReflectionViewControllerStartText, for: .normal)
         button.titleLabel?.font = .label2
         button.setTitleColor(.black100, for: .normal)
@@ -52,10 +52,12 @@ final class StartReflectionViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        render()
     }
     
     override func configUI() {
         view.backgroundColor = .clear
+        setPopupGradient()
     }
     
     override func render() {
@@ -79,9 +81,6 @@ final class StartReflectionViewController: BaseViewController {
             $0.centerX.equalToSuperview()
         }
         
-        startPopupView.layoutIfNeeded()
-        startPopupView.setGradient(colorTop: .gradientBlue100Top, colorBottom: .gradientBlue100Bottom)
-
         startPopupView.addSubview(startLabel)
         startLabel.snp.makeConstraints {
             $0.top.equalToSuperview().inset(59)
@@ -94,5 +93,10 @@ final class StartReflectionViewController: BaseViewController {
             $0.bottom.equalToSuperview().inset(24)
             $0.height.equalTo(42)
         }
+    }
+    
+    private func setPopupGradient() {
+        startPopupView.layoutIfNeeded()
+        startPopupView.setGradient(colorTop: .gradientBlue100Top, colorBottom: .gradientBlue100Bottom)
     }
 }
