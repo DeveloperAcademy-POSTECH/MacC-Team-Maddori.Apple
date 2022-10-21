@@ -7,7 +7,6 @@
 
 import UIKit
 
-    static var icClose: UIImage {  .load(systemName: "xmark")  }
 enum ImageLiterals {
     
     // MARK: - icon
