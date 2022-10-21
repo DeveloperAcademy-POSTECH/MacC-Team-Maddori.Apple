@@ -12,4 +12,9 @@ enum TextLiteral {
     // MARK: - MainViewController
     
     static let mainViewControllerTitle = "예시입니다...람쥐"
+    
+    // MARK: - AddFeedbackContentViewController
+    
+    static let addFeedbackContentViewControllerTitleLabel = "진저님께 피드백 보내기"
+    static let addFeedbackContentViewControllerFeedbackTypeLabel = "피드백 종류"
 }

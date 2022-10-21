@@ -17,14 +17,14 @@ final class AddFeedbackContentViewController: BaseViewController {
     private let exitButton = ExitButton()
     private let addFeedbackTitleLabel: UILabel = {
         let label = UILabel()
-        label.text = "진저님께 피드백 보내기"
+        label.text = TextLiteral.addFeedbackContentViewControllerTitleLabel
         label.textColor = .black100
         label.font = .title
         return label
     }()
     private let feedbackTypeLabel: UILabel = {
         let label = UILabel()
-        label.text = "피드백 종류"
+        label.text = TextLiteral.addFeedbackContentViewControllerFeedbackTypeLabel
         label.textColor = .black100
         label.font = .label2
         return label
