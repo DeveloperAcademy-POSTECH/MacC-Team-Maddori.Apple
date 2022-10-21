@@ -31,12 +31,8 @@ class HomeViewController: BaseViewController {
         view.backgroundColor = .white
     }
     
-    override func render() {
-        
-    }
-    
     private func setupCollectionView() {
-        keywordCollectionView = KeywordCollectionView(frame: .zero, collectionViewLayout: KeywordCollectionViewLayout.init())
+        keywordCollectionView = UICollectionView(frame: .zero, collectionViewLayout: KeywordCollectionViewLayout.init())
         keywordCollectionView.backgroundColor = .white200
         view.addSubview(keywordCollectionView)
         keywordCollectionView.snp.makeConstraints {
