@@ -16,7 +16,8 @@ class BaseTextFieldViewController: BaseViewController {
     private var nickname: String = ""
     
     var titleText: String = ""
-    var placeholerText: String = ""
+    var placeholderText: String = ""
+    var buttonText: String = ""
     
     // MARK: - property
     
@@ -27,7 +28,7 @@ class BaseTextFieldViewController: BaseViewController {
     }()
     private lazy var nicknameTextField: KigoTextField = {
         let textField = KigoTextField()
-        textField.placeHolderText = placeholerText
+        textField.placeHolderText = placeholderText
         return textField
     }()
     private lazy var textLimitLabel: UILabel = {
@@ -37,9 +38,9 @@ class BaseTextFieldViewController: BaseViewController {
         label.textColor = .gray500
         return label
     }()
-    private let doneButton: MainButton = {
+    private lazy var doneButton: MainButton = {
         let button = MainButton()
-        button.title = TextLiteral.setupNicknameViewControllerDoneButtonTitle
+        button.title = buttonText
         button.isDisabled = true
         return button
     }()

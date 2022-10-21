@@ -214,6 +214,7 @@
 				39257DEA28F9373900201E0B /* BaseViewController.swift */,
 				39257DEC28F9378D00201E0B /* BaseCollectionViewCell.swift */,
 				39257DEE28F937A500201E0B /* BaseTableViewCell.swift */,
+				D724790B28FEC8C900D67B50 /* BaseTextFieldViewController.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -254,7 +255,6 @@
 		D724790A28FEC8A800D67B50 /* Setup */ = {
 			isa = PBXGroup;
 			children = (
-				D724790B28FEC8C900D67B50 /* BaseTextFieldViewController.swift */,
 				7E2ECA0F2901136700A4D65C /* SetupNicknameViewController.swift */,
 			);
 			path = Setup;
