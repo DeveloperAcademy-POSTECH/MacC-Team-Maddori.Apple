@@ -14,7 +14,7 @@ final class AddFeedbackContentViewController: BaseViewController {
     // MARK: - property
 
     private let backButton = BackButton()
-    private let exitButton = ExitButton()
+    private let closeButton = CloseButton()
     private let addFeedbackTitleLabel: UILabel = {
         let label = UILabel()
         label.text = TextLiteral.addFeedbackContentViewControllerTitleLabel
@@ -60,11 +60,11 @@ final class AddFeedbackContentViewController: BaseViewController {
         super.setupNavigationBar()
         
         let backButton = makeBarButtonItem(with: backButton)
-        let exitButton = makeBarButtonItem(with: exitButton)
+        let closeButton = makeBarButtonItem(with: closeButton)
         
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.largeTitleDisplayMode = .never
         navigationItem.leftBarButtonItem = backButton
-        navigationItem.rightBarButtonItem = exitButton
+        navigationItem.rightBarButtonItem = closeButton
     }
 }
