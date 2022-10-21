@@ -53,6 +53,13 @@ final class AddFeedbackContentViewController: BaseViewController {
         label.textColor = .gray500
         return label
     }()
+    private let feedbackContentLabel: UILabel = {
+        let label = UILabel()
+        label.text = "내용"
+        label.textColor = .black100
+        label.font = .label2
+        return label
+    }()
     private let feedbackDoneButton: MainButton = {
         let button = MainButton()
         button.title = "완료"
@@ -106,6 +113,12 @@ final class AddFeedbackContentViewController: BaseViewController {
         textLimitLabel.snp.makeConstraints {
             $0.top.equalTo(feedbackKeywordTextField.snp.bottom).offset(4)
             $0.trailing.equalToSuperview().inset(27)
+        }
+        
+        view.addSubview(feedbackContentLabel)
+        feedbackContentLabel.snp.makeConstraints {
+            $0.top.equalTo(feedbackKeywordTextField.snp.bottom).offset(36)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
         view.addSubview(feedbackDoneButton)
