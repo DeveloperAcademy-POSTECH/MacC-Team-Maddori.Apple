@@ -11,17 +11,17 @@ import SnapKit
 
 final class AddFeedbackContentViewController: BaseViewController {
     
-    private let minLength: Int = 0
-    private let maxLength: Int = 15
-    private var nickname: String = ""
+    private let keywordMinLength: Int = 0
+    private let keywordMaxLength: Int = 15
+    private var nickname: String = "진저"
     
     // MARK: - property
     
     private let backButton = BackButton()
     private let closeButton = CloseButton()
-    private let addFeedbackTitleLabel: UILabel = {
+    private lazy var addFeedbackTitleLabel: UILabel = {
         let label = UILabel()
-        label.text = TextLiteral.addFeedbackContentViewControllerTitleLabel
+        label.text = nickname + TextLiteral.addFeedbackContentViewControllerTitleLabel
         label.textColor = .black100
         label.font = .title
         return label
@@ -48,10 +48,16 @@ final class AddFeedbackContentViewController: BaseViewController {
     }()
     private lazy var textLimitLabel: UILabel = {
         let label = UILabel()
-        label.setTextWithLineHeight(text: "\(minLength)/\(maxLength)", lineHeight: 22)
+        label.setTextWithLineHeight(text: "\(keywordMinLength)/\(keywordMaxLength)", lineHeight: 22)
         label.font = .body2
         label.textColor = .gray500
         return label
+    }()
+    private let feedbackDoneButton: MainButton = {
+        let button = MainButton()
+        button.title = "완료"
+        button.isDisabled = true
+        return button
     }()
     
     // MARK: - lifecycle
@@ -60,7 +66,7 @@ final class AddFeedbackContentViewController: BaseViewController {
         super.viewDidLoad()
         configUI()
         render()
-        //setupNotificationCenter()
+        setupNotificationCenter()
         setupDelegate()
     }
     
@@ -101,6 +107,12 @@ final class AddFeedbackContentViewController: BaseViewController {
             $0.top.equalTo(feedbackKeywordTextField.snp.bottom).offset(4)
             $0.trailing.equalToSuperview().inset(27)
         }
+        
+        view.addSubview(feedbackDoneButton)
+        feedbackDoneButton.snp.makeConstraints {
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(2)
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
     }
     
     // MARK: - functions
@@ -117,27 +129,27 @@ final class AddFeedbackContentViewController: BaseViewController {
         navigationItem.rightBarButtonItem = closeButton
     }
     
-//    private func setupNotificationCenter() {
-//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-//    }
+    private func setupNotificationCenter() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
     
     private func setupDelegate() {
         feedbackKeywordTextField.delegate = self
     }
     
     override func endEditingView() {
-//        if !doneButton.isTouchInside {
-//            view.endEditing(true)
-//        }
+        if !feedbackDoneButton.isTouchInside {
+            view.endEditing(true)
+        }
     }
     
     private func setCounter(count: Int) {
-        if count <= maxLength {
-            textLimitLabel.text = "\(count)/\(maxLength)"
+        if count <= keywordMinLength {
+            textLimitLabel.text = "\(count)/\(keywordMaxLength)"
         }
         else {
-            textLimitLabel.text = "\(maxLength)/\(maxLength)"
+            textLimitLabel.text = "\(keywordMinLength)/\(keywordMinLength)"
         }
     }
     
@@ -157,19 +169,19 @@ final class AddFeedbackContentViewController: BaseViewController {
     
     // MARK: - selector
     
-//    @objc private func keyboardWillShow(notification:NSNotification) {
-//        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-//            UIView.animate(withDuration: 0.2, animations: {
-//                self.doneButton.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height + 10)
-//            })
-//        }
-//    }
-//
-//    @objc private func keyboardWillHide(notification:NSNotification) {
-//        UIView.animate(withDuration: 0.2, animations: {
-//            self.doneButton.transform = .identity
-//        })
-//    }
+    @objc private func keyboardWillShow(notification:NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            UIView.animate(withDuration: 0.2, animations: {
+                self.feedbackDoneButton.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height + 25)
+            })
+        }
+    }
+
+    @objc private func keyboardWillHide(notification:NSNotification) {
+        UIView.animate(withDuration: 0.2, animations: {
+            self.feedbackDoneButton.transform = .identity
+        })
+    }
 }
 
 // MARK: - extension
@@ -177,9 +189,9 @@ final class AddFeedbackContentViewController: BaseViewController {
 extension AddFeedbackContentViewController: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
         setCounter(count: textField.text?.count ?? 0)
-        checkMaxLength(textField: feedbackKeywordTextField, maxLength: maxLength)
+        checkMaxLength(textField: feedbackKeywordTextField, maxLength: keywordMaxLength)
         
         let hasText = feedbackKeywordTextField.hasText
-        //doneButton.isDisabled = !hasText
+        feedbackDoneButton.isDisabled = !hasText
     }
 }
