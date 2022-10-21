@@ -20,15 +20,6 @@ final class FeedbackTypeButtonView: UIButton {
         static let height: CGFloat = 46
     }
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        render()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     // MARK: - property
     
     private var selectedType: FeedbackType = .continueType
@@ -58,10 +49,10 @@ final class FeedbackTypeButtonView: UIButton {
         button.backgroundColor = .blue200
         button.clipsToBounds = true
         button.layer.cornerRadius = 10
-        let buttonAction = UIAction { [weak self] _ in
+        let action = UIAction { [weak self] _ in
             self?.touchUpToSelectType(.continueType)
         }
-        button.addAction(buttonAction, for: .touchUpInside)
+        button.addAction(action, for: .touchUpInside)
         return button
     }()
     private lazy var stopButton: UIButton = {
@@ -72,14 +63,23 @@ final class FeedbackTypeButtonView: UIButton {
         button.backgroundColor = .white100
         button.clipsToBounds = true
         button.layer.cornerRadius = 10
-        let buttonAction = UIAction { [weak self] _ in
+        let action = UIAction { [weak self] _ in
             self?.touchUpToSelectType(.stopType)
         }
-        button.addAction(buttonAction, for: .touchUpInside)
+        button.addAction(action, for: .touchUpInside)
         return button
     }()
     
     // MARK: - life cycle
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        render()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     private func render() {
         self.addSubview(continueShadowView)
@@ -97,40 +97,38 @@ final class FeedbackTypeButtonView: UIButton {
         stopShadowView.snp.makeConstraints {
             $0.width.equalTo(Size.width)
             $0.height.equalTo(Size.height)
-            $0.leading.equalTo(continueShadowView.snp.trailing).offset(11)
+            $0.leading.equalTo(continueShadowView.snp.trailing).offset(Size.buttonPadding)
             $0.centerY.equalTo(continueShadowView)
         }
         stopShadowView.addSubview(stopButton)
         stopButton.snp.makeConstraints {
             $0.width.equalTo(Size.width)
             $0.height.equalTo(Size.height)
-            $0.leading.equalTo(continueButton.snp.trailing).offset(11)
+            $0.leading.equalTo(continueButton.snp.trailing).offset(Size.buttonPadding)
             $0.centerY.equalTo(continueButton)
         }
     }
     
-    // MARK: - function
+    // MARK: - func
+    
     private func touchUpToSelectType(_ type: FeedbackType) {
-        if type == .continueType {
+        switch type {
+        case .continueType:
             continueButton.setTitleColor(.white100, for: .normal)
             continueButton.backgroundColor = .blue200
             continueShadowView.layer.shadowRadius = 2
             stopButton.setTitleColor(.gray600, for: .normal)
             stopButton.backgroundColor = .white100
             stopShadowView.layer.shadowRadius = 1
-            
             // FIXME: - 선택된 feedback 타입 전달
-            
-        } else {
+        case .stopType:
             stopButton.setTitleColor(.white100, for: .normal)
             stopButton.backgroundColor = .blue200
             stopShadowView.layer.shadowRadius = 2
             continueButton.setTitleColor(.gray600, for: .normal)
             continueButton.backgroundColor = .white100
             continueShadowView.layer.shadowRadius = 1
-            
             // FIXME: - 선택된 feedback 타입 전달
-            
         }
     }
 }
