@@ -49,7 +49,6 @@ class KeywordCollectionViewCell: BaseCollectionViewCell {
     }
     
     func configShadow(type: KeywordType) {
-        layer.shadowColor = type.shadowColor
         layer.shadowOpacity = type.shadowOpacity
         layer.shadowRadius = type.shadowRadius
         layer.shadowOffset = type.shadowOffset
@@ -58,10 +57,6 @@ class KeywordCollectionViewCell: BaseCollectionViewCell {
     
     func configLabelText(keyword: String?) {
         keywordLabel.text = keyword
-    }
-    
-    func configLableType(type: KeywordType) {
-        keywordType = type
     }
     
     static func fittingSize(availableHeight: CGFloat, keyword: String?) -> CGSize {

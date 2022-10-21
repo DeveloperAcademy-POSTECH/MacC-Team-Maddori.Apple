@@ -42,21 +42,12 @@ enum KeywordType: CaseIterable {
         }
     }
     
-    var shadowColor: CGColor {
-        switch self {
-        case .disabledKeyword:
-            return UIColor(red: 0, green: 0, blue: 0, alpha: 0.2).cgColor
-        default:
-            return UIColor(red: 0, green: 0, blue: 0, alpha: 0.10).cgColor
-        }
-    }
-    
     var shadowOpacity: Float {
         switch self {
-        case .disabledKeyword:
-            return 0.5
+        case .previewKeyword:
+            return 0.13
         default:
-            return 1
+            return 0.25
         }
     }
     

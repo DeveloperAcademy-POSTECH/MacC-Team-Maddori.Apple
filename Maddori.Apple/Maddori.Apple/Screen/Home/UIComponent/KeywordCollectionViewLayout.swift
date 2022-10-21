@@ -7,7 +7,7 @@
 
 import UIKit
 
-class KeywordCollectionViewLayout: UICollectionViewFlowLayout {
+final class KeywordCollectionViewLayout: UICollectionViewFlowLayout {
     let cellSpacing: CGFloat = SizeLiteral.keywordLabelXSpacing
     
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
