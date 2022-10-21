@@ -9,26 +9,24 @@ import UIKit
 
 import SnapKit
 
-class BaseTextFieldViewController: BaseViewController {
+final class SignupViewController: BaseViewController {
     
     private let minLength: Int = 0
     private let maxLength: Int = 6
     private var nickname: String = ""
     
-    var titleText: String = ""
-    var placeholderText: String = ""
-    var buttonText: String = ""
-    
     // MARK: - property
     
-    private lazy var titleLabel: UILabel = {
+    private let titleLabel: UILabel = {
         let label = UILabel()
-        label.setTitleFont(text: titleText)
+        label.text = TextLiteral.signupViewControllerTitleLabel
+        label.font = .title
+        label.numberOfLines = 2
         return label
     }()
-    private lazy var nicknameTextField: KigoTextField = {
+    private let nicknameTextField: KigoTextField = {
         let textField = KigoTextField()
-        textField.placeHolderText = placeholderText
+        textField.placeHolderText = TextLiteral.signupViewControllerNicknameTextFieldPlaceHolder
         return textField
     }()
     private lazy var textLimitLabel: UILabel = {
@@ -38,9 +36,9 @@ class BaseTextFieldViewController: BaseViewController {
         label.textColor = .gray500
         return label
     }()
-    private lazy var doneButton: MainButton = {
+    private let doneButton: MainButton = {
         let button = MainButton()
-        button.title = buttonText
+        button.title = TextLiteral.signupViewControllerDoneButtonTitle
         button.isDisabled = true
         return button
     }()
@@ -139,7 +137,7 @@ class BaseTextFieldViewController: BaseViewController {
 
 // MARK: - Extension
 
-extension BaseTextFieldViewController: UITextFieldDelegate {
+extension SignupViewController: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
         setCounter(count: textField.text?.count ?? 0)
         checkMaxLength(textField: nicknameTextField, maxLength: maxLength)
