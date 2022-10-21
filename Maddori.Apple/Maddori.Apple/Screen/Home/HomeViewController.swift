@@ -13,6 +13,8 @@ class HomeViewController: BaseViewController {
     
     // MARK: - property
     
+    private let keywordLabelHeight: CGFloat = 50
+    
     private var keywordCollectionView: UICollectionView!
     static let keywords = mockData
     
@@ -68,7 +70,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let size = SizeLiteral.keywordLabelHeight
+        let size = keywordLabelHeight
         return KeywordCollectionViewCell.fittingSize(availableHeight: size, keyword: HomeViewController.keywords[indexPath.item].string)
     }
 }

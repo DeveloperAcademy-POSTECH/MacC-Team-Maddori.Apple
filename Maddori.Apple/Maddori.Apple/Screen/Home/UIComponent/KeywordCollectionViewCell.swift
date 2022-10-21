@@ -11,6 +11,12 @@ import SnapKit
 
 class KeywordCollectionViewCell: BaseCollectionViewCell {
     
+    private enum Size {
+        static let keywordLabelHeight: CGFloat = 50
+        // FIXME: 기존에는 16 이었는데 그렇게 하면 한 글자일 때 cornerRadius 때문에 뾰족해짐
+        static let keywordLabelXInset: CGFloat = 17
+    }
+    
     // MARK: - properties
     
     var keywordLabel = UILabel()
@@ -33,14 +39,15 @@ class KeywordCollectionViewCell: BaseCollectionViewCell {
         contentView.addSubview(keywordLabel)
         keywordLabel.snp.makeConstraints {
             $0.edges.equalTo(safeAreaLayoutGuide)
-            $0.edges.equalToSuperview().inset(SizeLiteral.keywordLabelXInset)
+            $0.edges.equalToSuperview().inset(Size.keywordLabelXInset)
         }
     }
     
     func configLabel(type: KeywordType) {
         keywordLabel.textAlignment = .center
         keywordLabel.font = .main
-        keywordLabel.layer.cornerRadius = SizeLiteral.keywordLabelHeight / 2
+        keywordLabel.layer.cornerRadius = Size
+            .keywordLabelHeight / 2
         keywordLabel.layer.masksToBounds = true
         
         keywordLabel.textColor = type.textColor
