@@ -9,7 +9,7 @@ import UIKit
 
 import SnapKit
 
-class LabelButtonView: UIView {
+final class LabelButtonView: UIView {
     
     var buttonAction: (() -> ())?
     
