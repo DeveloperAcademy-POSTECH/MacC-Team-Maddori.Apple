@@ -16,9 +16,7 @@ final class ExitButton: UIButton {
         configUI()
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    required init?(coder: NSCoder) { nil }
     
     private func configUI() {
         self.frame = CGRect(x: 0, y: 0, width: 44, height: 44)

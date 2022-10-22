@@ -17,9 +17,9 @@ final class AddFeedbackContentViewController: BaseViewController {
     
     // MARK: - property
     
-    private let backButton = BackButton()
-    private let closeButton = CloseButton()
-    private lazy var addFeedbackTitleLabel: UILabel = {
+    private let backButton = BackButton(type: .system)
+    private let exitButton = ExitButton(type: .system)
+    private let addFeedbackTitleLabel: UILabel = {
         let label = UILabel()
         label.text = nickname + TextLiteral.addFeedbackContentViewControllerTitleLabel
         label.textColor = .black100
@@ -106,7 +106,6 @@ final class AddFeedbackContentViewController: BaseViewController {
         feedbackTypeButtonView.snp.makeConstraints {
             $0.top.equalTo(feedbackTypeLabel.snp.bottom).offset(10)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-            $0.centerX.equalToSuperview()
         }
         
         view.addSubview(feedbackKeywordLabel)
@@ -153,13 +152,14 @@ final class AddFeedbackContentViewController: BaseViewController {
     override func setupNavigationBar() {
         super.setupNavigationBar()
         
-        let backButton = makeBarButtonItem(with: backButton)
-        let closeButton = makeBarButtonItem(with: closeButton)
+        let button = removeBarButtonItemOffset(with: backButton, offsetX: 10)
+        let backButton = makeBarButtonItem(with: button)
+        let exitButton = makeBarButtonItem(with: exitButton)
         
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.largeTitleDisplayMode = .never
         navigationItem.leftBarButtonItem = backButton
-        navigationItem.rightBarButtonItem = closeButton
+        navigationItem.rightBarButtonItem = exitButton
     }
     
     private func setupNotificationCenter() {

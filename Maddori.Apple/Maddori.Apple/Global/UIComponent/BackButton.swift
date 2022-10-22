@@ -16,10 +16,7 @@ final class BackButton: UIButton {
         configUI()
     }
     
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        configUI()
-    }
+    required init?(coder: NSCoder) { nil }
     
     private func configUI() {
         self.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
