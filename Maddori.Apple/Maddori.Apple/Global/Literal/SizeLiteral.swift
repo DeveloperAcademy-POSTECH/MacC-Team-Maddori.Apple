@@ -8,8 +8,14 @@
 import Foundation
 
 enum SizeLiteral {
+    
+    // MARK: - common
+    
     static let leadingTrailingPadding: CGFloat = 24
     static let topPadding: CGFloat = 12
+    static let topComponentPadding: CGFloat = 40
+    static let labelComponentPadding: CGFloat = 10
+    static let componentIntervalPadding: CGFloat = 36
     
     static let keywordLabelHeight: CGFloat = 50
     static let keywordLabelXSpacing: CGFloat = 10

@@ -92,25 +92,25 @@ final class AddFeedbackContentViewController: BaseViewController {
         
         view.addSubview(feedbackTypeLabel)
         feedbackTypeLabel.snp.makeConstraints {
-            $0.top.equalTo(addFeedbackTitleLabel.snp.bottom).offset(40)
+            $0.top.equalTo(addFeedbackTitleLabel.snp.bottom).offset(SizeLiteral.topComponentPadding)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
         view.addSubview(feedbackTypeButtonView)
         feedbackTypeButtonView.snp.makeConstraints {
-            $0.top.equalTo(feedbackTypeLabel.snp.bottom).offset(10)
+            $0.top.equalTo(feedbackTypeLabel.snp.bottom).offset(SizeLiteral.labelComponentPadding)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
         view.addSubview(feedbackKeywordLabel)
         feedbackKeywordLabel.snp.makeConstraints {
-            $0.top.equalTo(feedbackTypeButtonView.snp.bottom).offset(36)
+            $0.top.equalTo(feedbackTypeButtonView.snp.bottom).offset(SizeLiteral.componentIntervalPadding)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
         view.addSubview(feedbackKeywordTextField)
         feedbackKeywordTextField.snp.makeConstraints {
-            $0.top.equalTo(feedbackKeywordLabel.snp.bottom).offset(10)
+            $0.top.equalTo(feedbackKeywordLabel.snp.bottom).offset(SizeLiteral.labelComponentPadding)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
@@ -122,13 +122,13 @@ final class AddFeedbackContentViewController: BaseViewController {
         
         view.addSubview(feedbackContentLabel)
         feedbackContentLabel.snp.makeConstraints {
-            $0.top.equalTo(feedbackKeywordTextField.snp.bottom).offset(36)
+            $0.top.equalTo(feedbackKeywordTextField.snp.bottom).offset(SizeLiteral.componentIntervalPadding)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
         view.addSubview(feedbackContentTextView)
         feedbackContentTextView.snp.makeConstraints {
-            $0.top.equalTo(feedbackContentLabel.snp.bottom).offset(10)
+            $0.top.equalTo(feedbackContentLabel.snp.bottom).offset(SizeLiteral.labelComponentPadding)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.height.equalTo(137)
         }
@@ -138,7 +138,6 @@ final class AddFeedbackContentViewController: BaseViewController {
             $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(2)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
-        
     }
     
     // MARK: - func
