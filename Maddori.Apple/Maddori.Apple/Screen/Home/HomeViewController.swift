@@ -16,7 +16,7 @@ class HomeViewController: BaseViewController {
     // MARK: - property
      
     lazy var keywordCollectionView: UICollectionView = {
-        let flowLayout = KeywordCollectionViewLayout()
+        let flowLayout = KeywordCollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         collectionView.backgroundColor = .white200
         collectionView.register(KeywordCollectionViewCell.self, forCellWithReuseIdentifier: KeywordCollectionViewCell.className)
