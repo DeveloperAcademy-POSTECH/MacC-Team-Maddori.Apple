@@ -34,6 +34,7 @@ final class JoinTeamViewController: BaseTextFieldViewController {
     }
     
     // MARK: - property
+    
     let createView: LabelButtonView = {
         let view = LabelButtonView()
         view.subText = TextLiteral.joinTeamViewControllerSubText
