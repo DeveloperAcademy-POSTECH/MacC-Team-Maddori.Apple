@@ -31,7 +31,7 @@ final class SetupNicknameViewController: BaseTextFieldViewController {
     
     override var buttonText: String {
         get {
-            return TextLiteral.setupNicknameViewControllerDoneButtonTitle
+            return TextLiteral.doneButtonTitle
         }
         
         set {

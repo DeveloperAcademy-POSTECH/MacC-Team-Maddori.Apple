@@ -38,7 +38,7 @@ class BaseTextFieldViewController: BaseViewController {
         label.textColor = .gray500
         return label
     }()
-    private lazy var doneButton: MainButton = {
+    lazy var doneButton: MainButton = {
         let button = MainButton()
         button.title = buttonText
         button.isDisabled = true
