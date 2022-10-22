@@ -12,17 +12,6 @@ import SnapKit
 final class HomeViewController: BaseViewController {
     
     let keywords = Keyword.mockData
-    
-    // MARK: - property
-     
-    lazy var keywordCollectionView: UICollectionView = {
-        let flowLayout = KeywordCollectionViewFlowLayout()
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
-        collectionView.backgroundColor = .white200
-        collectionView.register(KeywordCollectionViewCell.self, forCellWithReuseIdentifier: KeywordCollectionViewCell.className)
-        return collectionView
-    }()
-    
     private enum Size {
         static let keywordLabelHeight: CGFloat = 50
         // FIXME: 기존 간격인 10으로 하면
@@ -36,7 +25,15 @@ final class HomeViewController: BaseViewController {
         static let planReflectionViewHeight: CGFloat = 40
     }
     
-    private let planReflectionView = UIView()
+    // MARK: - property
+     
+    lazy var keywordCollectionView: UICollectionView = {
+        let flowLayout = KeywordCollectionViewFlowLayout()
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+        collectionView.backgroundColor = .white200
+        collectionView.register(KeywordCollectionViewCell.self, forCellWithReuseIdentifier: KeywordCollectionViewCell.className)
+        return collectionView
+    }()
     private let teamNameLabel: UILabel = {
         let label = UILabel()
         label.text = TextLiteral.mainViewControllerTeamName
@@ -67,21 +64,6 @@ final class HomeViewController: BaseViewController {
         label.font = .label2
         label.textColor = .black100
         return label
-    }()
-    private let planReflectionViewLabel: UILabel = {
-        let label = UILabel()
-        label.text = TextLiteral.mainViewControllerPlanReflectionViewLabelText
-        label.font = .body2
-        label.textColor = .gray400
-        return label
-    }()
-    private let planReflectionViewButton: UIButton = {
-        let button = UIButton()
-        button.setTitle(TextLiteral.mainViewControllerPlanReflectionViewButtonText, for: .normal)
-        button.titleLabel?.font = .body2
-        button.setTitleColor(UIColor.blue200, for: .normal)
-        // TODO: button action 추가
-        return button
     }()
     private let addFeedbackButton: UIButton = {
         let button = UIButton()
@@ -144,30 +126,15 @@ final class HomeViewController: BaseViewController {
             $0.height.equalTo(Size.mainButtonHeight)
         }
         
-        planReflectionView.addSubview(planReflectionViewLabel)
-        planReflectionViewLabel.snp.makeConstraints {
-            $0.leading.top.bottom.equalToSuperview()
-        }
-        planReflectionView.addSubview(planReflectionViewButton)
-        planReflectionViewButton.snp.makeConstraints {
-            $0.trailing.top.bottom.equalToSuperview()
-            $0.leading.equalTo(planReflectionViewLabel.snp.trailing).offset(4)
-        }
-        view.addSubview(planReflectionView)
-        planReflectionView.snp.makeConstraints {
-            $0.bottom.equalTo(addFeedbackButton.snp.top)
-            $0.centerX.equalToSuperview()
-            $0.height.equalTo(Size.planReflectionViewHeight)
-        }
         view.addSubview(keywordCollectionView)
         keywordCollectionView.snp.makeConstraints {
             $0.top.equalTo(currentReflectionLabel.snp.bottom).offset(Size.labelPadding)
             $0.leading.equalTo(view.safeAreaLayoutGuide)
             $0.trailing.equalTo(view.safeAreaLayoutGuide)
-            $0.bottom.equalTo(planReflectionView.snp.top)
+            $0.bottom.equalTo(addFeedbackButton.snp.top)
         }
     }
-    
+
     private func setUpDelegation() {
         keywordCollectionView.delegate = self
         keywordCollectionView.dataSource = self
@@ -199,6 +166,7 @@ extension HomeViewController: UICollectionViewDataSource {
 extension HomeViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let size = Size.keywordLabelHeight
-        return KeywordCollectionViewCell.fittingSize(availableHeight: size, keyword: HomeViewController.keywords[indexPath.item].string)
+        return KeywordCollectionViewCell.fittingSize(availableHeight: size, keyword: keywords[indexPath.item].string)
     }
 }
+

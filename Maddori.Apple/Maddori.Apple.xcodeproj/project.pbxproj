@@ -36,7 +36,6 @@
 		3E557FF82901CD3400714E46 /* KeywordCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E557FF72901CD3400714E46 /* KeywordCollectionViewFlowLayout.swift */; };
 		3E557FFA2901CD4200714E46 /* KeywordCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E557FF92901CD4200714E46 /* KeywordCollectionViewCell.swift */; };
 		3E557FFD2901CD7400714E46 /* Keyword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E557FFC2901CD7400714E46 /* Keyword.swift */; };
-		3E5580042902D9A700714E46 /* ToastPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5580032902D9A700714E46 /* ToastPopUpView.swift */; };
 		525E721528FEEE8500EF3FCB /* AddFeedbackMemberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525E721428FEEE8500EF3FCB /* AddFeedbackMemberViewController.swift */; };
 		525E721728FEF2C500EF3FCB /* ExitButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525E721628FEF2C500EF3FCB /* ExitButton.swift */; };
 		525E721A28FF0F1900EF3FCB /* MemberCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525E721928FF0F1900EF3FCB /* MemberCollectionViewCell.swift */; };
@@ -78,7 +77,6 @@
 		3E557FF72901CD3400714E46 /* KeywordCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		3E557FF92901CD4200714E46 /* KeywordCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordCollectionViewCell.swift; sourceTree = "<group>"; };
 		3E557FFC2901CD7400714E46 /* Keyword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keyword.swift; sourceTree = "<group>"; };
-		3E5580032902D9A700714E46 /* ToastPopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastPopUpView.swift; sourceTree = "<group>"; };
 		525E721428FEEE8500EF3FCB /* AddFeedbackMemberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFeedbackMemberViewController.swift; sourceTree = "<group>"; };
 		525E721628FEF2C500EF3FCB /* ExitButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExitButton.swift; sourceTree = "<group>"; };
 		525E721928FF0F1900EF3FCB /* MemberCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -207,7 +205,6 @@
 				395C7E1C28FEC8C400FC2FCA /* CloseButton.swift */,
 				D724790D28FEEEC300D67B50 /* KigoTextField.swift */,
 				3E557FC428FE854600714E46 /* KeywordLabel.swift */,
-				3E5580032902D9A700714E46 /* ToastPopUpView.swift */,
 			);
 			path = UIComponent;
 			sourceTree = "<group>";
@@ -408,7 +405,6 @@
 			files = (
 				525E721C28FF0F5B00EF3FCB /* MemberCollectionView.swift in Sources */,
 				395C7E2028FED7B500FC2FCA /* ReflectionNameView.swift in Sources */,
-				3E5580042902D9A700714E46 /* ToastPopUpView.swift in Sources */,
 				395C7E1128F9834A00FC2FCA /* SampleDTO.swift in Sources */,
 				3E557FFA2901CD4200714E46 /* KeywordCollectionViewCell.swift in Sources */,
 				395C7E0528F953D200FC2FCA /* UIViewController+Extension.swift in Sources */,

@@ -19,11 +19,11 @@ final class KeywordCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - properties
     
-    var keywordLabel: UILabel = {
+    lazy var keywordLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
         label.font = .main
-        label.layer.cornerRadius = SizeLiteral.keywordLabelHeight / 2
+        label.layer.cornerRadius = Size.keywordLabelHeight / 2
         label.layer.masksToBounds = true
         return label
     }()
