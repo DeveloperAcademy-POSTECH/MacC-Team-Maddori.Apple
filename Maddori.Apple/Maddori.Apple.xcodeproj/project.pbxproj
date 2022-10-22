@@ -46,8 +46,10 @@
 		525E722528FFCFA600EF3FCB /* FeedbackTypeButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525E722428FFCFA600EF3FCB /* FeedbackTypeButtonView.swift */; };
 		7E2ECA102901136700A4D65C /* SetupNicknameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2ECA0F2901136700A4D65C /* SetupNicknameViewController.swift */; };
 		7E6B662F28FE887300C3BEEF /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6B662E28FE887300C3BEEF /* UILabel+Extension.swift */; };
+		7EB4D58229011EF7001FC396 /* JoinTeamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB4D58129011EF7001FC396 /* JoinTeamViewController.swift */; };
 		D724790C28FEC8C900D67B50 /* BaseTextFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D724790B28FEC8C900D67B50 /* BaseTextFieldViewController.swift */; };
 		D724790E28FEEEC300D67B50 /* KigoTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D724790D28FEEEC300D67B50 /* KigoTextField.swift */; };
+		D79D908C2903B6B1004DDC4A /* LabelButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D79D908B2903B6B1004DDC4A /* LabelButtonView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -91,8 +93,10 @@
 		525E722428FFCFA600EF3FCB /* FeedbackTypeButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackTypeButtonView.swift; sourceTree = "<group>"; };
 		7E2ECA0F2901136700A4D65C /* SetupNicknameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupNicknameViewController.swift; sourceTree = "<group>"; };
 		7E6B662E28FE887300C3BEEF /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
+		7EB4D58129011EF7001FC396 /* JoinTeamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinTeamViewController.swift; sourceTree = "<group>"; };
 		D724790B28FEC8C900D67B50 /* BaseTextFieldViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTextFieldViewController.swift; sourceTree = "<group>"; };
 		D724790D28FEEEC300D67B50 /* KigoTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KigoTextField.swift; sourceTree = "<group>"; };
+		D79D908B2903B6B1004DDC4A /* LabelButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelButtonView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -213,6 +217,7 @@
 				525E721B28FF0F5B00EF3FCB /* MemberCollectionView.swift */,
 				395C7E1C28FEC8C400FC2FCA /* CloseButton.swift */,
 				D724790D28FEEEC300D67B50 /* KigoTextField.swift */,
+				D79D908B2903B6B1004DDC4A /* LabelButtonView.swift */,
 				3E557FC428FE854600714E46 /* KeywordLabel.swift */,
 				525E722028FFC9A800EF3FCB /* BackButton.swift */,
 				525E722428FFCFA600EF3FCB /* FeedbackTypeButtonView.swift */,
@@ -343,6 +348,7 @@
 			isa = PBXGroup;
 			children = (
 				7E2ECA0F2901136700A4D65C /* SetupNicknameViewController.swift */,
+				7EB4D58129011EF7001FC396 /* JoinTeamViewController.swift */,
 			);
 			path = Setup;
 			sourceTree = "<group>";
@@ -445,12 +451,14 @@
 				395C7E0B28F9550A00FC2FCA /* NSObject+Extension.swift in Sources */,
 				3E557FFD2901CD7400714E46 /* Keyword.swift in Sources */,
 				395C7E1D28FEC8C400FC2FCA /* CloseButton.swift in Sources */,
+				D79D908C2903B6B1004DDC4A /* LabelButtonView.swift in Sources */,
 				39257DEF28F937A500201E0B /* BaseTableViewCell.swift in Sources */,
 				3E557FC528FE854600714E46 /* KeywordLabel.swift in Sources */,
 				39257DF128F93C2A00201E0B /* ImageLiteral.swift in Sources */,
 				3E557FF82901CD3400714E46 /* KeywordCollectionViewFlowLayout.swift in Sources */,
 				395C7E1B28FEC42900FC2FCA /* AddReflectionViewController.swift in Sources */,
 				D724790E28FEEEC300D67B50 /* KigoTextField.swift in Sources */,
+				7EB4D58229011EF7001FC396 /* JoinTeamViewController.swift in Sources */,
 				39257DE228F90F5C00201E0B /* MainViewController.swift in Sources */,
 				39257DED28F9378D00201E0B /* BaseCollectionViewCell.swift in Sources */,
 				525E721A28FF0F1900EF3FCB /* MemberCollectionViewCell.swift in Sources */,
