@@ -12,7 +12,7 @@ import SnapKit
 final class AddFeedbackContentViewController: BaseViewController {
     
     // MARK: - property
-
+    
     private let backButton = BackButton(type: .system)
     private let exitButton = ExitButton(type: .system)
     private let addFeedbackTitleLabel: UILabel = {
@@ -52,13 +52,14 @@ final class AddFeedbackContentViewController: BaseViewController {
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
     }
-
+    
     // MARK: - func
     
     override func setupNavigationBar() {
         super.setupNavigationBar()
         
-        let backButton = makeBarButtonItem(with: backButton)
+        let button = removeBarButtonItemOffset(with: backButton, offsetX: 10)
+        let backButton = makeBarButtonItem(with: button)
         let exitButton = makeBarButtonItem(with: exitButton)
         
         navigationController?.navigationBar.prefersLargeTitles = false
