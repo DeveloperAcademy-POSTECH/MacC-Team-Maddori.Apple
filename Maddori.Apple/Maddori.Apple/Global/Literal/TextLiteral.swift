@@ -9,6 +9,9 @@ import UIKit
 
 enum TextLiteral {
     
+    // MARK: - Common
+    static let doneButtonTitle = "입력완료"
+    
     // MARK: - MainViewController
     
     static let mainViewControllerTitle = "예시입니다...람쥐"
@@ -29,9 +32,16 @@ enum TextLiteral {
     
     static let setupNicknameViewControllerTitleLabel = "키고에서 사용할 \n닉네임을 입력해주세요"
     static let setupNicknameViewControllerNicknameTextFieldPlaceHolder = "예) 진저, 호야, 성민"
-    static let setupNicknameViewControllerDoneButtonTitle = "입력완료"
-    static let addFeedbackContentViewControllerTitleLabel = "진저님께 피드백 보내기"
-    static let addFeedbackContentViewControllerFeedbackTypeLabel = "피드백 종류"
+    
     // MARK: - AddFeedbackContentViewController
     
+    static let addFeedbackContentViewControllerTitleLabel = "진저님께 피드백 보내기"
+    static let addFeedbackContentViewControllerFeedbackTypeLabel = "피드백 종류"
+    
+    // MARK: - JoinTeamViewController
+    
+    static let joinTeamViewControllerTitleLabel = "님 반가워요!\n이제 팀에 합류해주세요"
+    static let joinTeamViewControllerNicknameTextFieldPlaceHolder = "초대코드"
+    static let joinTeamViewControllerSubText = "팀이 없나요?"
+    static let joinTeamViewControllerSubButtonText = "팀 생성하기"
 }
