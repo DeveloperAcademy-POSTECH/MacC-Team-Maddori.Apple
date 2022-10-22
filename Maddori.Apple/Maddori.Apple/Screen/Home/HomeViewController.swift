@@ -65,6 +65,12 @@ final class HomeViewController: BaseViewController {
         label.textColor = .black100
         return label
     }()
+    private let planLabelButtonView: LabelButtonView = {
+        let labelButton = LabelButtonView()
+        labelButton.subText = TextLiteral.mainViewControllerPlanLabelButtonSubText
+        labelButton.subButtonText = TextLiteral.mainViewControllerPlanLabelButtonSubButtonText
+        return labelButton
+    }()
     private let addFeedbackButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .white100
@@ -126,12 +132,19 @@ final class HomeViewController: BaseViewController {
             $0.height.equalTo(Size.mainButtonHeight)
         }
         
+        view.addSubview(planLabelButtonView)
+        planLabelButtonView.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.bottom.equalTo(addFeedbackButton.snp.top)
+            $0.height.equalTo(SizeLiteral.minimumTouchArea)
+        }
+        
         view.addSubview(keywordCollectionView)
         keywordCollectionView.snp.makeConstraints {
             $0.top.equalTo(currentReflectionLabel.snp.bottom).offset(Size.labelPadding)
             $0.leading.equalTo(view.safeAreaLayoutGuide)
             $0.trailing.equalTo(view.safeAreaLayoutGuide)
-            $0.bottom.equalTo(addFeedbackButton.snp.top)
+            $0.bottom.equalTo(planLabelButtonView.snp.top)
         }
     }
 
