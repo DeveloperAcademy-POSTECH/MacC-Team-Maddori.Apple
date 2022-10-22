@@ -9,7 +9,7 @@ import UIKit
 
 import SnapKit
 
-class KeywordCollectionViewCell: BaseCollectionViewCell {
+final class KeywordCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - properties
     

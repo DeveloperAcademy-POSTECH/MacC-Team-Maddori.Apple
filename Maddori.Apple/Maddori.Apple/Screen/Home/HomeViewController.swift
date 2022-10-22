@@ -9,7 +9,7 @@ import UIKit
 
 import SnapKit
 
-class HomeViewController: BaseViewController {
+final class HomeViewController: BaseViewController {
     
     let keywords = Keyword.mockData
     
@@ -27,7 +27,7 @@ class HomeViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUpDelagation()
+        setUpDelegation()
     }
     
     // MARK: - func
@@ -43,7 +43,7 @@ class HomeViewController: BaseViewController {
         }
     }
     
-    private func setUpDelagation() {
+    private func setUpDelegation() {
         keywordCollectionView.delegate = self
         keywordCollectionView.dataSource = self
     }
