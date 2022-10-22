@@ -32,18 +32,19 @@ final class JoinTeamViewController: BaseTextFieldViewController {
     }
     
     // MARK: - property
-    
-    private let createTeamButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("팀 생성하기", for: .normal)
-        return button
+    let subView: LabelButtonView = {
+        let view = LabelButtonView()
+        view.buttonAction = { 
+            print("s")
+        }
+        return view
     }()
         
     override func render() {
         super.render()
         
-        view.addSubview(createTeamButton)
-        createTeamButton.snp.makeConstraints {
+        view.addSubview(subView)
+        subView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.bottom.equalTo(super.doneButton.snp.top)
             $0.height.equalTo(44)
