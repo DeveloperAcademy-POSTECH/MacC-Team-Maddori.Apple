@@ -76,9 +76,7 @@ final class FeedbackTypeButtonView: UIButton {
         render()
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    required init?(coder: NSCoder) { nil }
     
     private func render() {
         self.addSubview(continueShadowView)
@@ -86,6 +84,7 @@ final class FeedbackTypeButtonView: UIButton {
             $0.width.equalTo(Size.width)
             $0.height.equalTo(Size.height)
         }
+        
         continueShadowView.addSubview(continueButton)
         continueButton.snp.makeConstraints {
             $0.width.equalTo(Size.width)
@@ -99,6 +98,7 @@ final class FeedbackTypeButtonView: UIButton {
             $0.leading.equalTo(continueShadowView.snp.trailing).offset(Size.buttonPadding)
             $0.centerY.equalTo(continueShadowView)
         }
+        
         stopShadowView.addSubview(stopButton)
         stopButton.snp.makeConstraints {
             $0.width.equalTo(Size.width)
