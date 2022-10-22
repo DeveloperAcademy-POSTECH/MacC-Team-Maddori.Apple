@@ -9,7 +9,7 @@ import UIKit
 
 import SnapKit
 
-class KeywordCollectionViewCell: BaseCollectionViewCell {
+final class KeywordCollectionViewCell: BaseCollectionViewCell {
     
     private enum Size {
         static let keywordLabelHeight: CGFloat = 50
@@ -19,14 +19,20 @@ class KeywordCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - properties
     
-    var keywordLabel = UILabel()
+    var keywordLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .center
+        label.font = .main
+        label.layer.cornerRadius = SizeLiteral.keywordLabelHeight / 2
+        label.layer.masksToBounds = true
+        return label
+    }()
     lazy var keywordType: KeywordType = .previewKeyword
     
     // MARK: - life cycle
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        configCell()
     }
     
     required init?(coder: NSCoder) {
@@ -35,7 +41,7 @@ class KeywordCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - func
     
-    func configCell() {
+    override func render() {
         contentView.addSubview(keywordLabel)
         keywordLabel.snp.makeConstraints {
             $0.edges.equalTo(safeAreaLayoutGuide)
@@ -44,12 +50,6 @@ class KeywordCollectionViewCell: BaseCollectionViewCell {
     }
     
     func configLabel(type: KeywordType) {
-        keywordLabel.textAlignment = .center
-        keywordLabel.font = .main
-        keywordLabel.layer.cornerRadius = Size
-            .keywordLabelHeight / 2
-        keywordLabel.layer.masksToBounds = true
-        
         keywordLabel.textColor = type.textColor
         keywordLabel.backgroundColor = type.labelColor[0]
         keywordLabel.layer.maskedCorners = type.maskedCorners

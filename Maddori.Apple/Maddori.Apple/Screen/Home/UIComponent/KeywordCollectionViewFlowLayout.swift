@@ -7,7 +7,7 @@
 
 import UIKit
 
-class KeywordCollectionViewLayout: UICollectionViewFlowLayout {
+final class KeywordCollectionViewFlowLayout: UICollectionViewFlowLayout {
     
     private enum Size {
         static let keywordLabelRowSpacing: CGFloat = 16
@@ -18,7 +18,7 @@ class KeywordCollectionViewLayout: UICollectionViewFlowLayout {
     
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         self.minimumLineSpacing = Size.keywordLabelRowSpacing
-        self.sectionInset = UIEdgeInsets(top: 15, left: 24, bottom: 0, right: 24)
+        self.sectionInset = UIEdgeInsets(top: 15, left: SizeLiteral.leadingTrailingPadding, bottom: 0, right: SizeLiteral.leadingTrailingPadding)
         let attributes = super.layoutAttributesForElements(in: rect)
         
         var leftMargin = sectionInset.left

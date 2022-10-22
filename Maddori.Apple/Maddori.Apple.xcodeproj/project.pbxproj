@@ -33,7 +33,7 @@
 		395C7E2228FEDB6500FC2FCA /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395C7E2128FEDB6500FC2FCA /* UITextField+Extension.swift */; };
 		3E557FC328FE7BBC00714E46 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E557FC228FE7BBC00714E46 /* HomeViewController.swift */; };
 		3E557FC528FE854600714E46 /* KeywordLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E557FC428FE854600714E46 /* KeywordLabel.swift */; };
-		3E557FF82901CD3400714E46 /* KeywordCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E557FF72901CD3400714E46 /* KeywordCollectionViewLayout.swift */; };
+		3E557FF82901CD3400714E46 /* KeywordCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E557FF72901CD3400714E46 /* KeywordCollectionViewFlowLayout.swift */; };
 		3E557FFA2901CD4200714E46 /* KeywordCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E557FF92901CD4200714E46 /* KeywordCollectionViewCell.swift */; };
 		3E557FFD2901CD7400714E46 /* Keyword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E557FFC2901CD7400714E46 /* Keyword.swift */; };
 		3E5580042902D9A700714E46 /* ToastPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5580032902D9A700714E46 /* ToastPopUpView.swift */; };
@@ -75,7 +75,7 @@
 		395C7E2128FEDB6500FC2FCA /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
 		3E557FC228FE7BBC00714E46 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		3E557FC428FE854600714E46 /* KeywordLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordLabel.swift; sourceTree = "<group>"; };
-		3E557FF72901CD3400714E46 /* KeywordCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordCollectionViewLayout.swift; sourceTree = "<group>"; };
+		3E557FF72901CD3400714E46 /* KeywordCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		3E557FF92901CD4200714E46 /* KeywordCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordCollectionViewCell.swift; sourceTree = "<group>"; };
 		3E557FFC2901CD7400714E46 /* Keyword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keyword.swift; sourceTree = "<group>"; };
 		3E5580032902D9A700714E46 /* ToastPopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastPopUpView.swift; sourceTree = "<group>"; };
@@ -293,7 +293,7 @@
 		3E557FF62901CD1800714E46 /* UIComponent */ = {
 			isa = PBXGroup;
 			children = (
-				3E557FF72901CD3400714E46 /* KeywordCollectionViewLayout.swift */,
+				3E557FF72901CD3400714E46 /* KeywordCollectionViewFlowLayout.swift */,
 				3E557FF92901CD4200714E46 /* KeywordCollectionViewCell.swift */,
 			);
 			path = UIComponent;
@@ -428,7 +428,7 @@
 				39257DEF28F937A500201E0B /* BaseTableViewCell.swift in Sources */,
 				3E557FC528FE854600714E46 /* KeywordLabel.swift in Sources */,
 				39257DF128F93C2A00201E0B /* ImageLiteral.swift in Sources */,
-				3E557FF82901CD3400714E46 /* KeywordCollectionViewLayout.swift in Sources */,
+				3E557FF82901CD3400714E46 /* KeywordCollectionViewFlowLayout.swift in Sources */,
 				395C7E1B28FEC42900FC2FCA /* AddReflectionViewController.swift in Sources */,
 				D724790E28FEEEC300D67B50 /* KigoTextField.swift in Sources */,
 				39257DE228F90F5C00201E0B /* MainViewController.swift in Sources */,
