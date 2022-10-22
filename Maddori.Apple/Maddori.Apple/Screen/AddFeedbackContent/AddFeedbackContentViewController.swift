@@ -60,6 +60,18 @@ final class AddFeedbackContentViewController: BaseViewController {
         label.font = .label2
         return label
     }()
+    private let feedbackContentTextView: UITextView = {
+        let textView = UITextView(frame: CGRect(x: 0, y: 0, width: 327, height: 137))
+        textView.backgroundColor = .white300
+        textView.layer.cornerRadius = 10
+        textView.layer.borderWidth = 1
+        textView.layer.borderColor = UIColor.gray100.cgColor
+        textView.font = .body1
+        textView.contentInset = .init(top: 11, left: 14, bottom: 11, right: 14)
+        textView.text = "키워드에 대한 자세한 내용을 작성해주세요"
+        textView.textColor = .gray500
+        return textView
+    }()
     private let feedbackDoneButton: MainButton = {
         let button = MainButton()
         button.title = "완료"
@@ -121,14 +133,22 @@ final class AddFeedbackContentViewController: BaseViewController {
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
+        view.addSubview(feedbackContentTextView)
+        feedbackContentTextView.snp.makeConstraints {
+            $0.top.equalTo(feedbackContentLabel.snp.bottom).offset(10)
+            $0.height.equalTo(137)
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+        
         view.addSubview(feedbackDoneButton)
         feedbackDoneButton.snp.makeConstraints {
             $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(2)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
+        
     }
     
-    // MARK: - functions
+    // MARK: - func
     
     override func setupNavigationBar() {
         super.setupNavigationBar()
@@ -149,6 +169,7 @@ final class AddFeedbackContentViewController: BaseViewController {
     
     private func setupDelegate() {
         feedbackKeywordTextField.delegate = self
+        feedbackContentTextView.delegate = self
     }
     
     override func endEditingView() {
@@ -158,11 +179,11 @@ final class AddFeedbackContentViewController: BaseViewController {
     }
     
     private func setCounter(count: Int) {
-        if count <= keywordMinLength {
+        if count <= keywordMaxLength {
             textLimitLabel.text = "\(count)/\(keywordMaxLength)"
         }
         else {
-            textLimitLabel.text = "\(keywordMinLength)/\(keywordMinLength)"
+            textLimitLabel.text = "\(keywordMaxLength)/\(keywordMaxLength)"
         }
     }
     
@@ -189,7 +210,7 @@ final class AddFeedbackContentViewController: BaseViewController {
             })
         }
     }
-
+    
     @objc private func keyboardWillHide(notification:NSNotification) {
         UIView.animate(withDuration: 0.2, animations: {
             self.feedbackDoneButton.transform = .identity
@@ -206,5 +227,32 @@ extension AddFeedbackContentViewController: UITextFieldDelegate {
         
         let hasText = feedbackKeywordTextField.hasText
         feedbackDoneButton.isDisabled = !hasText
+    }
+}
+
+extension AddFeedbackContentViewController: UITextViewDelegate {
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.text == "키워드에 대한 자세한 내용을 작성해주세요" {
+            textView.text = nil
+            textView.textColor = .black100
+        }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            textView.text = "키워드에 대한 자세한 내용을 작성해주세요"
+            textView.textColor = .gray500
+        }
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        let inputString = text.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard let oldString = textView.text, let newRange = Range(range, in: oldString) else { return true }
+        let newString = oldString.replacingCharacters(in: newRange, with: inputString).trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        let characterCount = newString.count
+        guard characterCount <= 200 else { return false }
+        
+        return true
     }
 }
