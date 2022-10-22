@@ -19,7 +19,7 @@ final class AddFeedbackContentViewController: BaseViewController {
     
     private let backButton = BackButton(type: .system)
     private let exitButton = ExitButton(type: .system)
-    private let addFeedbackTitleLabel: UILabel = {
+    private lazy var addFeedbackTitleLabel: UILabel = {
         let label = UILabel()
         label.text = nickname + TextLiteral.addFeedbackContentViewControllerTitleLabel
         label.textColor = .black100
@@ -60,17 +60,10 @@ final class AddFeedbackContentViewController: BaseViewController {
         label.font = .label2
         return label
     }()
-    private let feedbackContentTextView: UITextView = {
-        let textView = UITextView(frame: CGRect(x: 0, y: 0, width: 327, height: 137))
-        textView.backgroundColor = .white300
-        textView.layer.cornerRadius = 10
-        textView.layer.borderWidth = 1
-        textView.layer.borderColor = UIColor.gray100.cgColor
-        textView.font = .body1
-        textView.contentInset = .init(top: 11, left: 14, bottom: 11, right: 14)
-        textView.text = "키워드에 대한 자세한 내용을 작성해주세요"
-        textView.textColor = .gray500
-        return textView
+    private let feedbackContentTextView: FeedbackTextView = {
+        let textview = FeedbackTextView(frame: CGRect(x: 0, y: 0, width: 327, height: 137))
+        textview.placeholder = "키워드에 대한 자세한 내용을 작성해주세요"
+        return textview
     }()
     private let feedbackDoneButton: MainButton = {
         let button = MainButton()
@@ -135,8 +128,8 @@ final class AddFeedbackContentViewController: BaseViewController {
         view.addSubview(feedbackContentTextView)
         feedbackContentTextView.snp.makeConstraints {
             $0.top.equalTo(feedbackContentLabel.snp.bottom).offset(10)
-            $0.height.equalTo(137)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.height.equalTo(137)
         }
         
         view.addSubview(feedbackDoneButton)
