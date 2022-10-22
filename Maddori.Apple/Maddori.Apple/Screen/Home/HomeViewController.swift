@@ -11,40 +11,39 @@ import SnapKit
 
 class HomeViewController: BaseViewController {
     
-    // MARK: - property
+    let keywords = Keyword.mockData
     
-    private var keywordCollectionView: UICollectionView!
-    static let keywords = mockData
+    // MARK: - property
+     
+    lazy var keywordCollectionView: UICollectionView = {
+        let flowLayout = KeywordCollectionViewLayout()
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+        collectionView.backgroundColor = .white200
+        collectionView.register(KeywordCollectionViewCell.self, forCellWithReuseIdentifier: KeywordCollectionViewCell.className)
+        return collectionView
+    }()
     
     // MARK: - life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupCollectionView()
-        registerCell()
-        collectionViewDelegate()
+        setUpDelagation()
     }
     
     // MARK: - func
     
     override func configUI() {
-        view.backgroundColor = .white
+        view.backgroundColor = .white100
     }
     
-    private func setupCollectionView() {
-        keywordCollectionView = UICollectionView(frame: .zero, collectionViewLayout: KeywordCollectionViewLayout.init())
-        keywordCollectionView.backgroundColor = .white200
+    override func render() {
         view.addSubview(keywordCollectionView)
         keywordCollectionView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
     }
     
-    private func registerCell() {
-        keywordCollectionView.register(KeywordCollectionViewCell.self, forCellWithReuseIdentifier: "KeywordCollectionViewCell")
-    }
-    
-    private func collectionViewDelegate() {
+    private func setUpDelagation() {
         keywordCollectionView.delegate = self
         keywordCollectionView.dataSource = self
     }
@@ -52,23 +51,29 @@ class HomeViewController: BaseViewController {
 
 // MARK: - extension
 
-extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension HomeViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return HomeViewController.keywords.count
+        return keywords.count
     }
-    
+}
+
+extension HomeViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = keywordCollectionView.dequeueReusableCell(withReuseIdentifier: "KeywordCollectionViewCell", for: indexPath) as! KeywordCollectionViewCell
-        let keyword = HomeViewController.keywords[indexPath.row]
+        guard let cell = keywordCollectionView.dequeueReusableCell(withReuseIdentifier: "KeywordCollectionViewCell", for: indexPath) as? KeywordCollectionViewCell else {
+            return UICollectionViewCell()
+        }
+        let keyword = keywords[indexPath.row]
         cell.keywordLabel.text = keyword.string
         // FIXME: cell을 여기서 접근하는건 안좋은 방법일수도?
-        cell.configShadow(type: HomeViewController.keywords[indexPath.row].type)
-        cell.configLabel(type: HomeViewController.keywords[indexPath.row].type)
+        cell.configShadow(type: keywords[indexPath.row].type)
+        cell.configLabel(type: keywords[indexPath.row].type)
         return cell
     }
-    
+}
+
+extension HomeViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let size = SizeLiteral.keywordLabelHeight
-        return KeywordCollectionViewCell.fittingSize(availableHeight: size, keyword: HomeViewController.keywords[indexPath.item].string)
+        return KeywordCollectionViewCell.fittingSize(availableHeight: size, keyword: keywords[indexPath.item].string)
     }
 }
