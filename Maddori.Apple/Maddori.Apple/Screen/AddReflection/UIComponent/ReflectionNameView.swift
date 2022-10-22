@@ -83,6 +83,8 @@ final class ReflectionNameView: UIView {
     }
 }
 
+// MARK: - extension
+
 extension ReflectionNameView: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
         if let text = textField.text {

@@ -14,7 +14,7 @@ final class HomeViewController: BaseViewController {
     let keywords = Keyword.mockData
     
     // MARK: - property
-     
+    
     lazy var keywordCollectionView: UICollectionView = {
         let flowLayout = KeywordCollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
@@ -30,8 +30,6 @@ final class HomeViewController: BaseViewController {
         setUpDelegation()
     }
     
-    // MARK: - func
-    
     override func configUI() {
         view.backgroundColor = .white100
     }
@@ -42,6 +40,8 @@ final class HomeViewController: BaseViewController {
             $0.edges.equalToSuperview()
         }
     }
+    
+    // MARK: - func
     
     private func setUpDelegation() {
         keywordCollectionView.delegate = self

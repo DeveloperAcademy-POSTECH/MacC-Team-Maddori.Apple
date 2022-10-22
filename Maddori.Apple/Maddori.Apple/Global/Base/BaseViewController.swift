@@ -55,10 +55,6 @@ class BaseViewController: UIViewController {
     func setupNavigationBar() {
         guard let navigationBar = navigationController?.navigationBar else { return }
         let appearance = UINavigationBarAppearance()
-        // FIXME: - navigation title font 설정
-//        let font = UIFont.font(.regular, ofSize: 14)
-
-//        appearance.titleTextAttributes = [.font: font]
         appearance.shadowColor = .clear
         appearance.backgroundColor = .backgroundWhite
 
