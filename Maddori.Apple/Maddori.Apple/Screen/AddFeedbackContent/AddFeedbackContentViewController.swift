@@ -13,6 +13,7 @@ final class AddFeedbackContentViewController: BaseViewController {
     
     private let keywordMinLength: Int = 0
     private let keywordMaxLength: Int = 15
+    private let textViewMaxLength: Int = 200
     private var nickname: String = "진저"
     
     // MARK: - property
@@ -36,14 +37,14 @@ final class AddFeedbackContentViewController: BaseViewController {
     private let feedbackTypeButtonView = FeedbackTypeButtonView()
     private let feedbackKeywordLabel: UILabel = {
         let label = UILabel()
-        label.text = "키워드"
+        label.text = TextLiteral.addFeedbackContentViewControllerFeedbackKeywordLabel
         label.textColor = .black100
         label.font = .label2
         return label
     }()
     private let feedbackKeywordTextField: KigoTextField = {
         let textField = KigoTextField()
-        textField.placeHolderText = "피드백을 한 단어로 작성해주세요"
+        textField.placeHolderText = TextLiteral.addFeedbackContentViewControllerFeedbackKeywordTextFieldPlaceholder
         return textField
     }()
     private lazy var textLimitLabel: UILabel = {
@@ -55,19 +56,19 @@ final class AddFeedbackContentViewController: BaseViewController {
     }()
     private let feedbackContentLabel: UILabel = {
         let label = UILabel()
-        label.text = "내용"
+        label.text = TextLiteral.addFeedbackContentViewControllerFeedbackContentLabel
         label.textColor = .black100
         label.font = .label2
         return label
     }()
     private let feedbackContentTextView: FeedbackTextView = {
         let textview = FeedbackTextView(frame: CGRect(x: 0, y: 0, width: 327, height: 137))
-        textview.placeholder = "키워드에 대한 자세한 내용을 작성해주세요"
+        textview.placeholder = TextLiteral.addFeedbackContentViewControllerFeedbackContentTextViewPlaceholder
         return textview
     }()
     private let feedbackDoneButton: MainButton = {
         let button = MainButton()
-        button.title = "완료"
+        button.title = TextLiteral.addFeedbackContentViewControllerDoneButtonTitle
         button.isDisabled = true
         return button
     }()
@@ -225,7 +226,7 @@ extension AddFeedbackContentViewController: UITextFieldDelegate {
 
 extension AddFeedbackContentViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.text == "키워드에 대한 자세한 내용을 작성해주세요" {
+        if textView.text == TextLiteral.addFeedbackContentViewControllerFeedbackContentTextViewPlaceholder {
             textView.text = nil
             textView.textColor = .black100
         }
@@ -233,7 +234,7 @@ extension AddFeedbackContentViewController: UITextViewDelegate {
     
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-            textView.text = "키워드에 대한 자세한 내용을 작성해주세요"
+            textView.text = TextLiteral.addFeedbackContentViewControllerFeedbackContentTextViewPlaceholder
             textView.textColor = .gray500
         }
     }
@@ -244,7 +245,7 @@ extension AddFeedbackContentViewController: UITextViewDelegate {
         let newString = oldString.replacingCharacters(in: newRange, with: inputString).trimmingCharacters(in: .whitespacesAndNewlines)
         
         let characterCount = newString.count
-        guard characterCount <= 200 else { return false }
+        guard characterCount <= textViewMaxLength else { return false }
         
         return true
     }
