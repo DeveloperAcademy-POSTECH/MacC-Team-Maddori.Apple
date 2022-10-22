@@ -20,12 +20,7 @@ final class AddFeedbackContentViewController: BaseViewController {
     
     private let backButton = BackButton(type: .system)
     private let exitButton = ExitButton(type: .system)
-    private let addFeedbackScrollView: UIScrollView = {
-        let scrollview = UIScrollView()
-        scrollview.backgroundColor = .white200
-        scrollview.showsVerticalScrollIndicator = false
-        return scrollview
-    }()
+    private let addFeedbackScrollView = UIScrollView()
     private let addFeedbackContentView = UIView()
     private lazy var addFeedbackTitleLabel: UILabel = {
         let label = UILabel()
@@ -104,6 +99,9 @@ final class AddFeedbackContentViewController: BaseViewController {
         addFeedbackContentView.snp.makeConstraints {
             $0.edges.equalTo(addFeedbackScrollView.snp.edges)
             $0.width.equalTo(addFeedbackScrollView.snp.width)
+            
+            // FIXME: - height 를 필수로 지정해야 함 -> 현재 임의로 줌
+            
             $0.height.equalTo(1000)
         }
         
