@@ -13,8 +13,8 @@ final class AddFeedbackContentViewController: BaseViewController {
     
     // MARK: - property
 
-    private let backButton = BackButton()
-    private let closeButton = CloseButton()
+    private let backButton = BackButton(type: .system)
+    private let exitButton = ExitButton(type: .system)
     private let addFeedbackTitleLabel: UILabel = {
         let label = UILabel()
         label.text = TextLiteral.addFeedbackContentViewControllerTitleLabel
@@ -53,17 +53,17 @@ final class AddFeedbackContentViewController: BaseViewController {
         }
     }
 
-    // MARK: - functions
+    // MARK: - func
     
     override func setupNavigationBar() {
         super.setupNavigationBar()
         
         let backButton = makeBarButtonItem(with: backButton)
-        let closeButton = makeBarButtonItem(with: closeButton)
+        let exitButton = makeBarButtonItem(with: exitButton)
         
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.largeTitleDisplayMode = .never
         navigationItem.leftBarButtonItem = backButton
-        navigationItem.rightBarButtonItem = closeButton
+        navigationItem.rightBarButtonItem = exitButton
     }
 }

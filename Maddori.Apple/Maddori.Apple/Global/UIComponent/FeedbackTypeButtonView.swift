@@ -22,7 +22,6 @@ final class FeedbackTypeButtonView: UIButton {
     
     // MARK: - property
     
-    private var selectedType: FeedbackType = .continueType
     private let continueShadowView: UIView = {
         let view = UIView()
         view.backgroundColor = .white100
