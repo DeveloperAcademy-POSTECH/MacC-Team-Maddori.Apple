@@ -37,7 +37,6 @@ class LabelButtonView: UIView {
         button.addAction(action, for: .touchUpInside)
         return button
     }()
-    
     private lazy var subLabel: UILabel = {
         let label = UILabel()
         label.text = subText
@@ -58,14 +57,13 @@ class LabelButtonView: UIView {
     func render() {
         self.addSubview(subLabel)
         subLabel.snp.makeConstraints {
-            $0.centerY.equalToSuperview()
-            $0.trailing.equalTo(self.snp.centerX)
+            $0.leading.top.bottom.equalToSuperview()
         }
         
         self.addSubview(subButton)
         subButton.snp.makeConstraints {
-            $0.leading.equalTo(subLabel.snp.trailing).offset(5)
-            $0.centerY.equalToSuperview()
+            $0.trailing.top.bottom.equalToSuperview()
+            $0.leading.equalTo(subLabel.snp.trailing).offset(4)
         }
     }
 }

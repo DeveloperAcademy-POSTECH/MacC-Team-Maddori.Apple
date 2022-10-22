@@ -35,7 +35,7 @@ final class JoinTeamViewController: BaseTextFieldViewController {
     
     // MARK: - property
     
-    let createView: LabelButtonView = {
+    private let createView: LabelButtonView = {
         let view = LabelButtonView()
         view.subText = TextLiteral.joinTeamViewControllerSubText
         view.subButtonText = TextLiteral.joinTeamViewControllerSubButtonText
@@ -52,8 +52,7 @@ final class JoinTeamViewController: BaseTextFieldViewController {
         createView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.bottom.equalTo(super.doneButton.snp.top)
-            $0.height.equalTo(44)
-            $0.width.equalTo(200)
+            $0.height.equalTo(SizeLiteral.labelButtonViewHeight)
         }
     }
 }
