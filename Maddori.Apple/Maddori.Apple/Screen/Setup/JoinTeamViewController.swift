@@ -11,9 +11,11 @@ import SnapKit
 
 final class JoinTeamViewController: BaseTextFieldViewController {
     
+    var name = "진저"
+    
     override var titleText: String {
         get {
-            return TextLiteral.joinTeamViewControllerTitleLabel
+            return name + TextLiteral.joinTeamViewControllerTitleLabel
         }
         
         set {

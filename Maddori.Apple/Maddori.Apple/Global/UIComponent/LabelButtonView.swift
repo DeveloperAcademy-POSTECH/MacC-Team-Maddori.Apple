@@ -26,6 +26,7 @@ class LabelButtonView: UIView {
     }
     
     // MARK: - property
+    
     private lazy var subbutton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle(subButtonText, for: .normal)
@@ -46,14 +47,13 @@ class LabelButtonView: UIView {
     }()
     
     // MARK: - init
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         render()
     }
     
-    required init?(coder: NSCoder) {
-        nil
-    }
+    required init?(coder: NSCoder) { nil }
     
     func render() {
         self.addSubview(subLabel)
