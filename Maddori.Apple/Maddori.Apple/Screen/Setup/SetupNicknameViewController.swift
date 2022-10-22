@@ -29,6 +29,16 @@ final class SetupNicknameViewController: BaseTextFieldViewController {
         }
     }
     
+    override var maxLength: Int {
+        get {
+            return 6
+        }
+        
+        set {
+            super.maxLength = newValue
+        }
+    }
+    
     override var buttonText: String {
         get {
             return TextLiteral.doneButtonTitle
