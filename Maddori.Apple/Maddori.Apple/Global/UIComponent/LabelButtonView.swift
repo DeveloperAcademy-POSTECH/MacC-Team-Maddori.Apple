@@ -21,13 +21,13 @@ class LabelButtonView: UIView {
     
     var subButtonText: String = "" {
         didSet {
-            subbutton.setTitle(subButtonText, for: .normal)
+            subButton.setTitle(subButtonText, for: .normal)
         }
     }
     
     // MARK: - property
     
-    private lazy var subbutton: UIButton = {
+    private lazy var subButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle(subButtonText, for: .normal)
         button.titleLabel?.font = .body2
@@ -62,8 +62,8 @@ class LabelButtonView: UIView {
             $0.trailing.equalTo(self.snp.centerX)
         }
         
-        self.addSubview(subbutton)
-        subbutton.snp.makeConstraints {
+        self.addSubview(subButton)
+        subButton.snp.makeConstraints {
             $0.leading.equalTo(subLabel.snp.trailing).offset(5)
             $0.centerY.equalToSuperview()
         }
