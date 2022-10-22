@@ -1,13 +1,13 @@
 //
-//  ExitButton.swift
+//  BackButton.swift
 //  Maddori.Apple
 //
-//  Created by 김유나 on 2022/10/18.
+//  Created by 김유나 on 2022/10/19.
 //
 
 import UIKit
 
-final class ExitButton: UIButton {
+final class BackButton: UIButton {
     
     // MARK: - init
     
@@ -20,7 +20,7 @@ final class ExitButton: UIButton {
     
     private func configUI() {
         self.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
-        self.setImage(ImageLiterals.icClose, for: .normal)
+        self.setImage(ImageLiterals.icBack, for: .normal)
         self.tintColor = .black100
     }
 }
