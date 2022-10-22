@@ -19,10 +19,10 @@ struct Keyword {
 
 #if DEBUG
 let mockData: [Keyword] = [
-    Keyword(string: "밥", type: .disabledKeyword),
-    Keyword(string: "회의왕", type: .disabledKeyword),
-    Keyword(string: "과몰입", type: .disabledKeyword),
-    Keyword(string: "사과처럼🍎", type: .disabledKeyword),
+    Keyword(string: "밥", type: .previewKeyword),
+    Keyword(string: "회의왕", type: .previewKeyword),
+    Keyword(string: "과몰입", type: .previewKeyword),
+    Keyword(string: "사과처럼🍎", type: .previewKeyword),
     Keyword(string: "회고마스터", type: .previewKeyword),
     Keyword(string: "🧨", type: .previewKeyword),
     Keyword(string: "내돈을가져가", type: .previewKeyword),
