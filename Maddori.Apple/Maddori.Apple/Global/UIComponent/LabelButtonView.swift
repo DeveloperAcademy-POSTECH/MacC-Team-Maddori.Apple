@@ -13,10 +13,22 @@ class LabelButtonView: UIView {
     
     var buttonAction: (() -> ())?
     
+    var subText: String = "" {
+        didSet {
+            subLabel.text = subText
+        }
+    }
+    
+    var subButtonText: String = "" {
+        didSet {
+            subbutton.setTitle(subButtonText, for: .normal)
+        }
+    }
+    
     // MARK: - property
     private lazy var subbutton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("팀 생성하기", for: .normal)
+        button.setTitle(subButtonText, for: .normal)
         button.titleLabel?.font = .body2
         let action = UIAction { [weak self] _ in
             self?.buttonAction?()
@@ -25,9 +37,9 @@ class LabelButtonView: UIView {
         return button
     }()
     
-    private let subLabel: UILabel = {
+    private lazy var subLabel: UILabel = {
         let label = UILabel()
-        label.text = "팀이 없나요?"
+        label.text = subText
         label.font = .body2
         label.textColor = .gray400
         return label
@@ -47,7 +59,7 @@ class LabelButtonView: UIView {
         self.addSubview(subLabel)
         subLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.centerX.equalToSuperview().offset(-35)
+            $0.trailing.equalTo(self.snp.centerX)
         }
         
         self.addSubview(subbutton)

@@ -32,10 +32,12 @@ final class JoinTeamViewController: BaseTextFieldViewController {
     }
     
     // MARK: - property
-    let subView: LabelButtonView = {
+    let createView: LabelButtonView = {
         let view = LabelButtonView()
-        view.buttonAction = { 
-            print("s")
+        view.subText = TextLiteral.joinTeamViewControllerSubText
+        view.subButtonText = TextLiteral.joinTeamViewControllerSubButtonText
+        view.buttonAction = {
+            // FIXME: 팀 생성하기 뷰 연결
         }
         return view
     }()
@@ -43,11 +45,12 @@ final class JoinTeamViewController: BaseTextFieldViewController {
     override func render() {
         super.render()
         
-        view.addSubview(subView)
-        subView.snp.makeConstraints {
+        view.addSubview(createView)
+        createView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.bottom.equalTo(super.doneButton.snp.top)
             $0.height.equalTo(44)
+            $0.width.equalTo(200)
         }
     }
 }
