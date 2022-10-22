@@ -62,7 +62,7 @@ final class JoinTeamViewController: BaseTextFieldViewController {
         createView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.bottom.equalTo(super.doneButton.snp.top)
-            $0.height.equalTo(SizeLiteral.labelButtonViewHeight)
+            $0.height.equalTo(SizeLiteral.minimumTouchArea)
         }
     }
 }

@@ -54,7 +54,7 @@ class LabelButtonView: UIView {
     
     required init?(coder: NSCoder) { nil }
     
-    func render() {
+    private func render() {
         self.addSubview(subLabel)
         subLabel.snp.makeConstraints {
             $0.leading.top.bottom.equalToSuperview()
