@@ -62,7 +62,7 @@ final class AddFeedbackContentViewController: BaseViewController {
         return label
     }()
     private let feedbackContentTextView: FeedbackTextView = {
-        let textview = FeedbackTextView(frame: CGRect(x: 0, y: 0, width: 327, height: 137))
+        let textview = FeedbackTextView(frame: CGRect(x: 0, y: 0, width: 327, height: 150))
         textview.placeholder = TextLiteral.addFeedbackContentViewControllerFeedbackContentTextViewPlaceholder
         return textview
     }()
@@ -73,7 +73,7 @@ final class AddFeedbackContentViewController: BaseViewController {
         return button
     }()
     
-    // MARK: - lifecycle
+    // MARK: - life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -130,7 +130,7 @@ final class AddFeedbackContentViewController: BaseViewController {
         feedbackContentTextView.snp.makeConstraints {
             $0.top.equalTo(feedbackContentLabel.snp.bottom).offset(SizeLiteral.labelComponentPadding)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-            $0.height.equalTo(137)
+            $0.height.greaterThanOrEqualTo(150)
         }
         
         view.addSubview(feedbackDoneButton)

@@ -32,8 +32,9 @@ final class FeedbackTextView: UITextView {
         self.layer.borderWidth = 1
         self.layer.borderColor = UIColor.gray100.cgColor
         self.font = .body1
-        self.contentInset = .init(top: 11, left: 14, bottom: 11, right: 14)
+        self.contentInset = .init(top: 10, left: 14, bottom: 10, right: 14)
         self.textColor = .gray500
+        self.isScrollEnabled = false
     }
     
     // MARK: - func
