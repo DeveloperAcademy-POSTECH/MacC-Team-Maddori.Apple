@@ -38,11 +38,7 @@ class BaseTextFieldViewController: BaseViewController {
         label.textColor = .gray500
         return label
     }()
-<<<<<<< HEAD:Maddori.Apple/Maddori.Apple/Screen/Setup/BaseTextFieldViewController.swift
-    let doneButton: MainButton = {
-=======
-    private lazy var doneButton: MainButton = {
->>>>>>> 866f47f20491192d8be9b486425bc031e0ef6f29:Maddori.Apple/Maddori.Apple/Global/Base/BaseTextFieldViewController.swift
+    lazy var doneButton: MainButton = {
         let button = MainButton()
         button.title = buttonText
         button.isDisabled = true

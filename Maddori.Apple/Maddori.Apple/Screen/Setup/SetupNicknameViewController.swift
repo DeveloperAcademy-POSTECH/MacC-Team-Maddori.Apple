@@ -19,13 +19,23 @@ final class SetupNicknameViewController: BaseTextFieldViewController {
         }
     }
     
-    override var placeholerText: String {
+    override var placeholderText: String {
         get {
             return TextLiteral.setupNicknameViewControllerNicknameTextFieldPlaceHolder
         }
         
         set {
-            super.placeholerText = newValue
+            super.placeholderText = newValue
+        }
+    }
+    
+    override var buttonText: String {
+        get {
+            return TextLiteral.doneButtonTitle
+        }
+        
+        set {
+            super.buttonText = newValue
         }
     }
 }

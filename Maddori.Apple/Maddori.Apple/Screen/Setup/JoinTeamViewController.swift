@@ -23,13 +23,23 @@ final class JoinTeamViewController: BaseTextFieldViewController {
         }
     }
     
-    override var placeholerText: String {
+    override var placeholderText: String {
         get {
             return TextLiteral.joinTeamViewControllerNicknameTextFieldPlaceHolder
         }
         
         set {
-            super.placeholerText = newValue
+            super.placeholderText = newValue
+        }
+    }
+    
+    override var buttonText: String {
+        get {
+            return TextLiteral.doneButtonTitle
+        }
+        
+        set {
+            super.buttonText = newValue
         }
     }
     
