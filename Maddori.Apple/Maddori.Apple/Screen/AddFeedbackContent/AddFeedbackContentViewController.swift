@@ -68,6 +68,23 @@ final class AddFeedbackContentViewController: BaseViewController {
         textView.placeholder = TextLiteral.addFeedbackContentViewControllerFeedbackContentTextViewPlaceholder
         return textView
     }()
+    private lazy var feedbackStartSwitch: UISwitch = {
+        let toggle = UISwitch()
+        toggle.onTintColor = .blue200
+        toggle.isOn = false
+        let action = UIAction { [weak self] _ in
+            self?.didTappedSwitch()
+        }
+        toggle.addAction(action, for: .touchUpInside)
+        return toggle
+    }()
+    private let feedbackStartLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Start 제안하기"
+        label.textColor = .black100
+        label.font = .label2
+        return label
+    }()
     private lazy var feedbackDoneButton: MainButton = {
         let button = MainButton()
         button.title = TextLiteral.addFeedbackContentViewControllerDoneButtonTitle
@@ -155,6 +172,20 @@ final class AddFeedbackContentViewController: BaseViewController {
             $0.height.greaterThanOrEqualTo(150)
         }
         
+        addFeedbackContentView.addSubview(feedbackStartSwitch)
+        feedbackStartSwitch.snp.makeConstraints {
+            $0.top.equalTo(feedbackContentTextView.snp.bottom).offset(SizeLiteral.componentIntervalPadding)
+            $0.trailing.equalTo(addFeedbackContentView.snp.trailing).inset(SizeLiteral.leadingTrailingPadding)
+            $0.width.equalTo(51)
+            $0.height.equalTo(31)
+        }
+        
+        addFeedbackContentView.addSubview(feedbackStartLabel)
+        feedbackStartLabel.snp.makeConstraints {
+            $0.centerY.equalTo(feedbackStartSwitch.snp.centerY)
+            $0.leading.equalTo(addFeedbackContentView.snp.leading).inset(SizeLiteral.leadingTrailingPadding)
+        }
+        
         addFeedbackContentView.addSubview(feedbackDoneButton)
         feedbackDoneButton.snp.makeConstraints {
             $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(2)
@@ -215,6 +246,10 @@ final class AddFeedbackContentViewController: BaseViewController {
                 }
             }
         }
+    }
+    
+    private func didTappedSwitch() {
+        
     }
     
     private func didTappedDoneButton() {
