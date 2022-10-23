@@ -63,9 +63,25 @@ final class AddReflectionViewController: BaseViewController {
         picker.addAction(action, for: .valueChanged)
         return picker
     }()
-    private let mainButton: MainButton = {
+    private lazy var mainButton: MainButton = {
         let button = MainButton()
         button.title = TextLiteral.addReflectionViewControllerButtonText
+        let action = UIAction { [weak self] _ in
+            let childView = StartReflectionViewController()
+            childView.dismissChildView = {
+                childView.willMove(toParent: nil)
+                childView.removeFromParent()
+                childView.view.removeFromSuperview()
+            }
+            childView.view.alpha = 0
+            self?.addChild(childView)
+            self?.view.addSubview(childView.view)
+            self?.didMove(toParent: childView)
+            UIView.animate(withDuration: 1, animations: {
+                childView.view.alpha = 1
+            })
+        }
+        button.addAction(action, for: .touchUpInside)
         return button
     }()
     
