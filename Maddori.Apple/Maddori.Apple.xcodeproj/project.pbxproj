@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		391596622904176500A432D9 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391596612904176500A432D9 /* UIView+Extension.swift */; };
+		391CBA19290580460044CA30 /* ReflectionInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391CBA18290580460044CA30 /* ReflectionInfoViewController.swift */; };
+		391CBA1C290582130044CA30 /* ReflectionInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391CBA1B290582130044CA30 /* ReflectionInfoModel.swift */; };
 		39257DC528F8FEBD00201E0B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39257DC428F8FEBD00201E0B /* AppDelegate.swift */; };
 		39257DC728F8FEBD00201E0B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39257DC628F8FEBD00201E0B /* SceneDelegate.swift */; };
 		39257DCE28F8FEBE00201E0B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 39257DCD28F8FEBE00201E0B /* Assets.xcassets */; };
@@ -55,6 +57,8 @@
 
 /* Begin PBXFileReference section */
 		391596612904176500A432D9 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		391CBA18290580460044CA30 /* ReflectionInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReflectionInfoViewController.swift; sourceTree = "<group>"; };
+		391CBA1B290582130044CA30 /* ReflectionInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReflectionInfoModel.swift; sourceTree = "<group>"; };
 		39257DC128F8FEBD00201E0B /* Maddori.Apple.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Maddori.Apple.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		39257DC428F8FEBD00201E0B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		39257DC628F8FEBD00201E0B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -113,6 +117,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		391CBA17290580360044CA30 /* ReflectionInfo */ = {
+			isa = PBXGroup;
+			children = (
+				391CBA18290580460044CA30 /* ReflectionInfoViewController.swift */,
+			);
+			path = ReflectionInfo;
+			sourceTree = "<group>";
+		};
+		391CBA1A290582030044CA30 /* ReflectionInfo */ = {
+			isa = PBXGroup;
+			children = (
+				391CBA1B290582130044CA30 /* ReflectionInfoModel.swift */,
+			);
+			path = ReflectionInfo;
+			sourceTree = "<group>";
+		};
 		39257DB828F8FEBD00201E0B = {
 			isa = PBXGroup;
 			children = (
@@ -151,6 +171,7 @@
 		39257DD928F90EB100201E0B /* Screen */ = {
 			isa = PBXGroup;
 			children = (
+				391CBA17290580360044CA30 /* ReflectionInfo */,
 				525E721328FE9C5600EF3FCB /* AddFeedbackMember */,
 				395C7E1928FEC3FB00FC2FCA /* AddReflection */,
 				3E557FC128FE7B9200714E46 /* Home */,
@@ -274,6 +295,7 @@
 		395C7E0F28F9833C00FC2FCA /* Response */ = {
 			isa = PBXGroup;
 			children = (
+				391CBA1A290582030044CA30 /* ReflectionInfo */,
 				3E557FFB2901CD6600714E46 /* Keyword */,
 				39257DDD28F90EF900201E0B /* Sample.swift */,
 			);
@@ -435,6 +457,7 @@
 				525E721C28FF0F5B00EF3FCB /* MemberCollectionView.swift in Sources */,
 				395C7E2028FED7B500FC2FCA /* ReflectionNameView.swift in Sources */,
 				395C7E1128F9834A00FC2FCA /* SampleDTO.swift in Sources */,
+				391CBA1C290582130044CA30 /* ReflectionInfoModel.swift in Sources */,
 				3E557FFA2901CD4200714E46 /* KeywordCollectionViewCell.swift in Sources */,
 				395C7E0528F953D200FC2FCA /* UIViewController+Extension.swift in Sources */,
 				39257DEB28F9373900201E0B /* BaseViewController.swift in Sources */,
@@ -465,6 +488,7 @@
 				7EB4D58229011EF7001FC396 /* JoinTeamViewController.swift in Sources */,
 				39257DE228F90F5C00201E0B /* MainViewController.swift in Sources */,
 				39257DED28F9378D00201E0B /* BaseCollectionViewCell.swift in Sources */,
+				391CBA19290580460044CA30 /* ReflectionInfoViewController.swift in Sources */,
 				525E721A28FF0F1900EF3FCB /* MemberCollectionViewCell.swift in Sources */,
 				395C7E2228FEDB6500FC2FCA /* UITextField+Extension.swift in Sources */,
 				39257DF328F93D8900201E0B /* TextLiteral.swift in Sources */,
