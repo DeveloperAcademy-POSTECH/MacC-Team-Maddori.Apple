@@ -142,8 +142,7 @@ final class HomeViewController: BaseViewController {
         view.addSubview(keywordCollectionView)
         keywordCollectionView.snp.makeConstraints {
             $0.top.equalTo(currentReflectionLabel.snp.bottom).offset(Size.labelPadding)
-            $0.leading.equalTo(view.safeAreaLayoutGuide)
-            $0.trailing.equalTo(view.safeAreaLayoutGuide)
+            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             $0.bottom.equalTo(planLabelButtonView.snp.top)
         }
     }
