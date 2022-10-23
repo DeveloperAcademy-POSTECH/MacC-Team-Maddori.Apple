@@ -31,17 +31,3 @@ struct Keyword {
     #endif
 
 }
-
-#if DEBUG
-let mockData: [Keyword] = [
-    Keyword(string: "밥", type: .disabledKeyword),
-    Keyword(string: "회의왕", type: .disabledKeyword),
-    Keyword(string: "과몰입", type: .disabledKeyword),
-    Keyword(string: "사과처럼🍎", type: .disabledKeyword),
-    Keyword(string: "회고마스터", type: .previewKeyword),
-    Keyword(string: "🧨", type: .previewKeyword),
-    Keyword(string: "내돈을가져가", type: .previewKeyword),
-    Keyword(string: "패셔니스타👕", type: .previewKeyword),
-    
-]
-#endif
