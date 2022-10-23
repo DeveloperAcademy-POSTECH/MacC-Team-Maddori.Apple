@@ -67,19 +67,8 @@ final class AddReflectionViewController: BaseViewController {
         let button = MainButton()
         button.title = TextLiteral.addReflectionViewControllerButtonText
         let action = UIAction { [weak self] _ in
-            let childView = StartReflectionViewController()
-            childView.dismissChildView = {
-                childView.willMove(toParent: nil)
-                childView.removeFromParent()
-                childView.view.removeFromSuperview()
-            }
-            childView.view.alpha = 0
-            self?.addChild(childView)
-            self?.view.addSubview(childView.view)
-            self?.didMove(toParent: childView)
-            UIView.animate(withDuration: 1, animations: {
-                childView.view.alpha = 1
-            })
+            // FIXME: - 특정 시간이 되면 함수 실행하도록 변경. 현재는 확인용
+            self?.showStartReflectionView()
         }
         button.addAction(action, for: .touchUpInside)
         return button
@@ -133,5 +122,23 @@ final class AddReflectionViewController: BaseViewController {
     override func setupNavigationBar() {
         let item = makeBarButtonItem(with: closeButton)
         navigationItem.rightBarButtonItem = item
+    }
+    
+    // MARK: - func
+    
+    private func showStartReflectionView() {
+        let childView = StartReflectionViewController()
+        childView.dismissChildView = {
+            childView.willMove(toParent: nil)
+            childView.removeFromParent()
+            childView.view.removeFromSuperview()
+        }
+        childView.view.alpha = 0
+        self.addChild(childView)
+        self.view.addSubview(childView.view)
+        self.didMove(toParent: childView)
+        UIView.animate(withDuration: 1, animations: {
+            childView.view.alpha = 1
+        })
     }
 }
