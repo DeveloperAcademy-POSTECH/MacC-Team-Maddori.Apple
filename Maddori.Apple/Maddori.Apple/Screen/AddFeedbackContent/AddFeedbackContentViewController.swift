@@ -10,10 +10,11 @@ import UIKit
 import SnapKit
 
 final class AddFeedbackContentViewController: BaseViewController {
-    
-    private let keywordMinLength: Int = 0
-    private let keywordMaxLength: Int = 15
-    private let textViewMaxLength: Int = 200
+    private enum Length {
+        static let keywordMinLength: Int = 0
+        static let keywordMaxLength: Int = 15
+        static let textViewMaxLength: Int = 200
+    }
     private var nickname: String = "진저"
     
     // MARK: - property
@@ -51,7 +52,7 @@ final class AddFeedbackContentViewController: BaseViewController {
     }()
     private lazy var textLimitLabel: UILabel = {
         let label = UILabel()
-        label.setTextWithLineHeight(text: "\(keywordMinLength)/\(keywordMaxLength)", lineHeight: 22)
+        label.setTextWithLineHeight(text: "\(Length.keywordMinLength)/\(Length.keywordMaxLength)", lineHeight: 22)
         label.font = .body2
         label.textColor = .gray500
         return label
@@ -193,11 +194,11 @@ final class AddFeedbackContentViewController: BaseViewController {
     }
     
     private func setCounter(count: Int) {
-        if count <= keywordMaxLength {
-            textLimitLabel.text = "\(count)/\(keywordMaxLength)"
+        if count <= Length.keywordMaxLength {
+            textLimitLabel.text = "\(count)/\(Length.keywordMaxLength)"
         }
         else {
-            textLimitLabel.text = "\(keywordMaxLength)/\(keywordMaxLength)"
+            textLimitLabel.text = "\(Length.keywordMaxLength)/\(Length.keywordMaxLength)"
         }
     }
     
@@ -224,7 +225,7 @@ final class AddFeedbackContentViewController: BaseViewController {
     
     // MARK: - selector
     
-    @objc private func keyboardWillShow(notification:NSNotification) {
+    @objc private func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             UIView.animate(withDuration: 0.2, animations: {
                 self.feedbackDoneButton.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height + 25)
@@ -232,7 +233,7 @@ final class AddFeedbackContentViewController: BaseViewController {
         }
     }
     
-    @objc private func keyboardWillHide(notification:NSNotification) {
+    @objc private func keyboardWillHide(notification: NSNotification) {
         UIView.animate(withDuration: 0.2, animations: {
             self.feedbackDoneButton.transform = .identity
         })
@@ -244,7 +245,7 @@ final class AddFeedbackContentViewController: BaseViewController {
 extension AddFeedbackContentViewController: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
         setCounter(count: textField.text?.count ?? 0)
-        checkMaxLength(textField: feedbackKeywordTextField, maxLength: keywordMaxLength)
+        checkMaxLength(textField: feedbackKeywordTextField, maxLength: Length.keywordMaxLength)
         
         let hasText = feedbackKeywordTextField.hasText
         feedbackDoneButton.isDisabled = !hasText
@@ -272,7 +273,7 @@ extension AddFeedbackContentViewController: UITextViewDelegate {
         let newString = oldString.replacingCharacters(in: newRange, with: inputString).trimmingCharacters(in: .whitespacesAndNewlines)
         
         let characterCount = newString.count
-        guard characterCount <= textViewMaxLength else { return false }
+        guard characterCount <= Length.textViewMaxLength else { return false }
         
         return true
     }
