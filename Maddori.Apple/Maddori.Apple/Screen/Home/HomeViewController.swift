@@ -36,8 +36,7 @@ final class HomeViewController: BaseViewController {
     }()
     private let teamNameLabel: UILabel = {
         let label = UILabel()
-        label.text = TextLiteral.mainViewControllerTeamName
-        label.font = .title
+        label.setTitleFont(text: TextLiteral.mainViewControllerTeamName)
         label.textColor = .black100
         label.numberOfLines = 0
         return label
