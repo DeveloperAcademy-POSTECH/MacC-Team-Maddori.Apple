@@ -16,9 +16,9 @@ final class ReflectionInfoViewController: BaseViewController {
     
     private lazy var titleText: UILabel = {
         let label = UILabel()
-        label.text = "\(viewModel.nickname)님이 보낸 \(viewModel.type.rawValue)"
+        label.text = "\(viewModel.nickname)님이 보낸 \(viewModel.feedbackType.rawValue)"
         label.textColor = .gray400
-        label.applyColor(to: "\(viewModel.type.rawValue)", with: .blue200)
+        label.applyColor(to: "\(viewModel.feedbackType.rawValue)", with: .blue200)
         label.font = .caption1
         return label
     }()
