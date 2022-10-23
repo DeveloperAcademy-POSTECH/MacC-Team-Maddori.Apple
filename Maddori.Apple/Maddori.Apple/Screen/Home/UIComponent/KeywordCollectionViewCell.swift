@@ -19,8 +19,8 @@ final class KeywordCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - properties
     
-    lazy var keywordLabel: UILabel = {
-        let label = UILabel()
+    lazy var keywordLabel: KeywordLabel = {
+        let label = KeywordLabel()
         label.textAlignment = .center
         label.font = .main
         label.layer.cornerRadius = Size.keywordLabelHeight / 2
@@ -44,8 +44,8 @@ final class KeywordCollectionViewCell: BaseCollectionViewCell {
     override func render() {
         contentView.addSubview(keywordLabel)
         keywordLabel.snp.makeConstraints {
-            $0.edges.equalTo(safeAreaLayoutGuide)
-            $0.edges.equalToSuperview().inset(Size.keywordLabelXInset)
+            $0.top.bottom.equalToSuperview()
+            $0.leading.trailing.equalToSuperview()
         }
     }
     

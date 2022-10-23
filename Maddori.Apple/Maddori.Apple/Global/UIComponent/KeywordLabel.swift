@@ -70,3 +70,20 @@ enum KeywordType: CaseIterable {
     }
 }
 // TODO: shadow를 struct로 빼서 하는게 나을까요?
+
+class KeywordLabel: UILabel {
+    
+    private let verticalInset: CGFloat = 13.0
+    private let horizontalInset: CGFloat = 18.0
+    
+    override var intrinsicContentSize: CGSize {
+        let size = super.intrinsicContentSize
+        return CGSize(width: (horizontalInset * 2) + size.width,
+                      height: size.height)
+    }
+    
+    override func drawText(in rect: CGRect) {
+        let insets = UIEdgeInsets(top: 0, left: horizontalInset, bottom: 0, right: horizontalInset)
+        super.drawText(in: rect.inset(by: insets))
+    }
+}
