@@ -131,7 +131,7 @@ final class AddFeedbackContentViewController: BaseViewController {
             
             // FIXME: - height 를 필수로 지정해야 함 -> 현재 임의로 줌
             
-            $0.height.equalTo(1000)
+            $0.height.equalTo(1180)
         }
         
         addFeedbackContentView.addSubview(addFeedbackTitleLabel)
@@ -183,7 +183,7 @@ final class AddFeedbackContentViewController: BaseViewController {
             $0.top.equalTo(feedbackContentLabel.snp.bottom).offset(SizeLiteral.labelComponentPadding)
             $0.centerX.equalTo(addFeedbackContentView.snp.centerX)
             $0.width.equalTo(addFeedbackContentView.snp.width).inset(SizeLiteral.leadingTrailingPadding)
-            $0.height.greaterThanOrEqualTo(150)
+            $0.height.equalTo(150)
         }
         
         addFeedbackContentView.addSubview(feedbackStartSwitch)
@@ -211,7 +211,7 @@ final class AddFeedbackContentViewController: BaseViewController {
             $0.top.equalTo(feedbackStartTextViewLabel.snp.bottom).offset(SizeLiteral.labelComponentPadding)
             $0.centerX.equalTo(addFeedbackContentView.snp.centerX)
             $0.width.equalTo(addFeedbackContentView.snp.width).inset(SizeLiteral.leadingTrailingPadding)
-            $0.height.greaterThanOrEqualTo(150)
+            $0.height.equalTo(150)
         }
         
         addFeedbackContentView.addSubview(feedbackDoneButton)
@@ -245,6 +245,7 @@ final class AddFeedbackContentViewController: BaseViewController {
     private func setupDelegate() {
         feedbackKeywordTextField.delegate = self
         feedbackContentTextView.delegate = self
+        feedbackStartTextView.delegate = self
     }
     
     override func endEditingView() {
@@ -279,6 +280,10 @@ final class AddFeedbackContentViewController: BaseViewController {
     private func didTappedSwitch() {
         feedbackStartTextViewLabel.isHidden.toggle()
         feedbackStartTextView.isHidden.toggle()
+        
+        if feedbackStartSwitch.isOn == true {
+            addFeedbackScrollView.scrollRectToVisible(CGRect(x: 0.0, y: 0.0, width: 375.0, height: 1100.0), animated: true)
+        }
     }
     
     private func didTappedDoneButton() {
@@ -315,19 +320,27 @@ extension AddFeedbackContentViewController: UITextFieldDelegate {
         let hasText = feedbackKeywordTextField.hasText
         feedbackDoneButton.isDisabled = !hasText
     }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        addFeedbackScrollView.scrollRectToVisible(CGRect(x: 0.0, y: 0.0, width: 375.0, height: 850.0), animated: true)
+    }
 }
 
 extension AddFeedbackContentViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.text == TextLiteral.addFeedbackContentViewControllerFeedbackContentTextViewPlaceholder {
+        if textView.text == TextLiteral.addFeedbackContentViewControllerFeedbackContentTextViewPlaceholder || textView.text == "제안하고 싶은 Start를 작성해주세요" {
             textView.text = nil
             textView.textColor = .black100
+        }
+                
+        if textView == feedbackContentTextView {
+            addFeedbackScrollView.scrollRectToVisible(CGRect(x: 0.0, y: 0.0, width: 375.0, height: 920.0), animated: true)
         }
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-            textView.text = TextLiteral.addFeedbackContentViewControllerFeedbackContentTextViewPlaceholder
+            textView.text = textView == feedbackContentTextView ? TextLiteral.addFeedbackContentViewControllerFeedbackContentTextViewPlaceholder : "제안하고 싶은 Start를 작성해주세요"
             textView.textColor = .gray500
         }
     }
