@@ -49,6 +49,7 @@
 		7EB4D58229011EF7001FC396 /* JoinTeamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB4D58129011EF7001FC396 /* JoinTeamViewController.swift */; };
 		D724790C28FEC8C900D67B50 /* BaseTextFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D724790B28FEC8C900D67B50 /* BaseTextFieldViewController.swift */; };
 		D724790E28FEEEC300D67B50 /* KigoTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D724790D28FEEEC300D67B50 /* KigoTextField.swift */; };
+		D72CF1B229057B430067A118 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72CF1B129057B430067A118 /* CustomTabBarController.swift */; };
 		D79D908C2903B6B1004DDC4A /* LabelButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D79D908B2903B6B1004DDC4A /* LabelButtonView.swift */; };
 		D79D908E29041F42004DDC4A /* CreateTeamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D79D908D29041F42004DDC4A /* CreateTeamViewController.swift */; };
 /* End PBXBuildFile section */
@@ -97,6 +98,7 @@
 		7EB4D58129011EF7001FC396 /* JoinTeamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinTeamViewController.swift; sourceTree = "<group>"; };
 		D724790B28FEC8C900D67B50 /* BaseTextFieldViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTextFieldViewController.swift; sourceTree = "<group>"; };
 		D724790D28FEEEC300D67B50 /* KigoTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KigoTextField.swift; sourceTree = "<group>"; };
+		D72CF1B129057B430067A118 /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 		D79D908B2903B6B1004DDC4A /* LabelButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelButtonView.swift; sourceTree = "<group>"; };
 		D79D908D29041F42004DDC4A /* CreateTeamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTeamViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -223,6 +225,7 @@
 				3E557FC428FE854600714E46 /* KeywordLabel.swift */,
 				525E722028FFC9A800EF3FCB /* BackButton.swift */,
 				525E722428FFCFA600EF3FCB /* FeedbackTypeButtonView.swift */,
+				D72CF1B129057B430067A118 /* CustomTabBarController.swift */,
 			);
 			path = UIComponent;
 			sourceTree = "<group>";
@@ -440,6 +443,7 @@
 				39257DEB28F9373900201E0B /* BaseViewController.swift in Sources */,
 				39257DDE28F90EF900201E0B /* Sample.swift in Sources */,
 				525E722128FFC9A800EF3FCB /* BackButton.swift in Sources */,
+				D72CF1B229057B430067A118 /* CustomTabBarController.swift in Sources */,
 				395C7E1828F9912700FC2FCA /* UIButton+Extension.swift in Sources */,
 				525E721728FEF2C500EF3FCB /* ExitButton.swift in Sources */,
 				3E557FC328FE7BBC00714E46 /* HomeViewController.swift in Sources */,
