@@ -58,7 +58,7 @@ final class AddFeedbackContentViewController: BaseViewController {
     }()
     private let feedbackContentLabel: UILabel = {
         let label = UILabel()
-        label.text = TextLiteral.addFeedbackContentViewControllerFeedbackContentLabel
+        label.text = TextLiteral.addFeedbackContentViewControllerFeedbackTextViewLabel
         label.textColor = .black100
         label.font = .label2
         return label
@@ -80,14 +80,14 @@ final class AddFeedbackContentViewController: BaseViewController {
     }()
     private let feedbackStartLabel: UILabel = {
         let label = UILabel()
-        label.text = "Start 제안하기"
+        label.text = TextLiteral.addFeedbackContentViewControllerFeedbackStartLabel
         label.textColor = .black100
         label.font = .label2
         return label
     }()
     private let feedbackStartTextViewLabel: UILabel = {
         let label = UILabel()
-        label.text = "내용"
+        label.text = TextLiteral.addFeedbackContentViewControllerFeedbackTextViewLabel
         label.textColor = .black100
         label.font = .label2
         label.isHidden = true
@@ -95,7 +95,7 @@ final class AddFeedbackContentViewController: BaseViewController {
     }()
     private let feedbackStartTextView: FeedbackTextView = {
         let textView = FeedbackTextView(frame: CGRect(x: 0, y: 0, width: 327, height: 150))
-        textView.placeholder = "제안하고 싶은 Start를 작성해주세요"
+        textView.placeholder = TextLiteral.addFeedbackContentViewControllerStartTextViewPlaceholder
         textView.isHidden = true
         return textView
     }()
@@ -128,9 +128,6 @@ final class AddFeedbackContentViewController: BaseViewController {
         addFeedbackContentView.snp.makeConstraints {
             $0.edges.equalTo(addFeedbackScrollView.snp.edges)
             $0.width.equalTo(addFeedbackScrollView.snp.width)
-            
-            // FIXME: - height 를 필수로 지정해야 함 -> 현재 임의로 줌
-            
             $0.height.equalTo(1180)
         }
         
@@ -328,7 +325,7 @@ extension AddFeedbackContentViewController: UITextFieldDelegate {
 
 extension AddFeedbackContentViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.text == TextLiteral.addFeedbackContentViewControllerFeedbackContentTextViewPlaceholder || textView.text == "제안하고 싶은 Start를 작성해주세요" {
+        if textView.text == TextLiteral.addFeedbackContentViewControllerFeedbackContentTextViewPlaceholder || textView.text == TextLiteral.addFeedbackContentViewControllerStartTextViewPlaceholder {
             textView.text = nil
             textView.textColor = .black100
         }
@@ -340,7 +337,7 @@ extension AddFeedbackContentViewController: UITextViewDelegate {
     
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-            textView.text = textView == feedbackContentTextView ? TextLiteral.addFeedbackContentViewControllerFeedbackContentTextViewPlaceholder : "제안하고 싶은 Start를 작성해주세요"
+            textView.text = textView == feedbackContentTextView ? TextLiteral.addFeedbackContentViewControllerFeedbackContentTextViewPlaceholder : TextLiteral.addFeedbackContentViewControllerStartTextViewPlaceholder
             textView.textColor = .gray500
         }
     }
