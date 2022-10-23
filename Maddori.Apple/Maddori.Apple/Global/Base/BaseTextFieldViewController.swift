@@ -12,7 +12,7 @@ import SnapKit
 class BaseTextFieldViewController: BaseViewController {
     
     private let minLength: Int = 0
-    private let maxLength: Int = 6
+    var maxLength: Int = 0
     private var nickname: String = ""
     
     var titleText: String = ""
