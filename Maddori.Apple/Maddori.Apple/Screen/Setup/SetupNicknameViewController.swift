@@ -13,7 +13,6 @@ final class SetupNicknameViewController: BaseTextFieldViewController {
         get {
             return TextLiteral.setupNicknameViewControllerTitleLabel
         }
-        
         set {
             super.titleText = newValue
         }
@@ -23,7 +22,6 @@ final class SetupNicknameViewController: BaseTextFieldViewController {
         get {
             return TextLiteral.setupNicknameViewControllerNicknameTextFieldPlaceHolder
         }
-        
         set {
             super.placeholderText = newValue
         }
@@ -33,7 +31,6 @@ final class SetupNicknameViewController: BaseTextFieldViewController {
         get {
             return TextLiteral.doneButtonTitle
         }
-        
         set {
             super.buttonText = newValue
         }

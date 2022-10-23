@@ -42,7 +42,7 @@ final class AddFeedbackMemberViewController: BaseViewController {
         }
     }
     
-    // MARK: - functions
+    // MARK: - func
     
     override func setupNavigationBar() {
         super.setupNavigationBar()

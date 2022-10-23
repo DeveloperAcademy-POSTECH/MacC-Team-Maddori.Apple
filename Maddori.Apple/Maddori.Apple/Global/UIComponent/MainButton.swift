@@ -15,18 +15,6 @@ final class MainButton: UIButton {
         static let height: CGFloat = 54
     }
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        render()
-        configUI()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    // MARK: - property
-    
     var title: String? {
         didSet { setupAttribute() }
     }
@@ -35,7 +23,15 @@ final class MainButton: UIButton {
         didSet { setupAttribute() }
     }
     
-    // MARK: - func
+    // MARK: - life cycle
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        render()
+        configUI()
+    }
+    
+    required init?(coder: NSCoder) { nil }
     
     private func configUI() {
         layer.masksToBounds = true
@@ -53,6 +49,8 @@ final class MainButton: UIButton {
             $0.height.equalTo(Size.height)
         }
     }
+    
+    // MARK: - func
     
     private func setupAttribute() {
         if let title = title {

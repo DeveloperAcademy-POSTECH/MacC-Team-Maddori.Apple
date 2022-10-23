@@ -80,7 +80,8 @@ class BaseTextFieldViewController: BaseViewController {
             $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(2)
         }
     }
-    // MARK: - function
+    
+    // MARK: - func
     
     private func setupNotificationCenter() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)

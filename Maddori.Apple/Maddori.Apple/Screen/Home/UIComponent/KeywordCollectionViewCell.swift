@@ -11,6 +11,8 @@ import SnapKit
 
 final class KeywordCollectionViewCell: BaseCollectionViewCell {
     
+    lazy var keywordType: KeywordType = .previewKeyword
+    
     // MARK: - properties
     
     var keywordLabel: UILabel = {
@@ -21,7 +23,6 @@ final class KeywordCollectionViewCell: BaseCollectionViewCell {
         label.layer.masksToBounds = true
         return label
     }()
-    lazy var keywordType: KeywordType = .previewKeyword
     
     // MARK: - life cycle
     
@@ -29,11 +30,7 @@ final class KeywordCollectionViewCell: BaseCollectionViewCell {
         super.init(frame: frame)
     }
     
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-    }
-    
-    // MARK: - func
+    required init?(coder: NSCoder) { nil }
     
     override func render() {
         contentView.addSubview(keywordLabel)
@@ -42,6 +39,8 @@ final class KeywordCollectionViewCell: BaseCollectionViewCell {
             $0.edges.equalToSuperview().inset(SizeLiteral.keywordLabelXInset)
         }
     }
+    
+    // MARK: - func
     
     func configLabel(type: KeywordType) {
         keywordLabel.textColor = type.textColor
