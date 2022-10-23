@@ -85,6 +85,20 @@ final class AddFeedbackContentViewController: BaseViewController {
         label.font = .label2
         return label
     }()
+    private let feedbackStartTextViewLabel: UILabel = {
+        let label = UILabel()
+        label.text = "내용"
+        label.textColor = .black100
+        label.font = .label2
+        label.isHidden = true
+        return label
+    }()
+    private let feedbackStartTextView: FeedbackTextView = {
+        let textView = FeedbackTextView(frame: CGRect(x: 0, y: 0, width: 327, height: 150))
+        textView.placeholder = "제안하고 싶은 Start를 작성해주세요"
+        textView.isHidden = true
+        return textView
+    }()
     private lazy var feedbackDoneButton: MainButton = {
         let button = MainButton()
         button.title = TextLiteral.addFeedbackContentViewControllerDoneButtonTitle
@@ -186,6 +200,20 @@ final class AddFeedbackContentViewController: BaseViewController {
             $0.leading.equalTo(addFeedbackContentView.snp.leading).inset(SizeLiteral.leadingTrailingPadding)
         }
         
+        addFeedbackContentView.addSubview(feedbackStartTextViewLabel)
+        feedbackStartTextViewLabel.snp.makeConstraints {
+            $0.top.equalTo(feedbackStartSwitch.snp.bottom).offset(SizeLiteral.componentIntervalPadding)
+            $0.leading.equalTo(addFeedbackContentView.snp.leading).inset(SizeLiteral.leadingTrailingPadding)
+        }
+        
+        addFeedbackContentView.addSubview(feedbackStartTextView)
+        feedbackStartTextView.snp.makeConstraints {
+            $0.top.equalTo(feedbackStartTextViewLabel.snp.bottom).offset(SizeLiteral.labelComponentPadding)
+            $0.centerX.equalTo(addFeedbackContentView.snp.centerX)
+            $0.width.equalTo(addFeedbackContentView.snp.width).inset(SizeLiteral.leadingTrailingPadding)
+            $0.height.greaterThanOrEqualTo(150)
+        }
+        
         addFeedbackContentView.addSubview(feedbackDoneButton)
         feedbackDoneButton.snp.makeConstraints {
             $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(2)
@@ -249,7 +277,8 @@ final class AddFeedbackContentViewController: BaseViewController {
     }
     
     private func didTappedSwitch() {
-        
+        feedbackStartTextViewLabel.isHidden.toggle()
+        feedbackStartTextView.isHidden.toggle()
     }
     
     private func didTappedDoneButton() {
