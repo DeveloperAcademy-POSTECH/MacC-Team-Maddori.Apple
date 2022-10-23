@@ -163,8 +163,6 @@ final class AddFeedbackContentViewController: BaseViewController {
         }
     }
     
-    // MARK: - func
-    
     override func setupNavigationBar() {
         super.setupNavigationBar()
         

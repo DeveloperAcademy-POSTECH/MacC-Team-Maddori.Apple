@@ -14,6 +14,7 @@ final class MemberCollectionView: UIView {
     // FIXME: - 목업 데이터 추후 데이터 연결한 후 삭제할 내용
     
     let memberList: [String] = ["진저", "이드", "호야", "케미", "메리"]
+    
     private enum Size {
         static let collectionHorizontalSpacing: CGFloat = 14
         static let collectionTopSpacing: CGFloat = 40
@@ -53,9 +54,7 @@ final class MemberCollectionView: UIView {
         render()
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    required init?(coder: NSCoder) { nil }
     
     private func render() {
         self.addSubview(collectionView)
@@ -64,6 +63,8 @@ final class MemberCollectionView: UIView {
         }
     }
 }
+
+// MARK: - extension
 
 extension MemberCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

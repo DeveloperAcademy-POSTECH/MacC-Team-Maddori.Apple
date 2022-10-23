@@ -11,7 +11,7 @@ import SnapKit
 
 final class CloseButton: UIButton {
 
-    // MARK: - init
+    // MARK: - life cycle
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -19,11 +19,7 @@ final class CloseButton: UIButton {
         render()
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    // MARK: - func
+    required init?(coder: NSCoder) { nil }
     
     private func configUI() {
         self.setImage(ImageLiterals.icClose, for: .normal)

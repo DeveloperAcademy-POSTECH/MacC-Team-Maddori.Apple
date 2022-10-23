@@ -43,7 +43,7 @@ final class MemberCollectionViewCell: BaseCollectionViewCell {
         return view
     }()
     
-    // MARK: - lifecycle
+    // MARK: - life cycle
     
     override func render() {
         self.addSubview(memberShadow)
@@ -59,7 +59,7 @@ final class MemberCollectionViewCell: BaseCollectionViewCell {
         }
     }
     
-    // MARK: - function
+    // MARK: - func
     
     private func setupAttribute() {
         if isSelected {
