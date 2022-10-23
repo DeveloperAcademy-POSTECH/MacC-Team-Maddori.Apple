@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		391D217C29050427003FC871 /* CustomVisualEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391D217B29050427003FC871 /* CustomVisualEffectView.swift */; };
 		39257DC528F8FEBD00201E0B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39257DC428F8FEBD00201E0B /* AppDelegate.swift */; };
 		39257DC728F8FEBD00201E0B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39257DC628F8FEBD00201E0B /* SceneDelegate.swift */; };
 		39257DCE28F8FEBE00201E0B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 39257DCD28F8FEBE00201E0B /* Assets.xcassets */; };
@@ -31,13 +32,14 @@
 		395C7E1D28FEC8C400FC2FCA /* CloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395C7E1C28FEC8C400FC2FCA /* CloseButton.swift */; };
 		395C7E2028FED7B500FC2FCA /* ReflectionNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395C7E1F28FED7B500FC2FCA /* ReflectionNameView.swift */; };
 		395C7E2228FEDB6500FC2FCA /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395C7E2128FEDB6500FC2FCA /* UITextField+Extension.swift */; };
-		395C7E252900E74700FC2FCA /* StartReflectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395C7E242900E74700FC2FCA /* StartReflectionViewController.swift */; };
+		395C7E252900E74700FC2FCA /* StartReflectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395C7E242900E74700FC2FCA /* StartReflectionView.swift */; };
 		7E6B662F28FE887300C3BEEF /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6B662E28FE887300C3BEEF /* UILabel+Extension.swift */; };
 		D724790C28FEC8C900D67B50 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D724790B28FEC8C900D67B50 /* SignupViewController.swift */; };
 		D724790E28FEEEC300D67B50 /* KigoTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D724790D28FEEEC300D67B50 /* KigoTextField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		391D217B29050427003FC871 /* CustomVisualEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomVisualEffectView.swift; sourceTree = "<group>"; };
 		39257DC128F8FEBD00201E0B /* Maddori.Apple.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Maddori.Apple.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		39257DC428F8FEBD00201E0B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		39257DC628F8FEBD00201E0B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -63,7 +65,7 @@
 		395C7E1C28FEC8C400FC2FCA /* CloseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseButton.swift; sourceTree = "<group>"; };
 		395C7E1F28FED7B500FC2FCA /* ReflectionNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReflectionNameView.swift; sourceTree = "<group>"; };
 		395C7E2128FEDB6500FC2FCA /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
-		395C7E242900E74700FC2FCA /* StartReflectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartReflectionViewController.swift; sourceTree = "<group>"; };
+		395C7E242900E74700FC2FCA /* StartReflectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartReflectionView.swift; sourceTree = "<group>"; };
 		7E6B662E28FE887300C3BEEF /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
 		D724790B28FEC8C900D67B50 /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		D724790D28FEEEC300D67B50 /* KigoTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KigoTextField.swift; sourceTree = "<group>"; };
@@ -81,6 +83,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		391D217A29050413003FC871 /* UIComponent */ = {
+			isa = PBXGroup;
+			children = (
+				391D217B29050427003FC871 /* CustomVisualEffectView.swift */,
+			);
+			path = UIComponent;
+			sourceTree = "<group>";
+		};
 		39257DB828F8FEBD00201E0B = {
 			isa = PBXGroup;
 			children = (
@@ -255,7 +265,8 @@
 		395C7E232900E72900FC2FCA /* StartReflection */ = {
 			isa = PBXGroup;
 			children = (
-				395C7E242900E74700FC2FCA /* StartReflectionViewController.swift */,
+				391D217A29050413003FC871 /* UIComponent */,
+				395C7E242900E74700FC2FCA /* StartReflectionView.swift */,
 			);
 			path = StartReflection;
 			sourceTree = "<group>";
@@ -346,6 +357,7 @@
 			files = (
 				395C7E2028FED7B500FC2FCA /* ReflectionNameView.swift in Sources */,
 				395C7E1128F9834A00FC2FCA /* SampleDTO.swift in Sources */,
+				391D217C29050427003FC871 /* CustomVisualEffectView.swift in Sources */,
 				395C7E0528F953D200FC2FCA /* UIViewController+Extension.swift in Sources */,
 				39257DEB28F9373900201E0B /* BaseViewController.swift in Sources */,
 				39257DDE28F90EF900201E0B /* Sample.swift in Sources */,
@@ -359,7 +371,7 @@
 				395C7E1D28FEC8C400FC2FCA /* CloseButton.swift in Sources */,
 				39257DEF28F937A500201E0B /* BaseTableViewCell.swift in Sources */,
 				39257DF128F93C2A00201E0B /* ImageLiteral.swift in Sources */,
-				395C7E252900E74700FC2FCA /* StartReflectionViewController.swift in Sources */,
+				395C7E252900E74700FC2FCA /* StartReflectionView.swift in Sources */,
 				395C7E1B28FEC42900FC2FCA /* AddReflectionViewController.swift in Sources */,
 				D724790E28FEEEC300D67B50 /* KigoTextField.swift in Sources */,
 				39257DE228F90F5C00201E0B /* MainViewController.swift in Sources */,
