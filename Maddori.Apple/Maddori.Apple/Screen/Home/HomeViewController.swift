@@ -9,19 +9,17 @@ import UIKit
 
 import SnapKit
 
-class HomeViewController: BaseViewController {
+final class HomeViewController: BaseViewController {
     
     let keywords = Keyword.mockData
     
     // MARK: - property
-    
-    private let flowLayout = KeywordCollectionViewLayout()
-    private lazy var keywordCollectionView: UICollectionView = {
+     
+    lazy var keywordCollectionView: UICollectionView = {
+        let flowLayout = KeywordCollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         collectionView.backgroundColor = .white200
         collectionView.register(KeywordCollectionViewCell.self, forCellWithReuseIdentifier: KeywordCollectionViewCell.className)
-        collectionView.delegate = self
-        collectionView.dataSource = self
         return collectionView
     }()
     
@@ -29,10 +27,13 @@ class HomeViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUpDelegation()
     }
     
+    // MARK: - func
+    
     override func configUI() {
-        view.backgroundColor = .white
+        view.backgroundColor = .white100
     }
     
     override func render() {
@@ -41,25 +42,29 @@ class HomeViewController: BaseViewController {
             $0.edges.equalToSuperview()
         }
     }
+    
+    private func setUpDelegation() {
+        keywordCollectionView.delegate = self
+        keywordCollectionView.dataSource = self
+    }
 }
 
 // MARK: - extension
 
-extension HomeViewController: UICollectionViewDataSource {
+extension HomeViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return keywords.count
     }
 }
 
-extension HomeViewController: UICollectionViewDelegate {
+extension HomeViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = keywordCollectionView.dequeueReusableCell(withReuseIdentifier: "KeywordCollectionViewCell", for: indexPath) as? KeywordCollectionViewCell else {
+            return UICollectionViewCell()
+        }
         let keyword = keywords[indexPath.row]
-        
-        guard let cell = keywordCollectionView.dequeueReusableCell(withReuseIdentifier: KeywordCollectionViewCell.className, for: indexPath) as? KeywordCollectionViewCell else { return UICollectionViewCell() }
         cell.keywordLabel.text = keyword.string
         // FIXME: cell을 여기서 접근하는건 안좋은 방법일수도?
-        cell.keywordType = keywords[indexPath.row].type
-        print("keywords[indexPath.row].type", keywords[indexPath.row].type)
         cell.configShadow(type: keywords[indexPath.row].type)
         cell.configLabel(type: keywords[indexPath.row].type)
         return cell

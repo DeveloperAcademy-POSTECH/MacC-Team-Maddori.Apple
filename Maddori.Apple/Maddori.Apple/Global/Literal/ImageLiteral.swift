@@ -11,7 +11,8 @@ enum ImageLiterals {
     
     // MARK: - icon
     
-    static var icClose: UIImage { .load(systemName: "xmark")}
+    static var icClose: UIImage { .load(systemName: "xmark") }
+    static var icBack: UIImage { .load(systemName: "chevron.left") }
     
     // MARK: - image
     
