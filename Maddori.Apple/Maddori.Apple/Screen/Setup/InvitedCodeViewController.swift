@@ -15,7 +15,7 @@ final class InvitedCodeViewController: BaseViewController {
     
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.setTitleFont(text: "초대코드를 공유하여\n팀원들을 초대해주세요")
+        label.setTitleFont(text: TextLiteral.invitedCodeViewControllerTitleLabel)
         return label
     }()
     private let invitedCodeLabel: UILabel = {
@@ -26,7 +26,7 @@ final class InvitedCodeViewController: BaseViewController {
     }()
     private lazy var copyCodeButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("코드 복사하기", for: .normal)
+        button.setTitle(TextLiteral.invitedCodeViewControllerCopyCodeButtonText, for: .normal)
         button.setTitleColor(UIColor.blue200, for: .normal)
         button.titleLabel?.font = .label2
         button.backgroundColor = .gray100
@@ -35,12 +35,12 @@ final class InvitedCodeViewController: BaseViewController {
     }()
     private lazy var startButton: MainButton = {
         let button = MainButton()
-        button.title = "시작하기"
+        button.title = TextLiteral.invitedCodeViewControllerStartButtonText
         return button
     }()
     private let subLabel: UILabel = {
         let label = UILabel()
-        label.text = "초대코드는 다시 복사할 수 있습니다."
+        label.text = TextLiteral.invitedCodeViewControllerSubLabelText
         label.font = .body2
         label.textColor = .gray400
         return label

@@ -49,4 +49,11 @@ enum TextLiteral {
     
     static let createTeamViewControllerTitleLabel = "팀 이름을 입력해주세요"
     static let createTeamViewControllerTextFieldPlaceHolder = "예) 맛쟁이 사과처럼"
+    
+    // MARK: - InvitedCodeViewController
+    
+    static let invitedCodeViewControllerTitleLabel = "초대코드를 공유하여\n팀원들을 초대해주세요"
+    static let invitedCodeViewControllerCopyCodeButtonText = "코드 복사하기"
+    static let invitedCodeViewControllerStartButtonText = "시작하기"
+    static let invitedCodeViewControllerSubLabelText = "초대코드는 다시 복사할 수 있습니다."
 }
