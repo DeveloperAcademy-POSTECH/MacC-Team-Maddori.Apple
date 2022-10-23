@@ -29,6 +29,16 @@ final class ReflectionInfoViewController: BaseViewController {
         label.textColor = .black100
         return label
     }()
+    private lazy var infoLabel: UILabel = {
+        let label = UILabel()
+        label.text = viewModel.info
+        label.font = .body1
+        label.textColor = .gray400
+        label.numberOfLines = 100
+//        label.setLineSpacing()
+        label.setTextWithLineHeight(text: label.text, lineHeight: 24)
+        return label
+    }()
     
     // MARK: - life cycle
     
@@ -51,6 +61,12 @@ final class ReflectionInfoViewController: BaseViewController {
         keywordLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.top.equalTo(sendFromLabel.snp.bottom).offset(10)
+        }
+        
+        view.addSubview(infoLabel)
+        infoLabel.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.top.equalTo(keywordLabel.snp.bottom).offset(32)
         }
     }
 }
