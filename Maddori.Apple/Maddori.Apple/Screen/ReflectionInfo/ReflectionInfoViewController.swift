@@ -14,12 +14,19 @@ final class ReflectionInfoViewController: BaseViewController {
     
     // MARK: - property
     
-    private lazy var titleText: UILabel = {
+    private lazy var sendFromLabel: UILabel = {
         let label = UILabel()
         label.text = "\(viewModel.nickname)님이 보낸 \(viewModel.feedbackType.rawValue)"
         label.textColor = .gray400
         label.applyColor(to: "\(viewModel.feedbackType.rawValue)", with: .blue200)
         label.font = .caption1
+        return label
+    }()
+    private lazy var keywordLabel: UILabel = {
+        let label = UILabel()
+        label.text = viewModel.keyword
+        label.font = .title
+        label.textColor = .black100
         return label
     }()
     
@@ -33,11 +40,17 @@ final class ReflectionInfoViewController: BaseViewController {
     required init?(coder: NSCoder) { nil }
     
     override func render() {
-        view.addSubview(titleText)
-        titleText.snp.makeConstraints {
+        view.addSubview(sendFromLabel)
+        sendFromLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.top.equalTo(view.safeAreaLayoutGuide
                 .snp.top).inset(55)
+        }
+        
+        view.addSubview(keywordLabel)
+        keywordLabel.snp.makeConstraints {
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.top.equalTo(sendFromLabel.snp.bottom).offset(10)
         }
     }
 }
