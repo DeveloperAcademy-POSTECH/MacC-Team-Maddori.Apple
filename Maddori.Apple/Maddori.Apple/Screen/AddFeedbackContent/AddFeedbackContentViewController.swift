@@ -64,16 +64,16 @@ final class AddFeedbackContentViewController: BaseViewController {
         return label
     }()
     private let feedbackContentTextView: FeedbackTextView = {
-        let textview = FeedbackTextView(frame: CGRect(x: 0, y: 0, width: 327, height: 150))
-        textview.placeholder = TextLiteral.addFeedbackContentViewControllerFeedbackContentTextViewPlaceholder
-        return textview
+        let textView = FeedbackTextView(frame: CGRect(x: 0, y: 0, width: 327, height: 150))
+        textView.placeholder = TextLiteral.addFeedbackContentViewControllerFeedbackContentTextViewPlaceholder
+        return textView
     }()
     private lazy var feedbackDoneButton: MainButton = {
         let button = MainButton()
         button.title = TextLiteral.addFeedbackContentViewControllerDoneButtonTitle
         button.isDisabled = true
         let action = UIAction { [weak self] _ in
-            self?.touchUpDoneButton()
+            self?.didTappedDoneButton()
         }
         button.addAction(action, for: .touchUpInside)
         return button
@@ -83,8 +83,6 @@ final class AddFeedbackContentViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configUI()
-        render()
         setupNotificationCenter()
         setupDelegate()
     }
@@ -219,7 +217,7 @@ final class AddFeedbackContentViewController: BaseViewController {
         }
     }
     
-    private func touchUpDoneButton() {
+    private func didTappedDoneButton() {
         
         // FIXME: - 피드백 추가 로직 (print문 삭제)
         

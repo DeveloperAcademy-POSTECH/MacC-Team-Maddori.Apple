@@ -17,6 +17,7 @@ enum SizeLiteral {
     static let topComponentPadding: CGFloat = 40
     static let labelComponentPadding: CGFloat = 10
     static let componentIntervalPadding: CGFloat = 36
+    static let componentCornerRadius: CGFloat = 10
     
     static let keywordLabelHeight: CGFloat = 50
     static let keywordLabelXSpacing: CGFloat = 10

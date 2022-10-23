@@ -11,8 +11,6 @@ import SnapKit
 
 final class FeedbackTextView: UITextView {
     
-    // MARK: - property
-    
     var placeholder: String? {
         didSet { setupAttribute() }
     }
@@ -28,11 +26,11 @@ final class FeedbackTextView: UITextView {
     
     private func configUI() {
         self.backgroundColor = .white300
-        self.layer.cornerRadius = 10
+        self.layer.cornerRadius = SizeLiteral.componentCornerRadius
         self.layer.borderWidth = 1
         self.layer.borderColor = UIColor.gray100.cgColor
         self.font = .body1
-        self.contentInset = .init(top: 10, left: 14, bottom: 10, right: 14)
+        self.textContainerInset = .init(top: 18, left: 12, bottom: 18, right: 12)
         self.textColor = .gray500
         self.isScrollEnabled = false
     }
