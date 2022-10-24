@@ -98,7 +98,7 @@ final class AddFeedbackContentViewController: BaseViewController {
         return label
     }()
     private let feedbackStartTextView: FeedbackTextView = {
-        let textView = FeedbackTextView(frame: CGRect(x: 0, y: 0, width: 327, height: 150))
+        let textView = FeedbackTextView()
         textView.placeholder = TextLiteral.addFeedbackContentViewControllerStartTextViewPlaceholder
         textView.isHidden = true
         return textView
@@ -222,27 +222,26 @@ final class AddFeedbackContentViewController: BaseViewController {
         addFeedbackContentView.addSubview(feedbackStartTextView)
         feedbackStartTextView.snp.makeConstraints {
             $0.top.equalTo(feedbackStartTextViewLabel.snp.bottom).offset(SizeLiteral.labelComponentPadding)
-            $0.centerX.equalTo(addFeedbackContentView.snp.centerX)
-            $0.width.equalTo(addFeedbackContentView.snp.width).inset(SizeLiteral.leadingTrailingPadding)
+            $0.leading.equalTo(addFeedbackContentView.snp.leading).inset(SizeLiteral.leadingTrailingPadding)
+            $0.trailing.equalTo(addFeedbackContentView.snp.trailing).inset(SizeLiteral.leadingTrailingPadding)
             $0.height.equalTo(150)
         }
         
-        addFeedbackContentView.addSubview(feedbackDoneButtonView)
+        view.addSubview(feedbackDoneButtonView)
         feedbackDoneButtonView.snp.makeConstraints {
-            $0.bottom.equalTo(view.safeAreaLayoutGuide)
-            $0.centerX.equalTo(addFeedbackContentView.snp.centerX)
-            $0.width.equalTo(addFeedbackContentView.snp.width)
-            $0.height.equalTo(100)
+            $0.bottom.equalToSuperview()
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(134)
         }
         
-        addFeedbackContentView.addSubview(feedbackDoneButton)
+        feedbackDoneButtonView.addSubview(feedbackDoneButton)
         feedbackDoneButton.snp.makeConstraints {
-            $0.bottom.equalTo(feedbackDoneButtonView.snp.bottom).inset(2)
+            $0.bottom.equalTo(feedbackDoneButtonView.snp.bottom).inset(36)
             $0.centerX.equalTo(feedbackDoneButtonView.snp.centerX)
             $0.width.equalTo(feedbackDoneButtonView.snp.width).inset(SizeLiteral.leadingTrailingPadding)
         }
         
-        addFeedbackContentView.addSubview(feedbackSendTimeLabel)
+        feedbackDoneButtonView.addSubview(feedbackSendTimeLabel)
         feedbackSendTimeLabel.snp.makeConstraints {
             $0.bottom.equalTo(feedbackDoneButton.snp.top).inset(-11)
             $0.centerX.equalTo(feedbackDoneButtonView.snp.centerX)
