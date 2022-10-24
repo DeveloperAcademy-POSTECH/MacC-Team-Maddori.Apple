@@ -93,7 +93,7 @@ final class HomeViewController: BaseViewController {
     // MARK: - func
     
     override func configUI() {
-        view.backgroundColor = .white100
+        view.backgroundColor = .white200
     }
     
     override func render() {
