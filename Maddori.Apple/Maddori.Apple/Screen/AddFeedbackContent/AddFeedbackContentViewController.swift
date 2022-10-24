@@ -102,9 +102,14 @@ final class AddFeedbackContentViewController: BaseViewController {
         textView.isHidden = true
         return textView
     }()
+    private let feedbackDoneButtonView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white200
+        return view
+    }()
     private lazy var feedbackSendTimeLabel: UILabel = {
         let label = UILabel()
-        label.text = "작성한 피드백은 회고 시간에 자동 제출됩니다"
+        label.text = TextLiteral.addFeedbackContentViewControllerFeedbackSendTimeLabel
         label.textColor = .gray400
         label.font = .body2
         return label
@@ -221,17 +226,25 @@ final class AddFeedbackContentViewController: BaseViewController {
             $0.height.equalTo(150)
         }
         
+        addFeedbackContentView.addSubview(feedbackDoneButtonView)
+        feedbackDoneButtonView.snp.makeConstraints {
+            $0.bottom.equalTo(view.safeAreaLayoutGuide)
+            $0.centerX.equalTo(addFeedbackContentView.snp.centerX)
+            $0.width.equalTo(addFeedbackContentView.snp.width)
+            $0.height.equalTo(100)
+        }
+        
         addFeedbackContentView.addSubview(feedbackDoneButton)
         feedbackDoneButton.snp.makeConstraints {
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(2)
-            $0.centerX.equalTo(addFeedbackContentView.snp.centerX)
-            $0.width.equalTo(addFeedbackContentView.snp.width).inset(SizeLiteral.leadingTrailingPadding)
+            $0.bottom.equalTo(feedbackDoneButtonView.snp.bottom).inset(2)
+            $0.centerX.equalTo(feedbackDoneButtonView.snp.centerX)
+            $0.width.equalTo(feedbackDoneButtonView.snp.width).inset(SizeLiteral.leadingTrailingPadding)
         }
         
         addFeedbackContentView.addSubview(feedbackSendTimeLabel)
         feedbackSendTimeLabel.snp.makeConstraints {
             $0.bottom.equalTo(feedbackDoneButton.snp.top).inset(-11)
-            $0.centerX.equalTo(addFeedbackContentView.snp.centerX)
+            $0.centerX.equalTo(feedbackDoneButtonView.snp.centerX)
         }
     }
     

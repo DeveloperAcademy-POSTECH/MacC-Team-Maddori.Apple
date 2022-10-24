@@ -45,6 +45,7 @@ enum TextLiteral {
     static let addFeedbackContentViewControllerDoneButtonTitle = "완료"
     static let addFeedbackContentViewControllerFeedbackStartLabel = "Start 제안하기"
     static let addFeedbackContentViewControllerStartTextViewPlaceholder = "제안하고 싶은 Start를 작성해주세요"
+    static let addFeedbackContentViewControllerFeedbackSendTimeLabel = "작성한 피드백은 회고 시간에 자동 제출됩니다"
 
     // MARK: - JoinTeamViewController
     
