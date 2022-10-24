@@ -16,6 +16,13 @@ enum TextLiteral {
     // MARK: - MainViewController
     
     static let mainViewControllerTitle = "예시입니다...람쥐"
+    static let mainViewControllerTeamName = "맛쟁이 사과처럼"
+    static let mainViewControllerReflectionDateDescription = "아직 회고 일정이 정해지지 않았습니다"
+    static let mainViewControllerCurrentReflectionKeyword = "이번 회고에 담긴 키워드"
+    static let mainViewControllerInvitationButtonText = "초대코드"
+    static let mainViewControllerPlanLabelButtonSubText = "회고 일정이 없습니다"
+    static let mainViewControllerPlanLabelButtonSubButtonText = "일정 만들기"
+    static let mainViewControllerButtonText = "피드백 추가하기"
     
     // MARK: - AddFeedbackMemberViewController
     
@@ -53,4 +60,9 @@ enum TextLiteral {
     static let joinTeamViewControllerNicknameTextFieldPlaceHolder = "초대코드"
     static let joinTeamViewControllerSubText = "팀이 없나요?"
     static let joinTeamViewControllerSubButtonText = "팀 생성하기"
+    
+    // MARK: - CreateTeamViewController
+    
+    static let createTeamViewControllerTitleLabel = "팀 이름을 입력해주세요"
+    static let createTeamViewControllerTextFieldPlaceHolder = "예) 맛쟁이 사과처럼"
 }

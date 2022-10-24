@@ -83,8 +83,7 @@ final class FeedbackTypeButtonView: UIButton {
         continueShadowView.snp.makeConstraints {
             $0.width.equalTo(Size.width)
             $0.height.equalTo(Size.height)
-            $0.leading.equalToSuperview()
-            $0.top.equalToSuperview()
+            $0.leading.top.equalToSuperview()
         }
         
         continueShadowView.addSubview(continueButton)

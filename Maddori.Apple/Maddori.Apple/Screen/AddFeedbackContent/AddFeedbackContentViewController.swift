@@ -10,10 +10,11 @@ import UIKit
 import SnapKit
 
 final class AddFeedbackContentViewController: BaseViewController {
-    
-    private let keywordMinLength: Int = 0
-    private let keywordMaxLength: Int = 15
-    private let textViewMaxLength: Int = 200
+    private enum Length {
+        static let keywordMinLength: Int = 0
+        static let keywordMaxLength: Int = 15
+        static let textViewMaxLength: Int = 200
+    }
     private var nickname: String = "진저"
     
     // FIXME: - 회고 날짜 받아오기 / 현재는 있는 상태
@@ -54,7 +55,7 @@ final class AddFeedbackContentViewController: BaseViewController {
     }()
     private lazy var textLimitLabel: UILabel = {
         let label = UILabel()
-        label.setTextWithLineHeight(text: "\(keywordMinLength)/\(keywordMaxLength)", lineHeight: 22)
+        label.setTextWithLineHeight(text: "\(Length.keywordMinLength)/\(Length.keywordMaxLength)", lineHeight: 22)
         label.font = .body2
         label.textColor = .gray500
         return label
@@ -67,7 +68,7 @@ final class AddFeedbackContentViewController: BaseViewController {
         return label
     }()
     private let feedbackContentTextView: FeedbackTextView = {
-        let textView = FeedbackTextView(frame: CGRect(x: 0, y: 0, width: 327, height: 150))
+        let textView = FeedbackTextView()
         textView.placeholder = TextLiteral.addFeedbackContentViewControllerFeedbackContentTextViewPlaceholder
         return textView
     }()
@@ -193,8 +194,8 @@ final class AddFeedbackContentViewController: BaseViewController {
         addFeedbackContentView.addSubview(feedbackContentTextView)
         feedbackContentTextView.snp.makeConstraints {
             $0.top.equalTo(feedbackContentLabel.snp.bottom).offset(SizeLiteral.labelComponentPadding)
-            $0.centerX.equalTo(addFeedbackContentView.snp.centerX)
-            $0.width.equalTo(addFeedbackContentView.snp.width).inset(SizeLiteral.leadingTrailingPadding)
+            $0.leading.equalTo(addFeedbackContentView.snp.leading).inset(SizeLiteral.leadingTrailingPadding)
+            $0.trailing.equalTo(addFeedbackContentView.snp.trailing).inset(SizeLiteral.leadingTrailingPadding)
             $0.height.equalTo(150)
         }
         
@@ -271,8 +272,8 @@ final class AddFeedbackContentViewController: BaseViewController {
     }
     
     private func setupNotificationCenter() {
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(willShowKeyboard), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(willHideKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     private func setupDelegate() {
@@ -288,11 +289,11 @@ final class AddFeedbackContentViewController: BaseViewController {
     }
     
     private func setCounter(count: Int) {
-        if count <= keywordMaxLength {
-            textLimitLabel.text = "\(count)/\(keywordMaxLength)"
+        if count <= Length.keywordMaxLength {
+            textLimitLabel.text = "\(count)/\(Length.keywordMaxLength)"
         }
         else {
-            textLimitLabel.text = "\(keywordMaxLength)/\(keywordMaxLength)"
+            textLimitLabel.text = "\(Length.keywordMaxLength)/\(Length.keywordMaxLength)"
         }
     }
     
@@ -328,7 +329,7 @@ final class AddFeedbackContentViewController: BaseViewController {
     
     // MARK: - selector
     
-    @objc private func keyboardWillShow(notification:NSNotification) {
+    @objc private func willShowKeyboard(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             UIView.animate(withDuration: 0.2, animations: {
                 self.feedbackDoneButton.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height + 25)
@@ -338,7 +339,7 @@ final class AddFeedbackContentViewController: BaseViewController {
         feedbackSendTimeLabel.isHidden = true
     }
     
-    @objc private func keyboardWillHide(notification:NSNotification) {
+    @objc private func willHideKeyboard(notification: NSNotification) {
         UIView.animate(withDuration: 0.2, animations: {
             self.feedbackDoneButton.transform = .identity
         })
@@ -352,7 +353,7 @@ final class AddFeedbackContentViewController: BaseViewController {
 extension AddFeedbackContentViewController: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
         setCounter(count: textField.text?.count ?? 0)
-        checkMaxLength(textField: feedbackKeywordTextField, maxLength: keywordMaxLength)
+        checkMaxLength(textField: feedbackKeywordTextField, maxLength: Length.keywordMaxLength)
         
         let hasText = feedbackKeywordTextField.hasText
         feedbackDoneButton.isDisabled = !hasText
@@ -390,7 +391,7 @@ extension AddFeedbackContentViewController: UITextViewDelegate {
         let newString = oldString.replacingCharacters(in: newRange, with: inputString).trimmingCharacters(in: .whitespacesAndNewlines)
         
         let characterCount = newString.count
-        guard characterCount <= textViewMaxLength else { return false }
+        guard characterCount <= Length.textViewMaxLength else { return false }
         
         return true
     }

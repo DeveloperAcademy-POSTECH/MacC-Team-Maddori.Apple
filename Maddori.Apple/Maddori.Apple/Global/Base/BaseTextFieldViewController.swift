@@ -12,7 +12,7 @@ import SnapKit
 class BaseTextFieldViewController: BaseViewController {
     
     private let minLength: Int = 0
-    private let maxLength: Int = 6
+    var maxLength: Int = 0
     private var nickname: String = ""
     
     var titleText: String = ""
@@ -80,7 +80,8 @@ class BaseTextFieldViewController: BaseViewController {
             $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(2)
         }
     }
-    // MARK: - function
+    
+    // MARK: - func
     
     private func setupNotificationCenter() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
