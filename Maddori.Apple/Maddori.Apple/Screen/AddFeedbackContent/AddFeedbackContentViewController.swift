@@ -65,7 +65,7 @@ final class AddFeedbackContentViewController: BaseViewController {
         return label
     }()
     private let feedbackContentTextView: FeedbackTextView = {
-        let textView = FeedbackTextView(frame: CGRect(x: 0, y: 0, width: 327, height: 150))
+        let textView = FeedbackTextView()
         textView.placeholder = TextLiteral.addFeedbackContentViewControllerFeedbackContentTextViewPlaceholder
         return textView
     }()
@@ -151,8 +151,8 @@ final class AddFeedbackContentViewController: BaseViewController {
         addFeedbackContentView.addSubview(feedbackContentTextView)
         feedbackContentTextView.snp.makeConstraints {
             $0.top.equalTo(feedbackContentLabel.snp.bottom).offset(SizeLiteral.labelComponentPadding)
-            $0.centerX.equalTo(addFeedbackContentView.snp.centerX)
-            $0.width.equalTo(addFeedbackContentView.snp.width).inset(SizeLiteral.leadingTrailingPadding)
+            $0.leading.equalTo(addFeedbackContentView.snp.leading).inset(SizeLiteral.leadingTrailingPadding)
+            $0.trailing.equalTo(addFeedbackContentView.snp.trailing).inset(SizeLiteral.leadingTrailingPadding)
             $0.height.greaterThanOrEqualTo(150)
         }
         
@@ -178,8 +178,8 @@ final class AddFeedbackContentViewController: BaseViewController {
     }
     
     private func setupNotificationCenter() {
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(willShowKeyboard), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(willHideKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     private func setupDelegate() {
@@ -225,7 +225,7 @@ final class AddFeedbackContentViewController: BaseViewController {
     
     // MARK: - selector
     
-    @objc private func keyboardWillShow(notification: NSNotification) {
+    @objc private func willShowKeyboard(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             UIView.animate(withDuration: 0.2, animations: {
                 self.feedbackDoneButton.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height + 25)
@@ -233,7 +233,7 @@ final class AddFeedbackContentViewController: BaseViewController {
         }
     }
     
-    @objc private func keyboardWillHide(notification: NSNotification) {
+    @objc private func willHideKeyboard(notification: NSNotification) {
         UIView.animate(withDuration: 0.2, animations: {
             self.feedbackDoneButton.transform = .identity
         })
