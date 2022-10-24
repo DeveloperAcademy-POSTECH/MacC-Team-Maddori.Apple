@@ -16,6 +16,9 @@ final class AddFeedbackContentViewController: BaseViewController {
     private let textViewMaxLength: Int = 200
     private var nickname: String = "진저"
     
+    // FIXME: - 회고 날짜 받아오기 / 현재는 있는 상태
+    private let feedbackDate: Date? = Date()
+    
     // MARK: - property
     
     private let backButton = BackButton(type: .system)
@@ -98,6 +101,13 @@ final class AddFeedbackContentViewController: BaseViewController {
         textView.placeholder = TextLiteral.addFeedbackContentViewControllerStartTextViewPlaceholder
         textView.isHidden = true
         return textView
+    }()
+    private lazy var feedbackSendTimeLabel: UILabel = {
+        let label = UILabel()
+        label.text = "작성한 피드백은 회고 시간에 자동 제출됩니다"
+        label.textColor = .gray400
+        label.font = .body2
+        return label
     }()
     private lazy var feedbackDoneButton: MainButton = {
         let button = MainButton()
@@ -217,6 +227,19 @@ final class AddFeedbackContentViewController: BaseViewController {
             $0.centerX.equalTo(addFeedbackContentView.snp.centerX)
             $0.width.equalTo(addFeedbackContentView.snp.width).inset(SizeLiteral.leadingTrailingPadding)
         }
+        
+        addFeedbackContentView.addSubview(feedbackSendTimeLabel)
+        feedbackSendTimeLabel.snp.makeConstraints {
+            $0.bottom.equalTo(feedbackDoneButton.snp.top).inset(-11)
+            $0.centerX.equalTo(addFeedbackContentView.snp.centerX)
+        }
+    }
+    
+    override func configUI() {
+        super.configUI()
+        if feedbackDate != nil {
+            feedbackSendTimeLabel.text = "작성한 피드백은 \(feedbackDate!)에 자동으로 제출됩니다"
+        }
     }
     
     // MARK: - func
@@ -298,12 +321,16 @@ final class AddFeedbackContentViewController: BaseViewController {
                 self.feedbackDoneButton.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height + 25)
             })
         }
+        
+        feedbackSendTimeLabel.isHidden = true
     }
     
     @objc private func keyboardWillHide(notification:NSNotification) {
         UIView.animate(withDuration: 0.2, animations: {
             self.feedbackDoneButton.transform = .identity
         })
+        
+        feedbackSendTimeLabel.isHidden = false
     }
 }
 
@@ -329,9 +356,11 @@ extension AddFeedbackContentViewController: UITextViewDelegate {
             textView.text = nil
             textView.textColor = .black100
         }
-                
+        
         if textView == feedbackContentTextView {
             addFeedbackScrollView.scrollRectToVisible(CGRect(x: 0.0, y: 0.0, width: 375.0, height: 920.0), animated: true)
+        } else {
+            addFeedbackScrollView.scrollRectToVisible(CGRect(x: 0.0, y: 0.0, width: 375.0, height: 1100.0), animated: true)
         }
     }
     
