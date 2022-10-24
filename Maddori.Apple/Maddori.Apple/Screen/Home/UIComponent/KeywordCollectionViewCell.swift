@@ -44,8 +44,7 @@ final class KeywordCollectionViewCell: BaseCollectionViewCell {
     override func render() {
         contentView.addSubview(keywordLabel)
         keywordLabel.snp.makeConstraints {
-            $0.top.bottom.equalToSuperview()
-            $0.leading.trailing.equalToSuperview()
+            $0.edges.equalToSuperview()
         }
     }
     
