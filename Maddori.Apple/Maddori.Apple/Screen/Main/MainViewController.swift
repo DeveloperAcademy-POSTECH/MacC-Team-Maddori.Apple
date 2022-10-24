@@ -16,7 +16,7 @@ final class MainViewController: BaseViewController {
     private lazy var mainButton: MainButton = {
         let button = MainButton()
         let action = UIAction { [weak self] _ in
-            self?.presentAddReflectionView()
+            self?.presentReflectionInfoView()
         }
         button.title = "예시"
         button.addAction(action, for: .touchUpInside)
@@ -47,5 +47,10 @@ final class MainViewController: BaseViewController {
         let viewController = UINavigationController(rootViewController: AddReflectionViewController())
         viewController.modalPresentationStyle = .fullScreen
         present(viewController, animated: true)
+    }
+    
+    private func presentReflectionInfoView() {
+        let viewController = ReflectionInfoViewController()
+        self.present(viewController, animated: true)
     }
 }
