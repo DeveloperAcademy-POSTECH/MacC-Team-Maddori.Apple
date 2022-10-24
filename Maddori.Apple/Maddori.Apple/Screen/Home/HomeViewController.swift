@@ -26,7 +26,7 @@ final class HomeViewController: BaseViewController {
     }
     
     // MARK: - property
-     
+    
     lazy var keywordCollectionView: UICollectionView = {
         let flowLayout = KeywordCollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
@@ -90,8 +90,6 @@ final class HomeViewController: BaseViewController {
         setUpDelegation()
     }
     
-    // MARK: - func
-    
     override func configUI() {
         view.backgroundColor = .white200
     }
@@ -145,7 +143,9 @@ final class HomeViewController: BaseViewController {
             $0.bottom.equalTo(planLabelButtonView.snp.top)
         }
     }
-
+    
+    // MARK: - func
+    
     private func setUpDelegation() {
         keywordCollectionView.delegate = self
         keywordCollectionView.dataSource = self

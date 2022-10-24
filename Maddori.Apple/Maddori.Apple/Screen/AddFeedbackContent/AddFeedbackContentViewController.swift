@@ -31,7 +31,7 @@ final class AddFeedbackContentViewController: BaseViewController {
     }()
     private let feedbackTypeButtonView = FeedbackTypeButtonView()
     
-    // MARK: - lifecycle
+    // MARK: - life cycle
     
     override func render() {
         view.addSubview(addFeedbackTitleLabel)
@@ -52,8 +52,6 @@ final class AddFeedbackContentViewController: BaseViewController {
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
     }
-    
-    // MARK: - func
     
     override func setupNavigationBar() {
         super.setupNavigationBar()
