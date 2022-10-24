@@ -12,4 +12,5 @@ enum SizeLiteral {
     static let topPadding: CGFloat = 12
     static let bottomPadding: CGFloat = 2
     static let minimumTouchArea: CGFloat = 44
+    static let titleSubTitlePadding: CGFloat = 5
 }

@@ -14,8 +14,6 @@ final class HomeViewController: BaseViewController {
     let keywords = Keyword.mockData
     private enum Size {
         static let keywordLabelHeight: CGFloat = 50
-        // FIXME: 기존 간격인 10으로 하면
-        static let labelPadding: CGFloat = 5
         static let labelButtonPadding: CGFloat = 6
         static let propertyPadding: CGFloat = 40
         static let buttonCornerRadius: CGFloat = 27
@@ -112,7 +110,7 @@ final class HomeViewController: BaseViewController {
         
         view.addSubview(descriptionLabel)
         descriptionLabel.snp.makeConstraints {
-            $0.top.equalTo(teamNameLabel.snp.bottom).offset(Size.labelPadding)
+            $0.top.equalTo(teamNameLabel.snp.bottom).offset(SizeLiteral.titleSubTitlePadding)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
@@ -138,7 +136,7 @@ final class HomeViewController: BaseViewController {
         
         view.addSubview(keywordCollectionView)
         keywordCollectionView.snp.makeConstraints {
-            $0.top.equalTo(currentReflectionLabel.snp.bottom).offset(Size.labelPadding)
+            $0.top.equalTo(currentReflectionLabel.snp.bottom).offset(SizeLiteral.titleSubTitlePadding)
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             $0.bottom.equalTo(planLabelButtonView.snp.top)
         }

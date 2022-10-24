@@ -56,4 +56,8 @@ enum TextLiteral {
     
     static let createTeamViewControllerTitleLabel = "팀 이름을 입력해주세요"
     static let createTeamViewControllerTextFieldPlaceHolder = "예) 맛쟁이 사과처럼"
+    
+    // MARK: - InProgressViewController
+    static let InProgressViewControllerTitleLabel = "님의 회고 시간"
+    static let InProgressViewControllerSubTitleLabel = "님은 이야기 나누고 싶은\n키워드를 선택해주세요"
 }
