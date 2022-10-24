@@ -60,4 +60,8 @@ enum TextLiteral {
     // MARK: - InProgressViewController
     static let InProgressViewControllerTitleLabel = "님의 회고 시간"
     static let InProgressViewControllerSubTitleLabel = "님은 이야기 나누고 싶은\n키워드를 선택해주세요"
+    static let InProgressViewControllerOthersSubTitleLabel = "님이 선택한 키워드를 확인해주세요"
+    static let InProgressViewControllerReceivedLabel = "내가 받은 피드백"
+    static let InProgressViewControllerGivenLabel = "내가 보낸 피드백"
+    static let InProgressViewControllerOtherGivenLabel = "팀원들이 보낸 피드백"
 }

@@ -11,7 +11,7 @@ import SnapKit
 
 final class HomeViewController: BaseViewController {
     
-    let keywords = Keyword.mockData
+    fileprivate let keywords = Keyword.mockData
     private enum Size {
         static let keywordLabelHeight: CGFloat = 50
         static let labelButtonPadding: CGFloat = 6
@@ -25,7 +25,7 @@ final class HomeViewController: BaseViewController {
     
     // MARK: - property
     
-    lazy var keywordCollectionView: UICollectionView = {
+    private lazy var keywordCollectionView: UICollectionView = {
         let flowLayout = KeywordCollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         collectionView.backgroundColor = .white200
@@ -160,14 +160,14 @@ extension HomeViewController: UICollectionViewDelegate {
 
 extension HomeViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = keywordCollectionView.dequeueReusableCell(withReuseIdentifier: "KeywordCollectionViewCell", for: indexPath) as? KeywordCollectionViewCell else {
+        guard let cell = keywordCollectionView.dequeueReusableCell(withReuseIdentifier: KeywordCollectionViewCell.className, for: indexPath) as? KeywordCollectionViewCell else {
             return UICollectionViewCell()
         }
-        let keyword = keywords[indexPath.row]
-        cell.keywordLabel.text = keyword.string
+        let keyword = keywords[indexPath.item]
         // FIXME: cell을 여기서 접근하는건 안좋은 방법일수도?
-        cell.configShadow(type: keywords[indexPath.row].type)
-        cell.configLabel(type: keywords[indexPath.row].type)
+        cell.keywordLabel.text = keyword.string
+        cell.configShadow(type: .previewKeyword)
+        cell.configLabel(type: .previewKeyword)
         return cell
     }
 }
