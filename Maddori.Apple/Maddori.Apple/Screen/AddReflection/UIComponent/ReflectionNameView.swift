@@ -52,9 +52,7 @@ final class ReflectionNameView: UIView {
         render()
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    required init?(coder: NSCoder) { nil }
     
     private func render() {
         self.addSubview(reflectionNameLabel)
@@ -82,6 +80,8 @@ final class ReflectionNameView: UIView {
         countTextLabel.text = "\(num)/\(self.maxLength)"
     }
 }
+
+// MARK: - extension
 
 extension ReflectionNameView: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {

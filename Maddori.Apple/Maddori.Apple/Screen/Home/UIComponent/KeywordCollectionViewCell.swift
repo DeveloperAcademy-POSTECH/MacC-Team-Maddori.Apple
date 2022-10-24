@@ -11,17 +11,22 @@ import SnapKit
 
 final class KeywordCollectionViewCell: BaseCollectionViewCell {
     
+    private enum Size {
+        static let keywordLabelHeight: CGFloat = 50
+        // FIXME: 기존에는 16 이었는데 그렇게 하면 한 글자일 때 cornerRadius 때문에 뾰족해짐
+        static let keywordLabelXInset: CGFloat = 17
+    }
+    
     // MARK: - properties
     
-    var keywordLabel: UILabel = {
-        let label = UILabel()
+    lazy var keywordLabel: KeywordLabel = {
+        let label = KeywordLabel()
         label.textAlignment = .center
         label.font = .main
-        label.layer.cornerRadius = SizeLiteral.keywordLabelHeight / 2
+        label.layer.cornerRadius = Size.keywordLabelHeight / 2
         label.layer.masksToBounds = true
         return label
     }()
-    lazy var keywordType: KeywordType = .previewKeyword
     
     // MARK: - life cycle
     
@@ -29,19 +34,16 @@ final class KeywordCollectionViewCell: BaseCollectionViewCell {
         super.init(frame: frame)
     }
     
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-    }
-    
-    // MARK: - func
+    required init?(coder: NSCoder) { nil }
     
     override func render() {
         contentView.addSubview(keywordLabel)
         keywordLabel.snp.makeConstraints {
-            $0.edges.equalTo(safeAreaLayoutGuide)
-            $0.edges.equalToSuperview().inset(SizeLiteral.keywordLabelXInset)
+            $0.edges.equalToSuperview()
         }
     }
+    
+    // MARK: - func
     
     func configLabel(type: KeywordType) {
         keywordLabel.textColor = type.textColor

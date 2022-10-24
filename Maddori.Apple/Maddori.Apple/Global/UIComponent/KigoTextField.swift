@@ -15,23 +15,19 @@ final class KigoTextField: UITextField {
         static let height: CGFloat = 56
     }
     
+    var placeHolderText: String? {
+        didSet { setupAttribute() }
+    }
+    
+    // MARK: - life cycle
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configUI()
         render()
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    // MARK: - property
-    
-    var placeHolderText: String? {
-        didSet { setupAttribute() }
-    }
-    
-    // MARK: - function
+    required init?(coder: NSCoder) { nil }
     
     private func configUI() {
         self.backgroundColor = .white300
@@ -56,6 +52,8 @@ final class KigoTextField: UITextField {
             $0.height.equalTo(Size.height)
         }
     }
+    
+    // MARK: - func
     
     private func setupAttribute() {
         let attributes = [

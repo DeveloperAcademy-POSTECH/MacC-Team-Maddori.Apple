@@ -9,6 +9,7 @@ import UIKit
 
 enum FontName: String {
     case regular = "AppleSDGothicNeo-Regular"
+    case medium = "AppleSDGothicNeo-Medium"
     case semibold = "AppleSDGothicNeo-SemiBold"
     case bold = "AppleSDGothicNeo-Bold"
 }
@@ -48,5 +49,9 @@ extension UIFont {
     
     static var caption2: UIFont {
         return font(.semibold, ofSize: 12)
+    }
+    
+    static var toast: UIFont {
+        return font(.semibold, ofSize: 14)
     }
 }
