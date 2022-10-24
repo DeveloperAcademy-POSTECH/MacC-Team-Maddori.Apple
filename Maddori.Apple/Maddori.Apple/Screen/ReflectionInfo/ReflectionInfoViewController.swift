@@ -10,45 +10,45 @@ import UIKit
 import SnapKit
 
 final class ReflectionInfoViewController: BaseViewController {
-    let viewModel: ReflectionInfoModel
+    let model = ReflectionInfoModel.mockData
     
     // MARK: - property
     
     private lazy var sendFromLabel: UILabel = {
         let label = UILabel()
-        label.text = "\(viewModel.nickname)님이 보낸 \(viewModel.feedbackType.rawValue)"
+        label.text = "\(model.nickname)님이 보낸 \(model.feedbackType.rawValue)"
         label.textColor = .gray400
-        label.applyColor(to: "\(viewModel.feedbackType.rawValue)", with: .blue200)
+        label.applyColor(to: "\(model.feedbackType.rawValue)", with: .blue200)
         label.font = .caption1
         return label
     }()
     private lazy var keywordLabel: UILabel = {
         let label = UILabel()
-        label.text = viewModel.keyword
+        label.text = model.keyword
         label.font = .title
         label.textColor = .black100
         return label
     }()
     private lazy var infoLabel: UILabel = {
         let label = UILabel()
-        label.text = viewModel.info
+        label.text = model.info
         label.font = .body1
         label.textColor = .gray400
-        label.numberOfLines = 100
-//        label.setLineSpacing()
+        label.numberOfLines = 0
         label.setTextWithLineHeight(text: label.text, lineHeight: 24)
         return label
     }()
+    private lazy var startView: StartSuggestionView = {
+        let view = StartSuggestionView()
+        view.backgroundColor = .blue100
+        view.clipsToBounds = true
+        view.layer.cornerRadius = 10
+        view.setStartInfoLabel(info: model.start)
+        return view
+    }()
     
     // MARK: - life cycle
-    
-    init(viewModel: ReflectionInfoModel) {
-        self.viewModel = viewModel
-        super.init()
-    }
-    
-    required init?(coder: NSCoder) { nil }
-    
+        
     override func render() {
         view.addSubview(sendFromLabel)
         sendFromLabel.snp.makeConstraints {
@@ -67,6 +67,12 @@ final class ReflectionInfoViewController: BaseViewController {
         infoLabel.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.top.equalTo(keywordLabel.snp.bottom).offset(32)
+        }
+        
+        view.addSubview(startView)
+        startView.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.top.equalTo(infoLabel.snp.bottom).offset(28)
         }
     }
 }
