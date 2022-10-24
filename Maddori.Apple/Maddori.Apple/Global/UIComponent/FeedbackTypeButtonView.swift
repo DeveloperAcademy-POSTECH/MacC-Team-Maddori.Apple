@@ -15,9 +15,9 @@ final class FeedbackTypeButtonView: UIButton {
         case stopType
     }
     private enum Size {
-        static let buttonPadding: CGFloat = 11
         static let width: CGFloat = 158
         static let height: CGFloat = 46
+        static let buttonPadding: CGFloat = UIScreen.main.bounds.width - SizeLiteral.leadingTrailingPadding * 2 - Size.width * 2
     }
     
     // MARK: - property
@@ -28,7 +28,7 @@ final class FeedbackTypeButtonView: UIButton {
         view.layer.shadowOpacity = 0.2
         view.layer.shadowRadius = 2
         view.layer.shadowOffset = CGSize(width: 0, height: 0)
-        view.layer.cornerRadius = 10
+        view.layer.cornerRadius = SizeLiteral.componentCornerRadius
         return view
     }()
     private let stopShadowView: UIView = {
@@ -37,7 +37,7 @@ final class FeedbackTypeButtonView: UIButton {
         view.layer.shadowOpacity = 0.2
         view.layer.shadowRadius = 1
         view.layer.shadowOffset = CGSize(width: 0, height: 0)
-        view.layer.cornerRadius = 10
+        view.layer.cornerRadius = SizeLiteral.componentCornerRadius
         return view
     }()
     private lazy var continueButton: UIButton = {
@@ -47,7 +47,7 @@ final class FeedbackTypeButtonView: UIButton {
         button.titleLabel?.font = .main
         button.backgroundColor = .blue200
         button.clipsToBounds = true
-        button.layer.cornerRadius = 10
+        button.layer.cornerRadius = SizeLiteral.componentCornerRadius
         let action = UIAction { [weak self] _ in
             self?.touchUpToSelectType(.continueType)
         }
@@ -61,7 +61,7 @@ final class FeedbackTypeButtonView: UIButton {
         button.titleLabel?.font = .main
         button.backgroundColor = .white100
         button.clipsToBounds = true
-        button.layer.cornerRadius = 10
+        button.layer.cornerRadius = SizeLiteral.componentCornerRadius
         let action = UIAction { [weak self] _ in
             self?.touchUpToSelectType(.stopType)
         }
@@ -83,12 +83,15 @@ final class FeedbackTypeButtonView: UIButton {
         continueShadowView.snp.makeConstraints {
             $0.width.equalTo(Size.width)
             $0.height.equalTo(Size.height)
+            $0.leading.top.equalToSuperview()
         }
         
         continueShadowView.addSubview(continueButton)
         continueButton.snp.makeConstraints {
             $0.width.equalTo(Size.width)
             $0.height.equalTo(Size.height)
+            $0.leading.equalTo(continueShadowView.snp.leading)
+            $0.top.equalTo(continueShadowView.snp.top)
         }
 
         self.addSubview(stopShadowView)
