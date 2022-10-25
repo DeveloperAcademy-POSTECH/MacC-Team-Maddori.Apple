@@ -35,7 +35,7 @@ final class HomeViewController: BaseViewController {
     }()
     private let toastLabel: UILabel = {
         let label = UILabel()
-        label.text = d"Test Flight에선 지원되지 않습니다"
+        label.text = "Test Flight에선 지원되지 않습니다"
         label.font = UIFont.font(.medium, ofSize: 14)
         label.textColor = .white100
         return label
