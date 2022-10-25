@@ -309,7 +309,7 @@ final class AddFeedbackContentViewController: BaseViewController {
         feedbackStartTextViewLabel.isHidden.toggle()
         feedbackStartTextView.isHidden.toggle()
         
-        if feedbackStartSwitch.isOn == true {
+        if feedbackStartSwitch.isOn {
             addFeedbackScrollView.scrollRectToVisible(CGRect(x: 0.0, y: 0.0, width: 375.0, height: 1100.0), animated: true)
         }
     }
