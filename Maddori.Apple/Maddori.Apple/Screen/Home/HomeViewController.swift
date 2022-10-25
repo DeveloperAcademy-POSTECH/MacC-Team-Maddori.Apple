@@ -113,7 +113,7 @@ final class HomeViewController: BaseViewController {
         keywordCollectionView.snp.makeConstraints {
             $0.top.equalTo(currentReflectionLabel.snp.bottom).offset(Size.labelPadding)
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-            $0.bottom.equalTo(addFeedbackButton.snp.top)
+            $0.bottom.equalTo(addFeedbackButton.snp.top).offset(-10)
         }
     }
     

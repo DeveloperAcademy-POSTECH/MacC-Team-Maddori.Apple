@@ -86,10 +86,3 @@ class BaseViewController: UIViewController {
         self.navigationController?.interactivePopGestureRecognizer?.delegate = self
     }
 }
-
-extension BaseViewController: UIGestureRecognizerDelegate {
-    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-        guard let count = self.navigationController?.viewControllers.count else { return false }
-        return count > 1
-    }
-}
