@@ -238,7 +238,7 @@ final class AddFeedbackContentViewController: BaseViewController {
         
         feedbackDoneButtonView.addSubview(feedbackSendTimeLabel)
         feedbackSendTimeLabel.snp.makeConstraints {
-            $0.bottom.equalTo(feedbackDoneButton.snp.top).inset(-11)
+            $0.bottom.equalTo(feedbackDoneButton.snp.top).offset(-11)
             $0.centerX.equalTo(feedbackDoneButtonView.snp.centerX)
         }
     }
