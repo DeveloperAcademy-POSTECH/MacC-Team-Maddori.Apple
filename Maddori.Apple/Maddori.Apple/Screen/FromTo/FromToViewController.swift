@@ -16,7 +16,14 @@ final class FromToViewController: BaseViewController {
     
     // MARK: - properties
     
-    private let exitButton = ExitButton(type: .system)
+    private lazy var exitButton: ExitButton = {
+        let button = ExitButton(type: .system)
+        let action = UIAction { [weak self] _ in
+            self?.didTappedExitButton()
+        }
+        button.addAction(action, for: .touchUpInside)
+        return button
+    }()
     private let fromToTitle: UILabel = {
         let label = UILabel()
         label.setTitleFont(text: "피드백 줄 사람을\n입력해주세요")
@@ -58,10 +65,14 @@ final class FromToViewController: BaseViewController {
         textField.tag = toTextFieldTag
         return textField
     }()
-    private let nextButton: MainButton = {
+    private lazy var nextButton: MainButton = {
         let button = MainButton()
         button.title = "다음"
         button.isDisabled = true
+        let action = UIAction { [weak self] _ in
+            self?.didTappedNextButton()
+        }
+        button.addAction(action, for: .touchUpInside)
         return button
     }()
     
@@ -129,6 +140,7 @@ final class FromToViewController: BaseViewController {
         }
     }
     
+    
     private func setupNotificationCenter() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -139,12 +151,24 @@ final class FromToViewController: BaseViewController {
         toTextField.delegate = self
     }
     
+    private func didTappedNextButton() {
+        guard let fromName = fromTextField.text,
+              let toName = toTextField.text else { return }
+        let addVC = AddFeedbackContentViewController()
+        addVC.nickname = toName
+        navigationController?.pushViewController(addVC, animated: true)
+    }
+    
+    private func didTappedExitButton() {
+        dismiss(animated: true)
+    }
+    
     // MARK: - selector
     
     @objc private func keyboardWillShow(notification:NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             UIView.animate(withDuration: 0.2, animations: {
-                self.nextButton.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height + 10)
+                self.nextButton.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height + 25)
             })
         }
     }

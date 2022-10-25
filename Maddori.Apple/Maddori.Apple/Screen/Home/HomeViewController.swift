@@ -41,15 +41,6 @@ final class HomeViewController: BaseViewController {
         label.numberOfLines = 0
         return label
     }()
-    private let invitationCodeButton: UIButton = {
-        let button = UIButton()
-        button.setTitle(TextLiteral.mainViewControllerInvitationButtonText, for: .normal)
-        button.setTitleColor(UIColor.blue200, for: .normal)
-        button.titleLabel?.font = .caption2
-        button.backgroundColor = .gray100
-        button.layer.cornerRadius = 4
-        return button
-    }()
     private let descriptionLabel: UILabel = {
         let label = UILabel()
         label.text = TextLiteral.mainViewControllerReflectionDateDescription
@@ -64,13 +55,7 @@ final class HomeViewController: BaseViewController {
         label.textColor = .black100
         return label
     }()
-    private let planLabelButtonView: LabelButtonView = {
-        let labelButton = LabelButtonView()
-        labelButton.subText = TextLiteral.mainViewControllerPlanLabelButtonSubText
-        labelButton.subButtonText = TextLiteral.mainViewControllerPlanLabelButtonSubButtonText
-        return labelButton
-    }()
-    private let addFeedbackButton: UIButton = {
+    private lazy var addFeedbackButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .white100
         button.setTitle(TextLiteral.mainViewControllerButtonText, for: .normal)
@@ -80,6 +65,10 @@ final class HomeViewController: BaseViewController {
         button.layer.borderColor = UIColor.blue200.cgColor
         button.layer.cornerRadius = Size.buttonCornerRadius
         // TODO: button action 추가
+        let action = UIAction { [weak self] _ in
+            self?.didTapAddFeedbackButton()
+        }
+        button.addAction(action, for: .touchUpInside)
         return button
     }()
     
@@ -101,15 +90,6 @@ final class HomeViewController: BaseViewController {
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
-        view.addSubview(invitationCodeButton)
-        invitationCodeButton.snp.makeConstraints {
-            $0.leading.equalTo(teamNameLabel.snp.trailing).offset(Size.labelButtonPadding)
-            $0.width.equalTo(Size.subButtonWidth)
-            $0.height.equalTo(Size.subButtonHeight)
-            $0.bottom.equalTo(teamNameLabel.snp.bottom).offset(-5)
-            // offset을 없애면 너무 낮은 것 같다는 생각에 임의로 줘봤습니다
-        }
-        
         view.addSubview(descriptionLabel)
         descriptionLabel.snp.makeConstraints {
             $0.top.equalTo(teamNameLabel.snp.bottom).offset(Size.labelPadding)
@@ -129,18 +109,11 @@ final class HomeViewController: BaseViewController {
             $0.height.equalTo(Size.mainButtonHeight)
         }
         
-        view.addSubview(planLabelButtonView)
-        planLabelButtonView.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.bottom.equalTo(addFeedbackButton.snp.top)
-            $0.height.equalTo(SizeLiteral.minimumTouchArea)
-        }
-        
         view.addSubview(keywordCollectionView)
         keywordCollectionView.snp.makeConstraints {
             $0.top.equalTo(currentReflectionLabel.snp.bottom).offset(Size.labelPadding)
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-            $0.bottom.equalTo(planLabelButtonView.snp.top)
+            $0.bottom.equalTo(addFeedbackButton.snp.top)
         }
     }
     
@@ -149,6 +122,12 @@ final class HomeViewController: BaseViewController {
     private func setUpDelegation() {
         keywordCollectionView.delegate = self
         keywordCollectionView.dataSource = self
+    }
+    
+    private func didTapAddFeedbackButton() {
+        let vc = UINavigationController(rootViewController: FromToViewController())
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
     }
 }
 

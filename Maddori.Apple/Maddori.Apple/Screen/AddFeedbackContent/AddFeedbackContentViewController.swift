@@ -15,12 +15,18 @@ final class AddFeedbackContentViewController: BaseViewController {
         static let keywordMaxLength: Int = 15
         static let textViewMaxLength: Int = 200
     }
-    private var nickname: String = "진저"
+    var nickname: String = ""
     
     // MARK: - property
     
-    private let backButton = BackButton(type: .system)
-    private let exitButton = ExitButton(type: .system)
+    private lazy var exitButton: ExitButton = {
+        let button = ExitButton(type: .system)
+        let action = UIAction { [weak self] _ in
+            self?.didTappedExitButton()
+        }
+        button.addAction(action, for: .touchUpInside)
+        return button
+    }()
     private let addFeedbackScrollView = UIScrollView()
     private let addFeedbackContentView = UIView()
     private lazy var addFeedbackTitleLabel: UILabel = {
@@ -167,13 +173,10 @@ final class AddFeedbackContentViewController: BaseViewController {
     override func setupNavigationBar() {
         super.setupNavigationBar()
         
-        let button = removeBarButtonItemOffset(with: backButton, offsetX: 10)
-        let backButton = makeBarButtonItem(with: button)
         let exitButton = makeBarButtonItem(with: exitButton)
         
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.largeTitleDisplayMode = .never
-        navigationItem.leftBarButtonItem = backButton
         navigationItem.rightBarButtonItem = exitButton
     }
     
@@ -216,11 +219,16 @@ final class AddFeedbackContentViewController: BaseViewController {
         }
     }
     
+    private func didTappedExitButton() {
+        self.dismiss(animated: true)
+    }
+    
     private func didTappedDoneButton() {
-        
-        // FIXME: - 피드백 추가 로직 (print문 삭제)
-        
-        print("버튼 누름")
+        guard let keyword = feedbackKeywordTextField.text,
+           let content = feedbackContentTextView.text else { return }
+        print(keyword,content)
+        // FIXME: 서버에 데이터 보내기
+        dismiss(animated: true)
     }
     
     // MARK: - selector
