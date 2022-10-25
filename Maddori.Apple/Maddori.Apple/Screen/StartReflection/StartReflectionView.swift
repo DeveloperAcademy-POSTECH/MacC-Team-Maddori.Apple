@@ -58,6 +58,11 @@ final class StartReflectionViewController: BaseViewController {
         button.layer.cornerRadius = 10
         button.backgroundColor = .white100
         button.addAction(action, for: .touchUpInside)
+        button.layer.shadowColor = UIColor.black100.cgColor
+        button.layer.shadowRadius = 1
+        button.layer.shadowOpacity = 0.5
+        button.layer.shadowOffset = CGSize.zero
+        button.layer.masksToBounds = false
         return button
     }()
     
