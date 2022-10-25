@@ -27,11 +27,24 @@ final class HomeViewController: BaseViewController {
     
     // MARK: - property
     
+    private let warningImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = ImageLiterals.icWarning
+        imageView.tintColor = .yellow300
+        return imageView
+    }()
     private let toastLabel: UILabel = {
         let label = UILabel()
-        label.text = "testing toast"
-        label.backgroundColor = .blue200
+        label.text = d"Test Flight에선 지원되지 않습니다"
+        label.font = UIFont.font(.medium, ofSize: 14)
+        label.textColor = .white100
         return label
+    }()
+    private let toastView: UIView = {
+        let view = UIView()
+        view.layer.cornerRadius = 10
+        view.clipsToBounds = true
+        return view
     }()
     lazy var keywordCollectionView: UICollectionView = {
         let flowLayout = KeywordCollectionViewFlowLayout()
@@ -83,17 +96,33 @@ final class HomeViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpDelegation()
+        render()
     }
     
     override func configUI() {
         view.backgroundColor = .white200
+        setGradientToastView()
     }
     
     override func render() {
-        navigationController?.view.addSubview(toastLabel)
-        toastLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(-20)
+        navigationController?.view.addSubview(toastView)
+        toastView.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(-60)
             $0.centerX.equalToSuperview()
+            $0.width.equalTo(250)
+            $0.height.equalTo(46)
+        }
+        
+        toastView.addSubview(toastLabel)
+        toastLabel.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.trailing.equalToSuperview().inset(16)
+        }
+        
+        toastView.addSubview(warningImageView)
+        warningImageView.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.leading.equalToSuperview().inset(16)
         }
         
         view.addSubview(teamNameLabel)
@@ -142,14 +171,19 @@ final class HomeViewController: BaseViewController {
         present(vc, animated: true)
     }
     
+    private func setGradientToastView() {
+        toastView.layoutIfNeeded()
+        toastView.setGradient(colorTop: .gradientGrayTop, colorBottom: .gradientGrayBottom)
+    }
+    
     private func showToastPopUp() {
         if !isTouched {
             isTouched = true
-            UIView.animate(withDuration: 1, delay: 0, animations: {
-                self.toastLabel.transform = CGAffineTransform(translationX: 0, y: 100)
+            UIView.animate(withDuration: 0.5, delay: 0, animations: {
+                self.toastView.transform = CGAffineTransform(translationX: 0, y: 115)
             }, completion: {_ in
-                UIView.animate(withDuration: 1, delay: 2, animations: {
-                    self.toastLabel.transform = .identity
+                UIView.animate(withDuration: 1, delay: 0.5, animations: {
+                    self.toastView.transform = .identity
                 }, completion: {_ in
                     self.isTouched = false
                 })
