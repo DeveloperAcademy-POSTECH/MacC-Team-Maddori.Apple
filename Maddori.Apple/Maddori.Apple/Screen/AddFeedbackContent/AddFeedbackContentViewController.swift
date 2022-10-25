@@ -159,7 +159,7 @@ final class AddFeedbackContentViewController: BaseViewController {
         addFeedbackContentView.snp.makeConstraints {
             $0.edges.equalTo(addFeedbackScrollView.snp.edges)
             $0.width.equalTo(addFeedbackScrollView.snp.width)
-            $0.height.equalTo(1180)
+            $0.height.equalTo(view.frame.height)
         }
         
         addFeedbackContentView.addSubview(addFeedbackTitleLabel)
@@ -330,6 +330,14 @@ final class AddFeedbackContentViewController: BaseViewController {
         
         if feedbackStartSwitch.isOn {
             addFeedbackScrollView.scrollRectToVisible(CGRect(x: 0.0, y: 0.0, width: 375.0, height: 1100.0), animated: true)
+            addFeedbackContentView.snp.updateConstraints {
+                $0.height.equalTo(1180)
+            }
+        }
+        else {
+            addFeedbackContentView.snp.updateConstraints {
+                $0.height.equalTo(view.frame.height)
+            }
         }
     }
     
