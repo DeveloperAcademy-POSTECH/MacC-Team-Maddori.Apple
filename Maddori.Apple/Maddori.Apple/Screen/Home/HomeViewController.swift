@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 
 final class HomeViewController: BaseViewController {
-    
+    var isTouched = false
     let keywords = Keyword.mockData
     private enum Size {
         static let keywordLabelHeight: CGFloat = 50
@@ -27,6 +27,12 @@ final class HomeViewController: BaseViewController {
     
     // MARK: - property
     
+    private let toastLabel: UILabel = {
+        let label = UILabel()
+        label.text = "testing toast"
+        label.backgroundColor = .blue200
+        return label
+    }()
     lazy var keywordCollectionView: UICollectionView = {
         let flowLayout = KeywordCollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
@@ -84,6 +90,12 @@ final class HomeViewController: BaseViewController {
     }
     
     override func render() {
+        navigationController?.view.addSubview(toastLabel)
+        toastLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(-20)
+            $0.centerX.equalToSuperview()
+        }
+        
         view.addSubview(teamNameLabel)
         teamNameLabel.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).offset(SizeLiteral.topPadding)
@@ -129,6 +141,21 @@ final class HomeViewController: BaseViewController {
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true)
     }
+    
+    private func showToastPopUp() {
+        if !isTouched {
+            isTouched = true
+            UIView.animate(withDuration: 1, delay: 0, animations: {
+                self.toastLabel.transform = CGAffineTransform(translationX: 0, y: 100)
+            }, completion: {_ in
+                UIView.animate(withDuration: 1, delay: 2, animations: {
+                    self.toastLabel.transform = .identity
+                }, completion: {_ in
+                    self.isTouched = false
+                })
+            })
+        }
+    }
 }
 
 // MARK: - extension
@@ -150,6 +177,12 @@ extension HomeViewController: UICollectionViewDataSource {
         cell.configShadow(type: keywords[indexPath.row].type)
         cell.configLabel(type: keywords[indexPath.row].type)
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print(indexPath.item)
+        UIDevice.vibrate()
+        showToastPopUp()
     }
 }
 
