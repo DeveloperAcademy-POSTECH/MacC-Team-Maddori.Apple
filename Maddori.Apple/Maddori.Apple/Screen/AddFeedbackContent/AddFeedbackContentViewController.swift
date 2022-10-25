@@ -17,7 +17,19 @@ final class AddFeedbackContentViewController: BaseViewController {
     }
     var nickname: String = ""
     
+    // FIXME: - 회고 날짜 받아오기 / 현재는 있는 상태
+    private let feedbackDate: Date? = Date()
+    
     // MARK: - property
+    
+    private lazy var backButton: BackButton = {
+        let button = BackButton(type: .system)
+        let action = UIAction { [weak self] _ in
+            self?.didTappedBackButton()
+        }
+        button.addAction(action, for: .touchUpInside)
+        return button
+    }()
     
     private lazy var exitButton: ExitButton = {
         let button = ExitButton(type: .system)
@@ -65,7 +77,7 @@ final class AddFeedbackContentViewController: BaseViewController {
     }()
     private let feedbackContentLabel: UILabel = {
         let label = UILabel()
-        label.text = TextLiteral.addFeedbackContentViewControllerFeedbackContentLabel
+        label.text = TextLiteral.addFeedbackContentViewControllerFeedbackTextViewLabel
         label.textColor = .black100
         label.font = .label2
         return label
@@ -74,6 +86,49 @@ final class AddFeedbackContentViewController: BaseViewController {
         let textView = FeedbackTextView()
         textView.placeholder = TextLiteral.addFeedbackContentViewControllerFeedbackContentTextViewPlaceholder
         return textView
+    }()
+    private lazy var feedbackStartSwitch: UISwitch = {
+        let toggle = UISwitch()
+        toggle.onTintColor = .blue200
+        toggle.isOn = false
+        let action = UIAction { [weak self] _ in
+            self?.didTappedSwitch()
+        }
+        toggle.addAction(action, for: .touchUpInside)
+        return toggle
+    }()
+    private let feedbackStartLabel: UILabel = {
+        let label = UILabel()
+        label.text = TextLiteral.addFeedbackContentViewControllerFeedbackStartLabel
+        label.textColor = .black100
+        label.font = .label2
+        return label
+    }()
+    private let feedbackStartTextViewLabel: UILabel = {
+        let label = UILabel()
+        label.text = TextLiteral.addFeedbackContentViewControllerFeedbackTextViewLabel
+        label.textColor = .black100
+        label.font = .label2
+        label.isHidden = true
+        return label
+    }()
+    private let feedbackStartTextView: FeedbackTextView = {
+        let textView = FeedbackTextView()
+        textView.placeholder = TextLiteral.addFeedbackContentViewControllerStartTextViewPlaceholder
+        textView.isHidden = true
+        return textView
+    }()
+    private let feedbackDoneButtonView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white200
+        return view
+    }()
+    private lazy var feedbackSendTimeLabel: UILabel = {
+        let label = UILabel()
+        label.text = TextLiteral.addFeedbackContentViewControllerFeedbackSendTimeLabel
+        label.textColor = .gray400
+        label.font = .body2
+        return label
     }()
     private lazy var feedbackDoneButton: MainButton = {
         let button = MainButton()
@@ -104,79 +159,124 @@ final class AddFeedbackContentViewController: BaseViewController {
         addFeedbackContentView.snp.makeConstraints {
             $0.edges.equalTo(addFeedbackScrollView.snp.edges)
             $0.width.equalTo(addFeedbackScrollView.snp.width)
-            
-            // FIXME: - height 를 필수로 지정해야 함 -> 현재 임의로 줌
-            
-            $0.height.equalTo(1000)
+            $0.height.equalTo(1180)
         }
         
         addFeedbackContentView.addSubview(addFeedbackTitleLabel)
         addFeedbackTitleLabel.snp.makeConstraints {
             $0.top.equalTo(addFeedbackContentView.snp.top).offset(SizeLiteral.topPadding)
-            $0.leading.equalTo(addFeedbackContentView.snp.leading).offset(SizeLiteral.leadingTrailingPadding)
+            $0.leading.equalToSuperview().offset(SizeLiteral.leadingTrailingPadding)
         }
         
         addFeedbackContentView.addSubview(feedbackTypeLabel)
         feedbackTypeLabel.snp.makeConstraints {
             $0.top.equalTo(addFeedbackTitleLabel.snp.bottom).offset(SizeLiteral.topComponentPadding)
-            $0.leading.equalTo(addFeedbackContentView.snp.leading).inset(SizeLiteral.leadingTrailingPadding)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
         addFeedbackContentView.addSubview(feedbackTypeButtonView)
         feedbackTypeButtonView.snp.makeConstraints {
             $0.top.equalTo(feedbackTypeLabel.snp.bottom).offset(SizeLiteral.labelComponentPadding)
-            $0.centerX.equalTo(addFeedbackContentView.snp.centerX)
-            $0.width.equalTo(addFeedbackContentView.snp.width).inset(SizeLiteral.leadingTrailingPadding)
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
         addFeedbackContentView.addSubview(feedbackKeywordLabel)
         feedbackKeywordLabel.snp.makeConstraints {
             $0.top.equalTo(feedbackTypeButtonView.snp.bottom).offset(SizeLiteral.componentIntervalPadding)
-            $0.leading.equalTo(addFeedbackContentView.snp.leading).inset(SizeLiteral.leadingTrailingPadding)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
         addFeedbackContentView.addSubview(feedbackKeywordTextField)
         feedbackKeywordTextField.snp.makeConstraints {
             $0.top.equalTo(feedbackKeywordLabel.snp.bottom).offset(SizeLiteral.labelComponentPadding)
-            $0.width.equalTo(addFeedbackContentView.snp.width).inset(SizeLiteral.leadingTrailingPadding)
-            $0.centerX.equalTo(addFeedbackContentView.snp.centerX)
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
         addFeedbackContentView.addSubview(textLimitLabel)
         textLimitLabel.snp.makeConstraints {
             $0.top.equalTo(feedbackKeywordTextField.snp.bottom).offset(4)
-            $0.trailing.equalTo(addFeedbackContentView.snp.trailing).inset(27)
+            $0.trailing.equalToSuperview().inset(27)
         }
         
         addFeedbackContentView.addSubview(feedbackContentLabel)
         feedbackContentLabel.snp.makeConstraints {
             $0.top.equalTo(feedbackKeywordTextField.snp.bottom).offset(SizeLiteral.componentIntervalPadding)
-            $0.leading.equalTo(addFeedbackContentView.snp.leading).inset(SizeLiteral.leadingTrailingPadding)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
         addFeedbackContentView.addSubview(feedbackContentTextView)
         feedbackContentTextView.snp.makeConstraints {
             $0.top.equalTo(feedbackContentLabel.snp.bottom).offset(SizeLiteral.labelComponentPadding)
-            $0.leading.equalTo(addFeedbackContentView.snp.leading).inset(SizeLiteral.leadingTrailingPadding)
-            $0.trailing.equalTo(addFeedbackContentView.snp.trailing).inset(SizeLiteral.leadingTrailingPadding)
-            $0.height.greaterThanOrEqualTo(150)
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.height.equalTo(150)
         }
         
-        addFeedbackContentView.addSubview(feedbackDoneButton)
+        addFeedbackContentView.addSubview(feedbackStartSwitch)
+        feedbackStartSwitch.snp.makeConstraints {
+            $0.top.equalTo(feedbackContentTextView.snp.bottom).offset(SizeLiteral.componentIntervalPadding)
+            $0.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.width.equalTo(51)
+            $0.height.equalTo(31)
+        }
+        
+        addFeedbackContentView.addSubview(feedbackStartLabel)
+        feedbackStartLabel.snp.makeConstraints {
+            $0.centerY.equalTo(feedbackStartSwitch.snp.centerY)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+        
+        addFeedbackContentView.addSubview(feedbackStartTextViewLabel)
+        feedbackStartTextViewLabel.snp.makeConstraints {
+            $0.top.equalTo(feedbackStartSwitch.snp.bottom).offset(SizeLiteral.componentIntervalPadding)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+        
+        addFeedbackContentView.addSubview(feedbackStartTextView)
+        feedbackStartTextView.snp.makeConstraints {
+            $0.top.equalTo(feedbackStartTextViewLabel.snp.bottom).offset(SizeLiteral.labelComponentPadding)
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.height.equalTo(150)
+        }
+        
+        view.addSubview(feedbackDoneButtonView)
+        feedbackDoneButtonView.snp.makeConstraints {
+            $0.bottom.equalToSuperview()
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(134)
+        }
+        
+        feedbackDoneButtonView.addSubview(feedbackDoneButton)
         feedbackDoneButton.snp.makeConstraints {
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(2)
-            $0.centerX.equalTo(addFeedbackContentView.snp.centerX)
-            $0.width.equalTo(addFeedbackContentView.snp.width).inset(SizeLiteral.leadingTrailingPadding)
+            $0.bottom.equalTo(feedbackDoneButtonView.snp.bottom).inset(36)
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+        
+        feedbackDoneButtonView.addSubview(feedbackSendTimeLabel)
+        feedbackSendTimeLabel.snp.makeConstraints {
+            $0.bottom.equalTo(feedbackDoneButton.snp.top).offset(-11)
+            $0.centerX.equalTo(feedbackDoneButtonView.snp.centerX)
         }
     }
+    
+    override func configUI() {
+        super.configUI()
+        if feedbackDate != nil {
+            feedbackSendTimeLabel.text = "작성한 피드백은 \(feedbackDate!.dateToMonthDayString)에 자동으로 제출됩니다"
+        }
+    }
+    
+    // MARK: - func
     
     override func setupNavigationBar() {
         super.setupNavigationBar()
         
+        let button = removeBarButtonItemOffset(with: backButton, offsetX: 10)
+        let backButton = makeBarButtonItem(with: button)
         let exitButton = makeBarButtonItem(with: exitButton)
         
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.largeTitleDisplayMode = .never
+        navigationItem.leftBarButtonItem = backButton
         navigationItem.rightBarButtonItem = exitButton
     }
     
@@ -188,6 +288,7 @@ final class AddFeedbackContentViewController: BaseViewController {
     private func setupDelegate() {
         feedbackKeywordTextField.delegate = self
         feedbackContentTextView.delegate = self
+        feedbackStartTextView.delegate = self
     }
     
     override func endEditingView() {
@@ -223,10 +324,23 @@ final class AddFeedbackContentViewController: BaseViewController {
         self.dismiss(animated: true)
     }
     
+    private func didTappedSwitch() {
+        feedbackStartTextViewLabel.isHidden.toggle()
+        feedbackStartTextView.isHidden.toggle()
+        
+        if feedbackStartSwitch.isOn {
+            addFeedbackScrollView.scrollRectToVisible(CGRect(x: 0.0, y: 0.0, width: 375.0, height: 1100.0), animated: true)
+        }
+    }
+    
+    private func didTappedBackButton() {
+        navigationController?.popViewController(animated: true)
+    }
+    
     private func didTappedDoneButton() {
         guard let keyword = feedbackKeywordTextField.text,
-           let content = feedbackContentTextView.text else { return }
-        print(keyword,content)
+              let content = feedbackContentTextView.text,
+              let startContent = feedbackStartTextView.text else { return }
         // FIXME: 서버에 데이터 보내기
         dismiss(animated: true)
     }
@@ -239,12 +353,16 @@ final class AddFeedbackContentViewController: BaseViewController {
                 self.feedbackDoneButton.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height + 25)
             })
         }
+        
+        feedbackSendTimeLabel.isHidden = true
     }
     
     @objc private func willHideKeyboard(notification: NSNotification) {
         UIView.animate(withDuration: 0.2, animations: {
             self.feedbackDoneButton.transform = .identity
         })
+        
+        feedbackSendTimeLabel.isHidden = false
     }
 }
 
@@ -258,19 +376,29 @@ extension AddFeedbackContentViewController: UITextFieldDelegate {
         let hasText = feedbackKeywordTextField.hasText
         feedbackDoneButton.isDisabled = !hasText
     }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        addFeedbackScrollView.scrollRectToVisible(CGRect(x: 0.0, y: 0.0, width: 375.0, height: 850.0), animated: true)
+    }
 }
 
 extension AddFeedbackContentViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.text == TextLiteral.addFeedbackContentViewControllerFeedbackContentTextViewPlaceholder {
+        if textView.text == TextLiteral.addFeedbackContentViewControllerFeedbackContentTextViewPlaceholder || textView.text == TextLiteral.addFeedbackContentViewControllerStartTextViewPlaceholder {
             textView.text = nil
             textView.textColor = .black100
+        }
+        
+        if textView == feedbackContentTextView {
+            addFeedbackScrollView.scrollRectToVisible(CGRect(x: 0.0, y: 0.0, width: 375.0, height: 920.0), animated: true)
+        } else {
+            addFeedbackScrollView.scrollRectToVisible(CGRect(x: 0.0, y: 0.0, width: 375.0, height: 1100.0), animated: true)
         }
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-            textView.text = TextLiteral.addFeedbackContentViewControllerFeedbackContentTextViewPlaceholder
+            textView.text = textView == feedbackContentTextView ? TextLiteral.addFeedbackContentViewControllerFeedbackContentTextViewPlaceholder : TextLiteral.addFeedbackContentViewControllerStartTextViewPlaceholder
             textView.textColor = .gray500
         }
     }
