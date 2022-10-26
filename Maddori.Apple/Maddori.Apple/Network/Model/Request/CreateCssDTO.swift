@@ -8,12 +8,12 @@
 import Foundation
 
 struct CreateCssDTO: Encodable {
-    let from_name: String?
-    let to_name: String?
-    let type: CSSType?
-    let keyword: String?
-    let content: String?
-    let start_content: String?
+    let from_name: String
+    let to_name: String
+    var type: CSSType
+    var keyword: String
+    var content: String
+    var start_content: String
 }
 
 enum CSSType: String, Encodable {

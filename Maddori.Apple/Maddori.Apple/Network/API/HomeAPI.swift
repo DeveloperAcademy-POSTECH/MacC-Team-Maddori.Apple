@@ -21,7 +21,7 @@ struct HomeAPI {
         return try await apiService.request(request)
     }
     
-    func dispatchCreateCss(body: CreateCssDTO) async throws -> Int? {
+    func dispatchCreateCss(body: CreateCssDTO) async throws -> ResponseCreateCss? {
         let request = HomeEndPoint
             .dispatchCreateCss(body: body)
             .createRequest()

@@ -28,8 +28,8 @@ enum HomeEndPoint: EndPointable {
         switch self {
         case .fetchCssList:
             return nil
-        case .dispatchCreateCss(let body):
-            return body.encode()
+        case .dispatchCreateCss(let info):
+            return info.encode()
         }
     }
     
@@ -43,7 +43,10 @@ enum HomeEndPoint: EndPointable {
     }
     
     func createRequest() -> NetworkRequest {
+        var headers: [String: String] = [:]
+        headers["Content-Type"] = "application/json"
         return NetworkRequest(url: getURL(baseURL: APIEnvironment.baseUrl),
+                              headers: headers,
                               reqBody: requestBody,
                               reqTimeout: requestTimeOut,
                               httpMethod: httpMethod
