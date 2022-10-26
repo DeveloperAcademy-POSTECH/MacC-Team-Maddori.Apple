@@ -15,15 +15,30 @@ final class AddFeedbackContentViewController: BaseViewController {
         static let keywordMaxLength: Int = 15
         static let textViewMaxLength: Int = 200
     }
-    private var nickname: String = "진저"
+    var nickname: String = ""
     
     // FIXME: - 회고 날짜 받아오기 / 현재는 있는 상태
     private let feedbackDate: Date? = Date()
     
     // MARK: - property
     
-    private let backButton = BackButton(type: .system)
-    private let exitButton = ExitButton(type: .system)
+    private lazy var backButton: BackButton = {
+        let button = BackButton(type: .system)
+        let action = UIAction { [weak self] _ in
+            self?.didTappedBackButton()
+        }
+        button.addAction(action, for: .touchUpInside)
+        return button
+    }()
+    
+    private lazy var exitButton: ExitButton = {
+        let button = ExitButton(type: .system)
+        let action = UIAction { [weak self] _ in
+            self?.didTappedExitButton()
+        }
+        button.addAction(action, for: .touchUpInside)
+        return button
+    }()
     private let addFeedbackScrollView = UIScrollView()
     private let addFeedbackContentView = UIView()
     private lazy var addFeedbackTitleLabel: UILabel = {
@@ -144,7 +159,7 @@ final class AddFeedbackContentViewController: BaseViewController {
         addFeedbackContentView.snp.makeConstraints {
             $0.edges.equalTo(addFeedbackScrollView.snp.edges)
             $0.width.equalTo(addFeedbackScrollView.snp.width)
-            $0.height.equalTo(1180)
+            $0.height.equalTo(view.frame.height)
         }
         
         addFeedbackContentView.addSubview(addFeedbackTitleLabel)
@@ -305,20 +320,37 @@ final class AddFeedbackContentViewController: BaseViewController {
         }
     }
     
+    private func didTappedExitButton() {
+        self.dismiss(animated: true)
+    }
+    
     private func didTappedSwitch() {
         feedbackStartTextViewLabel.isHidden.toggle()
         feedbackStartTextView.isHidden.toggle()
         
         if feedbackStartSwitch.isOn {
             addFeedbackScrollView.scrollRectToVisible(CGRect(x: 0.0, y: 0.0, width: 375.0, height: 1100.0), animated: true)
+            addFeedbackContentView.snp.updateConstraints {
+                $0.height.equalTo(1180)
+            }
+        }
+        else {
+            addFeedbackContentView.snp.updateConstraints {
+                $0.height.equalTo(view.frame.height)
+            }
         }
     }
     
+    private func didTappedBackButton() {
+        navigationController?.popViewController(animated: true)
+    }
+    
     private func didTappedDoneButton() {
-        
-        // FIXME: - 피드백 추가 로직 (print문 삭제)
-        
-        print("버튼 누름")
+        guard let keyword = feedbackKeywordTextField.text,
+              let content = feedbackContentTextView.text,
+              let startContent = feedbackStartTextView.text else { return }
+        // FIXME: 서버에 데이터 보내기
+        dismiss(animated: true)
     }
     
     // MARK: - selector

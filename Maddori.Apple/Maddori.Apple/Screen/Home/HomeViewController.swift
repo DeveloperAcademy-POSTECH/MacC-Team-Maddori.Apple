@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 
 final class HomeViewController: BaseViewController {
-    
+    var isTouched = false
     let keywords = Keyword.mockData
     private enum Size {
         static let keywordLabelHeight: CGFloat = 50
@@ -27,6 +27,25 @@ final class HomeViewController: BaseViewController {
     
     // MARK: - property
     
+    private let warningImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = ImageLiterals.icWarning
+        imageView.tintColor = .yellow300
+        return imageView
+    }()
+    private let toastLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Test Flight에선 지원되지 않습니다"
+        label.font = UIFont.font(.medium, ofSize: 14)
+        label.textColor = .white100
+        return label
+    }()
+    private let toastView: UIView = {
+        let view = UIView()
+        view.layer.cornerRadius = 10
+        view.clipsToBounds = true
+        return view
+    }()
     lazy var keywordCollectionView: UICollectionView = {
         let flowLayout = KeywordCollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
@@ -40,15 +59,6 @@ final class HomeViewController: BaseViewController {
         label.textColor = .black100
         label.numberOfLines = 0
         return label
-    }()
-    private let invitationCodeButton: UIButton = {
-        let button = UIButton()
-        button.setTitle(TextLiteral.mainViewControllerInvitationButtonText, for: .normal)
-        button.setTitleColor(UIColor.blue200, for: .normal)
-        button.titleLabel?.font = .caption2
-        button.backgroundColor = .gray100
-        button.layer.cornerRadius = 4
-        return button
     }()
     private let descriptionLabel: UILabel = {
         let label = UILabel()
@@ -64,13 +74,7 @@ final class HomeViewController: BaseViewController {
         label.textColor = .black100
         return label
     }()
-    private let planLabelButtonView: LabelButtonView = {
-        let labelButton = LabelButtonView()
-        labelButton.subText = TextLiteral.mainViewControllerPlanLabelButtonSubText
-        labelButton.subButtonText = TextLiteral.mainViewControllerPlanLabelButtonSubButtonText
-        return labelButton
-    }()
-    private let addFeedbackButton: UIButton = {
+    private lazy var addFeedbackButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .white100
         button.setTitle(TextLiteral.mainViewControllerButtonText, for: .normal)
@@ -80,6 +84,10 @@ final class HomeViewController: BaseViewController {
         button.layer.borderColor = UIColor.blue200.cgColor
         button.layer.cornerRadius = Size.buttonCornerRadius
         // TODO: button action 추가
+        let action = UIAction { [weak self] _ in
+            self?.didTapAddFeedbackButton()
+        }
+        button.addAction(action, for: .touchUpInside)
         return button
     }()
     
@@ -88,26 +96,39 @@ final class HomeViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpDelegation()
+        render()
     }
     
     override func configUI() {
         view.backgroundColor = .white200
+        setGradientToastView()
     }
     
     override func render() {
+        navigationController?.view.addSubview(toastView)
+        toastView.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(-60)
+            $0.centerX.equalToSuperview()
+            $0.width.equalTo(250)
+            $0.height.equalTo(46)
+        }
+        
+        toastView.addSubview(toastLabel)
+        toastLabel.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.trailing.equalToSuperview().inset(16)
+        }
+        
+        toastView.addSubview(warningImageView)
+        warningImageView.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.leading.equalToSuperview().inset(16)
+        }
+        
         view.addSubview(teamNameLabel)
         teamNameLabel.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).offset(SizeLiteral.topPadding)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-        }
-        
-        view.addSubview(invitationCodeButton)
-        invitationCodeButton.snp.makeConstraints {
-            $0.leading.equalTo(teamNameLabel.snp.trailing).offset(Size.labelButtonPadding)
-            $0.width.equalTo(Size.subButtonWidth)
-            $0.height.equalTo(Size.subButtonHeight)
-            $0.bottom.equalTo(teamNameLabel.snp.bottom).offset(-5)
-            // offset을 없애면 너무 낮은 것 같다는 생각에 임의로 줘봤습니다
         }
         
         view.addSubview(descriptionLabel)
@@ -129,18 +150,11 @@ final class HomeViewController: BaseViewController {
             $0.height.equalTo(Size.mainButtonHeight)
         }
         
-        view.addSubview(planLabelButtonView)
-        planLabelButtonView.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.bottom.equalTo(addFeedbackButton.snp.top)
-            $0.height.equalTo(SizeLiteral.minimumTouchArea)
-        }
-        
         view.addSubview(keywordCollectionView)
         keywordCollectionView.snp.makeConstraints {
             $0.top.equalTo(currentReflectionLabel.snp.bottom).offset(Size.labelPadding)
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-            $0.bottom.equalTo(planLabelButtonView.snp.top)
+            $0.bottom.equalTo(addFeedbackButton.snp.top).offset(-10)
         }
     }
     
@@ -149,6 +163,32 @@ final class HomeViewController: BaseViewController {
     private func setUpDelegation() {
         keywordCollectionView.delegate = self
         keywordCollectionView.dataSource = self
+    }
+    
+    private func didTapAddFeedbackButton() {
+        let vc = UINavigationController(rootViewController: FromToViewController())
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
+    }
+    
+    private func setGradientToastView() {
+        toastView.layoutIfNeeded()
+        toastView.setGradient(colorTop: .gradientGrayTop, colorBottom: .gradientGrayBottom)
+    }
+    
+    private func showToastPopUp() {
+        if !isTouched {
+            isTouched = true
+            UIView.animate(withDuration: 0.5, delay: 0, animations: {
+                self.toastView.transform = CGAffineTransform(translationX: 0, y: 115)
+            }, completion: {_ in
+                UIView.animate(withDuration: 1, delay: 0.5, animations: {
+                    self.toastView.transform = .identity
+                }, completion: {_ in
+                    self.isTouched = false
+                })
+            })
+        }
     }
 }
 
@@ -162,7 +202,7 @@ extension HomeViewController: UICollectionViewDelegate {
 
 extension HomeViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = keywordCollectionView.dequeueReusableCell(withReuseIdentifier: "KeywordCollectionViewCell", for: indexPath) as? KeywordCollectionViewCell else {
+        guard let cell = keywordCollectionView.dequeueReusableCell(withReuseIdentifier: KeywordCollectionViewCell.className, for: indexPath) as? KeywordCollectionViewCell else {
             return UICollectionViewCell()
         }
         let keyword = keywords[indexPath.row]
@@ -171,6 +211,12 @@ extension HomeViewController: UICollectionViewDataSource {
         cell.configShadow(type: keywords[indexPath.row].type)
         cell.configLabel(type: keywords[indexPath.row].type)
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print(indexPath.item)
+        UIDevice.vibrate()
+        showToastPopUp()
     }
 }
 
