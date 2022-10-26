@@ -188,7 +188,7 @@ final class HomeViewController: BaseViewController {
             UIView.animate(withDuration: 0.5, delay: 0, animations: {
                 self.toastView.transform = CGAffineTransform(translationX: 0, y: 115)
             }, completion: {_ in
-                UIView.animate(withDuration: 1, delay: 0.5, animations: {
+                UIView.animate(withDuration: 1, delay: 0.8, animations: {
                     self.toastView.transform = .identity
                 }, completion: {_ in
                     self.isTouched = false
@@ -241,7 +241,6 @@ extension HomeViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(indexPath.item)
         UIDevice.vibrate()
         showToastPopUp()
     }
