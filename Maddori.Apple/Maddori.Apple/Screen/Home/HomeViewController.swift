@@ -172,9 +172,9 @@ final class HomeViewController: BaseViewController {
     }
     
     private func didTapAddFeedbackButton() {
-        let vc = UINavigationController(rootViewController: FromToViewController())
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true)
+        let viewController = UINavigationController(rootViewController: FromToViewController())
+        viewController.modalPresentationStyle = .fullScreen
+        present(viewController, animated: true)
     }
     
     private func setGradientToastView() {

@@ -10,12 +10,24 @@ import UIKit
 import SnapKit
 
 final class AddFeedbackContentViewController: BaseViewController {
+    private let homeService = HomeAPI(apiService: APIService())
+    
     private enum Length {
         static let keywordMinLength: Int = 0
         static let keywordMaxLength: Int = 15
         static let textViewMaxLength: Int = 200
     }
-    var nickname: String = ""
+    var type: CSSType = .Continue
+    var fromNickname: String
+    var toNickname: String
+    
+    init(from: String, to: String) {
+        self.fromNickname = from
+        self.toNickname = to
+        super.init()
+    }
+    
+    required init?(coder: NSCoder) { nil }
     
     // FIXME: - 회고 날짜 받아오기 / 현재는 있는 상태
     private let feedbackDate: Date? = Date()
@@ -43,7 +55,7 @@ final class AddFeedbackContentViewController: BaseViewController {
     private let addFeedbackContentView = UIView()
     private lazy var addFeedbackTitleLabel: UILabel = {
         let label = UILabel()
-        label.text = nickname + TextLiteral.addFeedbackContentViewControllerTitleLabel
+        label.text = toNickname + TextLiteral.addFeedbackContentViewControllerTitleLabel
         label.textColor = .black100
         label.font = .title
         return label
@@ -55,7 +67,15 @@ final class AddFeedbackContentViewController: BaseViewController {
         label.font = .label2
         return label
     }()
-    private let feedbackTypeButtonView = FeedbackTypeButtonView()
+    private lazy var feedbackTypeButtonView: FeedbackTypeButtonView = {
+        let view = FeedbackTypeButtonView()
+        view.changeFeedbackType = { [weak self] type in
+            if let typeValue = CSSType.init(rawValue: type.rawValue) {
+                self?.type = typeValue
+            }
+        }
+        return view
+    }()
     private let feedbackKeywordLabel: UILabel = {
         let label = UILabel()
         label.text = TextLiteral.addFeedbackContentViewControllerFeedbackKeywordLabel
@@ -346,11 +366,7 @@ final class AddFeedbackContentViewController: BaseViewController {
     }
     
     private func didTappedDoneButton() {
-        guard let keyword = feedbackKeywordTextField.text,
-              let content = feedbackContentTextView.text,
-              let startContent = feedbackStartTextView.text else { return }
-        // FIXME: 서버에 데이터 보내기
-        dismiss(animated: true)
+        postCreateCss()
     }
     
     // MARK: - selector
@@ -371,6 +387,27 @@ final class AddFeedbackContentViewController: BaseViewController {
         })
         
         feedbackSendTimeLabel.isHidden = false
+    }
+    
+    // MARK: - API
+    
+    private func postCreateCss() {
+        Task {
+            do {
+                guard let keyword = feedbackKeywordTextField.text,
+                      let content = feedbackContentTextView.text,
+                      let startContent = feedbackStartTextView.text else { return }
+                let dto = CreateCssDTO(from_name: fromNickname, to_name: toNickname, type: type, keyword: keyword, content: content, start_content: startContent)
+                if let data = try await homeService.dispatchCreateCss(body: dto) {
+                    dump(data)
+                    dismiss(animated: true)
+                }
+            } catch NetworkError.serverError {
+                print("serverError")
+            } catch NetworkError.clientError(let message) {
+                print("clientError:\(String(describing: message))")
+            }
+        }
     }
 }
 
