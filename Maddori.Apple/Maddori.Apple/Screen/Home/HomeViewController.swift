@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 
 final class HomeViewController: BaseViewController {
-    
+    var isTouched = false
     let keywords = Keyword.mockData
     private enum Size {
         static let keywordLabelHeight: CGFloat = 50
@@ -27,6 +27,25 @@ final class HomeViewController: BaseViewController {
     
     // MARK: - property
     
+    private let warningImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = ImageLiterals.icWarning
+        imageView.tintColor = .yellow300
+        return imageView
+    }()
+    private let toastLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Test Flight에선 지원되지 않습니다"
+        label.font = UIFont.font(.medium, ofSize: 14)
+        label.textColor = .white100
+        return label
+    }()
+    private let toastView: UIView = {
+        let view = UIView()
+        view.layer.cornerRadius = 10
+        view.clipsToBounds = true
+        return view
+    }()
     lazy var keywordCollectionView: UICollectionView = {
         let flowLayout = KeywordCollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
@@ -77,13 +96,35 @@ final class HomeViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpDelegation()
+        render()
     }
     
     override func configUI() {
         view.backgroundColor = .white200
+        setGradientToastView()
     }
     
     override func render() {
+        navigationController?.view.addSubview(toastView)
+        toastView.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(-60)
+            $0.centerX.equalToSuperview()
+            $0.width.equalTo(250)
+            $0.height.equalTo(46)
+        }
+        
+        toastView.addSubview(toastLabel)
+        toastLabel.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.trailing.equalToSuperview().inset(16)
+        }
+        
+        toastView.addSubview(warningImageView)
+        warningImageView.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.leading.equalToSuperview().inset(16)
+        }
+        
         view.addSubview(teamNameLabel)
         teamNameLabel.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).offset(SizeLiteral.topPadding)
@@ -129,6 +170,26 @@ final class HomeViewController: BaseViewController {
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true)
     }
+    
+    private func setGradientToastView() {
+        toastView.layoutIfNeeded()
+        toastView.setGradient(colorTop: .gradientGrayTop, colorBottom: .gradientGrayBottom)
+    }
+    
+    private func showToastPopUp() {
+        if !isTouched {
+            isTouched = true
+            UIView.animate(withDuration: 0.5, delay: 0, animations: {
+                self.toastView.transform = CGAffineTransform(translationX: 0, y: 115)
+            }, completion: {_ in
+                UIView.animate(withDuration: 1, delay: 0.5, animations: {
+                    self.toastView.transform = .identity
+                }, completion: {_ in
+                    self.isTouched = false
+                })
+            })
+        }
+    }
 }
 
 // MARK: - extension
@@ -141,7 +202,7 @@ extension HomeViewController: UICollectionViewDelegate {
 
 extension HomeViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = keywordCollectionView.dequeueReusableCell(withReuseIdentifier: "KeywordCollectionViewCell", for: indexPath) as? KeywordCollectionViewCell else {
+        guard let cell = keywordCollectionView.dequeueReusableCell(withReuseIdentifier: KeywordCollectionViewCell.className, for: indexPath) as? KeywordCollectionViewCell else {
             return UICollectionViewCell()
         }
         let keyword = keywords[indexPath.row]
@@ -150,6 +211,12 @@ extension HomeViewController: UICollectionViewDataSource {
         cell.configShadow(type: keywords[indexPath.row].type)
         cell.configLabel(type: keywords[indexPath.row].type)
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print(indexPath.item)
+        UIDevice.vibrate()
+        showToastPopUp()
     }
 }
 
