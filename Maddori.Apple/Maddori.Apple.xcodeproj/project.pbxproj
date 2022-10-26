@@ -71,7 +71,7 @@
 
 /* Begin PBXFileReference section */
 		391596612904176500A432D9 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
-		39257DC128F8FEBD00201E0B /* Maddori.Apple.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Maddori.Apple.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		39257DC128F8FEBD00201E0B /* 키고.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "키고.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		39257DC428F8FEBD00201E0B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		39257DC628F8FEBD00201E0B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		39257DCD28F8FEBE00201E0B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -157,7 +157,7 @@
 		39257DC228F8FEBD00201E0B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				39257DC128F8FEBD00201E0B /* Maddori.Apple.app */,
+				39257DC128F8FEBD00201E0B /* 키고.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -464,7 +464,7 @@
 				395C7E1528F984B300FC2FCA /* SnapKit */,
 			);
 			productName = Maddori.Apple;
-			productReference = 39257DC128F8FEBD00201E0B /* Maddori.Apple.app */;
+			productReference = 39257DC128F8FEBD00201E0B /* 키고.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -731,7 +731,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = mingwan.Maddori.Apple;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "키고";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -762,7 +762,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = mingwan.Maddori.Apple;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "키고";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
