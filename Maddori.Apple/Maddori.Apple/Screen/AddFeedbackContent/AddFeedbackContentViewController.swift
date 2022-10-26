@@ -277,14 +277,7 @@ final class AddFeedbackContentViewController: BaseViewController {
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
     }
-    
-    override func configUI() {
-        super.configUI()
-//        if feedbackDate != nil {
-//            feedbackSendTimeLabel.text = "작성한 피드백은 \(feedbackDate!.dateToMonthDayString)에 자동으로 제출됩니다"
-//        }
-    }
-    
+        
     // MARK: - func
     
     override func setupNavigationBar() {
