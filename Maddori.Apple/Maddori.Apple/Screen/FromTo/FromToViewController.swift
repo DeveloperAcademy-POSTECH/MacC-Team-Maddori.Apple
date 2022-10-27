@@ -49,7 +49,6 @@ final class FromToViewController: BaseViewController {
         let textField = KigoTextField()
         textField.placeHolderText = "본인 닉네임을 입력해주세요"
         textField.returnKeyType = .done
-        textField.tag = fromTextFieldTag
         return textField
     }()
     private let toLabel: UILabel = {
@@ -62,7 +61,6 @@ final class FromToViewController: BaseViewController {
     private lazy var toTextField: KigoTextField = {
         let textField = KigoTextField()
         textField.placeHolderText = "받는 사람 닉네임을 입력해주세요"
-        textField.tag = toTextFieldTag
         return textField
     }()
     private lazy var nextButton: MainButton = {
@@ -109,27 +107,27 @@ final class FromToViewController: BaseViewController {
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
-        view?.addSubview(fromLabel)
-        fromLabel.snp.makeConstraints {
-            $0.top.equalTo(subTitle.snp.bottom).offset(SizeLiteral.topComponentPadding)
-            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-        }
-        
-        view.addSubview(fromTextField)
-        fromTextField.snp.makeConstraints {
-            $0.top.equalTo(fromLabel.snp.bottom).offset(SizeLiteral.labelComponentPadding)
-            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-        }
-        
         view.addSubview(toLabel)
         toLabel.snp.makeConstraints {
-            $0.top.equalTo(fromTextField.snp.bottom).offset(SizeLiteral.componentIntervalPadding)
+            $0.top.equalTo(subTitle.snp.bottom).offset(SizeLiteral.topComponentPadding)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
         view.addSubview(toTextField)
         toTextField.snp.makeConstraints {
             $0.top.equalTo(toLabel.snp.bottom).offset(SizeLiteral.labelComponentPadding)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+        
+        view.addSubview(fromLabel)
+        fromLabel.snp.makeConstraints {
+            $0.top.equalTo(toTextField.snp.bottom).offset(SizeLiteral.componentIntervalPadding)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+        
+        view.addSubview(fromTextField)
+        fromTextField.snp.makeConstraints {
+            $0.top.equalTo(fromLabel.snp.bottom).offset(SizeLiteral.labelComponentPadding)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
@@ -162,6 +160,12 @@ final class FromToViewController: BaseViewController {
         dismiss(animated: true)
     }
     
+    override func endEditingView() {
+        if !nextButton.isTouchInside {
+            view.endEditing(true)
+        }
+    }
+    
     // MARK: - selector
     
     @objc private func keyboardWillShow(notification:NSNotification) {
@@ -181,10 +185,14 @@ final class FromToViewController: BaseViewController {
 
 extension FromToViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if textField == fromTextField {
-            toTextField.becomeFirstResponder()
+        if textField == toTextField {
+            fromTextField.becomeFirstResponder()
         } else {
-            toTextField.resignFirstResponder()
+            guard let toText = toTextField.text,
+                  let fromText = fromTextField.text else { return false }
+            if !toText.isEmpty && !fromText.isEmpty {
+                didTappedNextButton()
+            }
         }
         return true
     }
