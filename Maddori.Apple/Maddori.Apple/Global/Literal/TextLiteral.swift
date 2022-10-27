@@ -16,9 +16,9 @@ enum TextLiteral {
     // MARK: - MainViewController
     
     static let mainViewControllerTitle = "예시입니다...람쥐"
-    static let mainViewControllerTeamName = "맛쟁이 사과처럼"
-    static let mainViewControllerReflectionDateDescription = "아직 회고 일정이 정해지지 않았습니다"
-    static let mainViewControllerCurrentReflectionKeyword = "이번 회고에 담긴 키워드"
+    static let mainViewControllerTeamName = "Apple Developer Academy"
+    static let mainViewControllerReflectionDateDescription = "담긴 키워드는 부스 종료 후 Ryver로 전달드립니다"
+    static let mainViewControllerCurrentReflectionKeyword = "할로윈 회고에 담긴 키워드"
     static let mainViewControllerInvitationButtonText = "초대코드"
     static let mainViewControllerPlanLabelButtonSubText = "회고 일정이 없습니다"
     static let mainViewControllerPlanLabelButtonSubButtonText = "일정 만들기"
@@ -47,9 +47,12 @@ enum TextLiteral {
     static let addFeedbackContentViewControllerFeedbackTypeLabel = "피드백 종류"
     static let addFeedbackContentViewControllerFeedbackKeywordLabel = "키워드"
     static let addFeedbackContentViewControllerFeedbackKeywordTextFieldPlaceholder = "피드백을 한 단어로 작성해주세요"
-    static let addFeedbackContentViewControllerFeedbackContentLabel = "내용"
+    static let addFeedbackContentViewControllerFeedbackTextViewLabel = "내용"
     static let addFeedbackContentViewControllerFeedbackContentTextViewPlaceholder = "키워드에 대한 자세한 내용을 작성해주세요"
     static let addFeedbackContentViewControllerDoneButtonTitle = "완료"
+    static let addFeedbackContentViewControllerFeedbackStartLabel = "Start 제안하기"
+    static let addFeedbackContentViewControllerStartTextViewPlaceholder = "제안하고 싶은 Start를 작성해주세요"
+    static let addFeedbackContentViewControllerFeedbackSendTimeLabel = "작성한 피드백은 회고 시간에 자동 제출됩니다"
 
     // MARK: - JoinTeamViewController
     
