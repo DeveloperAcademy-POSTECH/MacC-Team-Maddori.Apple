@@ -160,6 +160,12 @@ final class FromToViewController: BaseViewController {
         dismiss(animated: true)
     }
     
+    override func endEditingView() {
+        if !nextButton.isTouchInside {
+            view.endEditing(true)
+        }
+    }
+    
     // MARK: - selector
     
     @objc private func keyboardWillShow(notification:NSNotification) {
