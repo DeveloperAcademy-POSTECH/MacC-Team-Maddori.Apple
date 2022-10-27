@@ -18,7 +18,7 @@ enum TextLiteral {
     static let mainViewControllerTitle = "예시입니다...람쥐"
     static let mainViewControllerTeamName = "Apple Developer Academy"
     static let mainViewControllerReflectionDateDescription = "담긴 키워드는 부스 종료 후 Ryver로 전달드립니다"
-    static let mainViewControllerCurrentReflectionKeyword = "할로윈 회고에 담긴 키워드"
+    static let mainViewControllerCurrentReflectionKeyword = "Test Flight에 담긴 키워드"
     static let mainViewControllerInvitationButtonText = "초대코드"
     static let mainViewControllerPlanLabelButtonSubText = "회고 일정이 없습니다"
     static let mainViewControllerPlanLabelButtonSubButtonText = "일정 만들기"
@@ -43,7 +43,7 @@ enum TextLiteral {
     
     // MARK: - AddFeedbackContentViewController
         
-    static let addFeedbackContentViewControllerTitleLabel = "님께 피드백 보내기"
+    static let addFeedbackContentViewControllerTitleLabel = "에게 피드백 보내기"
     static let addFeedbackContentViewControllerFeedbackTypeLabel = "피드백 종류"
     static let addFeedbackContentViewControllerFeedbackKeywordLabel = "키워드"
     static let addFeedbackContentViewControllerFeedbackKeywordTextFieldPlaceholder = "피드백을 한 단어로 작성해주세요"

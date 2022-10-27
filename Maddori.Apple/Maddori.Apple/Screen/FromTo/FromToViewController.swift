@@ -154,8 +154,7 @@ final class FromToViewController: BaseViewController {
     private func didTappedNextButton() {
         guard let fromName = fromTextField.text,
               let toName = toTextField.text else { return }
-        let addVC = AddFeedbackContentViewController()
-        addVC.nickname = toName
+        let addVC = AddFeedbackContentViewController(from: fromName, to: toName)
         navigationController?.pushViewController(addVC, animated: true)
     }
     

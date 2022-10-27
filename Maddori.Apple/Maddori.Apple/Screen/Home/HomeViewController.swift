@@ -10,8 +10,10 @@ import UIKit
 import SnapKit
 
 final class HomeViewController: BaseViewController {
+    private let homeService = HomeAPI(apiService: APIService())
+    
+    var keywordList: [Keyword] = []
     var isTouched = false
-    let keywords = Keyword.mockData
     private enum Size {
         static let keywordLabelHeight: CGFloat = 50
         // FIXME: 기존 간격인 10으로 하면
@@ -93,6 +95,10 @@ final class HomeViewController: BaseViewController {
     
     // MARK: - life cycle
     
+    override func viewWillAppear(_ animated: Bool) {
+        getAllCss()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpDelegation()
@@ -166,9 +172,9 @@ final class HomeViewController: BaseViewController {
     }
     
     private func didTapAddFeedbackButton() {
-        let vc = UINavigationController(rootViewController: FromToViewController())
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true)
+        let viewController = UINavigationController(rootViewController: FromToViewController())
+        viewController.modalPresentationStyle = .fullScreen
+        present(viewController, animated: true)
     }
     
     private func setGradientToastView() {
@@ -182,12 +188,33 @@ final class HomeViewController: BaseViewController {
             UIView.animate(withDuration: 0.5, delay: 0, animations: {
                 self.toastView.transform = CGAffineTransform(translationX: 0, y: 115)
             }, completion: {_ in
-                UIView.animate(withDuration: 1, delay: 0.5, animations: {
+                UIView.animate(withDuration: 1, delay: 0.8, animations: {
                     self.toastView.transform = .identity
                 }, completion: {_ in
                     self.isTouched = false
                 })
             })
+        }
+    }
+    
+    // MARK: - API
+    
+    private func getAllCss() {
+        Task {
+            do {
+                if let data = try await homeService.fetchCssList()?.keywords {
+                    keywordList.removeAll()
+                    data.map {
+                        keywordList.append(Keyword(string: $0, type: .defaultKeyword))
+                    }
+                    print("keywordList", keywordList)
+                    keywordCollectionView.reloadData()
+                }
+            } catch NetworkError.serverError {
+                print("serverError")
+            } catch NetworkError.clientError(let message) {
+                print("clientError:\(String(describing: message))")
+            }
         }
     }
 }
@@ -196,7 +223,7 @@ final class HomeViewController: BaseViewController {
 
 extension HomeViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return keywords.count
+        return keywordList.count
     }
 }
 
@@ -205,16 +232,15 @@ extension HomeViewController: UICollectionViewDataSource {
         guard let cell = keywordCollectionView.dequeueReusableCell(withReuseIdentifier: KeywordCollectionViewCell.className, for: indexPath) as? KeywordCollectionViewCell else {
             return UICollectionViewCell()
         }
-        let keyword = keywords[indexPath.row]
+        let keyword = keywordList[indexPath.row]
         cell.keywordLabel.text = keyword.string
         // FIXME: cell을 여기서 접근하는건 안좋은 방법일수도?
-        cell.configShadow(type: keywords[indexPath.row].type)
-        cell.configLabel(type: keywords[indexPath.row].type)
+        cell.configShadow(type: keywordList[indexPath.row].type)
+        cell.configLabel(type: keywordList[indexPath.row].type)
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(indexPath.item)
         UIDevice.vibrate()
         showToastPopUp()
     }
@@ -223,7 +249,7 @@ extension HomeViewController: UICollectionViewDataSource {
 extension HomeViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let size = Size.keywordLabelHeight
-        return KeywordCollectionViewCell.fittingSize(availableHeight: size, keyword: keywords[indexPath.item].string)
+        return KeywordCollectionViewCell.fittingSize(availableHeight: size, keyword: keywordList[indexPath.item].string)
     }
 }
 
