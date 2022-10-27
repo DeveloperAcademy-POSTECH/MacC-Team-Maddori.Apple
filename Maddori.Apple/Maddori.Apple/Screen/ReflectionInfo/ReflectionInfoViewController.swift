@@ -53,8 +53,7 @@ final class ReflectionInfoViewController: BaseViewController {
         view.addSubview(sendFromLabel)
         sendFromLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-            $0.top.equalTo(view.safeAreaLayoutGuide
-                .snp.top).inset(55)
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(55)
         }
         
         view.addSubview(keywordLabel)
