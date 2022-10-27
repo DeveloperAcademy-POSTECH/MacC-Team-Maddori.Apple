@@ -362,7 +362,6 @@ final class AddFeedbackContentViewController: BaseViewController {
         postCreateCss()
     }
     
-    
     // MARK: - selector
     
     @objc private func willShowKeyboard(notification: NSNotification) {
