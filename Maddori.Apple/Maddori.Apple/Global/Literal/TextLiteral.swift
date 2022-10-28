@@ -65,4 +65,8 @@ enum TextLiteral {
     
     static let createTeamViewControllerTitleLabel = "팀 이름을 입력해주세요"
     static let createTeamViewControllerTextFieldPlaceHolder = "예) 맛쟁이 사과처럼"
+    
+    // MARK: - StartSuggestionView
+    
+    static let startSuggestionViewStartText = "⭐️ Start"
 }
