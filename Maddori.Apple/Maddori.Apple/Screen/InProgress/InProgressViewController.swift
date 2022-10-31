@@ -13,8 +13,8 @@ final class InProgressViewController: BaseViewController {
     
     private var keywordData = Keyword.mockData
     private let currentRetrospectiveUser = "진저"
-    private let user = "이드"
-//    private let user = "진저"
+//    private let user = "이드"
+    private let user = "진저"
     private enum Size {
         static let keywordLabelHeight: CGFloat = 50
         static let sectionPadding: CGFloat = 60
