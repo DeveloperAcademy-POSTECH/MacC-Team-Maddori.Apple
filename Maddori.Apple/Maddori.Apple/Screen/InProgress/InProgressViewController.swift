@@ -77,7 +77,7 @@ final class InProgressViewController: BaseViewController {
         
         view.addSubview(subTitleLabel)
         subTitleLabel.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.bottom).offset(SizeLiteral.titleSubTitlePadding)
+            $0.top.equalTo(titleLabel.snp.bottom).offset(SizeLiteral.titleSubtitleSpacing)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
@@ -138,6 +138,19 @@ extension InProgressViewController: UICollectionViewDelegate {
             return keywords[0].count
         }
     }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let cell = keywordCollectionView.dequeueReusableCell(withReuseIdentifier: KeywordCollectionViewCell.className, for: indexPath) as? KeywordCollectionViewCell else { return }
+        let section = indexPath.section
+        let item = indexPath.item
+        keywords[section][item].type = .disabledKeyword
+        UIView.performWithoutAnimation {
+            cell.configLabel(type: .disabledKeyword)
+            cell.configShadow(type: .disabledKeyword)
+            self.keywordCollectionView.reloadItems(at: [indexPath])
+        }
+    }
 }
 
 extension InProgressViewController: UICollectionViewDataSource {
@@ -151,7 +164,6 @@ extension InProgressViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: SectionHeaderView.className, for: indexPath) as? SectionHeaderView else { return UICollectionReusableView() }
-        
         if isUserRetrospective {
             header.label.text = TextLiteral.InProgressViewControllerReceivedLabel
         } else if indexPath.section == 0 {
@@ -176,8 +188,8 @@ extension InProgressViewController: UICollectionViewDataSource {
         let item = indexPath.item
         let keyword = keywords[section][item]
         cell.keywordLabel.text = keyword.string
-        cell.configShadow(type: keyword.type)
         cell.configLabel(type: keyword.type)
+        cell.configShadow(type: keyword.type)
         return cell
     }
 }

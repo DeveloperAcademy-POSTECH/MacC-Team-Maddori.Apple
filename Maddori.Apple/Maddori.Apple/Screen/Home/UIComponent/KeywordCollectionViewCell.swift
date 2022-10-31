@@ -13,19 +13,18 @@ final class KeywordCollectionViewCell: BaseCollectionViewCell {
     
     private enum Size {
         static let keywordLabelHeight: CGFloat = 50
-        // FIXME: 기존에는 16 이었는데 그렇게 하면 한 글자일 때 cornerRadius 때문에 뾰족해짐
         static let keywordLabelXInset: CGFloat = 17
     }
     
     // TODO: 터치했을 때 디테일 페이지 나오도록
-    override var isSelected: Bool {
-        didSet {
-            if isSelected {
-                configLabel(type: .disabledKeyword)
-                configShadow(type: .disabledKeyword)
-            }
-        }
-    }
+//    override var isSelected: Bool {
+//        didSet {
+//            if isSelected {
+//                configLabel(type: .disabledKeyword)
+//                configShadow(type: .disabledKeyword)
+//            }
+//        }
+//    }
     
     // MARK: - properties
     

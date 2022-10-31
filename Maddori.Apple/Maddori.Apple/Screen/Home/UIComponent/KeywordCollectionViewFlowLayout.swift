@@ -32,8 +32,9 @@ final class KeywordCollectionViewFlowLayout: UICollectionViewFlowLayout {
             maxY = max(layoutAttribute.frame.maxY, maxY)
         }
         
-        // FIXME: 이 attributes array의 맨 마지막 두 요소를 바꿔야 해서 map 뭐시기를 써보다가 이렇게 하니 되는데.. 사용한 값이 안쓰인다고 warning 주네요..
-        attributes?.suffix(2).map { $0.frame.origin.x = SizeLiteral.leadingTrailingPadding }
+        for i in Keyword.mockData.count..<(attributes?.count ?? 0) {
+            attributes?[i].frame.origin.x = SizeLiteral.leadingTrailingPadding
+        }
         
         return attributes
     }
