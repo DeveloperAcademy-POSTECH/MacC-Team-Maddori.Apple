@@ -12,7 +12,7 @@ import SnapKit
 final class InProgressViewController: BaseViewController {
     
     private var keywordData = Keyword.mockData
-    private let currentRetrospective = "진저"
+    private let currentRetrospectiveUser = "진저"
     private let user = "이드"
 //    private let user = "진저"
     private enum Size {
@@ -21,7 +21,7 @@ final class InProgressViewController: BaseViewController {
     }
     private var keywords = [[Keyword]]()
     private var isUserRetrospective: Bool {
-        return user == currentRetrospective ? true : false
+        return user == currentRetrospectiveUser ? true : false
     }
     
     // MARK: - properties
@@ -29,7 +29,7 @@ final class InProgressViewController: BaseViewController {
     private let backButton = BackButton(type: .system)
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.setTitleFont(text: currentRetrospective +  TextLiteral.InProgressViewControllerTitleLabel)
+        label.setTitleFont(text: currentRetrospectiveUser +  TextLiteral.InProgressViewControllerTitleLabel)
         label.textColor = .black100
         label.numberOfLines = 0
         return label
@@ -38,10 +38,10 @@ final class InProgressViewController: BaseViewController {
         let label = UILabel()
         label.font = .caption1
         label.textColor = .gray400
-        if user == currentRetrospective {
-            label.text = currentRetrospective + TextLiteral.InProgressViewControllerSubTitleLabel
+        if user == currentRetrospectiveUser {
+            label.text = currentRetrospectiveUser + TextLiteral.InProgressViewControllerSubTitleLabel
         } else {
-            label.text = currentRetrospective + TextLiteral.InProgressViewControllerOthersSubTitleLabel
+            label.text = currentRetrospectiveUser + TextLiteral.InProgressViewControllerOthersSubTitleLabel
         }
         label.numberOfLines = 0
         return label
