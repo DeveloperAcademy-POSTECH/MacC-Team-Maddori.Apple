@@ -16,7 +16,7 @@ final class SelectFeedbackMemberViewController: BaseViewController {
     private let exitButton = ExitButton(type: .system)
     private let selectFeedbackMemberTitleLabel: UILabel = {
         let label = UILabel()
-        label.text = "피드백을 듣고 싶은\n팀원을 선택해주세요"
+        label.text = TextLiteral.selectFeedbackMemberViewControllerTitleLabel
         label.textColor = .black100
         label.font = .title
         label.numberOfLines = 0
@@ -26,7 +26,7 @@ final class SelectFeedbackMemberViewController: BaseViewController {
     private let memberCollectionView = MemberCollectionView()
     private lazy var feedbackDoneButton: MainButton = {
         let button = MainButton()
-        button.title = "모든 회고 끝내기 (0/\(memberCollectionView.memberList.count))"
+        button.title = TextLiteral.selectFeedbackMemberViewControllerDoneButtonText + "(0/\(memberCollectionView.memberList.count))"
         button.isDisabled = true
         return button
     }()
@@ -72,7 +72,7 @@ final class SelectFeedbackMemberViewController: BaseViewController {
     
     private func didTappedMember() {
         memberCollectionView.didTappedMember = { [weak self] member in
-            self?.feedbackDoneButton.title = "모든 회고 끝내기 (\(member.count)/\(self?.memberCollectionView.memberList.count ?? 0))"
+            self?.feedbackDoneButton.title = TextLiteral.selectFeedbackMemberViewControllerDoneButtonText + "(\(member.count)/\(self?.memberCollectionView.memberList.count ?? 0))"
             if member.count == self?.memberCollectionView.memberList.count {
                 self?.feedbackDoneButton.isDisabled = false
             }
