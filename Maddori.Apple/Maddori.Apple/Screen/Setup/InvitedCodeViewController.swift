@@ -21,7 +21,7 @@ final class InvitedCodeViewController: BaseViewController {
     private let invitedCodeLabel: UILabel = {
         let label = UILabel()
         label.text = "1BCDFF"
-        label.font = UIFont.systemFont(ofSize: 32, weight: .bold)
+        label.font = UIFont.font(.bold, ofSize: 32)
         return label
     }()
     private lazy var copyCodeButton: UIButton = {
@@ -50,8 +50,7 @@ final class InvitedCodeViewController: BaseViewController {
     // MARK: - func
     
     override func render() {
-        super.render()
-        
+
         view.addSubview(titleLabel)
         titleLabel.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.topPadding)
