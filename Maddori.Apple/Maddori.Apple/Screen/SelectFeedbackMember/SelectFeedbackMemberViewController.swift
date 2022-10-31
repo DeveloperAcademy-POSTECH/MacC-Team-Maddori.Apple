@@ -16,11 +16,8 @@ final class SelectFeedbackMemberViewController: BaseViewController {
     private let exitButton = ExitButton(type: .system)
     private let selectFeedbackMemberTitleLabel: UILabel = {
         let label = UILabel()
-        label.text = TextLiteral.selectFeedbackMemberViewControllerTitleLabel
         label.textColor = .black100
-        label.font = .title
-        label.numberOfLines = 0
-        label.setLineSpacing()
+        label.setTitleFont(text: TextLiteral.selectFeedbackMemberViewControllerTitleLabel)
         return label
     }()
     private let memberCollectionView = MemberCollectionView()
