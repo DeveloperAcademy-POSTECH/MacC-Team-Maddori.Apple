@@ -17,6 +17,15 @@ final class KeywordCollectionViewCell: BaseCollectionViewCell {
         static let keywordLabelXInset: CGFloat = 17
     }
     
+    override var isSelected: Bool {
+        didSet {
+            if isSelected {
+                configLabel(type: .disabledKeyword)
+                configShadow(type: .disabledKeyword)
+            }
+        }
+    }
+    
     // MARK: - properties
     
     lazy var keywordLabel: KeywordLabel = {
