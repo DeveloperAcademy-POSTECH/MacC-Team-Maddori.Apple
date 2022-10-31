@@ -11,23 +11,22 @@ import SnapKit
 
 final class InProgressViewController: BaseViewController {
     
-    fileprivate var keywordData = Keyword.mockData
-    fileprivate let currentRetrospective = "진저"
-    fileprivate let user = "이드"
+    private var keywordData = Keyword.mockData
+    private let currentRetrospective = "진저"
+    private let user = "이드"
 //    private let user = "진저"
-    private let headerId = "headerId"
     private enum Size {
         static let keywordLabelHeight: CGFloat = 50
+        static let sectionPadding: CGFloat = 60
     }
     private var keywords = [[Keyword]]()
+    private var isUserRetrospective: Bool {
+        return user == currentRetrospective ? true : false
+    }
     
     // MARK: - properties
     
-    let label: UILabel = {
-        let label = UILabel()
-        label.text = "awefdasf"
-        return label
-    }()
+    private let backButton = BackButton(type: .system)
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.setTitleFont(text: currentRetrospective +  TextLiteral.InProgressViewControllerTitleLabel)
@@ -84,13 +83,20 @@ final class InProgressViewController: BaseViewController {
         
         view.addSubview(keywordCollectionView)
         keywordCollectionView.snp.makeConstraints {
-            $0.top.equalTo(subTitleLabel.snp.bottom).offset(10)
+            $0.top.equalTo(subTitleLabel.snp.bottom)
             $0.leading.trailing.bottom.equalToSuperview()
         }
     }
     
-    fileprivate func checkIfUserRetrospective() -> Bool {
-        return user == currentRetrospective ? true : false
+    override func setupNavigationBar() {
+        super.setupNavigationBar()
+        
+        let button = removeBarButtonItemOffset(with: backButton, offsetX: 10)
+        let backButton = makeBarButtonItem(with: button)
+        
+        navigationController?.navigationBar.prefersLargeTitles = false
+        navigationItem.largeTitleDisplayMode = .never
+        navigationItem.leftBarButtonItem = backButton
     }
     
     private func setUpDelegation() {
@@ -99,7 +105,7 @@ final class InProgressViewController: BaseViewController {
     }
     
     private func setUpKeywordType() {
-        if checkIfUserRetrospective() {
+        if isUserRetrospective {
             for i in 0..<keywordData.count {
                 keywordData[i].type = .defaultKeyword
             }
@@ -136,7 +142,7 @@ extension InProgressViewController: UICollectionViewDelegate {
 
 extension InProgressViewController: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        if checkIfUserRetrospective() {
+        if isUserRetrospective {
             return 1
         } else {
             return 2
@@ -146,7 +152,7 @@ extension InProgressViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: SectionHeaderView.className, for: indexPath) as? SectionHeaderView else { return UICollectionReusableView() }
         
-        if checkIfUserRetrospective() {
+        if isUserRetrospective {
             header.label.text = TextLiteral.InProgressViewControllerReceivedLabel
         } else if indexPath.section == 0 {
             header.label.text = TextLiteral.InProgressViewControllerGivenLabel
@@ -185,7 +191,7 @@ extension InProgressViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: view.frame.width, height: 60)
+        return CGSize(width: view.frame.width, height: Size.sectionPadding)
     }
 }
 

@@ -17,6 +17,7 @@ final class KeywordCollectionViewCell: BaseCollectionViewCell {
         static let keywordLabelXInset: CGFloat = 17
     }
     
+    // TODO: 터치했을 때 디테일 페이지 나오도록
     override var isSelected: Bool {
         didSet {
             if isSelected {

@@ -22,18 +22,17 @@ class SectionHeaderView: UICollectionReusableView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
+        render()
+    }
+
+    required init?(coder: NSCoder) { nil }
+    
+    // MARK: - func
+    
+    private func render() {
         self.addSubview(label)
         label.snp.makeConstraints {
             $0.leading.bottom.equalToSuperview()
         }
     }
-
-    required init?(coder: NSCoder) { nil }
-//
-//    // MARK: - func
-//
-//    private func configUI() {
-//
-//    }
-//
 }
