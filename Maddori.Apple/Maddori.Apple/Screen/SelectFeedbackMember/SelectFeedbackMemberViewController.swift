@@ -23,7 +23,7 @@ final class SelectFeedbackMemberViewController: BaseViewController {
     private let memberCollectionView = MemberCollectionView()
     private lazy var feedbackDoneButton: MainButton = {
         let button = MainButton()
-        button.title = TextLiteral.selectFeedbackMemberViewControllerDoneButtonText + " (0/\(memberCollectionView.memberList.count))"
+        button.title = TextLiteral.selectFeedbackMemberViewControllerDoneButtonText + "(0/\(memberCollectionView.memberList.count))"
         button.isDisabled = true
         return button
     }()
@@ -69,7 +69,7 @@ final class SelectFeedbackMemberViewController: BaseViewController {
     
     private func didTappedMember() {
         memberCollectionView.didTappedMember = { [weak self] member in
-            self?.feedbackDoneButton.title = TextLiteral.selectFeedbackMemberViewControllerDoneButtonText + " (\(member.count)/\(self?.memberCollectionView.memberList.count ?? 0))"
+            self?.feedbackDoneButton.title = TextLiteral.selectFeedbackMemberViewControllerDoneButtonText + "(\(member.count)/\(self?.memberCollectionView.memberList.count ?? 0))"
             if member.count == self?.memberCollectionView.memberList.count {
                 self?.feedbackDoneButton.isDisabled = false
             }
