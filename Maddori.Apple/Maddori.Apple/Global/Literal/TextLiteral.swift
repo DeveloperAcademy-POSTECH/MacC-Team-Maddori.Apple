@@ -61,6 +61,11 @@ enum TextLiteral {
     static let joinTeamViewControllerSubText = "팀이 없나요?"
     static let joinTeamViewControllerSubButtonText = "팀 생성하기"
     
+    // MARK: - StartReflectionViewController
+    
+    static let startReflectionViewControllerStartTitle = "회고 시간이 되었습니다"
+    static let startReflectionViewControllerStartText = "시작하기"
+    
     // MARK: - CreateTeamViewController
     
     static let createTeamViewControllerTitleLabel = "팀 이름을 입력해주세요"
