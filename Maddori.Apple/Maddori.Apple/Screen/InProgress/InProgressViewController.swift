@@ -29,7 +29,7 @@ final class InProgressViewController: BaseViewController {
     private let backButton = BackButton(type: .system)
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.setTitleFont(text: currentRetrospectiveUser +  TextLiteral.InProgressViewControllerTitleLabel)
+        label.setTitleFont(text: currentRetrospectiveUser + TextLiteral.InProgressViewControllerTitleLabel)
         label.textColor = .black100
         label.numberOfLines = 0
         return label
