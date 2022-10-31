@@ -61,10 +61,23 @@ extension UIViewController {
     func hideKeyboardWhenTappedAround() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(endEditingView))
         tap.cancelsTouchesInView = false
+        tap.delegate = self
         view.addGestureRecognizer(tap)
     }
     
     @objc func endEditingView() {
         view.endEditing(true)
     }
+}
+
+extension UIViewController: UIGestureRecognizerDelegate {
+    
+    public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        guard let count = self.navigationController?.viewControllers.count else { return false }
+        return count > 1
+    }
+    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+         guard touch.view is UIButton else { return true }
+         return false
+     }
 }
