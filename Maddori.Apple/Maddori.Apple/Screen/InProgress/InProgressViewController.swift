@@ -19,7 +19,7 @@ final class InProgressViewController: BaseViewController {
         static let keywordLabelHeight: CGFloat = 50
         static let sectionPadding: CGFloat = 60
     }
-    private var keywords = [[Keyword]]()
+    private var keywordsSectionList = [[Keyword]]()
     private var isUserRetrospective: Bool {
         return user == currentRetrospectiveUser ? true : false
     }
@@ -31,7 +31,6 @@ final class InProgressViewController: BaseViewController {
         let label = UILabel()
         label.setTitleFont(text: currentRetrospectiveUser + TextLiteral.InProgressViewControllerTitleLabel)
         label.textColor = .black100
-        label.numberOfLines = 0
         return label
     }()
     private lazy var subTitleLabel: UILabel = {
@@ -109,7 +108,7 @@ final class InProgressViewController: BaseViewController {
             for i in 0..<keywordData.count {
                 keywordData[i].type = .defaultKeyword
             }
-            keywords.append(keywordData)
+            keywordsSectionList.append(keywordData)
         } else {
             var myKeywords = keywordData.filter { $0.from == user}
             var otherKeywords = keywordData.filter { $0.from != user}
@@ -119,8 +118,8 @@ final class InProgressViewController: BaseViewController {
             for j in 0..<otherKeywords.count {
                 otherKeywords[j].type = .subKeyword
             }
-            keywords.append(myKeywords)
-            keywords.append(otherKeywords)
+            keywordsSectionList.append(myKeywords)
+            keywordsSectionList.append(otherKeywords)
         }
     }
 }
@@ -131,11 +130,11 @@ extension InProgressViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch section {
         case 0:
-            return keywords[0].count
+            return keywordsSectionList[0].count
         case 1:
-            return keywords[1].count
+            return keywordsSectionList[1].count
         default:
-            return keywords[0].count
+            return keywordsSectionList[0].count
         }
     }
     
@@ -144,7 +143,7 @@ extension InProgressViewController: UICollectionViewDelegate {
         guard let cell = keywordCollectionView.dequeueReusableCell(withReuseIdentifier: KeywordCollectionViewCell.className, for: indexPath) as? KeywordCollectionViewCell else { return }
         let section = indexPath.section
         let item = indexPath.item
-        keywords[section][item].type = .disabledKeyword
+        keywordsSectionList[section][item].type = .disabledKeyword
         UIView.performWithoutAnimation {
             cell.configLabel(type: .disabledKeyword)
             cell.configShadow(type: .disabledKeyword)
@@ -186,7 +185,7 @@ extension InProgressViewController: UICollectionViewDataSource {
         }
         let section = indexPath.section
         let item = indexPath.item
-        let keyword = keywords[section][item]
+        let keyword = keywordsSectionList[section][item]
         cell.keywordLabel.text = keyword.string
         cell.configLabel(type: keyword.type)
         cell.configShadow(type: keyword.type)
@@ -199,7 +198,7 @@ extension InProgressViewController: UICollectionViewDelegateFlowLayout {
         let section = indexPath.section
         let item = indexPath.item
         let size = Size.keywordLabelHeight
-        return KeywordCollectionViewCell.fittingSize(availableHeight: size, keyword: keywords[section][item].string)
+        return KeywordCollectionViewCell.fittingSize(availableHeight: size, keyword: keywordsSectionList[section][item].string)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
