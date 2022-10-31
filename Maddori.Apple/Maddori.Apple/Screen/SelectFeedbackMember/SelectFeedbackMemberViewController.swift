@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 
 final class SelectFeedbackMemberViewController: BaseViewController {
-    
+        
     // MARK: - property
     
     private let exitButton = ExitButton(type: .system)
@@ -26,12 +26,17 @@ final class SelectFeedbackMemberViewController: BaseViewController {
     private let memberCollectionView = MemberCollectionView()
     private lazy var feedbackDoneButton: MainButton = {
         let button = MainButton()
-        button.title = "모든 회고 끝내기 (\(memberCollectionView.numOfSelectedMember)/\(memberCollectionView.memberList.count))"
+        button.title = "모든 회고 끝내기 (0/\(memberCollectionView.memberList.count))"
         button.isDisabled = true
         return button
     }()
     
     // MARK: - life cycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        didTappedMember()
+    }
     
     override func render() {
         view.addSubview(selectFeedbackMemberTitleLabel)
@@ -63,5 +68,14 @@ final class SelectFeedbackMemberViewController: BaseViewController {
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.largeTitleDisplayMode = .never
         navigationItem.rightBarButtonItem = exitButton
+    }
+    
+    private func didTappedMember() {
+        memberCollectionView.didTappedMember = { [weak self] member in
+            self?.feedbackDoneButton.title = "모든 회고 끝내기 (\(member.count)/\(self?.memberCollectionView.memberList.count ?? 0))"
+            if member.count == self?.memberCollectionView.memberList.count {
+                self?.feedbackDoneButton.isDisabled = false
+            }
+        }
     }
 }
