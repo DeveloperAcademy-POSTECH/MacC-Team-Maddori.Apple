@@ -12,7 +12,7 @@ import SnapKit
 final class HomeViewController: BaseViewController {
     private let homeService = HomeAPI(apiService: APIService())
     
-    var keywordList: [Keyword] = []
+    var keywordList: [Keyword] = Keyword.mockData
     var isTouched = false
     private enum Size {
         static let keywordLabelHeight: CGFloat = 50
@@ -92,10 +92,6 @@ final class HomeViewController: BaseViewController {
     }()
     
     // MARK: - life cycle
-    
-    override func viewWillAppear(_ animated: Bool) {
-        getAllCss()
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -194,27 +190,6 @@ final class HomeViewController: BaseViewController {
             })
         }
     }
-    
-    // MARK: - API
-    
-    private func getAllCss() {
-        Task {
-            do {
-                if let data = try await homeService.fetchCssList()?.keywords {
-                    keywordList.removeAll()
-                    data.map {
-                        keywordList.append(Keyword(string: $0, type: .defaultKeyword))
-                    }
-                    print("keywordList", keywordList)
-                    keywordCollectionView.reloadData()
-                }
-            } catch NetworkError.serverError {
-                print("serverError")
-            } catch NetworkError.clientError(let message) {
-                print("clientError:\(String(describing: message))")
-            }
-        }
-    }
 }
 
 // MARK: - extension
@@ -230,7 +205,7 @@ extension HomeViewController: UICollectionViewDataSource {
         guard let cell = keywordCollectionView.dequeueReusableCell(withReuseIdentifier: KeywordCollectionViewCell.className, for: indexPath) as? KeywordCollectionViewCell else {
             return UICollectionViewCell()
         }
-        let keyword = keywords[indexPath.item]
+        let keyword = keywordList[indexPath.item]
         // FIXME: cell을 여기서 접근하는건 안좋은 방법일수도?
         cell.keywordLabel.text = keyword.string
         cell.configShadow(type: .previewKeyword)
