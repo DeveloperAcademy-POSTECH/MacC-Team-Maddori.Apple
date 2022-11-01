@@ -13,7 +13,7 @@ final class SelectFeedbackMemberViewController: BaseViewController {
         
     // MARK: - property
     
-    private let exitButton = ExitButton(type: .system)
+    private let exitButton = CloseButton(type: .system)
     private let selectFeedbackMemberTitleLabel: UILabel = {
         let label = UILabel()
         label.textColor = .black100

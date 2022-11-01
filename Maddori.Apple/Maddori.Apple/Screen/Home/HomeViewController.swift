@@ -10,7 +10,6 @@ import UIKit
 import SnapKit
 
 final class HomeViewController: BaseViewController {
-    private let homeService = HomeAPI(apiService: APIService())
     
     var keywordList: [Keyword] = Keyword.mockData
     var isTouched = false
@@ -35,7 +34,7 @@ final class HomeViewController: BaseViewController {
     }()
     private let toastLabel: UILabel = {
         let label = UILabel()
-        label.text = "Test Flight에선 지원되지 않습니다"
+        label.text = "아직 회고 시간이 아닙니다"
         label.font = UIFont.font(.medium, ofSize: 14)
         label.textColor = .white100
         return label
@@ -55,14 +54,14 @@ final class HomeViewController: BaseViewController {
     }()
     private let teamNameLabel: UILabel = {
         let label = UILabel()
-        label.setTitleFont(text: TextLiteral.mainViewControllerTeamName)
+        label.setTitleFont(text: "Apple Developer Academy")
         label.textColor = .black100
         label.numberOfLines = 0
         return label
     }()
     private let descriptionLabel: UILabel = {
         let label = UILabel()
-        label.text = TextLiteral.mainViewControllerReflectionDateDescription
+        label.text = "아직 회고 일정이 정해지지 않았습니다"
         label.font = .caption1
         label.textColor = .gray400
         return label
@@ -83,7 +82,6 @@ final class HomeViewController: BaseViewController {
         button.layer.borderWidth = 2
         button.layer.borderColor = UIColor.blue200.cgColor
         button.layer.cornerRadius = Size.buttonCornerRadius
-        // TODO: button action 추가
         let action = UIAction { [weak self] _ in
             self?.didTapAddFeedbackButton()
         }
@@ -113,6 +111,7 @@ final class HomeViewController: BaseViewController {
             $0.height.equalTo(46)
         }
         
+        // FIXME: - 크기 수정 필요
         toastView.addSubview(toastLabel)
         toastLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
@@ -166,7 +165,7 @@ final class HomeViewController: BaseViewController {
     }
     
     private func didTapAddFeedbackButton() {
-        let viewController = UINavigationController(rootViewController: FromToViewController())
+        let viewController = UINavigationController(rootViewController: AddFeedbackMemberViewController())
         viewController.modalPresentationStyle = .fullScreen
         present(viewController, animated: true)
     }

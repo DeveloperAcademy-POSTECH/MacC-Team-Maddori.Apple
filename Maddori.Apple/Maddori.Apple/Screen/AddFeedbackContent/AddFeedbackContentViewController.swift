@@ -10,14 +10,13 @@ import UIKit
 import SnapKit
 
 final class AddFeedbackContentViewController: BaseViewController {
-    private let homeService = HomeAPI(apiService: APIService())
     
     private enum Length {
         static let keywordMinLength: Int = 0
         static let keywordMaxLength: Int = 15
         static let textViewMaxLength: Int = 200
     }
-    var type: CSSType = .Continue
+    var type: FeedBackType = .continueType
     var fromNickname: String
     var toNickname: String
     
@@ -43,8 +42,8 @@ final class AddFeedbackContentViewController: BaseViewController {
         return button
     }()
     
-    private lazy var exitButton: ExitButton = {
-        let button = ExitButton(type: .system)
+    private lazy var closeButton: CloseButton = {
+        let button = CloseButton(type: .system)
         let action = UIAction { [weak self] _ in
             self?.didTappedExitButton()
         }
@@ -70,7 +69,7 @@ final class AddFeedbackContentViewController: BaseViewController {
     private lazy var feedbackTypeButtonView: FeedbackTypeButtonView = {
         let view = FeedbackTypeButtonView()
         view.changeFeedbackType = { [weak self] type in
-            if let typeValue = CSSType.init(rawValue: type.rawValue) {
+            if let typeValue = FeedBackType.init(rawValue: type.rawValue) {
                 self?.type = typeValue
             }
         }
@@ -285,7 +284,7 @@ final class AddFeedbackContentViewController: BaseViewController {
         
         let button = removeBarButtonItemOffset(with: backButton, offsetX: 10)
         let backButton = makeBarButtonItem(with: button)
-        let exitButton = makeBarButtonItem(with: exitButton)
+        let exitButton = makeBarButtonItem(with: closeButton)
         
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.largeTitleDisplayMode = .never
@@ -359,7 +358,7 @@ final class AddFeedbackContentViewController: BaseViewController {
     }
     
     private func didTappedDoneButton() {
-        postCreateCss()
+        
     }
     
     // MARK: - selector
@@ -376,27 +375,6 @@ final class AddFeedbackContentViewController: BaseViewController {
         UIView.animate(withDuration: 0.2, animations: {
             self.feedbackDoneButton.transform = .identity
         })
-    }
-    
-    // MARK: - API
-    
-    private func postCreateCss() {
-        Task {
-            do {
-                guard let keyword = feedbackKeywordTextField.text,
-                      let content = feedbackContentTextView.text,
-                      let startContent = feedbackStartTextView.text else { return }
-                let dto = CreateCssDTO(from_name: fromNickname, to_name: toNickname, type: type, keyword: keyword, content: content, start_content: startContent)
-                if let data = try await homeService.dispatchCreateCss(body: dto) {
-                    dump(data)
-                    dismiss(animated: true)
-                }
-            } catch NetworkError.serverError {
-                print("serverError")
-            } catch NetworkError.clientError(let message) {
-                print("clientError:\(String(describing: message))")
-            }
-        }
     }
 }
 
