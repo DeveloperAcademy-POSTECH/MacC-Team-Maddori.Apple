@@ -52,7 +52,7 @@ final class MemberCollectionViewCell: BaseCollectionViewCell {
             $0.height.equalTo(Size.height)
         }
                 
-        self.addSubview(memberLabel)
+        memberShadow.addSubview(memberLabel)
         memberLabel.snp.makeConstraints {
             $0.width.equalTo(Size.width)
             $0.height.equalTo(Size.height)

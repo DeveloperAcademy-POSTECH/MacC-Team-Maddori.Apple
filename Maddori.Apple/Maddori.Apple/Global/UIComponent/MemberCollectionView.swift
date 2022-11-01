@@ -14,7 +14,8 @@ final class MemberCollectionView: UIView {
     // FIXME: - 목업 데이터 추후 데이터 연결한 후 삭제할 내용
     
     let memberList: [String] = ["진저", "이드", "호야", "케미", "메리"]
-    
+    var didTappedMember: (([String]) -> ())?
+    private var selectedMemberList: [String] = []
     private enum Size {
         static let collectionHorizontalSpacing: CGFloat = 14
         static let collectionTopSpacing: CGFloat = 40
@@ -26,7 +27,7 @@ final class MemberCollectionView: UIView {
             bottom: 0,
             right: collectionHorizontalSpacing)
     }
-
+    
     // MARK: - property
     
     private let collectionViewFlowLayout: UICollectionViewFlowLayout = {
@@ -68,10 +69,10 @@ final class MemberCollectionView: UIView {
 
 extension MemberCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        // FIXME: - 추후 print문 삭제하고 navigate하는 코드 넣을 예정
-        
-        print(memberList[indexPath.item])
+        if !selectedMemberList.contains(memberList[indexPath.item]) {
+            selectedMemberList.append(memberList[indexPath.item])
+        }
+        didTappedMember?(selectedMemberList)
     }
 }
 
