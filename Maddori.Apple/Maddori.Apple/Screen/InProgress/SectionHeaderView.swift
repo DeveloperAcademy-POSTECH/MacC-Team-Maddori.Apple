@@ -7,6 +7,8 @@
 
 import UIKit
 
+import SnapKit
+
 final class SectionHeaderView: UICollectionReusableView {
     
     // MARK: - properties
