@@ -27,7 +27,7 @@ final class MemberCollectionView: UIView {
             bottom: 0,
             right: collectionHorizontalSpacing)
     }
-
+    
     // MARK: - property
     
     private let collectionViewFlowLayout: UICollectionViewFlowLayout = {
@@ -69,9 +69,7 @@ final class MemberCollectionView: UIView {
 
 extension MemberCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if selectedMemberList.contains(memberList[indexPath.item]) {
-            return
-        } else {
+        if !selectedMemberList.contains(memberList[indexPath.item]) {
             selectedMemberList.append(memberList[indexPath.item])
         }
         didTappedMember?(selectedMemberList)
