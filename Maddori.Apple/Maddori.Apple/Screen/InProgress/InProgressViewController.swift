@@ -24,7 +24,7 @@ final class InProgressViewController: BaseViewController {
         return user == currentRetrospectiveUser ? true : false
     }
     
-    // MARK: - properties
+    // MARK: - property
     
     private let backButton = BackButton(type: .system)
     private lazy var titleLabel: UILabel = {
