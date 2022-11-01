@@ -19,7 +19,7 @@ final class InProgressViewController: BaseViewController {
         static let keywordLabelHeight: CGFloat = 50
         static let sectionPadding: CGFloat = 60
     }
-    private var keywordsSectionList = [[Keyword]]()
+    private var keywordsSectionList: [[Keyword]] = []
     private var isUserRetrospective: Bool {
         return user == currentRetrospectiveUser ? true : false
     }
