@@ -144,12 +144,11 @@ extension InProgressViewController: UICollectionViewDelegate {
         let section = indexPath.section
         let item = indexPath.item
         keywordsSectionList[section][item].type = .disabledKeyword
-        DispatchQueue.main.async {
-            UIView.performWithoutAnimation {
-                cell.configLabel(type: .disabledKeyword)
-                cell.configShadow(type: .disabledKeyword)
-                self.keywordCollectionView.reloadItems(at: [indexPath])
-            }
+        
+        UIView.performWithoutAnimation {
+            cell.configLabel(type: .disabledKeyword)
+            cell.configShadow(type: .disabledKeyword)
+            self.keywordCollectionView.reloadItems(at: [indexPath])
         }
     }
 }
