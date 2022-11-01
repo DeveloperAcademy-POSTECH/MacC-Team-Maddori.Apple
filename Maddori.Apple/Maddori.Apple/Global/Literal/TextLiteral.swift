@@ -82,6 +82,11 @@ enum TextLiteral {
     
     static let startSuggestionViewStartText = "⭐️ Start"
     
+    // MARK: - SelectFeedbackMemberViewController
+    
+    static let selectFeedbackMemberViewControllerTitleLabel = "피드백을 듣고 싶은\n팀원을 선택해주세요"
+    static let selectFeedbackMemberViewControllerDoneButtonText = "모든 회고 끝내기 "
+    
     // MARK: - InProgressViewController
     static let InProgressViewControllerTitleLabel = "님의 회고 시간"
     static let InProgressViewControllerSubTitleLabel = "님은 이야기 나누고 싶은\n키워드를 선택해주세요"

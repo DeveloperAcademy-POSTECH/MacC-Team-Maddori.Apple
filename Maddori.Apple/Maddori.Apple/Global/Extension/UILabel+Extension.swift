@@ -50,7 +50,7 @@ extension UILabel {
     func setTitleFont(text: String) {
         self.text = text
         self.font = .title
-        self.setTextWithLineHeight(text: self.text, lineHeight: 38)
-        self.numberOfLines = 2
+        self.setLineSpacing()
+        self.numberOfLines = 0
     }
 }
