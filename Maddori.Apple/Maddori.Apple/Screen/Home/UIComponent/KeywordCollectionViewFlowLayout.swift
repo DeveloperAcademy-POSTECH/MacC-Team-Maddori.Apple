@@ -31,6 +31,11 @@ final class KeywordCollectionViewFlowLayout: UICollectionViewFlowLayout {
             leftMargin += layoutAttribute.frame.width + cellSpacing
             maxY = max(layoutAttribute.frame.maxY, maxY)
         }
+        
+        for i in Keyword.mockData.count..<(attributes?.count ?? 0) {
+            attributes?[i].frame.origin.x = SizeLiteral.leadingTrailingPadding
+        }
+        
         return attributes
     }
 }

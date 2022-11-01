@@ -9,58 +9,29 @@ import UIKit
 
 struct Keyword {
     let string: String
-    let type: KeywordType
+    var type: KeywordType
+    let from: String
+    let to: String
     
-    init(string: String, type: KeywordType) {
+    init(string: String, type: KeywordType, from: String, to: String) {
         self.string = string
         self.type = type
+        self.from = from
+        self.to = to
     }
     
     #if DEBUG
     static let mockData: [Keyword] = [
-        Keyword(string: "밥", type: .defaultKeyword),
-        Keyword(string: "회의왕", type: .defaultKeyword),
-        Keyword(string: "과몰입", type: .defaultKeyword),
-        Keyword(string: "사과처럼🍎", type: .defaultKeyword),
-        Keyword(string: "회고마스터", type: .defaultKeyword),
-        Keyword(string: "🧨", type: .defaultKeyword),
-        Keyword(string: "내돈을가져가", type: .defaultKeyword),
-        Keyword(string: "패셔니스타👕", type: .defaultKeyword),
-        Keyword(string: "밥", type: .defaultKeyword),
-        Keyword(string: "회의왕", type: .defaultKeyword),
-        Keyword(string: "과몰입", type: .defaultKeyword),
-        Keyword(string: "사과처럼🍎", type: .defaultKeyword),
-        Keyword(string: "회고마스터", type: .defaultKeyword),
-        Keyword(string: "🧨", type: .defaultKeyword),
-        Keyword(string: "내돈을가져가", type: .defaultKeyword),
-        Keyword(string: "패셔니스타👕", type: .defaultKeyword),
-        Keyword(string: "밥", type: .defaultKeyword),
-        Keyword(string: "회의왕", type: .defaultKeyword),
-        Keyword(string: "과몰입", type: .defaultKeyword),
-        Keyword(string: "사과처럼🍎", type: .defaultKeyword),
-        Keyword(string: "회고마스터", type: .defaultKeyword),
-        Keyword(string: "🧨", type: .defaultKeyword),
-        Keyword(string: "내돈을가져가", type: .defaultKeyword),
-        Keyword(string: "패셔니스타👕", type: .defaultKeyword),
-        Keyword(string: "밥", type: .defaultKeyword),
-        Keyword(string: "회의왕", type: .defaultKeyword),
-        Keyword(string: "과몰입", type: .defaultKeyword),
-        Keyword(string: "사과처럼🍎", type: .defaultKeyword),
-        Keyword(string: "회고마스터", type: .defaultKeyword),
-        Keyword(string: "🧨", type: .defaultKeyword),
-        Keyword(string: "내돈을가져가", type: .defaultKeyword),
-        Keyword(string: "패셔니스타👕", type: .defaultKeyword),
-        Keyword(string: "밥", type: .defaultKeyword),
-        Keyword(string: "회의왕", type: .defaultKeyword),
-        Keyword(string: "과몰입", type: .defaultKeyword),
-        Keyword(string: "사과처럼🍎", type: .defaultKeyword),
-        Keyword(string: "회고마스터", type: .defaultKeyword),
-        Keyword(string: "🧨", type: .defaultKeyword),
-        Keyword(string: "내돈을가져가", type: .defaultKeyword),
-        Keyword(string: "패셔니스타👕", type: .defaultKeyword),
-        
-        
+        Keyword(string: "밥", type: .defaultKeyword, from: "이드", to: "진저"),
+        Keyword(string: "회의왕", type: .defaultKeyword, from: "이드", to: "진저"),
+        Keyword(string: "과몰입", type: .defaultKeyword, from: "이드", to: "진저"),
+        Keyword(string: "사과처럼🍎", type: .defaultKeyword, from: "케미", to: "진저"),
+        Keyword(string: "회고마스터", type: .defaultKeyword, from: "케미", to: "진저"),
+//        Keyword(string: "🧨", type: .defaultKeyword, from: "케미", to: "진저"),
+        Keyword(string: "👕", type: .defaultKeyword, from: "케미", to: "진저"),
+        Keyword(string: "내돈을가져가", type: .defaultKeyword, from: "이드", to: "진저"),
+        Keyword(string: "👕", type: .defaultKeyword, from: "이드", to: "진저"),
+        Keyword(string: "👕", type: .defaultKeyword, from: "케미", to: "진저"),
     ]
     #endif
-
 }

@@ -13,7 +13,6 @@ final class KeywordCollectionViewCell: BaseCollectionViewCell {
     
     private enum Size {
         static let keywordLabelHeight: CGFloat = 50
-        // FIXME: 기존에는 16 이었는데 그렇게 하면 한 글자일 때 cornerRadius 때문에 뾰족해짐
         static let keywordLabelXInset: CGFloat = 17
     }
     
