@@ -368,6 +368,9 @@
 		3977E12829121A22000E9761 /* CollectionView */ = {
 			isa = PBXGroup;
 			children = (
+				3E557FF92901CD4200714E46 /* KeywordCollectionViewCell.swift */,
+				3E557FF72901CD3400714E46 /* KeywordCollectionViewFlowLayout.swift */,
+				3E8052DE2906E09100A6449D /* SectionHeaderView.swift */,
 				525E721B28FF0F5B00EF3FCB /* MemberCollectionView.swift */,
 				525E721928FF0F1900EF3FCB /* MemberCollectionViewCell.swift */,
 			);
@@ -394,19 +397,9 @@
 		3E557FC128FE7B9200714E46 /* HomeView */ = {
 			isa = PBXGroup;
 			children = (
-				3E557FF62901CD1800714E46 /* UIComponent */,
 				3E557FC228FE7BBC00714E46 /* HomeViewController.swift */,
 			);
 			path = HomeView;
-			sourceTree = "<group>";
-		};
-		3E557FF62901CD1800714E46 /* UIComponent */ = {
-			isa = PBXGroup;
-			children = (
-				3E557FF72901CD3400714E46 /* KeywordCollectionViewFlowLayout.swift */,
-				3E557FF92901CD4200714E46 /* KeywordCollectionViewCell.swift */,
-			);
-			path = UIComponent;
 			sourceTree = "<group>";
 		};
 		3E557FFB2901CD6600714E46 /* Keyword */ = {
@@ -421,7 +414,6 @@
 			isa = PBXGroup;
 			children = (
 				3E5580062906A7B200714E46 /* InProgressViewController.swift */,
-				3E8052DE2906E09100A6449D /* SectionHeaderView.swift */,
 			);
 			path = InProgress;
 			sourceTree = "<group>";
