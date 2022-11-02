@@ -63,6 +63,7 @@ final class MyFeedbackCollectionView: UIView {
 extension MyFeedbackCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: MyFeedbackHeaderView.className, for: indexPath) as? MyFeedbackHeaderView else { return UICollectionReusableView() }
+        header.setCssLabelText(with: indexPath.section)
         switch kind {
         case UICollectionView.elementKindSectionHeader:
             return header
@@ -73,12 +74,16 @@ extension MyFeedbackCollectionView: UICollectionViewDelegate {
 }
 extension MyFeedbackCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        25
+        10
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyFeedbackCollectionViewCell.className, for: indexPath) as? MyFeedbackCollectionViewCell else { return UICollectionViewCell()}
         return cell
+    }
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        2
     }
 }
 

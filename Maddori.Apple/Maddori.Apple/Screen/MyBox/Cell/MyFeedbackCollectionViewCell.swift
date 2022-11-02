@@ -26,7 +26,6 @@ final class MyFeedbackCollectionViewCell: BaseCollectionViewCell {
         label.font = .body2
         label.textColor = .gray400
         label.numberOfLines = 2
-        
         return label
     }()
     

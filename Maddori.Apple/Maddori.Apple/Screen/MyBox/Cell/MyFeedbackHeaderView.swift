@@ -36,4 +36,7 @@ final class MyFeedbackHeaderView: UICollectionReusableView {
         }
     }
     
+    func setCssLabelText(with index: Int) {
+        cssLabel.text = FeedBackType.allCases[index].rawValue
+    }
 }
