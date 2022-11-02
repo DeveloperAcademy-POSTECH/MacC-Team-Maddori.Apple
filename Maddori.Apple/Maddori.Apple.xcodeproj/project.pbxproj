@@ -36,6 +36,7 @@
 		3977E1252910CFF1000E9761 /* sample1 in Resources */ = {isa = PBXBuildFile; fileRef = 3977E1242910CFF1000E9761 /* sample1 */; };
 		39A64ACE2905885F001DB020 /* StartSuggestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A64ACD2905885F001DB020 /* StartSuggestionView.swift */; };
 		39F1A13529125762005E3456 /* MyBoxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F1A13429125762005E3456 /* MyBoxViewController.swift */; };
+		39F1A13C2912637E005E3456 /* MyBoxMemberCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F1A13B2912637E005E3456 /* MyBoxMemberCollectionViewCell.swift */; };
 		39F5582B2908027500CD6F6E /* UIDevice+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F5582A2908027500CD6F6E /* UIDevice+Extension.swift */; };
 		39F5583D2908CFAD00CD6F6E /* Encodable+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F5583C2908CFAD00CD6F6E /* Encodable+Extension.swift */; };
 		3E557FC328FE7BBC00714E46 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E557FC228FE7BBC00714E46 /* HomeViewController.swift */; };
@@ -95,6 +96,7 @@
 		3977E1242910CFF1000E9761 /* sample1 */ = {isa = PBXFileReference; lastKnownFileType = text; path = sample1; sourceTree = "<group>"; };
 		39A64ACD2905885F001DB020 /* StartSuggestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartSuggestionView.swift; sourceTree = "<group>"; };
 		39F1A13429125762005E3456 /* MyBoxViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBoxViewController.swift; sourceTree = "<group>"; };
+		39F1A13B2912637E005E3456 /* MyBoxMemberCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBoxMemberCollectionViewCell.swift; sourceTree = "<group>"; };
 		39F5582A2908027500CD6F6E /* UIDevice+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Extension.swift"; sourceTree = "<group>"; };
 		39F5583C2908CFAD00CD6F6E /* Encodable+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+Extension.swift"; sourceTree = "<group>"; };
 		3E557FC228FE7BBC00714E46 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -332,6 +334,8 @@
 		3977E1202910CF7E000E9761 /* MyBox */ = {
 			isa = PBXGroup;
 			children = (
+				39F1A138291262EA005E3456 /* Cell */,
+				39F1A136291262B4005E3456 /* UIComponent */,
 				39F1A13429125762005E3456 /* MyBoxViewController.swift */,
 			);
 			path = MyBox;
@@ -392,6 +396,21 @@
 				39A64ACD2905885F001DB020 /* StartSuggestionView.swift */,
 			);
 			path = UIComponent;
+			sourceTree = "<group>";
+		};
+		39F1A136291262B4005E3456 /* UIComponent */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = UIComponent;
+			sourceTree = "<group>";
+		};
+		39F1A138291262EA005E3456 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				39F1A13B2912637E005E3456 /* MyBoxMemberCollectionViewCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		3E557FC128FE7B9200714E46 /* HomeView */ = {
@@ -570,6 +589,7 @@
 				7EB4D58229011EF7001FC396 /* JoinTeamViewController.swift in Sources */,
 				39257DED28F9378D00201E0B /* BaseCollectionViewCell.swift in Sources */,
 				391CBA19290580460044CA30 /* ReflectionInfoViewController.swift in Sources */,
+				39F1A13C2912637E005E3456 /* MyBoxMemberCollectionViewCell.swift in Sources */,
 				525E721A28FF0F1900EF3FCB /* MemberCollectionViewCell.swift in Sources */,
 				395C7E2228FEDB6500FC2FCA /* UITextField+Extension.swift in Sources */,
 				D72CF1B0290552960067A118 /* InvitedCodeViewController.swift in Sources */,
