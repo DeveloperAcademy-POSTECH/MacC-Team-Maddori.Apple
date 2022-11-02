@@ -51,6 +51,7 @@ final class MyBoxViewController: BaseViewController {
         view.backgroundColor = .gray300
         return view
     }()
+    private let feedbackCollectionView = MyFeedbackCollectionView()
     
     // MARK: - life cycle
     
@@ -73,6 +74,12 @@ final class MyBoxViewController: BaseViewController {
             $0.leading.trailing.equalToSuperview()
             $0.top.equalTo(memberCollectionView.snp.bottom)
             $0.height.equalTo(0.5)
+        }
+        
+        view.addSubview(feedbackCollectionView)
+        feedbackCollectionView.snp.makeConstraints {
+            $0.leading.trailing.bottom.equalToSuperview()
+            $0.top.equalTo(dividerView.snp.bottom).offset(24)
         }
     }
 }

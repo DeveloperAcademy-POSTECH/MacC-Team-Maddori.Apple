@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 
 final class MyFeedbackCollectionView: UIView {
-    
+    private let mockData = FeedBack.mockData
     private enum Size {
         static let horizontalPadding: CGFloat = 24
         static let topSpacing: CGFloat = 20
@@ -74,16 +74,34 @@ extension MyFeedbackCollectionView: UICollectionViewDelegate {
 }
 extension MyFeedbackCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        10
+        mockData.filter { $0.type == FeedBackType.allCases[section] }.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyFeedbackCollectionViewCell.className, for: indexPath) as? MyFeedbackCollectionViewCell else { return UICollectionViewCell()}
+        switch indexPath.section {
+        case 0:
+            let data = mockData.filter { $0.type == .continueType }
+            cell.setCellLabel(title: data[indexPath.item].title, content: data[indexPath.item].content)
+        case 1:
+            let data = mockData.filter { $0.type == .stopType }
+            cell.setCellLabel(title: data[indexPath.item].title, content: data[indexPath.item].content)
+        default:
+            let data = mockData.filter { $0.type == .startType }
+            cell.setCellLabel(title: data[indexPath.item].title, content: data[indexPath.item].content)
+        }
         return cell
     }
     
+    // FIXME: - 예외 처리해야함 (continue와 start만 있다던지?)
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        2
+        if mockData.contains(where: { $0.type == .continueType }) && mockData.contains(where: { $0.type == .stopType }) && mockData.contains(where: { $0.type == .startType }) {
+            return 3
+        } else if mockData.contains(where: { $0.type == .continueType }) && mockData.contains(where: { $0.type == .stopType }) {
+            return 2
+        } else {
+            return 1
+        }
     }
 }
 
