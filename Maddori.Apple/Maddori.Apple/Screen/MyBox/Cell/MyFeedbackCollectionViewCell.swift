@@ -15,14 +15,12 @@ final class MyFeedbackCollectionViewCell: BaseCollectionViewCell {
     
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "test"
         label.font = .label1
         label.textColor = .black100
         return label
     }()
     private let contentLabel: UILabel = {
         let label = UILabel()
-        label.text = "너무 좋아요 ~ 너무 좋아요 ~ 너무 좋아요 ~ 너무 좋아요 ~ 너무 좋아요 ~ 너무 좋아요 ~ 너무 좋아요 ~ 너무 좋아요 ~ "
         label.font = .body2
         label.textColor = .gray400
         label.numberOfLines = 2
@@ -58,5 +56,12 @@ final class MyFeedbackCollectionViewCell: BaseCollectionViewCell {
         rightImage.snp.makeConstraints {
             $0.trailing.centerY.equalToSuperview()
         }
+    }
+    
+    // MARK: - func
+    
+    func setCellLabel(title: String, content: String) {
+        titleLabel.text = title
+        contentLabel.text = content
     }
 }

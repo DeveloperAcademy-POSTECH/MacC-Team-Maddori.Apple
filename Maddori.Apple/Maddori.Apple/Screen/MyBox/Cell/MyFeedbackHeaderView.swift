@@ -15,7 +15,6 @@ final class MyFeedbackHeaderView: UICollectionReusableView {
     
     private let cssLabel: UILabel = {
         let label = UILabel()
-        label.text = "Continue"
         label.font = .main
         label.textColor = .blue200
         return label
