@@ -19,6 +19,8 @@ final class AddFeedbackContentViewController: BaseViewController {
     var type: FeedBackType = .continueType
     var fromNickname: String
     var toNickname: String
+    var keywordHasText: Bool = false
+    var contentHasText: Bool = false
     
     init(from: String, to: String) {
         self.fromNickname = from
@@ -99,13 +101,6 @@ final class AddFeedbackContentViewController: BaseViewController {
         label.text = TextLiteral.addFeedbackContentViewControllerFeedbackTextViewLabel
         label.textColor = .black100
         label.font = .label2
-        return label
-    }()
-    private let feedbackContentOptionalLabel: UILabel = {
-        let label = UILabel()
-        label.text = "(선택사항)"
-        label.font = .body2
-        label.textColor = .gray400
         return label
     }()
     private let feedbackContentTextView: FeedbackTextView = {
@@ -192,7 +187,7 @@ final class AddFeedbackContentViewController: BaseViewController {
         addFeedbackContentView.snp.makeConstraints {
             $0.edges.equalTo(addFeedbackScrollView.snp.edges)
             $0.width.equalTo(addFeedbackScrollView.snp.width)
-            $0.height.equalTo(view.frame.height)
+            $0.height.equalTo(1180)
         }
         
         addFeedbackContentView.addSubview(addFeedbackTitleLabel)
@@ -235,12 +230,6 @@ final class AddFeedbackContentViewController: BaseViewController {
         feedbackContentLabel.snp.makeConstraints {
             $0.top.equalTo(feedbackKeywordTextField.snp.bottom).offset(SizeLiteral.componentIntervalPadding)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-        }
-        
-        addFeedbackScrollView.addSubview(feedbackContentOptionalLabel)
-        feedbackContentOptionalLabel.snp.makeConstraints {
-            $0.leading.equalTo(feedbackContentLabel.snp.trailing).offset(2)
-            $0.bottom.equalTo(feedbackContentLabel.snp.bottom)
         }
         
         addFeedbackContentView.addSubview(feedbackContentTextView)
@@ -296,7 +285,7 @@ final class AddFeedbackContentViewController: BaseViewController {
             $0.centerX.equalTo(feedbackDoneButtonView.snp.centerX)
         }
     }
-        
+    
     // MARK: - func
     
     override func setupNavigationBar() {
@@ -407,8 +396,8 @@ extension AddFeedbackContentViewController: UITextFieldDelegate {
         setCounter(count: textField.text?.count ?? 0)
         checkMaxLength(textField: feedbackKeywordTextField, maxLength: Length.keywordMaxLength)
         
-        let hasText = feedbackKeywordTextField.hasText
-        feedbackDoneButton.isDisabled = !hasText
+        keywordHasText = feedbackKeywordTextField.hasText
+        feedbackDoneButton.isDisabled = !(keywordHasText && contentHasText)
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -417,6 +406,11 @@ extension AddFeedbackContentViewController: UITextFieldDelegate {
 }
 
 extension AddFeedbackContentViewController: UITextViewDelegate {
+    func textViewDidChangeSelection(_ textView: UITextView) {
+        contentHasText = feedbackContentTextView.hasText && feedbackContentTextView.text != TextLiteral.addFeedbackContentViewControllerFeedbackContentTextViewPlaceholder
+        feedbackDoneButton.isDisabled = !(keywordHasText && contentHasText)
+    }
+    
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.text == TextLiteral.addFeedbackContentViewControllerFeedbackContentTextViewPlaceholder || textView.text == TextLiteral.addFeedbackContentViewControllerStartTextViewPlaceholder {
             textView.text = nil
