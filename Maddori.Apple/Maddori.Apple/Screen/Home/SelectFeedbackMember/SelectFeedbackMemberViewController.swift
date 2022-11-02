@@ -13,7 +13,7 @@ final class SelectFeedbackMemberViewController: BaseViewController {
         
     // MARK: - property
     
-    private let exitButton = CloseButton(type: .system)
+    private let closeButton = CloseButton(type: .system)
     private let selectFeedbackMemberTitleLabel: UILabel = {
         let label = UILabel()
         label.textColor = .black100
@@ -61,10 +61,10 @@ final class SelectFeedbackMemberViewController: BaseViewController {
     override func setupNavigationBar() {
         super.setupNavigationBar()
         
-        let exitButton = makeBarButtonItem(with: exitButton)
+        let rightButton = makeBarButtonItem(with: closeButton)
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.largeTitleDisplayMode = .never
-        navigationItem.rightBarButtonItem = exitButton
+        navigationItem.rightBarButtonItem = rightButton
     }
     
     private func didTappedMember() {

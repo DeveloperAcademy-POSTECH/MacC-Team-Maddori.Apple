@@ -45,7 +45,7 @@ final class AddFeedbackContentViewController: BaseViewController {
     private lazy var closeButton: CloseButton = {
         let button = CloseButton(type: .system)
         let action = UIAction { [weak self] _ in
-            self?.didTappedExitButton()
+            self?.didTappedCloseButton()
         }
         button.addAction(action, for: .touchUpInside)
         return button
@@ -123,6 +123,13 @@ final class AddFeedbackContentViewController: BaseViewController {
         toggle.addAction(action, for: .touchUpInside)
         return toggle
     }()
+    private lazy var feedbackSendTimeLabel: UILabel = {
+        let label = UILabel()
+        label.setTextWithLineHeight(text: TextLiteral.addFeedbackContentViewControllerFeedbackSendTimeLabel, lineHeight: 22)
+        label.textColor = .gray400
+        label.font = .body2
+        return label
+    }()
     private let feedbackStartLabel: UILabel = {
         let label = UILabel()
         label.text = TextLiteral.addFeedbackContentViewControllerFeedbackStartLabel
@@ -166,6 +173,13 @@ final class AddFeedbackContentViewController: BaseViewController {
         super.viewDidLoad()
         setupNotificationCenter()
         setupDelegate()
+    }
+    
+    override func configUI() {
+        super.configUI()
+        if feedbackDate != nil {
+            feedbackSendTimeLabel.text = "작성한 피드백은 \(feedbackDate!.dateToMonthDayString)에 자동으로 제출됩니다"
+        }
     }
     
     override func render() {
@@ -244,6 +258,12 @@ final class AddFeedbackContentViewController: BaseViewController {
             $0.height.equalTo(31)
         }
         
+        feedbackDoneButtonView.addSubview(feedbackSendTimeLabel)
+        feedbackSendTimeLabel.snp.makeConstraints {
+            $0.bottom.equalTo(feedbackDoneButton.snp.top).offset(-11)
+            $0.centerX.equalTo(feedbackDoneButtonView.snp.centerX)
+        }
+        
         addFeedbackContentView.addSubview(feedbackStartLabel)
         feedbackStartLabel.snp.makeConstraints {
             $0.centerY.equalTo(feedbackStartSwitch.snp.centerY)
@@ -284,12 +304,12 @@ final class AddFeedbackContentViewController: BaseViewController {
         
         let button = removeBarButtonItemOffset(with: backButton, offsetX: 10)
         let backButton = makeBarButtonItem(with: button)
-        let exitButton = makeBarButtonItem(with: closeButton)
+        let closeButton = makeBarButtonItem(with: closeButton)
         
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.largeTitleDisplayMode = .never
         navigationItem.leftBarButtonItem = backButton
-        navigationItem.rightBarButtonItem = exitButton
+        navigationItem.rightBarButtonItem = closeButton
     }
     
     private func setupNotificationCenter() {
@@ -332,7 +352,7 @@ final class AddFeedbackContentViewController: BaseViewController {
         }
     }
     
-    private func didTappedExitButton() {
+    private func didTappedCloseButton() {
         self.dismiss(animated: true)
     }
     
@@ -369,12 +389,14 @@ final class AddFeedbackContentViewController: BaseViewController {
                 self.feedbackDoneButton.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height + 25)
             })
         }
+        feedbackSendTimeLabel.isHidden = true
     }
     
     @objc private func willHideKeyboard(notification: NSNotification) {
         UIView.animate(withDuration: 0.2, animations: {
             self.feedbackDoneButton.transform = .identity
         })
+        feedbackSendTimeLabel.isHidden = false
     }
 }
 
