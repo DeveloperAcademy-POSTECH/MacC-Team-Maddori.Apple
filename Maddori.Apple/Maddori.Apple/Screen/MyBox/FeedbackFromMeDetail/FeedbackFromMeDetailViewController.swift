@@ -11,7 +11,7 @@ import SnapKit
 
 final class FeedbackFromMeDetailViewController: BaseViewController {
     
-    let model = ReflectionInfoModel.mockData
+    let model = FeedbackFromMeModel.mockData
     
     // MARK: - property
     
@@ -22,6 +22,7 @@ final class FeedbackFromMeDetailViewController: BaseViewController {
         button.setTitleColor(.red100, for: .normal)
         button.titleLabel?.font = .label2
         button.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
+        
         return button
     }()
     private let feedbackFromMeDetailScrollView = UIScrollView()
@@ -87,6 +88,24 @@ final class FeedbackFromMeDetailViewController: BaseViewController {
         label.font = .body1
         label.numberOfLines = 0
         return label
+    }()
+    private let feedbackEditButtonView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white200
+        return view
+    }()
+    private lazy var feedbackSendTimeLabel: UILabel = {
+        let label = UILabel()
+        label.setTextWithLineHeight(text: "작성한 피드백은 회고 시간에 자동 제출됩니다", lineHeight: 22)
+        label.textColor = .gray400
+        label.font = .body2
+        return label
+    }()
+    private lazy var feedbackEditButton: MainButton = {
+        let button = MainButton()
+        button.title = "수정하러 가기"
+        button.isDisabled = false
+        return button
     }()
     
     // MARK: - life cycle
@@ -159,6 +178,24 @@ final class FeedbackFromMeDetailViewController: BaseViewController {
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
+        view.addSubview(feedbackEditButtonView)
+        feedbackEditButtonView.snp.makeConstraints {
+            $0.bottom.equalToSuperview()
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(181)
+        }
+        
+        feedbackEditButtonView.addSubview(feedbackEditButton)
+        feedbackEditButton.snp.makeConstraints {
+            $0.bottom.equalTo(feedbackEditButtonView.snp.bottom).inset(91)
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+        
+        feedbackEditButtonView.addSubview(feedbackSendTimeLabel)
+        feedbackSendTimeLabel.snp.makeConstraints {
+            $0.bottom.equalTo(feedbackEditButton.snp.top).offset(-11)
+            $0.centerX.equalTo(feedbackEditButtonView.snp.centerX)
+        }
     }
     
     // MARK: - func

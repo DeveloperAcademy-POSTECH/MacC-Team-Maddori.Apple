@@ -51,6 +51,7 @@
 		525E721F28FFC89800EF3FCB /* AddFeedbackContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525E721E28FFC89800EF3FCB /* AddFeedbackContentViewController.swift */; };
 		525E722128FFC9A800EF3FCB /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525E722028FFC9A800EF3FCB /* BackButton.swift */; };
 		525E722528FFCFA600EF3FCB /* FeedbackTypeButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525E722428FFCFA600EF3FCB /* FeedbackTypeButtonView.swift */; };
+		52AED2DD29128532004D70B9 /* FeedbackFromMeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52AED2DC29128532004D70B9 /* FeedbackFromMeModel.swift */; };
 		52F07B9A2912541B0015BC8B /* FeedbackFromMeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F07B992912541B0015BC8B /* FeedbackFromMeDetailViewController.swift */; };
 		52F07B9C29125EAB0015BC8B /* FeedbackTypeLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F07B9B29125EAB0015BC8B /* FeedbackTypeLabelView.swift */; };
 		52F2D1C12906F172009CBF89 /* SelectFeedbackMemberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F2D1C02906F172009CBF89 /* SelectFeedbackMemberViewController.swift */; };
@@ -111,6 +112,7 @@
 		525E721E28FFC89800EF3FCB /* AddFeedbackContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFeedbackContentViewController.swift; sourceTree = "<group>"; };
 		525E722028FFC9A800EF3FCB /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
 		525E722428FFCFA600EF3FCB /* FeedbackTypeButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackTypeButtonView.swift; sourceTree = "<group>"; };
+		52AED2DC29128532004D70B9 /* FeedbackFromMeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackFromMeModel.swift; sourceTree = "<group>"; };
 		52F07B992912541B0015BC8B /* FeedbackFromMeDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackFromMeDetailViewController.swift; sourceTree = "<group>"; };
 		52F07B9B29125EAB0015BC8B /* FeedbackTypeLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackTypeLabelView.swift; sourceTree = "<group>"; };
 		52F2D1C02906F172009CBF89 /* SelectFeedbackMemberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectFeedbackMemberViewController.swift; sourceTree = "<group>"; };
@@ -191,6 +193,7 @@
 		39257DD828F90EA900201E0B /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				52F07B9D2912849E0015BC8B /* FeedbackFromMe */,
 				391CBA1A290582030044CA30 /* ReflectionInfo */,
 				3E557FFB2901CD6600714E46 /* Keyword */,
 			);
@@ -445,6 +448,14 @@
 			path = FeedbackFromMeDetail;
 			sourceTree = "<group>";
 		};
+		52F07B9D2912849E0015BC8B /* FeedbackFromMe */ = {
+			isa = PBXGroup;
+			children = (
+				52AED2DC29128532004D70B9 /* FeedbackFromMeModel.swift */,
+			);
+			path = FeedbackFromMe;
+			sourceTree = "<group>";
+		};
 		52F2D1BF2906F157009CBF89 /* SelectFeedbackMember */ = {
 			isa = PBXGroup;
 			children = (
@@ -565,6 +576,7 @@
 				525E722528FFCFA600EF3FCB /* FeedbackTypeButtonView.swift in Sources */,
 				39A64ACE2905885F001DB020 /* StartSuggestionView.swift in Sources */,
 				525E721F28FFC89800EF3FCB /* AddFeedbackContentViewController.swift in Sources */,
+				52AED2DD29128532004D70B9 /* FeedbackFromMeModel.swift in Sources */,
 				D724790C28FEC8C900D67B50 /* BaseTextFieldViewController.swift in Sources */,
 				7E6B662F28FE887300C3BEEF /* UILabel+Extension.swift in Sources */,
 				395C7E0B28F9550A00FC2FCA /* NSObject+Extension.swift in Sources */,

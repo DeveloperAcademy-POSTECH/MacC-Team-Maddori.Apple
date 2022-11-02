@@ -123,13 +123,6 @@ final class AddFeedbackContentViewController: BaseViewController {
         toggle.addAction(action, for: .touchUpInside)
         return toggle
     }()
-    private lazy var feedbackSendTimeLabel: UILabel = {
-        let label = UILabel()
-        label.setTextWithLineHeight(text: TextLiteral.addFeedbackContentViewControllerFeedbackSendTimeLabel, lineHeight: 22)
-        label.textColor = .gray400
-        label.font = .body2
-        return label
-    }()
     private let feedbackStartLabel: UILabel = {
         let label = UILabel()
         label.text = TextLiteral.addFeedbackContentViewControllerFeedbackStartLabel
@@ -155,6 +148,13 @@ final class AddFeedbackContentViewController: BaseViewController {
         let view = UIView()
         view.backgroundColor = .white200
         return view
+    }()
+    private lazy var feedbackSendTimeLabel: UILabel = {
+        let label = UILabel()
+        label.setTextWithLineHeight(text: TextLiteral.addFeedbackContentViewControllerFeedbackSendTimeLabel, lineHeight: 22)
+        label.textColor = .gray400
+        label.font = .body2
+        return label
     }()
     private lazy var feedbackDoneButton: MainButton = {
         let button = MainButton()
