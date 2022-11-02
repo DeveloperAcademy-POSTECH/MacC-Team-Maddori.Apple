@@ -14,24 +14,30 @@ final class MyFeedbackCollectionView: UIView {
     private enum Size {
         static let horizontalPadding: CGFloat = 24
         static let topSpacing: CGFloat = 20
+        static let cellWidth: CGFloat = UIScreen.main.bounds.size.width - (SizeLiteral.leadingTrailingPadding * 2)
+        static let cellHeight: CGFloat = 85
+        static let collectionViewInset = UIEdgeInsets.init(top: Size.topSpacing,
+                                                           left: Size.horizontalPadding,
+                                                           bottom: 0,
+                                                           right: Size.horizontalPadding)
     }
     
     // MARK: - property
     
     private let collectionViewFlowLayout: UICollectionViewFlowLayout = {
         let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.sectionInset = UIEdgeInsets.init(top: Size.topSpacing,
-                                                    left: Size.horizontalPadding,
-                                                    bottom: 0,
-                                                    right: Size.horizontalPadding)
+        flowLayout.scrollDirection = .vertical
+        flowLayout.sectionInset = Size.collectionViewInset
+        flowLayout.itemSize = CGSize(width: Size.cellWidth, height: Size.cellHeight)
         return flowLayout
     }()
     private lazy var feedbackCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewFlowLayout)
+        collectionView.backgroundColor = .backgroundWhite
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.register(MyFeedbackCollectionViewCell.self, forCellWithReuseIdentifier: MyFeedbackCollectionViewCell.className)
         collectionView.register(MyFeedbackHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: MyFeedbackHeaderView.className)
+        collectionView.register(MyFeedbackCollectionViewCell.self, forCellWithReuseIdentifier: MyFeedbackCollectionViewCell.className)
         return collectionView
     }()
     
@@ -67,7 +73,7 @@ extension MyFeedbackCollectionView: UICollectionViewDelegate {
 }
 extension MyFeedbackCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        5
+        25
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -78,7 +84,7 @@ extension MyFeedbackCollectionView: UICollectionViewDataSource {
 
 extension MyFeedbackCollectionView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: 300, height: 40)
+        return CGSize(width: 80, height: 25)
     }
 }
 
