@@ -22,7 +22,7 @@ final class MyBoxViewController: BaseViewController {
     
     private let myFeedbackLabel: UILabel = {
         let label = UILabel()
-        label.setTitleFont(text: "내가 작성한 피드백")
+        label.setTitleFont(text: TextLiteral.myBoxViewControllerTitleLabel)
         return label
     }()
     private let collectionViewFlowLayout: UICollectionViewFlowLayout = {
