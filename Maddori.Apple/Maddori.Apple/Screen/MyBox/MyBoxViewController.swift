@@ -10,6 +10,7 @@ import UIKit
 import SnapKit
 
 final class MyBoxViewController: BaseViewController {
+    private let memberList: [String] = ["진저", "이드", "호야", "케미", "메리"]
     
     private enum Size {
         static let horizontalPadding: CGFloat = 24
@@ -38,8 +39,10 @@ final class MyBoxViewController: BaseViewController {
     }()
     private lazy var memberCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewFlowLayout)
+        collectionView.backgroundColor = .backgroundWhite
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.showsHorizontalScrollIndicator = false
         collectionView.register(MyBoxMemberCollectionViewCell.self, forCellWithReuseIdentifier: MyBoxMemberCollectionViewCell.className)
         return collectionView
     }()
@@ -64,19 +67,18 @@ final class MyBoxViewController: BaseViewController {
 
 // MARK: - extension
 
-extension MyBoxViewController: UICollectionViewDelegate {
-    
-}
+extension MyBoxViewController: UICollectionViewDelegate { }
 
 extension MyBoxViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        5
+        memberList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyBoxMemberCollectionViewCell.className, for: indexPath) as? MyBoxMemberCollectionViewCell else {
             return UICollectionViewCell()
         }
+        cell.setMemeberName(name: memberList[indexPath.item])
         return cell
     }
 }
