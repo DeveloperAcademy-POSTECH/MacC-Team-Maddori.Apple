@@ -46,6 +46,11 @@ final class MyBoxViewController: BaseViewController {
         collectionView.register(MyBoxMemberCollectionViewCell.self, forCellWithReuseIdentifier: MyBoxMemberCollectionViewCell.className)
         return collectionView
     }()
+    private let dividerView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .gray300
+        return view
+    }()
     
     // MARK: - life cycle
     
@@ -61,6 +66,13 @@ final class MyBoxViewController: BaseViewController {
             $0.top.equalTo(myFeedbackLabel.snp.bottom).offset(7)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(100)
+        }
+        
+        view.addSubview(dividerView)
+        dividerView.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview()
+            $0.top.equalTo(memberCollectionView.snp.bottom)
+            $0.height.equalTo(0.5)
         }
     }
 }
