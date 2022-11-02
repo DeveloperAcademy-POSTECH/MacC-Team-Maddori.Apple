@@ -58,6 +58,7 @@ final class MyBoxMemberCollectionViewCell: BaseCollectionViewCell {
         self.layer.borderColor = UIColor.blue200.cgColor
         self.layer.borderWidth = 2
         self.layer.shadowOpacity = 0
+        memberNameLabel.textColor = .blue200
     }
     
     private func setShadowLayer() {
@@ -65,6 +66,7 @@ final class MyBoxMemberCollectionViewCell: BaseCollectionViewCell {
         self.layer.borderWidth = 0
         self.layer.borderColor = UIColor.clear.cgColor
         self.makeShadow(color: .black, opacity: 0.25, offset: CGSize.zero, radius: 1)
+        memberNameLabel.textColor = .gray400
     }
     
     func setMemeberName(name: String) {
