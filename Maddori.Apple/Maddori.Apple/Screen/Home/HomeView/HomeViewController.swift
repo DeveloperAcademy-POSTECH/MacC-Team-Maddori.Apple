@@ -56,9 +56,19 @@ final class HomeViewController: BaseViewController {
         let label = UILabel()
         label.setTitleFont(text: "Apple Developer Academy")
         label.textColor = .black100
-        label.numberOfLines = 0
+        label.numberOfLines = 1
+        label.lineBreakMode = .byTruncatingTail
         return label
     }()
+    private let invitationCodeButton: UIButton = {
+         let button = UIButton()
+         button.setTitle(TextLiteral.mainViewControllerInvitationButtonText, for: .normal)
+         button.setTitleColor(UIColor.blue200, for: .normal)
+         button.titleLabel?.font = .caption2
+         button.backgroundColor = .gray100
+         button.layer.cornerRadius = 4
+         return button
+     }()
     private let descriptionLabel: UILabel = {
         let label = UILabel()
         label.text = "아직 회고 일정이 정해지지 않았습니다"
@@ -128,6 +138,15 @@ final class HomeViewController: BaseViewController {
         teamNameLabel.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).offset(SizeLiteral.topPadding)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.trailing.equalToSuperview().inset(80)
+        }
+        
+        view.addSubview(invitationCodeButton)
+        invitationCodeButton.snp.makeConstraints {
+            $0.leading.equalTo(teamNameLabel.snp.trailing).offset(Size.labelButtonPadding)
+            $0.centerY.equalTo(teamNameLabel.snp.centerY)
+            $0.width.equalTo(Size.subButtonWidth)
+            $0.height.equalTo(Size.subButtonHeight)
         }
         
         view.addSubview(descriptionLabel)
