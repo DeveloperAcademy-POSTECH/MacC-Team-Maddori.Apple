@@ -7,6 +7,8 @@
 
 import UIKit
 
+import SnapKit
+
 final class BackButton: UIButton {
     
     // MARK: - life cycle
@@ -14,13 +16,19 @@ final class BackButton: UIButton {
     override init(frame: CGRect) {
         super.init(frame: frame)
         configUI()
+        render()
     }
     
     required init?(coder: NSCoder) { nil }
     
     private func configUI() {
-        self.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
         self.setImage(ImageLiterals.icBack, for: .normal)
         self.tintColor = .black100
+    }
+    
+    private func render() {
+        self.snp.makeConstraints {
+            $0.width.height.equalTo(44)
+        }
     }
 }

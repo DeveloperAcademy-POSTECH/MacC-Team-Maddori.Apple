@@ -10,12 +10,23 @@ import UIKit
 import SnapKit
 
 final class AddFeedbackContentViewController: BaseViewController {
+    
     private enum Length {
         static let keywordMinLength: Int = 0
         static let keywordMaxLength: Int = 15
         static let textViewMaxLength: Int = 200
     }
-    var nickname: String = ""
+    var type: FeedBackType = .continueType
+    var fromNickname: String
+    var toNickname: String
+    
+    init(from: String, to: String) {
+        self.fromNickname = from
+        self.toNickname = to
+        super.init()
+    }
+    
+    required init?(coder: NSCoder) { nil }
     
     // FIXME: - 회고 날짜 받아오기 / 현재는 있는 상태
     private let feedbackDate: Date? = Date()
@@ -31,10 +42,10 @@ final class AddFeedbackContentViewController: BaseViewController {
         return button
     }()
     
-    private lazy var exitButton: ExitButton = {
-        let button = ExitButton(type: .system)
+    private lazy var closeButton: CloseButton = {
+        let button = CloseButton(type: .system)
         let action = UIAction { [weak self] _ in
-            self?.didTappedExitButton()
+            self?.didTappedCloseButton()
         }
         button.addAction(action, for: .touchUpInside)
         return button
@@ -43,7 +54,7 @@ final class AddFeedbackContentViewController: BaseViewController {
     private let addFeedbackContentView = UIView()
     private lazy var addFeedbackTitleLabel: UILabel = {
         let label = UILabel()
-        label.text = nickname + TextLiteral.addFeedbackContentViewControllerTitleLabel
+        label.text = toNickname + TextLiteral.addFeedbackContentViewControllerTitleLabel
         label.textColor = .black100
         label.font = .title
         return label
@@ -55,7 +66,15 @@ final class AddFeedbackContentViewController: BaseViewController {
         label.font = .label2
         return label
     }()
-    private let feedbackTypeButtonView = FeedbackTypeButtonView()
+    private lazy var feedbackTypeButtonView: FeedbackTypeButtonView = {
+        let view = FeedbackTypeButtonView()
+        view.changeFeedbackType = { [weak self] type in
+            if let typeValue = FeedBackType.init(rawValue: type.rawValue) {
+                self?.type = typeValue
+            }
+        }
+        return view
+    }()
     private let feedbackKeywordLabel: UILabel = {
         let label = UILabel()
         label.text = TextLiteral.addFeedbackContentViewControllerFeedbackKeywordLabel
@@ -82,6 +101,13 @@ final class AddFeedbackContentViewController: BaseViewController {
         label.font = .label2
         return label
     }()
+    private let feedbackContentOptionalLabel: UILabel = {
+        let label = UILabel()
+        label.text = "(선택사항)"
+        label.font = .body2
+        label.textColor = .gray400
+        return label
+    }()
     private let feedbackContentTextView: FeedbackTextView = {
         let textView = FeedbackTextView()
         textView.placeholder = TextLiteral.addFeedbackContentViewControllerFeedbackContentTextViewPlaceholder
@@ -96,6 +122,13 @@ final class AddFeedbackContentViewController: BaseViewController {
         }
         toggle.addAction(action, for: .touchUpInside)
         return toggle
+    }()
+    private lazy var feedbackSendTimeLabel: UILabel = {
+        let label = UILabel()
+        label.setTextWithLineHeight(text: TextLiteral.addFeedbackContentViewControllerFeedbackSendTimeLabel, lineHeight: 22)
+        label.textColor = .gray400
+        label.font = .body2
+        return label
     }()
     private let feedbackStartLabel: UILabel = {
         let label = UILabel()
@@ -123,13 +156,6 @@ final class AddFeedbackContentViewController: BaseViewController {
         view.backgroundColor = .white200
         return view
     }()
-    private lazy var feedbackSendTimeLabel: UILabel = {
-        let label = UILabel()
-        label.text = TextLiteral.addFeedbackContentViewControllerFeedbackSendTimeLabel
-        label.textColor = .gray400
-        label.font = .body2
-        return label
-    }()
     private lazy var feedbackDoneButton: MainButton = {
         let button = MainButton()
         button.title = TextLiteral.addFeedbackContentViewControllerDoneButtonTitle
@@ -147,6 +173,13 @@ final class AddFeedbackContentViewController: BaseViewController {
         super.viewDidLoad()
         setupNotificationCenter()
         setupDelegate()
+    }
+    
+    override func configUI() {
+        super.configUI()
+        if feedbackDate != nil {
+            feedbackSendTimeLabel.text = "작성한 피드백은 \(feedbackDate!.dateToMonthDayString)에 자동으로 제출됩니다"
+        }
     }
     
     override func render() {
@@ -204,6 +237,12 @@ final class AddFeedbackContentViewController: BaseViewController {
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
+        addFeedbackScrollView.addSubview(feedbackContentOptionalLabel)
+        feedbackContentOptionalLabel.snp.makeConstraints {
+            $0.leading.equalTo(feedbackContentLabel.snp.trailing).offset(2)
+            $0.bottom.equalTo(feedbackContentLabel.snp.bottom)
+        }
+        
         addFeedbackContentView.addSubview(feedbackContentTextView)
         feedbackContentTextView.snp.makeConstraints {
             $0.top.equalTo(feedbackContentLabel.snp.bottom).offset(SizeLiteral.labelComponentPadding)
@@ -217,6 +256,12 @@ final class AddFeedbackContentViewController: BaseViewController {
             $0.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.width.equalTo(51)
             $0.height.equalTo(31)
+        }
+        
+        feedbackDoneButtonView.addSubview(feedbackSendTimeLabel)
+        feedbackSendTimeLabel.snp.makeConstraints {
+            $0.bottom.equalTo(feedbackDoneButton.snp.top).offset(-11)
+            $0.centerX.equalTo(feedbackDoneButtonView.snp.centerX)
         }
         
         addFeedbackContentView.addSubview(feedbackStartLabel)
@@ -250,21 +295,8 @@ final class AddFeedbackContentViewController: BaseViewController {
             $0.bottom.equalTo(feedbackDoneButtonView.snp.bottom).inset(36)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
+    }
         
-        feedbackDoneButtonView.addSubview(feedbackSendTimeLabel)
-        feedbackSendTimeLabel.snp.makeConstraints {
-            $0.bottom.equalTo(feedbackDoneButton.snp.top).offset(-11)
-            $0.centerX.equalTo(feedbackDoneButtonView.snp.centerX)
-        }
-    }
-    
-    override func configUI() {
-        super.configUI()
-        if feedbackDate != nil {
-            feedbackSendTimeLabel.text = "작성한 피드백은 \(feedbackDate!.dateToMonthDayString)에 자동으로 제출됩니다"
-        }
-    }
-    
     // MARK: - func
     
     override func setupNavigationBar() {
@@ -272,12 +304,12 @@ final class AddFeedbackContentViewController: BaseViewController {
         
         let button = removeBarButtonItemOffset(with: backButton, offsetX: 10)
         let backButton = makeBarButtonItem(with: button)
-        let exitButton = makeBarButtonItem(with: exitButton)
+        let closeButton = makeBarButtonItem(with: closeButton)
         
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.largeTitleDisplayMode = .never
         navigationItem.leftBarButtonItem = backButton
-        navigationItem.rightBarButtonItem = exitButton
+        navigationItem.rightBarButtonItem = closeButton
     }
     
     private func setupNotificationCenter() {
@@ -320,7 +352,7 @@ final class AddFeedbackContentViewController: BaseViewController {
         }
     }
     
-    private func didTappedExitButton() {
+    private func didTappedCloseButton() {
         self.dismiss(animated: true)
     }
     
@@ -346,11 +378,7 @@ final class AddFeedbackContentViewController: BaseViewController {
     }
     
     private func didTappedDoneButton() {
-        guard let keyword = feedbackKeywordTextField.text,
-              let content = feedbackContentTextView.text,
-              let startContent = feedbackStartTextView.text else { return }
-        // FIXME: 서버에 데이터 보내기
-        dismiss(animated: true)
+        
     }
     
     // MARK: - selector
@@ -361,7 +389,6 @@ final class AddFeedbackContentViewController: BaseViewController {
                 self.feedbackDoneButton.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height + 25)
             })
         }
-        
         feedbackSendTimeLabel.isHidden = true
     }
     
@@ -369,7 +396,6 @@ final class AddFeedbackContentViewController: BaseViewController {
         UIView.animate(withDuration: 0.2, animations: {
             self.feedbackDoneButton.transform = .identity
         })
-        
         feedbackSendTimeLabel.isHidden = false
     }
 }

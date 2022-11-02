@@ -10,8 +10,9 @@ import UIKit
 import SnapKit
 
 final class HomeViewController: BaseViewController {
+    
+    var keywordList: [Keyword] = Keyword.mockData
     var isTouched = false
-    let keywords = Keyword.mockData
     private enum Size {
         static let keywordLabelHeight: CGFloat = 50
         static let labelButtonPadding: CGFloat = 6
@@ -33,7 +34,7 @@ final class HomeViewController: BaseViewController {
     }()
     private let toastLabel: UILabel = {
         let label = UILabel()
-        label.text = "Test Flight에선 지원되지 않습니다"
+        label.text = "아직 회고 시간이 아닙니다"
         label.font = UIFont.font(.medium, ofSize: 14)
         label.textColor = .white100
         return label
@@ -53,14 +54,23 @@ final class HomeViewController: BaseViewController {
     }()
     private let teamNameLabel: UILabel = {
         let label = UILabel()
-        label.setTitleFont(text: TextLiteral.mainViewControllerTeamName)
+        label.setTitleFont(text: "맛쟁이 사과처럼")
         label.textColor = .black100
         label.numberOfLines = 0
         return label
     }()
+    private let invitationCodeButton: UIButton = {
+         let button = UIButton()
+         button.setTitle(TextLiteral.mainViewControllerInvitationButtonText, for: .normal)
+         button.setTitleColor(UIColor.blue200, for: .normal)
+         button.titleLabel?.font = .caption2
+         button.backgroundColor = .gray100
+         button.layer.cornerRadius = 4
+         return button
+     }()
     private let descriptionLabel: UILabel = {
         let label = UILabel()
-        label.text = TextLiteral.mainViewControllerReflectionDateDescription
+        label.text = "아직 회고 일정이 정해지지 않았습니다"
         label.font = .caption1
         label.textColor = .gray400
         return label
@@ -72,6 +82,12 @@ final class HomeViewController: BaseViewController {
         label.textColor = .black100
         return label
     }()
+    private let planLabelButtonView: LabelButtonView = {
+        let labelButton = LabelButtonView()
+        labelButton.subText = TextLiteral.mainViewControllerPlanLabelButtonSubText
+        labelButton.subButtonText = TextLiteral.mainViewControllerPlanLabelButtonSubButtonText
+        return labelButton
+    }()
     private lazy var addFeedbackButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .white100
@@ -81,7 +97,6 @@ final class HomeViewController: BaseViewController {
         button.layer.borderWidth = 2
         button.layer.borderColor = UIColor.blue200.cgColor
         button.layer.cornerRadius = Size.buttonCornerRadius
-        // TODO: button action 추가
         let action = UIAction { [weak self] _ in
             self?.didTapAddFeedbackButton()
         }
@@ -111,6 +126,7 @@ final class HomeViewController: BaseViewController {
             $0.height.equalTo(46)
         }
         
+        // FIXME: - 크기 수정 필요
         toastView.addSubview(toastLabel)
         toastLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
@@ -127,6 +143,14 @@ final class HomeViewController: BaseViewController {
         teamNameLabel.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).offset(SizeLiteral.topPadding)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+        
+        view.addSubview(invitationCodeButton)
+        invitationCodeButton.snp.makeConstraints {
+           $0.leading.equalTo(teamNameLabel.snp.trailing).offset(Size.labelButtonPadding)
+           $0.width.equalTo(Size.subButtonWidth)
+           $0.height.equalTo(Size.subButtonHeight)
+           $0.bottom.equalTo(teamNameLabel.snp.bottom).offset(-5)
         }
         
         view.addSubview(descriptionLabel)
@@ -154,6 +178,13 @@ final class HomeViewController: BaseViewController {
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             $0.bottom.equalTo(addFeedbackButton.snp.top).offset(-10)
         }
+        
+        view.addSubview(planLabelButtonView)
+        planLabelButtonView.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.bottom.equalTo(addFeedbackButton.snp.top)
+            $0.height.equalTo(SizeLiteral.minimumTouchArea)
+        }
     }
     
     // MARK: - func
@@ -164,9 +195,9 @@ final class HomeViewController: BaseViewController {
     }
     
     private func didTapAddFeedbackButton() {
-        let vc = UINavigationController(rootViewController: FromToViewController())
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true)
+        let viewController = UINavigationController(rootViewController: AddFeedbackMemberViewController())
+        viewController.modalPresentationStyle = .fullScreen
+        present(viewController, animated: true)
     }
     
     private func setGradientToastView() {
@@ -180,7 +211,7 @@ final class HomeViewController: BaseViewController {
             UIView.animate(withDuration: 0.5, delay: 0, animations: {
                 self.toastView.transform = CGAffineTransform(translationX: 0, y: 115)
             }, completion: {_ in
-                UIView.animate(withDuration: 1, delay: 0.5, animations: {
+                UIView.animate(withDuration: 1, delay: 0.8, animations: {
                     self.toastView.transform = .identity
                 }, completion: {_ in
                     self.isTouched = false
@@ -194,7 +225,7 @@ final class HomeViewController: BaseViewController {
 
 extension HomeViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return keywords.count
+        return keywordList.count
     }
 }
 
@@ -203,7 +234,7 @@ extension HomeViewController: UICollectionViewDataSource {
         guard let cell = keywordCollectionView.dequeueReusableCell(withReuseIdentifier: KeywordCollectionViewCell.className, for: indexPath) as? KeywordCollectionViewCell else {
             return UICollectionViewCell()
         }
-        let keyword = keywords[indexPath.item]
+        let keyword = keywordList[indexPath.item]
         // FIXME: cell을 여기서 접근하는건 안좋은 방법일수도?
         cell.keywordLabel.text = keyword.string
         cell.configShadow(type: .previewKeyword)
@@ -212,7 +243,6 @@ extension HomeViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(indexPath.item)
         UIDevice.vibrate()
         showToastPopUp()
     }
@@ -221,7 +251,7 @@ extension HomeViewController: UICollectionViewDataSource {
 extension HomeViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let size = Size.keywordLabelHeight
-        return KeywordCollectionViewCell.fittingSize(availableHeight: size, keyword: keywords[indexPath.item].string)
+        return KeywordCollectionViewCell.fittingSize(availableHeight: size, keyword: keywordList[indexPath.item].string)
     }
 }
 

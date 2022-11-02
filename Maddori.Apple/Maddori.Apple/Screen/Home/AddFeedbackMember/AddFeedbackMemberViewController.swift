@@ -13,7 +13,7 @@ final class AddFeedbackMemberViewController: BaseViewController {
 
     // MARK: - property
     
-    private let exitButton = ExitButton()
+    private let closeButton = CloseButton()
     private let selectMemberLabel: UILabel = {
         let label = UILabel()
         label.text = TextLiteral.addFeedbackMemberViewControllerTitle
@@ -47,9 +47,9 @@ final class AddFeedbackMemberViewController: BaseViewController {
     override func setupNavigationBar() {
         super.setupNavigationBar()
         
-        let exitButton = makeBarButtonItem(with: exitButton)
+        let rightButton = makeBarButtonItem(with: closeButton)
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.largeTitleDisplayMode = .never
-        navigationItem.rightBarButtonItem = exitButton
+        navigationItem.rightBarButtonItem = rightButton
     }
 }

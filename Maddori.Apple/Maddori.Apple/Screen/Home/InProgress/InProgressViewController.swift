@@ -89,7 +89,7 @@ final class InProgressViewController: BaseViewController {
     
     override func setupNavigationBar() {
         super.setupNavigationBar()
-        
+        // FIXME: - 터치영역 34로 되어있음
         let button = removeBarButtonItemOffset(with: backButton, offsetX: 10)
         let backButton = makeBarButtonItem(with: button)
         
