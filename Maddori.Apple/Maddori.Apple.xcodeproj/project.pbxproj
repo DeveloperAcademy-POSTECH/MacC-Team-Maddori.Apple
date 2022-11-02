@@ -24,6 +24,7 @@
 		39436C1029127BBA0083D77A /* MyFeedbackCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39436C0F29127BBA0083D77A /* MyFeedbackCollectionView.swift */; };
 		39436C132912877D0083D77A /* MyFeedbackHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39436C122912877D0083D77A /* MyFeedbackHeaderView.swift */; };
 		39436C15291287A00083D77A /* MyFeedbackCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39436C14291287A00083D77A /* MyFeedbackCollectionViewCell.swift */; };
+		39436C182912A2E10083D77A /* Feedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39436C172912A2E10083D77A /* Feedback.swift */; };
 		395C7E0328F945B500FC2FCA /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395C7E0228F945B500FC2FCA /* UIFont+Extension.swift */; };
 		395C7E0528F953D200FC2FCA /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395C7E0428F953D200FC2FCA /* UIViewController+Extension.swift */; };
 		395C7E0B28F9550A00FC2FCA /* NSObject+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395C7E0A28F9550A00FC2FCA /* NSObject+Extension.swift */; };
@@ -88,6 +89,7 @@
 		39436C0F29127BBA0083D77A /* MyFeedbackCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFeedbackCollectionView.swift; sourceTree = "<group>"; };
 		39436C122912877D0083D77A /* MyFeedbackHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFeedbackHeaderView.swift; sourceTree = "<group>"; };
 		39436C14291287A00083D77A /* MyFeedbackCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFeedbackCollectionViewCell.swift; sourceTree = "<group>"; };
+		39436C172912A2E10083D77A /* Feedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feedback.swift; sourceTree = "<group>"; };
 		395C7E0228F945B500FC2FCA /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
 		395C7E0428F953D200FC2FCA /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		395C7E0A28F9550A00FC2FCA /* NSObject+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Extension.swift"; sourceTree = "<group>"; };
@@ -197,6 +199,7 @@
 		39257DD828F90EA900201E0B /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				39436C162912A2D30083D77A /* Feedback */,
 				391CBA1A290582030044CA30 /* ReflectionInfo */,
 				3E557FFB2901CD6600714E46 /* Keyword */,
 			);
@@ -294,6 +297,14 @@
 				D724790B28FEC8C900D67B50 /* BaseTextFieldViewController.swift */,
 			);
 			path = Base;
+			sourceTree = "<group>";
+		};
+		39436C162912A2D30083D77A /* Feedback */ = {
+			isa = PBXGroup;
+			children = (
+				39436C172912A2E10083D77A /* Feedback.swift */,
+			);
+			path = Feedback;
 			sourceTree = "<group>";
 		};
 		395C7E1928FEC3FB00FC2FCA /* AddReflection */ = {
@@ -612,6 +623,7 @@
 				52F2D1C12906F172009CBF89 /* SelectFeedbackMemberViewController.swift in Sources */,
 				395C7E0328F945B500FC2FCA /* UIFont+Extension.swift in Sources */,
 				3E8052DF2906E09100A6449D /* SectionHeaderView.swift in Sources */,
+				39436C182912A2E10083D77A /* Feedback.swift in Sources */,
 				7E2ECA102901136700A4D65C /* SetupNicknameViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
