@@ -258,12 +258,6 @@ final class AddFeedbackContentViewController: BaseViewController {
             $0.height.equalTo(31)
         }
         
-        feedbackDoneButtonView.addSubview(feedbackSendTimeLabel)
-        feedbackSendTimeLabel.snp.makeConstraints {
-            $0.bottom.equalTo(feedbackDoneButton.snp.top).offset(-11)
-            $0.centerX.equalTo(feedbackDoneButtonView.snp.centerX)
-        }
-        
         addFeedbackContentView.addSubview(feedbackStartLabel)
         feedbackStartLabel.snp.makeConstraints {
             $0.centerY.equalTo(feedbackStartSwitch.snp.centerY)
@@ -294,6 +288,12 @@ final class AddFeedbackContentViewController: BaseViewController {
         feedbackDoneButton.snp.makeConstraints {
             $0.bottom.equalTo(feedbackDoneButtonView.snp.bottom).inset(36)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+        
+        feedbackDoneButtonView.addSubview(feedbackSendTimeLabel)
+        feedbackSendTimeLabel.snp.makeConstraints {
+            $0.bottom.equalTo(feedbackDoneButton.snp.top).offset(-11)
+            $0.centerX.equalTo(feedbackDoneButtonView.snp.centerX)
         }
     }
         

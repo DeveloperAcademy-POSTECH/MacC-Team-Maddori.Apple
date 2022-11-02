@@ -11,7 +11,7 @@ import SnapKit
 
 final class FeedbackFromMeDetailViewController: BaseViewController {
     
-    var toNickname: String = "진저"
+    let model = ReflectionInfoModel.mockData
     
     // MARK: - property
     
@@ -28,8 +28,64 @@ final class FeedbackFromMeDetailViewController: BaseViewController {
     private let feedbackFromMeDetailContentView = UIView()
     private lazy var feedbackFromMeDetailTitleLabel: UILabel = {
         let label = UILabel()
-        label.setTitleFont(text: toNickname + "님께 작성한 피드백")
+        label.setTitleFont(text: model.nickname + "님께 작성한 피드백")
         label.textColor = .black100
+        return label
+    }()
+    private let feedbackTypeLabel: UILabel = {
+        let label = UILabel()
+        label.text = "피드백 종류"
+        label.textColor = .black100
+        label.font = .label2
+        return label
+    }()
+    private lazy var feedbackTypeLabelView: FeedbackTypeLabelView = {
+        let view = FeedbackTypeLabelView()
+        view.feedbackType = model.feedbackType
+        return view
+    }()
+    private let feedbackKeywordLabel: UILabel = {
+        let label = UILabel()
+        label.text = "키워드"
+        label.textColor = .black100
+        label.font = .label2
+        return label
+    }()
+    private lazy var feedbackKeywordText: UILabel = {
+        let label = UILabel()
+        label.setTextWithLineHeight(text: model.keyword, lineHeight: 24)
+        label.textColor = .gray400
+        label.font = .body1
+        return label
+    }()
+    private let feedbackContentLabel: UILabel = {
+        let label = UILabel()
+        label.text = "내용"
+        label.textColor = .black100
+        label.font = .label2
+        return label
+    }()
+    private lazy var feedbackContentText: UILabel = {
+        let label = UILabel()
+        label.setTextWithLineHeight(text: model.info, lineHeight: 24)
+        label.textColor = .gray400
+        label.font = .body1
+        label.numberOfLines = 0
+        return label
+    }()
+    private let feedbackStartLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Start"
+        label.textColor = .black100
+        label.font = .label2
+        return label
+    }()
+    private lazy var feedbackStartText: UILabel = {
+        let label = UILabel()
+        label.setTextWithLineHeight(text: model.start, lineHeight: 24)
+        label.textColor = .gray400
+        label.font = .body1
+        label.numberOfLines = 0
         return label
     }()
     
@@ -53,6 +109,56 @@ final class FeedbackFromMeDetailViewController: BaseViewController {
             $0.top.equalTo(feedbackFromMeDetailContentView).inset(SizeLiteral.topPadding)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
+        
+        feedbackFromMeDetailContentView.addSubview(feedbackTypeLabel)
+        feedbackTypeLabel.snp.makeConstraints {
+            $0.top.equalTo(feedbackFromMeDetailTitleLabel.snp.bottom).offset(SizeLiteral.topComponentPadding)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+        
+        feedbackFromMeDetailContentView.addSubview(feedbackTypeLabelView)
+        feedbackTypeLabelView.snp.makeConstraints {
+            $0.top.equalTo(feedbackTypeLabel.snp.bottom).offset(SizeLiteral.labelComponentPadding)
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.height.equalTo(46)
+        }
+        
+        feedbackFromMeDetailContentView.addSubview(feedbackKeywordLabel)
+        feedbackKeywordLabel.snp.makeConstraints {
+            $0.top.equalTo(feedbackTypeLabelView.snp.bottom).offset(SizeLiteral.componentIntervalPadding)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+        
+        feedbackFromMeDetailContentView.addSubview(feedbackKeywordText)
+        feedbackKeywordText.snp.makeConstraints {
+            $0.top.equalTo(feedbackKeywordLabel.snp.bottom).offset(SizeLiteral.labelComponentPadding)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+        
+        feedbackFromMeDetailContentView.addSubview(feedbackContentLabel)
+        feedbackContentLabel.snp.makeConstraints {
+            $0.top.equalTo(feedbackKeywordText.snp.bottom).offset(SizeLiteral.componentIntervalPadding)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+        
+        feedbackFromMeDetailContentView.addSubview(feedbackContentText)
+        feedbackContentText.snp.makeConstraints {
+            $0.top.equalTo(feedbackContentLabel.snp.bottom).offset(SizeLiteral.labelComponentPadding)
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+        
+        feedbackFromMeDetailContentView.addSubview(feedbackStartLabel)
+        feedbackStartLabel.snp.makeConstraints {
+            $0.top.equalTo(feedbackContentText.snp.bottom).offset(SizeLiteral.componentIntervalPadding)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+        
+        feedbackFromMeDetailContentView.addSubview(feedbackStartText)
+        feedbackStartText.snp.makeConstraints {
+            $0.top.equalTo(feedbackStartLabel.snp.bottom).offset(SizeLiteral.labelComponentPadding)
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+        
     }
     
     // MARK: - func
