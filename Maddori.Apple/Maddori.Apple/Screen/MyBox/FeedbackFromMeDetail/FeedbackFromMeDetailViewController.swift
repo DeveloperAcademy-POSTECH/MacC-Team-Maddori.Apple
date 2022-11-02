@@ -11,7 +11,10 @@ import SnapKit
 
 final class FeedbackFromMeDetailViewController: BaseViewController {
     
-    let model = FeedbackFromMeModel.mockData
+    // FIXME: - 추후 API 연결 (현재는 mock data)
+    
+    private let model = FeedbackFromMeModel.mockData
+    private let feedbackDate: Date? = nil
     
     // MARK: - property
     
@@ -96,7 +99,6 @@ final class FeedbackFromMeDetailViewController: BaseViewController {
     }()
     private lazy var feedbackSendTimeLabel: UILabel = {
         let label = UILabel()
-        label.setTextWithLineHeight(text: "작성한 피드백은 회고 시간에 자동 제출됩니다", lineHeight: 22)
         label.textColor = .gray400
         label.font = .body2
         return label
@@ -109,6 +111,26 @@ final class FeedbackFromMeDetailViewController: BaseViewController {
     }()
     
     // MARK: - life cycle
+    
+    override func configUI() {
+        super.configUI()
+        
+        if let date = feedbackDate {
+            if date <= Date() {
+                feedbackEditButton.isHidden = true
+                deleteButton.isHidden = true
+                feedbackSendTimeLabel.setTextWithLineHeight(text: "회고가 시작되었습니다", lineHeight: 22)
+                feedbackSendTimeLabel.snp.remakeConstraints {
+                    $0.bottom.equalTo(feedbackEditButtonView.snp.bottom).inset(91)
+                    $0.centerX.equalTo(feedbackEditButtonView.snp.centerX)
+                }
+            } else {
+                feedbackSendTimeLabel.setTextWithLineHeight(text: "담아둔 피드백은 \(date.dateToMonthDayString)에 자동으로 제출됩니다", lineHeight: 22)
+            }
+        } else {
+            feedbackSendTimeLabel.setTextWithLineHeight(text: "담아둔 피드백은 회고 시간에 자동 제출됩니다", lineHeight: 22)
+        }
+    }
     
     override func render() {
         view.addSubview(feedbackFromMeDetailScrollView)
