@@ -21,7 +21,7 @@ final class FeedbackFromMeDetailViewController: BaseViewController {
     private let backButton = BackButton(type: .system)
     private let deleteButton: UIButton = {
         let button = UIButton()
-        button.setTitle("삭제", for: .normal)
+        button.setTitle(TextLiteral.feedbackFromMeDetailViewControllerDeleteButtonText, for: .normal)
         button.setTitleColor(.red100, for: .normal)
         button.titleLabel?.font = .label2
         button.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
@@ -32,13 +32,13 @@ final class FeedbackFromMeDetailViewController: BaseViewController {
     private let feedbackFromMeDetailContentView = UIView()
     private lazy var feedbackFromMeDetailTitleLabel: UILabel = {
         let label = UILabel()
-        label.setTitleFont(text: model.nickname + "님께 작성한 피드백")
+        label.setTitleFont(text: model.nickname + TextLiteral.feedbackFromMeDetailViewControllerTitleLabel)
         label.textColor = .black100
         return label
     }()
     private let feedbackTypeLabel: UILabel = {
         let label = UILabel()
-        label.text = "피드백 종류"
+        label.text = TextLiteral.feedbackTypeLabel
         label.textColor = .black100
         label.font = .label2
         return label
@@ -50,7 +50,7 @@ final class FeedbackFromMeDetailViewController: BaseViewController {
     }()
     private let feedbackKeywordLabel: UILabel = {
         let label = UILabel()
-        label.text = "키워드"
+        label.text = TextLiteral.feedbackKeywordLabel
         label.textColor = .black100
         label.font = .label2
         return label
@@ -64,7 +64,7 @@ final class FeedbackFromMeDetailViewController: BaseViewController {
     }()
     private let feedbackContentLabel: UILabel = {
         let label = UILabel()
-        label.text = "내용"
+        label.text = TextLiteral.feedbackContentLabel
         label.textColor = .black100
         label.font = .label2
         return label
@@ -79,7 +79,7 @@ final class FeedbackFromMeDetailViewController: BaseViewController {
     }()
     private let feedbackStartLabel: UILabel = {
         let label = UILabel()
-        label.text = "Start"
+        label.text = TextLiteral.feedbackFromMeDetailViewControllerFeedbackStartLabel
         label.textColor = .black100
         label.font = .label2
         return label
@@ -105,7 +105,7 @@ final class FeedbackFromMeDetailViewController: BaseViewController {
     }()
     private lazy var feedbackEditButton: MainButton = {
         let button = MainButton()
-        button.title = "수정하러 가기"
+        button.title = TextLiteral.feedbackFromMeDetailViewControllerEditButtonText
         button.isDisabled = false
         return button
     }()
@@ -226,7 +226,7 @@ final class FeedbackFromMeDetailViewController: BaseViewController {
             if date <= Date() {
                 feedbackEditButton.isHidden = true
                 deleteButton.isHidden = true
-                feedbackSendTimeLabel.setTextWithLineHeight(text: "회고가 시작되었습니다", lineHeight: 22)
+                feedbackSendTimeLabel.setTextWithLineHeight(text: TextLiteral.feedbackFromMeDetailViewControllerReflectionIsStartedLabel, lineHeight: 22)
                 feedbackSendTimeLabel.snp.remakeConstraints {
                     $0.bottom.equalTo(feedbackEditButtonView.snp.bottom).inset(91)
                     $0.centerX.equalTo(feedbackEditButtonView.snp.centerX)
@@ -235,7 +235,7 @@ final class FeedbackFromMeDetailViewController: BaseViewController {
                 feedbackSendTimeLabel.setTextWithLineHeight(text: "담아둔 피드백은 \(date.dateToMonthDayString)에 자동으로 제출됩니다", lineHeight: 22)
             }
         } else {
-            feedbackSendTimeLabel.setTextWithLineHeight(text: "담아둔 피드백은 회고 시간에 자동 제출됩니다", lineHeight: 22)
+            feedbackSendTimeLabel.setTextWithLineHeight(text: TextLiteral.feedbackFromMeDetailViewControllerReflectionTimeUndecided, lineHeight: 22)
         }
     }
 

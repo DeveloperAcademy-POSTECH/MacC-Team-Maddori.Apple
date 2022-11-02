@@ -63,7 +63,7 @@ final class AddFeedbackContentViewController: BaseViewController {
     }()
     private let feedbackTypeLabel: UILabel = {
         let label = UILabel()
-        label.text = TextLiteral.addFeedbackContentViewControllerFeedbackTypeLabel
+        label.text = TextLiteral.feedbackTypeLabel
         label.textColor = .black100
         label.font = .label2
         return label
@@ -79,7 +79,7 @@ final class AddFeedbackContentViewController: BaseViewController {
     }()
     private let feedbackKeywordLabel: UILabel = {
         let label = UILabel()
-        label.text = TextLiteral.addFeedbackContentViewControllerFeedbackKeywordLabel
+        label.text = TextLiteral.feedbackKeywordLabel
         label.textColor = .black100
         label.font = .label2
         return label
@@ -98,7 +98,7 @@ final class AddFeedbackContentViewController: BaseViewController {
     }()
     private let feedbackContentLabel: UILabel = {
         let label = UILabel()
-        label.text = TextLiteral.addFeedbackContentViewControllerFeedbackTextViewLabel
+        label.text = TextLiteral.feedbackContentLabel
         label.textColor = .black100
         label.font = .label2
         return label
@@ -127,7 +127,7 @@ final class AddFeedbackContentViewController: BaseViewController {
     }()
     private let feedbackStartTextViewLabel: UILabel = {
         let label = UILabel()
-        label.text = TextLiteral.addFeedbackContentViewControllerFeedbackTextViewLabel
+        label.text = TextLiteral.feedbackContentLabel
         label.textColor = .black100
         label.font = .label2
         label.isHidden = true
