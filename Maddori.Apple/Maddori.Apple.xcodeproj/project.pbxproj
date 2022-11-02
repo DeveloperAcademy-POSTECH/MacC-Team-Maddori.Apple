@@ -241,16 +241,10 @@
 		39257DE528F90F8100201E0B /* UIComponent */ = {
 			isa = PBXGroup;
 			children = (
-				395C7E0C28F959A500FC2FCA /* MainButton.swift */,
-				525E721928FF0F1900EF3FCB /* MemberCollectionViewCell.swift */,
-				525E721B28FF0F5B00EF3FCB /* MemberCollectionView.swift */,
-				395C7E1C28FEC8C400FC2FCA /* CloseButton.swift */,
-				D724790D28FEEEC300D67B50 /* KigoTextField.swift */,
-				D79D908B2903B6B1004DDC4A /* LabelButtonView.swift */,
-				3E557FC428FE854600714E46 /* KeywordLabel.swift */,
-				525E722028FFC9A800EF3FCB /* BackButton.swift */,
-				525E722428FFCFA600EF3FCB /* FeedbackTypeButtonView.swift */,
-				522D99BE29041B51009CBD95 /* FeedbackTextView.swift */,
+				3977E12929121B6A000E9761 /* View */,
+				3977E12829121A22000E9761 /* CollectionView */,
+				3977E127291219DC000E9761 /* TextField */,
+				3977E12629121863000E9761 /* Button */,
 			);
 			path = UIComponent;
 			sourceTree = "<group>";
@@ -349,6 +343,44 @@
 				3977E1242910CFF1000E9761 /* sample1 */,
 			);
 			path = MyReflection;
+			sourceTree = "<group>";
+		};
+		3977E12629121863000E9761 /* Button */ = {
+			isa = PBXGroup;
+			children = (
+				525E722428FFCFA600EF3FCB /* FeedbackTypeButtonView.swift */,
+				525E722028FFC9A800EF3FCB /* BackButton.swift */,
+				395C7E1C28FEC8C400FC2FCA /* CloseButton.swift */,
+				395C7E0C28F959A500FC2FCA /* MainButton.swift */,
+			);
+			path = Button;
+			sourceTree = "<group>";
+		};
+		3977E127291219DC000E9761 /* TextField */ = {
+			isa = PBXGroup;
+			children = (
+				522D99BE29041B51009CBD95 /* FeedbackTextView.swift */,
+				D724790D28FEEEC300D67B50 /* KigoTextField.swift */,
+			);
+			path = TextField;
+			sourceTree = "<group>";
+		};
+		3977E12829121A22000E9761 /* CollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				525E721B28FF0F5B00EF3FCB /* MemberCollectionView.swift */,
+				525E721928FF0F1900EF3FCB /* MemberCollectionViewCell.swift */,
+			);
+			path = CollectionView;
+			sourceTree = "<group>";
+		};
+		3977E12929121B6A000E9761 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D79D908B2903B6B1004DDC4A /* LabelButtonView.swift */,
+				3E557FC428FE854600714E46 /* KeywordLabel.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		39A64ACC2905882C001DB020 /* UIComponent */ = {
