@@ -28,6 +28,12 @@ final class MyFeedbackCollectionViewCell: BaseCollectionViewCell {
         label.numberOfLines = 2
         return label
     }()
+    private let rightImage: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = ImageLiterals.icRight
+        imageView.tintColor = .gray400
+        return imageView
+    }()
     
     // MARK: - life cycle
     
@@ -46,6 +52,11 @@ final class MyFeedbackCollectionViewCell: BaseCollectionViewCell {
             $0.leading.equalToSuperview()
             $0.trailing.equalToSuperview().inset(66)
             $0.top.equalTo(titleLabel.snp.bottom).offset(8)
+        }
+        
+        self.addSubview(rightImage)
+        rightImage.snp.makeConstraints {
+            $0.trailing.centerY.equalToSuperview()
         }
     }
 }
