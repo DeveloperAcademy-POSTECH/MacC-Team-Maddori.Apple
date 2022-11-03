@@ -20,6 +20,8 @@ final class MyFeedbackHeaderView: UICollectionReusableView {
         return label
     }()
     
+    // MARK: - life cycle
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         render()
@@ -34,6 +36,8 @@ final class MyFeedbackHeaderView: UICollectionReusableView {
             $0.centerY.equalToSuperview()
         }
     }
+    
+    // MARK: - func
     
     func setCssLabelText(with index: Int) {
         cssLabel.text = FeedBackType.allCases[index].rawValue
