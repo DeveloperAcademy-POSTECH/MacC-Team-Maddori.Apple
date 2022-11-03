@@ -91,6 +91,10 @@ extension MyBoxViewController: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         cell.setMemberName(name: memberList[indexPath.item])
+        if indexPath.item == 0 {
+            cell.isSelected = true
+            collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .init())
+        }
         return cell
     }
 }
