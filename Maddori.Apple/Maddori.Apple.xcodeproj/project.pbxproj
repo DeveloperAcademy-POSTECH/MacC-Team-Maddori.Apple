@@ -56,6 +56,9 @@
 		7E2ECA102901136700A4D65C /* SetupNicknameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2ECA0F2901136700A4D65C /* SetupNicknameViewController.swift */; };
 		7E6B662F28FE887300C3BEEF /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6B662E28FE887300C3BEEF /* UILabel+Extension.swift */; };
 		7EB4D58229011EF7001FC396 /* JoinTeamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB4D58129011EF7001FC396 /* JoinTeamViewController.swift */; };
+		7EF1C7F82913A9B500E98AA1 /* FavoriteCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF1C7F72913A9B500E98AA1 /* FavoriteCollectionView.swift */; };
+		7EF1C7FA2913AE0F00E98AA1 /* FavoriteReflectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF1C7F92913AE0F00E98AA1 /* FavoriteReflectionCell.swift */; };
+		7EF1C7FC2913B51E00E98AA1 /* WriterLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF1C7FB2913B51E00E98AA1 /* WriterLabelView.swift */; };
 		D724790C28FEC8C900D67B50 /* BaseTextFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D724790B28FEC8C900D67B50 /* BaseTextFieldViewController.swift */; };
 		D724790E28FEEEC300D67B50 /* KigoTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D724790D28FEEEC300D67B50 /* KigoTextField.swift */; };
 		D72CF1B0290552960067A118 /* InvitedCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72CF1AF290552960067A118 /* InvitedCodeViewController.swift */; };
@@ -115,6 +118,9 @@
 		7E2ECA0F2901136700A4D65C /* SetupNicknameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupNicknameViewController.swift; sourceTree = "<group>"; };
 		7E6B662E28FE887300C3BEEF /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
 		7EB4D58129011EF7001FC396 /* JoinTeamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinTeamViewController.swift; sourceTree = "<group>"; };
+		7EF1C7F72913A9B500E98AA1 /* FavoriteCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCollectionView.swift; sourceTree = "<group>"; };
+		7EF1C7F92913AE0F00E98AA1 /* FavoriteReflectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteReflectionCell.swift; sourceTree = "<group>"; };
+		7EF1C7FB2913B51E00E98AA1 /* WriterLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriterLabelView.swift; sourceTree = "<group>"; };
 		D724790B28FEC8C900D67B50 /* BaseTextFieldViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTextFieldViewController.swift; sourceTree = "<group>"; };
 		D724790D28FEEEC300D67B50 /* KigoTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KigoTextField.swift; sourceTree = "<group>"; };
 		D72CF1AF290552960067A118 /* InvitedCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitedCodeViewController.swift; sourceTree = "<group>"; };
@@ -341,6 +347,9 @@
 			isa = PBXGroup;
 			children = (
 				D7DE62E12912B87C009691A2 /* FavoriteReflectionViewController.swift */,
+				7EF1C7F72913A9B500E98AA1 /* FavoriteCollectionView.swift */,
+				7EF1C7F92913AE0F00E98AA1 /* FavoriteReflectionCell.swift */,
+				7EF1C7FB2913B51E00E98AA1 /* WriterLabelView.swift */,
 			);
 			path = MyReflection;
 			sourceTree = "<group>";
@@ -548,6 +557,7 @@
 				391596622904176500A432D9 /* UIView+Extension.swift in Sources */,
 				D7DE62E22912B87C009691A2 /* FavoriteReflectionViewController.swift in Sources */,
 				39257DC528F8FEBD00201E0B /* AppDelegate.swift in Sources */,
+				7EF1C7FA2913AE0F00E98AA1 /* FavoriteReflectionCell.swift in Sources */,
 				39F5583D2908CFAD00CD6F6E /* Encodable+Extension.swift in Sources */,
 				39257DC728F8FEBD00201E0B /* SceneDelegate.swift in Sources */,
 				525E722528FFCFA600EF3FCB /* FeedbackTypeButtonView.swift in Sources */,
@@ -569,9 +579,11 @@
 				D724790E28FEEEC300D67B50 /* KigoTextField.swift in Sources */,
 				7EB4D58229011EF7001FC396 /* JoinTeamViewController.swift in Sources */,
 				39257DED28F9378D00201E0B /* BaseCollectionViewCell.swift in Sources */,
+				7EF1C7FC2913B51E00E98AA1 /* WriterLabelView.swift in Sources */,
 				391CBA19290580460044CA30 /* ReflectionInfoViewController.swift in Sources */,
 				525E721A28FF0F1900EF3FCB /* MemberCollectionViewCell.swift in Sources */,
 				395C7E2228FEDB6500FC2FCA /* UITextField+Extension.swift in Sources */,
+				7EF1C7F82913A9B500E98AA1 /* FavoriteCollectionView.swift in Sources */,
 				D72CF1B0290552960067A118 /* InvitedCodeViewController.swift in Sources */,
 				39257DF328F93D8900201E0B /* TextLiteral.swift in Sources */,
 				395C7E0D28F959A500FC2FCA /* MainButton.swift in Sources */,
