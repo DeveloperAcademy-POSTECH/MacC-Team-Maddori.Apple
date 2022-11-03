@@ -190,12 +190,12 @@ final class FeedbackFromMeDetailViewController: BaseViewController {
         feedbackEditButtonView.snp.makeConstraints {
             $0.bottom.equalToSuperview()
             $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(181)
+            $0.height.equalTo(134)
         }
         
         feedbackEditButtonView.addSubview(feedbackEditButton)
         feedbackEditButton.snp.makeConstraints {
-            $0.bottom.equalTo(feedbackEditButtonView.snp.bottom).inset(91)
+            $0.bottom.equalTo(feedbackEditButtonView.snp.bottom).inset(44)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         

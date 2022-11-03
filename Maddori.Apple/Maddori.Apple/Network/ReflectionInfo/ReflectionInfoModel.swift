@@ -10,6 +10,7 @@ import Foundation
 enum FeedBackType: String {
     case continueType = "continue"
     case stopType = "stop"
+    case startType = "start"
 }
 
 struct ReflectionInfoModel {

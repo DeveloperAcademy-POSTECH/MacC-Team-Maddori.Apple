@@ -15,7 +15,7 @@ final class FeedbackTypeLabelView: UILabel {
         static let height: CGFloat = 46
         static let labelPadding: CGFloat = UIScreen.main.bounds.width - SizeLiteral.leadingTrailingPadding * 2 - Size.width * 2
     }
-    var feedbackType: FeedBackType = .continueType {
+    var feedbackType: FeedbackButtonType = .continueType {
         didSet { setupAttribute(feedbackType) }
     }
     
@@ -75,10 +75,7 @@ final class FeedbackTypeLabelView: UILabel {
         
         continueShadowView.addSubview(continueLabel)
         continueLabel.snp.makeConstraints {
-            $0.width.equalTo(Size.width)
-            $0.height.equalTo(Size.height)
-            $0.leading.equalTo(continueShadowView.snp.leading)
-            $0.top.equalTo(continueShadowView.snp.top)
+            $0.edges.equalToSuperview()
         }
 
         self.addSubview(stopShadowView)
@@ -91,16 +88,13 @@ final class FeedbackTypeLabelView: UILabel {
         
         stopShadowView.addSubview(stopLabel)
         stopLabel.snp.makeConstraints {
-            $0.width.equalTo(Size.width)
-            $0.height.equalTo(Size.height)
-            $0.leading.equalTo(continueLabel.snp.trailing).offset(Size.labelPadding)
-            $0.centerY.equalTo(continueLabel)
+            $0.edges.equalToSuperview()
         }
     }
     
     // MARK: - func
     
-    private func setupAttribute(_ type: FeedBackType) {
+    private func setupAttribute(_ type: FeedbackButtonType) {
         switch type {
         case .continueType:
             continueLabel.textColor = .white100

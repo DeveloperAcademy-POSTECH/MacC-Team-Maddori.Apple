@@ -7,9 +7,14 @@
 
 import Foundation
 
+enum FeedbackButtonType: String {
+    case continueType = "continue"
+    case stopType = "stop"
+}
+
 struct FeedbackFromMeModel {
     let nickname: String
-    let feedbackType: FeedBackType
+    let feedbackType: FeedbackButtonType
     let keyword: String
     let info: String
     let start: String?
