@@ -73,7 +73,7 @@ final class MyBoxMemberCollectionViewCell: BaseCollectionViewCell {
         memberNameLabel.textColor = .gray400
     }
     
-    func setMemeberName(name: String) {
+    func setMemberName(name: String) {
         memberNameLabel.text = name
     }
 }
