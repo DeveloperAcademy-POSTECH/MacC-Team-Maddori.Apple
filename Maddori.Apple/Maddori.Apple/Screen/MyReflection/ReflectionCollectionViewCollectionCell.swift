@@ -36,14 +36,14 @@ final class ReflectionCollectionViewCollectionCell: BaseCollectionViewCell {
         contentView.addSubview(cellLabel)
         cellLabel.snp.makeConstraints {
             $0.leading.equalToSuperview()
-            $0.top.equalToSuperview().inset(15)
+            $0.top.equalToSuperview().inset(10)
         }
         
         contentView.addSubview(cellDate)
         cellDate.snp.makeConstraints {
             $0.leading.equalToSuperview()
-            $0.top.equalTo(cellLabel.snp.bottom).offset(5)
-            $0.bottom.equalToSuperview().inset(15)
+            $0.top.equalTo(cellLabel.snp.bottom)
+            $0.bottom.equalToSuperview().inset(10)
         }
         
         contentView.addSubview(cellArrow)

@@ -18,8 +18,8 @@ final class MyReflectionMainViewController: BaseViewController {
                                      ReflectionModel(title: "2차 회고", date: "2022.11.07.수"),
                                      ReflectionModel(title: "3차 회고", date: "2022.11.21.수")]
     private enum Size {
-        static let headerHeight: CGFloat = 28
-        static let specialCellHeight: CGFloat = 60
+        static let headerHeight: CGFloat = 50
+        static let specialCellHeight: CGFloat = 50
         static let collectionCellHeight: CGFloat = 70
     }
     
@@ -32,11 +32,10 @@ final class MyReflectionMainViewController: BaseViewController {
         return label
     }()
     private let reflectionCollectionView: UICollectionView = {
-        var config = UICollectionLayoutListConfiguration(appearance: .plain)
-        config.headerMode = .supplementary
-        config.showsSeparators = false
-        let layout = UICollectionViewCompositionalLayout.list(using: config)
+        let layout = UICollectionViewFlowLayout()
+        layout.minimumLineSpacing = 0
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.backgroundColor = .white200
         collectionView.register(ReflectionCollectionViewSpecialCell.self, forCellWithReuseIdentifier: ReflectionCollectionViewSpecialCell.className)
         collectionView.register(ReflectionCollectionViewCollectionCell.self, forCellWithReuseIdentifier: ReflectionCollectionViewCollectionCell.className)
         collectionView.register(ReflectionCollectionViewHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: ReflectionCollectionViewHeader.className)
@@ -62,16 +61,11 @@ final class MyReflectionMainViewController: BaseViewController {
         
         view.addSubview(reflectionCollectionView)
         reflectionCollectionView.snp.makeConstraints {
-            $0.top.equalTo(myReflectionTitle).offset(40)
+            $0.top.equalTo(myReflectionTitle.snp.bottom).offset(20)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.bottom.equalToSuperview()
         }
     }
-//
-//    override func configUI() {
-//        super.configUI()
-//        reflectionCollectionView.backgroundColor = .white200
-//    }
     
     private func setUpDelegation() {
         reflectionCollectionView.delegate = self
@@ -80,18 +74,14 @@ final class MyReflectionMainViewController: BaseViewController {
 }
 
 extension MyReflectionMainViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let cell = collectionView.cellForItem(at: indexPath) {
-            UIView.animate(withDuration: 0.2, delay: 0, options: [.curveEaseOut]) {
-                cell.backgroundColor = .gray100
-            }
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
-        if let cell = collectionView.cellForItem(at: indexPath) {
-            UIView.animate(withDuration: 0.2, delay: 0, options: [.curveEaseOut]) {
-                cell.backgroundColor = .white100
+            UIView.animate(withDuration: 0.15, delay: 0, animations: {
+                cell.contentView.backgroundColor = .gray100
+            }) { _ in
+                UIView.animate(withDuration: 0.15, delay: 0, animations: {
+                    cell.contentView.backgroundColor = .white200
+                })
             }
         }
     }
@@ -127,6 +117,21 @@ extension MyReflectionMainViewController: UICollectionViewDataSource {
             return UICollectionReusableView()
         }
         return header
+    }
+    
+    
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = view.frame.width - 2 * SizeLiteral.leadingTrailingPadding
+        let section = indexPath.section
+        switch section {
+        case 0:
+            return CGSize(width: width, height: Size.specialCellHeight)
+        case 1:
+            return CGSize(width: width, height: Size.collectionCellHeight)
+        default:
+            return .zero
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

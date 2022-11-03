@@ -75,7 +75,8 @@ final class ReflectionCollectionViewHeader: UICollectionReusableView {
     private func render() {
         self.addSubview(headerIcon)
         headerIcon.snp.makeConstraints {
-            $0.bottom.leading.equalToSuperview()
+            $0.bottom.equalToSuperview().inset(6)
+            $0.leading.equalToSuperview()
             $0.height.width.equalTo(28)
         }
         
