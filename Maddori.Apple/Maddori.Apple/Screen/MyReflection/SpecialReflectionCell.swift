@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class ReflectionCollectionViewSpecialCell: BaseCollectionViewCell {
+final class SpecialReflectionCell: BaseCollectionViewCell {
     
     // MARK: - property
     

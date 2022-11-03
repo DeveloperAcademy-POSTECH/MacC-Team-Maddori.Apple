@@ -8,16 +8,17 @@
 import UIKit
 
 import SnapKit
-
+// FIXME: 도저히 머리가 안돌아가서 실천하기 란을 special로 이름을 지었습니다
+// 이거 좀 아이디어 좀 주세요...
 enum headerType {
     case special
-    case reflection
+    case total
     
     var iconImage: UIImage {
         switch self {
         case .special:
             return ImageLiterals.icPin
-        case .reflection:
+        case .total:
             return ImageLiterals.icBox
         }
     }
@@ -26,7 +27,7 @@ enum headerType {
         switch self {
         case .special:
             return UIColor.yellow200
-        case .reflection:
+        case .total:
             return UIColor.blue200
         }
     }
@@ -34,8 +35,9 @@ enum headerType {
     var labelText: String {
         switch self {
         case .special:
-            return "즐겨찾기"
-        case .reflection:
+            // FIXME: 실천하기도 레이블링 바꾸기로 했었는데 일단 생각이 안나서 이렇게 둡니다...
+            return "실천하기"
+        case .total:
             return "모음집"
         }
     }
@@ -53,7 +55,7 @@ final class ReflectionCollectionViewHeader: UICollectionReusableView {
         imageView.tintColor = type.iconColor
         return imageView
     }()
-    lazy var label: UILabel = {
+    lazy var headerLabel: UILabel = {
         let label = UILabel()
         label.text = type.labelText
         label.font = .label3
@@ -80,10 +82,10 @@ final class ReflectionCollectionViewHeader: UICollectionReusableView {
             $0.height.width.equalTo(28)
         }
         
-        self.addSubview(label)
-        label.snp.makeConstraints {
-            $0.centerY.equalTo(headerIcon)
-            $0.leading.equalTo(headerIcon.snp.trailing).offset(8)
+        self.addSubview(headerLabel)
+        headerLabel.snp.makeConstraints {
+            $0.bottom.equalTo(headerIcon).offset(-3)
+            $0.leading.equalTo(headerIcon.snp.trailing).offset(5)
         }
     }
     
@@ -97,6 +99,6 @@ final class ReflectionCollectionViewHeader: UICollectionReusableView {
     }
     
     func configLabel(to headerType: headerType) {
-        label.text = headerType.labelText
+        headerLabel.text = headerType.labelText
     }
 }

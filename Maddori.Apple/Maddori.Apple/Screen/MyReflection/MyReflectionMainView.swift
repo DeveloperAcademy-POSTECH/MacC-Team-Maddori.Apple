@@ -12,15 +12,15 @@ import SnapKit
 final class MyReflectionMainViewController: BaseViewController {
     
     private let user = "진저"
-    // TODO: reflection 이름 받아온 리스트를 이 reflectionSections에 append 시키기
-    private let specialSection = ["즐겨찾기"]
-    private let reflectionSection = [ReflectionModel(title: "1차 회고", date: "2022.10.30.화"),
+    private let specialReflection = ["즐겨찾기"]
+    // TODO: reflection 이름 받아온 리스트를 이 totalReflections에 append 시키기
+    private let totalReflection = [ReflectionModel(title: "1차 회고", date: "2022.10.30.화"),
                                      ReflectionModel(title: "2차 회고", date: "2022.11.07.수"),
                                      ReflectionModel(title: "3차 회고", date: "2022.11.21.수")]
     private enum Size {
         static let headerHeight: CGFloat = 50
-        static let specialCellHeight: CGFloat = 50
-        static let collectionCellHeight: CGFloat = 70
+        static let specialReflectionCellHeight: CGFloat = 50
+        static let totalReflectionCellHeight: CGFloat = 70
     }
     
     // MARK: - property
@@ -36,8 +36,8 @@ final class MyReflectionMainViewController: BaseViewController {
         layout.minimumLineSpacing = 0
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .white200
-        collectionView.register(ReflectionCollectionViewSpecialCell.self, forCellWithReuseIdentifier: ReflectionCollectionViewSpecialCell.className)
-        collectionView.register(ReflectionCollectionViewCollectionCell.self, forCellWithReuseIdentifier: ReflectionCollectionViewCollectionCell.className)
+        collectionView.register(SpecialReflectionCell.self, forCellWithReuseIdentifier: SpecialReflectionCell.className)
+        collectionView.register(TotalReflectionCell.self, forCellWithReuseIdentifier: TotalReflectionCell.className)
         collectionView.register(ReflectionCollectionViewHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: ReflectionCollectionViewHeader.className)
         return collectionView
     }()
@@ -95,9 +95,9 @@ extension MyReflectionMainViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch section {
         case 0:
-            return specialSection.count
+            return specialReflection.count
         case 1:
-            return reflectionSection.count
+            return totalReflection.count
         default:
             return 0
         }
@@ -111,8 +111,8 @@ extension MyReflectionMainViewController: UICollectionViewDataSource {
             header.configIcon(to: .special)
             header.configLabel(to: .special)
         case 1:
-            header.configIcon(to: .reflection)
-            header.configLabel(to: .reflection)
+            header.configIcon(to: .total)
+            header.configLabel(to: .total)
         default:
             return UICollectionReusableView()
         }
@@ -126,9 +126,9 @@ extension MyReflectionMainViewController: UICollectionViewDataSource {
         let section = indexPath.section
         switch section {
         case 0:
-            return CGSize(width: width, height: Size.specialCellHeight)
+            return CGSize(width: width, height: Size.specialReflectionCellHeight)
         case 1:
-            return CGSize(width: width, height: Size.collectionCellHeight)
+            return CGSize(width: width, height: Size.totalReflectionCellHeight)
         default:
             return .zero
         }
@@ -138,13 +138,13 @@ extension MyReflectionMainViewController: UICollectionViewDataSource {
         let section = indexPath.section
         switch section {
         case 0:
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ReflectionCollectionViewSpecialCell.className, for: indexPath) as? ReflectionCollectionViewSpecialCell else { return UICollectionViewCell()}
-            cell.configLabel(text: specialSection[indexPath.item])
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SpecialReflectionCell.className, for: indexPath) as? SpecialReflectionCell else { return UICollectionViewCell()}
+            cell.configLabel(text: specialReflection[indexPath.item])
             return cell
         case 1:
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ReflectionCollectionViewCollectionCell.className, for: indexPath) as? ReflectionCollectionViewCollectionCell else { return UICollectionViewCell() }
-            cell.configLabel(text: reflectionSection[indexPath.item].title,
-                             date: reflectionSection[indexPath.item].date)
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TotalReflectionCell.className, for: indexPath) as? TotalReflectionCell else { return UICollectionViewCell() }
+            cell.configLabel(text: totalReflection[indexPath.item].title,
+                             date: totalReflection[indexPath.item].date)
             return cell
         default:
             return UICollectionViewCell()
