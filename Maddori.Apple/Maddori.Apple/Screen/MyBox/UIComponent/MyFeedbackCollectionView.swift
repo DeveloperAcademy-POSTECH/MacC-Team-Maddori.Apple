@@ -63,6 +63,11 @@ final class MyFeedbackCollectionView: UIView {
 extension MyFeedbackCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: MyFeedbackHeaderView.className, for: indexPath) as? MyFeedbackHeaderView else { return UICollectionReusableView() }
+        if indexPath.section == 0 {
+            header.setHiddenDivider(value: true)
+        } else {
+            header.setHiddenDivider(value: false)
+        }
         header.setCssLabelText(with: indexPath.section)
         switch kind {
         case UICollectionView.elementKindSectionHeader:
@@ -107,8 +112,6 @@ extension MyFeedbackCollectionView: UICollectionViewDataSource {
 
 extension MyFeedbackCollectionView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: 80, height: 25)
+        return CGSize(width: 80, height: 45)
     }
 }
-
-

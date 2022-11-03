@@ -79,7 +79,7 @@ final class MyBoxViewController: BaseViewController {
         view.addSubview(feedbackCollectionView)
         feedbackCollectionView.snp.makeConstraints {
             $0.leading.trailing.bottom.equalToSuperview()
-            $0.top.equalTo(dividerView.snp.bottom).offset(24)
+            $0.top.equalTo(dividerView.snp.bottom)
         }
     }
 }

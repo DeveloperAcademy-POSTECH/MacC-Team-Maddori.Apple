@@ -13,6 +13,11 @@ final class MyFeedbackHeaderView: UICollectionReusableView {
     
     // MARK: - property
     
+    private let dividerView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .gray300
+        return view
+    }()
     private let cssLabel: UILabel = {
         let label = UILabel()
         label.font = .main
@@ -30,10 +35,16 @@ final class MyFeedbackHeaderView: UICollectionReusableView {
     required init?(coder: NSCoder) { nil }
     
     private func render() {
+        self.addSubview(dividerView)
+        dividerView.snp.makeConstraints {
+            $0.leading.trailing.top.equalToSuperview()
+            $0.height.equalTo(0.5)
+        }
+        
         self.addSubview(cssLabel)
         cssLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-            $0.centerY.equalToSuperview()
+            $0.bottom.equalToSuperview()
         }
     }
     
@@ -41,5 +52,9 @@ final class MyFeedbackHeaderView: UICollectionReusableView {
     
     func setCssLabelText(with index: Int) {
         cssLabel.text = FeedBackType.allCases[index].rawValue
+    }
+    
+    func setHiddenDivider(value: Bool) {
+        dividerView.isHidden = value
     }
 }
