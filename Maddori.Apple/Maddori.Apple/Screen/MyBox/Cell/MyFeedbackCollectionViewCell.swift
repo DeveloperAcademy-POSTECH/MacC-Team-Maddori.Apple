@@ -48,13 +48,16 @@ final class MyFeedbackCollectionViewCell: BaseCollectionViewCell {
         self.addSubview(contentLabel)
         contentLabel.snp.makeConstraints {
             $0.leading.equalToSuperview()
-            $0.trailing.equalToSuperview().inset(66)
+            $0.trailing.equalToSuperview().inset(66 - SizeLiteral.leadingTrailingPadding)
             $0.top.equalTo(titleLabel.snp.bottom).offset(8)
         }
         
         self.addSubview(rightImage)
         rightImage.snp.makeConstraints {
-            $0.trailing.centerY.equalToSuperview()
+            $0.trailing.equalToSuperview()
+            $0.top.equalTo(contentLabel.snp.top)
+            $0.width.equalTo(12)
+            $0.height.equalTo(20)
         }
     }
     
@@ -62,6 +65,6 @@ final class MyFeedbackCollectionViewCell: BaseCollectionViewCell {
     
     func setCellLabel(title: String, content: String) {
         titleLabel.text = title
-        contentLabel.text = content
+        contentLabel.setTextWithLineHeight(text: content, lineHeight: 22)
     }
 }
