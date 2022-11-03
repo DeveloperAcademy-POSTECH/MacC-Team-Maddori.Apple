@@ -39,6 +39,10 @@ final class MyBoxMemberCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - life cycle
     
+    override func configUI() {
+        setShadowLayer()
+    }
+    
     override func render() {
         self.addSubview(shadowView)
         shadowView.snp.makeConstraints {
