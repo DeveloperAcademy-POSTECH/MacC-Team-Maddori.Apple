@@ -32,6 +32,11 @@ final class MyFeedbackCollectionViewCell: BaseCollectionViewCell {
         imageView.tintColor = .gray400
         return imageView
     }()
+    private let dividerView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .gray300
+        return view
+    }()
     
     // MARK: - life cycle
     
@@ -48,16 +53,23 @@ final class MyFeedbackCollectionViewCell: BaseCollectionViewCell {
         self.addSubview(contentLabel)
         contentLabel.snp.makeConstraints {
             $0.leading.equalToSuperview()
-            $0.trailing.equalToSuperview().inset(66 - SizeLiteral.leadingTrailingPadding)
+            $0.trailing.equalToSuperview().inset(66)
             $0.top.equalTo(titleLabel.snp.bottom).offset(8)
         }
         
         self.addSubview(rightImage)
         rightImage.snp.makeConstraints {
-            $0.trailing.equalToSuperview()
+            $0.trailing.equalToSuperview().inset(24)
             $0.top.equalTo(contentLabel.snp.top)
             $0.width.equalTo(12)
             $0.height.equalTo(20)
+        }
+        
+        self.addSubview(dividerView)
+        dividerView.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalToSuperview()
+            $0.height.equalTo(0.5)
         }
     }
     
@@ -66,5 +78,9 @@ final class MyFeedbackCollectionViewCell: BaseCollectionViewCell {
     func setCellLabel(title: String, content: String) {
         titleLabel.text = title
         contentLabel.setTextWithLineHeight(text: content, lineHeight: 22)
+    }
+    
+    func setHiddenDivider(value: Bool) {
+        dividerView.isHidden = value
     }
 }

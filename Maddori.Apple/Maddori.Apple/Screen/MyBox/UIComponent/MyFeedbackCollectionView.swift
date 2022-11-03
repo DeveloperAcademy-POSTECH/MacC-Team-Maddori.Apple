@@ -14,12 +14,12 @@ final class MyFeedbackCollectionView: UIView {
     private enum Size {
         static let horizontalPadding: CGFloat = 24
         static let topSpacing: CGFloat = 20
-        static let cellWidth: CGFloat = UIScreen.main.bounds.size.width - (SizeLiteral.leadingTrailingPadding * 2)
+        static let cellWidth: CGFloat = UIScreen.main.bounds.size.width - SizeLiteral.leadingTrailingPadding
         static let cellHeight: CGFloat = 85
         static let collectionViewInset = UIEdgeInsets.init(top: Size.topSpacing,
                                                            left: Size.horizontalPadding,
                                                            bottom: 0,
-                                                           right: Size.horizontalPadding)
+                                                           right: 0)
     }
     
     // MARK: - property
@@ -88,12 +88,21 @@ extension MyFeedbackCollectionView: UICollectionViewDataSource {
         case 0:
             let data = mockData.filter { $0.type == .continueType }
             cell.setCellLabel(title: data[indexPath.item].title, content: data[indexPath.item].content)
+            if indexPath.item == data.count - 1 {
+                cell.setHiddenDivider(value: true)
+            }
         case 1:
             let data = mockData.filter { $0.type == .stopType }
             cell.setCellLabel(title: data[indexPath.item].title, content: data[indexPath.item].content)
+            if indexPath.item == data.count - 1 {
+                cell.setHiddenDivider(value: true)
+            }
         default:
             let data = mockData.filter { $0.type == .startType }
             cell.setCellLabel(title: data[indexPath.item].title, content: data[indexPath.item].content)
+            if indexPath.item == data.count - 1 {
+                cell.setHiddenDivider(value: true)
+            }
         }
         return cell
     }
