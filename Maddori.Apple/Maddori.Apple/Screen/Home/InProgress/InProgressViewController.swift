@@ -127,18 +127,6 @@ final class InProgressViewController: BaseViewController {
 // MARK: - extension
 
 extension InProgressViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        switch section {
-        case 0:
-            return keywordsSectionList[0].count
-        case 1:
-            return keywordsSectionList[1].count
-        default:
-            return keywordsSectionList[0].count
-        }
-    }
-    
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let cell = keywordCollectionView.dequeueReusableCell(withReuseIdentifier: KeywordCollectionViewCell.className, for: indexPath) as? KeywordCollectionViewCell else { return }
         let section = indexPath.section
@@ -160,6 +148,17 @@ extension InProgressViewController: UICollectionViewDataSource {
             return 1
         } else {
             return 2
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        switch section {
+        case 0:
+            return keywordsSectionList[0].count
+        case 1:
+            return keywordsSectionList[1].count
+        default:
+            return keywordsSectionList[0].count
         }
     }
     
@@ -204,7 +203,7 @@ extension InProgressViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: view.frame.width, height: Size.sectionPadding)
+        return CGSize(width: 100, height: Size.sectionPadding)
     }
 }
 
