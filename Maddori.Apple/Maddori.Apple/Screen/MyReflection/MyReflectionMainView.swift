@@ -50,8 +50,6 @@ final class MyReflectionMainViewController: BaseViewController {
         setUpDelegation()
     }
     
-    // MARK: - func
-    
     override func render() {
         view.addSubview(myReflectionTitle)
         myReflectionTitle.snp.makeConstraints {
@@ -66,6 +64,8 @@ final class MyReflectionMainViewController: BaseViewController {
             $0.bottom.equalToSuperview()
         }
     }
+    
+    // MARK: - func
     
     private func setUpDelegation() {
         reflectionCollectionView.delegate = self

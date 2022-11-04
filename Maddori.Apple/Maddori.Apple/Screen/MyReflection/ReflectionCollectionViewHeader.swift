@@ -49,13 +49,13 @@ final class ReflectionCollectionViewHeader: UICollectionReusableView {
     
     // MARK: - property
     
-    lazy var headerIcon: UIImageView = {
+    private lazy var headerIcon: UIImageView = {
         let imageView = UIImageView()
         imageView.image = type.iconImage
         imageView.tintColor = type.iconColor
         return imageView
     }()
-    lazy var headerLabel: UILabel = {
+    private lazy var headerLabel: UILabel = {
         let label = UILabel()
         label.text = type.labelText
         label.font = .label3
@@ -71,8 +71,6 @@ final class ReflectionCollectionViewHeader: UICollectionReusableView {
     }
     
     required init?(coder: NSCoder) { nil }
-    
-    // MARK: - func
     
     private func render() {
         self.addSubview(headerIcon)
@@ -92,6 +90,8 @@ final class ReflectionCollectionViewHeader: UICollectionReusableView {
     private func configUI() {
         self.backgroundColor = .white200
     }
+
+    // MARK: - func
     
     func configIcon(to headerType: headerType) {
         headerIcon.image = headerType.iconImage

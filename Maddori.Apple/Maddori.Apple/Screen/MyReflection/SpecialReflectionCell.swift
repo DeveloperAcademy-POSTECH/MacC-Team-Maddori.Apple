@@ -7,6 +7,8 @@
 
 import UIKit
 
+import SnapKit
+
 final class SpecialReflectionCell: BaseCollectionViewCell {
     
     // MARK: - property
