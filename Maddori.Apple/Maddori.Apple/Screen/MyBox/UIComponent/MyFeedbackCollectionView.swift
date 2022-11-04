@@ -13,12 +13,12 @@ final class MyFeedbackCollectionView: UIView {
     private let mockData = FeedBack.mockData
     private enum Size {
         static let horizontalPadding: CGFloat = 24
-        static let topSpacing: CGFloat = 20
+        static let topSpacing: CGFloat = 24
         static let cellWidth: CGFloat = UIScreen.main.bounds.size.width - (SizeLiteral.leadingTrailingPadding * 2)
-        static let cellHeight: CGFloat = 85
+        static let cellHeight: CGFloat = 75
         static let collectionViewInset = UIEdgeInsets.init(top: Size.topSpacing,
                                                            left: Size.horizontalPadding,
-                                                           bottom: 0,
+                                                           bottom: 15,
                                                            right: Size.horizontalPadding)
     }
     
