@@ -203,7 +203,7 @@ extension InProgressViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: 100, height: Size.sectionPadding)
+        return CGSize(width: view.frame.width, height: Size.sectionPadding)
     }
 }
 
