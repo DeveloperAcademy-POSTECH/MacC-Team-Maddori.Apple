@@ -7,6 +7,8 @@
 
 import UIKit
 
+import SnapKit
+
 final class TotalReflectionCell: BaseCollectionViewCell {
     
     // MARK: - property
@@ -29,8 +31,6 @@ final class TotalReflectionCell: BaseCollectionViewCell {
         imageView.tintColor = .gray400
         return imageView
     }()
-    
-    // MARK: - func
     
     override func render() {
         contentView.addSubview(cellLabel)
@@ -58,6 +58,8 @@ final class TotalReflectionCell: BaseCollectionViewCell {
         super.configUI()
         contentView.backgroundColor = .white200
     }
+    
+    // MARK: - func
     
     func configLabel(text: String, date: String) {
         cellLabel.text = text
