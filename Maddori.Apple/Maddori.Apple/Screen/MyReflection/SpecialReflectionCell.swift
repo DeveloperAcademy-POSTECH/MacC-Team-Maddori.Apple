@@ -25,8 +25,6 @@ final class SpecialReflectionCell: BaseCollectionViewCell {
         return imageView
     }()
     
-    // MARK: - func
-    
     override func render() {
         contentView.addSubview(cellLabel)
         cellLabel.snp.makeConstraints {
@@ -46,6 +44,8 @@ final class SpecialReflectionCell: BaseCollectionViewCell {
         super.configUI()
         contentView.backgroundColor = .white200
     }
+    
+    // MARK: - func
     
     func configLabel(text: String) {
         cellLabel.text = text
