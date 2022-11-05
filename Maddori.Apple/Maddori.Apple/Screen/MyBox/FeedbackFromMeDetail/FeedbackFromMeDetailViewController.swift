@@ -225,12 +225,12 @@ final class FeedbackFromMeDetailViewController: BaseViewController {
     
     private func setupFeedbackSendTimeLabel() {
         if let date = reflectionDate {
-            if date <= Date() {
+            if date >= Date() {
                 feedbackEditButton.isHidden = true
                 deleteButton.isHidden = true
                 editFeedbackUntilLabel.setTextWithLineHeight(text: TextLiteral.feedbackFromMeDetailViewControllerReflectionIsStartedLabel, lineHeight: 22)
                 editFeedbackUntilLabel.snp.remakeConstraints {
-                    $0.bottom.equalTo(feedbackEditButtonView.snp.bottom).inset(91)
+                    $0.bottom.equalTo(feedbackEditButtonView.snp.bottom).inset(44)
                     $0.centerX.equalTo(feedbackEditButtonView.snp.centerX)
                 }
             } else {
