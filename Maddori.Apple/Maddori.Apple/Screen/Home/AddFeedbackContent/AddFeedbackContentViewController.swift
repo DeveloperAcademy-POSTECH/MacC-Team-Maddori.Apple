@@ -170,13 +170,6 @@ final class AddFeedbackContentViewController: BaseViewController {
         setupDelegate()
     }
     
-    override func configUI() {
-        super.configUI()
-        if feedbackDate != nil {
-            feedbackSendTimeLabel.text = "작성한 피드백은 \(feedbackDate!.dateToMonthDayString)에 자동으로 제출됩니다"
-        }
-    }
-    
     override func render() {
         view.addSubview(addFeedbackScrollView)
         addFeedbackScrollView.snp.makeConstraints {
