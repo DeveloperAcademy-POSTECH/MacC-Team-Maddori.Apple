@@ -42,7 +42,7 @@ class MyReflectionDetailViewController: BaseViewController {
         view.addSubview(tableView)
         tableView.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(SizeLiteral.topPadding)
-            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.leading.trailing.equalToSuperview()
             $0.bottom.equalToSuperview()
         }
     }
@@ -57,10 +57,14 @@ extension MyReflectionDetailViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: MyReflectionDetailTableViewCell.className, for: indexPath) as? MyReflectionDetailTableViewCell else { return UITableViewCell() }
+        
+        cell.titleLabel.text = "필기능력"
         return cell
     }
 }
 
 extension MyReflectionDetailViewController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
+    }
 }
