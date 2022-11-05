@@ -64,9 +64,9 @@ extension MyFeedbackCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: MyFeedbackHeaderView.className, for: indexPath) as? MyFeedbackHeaderView else { return UICollectionReusableView() }
         if indexPath.section == 0 {
-            header.setHiddenDivider(value: true)
+            header.setDividerHidden(true)
         } else {
-            header.setHiddenDivider(value: false)
+            header.setDividerHidden(false)
         }
         header.setCssLabelText(with: indexPath.section)
         switch kind {
@@ -89,19 +89,19 @@ extension MyFeedbackCollectionView: UICollectionViewDataSource {
             let data = mockData.filter { $0.type == .continueType }
             cell.setCellLabel(title: data[indexPath.item].title, content: data[indexPath.item].content)
             if indexPath.item == data.count - 1 {
-                cell.setHiddenDivider(value: true)
+                cell.setDividerHidden(true)
             }
         case 1:
             let data = mockData.filter { $0.type == .stopType }
             cell.setCellLabel(title: data[indexPath.item].title, content: data[indexPath.item].content)
             if indexPath.item == data.count - 1 {
-                cell.setHiddenDivider(value: true)
+                cell.setDividerHidden(true)
             }
         default:
             let data = mockData.filter { $0.type == .startType }
             cell.setCellLabel(title: data[indexPath.item].title, content: data[indexPath.item].content)
             if indexPath.item == data.count - 1 {
-                cell.setHiddenDivider(value: true)
+                cell.setDividerHidden(true)
             }
         }
         return cell

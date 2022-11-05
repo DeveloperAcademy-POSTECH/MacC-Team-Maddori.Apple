@@ -54,7 +54,7 @@ final class MyFeedbackHeaderView: UICollectionReusableView {
         cssLabel.text = FeedBackType.allCases[index].rawValue
     }
     
-    func setHiddenDivider(value: Bool) {
+    func setDividerHidden(_ value: Bool) {
         dividerView.isHidden = value
     }
 }

@@ -80,7 +80,7 @@ final class MyFeedbackCollectionViewCell: BaseCollectionViewCell {
         contentLabel.setTextWithLineHeight(text: content, lineHeight: 22)
     }
     
-    func setHiddenDivider(value: Bool) {
+    func setDividerHidden(_ value: Bool) {
         dividerView.isHidden = value
     }
 }
