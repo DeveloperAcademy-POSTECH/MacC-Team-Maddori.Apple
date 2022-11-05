@@ -31,8 +31,8 @@ struct FeedBack {
         FeedBack(type: .stopType, title: "토끼", content: "Stop 좋아요~ 너무 좋아요~ 너무 좋아요 ~ 너무 좋아요~ 너무 좋아요~ 너무 좋아요~너무 좋아요~너무 좋아요~", from: "케미", to: "호야"),
         FeedBack(type: .stopType, title: "진저비어", content: "Stop 좋아요~ 너무 좋아요~ 너무 좋아요 ~ 너무 좋아요~ 너무 좋아요~ 너무 좋아요~너무 좋아요~너무 좋아요~", from: "케미", to: "호야"),
         FeedBack(type: .stopType, title: "불도저", content: "Stop 좋아요~ 너무 좋아요~ 너무 좋아요 ~ 너무 좋아요~ 너무 좋아요~ 너무 좋아요~너무 좋아요~너무 좋아요~", from: "케미", to: "호야"),
-        FeedBack(type: .startType, title: "진저비어", content: "Start 좋아요~ 너무 좋아요~ 너무 좋아요 ~ 너무 좋아요~ 너무 좋아요~ 너무 좋아요~너무 좋아요~너무 좋아요~", from: "케미", to: "호야"),
-        FeedBack(type: .startType, title: "불도저", content: "Start 좋아요~ 너무 좋아요~ 너무 좋아요 ~ 너무 좋아요~ 너무 좋아요~ 너무 좋아요~너무 좋아요~너무 좋아요~", from: "케미", to: "호야")
+        FeedBack(type: .continueType, title: "진저비어", content: "Start 좋아요~ 너무 좋아요~ 너무 좋아요 ~ 너무 좋아요~ 너무 좋아요~ 너무 좋아요~너무 좋아요~너무 좋아요~", from: "케미", to: "호야"),
+        FeedBack(type: .stopType, title: "불도저", content: "Start 좋아요~ 너무 좋아요~ 너무 좋아요 ~ 너무 좋아요~ 너무 좋아요~ 너무 좋아요~너무 좋아요~너무 좋아요~", from: "케미", to: "호야")
     ]
     #endif
 }

@@ -86,7 +86,7 @@ extension MyFeedbackCollectionView: UICollectionViewDataSource {
         case 1:
             data = mockData.filter { $0.type == .stopType }
         default:
-            data = mockData.filter { $0.type == .startType }
+            break
         }
         cell.setCellLabel(title: data[indexPath.item].title, content: data[indexPath.item].content)
         return cell
@@ -94,9 +94,7 @@ extension MyFeedbackCollectionView: UICollectionViewDataSource {
     
     // FIXME: - 예외 처리해야함 (continue와 start만 있다던지?)
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        if mockData.contains(where: { $0.type == .continueType }) && mockData.contains(where: { $0.type == .stopType }) && mockData.contains(where: { $0.type == .startType }) {
-            return 3
-        } else if mockData.contains(where: { $0.type == .continueType }) && mockData.contains(where: { $0.type == .stopType }) {
+        if mockData.contains(where: { $0.type == .continueType }) && mockData.contains(where: { $0.type == .stopType }) {
             return 2
         } else {
             return 1
