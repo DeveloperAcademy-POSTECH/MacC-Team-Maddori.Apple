@@ -78,18 +78,17 @@ extension MyFeedbackCollectionView: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyFeedbackCollectionViewCell.className, for: indexPath) as? MyFeedbackCollectionViewCell else { return UICollectionViewCell()}
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyFeedbackCollectionViewCell.className, for: indexPath) as? MyFeedbackCollectionViewCell else { return UICollectionViewCell() }
+        var data: [FeedBack] = []
         switch indexPath.section {
         case 0:
-            let data = mockData.filter { $0.type == .continueType }
-            cell.setCellLabel(title: data[indexPath.item].title, content: data[indexPath.item].content)
+            data = mockData.filter { $0.type == .continueType }
         case 1:
-            let data = mockData.filter { $0.type == .stopType }
-            cell.setCellLabel(title: data[indexPath.item].title, content: data[indexPath.item].content)
+            data = mockData.filter { $0.type == .stopType }
         default:
-            let data = mockData.filter { $0.type == .startType }
-            cell.setCellLabel(title: data[indexPath.item].title, content: data[indexPath.item].content)
+            data = mockData.filter { $0.type == .startType }
         }
+        cell.setCellLabel(title: data[indexPath.item].title, content: data[indexPath.item].content)
         return cell
     }
     
