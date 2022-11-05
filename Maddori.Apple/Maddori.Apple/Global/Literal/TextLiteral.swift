@@ -91,4 +91,8 @@ enum TextLiteral {
     static let InProgressViewControllerReceivedLabel = "내가 받은 피드백"
     static let InProgressViewControllerGivenLabel = "내가 보낸 피드백"
     static let InProgressViewControllerOtherGivenLabel = "팀원들이 보낸 피드백"
+    
+    // MARK: - MyBoxViewController
+    
+    static let myBoxViewControllerTitleLabel = "내가 작성한 피드백"
 }
