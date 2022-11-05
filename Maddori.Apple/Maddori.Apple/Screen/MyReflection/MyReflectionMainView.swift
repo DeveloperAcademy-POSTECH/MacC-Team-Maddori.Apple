@@ -38,7 +38,11 @@ final class MyReflectionMainViewController: BaseViewController {
         collectionView.register(ReflectionCollectionViewHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: ReflectionCollectionViewHeader.className)
         return collectionView
     }()
-    
+    private var emptyFeedbackLabel: EmptyFeedbackView = {
+        let label = EmptyFeedbackView()
+        label.emptyLabel.text = TextLiteral.emptyViewMyReflection
+        return label
+    }()
     
     // MARK: - life cycle
     
@@ -60,6 +64,14 @@ final class MyReflectionMainViewController: BaseViewController {
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.bottom.equalToSuperview()
         }
+        
+//        view.addSubview(emptyFeedbackLabel)
+//        emptyFeedbackLabel.snp.makeConstraints {
+//            $0.top.equalTo(reflectionCollectionView.snp.bottom)
+//            $0.centerX.equalToSuperview()
+//            $0.width.equalTo(88)
+//            $0.height.equalTo(54)
+//        }
     }
     
     // MARK: - func

@@ -85,10 +85,19 @@ enum TextLiteral {
     static let selectFeedbackMemberViewControllerDoneButtonText = "모든 회고 끝내기 "
     
     // MARK: - InProgressViewController
+    
     static let InProgressViewControllerTitleLabel = "님의 회고 시간"
     static let InProgressViewControllerSubTitleLabel = "님은 이야기 나누고 싶은\n키워드를 선택해주세요"
     static let InProgressViewControllerOthersSubTitleLabel = "님이 선택한 키워드를 확인해주세요"
     static let InProgressViewControllerReceivedLabel = "내가 받은 피드백"
     static let InProgressViewControllerGivenLabel = "내가 보낸 피드백"
     static let InProgressViewControllerOtherGivenLabel = "팀원들이 보낸 피드백"
+    
+    // MARK: - EmptyFeedbackView
+    
+    static let emptyViewMyBox = "팀원에게 작성한 피드백이 없습니다\n홈에서 피드백을 작성해보세요"
+    static let emptyViewMyReflection = "팀원에게 받은 피드백이 없습니다"
+    static let emptyViewInProgressMyRetrospective = "팀원에게 받은 피드백이 없습니다"
+    static let emptyViewInProgressOthersRetrospectiveSelf = "내가 보낸 피드백이 없습니다"
+    static let emptyViewInProgressOthersRetrospectiveOthers = "팀원들이 보낸 피드백이 없습니다"
 }
