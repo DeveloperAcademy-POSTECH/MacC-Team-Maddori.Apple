@@ -39,6 +39,10 @@ final class MyBoxMemberCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - life cycle
     
+    override func configUI() {
+        setShadowLayer()
+    }
+    
     override func render() {
         self.addSubview(shadowView)
         shadowView.snp.makeConstraints {
@@ -69,7 +73,7 @@ final class MyBoxMemberCollectionViewCell: BaseCollectionViewCell {
         memberNameLabel.textColor = .gray400
     }
     
-    func setMemeberName(name: String) {
+    func setMemberName(name: String) {
         memberNameLabel.text = name
     }
 }

@@ -97,7 +97,11 @@ extension MyBoxViewController: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyBoxMemberCollectionViewCell.className, for: indexPath) as? MyBoxMemberCollectionViewCell else {
             return UICollectionViewCell()
         }
-        cell.setMemeberName(name: memberList[indexPath.item])
+        cell.setMemberName(name: memberList[indexPath.item])
+        if indexPath.item == 0 {
+            cell.isSelected = true
+            collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .init())
+        }
         return cell
     }
 }
