@@ -144,7 +144,7 @@ final class AddFeedbackContentViewController: BaseViewController {
         view.backgroundColor = .white200
         return view
     }()
-    private lazy var editFeedbackUntilLabel: UILabel = {
+    private let editFeedbackUntilLabel: UILabel = {
         let label = UILabel()
         label.setTextWithLineHeight(text: TextLiteral.addFeedbackContentViewControllerFeedbackSendTimeLabel, lineHeight: 22)
         label.textColor = .gray400
