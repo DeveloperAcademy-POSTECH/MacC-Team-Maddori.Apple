@@ -53,4 +53,13 @@ extension UILabel {
         self.setLineSpacing()
         self.numberOfLines = 0
     }
+    
+    class func textSize(font: UIFont, text: String, width: CGFloat, height: CGFloat) -> CGSize {
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: width, height: height))
+        label.numberOfLines = 0
+        label.font = font
+        label.text = text
+        label.sizeToFit()
+        return label.frame.size
+    }
 }
