@@ -99,8 +99,9 @@ final class FeedbackFromMeDetailViewController: BaseViewController {
         view.backgroundColor = .white200
         return view
     }()
-    private lazy var feedbackSendTimeLabel: UILabel = {
+    private lazy var editFeedbackUntilLabel: UILabel = {
         let label = UILabel()
+        label.text = TextLiteral.feedbackFromMeDetailViewControllerBeforeReflectionLabel
         label.textColor = .gray400
         label.font = .body2
         return label
@@ -200,8 +201,8 @@ final class FeedbackFromMeDetailViewController: BaseViewController {
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
-        feedbackEditButtonView.addSubview(feedbackSendTimeLabel)
-        feedbackSendTimeLabel.snp.makeConstraints {
+        feedbackEditButtonView.addSubview(editFeedbackUntilLabel)
+        editFeedbackUntilLabel.snp.makeConstraints {
             $0.bottom.equalTo(feedbackEditButton.snp.top).offset(-11)
             $0.centerX.equalTo(feedbackEditButtonView.snp.centerX)
         }
@@ -227,16 +228,14 @@ final class FeedbackFromMeDetailViewController: BaseViewController {
             if date <= Date() {
                 feedbackEditButton.isHidden = true
                 deleteButton.isHidden = true
-                feedbackSendTimeLabel.setTextWithLineHeight(text: TextLiteral.feedbackFromMeDetailViewControllerReflectionIsStartedLabel, lineHeight: 22)
-                feedbackSendTimeLabel.snp.remakeConstraints {
+                editFeedbackUntilLabel.setTextWithLineHeight(text: TextLiteral.feedbackFromMeDetailViewControllerReflectionIsStartedLabel, lineHeight: 22)
+                editFeedbackUntilLabel.snp.remakeConstraints {
                     $0.bottom.equalTo(feedbackEditButtonView.snp.bottom).inset(91)
                     $0.centerX.equalTo(feedbackEditButtonView.snp.centerX)
                 }
             } else {
-                feedbackSendTimeLabel.setTextWithLineHeight(text: "담아둔 피드백은 \(date.dateToMonthDayString)에 자동으로 제출됩니다", lineHeight: 22)
+                editFeedbackUntilLabel.setTextWithLineHeight(text: TextLiteral.feedbackFromMeDetailViewControllerBeforeReflectionLabel, lineHeight: 22)
             }
-        } else {
-            feedbackSendTimeLabel.setTextWithLineHeight(text: TextLiteral.feedbackFromMeDetailViewControllerReflectionTimeUndecided, lineHeight: 22)
         }
     }
 
