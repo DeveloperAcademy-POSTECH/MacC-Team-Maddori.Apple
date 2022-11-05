@@ -9,11 +9,20 @@ import UIKit
 
 import SnapKit
 
-class MyReflectionDetailViewController: BaseViewController {
+final class MyReflectionDetailViewController: BaseViewController {
     
     // MARK: - property
+    private lazy var backButton: BackButton = {
+        let button = BackButton(type: .system)
+        let action = UIAction { [weak self] _ in
+            // FIXME
+        }
+        button.addAction(action, for: .touchUpInside)
+        return button
+    }()
     private let titleLabel: UILabel = {
         let label = UILabel()
+        // FIXME
         label.setTitleFont(text: "배포 후 3차 스프린트를 돌아보세요")
         label.applyColor(to: "배포 후 3차 스프린트", with: .blue200)
         return label
@@ -43,21 +52,32 @@ class MyReflectionDetailViewController: BaseViewController {
         tableView.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(SizeLiteral.topPadding)
             $0.leading.trailing.equalToSuperview()
-            $0.bottom.equalToSuperview()
+            // FIXME
+            $0.bottom.equalToSuperview().inset(150)
         }
     }
     
     // MARK: - func
+    override func setupNavigationBar() {
+        super.setupNavigationBar()
+        
+        let button = removeBarButtonItemOffset(with: backButton, offsetX: 10)
+        let backButton = makeBarButtonItem(with: button)
+        
+        navigationItem.leftBarButtonItem = backButton
+    }
 }
 
 extension MyReflectionDetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        // FIXME
+        return 15
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: MyReflectionDetailTableViewCell.className, for: indexPath) as? MyReflectionDetailTableViewCell else { return UITableViewCell() }
         
+        // FIXME
         cell.titleLabel.text = "필기능력"
         return cell
     }
@@ -66,5 +86,9 @@ extension MyReflectionDetailViewController: UITableViewDataSource {
 extension MyReflectionDetailViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
