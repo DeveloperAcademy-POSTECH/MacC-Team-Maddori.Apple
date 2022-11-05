@@ -115,7 +115,7 @@ extension MyFeedbackCollectionView: UICollectionViewDelegateFlowLayout {
         } else {
             data = mockData.filter { $0.type == .stopType }
         }
-        let cellHeight = UILabel.textSize(font: .body2, text: data[indexPath.item].content, width: Size.cellContentWidth, height: 30).height
+        let cellHeight = UILabel.textSize(font: .body2, text: data[indexPath.item].content, width: Size.cellContentWidth, height: 0).height
         let isOneTextLine = cellHeight < 18
         if isOneTextLine {
             return CGSize(width: Size.cellWidth, height: Size.resizingTextLineOneHeight)
