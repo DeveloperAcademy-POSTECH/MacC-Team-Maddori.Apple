@@ -14,8 +14,10 @@ final class MyFeedbackCollectionView: UIView {
     private enum Size {
         static let horizontalPadding: CGFloat = 24
         static let topSpacing: CGFloat = 24
+        static let cellContentWidth: CGFloat = UIScreen.main.bounds.size.width - SizeLiteral.leadingTrailingPadding - 66
+        static let resizingTextLineOneHeight: CGFloat = 53
+        static let resizingTextLineTwoHeight: CGFloat = 75
         static let cellWidth: CGFloat = UIScreen.main.bounds.size.width - (SizeLiteral.leadingTrailingPadding * 2)
-        static let cellHeight: CGFloat = 75
         static let collectionViewInset = UIEdgeInsets.init(top: Size.topSpacing,
                                                            left: Size.horizontalPadding,
                                                            bottom: 15,
@@ -28,7 +30,6 @@ final class MyFeedbackCollectionView: UIView {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .vertical
         flowLayout.sectionInset = Size.collectionViewInset
-        flowLayout.itemSize = CGSize(width: Size.cellWidth, height: Size.cellHeight)
         return flowLayout
     }()
     private lazy var feedbackCollectionView: UICollectionView = {
@@ -106,6 +107,20 @@ extension MyFeedbackCollectionView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: 80, height: 25)
     }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        var data: [FeedBack] = []
+        if indexPath.section == 0 {
+            data = mockData.filter { $0.type == .continueType }
+        } else {
+            data = mockData.filter { $0.type == .stopType }
+        }
+        let cellHeight = UILabel.textSize(font: .body2, text: data[indexPath.item].content, width: Size.cellContentWidth, height: 30).height
+        let isOneTextLine = cellHeight < 18
+        if isOneTextLine {
+            return CGSize(width: Size.cellWidth, height: Size.resizingTextLineOneHeight)
+        } else {
+            return CGSize(width: Size.cellWidth, height: Size.resizingTextLineTwoHeight)
+        }
+    }
 }
-
-
