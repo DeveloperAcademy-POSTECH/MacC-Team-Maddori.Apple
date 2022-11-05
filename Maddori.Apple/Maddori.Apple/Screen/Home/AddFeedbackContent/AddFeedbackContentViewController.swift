@@ -144,7 +144,7 @@ final class AddFeedbackContentViewController: BaseViewController {
         view.backgroundColor = .white200
         return view
     }()
-    private lazy var feedbackSendTimeLabel: UILabel = {
+    private lazy var editFeedbackUntilLabel: UILabel = {
         let label = UILabel()
         label.setTextWithLineHeight(text: TextLiteral.addFeedbackContentViewControllerFeedbackSendTimeLabel, lineHeight: 22)
         label.textColor = .gray400
@@ -272,8 +272,8 @@ final class AddFeedbackContentViewController: BaseViewController {
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
-        feedbackDoneButtonView.addSubview(feedbackSendTimeLabel)
-        feedbackSendTimeLabel.snp.makeConstraints {
+        feedbackDoneButtonView.addSubview(editFeedbackUntilLabel)
+        editFeedbackUntilLabel.snp.makeConstraints {
             $0.bottom.equalTo(feedbackDoneButton.snp.top).offset(-11)
             $0.centerX.equalTo(feedbackDoneButtonView.snp.centerX)
         }
@@ -371,14 +371,14 @@ final class AddFeedbackContentViewController: BaseViewController {
                 self.feedbackDoneButton.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height + 25)
             })
         }
-        feedbackSendTimeLabel.isHidden = true
+        editFeedbackUntilLabel.isHidden = true
     }
     
     @objc private func willHideKeyboard(notification: NSNotification) {
         UIView.animate(withDuration: 0.2, animations: {
             self.feedbackDoneButton.transform = .identity
         })
-        feedbackSendTimeLabel.isHidden = false
+        editFeedbackUntilLabel.isHidden = false
     }
 }
 
