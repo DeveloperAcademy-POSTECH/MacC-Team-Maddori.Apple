@@ -43,10 +43,12 @@ final class FeedbackFromMeDetailViewController: BaseViewController {
         label.font = .label2
         return label
     }()
-    private lazy var feedbackTypeLabelView: FeedbackTypeLabelView = {
-        let view = FeedbackTypeLabelView()
-        view.feedbackType = model.feedbackType
-        return view
+    private lazy var feedbackTypeText: UILabel = {
+        let label = UILabel()
+        label.text = model.feedbackType.rawValue
+        label.textColor = .gray400
+        label.font = .body1
+        return label
     }()
     private let feedbackKeywordLabel: UILabel = {
         let label = UILabel()
@@ -143,16 +145,15 @@ final class FeedbackFromMeDetailViewController: BaseViewController {
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
-        feedbackFromMeDetailContentView.addSubview(feedbackTypeLabelView)
-        feedbackTypeLabelView.snp.makeConstraints {
+        feedbackFromMeDetailContentView.addSubview(feedbackTypeText)
+        feedbackTypeText.snp.makeConstraints {
             $0.top.equalTo(feedbackTypeLabel.snp.bottom).offset(SizeLiteral.labelComponentPadding)
-            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-            $0.height.equalTo(46)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
         feedbackFromMeDetailContentView.addSubview(feedbackKeywordLabel)
         feedbackKeywordLabel.snp.makeConstraints {
-            $0.top.equalTo(feedbackTypeLabelView.snp.bottom).offset(SizeLiteral.componentIntervalPadding)
+            $0.top.equalTo(feedbackTypeText.snp.bottom).offset(SizeLiteral.componentIntervalPadding)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         

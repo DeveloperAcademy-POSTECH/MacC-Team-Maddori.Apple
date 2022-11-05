@@ -8,8 +8,8 @@
 import Foundation
 
 enum FeedbackButtonType: String {
-    case continueType = "continue"
-    case stopType = "stop"
+    case continueType = "Continue"
+    case stopType = "Stop"
 }
 
 struct FeedbackFromMeModel {
