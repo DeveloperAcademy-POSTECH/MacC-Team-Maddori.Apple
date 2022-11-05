@@ -8,56 +8,20 @@
 import UIKit
 
 import SnapKit
-// FIXME: 도저히 머리가 안돌아가서 실천하기 란을 special로 이름을 지었습니다
-// 이거 좀 아이디어 좀 주세요...
-enum headerType {
-    case special
-    case total
-    
-    var iconImage: UIImage {
-        switch self {
-        case .special:
-            return ImageLiterals.icPin
-        case .total:
-            return ImageLiterals.icBox
-        }
-    }
-    
-    var iconColor: UIColor {
-        switch self {
-        case .special:
-            return UIColor.yellow200
-        case .total:
-            return UIColor.blue200
-        }
-    }
-    
-    var labelText: String {
-        switch self {
-        case .special:
-            // FIXME: 실천하기도 레이블링 바꾸기로 했었는데 일단 생각이 안나서 이렇게 둡니다...
-            return "실천하기"
-        case .total:
-            return "모음집"
-        }
-    }
-}
 
 final class ReflectionCollectionViewHeader: UICollectionReusableView {
-    
-    var type: headerType = .special
     
     // MARK: - property
     
     private lazy var headerIcon: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = type.iconImage
-        imageView.tintColor = type.iconColor
+        imageView.image = ImageLiterals.icBox
+        imageView.tintColor = UIColor.blue200
         return imageView
     }()
     private lazy var headerLabel: UILabel = {
         let label = UILabel()
-        label.text = type.labelText
+        label.text = "모음집"
         label.font = .label3
         return label
     }()
@@ -76,7 +40,7 @@ final class ReflectionCollectionViewHeader: UICollectionReusableView {
         self.addSubview(headerIcon)
         headerIcon.snp.makeConstraints {
             $0.bottom.equalToSuperview().inset(6)
-            $0.leading.equalToSuperview()
+            $0.leading.equalToSuperview().inset(-2)
             $0.height.width.equalTo(28)
         }
         
@@ -89,16 +53,5 @@ final class ReflectionCollectionViewHeader: UICollectionReusableView {
     
     private func configUI() {
         self.backgroundColor = .white200
-    }
-
-    // MARK: - func
-    
-    func configIcon(to headerType: headerType) {
-        headerIcon.image = headerType.iconImage
-        headerIcon.tintColor = headerType.iconColor
-    }
-    
-    func configLabel(to headerType: headerType) {
-        headerLabel.text = headerType.labelText
     }
 }
