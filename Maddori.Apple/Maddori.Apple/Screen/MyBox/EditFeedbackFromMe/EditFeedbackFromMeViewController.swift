@@ -13,14 +13,14 @@ final class EditFeedbackFromMeViewController: AddFeedbackContentViewController {
     
     private let model = FeedbackFromMeModel.mockData
     
-    // MARK: - property
-    
     // MARK: - life cycle
     
     override func configUI() {
         super.configUI()
         setupFeedbackType()
         setupFeedbackKeyword()
+        setupFeedbackContent()
+        setupFeedbackStart()
     }
     
     // MARK: - func
@@ -37,5 +37,20 @@ final class EditFeedbackFromMeViewController: AddFeedbackContentViewController {
     private func setupFeedbackKeyword() {
         feedbackKeywordTextField.text = model.keyword
         setCounter(count: model.keyword.count)
+    }
+    
+    private func setupFeedbackContent() {
+        feedbackContentTextView.text = model.info
+        feedbackContentTextView.textColor = .black100
+    }
+    
+    private func setupFeedbackStart() {
+        if let start = model.start {
+            feedbackStartSwitch.isOn = true
+            feedbackStartTextViewLabel.isHidden = false
+            feedbackStartTextView.isHidden = false
+            feedbackStartTextView.text = start
+            feedbackStartTextView.textColor = .black100
+        }
     }
 }

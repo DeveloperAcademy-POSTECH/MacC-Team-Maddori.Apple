@@ -103,12 +103,12 @@ class AddFeedbackContentViewController: BaseViewController {
         label.font = .label2
         return label
     }()
-    private let feedbackContentTextView: FeedbackTextView = {
+    let feedbackContentTextView: FeedbackTextView = {
         let textView = FeedbackTextView()
         textView.placeholder = TextLiteral.addFeedbackContentViewControllerFeedbackContentTextViewPlaceholder
         return textView
     }()
-    private lazy var feedbackStartSwitch: UISwitch = {
+    lazy var feedbackStartSwitch: UISwitch = {
         let toggle = UISwitch()
         toggle.onTintColor = .blue200
         toggle.isOn = false
@@ -125,7 +125,7 @@ class AddFeedbackContentViewController: BaseViewController {
         label.font = .label2
         return label
     }()
-    private let feedbackStartTextViewLabel: UILabel = {
+    let feedbackStartTextViewLabel: UILabel = {
         let label = UILabel()
         label.text = TextLiteral.feedbackContentLabel
         label.textColor = .black100
@@ -133,7 +133,7 @@ class AddFeedbackContentViewController: BaseViewController {
         label.isHidden = true
         return label
     }()
-    private let feedbackStartTextView: FeedbackTextView = {
+    let feedbackStartTextView: FeedbackTextView = {
         let textView = FeedbackTextView()
         textView.placeholder = TextLiteral.addFeedbackContentViewControllerStartTextViewPlaceholder
         textView.isHidden = true
