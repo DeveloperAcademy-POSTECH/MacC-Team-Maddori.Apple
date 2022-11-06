@@ -139,12 +139,12 @@ class AddFeedbackContentViewController: BaseViewController {
         textView.isHidden = true
         return textView
     }()
-    private let feedbackDoneButtonView: UIView = {
+    let feedbackDoneButtonView: UIView = {
         let view = UIView()
         view.backgroundColor = .white200
         return view
     }()
-    private let editFeedbackUntilLabel: UILabel = {
+    let editFeedbackUntilLabel: UILabel = {
         let label = UILabel()
         label.setTextWithLineHeight(text: TextLiteral.addFeedbackContentViewControllerFeedbackSendTimeLabel, lineHeight: 22)
         label.textColor = .gray400

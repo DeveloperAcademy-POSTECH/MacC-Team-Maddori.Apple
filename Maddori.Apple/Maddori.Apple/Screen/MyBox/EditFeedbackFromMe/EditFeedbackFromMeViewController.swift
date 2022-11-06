@@ -21,6 +21,7 @@ final class EditFeedbackFromMeViewController: AddFeedbackContentViewController {
         setupFeedbackKeyword()
         setupFeedbackContent()
         setupFeedbackStart()
+        hideEditFeedbackUntilLabel()
     }
     
     // MARK: - func
@@ -51,6 +52,15 @@ final class EditFeedbackFromMeViewController: AddFeedbackContentViewController {
             feedbackStartTextView.isHidden = false
             feedbackStartTextView.text = start
             feedbackStartTextView.textColor = .black100
+        }
+    }
+    
+    private func hideEditFeedbackUntilLabel() {
+        editFeedbackUntilLabel.isHidden = true
+        feedbackDoneButtonView.snp.remakeConstraints {
+            $0.bottom.equalToSuperview()
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(95)
         }
     }
 }
