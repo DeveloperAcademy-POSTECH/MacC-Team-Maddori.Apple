@@ -47,6 +47,18 @@ final class AlertView: UIView {
         view.layer.cornerRadius = 10
         return view
     }()
+    private let titleLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .blue200
+        label.font = .main
+        return label
+    }()
+    private let subTitleLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .gray400
+        label.font = .caption1
+        return label
+    }()
     
     // MARK: - life cycle
     
@@ -68,6 +80,18 @@ final class AlertView: UIView {
             $0.width.equalTo(Size.alertViewWidth)
             $0.height.equalTo(Size.alertViewHeight)
             $0.center.equalTo(backgroundView.snp.center)
+        }
+        
+        alertView.addSubview(titleLabel)
+        titleLabel.snp.makeConstraints {
+            $0.top.equalTo(alertView.snp.top).inset(43)
+            $0.centerX.equalTo(alertView.snp.centerX)
+        }
+        
+        alertView.addSubview(subTitleLabel)
+        subTitleLabel.snp.makeConstraints {
+            $0.top.equalTo(titleLabel.snp.bottom).offset(10)
+            $0.centerX.equalTo(alertView.snp.centerX)
         }
     }
     
