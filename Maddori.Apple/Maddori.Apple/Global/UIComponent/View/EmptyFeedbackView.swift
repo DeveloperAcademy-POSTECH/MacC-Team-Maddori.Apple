@@ -14,8 +14,8 @@ final class EmptyFeedbackView: BaseCollectionViewCell {
     private enum Size {
         static let capsuleWidth: CGFloat = 88
         static let capsuleHeight: CGFloat = 54
-        static let capsuleYOffset: CGFloat = 50
-        static let labelYOffset: CGFloat = 18
+        static let capsuleYOffset: CGFloat = 20
+        static let labelYOffset: CGFloat = 30
     }
     
     // MARK: - property
@@ -36,14 +36,14 @@ final class EmptyFeedbackView: BaseCollectionViewCell {
         self.addSubview(emptyFeedbackCapsule)
         emptyFeedbackCapsule.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalToSuperview().inset(Size.capsuleYOffset)
+            $0.centerY.equalToSuperview().offset(-Size.capsuleYOffset)
             $0.width.equalTo(Size.capsuleWidth)
             $0.height.equalTo(Size.capsuleHeight)
         }
         
         self.addSubview(emptyFeedbackLabel)
         emptyFeedbackLabel.snp.makeConstraints {
-            $0.top.equalTo(emptyFeedbackCapsule.snp.bottom).offset(Size.labelYOffset)
+            $0.centerY.equalToSuperview().offset(Size.labelYOffset)
             $0.centerX.equalToSuperview()
         }
     }
