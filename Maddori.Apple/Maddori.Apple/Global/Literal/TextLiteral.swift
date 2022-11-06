@@ -105,4 +105,9 @@ enum TextLiteral {
     static let feedbackFromMeDetailViewControllerEditButtonText: String = "수정하러 가기"
     static let feedbackFromMeDetailViewControllerReflectionIsStartedLabel: String = "회고가 시작되었습니다"
     static let feedbackFromMeDetailViewControllerBeforeReflectionLabel: String = "담아둔 피드백은 회고 시간 전까지 수정 가능합니다"
+    
+    // MARK: - LoginViewController
+    
+    static let loginViewControllerLogoText: String = "KeyGo"
+    static let loginViewControllerDescriptionText: String = "키워드로 회고하기"
 }
