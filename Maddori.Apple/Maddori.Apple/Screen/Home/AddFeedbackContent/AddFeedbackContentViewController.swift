@@ -9,7 +9,7 @@ import UIKit
 
 import SnapKit
 
-final class AddFeedbackContentViewController: BaseViewController {
+class AddFeedbackContentViewController: BaseViewController {
     
     private enum Length {
         static let keywordMinLength: Int = 0
