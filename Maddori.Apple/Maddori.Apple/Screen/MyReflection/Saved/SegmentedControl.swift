@@ -7,11 +7,10 @@
 
 import UIKit
 
-import SnapKit
-
-class CustomSegmentedControl: UISegmentedControl {
+final class CustomSegmentedControl: UISegmentedControl {
     
     // MARK: - init
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.removeBackgroundAndDivider()
@@ -25,6 +24,7 @@ class CustomSegmentedControl: UISegmentedControl {
     required init?(coder: NSCoder) { nil }
     
     // MARK: - func
+    
     private func removeBackgroundAndDivider() {
         let image = UIImage()
         self.setBackgroundImage(image, for: .normal, barMetrics: .default)

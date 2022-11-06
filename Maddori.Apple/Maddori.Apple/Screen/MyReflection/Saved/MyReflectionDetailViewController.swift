@@ -12,6 +12,7 @@ import SnapKit
 final class MyReflectionDetailViewController: BaseViewController {
     
     // MARK: - property
+    
     private lazy var backButton: BackButton = {
         let button = BackButton(type: .system)
         let action = UIAction { [weak self] _ in
@@ -24,6 +25,7 @@ final class MyReflectionDetailViewController: BaseViewController {
         let label = UILabel()
         // FIXME
         label.setTitleFont(text: "배포 후 3차 스프린트를 돌아보세요")
+        label.textColor = .black100
         label.applyColor(to: "배포 후 3차 스프린트", with: .blue200)
         return label
     }()
@@ -44,7 +46,7 @@ final class MyReflectionDetailViewController: BaseViewController {
     override func render() {
         view.addSubview(titleLabel)
         titleLabel.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.topPadding)
+            $0.top.equalTo(view.safeAreaLayoutGuide).inset(20)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
