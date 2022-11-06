@@ -18,7 +18,8 @@ final class InProgressViewController: BaseViewController {
     private enum Size {
         static let keywordLabelHeight: CGFloat = 50
         static let sectionPadding: CGFloat = 60
-        static let emptyViewHeight: CGFloat = 180
+        static let myReflectionEmptyViewHeight: CGFloat = 500
+        static let othersReflectionEmptyViewHeight: CGFloat = 180
     }
     private var keywordsSectionList: [[Keyword]] = []
     private var isUserRetrospective: Bool {
@@ -199,7 +200,7 @@ extension InProgressViewController: UICollectionViewDataSource {
         let item = indexPath.item
         let sectionIsEmpty = keywordsSectionList[section].isEmpty
         
-        if sectionIsEmpty {
+        if sectionIsEmpty && !isUserRetrospective {
             switch section {
             case 0:
                 emptyCell.emptyFeedbackLabel.text = TextLiteral.emptyViewInProgressOthersRetrospectiveSelf
@@ -208,6 +209,9 @@ extension InProgressViewController: UICollectionViewDataSource {
             default:
                 return emptyCell
             }
+            return emptyCell
+        } else if sectionIsEmpty && isUserRetrospective {
+            emptyCell.emptyFeedbackLabel.text = TextLiteral.emptyViewInProgressMyRetrospective
             return emptyCell
         }
         
@@ -224,8 +228,10 @@ extension InProgressViewController: UICollectionViewDelegateFlowLayout {
         let section = indexPath.section
         let item = indexPath.item
         let sectionIsEmpty = keywordsSectionList[section].isEmpty
-        if sectionIsEmpty {
-            return CGSize(width: view.frame.width - 2 * SizeLiteral.leadingTrailingPadding, height: Size.emptyViewHeight)
+        if sectionIsEmpty && isUserRetrospective {
+            return CGSize(width: view.frame.width - 2 * SizeLiteral.leadingTrailingPadding, height: Size.myReflectionEmptyViewHeight)
+        } else if sectionIsEmpty && !isUserRetrospective {
+            return CGSize(width: view.frame.width - 2 * SizeLiteral.leadingTrailingPadding, height: Size.othersReflectionEmptyViewHeight)
         }
         return KeywordCollectionViewCell.fittingSize(availableHeight: Size.keywordLabelHeight,
                                                      keyword: keywordsSectionList[section][item].string)
