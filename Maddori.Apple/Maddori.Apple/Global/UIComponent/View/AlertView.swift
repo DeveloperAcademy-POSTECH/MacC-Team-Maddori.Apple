@@ -178,12 +178,8 @@ final class AlertView: UIView {
         case .join:
             actionButton.setTitle(alertType?.rawValue, for: .normal)
             actionButton.setTitleColor(.gray500, for: .normal)
-            
-            // FIXME: alertType이 전달되지 않을 경우
-            
         case .none:
-            actionButton.setTitle("확인", for: .normal)
-            actionButton.setTitleColor(.gray500, for: .normal)
+            return
         }
     }
     
