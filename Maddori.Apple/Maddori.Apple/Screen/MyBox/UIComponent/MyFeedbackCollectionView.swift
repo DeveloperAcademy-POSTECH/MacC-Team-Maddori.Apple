@@ -13,13 +13,15 @@ final class MyFeedbackCollectionView: UIView {
     private let mockData = FeedBack.mockData
     private enum Size {
         static let horizontalPadding: CGFloat = 24
-        static let topSpacing: CGFloat = 20
-        static let cellWidth: CGFloat = UIScreen.main.bounds.size.width - SizeLiteral.leadingTrailingPadding
-        static let cellHeight: CGFloat = 85
+        static let topSpacing: CGFloat = 24
+        static let cellContentWidth: CGFloat = UIScreen.main.bounds.size.width - SizeLiteral.leadingTrailingPadding - 66
+        static let resizingTextLineOneHeight: CGFloat = 53
+        static let resizingTextLineTwoHeight: CGFloat = 75
+        static let cellWidth: CGFloat = UIScreen.main.bounds.size.width - (SizeLiteral.leadingTrailingPadding * 2)
         static let collectionViewInset = UIEdgeInsets.init(top: Size.topSpacing,
                                                            left: Size.horizontalPadding,
-                                                           bottom: 0,
-                                                           right: 0)
+                                                           bottom: 15,
+                                                           right: Size.horizontalPadding)
     }
     
     // MARK: - property
@@ -28,7 +30,6 @@ final class MyFeedbackCollectionView: UIView {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .vertical
         flowLayout.sectionInset = Size.collectionViewInset
-        flowLayout.itemSize = CGSize(width: Size.cellWidth, height: Size.cellHeight)
         return flowLayout
     }()
     private lazy var feedbackCollectionView: UICollectionView = {
@@ -83,35 +84,29 @@ extension MyFeedbackCollectionView: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyFeedbackCollectionViewCell.className, for: indexPath) as? MyFeedbackCollectionViewCell else { return UICollectionViewCell()}
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyFeedbackCollectionViewCell.className, for: indexPath) as? MyFeedbackCollectionViewCell else { return UICollectionViewCell() }
+        var data: [FeedBack] = []
         switch indexPath.section {
         case 0:
-            let data = mockData.filter { $0.type == .continueType }
-            cell.setCellLabel(title: data[indexPath.item].title, content: data[indexPath.item].content)
+            data = mockData.filter { $0.type == .continueType }
             if indexPath.item == data.count - 1 {
                 cell.setDividerHidden(true)
             }
         case 1:
-            let data = mockData.filter { $0.type == .stopType }
-            cell.setCellLabel(title: data[indexPath.item].title, content: data[indexPath.item].content)
+            data = mockData.filter { $0.type == .stopType }
             if indexPath.item == data.count - 1 {
                 cell.setDividerHidden(true)
             }
         default:
-            let data = mockData.filter { $0.type == .startType }
-            cell.setCellLabel(title: data[indexPath.item].title, content: data[indexPath.item].content)
-            if indexPath.item == data.count - 1 {
-                cell.setDividerHidden(true)
-            }
+            break
         }
+        cell.setCellLabel(title: data[indexPath.item].title, content: data[indexPath.item].content)
         return cell
     }
     
     // FIXME: - 예외 처리해야함 (continue와 start만 있다던지?)
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        if mockData.contains(where: { $0.type == .continueType }) && mockData.contains(where: { $0.type == .stopType }) && mockData.contains(where: { $0.type == .startType }) {
-            return 3
-        } else if mockData.contains(where: { $0.type == .continueType }) && mockData.contains(where: { $0.type == .stopType }) {
+        if mockData.contains(where: { $0.type == .continueType }) && mockData.contains(where: { $0.type == .stopType }) {
             return 2
         } else {
             return 1
@@ -122,5 +117,21 @@ extension MyFeedbackCollectionView: UICollectionViewDataSource {
 extension MyFeedbackCollectionView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: 80, height: 45)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        var data: [FeedBack] = []
+        if indexPath.section == 0 {
+            data = mockData.filter { $0.type == .continueType }
+        } else {
+            data = mockData.filter { $0.type == .stopType }
+        }
+        let cellHeight = UILabel.textSize(font: .body2, text: data[indexPath.item].content, width: Size.cellContentWidth, height: 0).height
+        let isOneTextLine = cellHeight < 18
+        if isOneTextLine {
+            return CGSize(width: Size.cellWidth, height: Size.resizingTextLineOneHeight)
+        } else {
+            return CGSize(width: Size.cellWidth, height: Size.resizingTextLineTwoHeight)
+        }
     }
 }
