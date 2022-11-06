@@ -68,7 +68,7 @@ class AddFeedbackContentViewController: BaseViewController {
         label.font = .label2
         return label
     }()
-    private lazy var feedbackTypeButtonView: FeedbackTypeButtonView = {
+    lazy var feedbackTypeButtonView: FeedbackTypeButtonView = {
         let view = FeedbackTypeButtonView()
         view.changeFeedbackType = { [weak self] type in
             if let typeValue = FeedBackType.init(rawValue: type.rawValue) {

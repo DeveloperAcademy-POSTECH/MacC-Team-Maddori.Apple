@@ -11,9 +11,30 @@ import SnapKit
 
 final class EditFeedbackFromMeViewController: AddFeedbackContentViewController {
     
+    private let model = FeedbackFromMeModel.mockData
+    
     // MARK: - property
     
     // MARK: - life cycle
     
+    override func configUI() {
+        super.configUI()
+        setupFeedbackType()
+        setupFeedbackKeyword()
+    }
+    
     // MARK: - func
+    
+    private func setupFeedbackType() {
+        switch model.feedbackType {
+        case .continueType:
+            self.feedbackTypeButtonView.touchUpToSelectType(.continueType)
+        case .stopType:
+            self.feedbackTypeButtonView.touchUpToSelectType(.stopType)
+        }
+    }
+    
+    private func setupFeedbackKeyword() {
+        
+    }
 }
