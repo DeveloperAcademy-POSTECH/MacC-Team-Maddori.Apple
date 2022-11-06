@@ -9,17 +9,15 @@ import UIKit
 
 import SnapKit
 
-protocol CustomAlertDelegate: AnyObject {
-    func action()
-    func cancel()
-}
-
 enum AlertType: String {
     case delete = "삭제하기"
     case join = "합류하기"
 }
 
 final class AlertView: UIView {
+    var didTappedCancelButton: (() -> ())?
+    var didTappedActionButton: (() -> ())?
+    
     private enum Size {
         static let alertViewWidth: CGFloat = 265
         static let alertViewHeight: CGFloat = 163
@@ -38,8 +36,6 @@ final class AlertView: UIView {
     var alertType: AlertType? {
         didSet { setupAttribute() }
     }
-    
-    weak var delegate: CustomAlertDelegate?
     
     // MARK: - property
     
@@ -83,7 +79,7 @@ final class AlertView: UIView {
         button.titleLabel?.font = .caption2
         button.titleLabel?.textAlignment = .center
         let action = UIAction { [weak self] _ in
-            self?.didTappedCancelButton()
+            self?.didTappedCancelButton!()
         }
         button.addAction(action, for: .touchUpInside)
         return button
@@ -93,7 +89,7 @@ final class AlertView: UIView {
         button.titleLabel?.font = .caption2
         button.titleLabel?.textAlignment = .center
         let action = UIAction { [weak self] _ in
-            self?.didTappedActionButton()
+            self?.didTappedActionButton!()
         }
         button.addAction(action, for: .touchUpInside)
         return button
@@ -180,18 +176,6 @@ final class AlertView: UIView {
             actionButton.setTitleColor(.gray500, for: .normal)
         case .none:
             return
-        }
-    }
-    
-    private func didTappedCancelButton() {
-        if let delegate = delegate {
-            delegate.cancel()
-        }
-    }
-    
-    private func didTappedActionButton() {
-        if let delegate = delegate {
-            delegate.action()
         }
     }
 }

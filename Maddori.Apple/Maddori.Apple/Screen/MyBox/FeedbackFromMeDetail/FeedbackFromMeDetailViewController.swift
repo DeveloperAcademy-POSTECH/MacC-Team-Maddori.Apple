@@ -126,11 +126,16 @@ final class FeedbackFromMeDetailViewController: BaseViewController {
     
     // MARK: - life cycle
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        didTappedCancelButton()
+        didTappedActionButton()
+    }
+    
     override func configUI() {
         super.configUI()
         setupFeedbackSendTimeLabel()
         setupOptionalComponents()
-        setupDelegate()
     }
     
     override func render() {
@@ -274,34 +279,29 @@ final class FeedbackFromMeDetailViewController: BaseViewController {
         deleteAlertView.isHidden = false
     }
     
-    private func setupDelegate() {
-        deleteAlertView.delegate = self
-    }
-}
+    private func didTappedCancelButton() {
+        deleteAlertView.didTappedCancelButton = {
+            self.deleteAlertView.isHidden = true
 
-// MARK: - extension
-
-extension FeedbackFromMeDetailViewController: CustomAlertDelegate {
-    func action() {
-        
-        // FIXME: - 피드백 삭제 api 연결 + MyBoxView 로 navigate
-        
-        deleteAlertView.isHidden = true
-        navigationController?.isNavigationBarHidden = false
-        feedbackFromMeDetailTitleLabel.snp.remakeConstraints {
-            $0.top.equalTo(feedbackFromMeDetailContentView).inset(SizeLiteral.topPadding)
-            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            self.navigationController?.isNavigationBarHidden = false
+            
+            self.feedbackFromMeDetailTitleLabel.snp.remakeConstraints {
+                $0.top.equalTo(self.feedbackFromMeDetailContentView).inset(SizeLiteral.topPadding)
+                $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            }
         }
     }
     
-    func cancel() {
-        deleteAlertView.isHidden = true
-
-        navigationController?.isNavigationBarHidden = false
-        
-        feedbackFromMeDetailTitleLabel.snp.remakeConstraints {
-            $0.top.equalTo(feedbackFromMeDetailContentView).inset(SizeLiteral.topPadding)
-            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+    private func didTappedActionButton() {
+        deleteAlertView.didTappedActionButton = {
+            // FIXME: - 피드백 삭제 api 연결 + MyBoxView 로 navigate
+            
+            self.deleteAlertView.isHidden = true
+            self.navigationController?.isNavigationBarHidden = false
+            self.feedbackFromMeDetailTitleLabel.snp.remakeConstraints {
+                $0.top.equalTo(self.feedbackFromMeDetailContentView).inset(SizeLiteral.topPadding)
+                $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            }
         }
     }
 }
