@@ -12,6 +12,9 @@ enum TextLiteral {
     // MARK: - Common
     
     static let doneButtonTitle = "입력완료"
+    static let feedbackTypeLabel = "피드백 종류"
+    static let feedbackKeywordLabel = "키워드"
+    static let feedbackContentLabel = "내용"
     
     // MARK: - MainViewController
     
@@ -41,15 +44,12 @@ enum TextLiteral {
     // MARK: - AddFeedbackContentViewController
     
     static let addFeedbackContentViewControllerTitleLabel = "에게 피드백 보내기"
-    static let addFeedbackContentViewControllerFeedbackTypeLabel = "피드백 종류"
-    static let addFeedbackContentViewControllerFeedbackKeywordLabel = "키워드"
     static let addFeedbackContentViewControllerFeedbackKeywordTextFieldPlaceholder = "피드백을 키워드로 작성해주세요"
-    static let addFeedbackContentViewControllerFeedbackTextViewLabel = "내용"
     static let addFeedbackContentViewControllerFeedbackContentTextViewPlaceholder = "키워드에 대한 자세한 내용을 작성해주세요"
     static let addFeedbackContentViewControllerDoneButtonTitle = "완료"
     static let addFeedbackContentViewControllerFeedbackStartLabel = "Start 제안하기"
     static let addFeedbackContentViewControllerStartTextViewPlaceholder = "제안하고 싶은 Start를 작성해주세요"
-    static let addFeedbackContentViewControllerFeedbackSendTimeLabel = "작성한 피드백은 회고 시간에 자동 제출됩니다"
+    static let addFeedbackContentViewControllerFeedbackSendTimeLabel = "작성한 피드백은 회고 시간 전까지 수정 가능합니다"
     
     // MARK: - JoinTeamViewController
     
@@ -100,4 +100,17 @@ enum TextLiteral {
     static let emptyViewInProgressMyRetrospective = "팀원에게 받은 피드백이 없습니다"
     static let emptyViewInProgressOthersRetrospectiveSelf = "내가 보낸 피드백이 없습니다"
     static let emptyViewInProgressOthersRetrospectiveOthers = "팀원들이 보낸 피드백이 없습니다"
+    
+    // MARK: - MyBoxViewController
+    
+    static let myBoxViewControllerTitleLabel = "내가 작성한 피드백"
+    
+    // MARK: - FeedbackFromMeDetailViewController
+    
+    static let feedbackFromMeDetailViewControllerDeleteButtonText: String = "삭제"
+    static let feedbackFromMeDetailViewControllerTitleLabel: String = "님께 작성한 피드백"
+    static let feedbackFromMeDetailViewControllerFeedbackStartLabel: String = "Start"
+    static let feedbackFromMeDetailViewControllerEditButtonText: String = "수정하러 가기"
+    static let feedbackFromMeDetailViewControllerReflectionIsStartedLabel: String = "회고가 시작되었습니다"
+    static let feedbackFromMeDetailViewControllerBeforeReflectionLabel: String = "담아둔 피드백은 회고 시간 전까지 수정 가능합니다"
 }

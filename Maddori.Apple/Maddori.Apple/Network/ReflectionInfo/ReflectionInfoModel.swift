@@ -7,10 +7,10 @@
 
 import Foundation
 
-enum FeedBackType: String {
-    case continueType = "continue"
-    case stopType = "stop"
-    case startType = "start"
+enum FeedBackType: String, CaseIterable {
+    case continueType = "Continue"
+    case stopType = "Stop"
+    case startType = "Start"
 }
 
 struct ReflectionInfoModel {

@@ -17,4 +17,16 @@ extension UIView {
         gradient.frame = bounds
         layer.addSublayer(gradient)
     }
+    
+    @discardableResult
+    func makeShadow(color: UIColor,
+                    opacity: Float,
+                    offset: CGSize,
+                    radius: CGFloat) -> Self {
+        layer.shadowColor = color.cgColor
+        layer.shadowOpacity = opacity
+        layer.shadowOffset = offset
+        layer.shadowRadius = radius
+        return self
+    }
 }
