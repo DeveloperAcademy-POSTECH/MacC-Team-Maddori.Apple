@@ -15,12 +15,12 @@ final class MyFeedbackCollectionView: UIView {
         static let horizontalPadding: CGFloat = 24
         static let topSpacing: CGFloat = 24
         static let cellContentWidth: CGFloat = UIScreen.main.bounds.size.width - SizeLiteral.leadingTrailingPadding - 66
-        static let resizingTextLineOneHeight: CGFloat = 53
-        static let resizingTextLineTwoHeight: CGFloat = 75
+        static let resizingTextLineOneHeight: CGFloat = 65
+        static let resizingTextLineTwoHeight: CGFloat = 87
         static let cellWidth: CGFloat = UIScreen.main.bounds.size.width - (SizeLiteral.leadingTrailingPadding * 2)
         static let collectionViewInset = UIEdgeInsets.init(top: Size.topSpacing,
                                                            left: Size.horizontalPadding,
-                                                           bottom: 15,
+                                                           bottom: 20,
                                                            right: Size.horizontalPadding)
     }
     
@@ -30,6 +30,7 @@ final class MyFeedbackCollectionView: UIView {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .vertical
         flowLayout.sectionInset = Size.collectionViewInset
+        flowLayout.minimumLineSpacing = 20
         return flowLayout
     }()
     private lazy var feedbackCollectionView: UICollectionView = {
@@ -126,7 +127,7 @@ extension MyFeedbackCollectionView: UICollectionViewDelegateFlowLayout {
         } else {
             data = mockData.filter { $0.type == .stopType }
         }
-        let cellHeight = UILabel.textSize(font: .body2, text: data[indexPath.item].content, width: Size.cellContentWidth, height: 0).height
+        let cellHeight = UILabel.textSize(font: .body2, text: data[indexPath.item].content, width: Size.cellContentWidth - 24, height: 0).height
         let isOneTextLine = cellHeight < 18
         if isOneTextLine {
             return CGSize(width: Size.cellWidth, height: Size.resizingTextLineOneHeight)
