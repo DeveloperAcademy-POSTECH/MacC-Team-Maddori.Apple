@@ -84,7 +84,7 @@ class AddFeedbackContentViewController: BaseViewController {
         label.font = .label2
         return label
     }()
-    private let feedbackKeywordTextField: KigoTextField = {
+    let feedbackKeywordTextField: KigoTextField = {
         let textField = KigoTextField()
         textField.placeHolderText = TextLiteral.addFeedbackContentViewControllerFeedbackKeywordTextFieldPlaceholder
         return textField
@@ -311,7 +311,7 @@ class AddFeedbackContentViewController: BaseViewController {
         }
     }
     
-    private func setCounter(count: Int) {
+    func setCounter(count: Int) {
         if count <= Length.keywordMaxLength {
             textLimitLabel.text = "\(count)/\(Length.keywordMaxLength)"
         }

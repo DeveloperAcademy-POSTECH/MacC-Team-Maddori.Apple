@@ -35,6 +35,7 @@ final class EditFeedbackFromMeViewController: AddFeedbackContentViewController {
     }
     
     private func setupFeedbackKeyword() {
-        
+        feedbackKeywordTextField.text = model.keyword
+        setCounter(count: model.keyword.count)
     }
 }
