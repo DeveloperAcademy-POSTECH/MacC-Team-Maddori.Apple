@@ -21,6 +21,7 @@ enum ImageLiterals {
     // MARK: - image
     
     static var imgCalendar: UIImage { .load(name: "calendar") }
+    static var imgEmptyCalendar: UIImage { .load(name: "emptyCalendar") }
 }
 
 extension UIImage {

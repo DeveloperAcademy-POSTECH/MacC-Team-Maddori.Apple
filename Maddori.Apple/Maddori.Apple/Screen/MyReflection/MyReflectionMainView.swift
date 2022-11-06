@@ -13,9 +13,10 @@ final class MyReflectionMainViewController: BaseViewController {
     
     private let user = "진저"
     // TODO: reflection 이름 받아온 리스트를 이 totalReflections에 append 시키기
-    private let totalReflection = [ReflectionModel(title: "1차 회고", date: "2022.10.30.화"),
-                                     ReflectionModel(title: "2차 회고", date: "2022.11.07.수"),
-                                     ReflectionModel(title: "3차 회고", date: "2022.11.21.수")]
+    // totalReflection 위아래 바꿔가면서 테스트 해볼 수 있습니다
+//    private let totalReflection = [ReflectionModel(title: "1차 회고", date: "2022.10.30.화"), ReflectionModel(title: "2차 회고", date: "2022.11.07.수"), ReflectionModel(title: "3차 회고", date: "2022.11.21.수")]
+    private let totalReflection: [ReflectionModel] = []
+    
     private enum Size {
         static let headerHeight: CGFloat = 50
         static let totalReflectionCellHeight: CGFloat = 70
@@ -98,6 +99,11 @@ extension MyReflectionMainViewController: UICollectionViewDelegate {
 
 extension MyReflectionMainViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if totalReflection.count == 0 {
+            collectionView.setEmptyView()
+        } else {
+            collectionView.restore()
+        }
         return totalReflection.count
     }
     
@@ -105,8 +111,6 @@ extension MyReflectionMainViewController: UICollectionViewDataSource {
         guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: ReflectionCollectionViewHeader.className, for: indexPath) as? ReflectionCollectionViewHeader else { return UICollectionReusableView() }
         return header
     }
-    
-    
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = view.frame.width - 2 * SizeLiteral.leadingTrailingPadding
