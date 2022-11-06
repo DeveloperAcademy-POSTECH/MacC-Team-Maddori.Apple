@@ -117,8 +117,8 @@ final class FeedbackFromMeDetailViewController: BaseViewController {
     }()
     private let deleteAlertView: AlertView = {
         let view = AlertView()
-        view.title = "피드백 삭제하기"
-        view.subTitle = "삭제된 피드백은 복구할 수 없습니다"
+        view.title = TextLiteral.feedbackFromMeDetailViewControllerAlertViewTitle
+        view.subTitle = TextLiteral.feedbackFromMeDetailViewControllerAlertViewSubTitle
         view.alertType = .delete
         view.isHidden = true
         return view

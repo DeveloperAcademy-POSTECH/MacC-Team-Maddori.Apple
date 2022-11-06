@@ -78,7 +78,7 @@ final class AlertView: UIView {
     }()
     private lazy var cancelButton: UIButton = {
         let button = UIButton()
-        button.setTitle("취소", for: .normal)
+        button.setTitle(TextLiteral.alertViewCancelButtonText, for: .normal)
         button.setTitleColor(.gray500, for: .normal)
         button.titleLabel?.font = .caption2
         button.titleLabel?.textAlignment = .center
@@ -188,14 +188,12 @@ final class AlertView: UIView {
     }
     
     private func didTappedCancelButton() {
-        print("cancel")
         if let delegate = delegate {
             delegate.cancel()
         }
     }
     
     private func didTappedActionButton() {
-        print("action")
         if let delegate = delegate {
             delegate.action()
         }
