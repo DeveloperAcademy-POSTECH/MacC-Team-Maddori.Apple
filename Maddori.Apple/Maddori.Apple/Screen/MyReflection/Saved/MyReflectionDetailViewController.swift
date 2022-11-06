@@ -41,21 +41,14 @@ final class MyReflectionDetailViewController: BaseViewController {
     }()
     private lazy var segmentControl: CustomSegmentedControl = {
         let control = CustomSegmentedControl(items: ["Continue", "Stop"])
-
         let action = UIAction { [weak self] _ in
             self?.didChangeValue(segment: self!.segmentControl)
         }
         control.addAction(action, for: .valueChanged)
-        
         return control
     }()
-    private let segmentControlView = CustomSegmentedControlView()
     
     // MARK: - life cycle
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
     
     override func render() {
         view.addSubview(titleLabel)
@@ -71,14 +64,6 @@ final class MyReflectionDetailViewController: BaseViewController {
             // FIXME
             $0.bottom.equalToSuperview().inset(150)
         }
-        
-//        view.addSubview(segmentControlView)
-//        segmentControlView.snp.makeConstraints {
-//            $0.top.equalTo(tableView.snp.bottom)
-//            $0.centerX.equalToSuperview()
-//            $0.width.equalTo(240)
-//            $0.height.equalTo(40)
-//        }
         
         view.addSubview(segmentControl)
         segmentControl.snp.makeConstraints {
