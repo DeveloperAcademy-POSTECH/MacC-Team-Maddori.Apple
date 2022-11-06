@@ -70,7 +70,12 @@ extension MyFeedbackCollectionView: UICollectionViewDelegate {
         } else {
             header.setDividerHidden(false)
         }
-        header.setCssLabelText(with: indexPath.section)
+        let hasContinue = mockData.contains(where: { $0.type == .continueType} )
+        if hasContinue {
+            header.setCssLabelText(with: indexPath.section)
+        } else {
+            header.setCssLabelText(with: 1)
+        }
         switch kind {
         case UICollectionView.elementKindSectionHeader:
             return header
@@ -81,15 +86,25 @@ extension MyFeedbackCollectionView: UICollectionViewDelegate {
 }
 extension MyFeedbackCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        mockData.filter { $0.type == FeedBackType.allCases[section] }.count
+        let hasContinue = mockData.contains(where: { $0.type == .continueType} )
+        if hasContinue {
+            return mockData.filter { $0.type == FeedBackType.allCases[section] }.count
+        } else {
+            return mockData.filter { $0.type == .stopType }.count
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyFeedbackCollectionViewCell.className, for: indexPath) as? MyFeedbackCollectionViewCell else { return UICollectionViewCell() }
         var data: [FeedBack] = []
+        let hasContinue = mockData.contains(where: { $0.type == .continueType} )
         switch indexPath.section {
         case 0:
-            data = mockData.filter { $0.type == .continueType }
+            if hasContinue {
+                data = mockData.filter { $0.type == .continueType }
+            } else {
+                data = mockData.filter { $0.type == .stopType }
+            }
             if indexPath.item == data.count - 1 {
                 cell.setDividerHidden(true)
             }
@@ -122,8 +137,13 @@ extension MyFeedbackCollectionView: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         var data: [FeedBack] = []
-        if indexPath.section == 0 {
-            data = mockData.filter { $0.type == .continueType }
+        let hasContinue = mockData.contains(where: { $0.type == .continueType} )
+        if hasContinue {
+            if indexPath.section == 0 {
+                data = mockData.filter { $0.type == .continueType }
+            } else {
+                data = mockData.filter { $0.type == .stopType }
+            }
         } else {
             data = mockData.filter { $0.type == .stopType }
         }
