@@ -50,7 +50,7 @@ final class EmptyFeedbackLabel: UIView {
     private func render() {
         self.addSubview(emptyFeedbackLabel)
         emptyFeedbackLabel.snp.makeConstraints {
-            $0.centerX.centerY.equalToSuperview()
+            $0.center.equalToSuperview()
         }
     }
 }

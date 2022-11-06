@@ -86,7 +86,7 @@ extension MyReflectionMainViewController: UICollectionViewDelegate {
 
 extension MyReflectionMainViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if totalReflection.count == 0 {
+        if totalReflection.isEmpty {
             collectionView.setEmptyReflectionView()
         } else {
             collectionView.restore()
