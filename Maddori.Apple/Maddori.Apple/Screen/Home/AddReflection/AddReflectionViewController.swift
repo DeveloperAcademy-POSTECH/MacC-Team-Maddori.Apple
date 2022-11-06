@@ -84,7 +84,7 @@ final class AddReflectionViewController: BaseViewController {
         view.addSubview(titleLabel)
         titleLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(20)
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(SizeLiteral.topPadding)
         }
         
         view.addSubview(reflectionNameView)
