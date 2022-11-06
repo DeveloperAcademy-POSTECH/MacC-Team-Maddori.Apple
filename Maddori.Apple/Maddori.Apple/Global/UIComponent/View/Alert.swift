@@ -9,9 +9,15 @@ import UIKit
 
 import SnapKit
 
+enum AlertType {
+    case delete = "삭제하기"
+    case join = "합류하기"
+}
+
 final class Alert: UIView {
     
     // MARK: - property
+    
     
     
     // MARK: - life cycle
