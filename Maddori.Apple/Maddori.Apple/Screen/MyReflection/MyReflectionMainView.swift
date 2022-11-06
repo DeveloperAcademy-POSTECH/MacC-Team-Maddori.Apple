@@ -39,11 +39,6 @@ final class MyReflectionMainViewController: BaseViewController {
         collectionView.register(ReflectionCollectionViewHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: ReflectionCollectionViewHeader.className)
         return collectionView
     }()
-    private var emptyFeedbackLabel: EmptyFeedbackView = {
-        let label = EmptyFeedbackView()
-        label.emptyLabel.text = TextLiteral.emptyViewMyReflection
-        return label
-    }()
     
     // MARK: - life cycle
     
@@ -100,7 +95,7 @@ extension MyReflectionMainViewController: UICollectionViewDelegate {
 extension MyReflectionMainViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if totalReflection.count == 0 {
-            collectionView.setEmptyView()
+            collectionView.setEmptyReflectionView()
         } else {
             collectionView.restore()
         }

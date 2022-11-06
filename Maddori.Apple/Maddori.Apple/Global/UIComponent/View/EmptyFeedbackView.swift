@@ -9,12 +9,19 @@ import UIKit
 
 import SnapKit
 
-final class EmptyFeedbackView: UIView {
+final class EmptyFeedbackView: BaseCollectionViewCell {
+    
+    private enum Size {
+        static let capsuleWidth: CGFloat = 88
+        static let capsuleHeight: CGFloat = 54
+        static let capsuleYOffset: CGFloat = 50
+        static let labelYOffset: CGFloat = 18
+    }
     
     // MARK: - property
     
-    private let emptyFeedback = EmptyFeedbackLabel()
-    lazy var emptyLabel: UILabel = {
+    private let emptyFeedbackCapsule = EmptyFeedbackLabel()
+    lazy var emptyFeedbackLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 2
         label.textAlignment = .center
@@ -25,27 +32,18 @@ final class EmptyFeedbackView: UIView {
     
     // MARK: - life cycle
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        render()
-    }
-    
-    required init?(coder: NSCoder) { nil }
-    
-    // MARK: - func
-    
-    private func render() {
-        self.addSubview(emptyFeedback)
-        emptyFeedback.snp.makeConstraints {
+    override func render() {
+        self.addSubview(emptyFeedbackCapsule)
+        emptyFeedbackCapsule.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.width.equalTo(88)
-            $0.height.equalTo(54)
-            $0.top.equalToSuperview().inset(2)
+            $0.top.equalToSuperview().inset(Size.capsuleYOffset)
+            $0.width.equalTo(Size.capsuleWidth)
+            $0.height.equalTo(Size.capsuleHeight)
         }
         
-        self.addSubview(emptyLabel)
-        emptyLabel.snp.makeConstraints {
-            $0.top.equalTo(emptyFeedback.snp.bottom).offset(18)
+        self.addSubview(emptyFeedbackLabel)
+        emptyFeedbackLabel.snp.makeConstraints {
+            $0.top.equalTo(emptyFeedbackCapsule.snp.bottom).offset(Size.labelYOffset)
             $0.centerX.equalToSuperview()
         }
     }

@@ -8,8 +8,15 @@
 import UIKit
 
 extension UICollectionView {
-    func setEmptyView() {
+    func setEmptyReflectionView() {
         let emptyView = EmptyReflectionView()
+        emptyView.sizeToFit()
+        self.backgroundView = emptyView
+    }
+    
+    func setEmptyFeedbackView(with label: String) {
+        let emptyView = EmptyFeedbackView()
+        emptyView.emptyFeedbackLabel.text = label
         emptyView.sizeToFit()
         self.backgroundView = emptyView
     }
