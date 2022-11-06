@@ -9,6 +9,11 @@ import UIKit
 
 import SnapKit
 
+protocol CustomAlertDelegate: AnyObject {
+    func action()
+    func cancel()
+}
+
 enum AlertType: String {
     case delete = "삭제하기"
     case join = "합류하기"
@@ -34,13 +39,13 @@ final class AlertView: UIView {
         didSet { setupAttribute() }
     }
     
+    weak var delegate: CustomAlertDelegate?
     
     // MARK: - property
     
     private let backgroundView: UIView = {
         let view = UIView()
-        view.backgroundColor = .black100
-        view.layer.opacity = 0.65
+        view.backgroundColor = .black100.withAlphaComponent(0.85)
         return view
     }()
     private let alertView: UIView = {
@@ -49,13 +54,13 @@ final class AlertView: UIView {
         view.layer.cornerRadius = 10
         return view
     }()
-    private let titleLabel: UILabel = {
+    private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.textColor = .blue200
         label.font = .main
         return label
     }()
-    private let subTitleLabel: UILabel = {
+    private lazy var subTitleLabel: UILabel = {
         let label = UILabel()
         label.textColor = .gray400
         label.font = .caption1
@@ -71,18 +76,26 @@ final class AlertView: UIView {
         view.backgroundColor = .gray300
         return view
     }()
-    private let cancelButton: UIButton = {
+    private lazy var cancelButton: UIButton = {
         let button = UIButton()
         button.setTitle("취소", for: .normal)
         button.setTitleColor(.gray500, for: .normal)
+        button.titleLabel?.font = .caption2
         button.titleLabel?.textAlignment = .center
-        // action 추가
+        let action = UIAction { [weak self] _ in
+            self?.didTappedCancelButton()
+        }
+        button.addAction(action, for: .touchUpInside)
         return button
     }()
     private lazy var actionButton: UIButton = {
         let button = UIButton()
+        button.titleLabel?.font = .caption2
         button.titleLabel?.textAlignment = .center
-        // action 추가
+        let action = UIAction { [weak self] _ in
+            self?.didTappedActionButton()
+        }
+        button.addAction(action, for: .touchUpInside)
         return button
     }()
     
@@ -105,7 +118,7 @@ final class AlertView: UIView {
         alertView.snp.makeConstraints {
             $0.width.equalTo(Size.alertViewWidth)
             $0.height.equalTo(Size.alertViewHeight)
-            $0.center.equalTo(backgroundView.snp.center)
+            $0.center.equalToSuperview()
         }
         
         alertView.addSubview(titleLabel)
@@ -130,16 +143,16 @@ final class AlertView: UIView {
         alertView.addSubview(buttonIntervalDivider)
         buttonIntervalDivider.snp.makeConstraints {
             $0.top.equalTo(subTitleLabel.snp.bottom).offset(27)
+            $0.bottom.equalTo(alertView.snp.bottom)
             $0.centerX.equalTo(alertView.snp.centerX)
             $0.width.equalTo(Size.dividerWeight)
-            $0.height.equalTo(50)
         }
         
         alertView.addSubview(cancelButton)
         cancelButton.snp.makeConstraints {
             $0.width.greaterThanOrEqualTo(Size.buttonMinimumSize)
             $0.height.equalTo(Size.buttonMinimumSize)
-            $0.top.equalTo(labelButtonDivider.snp.bottom).offset(3)
+            $0.centerY.equalTo(buttonIntervalDivider.snp.centerY)
             $0.trailing.equalTo(buttonIntervalDivider.snp.leading).offset(-44)
         }
         
@@ -147,8 +160,8 @@ final class AlertView: UIView {
         actionButton.snp.makeConstraints {
             $0.width.greaterThanOrEqualTo(Size.buttonMinimumSize)
             $0.height.equalTo(Size.buttonMinimumSize)
-            $0.top.equalTo(labelButtonDivider.snp.bottom).offset(3)
-            $0.trailing.equalTo(buttonIntervalDivider.snp.trailing).offset(44)
+            $0.centerY.equalTo(buttonIntervalDivider.snp.centerY)
+            $0.leading.equalTo(buttonIntervalDivider.snp.trailing).offset(44)
         }
     }
     
@@ -166,11 +179,25 @@ final class AlertView: UIView {
             actionButton.setTitle(alertType?.rawValue, for: .normal)
             actionButton.setTitleColor(.gray500, for: .normal)
             
-        // FIXME: alertType이 전달되지 않을 경우
+            // FIXME: alertType이 전달되지 않을 경우
             
         case .none:
             actionButton.setTitle("확인", for: .normal)
             actionButton.setTitleColor(.gray500, for: .normal)
+        }
+    }
+    
+    private func didTappedCancelButton() {
+        print("cancel")
+        if let delegate = delegate {
+            delegate.cancel()
+        }
+    }
+    
+    private func didTappedActionButton() {
+        print("action")
+        if let delegate = delegate {
+            delegate.action()
         }
     }
 }

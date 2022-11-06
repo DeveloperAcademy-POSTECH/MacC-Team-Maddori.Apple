@@ -19,13 +19,16 @@ final class FeedbackFromMeDetailViewController: BaseViewController {
     // MARK: - property
     
     private let backButton = BackButton(type: .system)
-    private let deleteButton: UIButton = {
+    private lazy var deleteButton: UIButton = {
         let button = UIButton()
         button.setTitle(TextLiteral.feedbackFromMeDetailViewControllerDeleteButtonText, for: .normal)
         button.setTitleColor(.red100, for: .normal)
         button.titleLabel?.font = .label2
         button.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
-        
+        let action = UIAction { [weak self] _ in
+            self?.didTappedDeleteButton()
+        }
+        button.addAction(action, for: .touchUpInside)
         return button
     }()
     private let feedbackFromMeDetailScrollView = UIScrollView()
@@ -112,6 +115,14 @@ final class FeedbackFromMeDetailViewController: BaseViewController {
         button.isDisabled = false
         return button
     }()
+    private let deleteAlertView: AlertView = {
+        let view = AlertView()
+        view.title = "피드백 삭제하기"
+        view.subTitle = "삭제된 피드백은 복구할 수 없습니다"
+        view.alertType = .delete
+        view.isHidden = true
+        return view
+    }()
     
     // MARK: - life cycle
     
@@ -119,6 +130,7 @@ final class FeedbackFromMeDetailViewController: BaseViewController {
         super.configUI()
         setupFeedbackSendTimeLabel()
         setupOptionalComponents()
+        setupDelegate()
     }
     
     override func render() {
@@ -206,6 +218,11 @@ final class FeedbackFromMeDetailViewController: BaseViewController {
             $0.bottom.equalTo(feedbackEditButton.snp.top).offset(-11)
             $0.centerX.equalTo(feedbackEditButtonView.snp.centerX)
         }
+        
+        view.addSubview(deleteAlertView)
+        deleteAlertView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
     }
     
     // MARK: - func
@@ -243,6 +260,48 @@ final class FeedbackFromMeDetailViewController: BaseViewController {
         if model.start == nil {
             feedbackStartLabel.isHidden = true
             feedbackStartText.isHidden = true
+        }
+    }
+    
+    private func didTappedDeleteButton() {
+        navigationController?.isNavigationBarHidden = true
+        
+        feedbackFromMeDetailTitleLabel.snp.remakeConstraints {
+            $0.top.equalTo(feedbackFromMeDetailContentView).inset(56)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+        
+        deleteAlertView.isHidden = false
+    }
+    
+    private func setupDelegate() {
+        deleteAlertView.delegate = self
+    }
+}
+
+// MARK: - extension
+
+extension FeedbackFromMeDetailViewController: CustomAlertDelegate {
+    func action() {
+        
+        // FIXME: - 피드백 삭제 api 연결 + MyBoxView 로 navigate
+        
+        deleteAlertView.isHidden = true
+        navigationController?.isNavigationBarHidden = false
+        feedbackFromMeDetailTitleLabel.snp.remakeConstraints {
+            $0.top.equalTo(feedbackFromMeDetailContentView).inset(SizeLiteral.topPadding)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+    }
+    
+    func cancel() {
+        deleteAlertView.isHidden = true
+
+        navigationController?.isNavigationBarHidden = false
+        
+        feedbackFromMeDetailTitleLabel.snp.remakeConstraints {
+            $0.top.equalTo(feedbackFromMeDetailContentView).inset(SizeLiteral.topPadding)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
     }
 }
