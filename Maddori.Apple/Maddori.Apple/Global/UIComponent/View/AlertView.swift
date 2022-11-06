@@ -14,9 +14,7 @@ enum AlertType: String {
     case join = "합류하기"
 }
 
-final class AlertView: UIView {
-    var didTappedCancelButton: (() -> ())?
-    var didTappedActionButton: (() -> ())?
+final class AlertViewController: BaseViewController {
     
     private enum Size {
         static let alertViewWidth: CGFloat = 265
@@ -25,7 +23,7 @@ final class AlertView: UIView {
         static let buttonMinimumSize: CGFloat = 44
     }
     
-    var title: String? {
+    override var title: String? {
         didSet { setupAttribute() }
     }
     
@@ -39,11 +37,6 @@ final class AlertView: UIView {
     
     // MARK: - property
     
-    private let backgroundView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .black100.withAlphaComponent(0.85)
-        return view
-    }()
     private let alertView: UIView = {
         let view = UIView()
         view.backgroundColor = .white100
@@ -79,7 +72,7 @@ final class AlertView: UIView {
         button.titleLabel?.font = .caption2
         button.titleLabel?.textAlignment = .center
         let action = UIAction { [weak self] _ in
-            self?.didTappedCancelButton!()
+            self?.dismiss(animated: true)
         }
         button.addAction(action, for: .touchUpInside)
         return button
@@ -89,7 +82,7 @@ final class AlertView: UIView {
         button.titleLabel?.font = .caption2
         button.titleLabel?.textAlignment = .center
         let action = UIAction { [weak self] _ in
-            self?.didTappedActionButton!()
+            self?.dismiss(animated: true)
         }
         button.addAction(action, for: .touchUpInside)
         return button
@@ -97,20 +90,12 @@ final class AlertView: UIView {
     
     // MARK: - life cycle
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        render()
+    override func configUI() {
+        view.backgroundColor = .black100.withAlphaComponent(0.85)
     }
     
-    required init?(coder: NSCoder) { nil }
-    
-    private func render() {
-        self.addSubview(backgroundView)
-        backgroundView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-        }
-        
-        backgroundView.addSubview(alertView)
+    override func render() {
+        view.addSubview(alertView)
         alertView.snp.makeConstraints {
             $0.width.equalTo(Size.alertViewWidth)
             $0.height.equalTo(Size.alertViewHeight)
