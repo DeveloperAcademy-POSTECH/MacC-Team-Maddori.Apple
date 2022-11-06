@@ -60,14 +60,6 @@ final class MyReflectionMainViewController: BaseViewController {
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.bottom.equalToSuperview()
         }
-        
-//        view.addSubview(emptyFeedbackLabel)
-//        emptyFeedbackLabel.snp.makeConstraints {
-//            $0.top.equalTo(reflectionCollectionView.snp.bottom)
-//            $0.centerX.equalToSuperview()
-//            $0.width.equalTo(88)
-//            $0.height.equalTo(54)
-//        }
     }
     
     // MARK: - func

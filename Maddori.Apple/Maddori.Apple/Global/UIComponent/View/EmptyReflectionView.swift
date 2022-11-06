@@ -26,7 +26,7 @@ final class EmptyReflectionView: UIView {
     }()
     var emptyReflectionLabel: UILabel = {
         let label = UILabel()
-        label.text = TextLiteral.emptyViewMyBox
+        label.text = TextLiteral.emptyViewMyReflection
         label.textColor = .gray700
         label.font = .body3
         label.textAlignment = .center
