@@ -12,7 +12,15 @@ import SnapKit
 final class EditFeedbackFromMeViewController: AddFeedbackContentViewController {
     
     private let model = FeedbackFromMeModel.mockData
-    private var isEdited: Bool = false
+    private var isFeedbackTypeChanged: Bool = false {
+        didSet {
+            if !(isTextInputChanged() || isFeedbackTypeChanged) {
+                feedbackDoneButton.isDisabled = true
+            } else {
+                feedbackDoneButton.isDisabled = false
+            }
+        }
+    }
     
     // MARK: - life cycle
     
@@ -23,10 +31,7 @@ final class EditFeedbackFromMeViewController: AddFeedbackContentViewController {
         setupFeedbackContent()
         setupFeedbackStart()
         hideEditFeedbackUntilLabel()
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
+        detectChangeOfFeedbackType()
     }
     
     // MARK: - func
@@ -76,19 +81,35 @@ final class EditFeedbackFromMeViewController: AddFeedbackContentViewController {
         editFeedbackUntilLabel.isHidden = true
     }
     
+    // MARK: - extension
+    
     override func textFieldDidChangeSelection(_ textField: UITextField) {
         setCounter(count: textField.text?.count ?? 0)
         checkMaxLength(textField: feedbackKeywordTextField, maxLength: Length.keywordMaxLength)
-        if model.keyword != textField.text {
-            isEdited = true
-        }
-        feedbackDoneButton.isDisabled = !(isEdited)
+        feedbackDoneButton.isDisabled = !(isTextInputChanged() || isFeedbackTypeChanged)
     }
     
     override func textViewDidChangeSelection(_ textView: UITextView) {
-        if model.info != feedbackContentTextView.text || model.start != feedbackStartTextView.text {
-            isEdited = true
+        feedbackDoneButton.isDisabled = !(isTextInputChanged() || isFeedbackTypeChanged)
+    }
+    
+    private func isTextInputChanged() -> Bool {
+        if feedbackContentTextView.text == model.info &&
+            feedbackStartTextView.text == model.start &&
+            feedbackKeywordTextField.text == model.keyword {
+            return false
+        } else {
+            return true
         }
-        feedbackDoneButton.isDisabled = !(isEdited)
+    }
+    
+    private func detectChangeOfFeedbackType() {
+        feedbackTypeButtonView.changeFeedbackType = { value in
+            if value == self.model.feedbackType {
+                self.isFeedbackTypeChanged = false
+            } else {
+                self.isFeedbackTypeChanged = true
+            }
+        }
     }
 }

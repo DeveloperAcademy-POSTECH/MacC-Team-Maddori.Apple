@@ -16,7 +16,7 @@ class AddFeedbackContentViewController: BaseViewController {
         static let keywordMaxLength: Int = 15
         static let textViewMaxLength: Int = 200
     }
-    var type: FeedBackType = .continueType
+    var type: FeedbackButtonType = .continueType
     var fromNickname: String
     var toNickname: String
     var keywordHasText: Bool = false
@@ -71,7 +71,7 @@ class AddFeedbackContentViewController: BaseViewController {
     lazy var feedbackTypeButtonView: FeedbackTypeButtonView = {
         let view = FeedbackTypeButtonView()
         view.changeFeedbackType = { [weak self] type in
-            if let typeValue = FeedBackType.init(rawValue: type.rawValue) {
+            if let typeValue = FeedbackButtonType.init(rawValue: type.rawValue) {
                 self?.type = typeValue
             }
         }
