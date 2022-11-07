@@ -12,6 +12,7 @@ import SnapKit
 final class InProgressViewController: BaseViewController {
     
     private var keywordData = Keyword.mockData
+//    private let keywordData: [Keyword] = []
     private let currentRetrospectiveUser = "진저"
     private let user = "이드"
 //    private let user = "진저"

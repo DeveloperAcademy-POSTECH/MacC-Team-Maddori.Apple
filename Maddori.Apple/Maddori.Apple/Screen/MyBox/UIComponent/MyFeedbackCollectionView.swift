@@ -11,6 +11,7 @@ import SnapKit
 
 final class MyFeedbackCollectionView: UIView {
     private let mockData = FeedBack.mockData
+//    private let mockData: [FeedBack] = []
     private enum Size {
         static let horizontalPadding: CGFloat = 24
         static let topSpacing: CGFloat = 24
