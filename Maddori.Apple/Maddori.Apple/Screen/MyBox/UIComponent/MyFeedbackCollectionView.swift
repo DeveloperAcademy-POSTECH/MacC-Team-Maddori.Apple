@@ -91,11 +91,6 @@ extension MyFeedbackCollectionView: UICollectionViewDelegate {
 }
 extension MyFeedbackCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        if mockData.isEmpty {
-//            collectionView.setEmptyFeedbackView(with: TextLiteral.emptyViewMyBox)
-//        } else {
-//            collectionView.restore()
-//        }
         if mockData.isEmpty {
             return 1
         }
