@@ -95,7 +95,7 @@ final class EditFeedbackFromMeViewController: AddFeedbackContentViewController {
     
     private func isTextInputChanged() -> Bool {
         if feedbackContentTextView.text == model.info &&
-            feedbackStartTextView.text == model.start &&
+            feedbackStartTextView.text == model.start ?? TextLiteral.addFeedbackContentViewControllerStartTextViewPlaceholder &&
             feedbackKeywordTextField.text == model.keyword {
             return false
         } else {
