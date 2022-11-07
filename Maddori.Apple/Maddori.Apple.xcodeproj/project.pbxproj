@@ -37,8 +37,6 @@
 		395C7E2028FED7B500FC2FCA /* ReflectionNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395C7E1F28FED7B500FC2FCA /* ReflectionNameView.swift */; };
 		395C7E2228FEDB6500FC2FCA /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395C7E2128FEDB6500FC2FCA /* UITextField+Extension.swift */; };
 		395C7E252900E74700FC2FCA /* StartReflectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395C7E242900E74700FC2FCA /* StartReflectionViewController.swift */; };
-		3977E1232910CFE7000E9761 /* sample2 in Resources */ = {isa = PBXBuildFile; fileRef = 3977E1222910CFE7000E9761 /* sample2 */; };
-		3977E1252910CFF1000E9761 /* sample1 in Resources */ = {isa = PBXBuildFile; fileRef = 3977E1242910CFF1000E9761 /* sample1 */; };
 		39A64ACE2905885F001DB020 /* StartSuggestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A64ACD2905885F001DB020 /* StartSuggestionView.swift */; };
 		39F1A13529125762005E3456 /* MyBoxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F1A13429125762005E3456 /* MyBoxViewController.swift */; };
 		39F1A13C2912637E005E3456 /* MyBoxMemberCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F1A13B2912637E005E3456 /* MyBoxMemberCollectionViewCell.swift */; };
@@ -55,7 +53,7 @@
 		3EB508622912B12700FB77CB /* ReflectionCollectionViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB508612912B12700FB77CB /* ReflectionCollectionViewHeader.swift */; };
 		3EB50866291350BB00FB77CB /* TotalReflectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB50865291350BB00FB77CB /* TotalReflectionCell.swift */; };
 		3EB508692913560A00FB77CB /* Reflection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB508682913560A00FB77CB /* Reflection.swift */; };
-		3EB5088C2916C64800FB77CB /* EmptyFeedbackLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB5088B2916C64800FB77CB /* EmptyFeedbackLabel.swift */; };
+		3EB5088C2916C64800FB77CB /* EmptyFeedbackKeyword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB5088B2916C64800FB77CB /* EmptyFeedbackKeyword.swift */; };
 		3EB5088E2916D05F00FB77CB /* EmptyFeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB5088D2916D05F00FB77CB /* EmptyFeedbackView.swift */; };
 		3EB508902917525600FB77CB /* EmptyReflectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB5088F2917525600FB77CB /* EmptyReflectionView.swift */; };
 		3EB508922917585600FB77CB /* UICollectionView + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB508912917585600FB77CB /* UICollectionView + Extension.swift */; };
@@ -112,8 +110,6 @@
 		395C7E1F28FED7B500FC2FCA /* ReflectionNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReflectionNameView.swift; sourceTree = "<group>"; };
 		395C7E2128FEDB6500FC2FCA /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
 		395C7E242900E74700FC2FCA /* StartReflectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartReflectionViewController.swift; sourceTree = "<group>"; };
-		3977E1222910CFE7000E9761 /* sample2 */ = {isa = PBXFileReference; lastKnownFileType = text; path = sample2; sourceTree = "<group>"; };
-		3977E1242910CFF1000E9761 /* sample1 */ = {isa = PBXFileReference; lastKnownFileType = text; path = sample1; sourceTree = "<group>"; };
 		39A64ACD2905885F001DB020 /* StartSuggestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartSuggestionView.swift; sourceTree = "<group>"; };
 		39F1A13429125762005E3456 /* MyBoxViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBoxViewController.swift; sourceTree = "<group>"; };
 		39F1A13B2912637E005E3456 /* MyBoxMemberCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBoxMemberCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -130,7 +126,7 @@
 		3EB508612912B12700FB77CB /* ReflectionCollectionViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReflectionCollectionViewHeader.swift; sourceTree = "<group>"; };
 		3EB50865291350BB00FB77CB /* TotalReflectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalReflectionCell.swift; sourceTree = "<group>"; };
 		3EB508682913560A00FB77CB /* Reflection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reflection.swift; sourceTree = "<group>"; };
-		3EB5088B2916C64800FB77CB /* EmptyFeedbackLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyFeedbackLabel.swift; sourceTree = "<group>"; };
+		3EB5088B2916C64800FB77CB /* EmptyFeedbackKeyword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyFeedbackKeyword.swift; sourceTree = "<group>"; };
 		3EB5088D2916D05F00FB77CB /* EmptyFeedbackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyFeedbackView.swift; sourceTree = "<group>"; };
 		3EB5088F2917525600FB77CB /* EmptyReflectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyReflectionView.swift; sourceTree = "<group>"; };
 		3EB508912917585600FB77CB /* UICollectionView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView + Extension.swift"; sourceTree = "<group>"; };
@@ -431,7 +427,7 @@
 			children = (
 				D79D908B2903B6B1004DDC4A /* LabelButtonView.swift */,
 				3E557FC428FE854600714E46 /* KeywordLabel.swift */,
-				3EB5088B2916C64800FB77CB /* EmptyFeedbackLabel.swift */,
+				3EB5088B2916C64800FB77CB /* EmptyFeedbackKeyword.swift */,
 				3EB5088D2916D05F00FB77CB /* EmptyFeedbackView.swift */,
 				3EB5088F2917525600FB77CB /* EmptyReflectionView.swift */,
 			);
@@ -678,7 +674,7 @@
 				395C7E2228FEDB6500FC2FCA /* UITextField+Extension.swift in Sources */,
 				D72CF1B0290552960067A118 /* InvitedCodeViewController.swift in Sources */,
 				39257DF328F93D8900201E0B /* TextLiteral.swift in Sources */,
-				3EB5088C2916C64800FB77CB /* EmptyFeedbackLabel.swift in Sources */,
+				3EB5088C2916C64800FB77CB /* EmptyFeedbackKeyword.swift in Sources */,
 				39436C15291287A00083D77A /* MyFeedbackCollectionViewCell.swift in Sources */,
 				395C7E0D28F959A500FC2FCA /* MainButton.swift in Sources */,
 				525E721528FEEE8500EF3FCB /* AddFeedbackMemberViewController.swift in Sources */,

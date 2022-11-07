@@ -1,5 +1,5 @@
 //
-//  EmptyFeedbackLabel.swift
+//  EmptyFeedbackKeyword.swift
 //  Maddori.Apple
 //
 //  Created by 이성민 on 2022/11/06.
@@ -9,7 +9,7 @@ import UIKit
 
 import SnapKit
 
-final class EmptyFeedbackLabel: UIView {
+final class EmptyFeedbackKeyword: UIView {
     
     // MARK: - property
     

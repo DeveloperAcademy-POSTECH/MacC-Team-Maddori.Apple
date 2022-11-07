@@ -20,7 +20,7 @@ final class EmptyFeedbackView: BaseCollectionViewCell {
     
     // MARK: - property
     
-    private let emptyFeedbackCapsule = EmptyFeedbackLabel()
+    private let emptyFeedbackKeyword = EmptyFeedbackKeyword()
     lazy var emptyFeedbackLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 2
@@ -33,8 +33,8 @@ final class EmptyFeedbackView: BaseCollectionViewCell {
     // MARK: - life cycle
     
     override func render() {
-        self.addSubview(emptyFeedbackCapsule)
-        emptyFeedbackCapsule.snp.makeConstraints {
+        self.addSubview(emptyFeedbackKeyword)
+        emptyFeedbackKeyword.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.centerY.equalToSuperview().offset(-Size.capsuleYOffset)
             $0.width.equalTo(Size.capsuleWidth)
@@ -44,7 +44,7 @@ final class EmptyFeedbackView: BaseCollectionViewCell {
         self.addSubview(emptyFeedbackLabel)
         emptyFeedbackLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(emptyFeedbackCapsule.snp.bottom).offset(20)
+            $0.top.equalTo(emptyFeedbackKeyword.snp.bottom).offset(20)
         }
     }
 }
