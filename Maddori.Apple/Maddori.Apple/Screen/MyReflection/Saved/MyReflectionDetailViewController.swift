@@ -52,7 +52,7 @@ final class MyReflectionDetailViewController: BaseViewController {
         
         view.addSubview(tableView)
         tableView.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.bottom).offset(SizeLiteral.topPadding)
+            $0.top.equalTo(titleLabel.snp.bottom).offset(22)
             $0.leading.trailing.equalToSuperview()
             // FIXME
             $0.bottom.equalToSuperview().inset(150)
