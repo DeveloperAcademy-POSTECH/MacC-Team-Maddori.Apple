@@ -11,6 +11,11 @@ import SnapKit
 
 final class EmptyFeedbackKeyword: UIView {
     
+    private enum Size {
+        static let width: CGFloat = 84
+        static let height: CGFloat = 50
+    }
+    
     // MARK: - property
     
     private let emptyFeedbackLabel: UILabel = {
@@ -26,7 +31,7 @@ final class EmptyFeedbackKeyword: UIView {
     override func draw(_ rect: CGRect) {
         let linePattern: [CGFloat] = [5, 4]
         let path = UIBezierPath(roundedRect: CGRect(origin: CGPoint(x: 2, y: 2),
-                                                    size: CGSize(width: 84, height: 50)),
+                                                    size: CGSize(width: Size.width, height: Size.height)),
                                 cornerRadius: 25)
         path.setLineDash(linePattern, count: linePattern.count, phase: 0)
         path.lineWidth = 3
