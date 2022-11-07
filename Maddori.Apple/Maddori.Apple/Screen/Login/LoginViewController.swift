@@ -44,7 +44,7 @@ final class LoginViewController: BaseViewController {
     // MARK: - life cycle
     
     override func configUI() {
-        view.backgroundColor = .backgroundWhite
+        super.configUI()
         setGradientText()
     }
     
