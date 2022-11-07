@@ -56,14 +56,14 @@ final class AlertViewController: BaseViewController {
     var teamName: String? = nil
     
     init(type: AlertType) {
-        self.type = type
         super.init()
+        self.type = type
     }
     
     init(type: AlertType, teamName: String?) {
+        super.init()
         self.type = type
         self.teamName = teamName
-        super.init()
     }
     
     required init?(coder: NSCoder) { nil }
@@ -72,7 +72,7 @@ final class AlertViewController: BaseViewController {
         static let alertViewWidth: CGFloat = 265
         static let alertViewHeight: CGFloat = 163
         static let dividerWeight: CGFloat = 0.5
-        static let buttonMinimumSize: CGFloat = 44
+        static let buttonMinimumHeight: CGFloat = 44
     }
     
     // MARK: - property
@@ -177,18 +177,18 @@ final class AlertViewController: BaseViewController {
         
         alertView.addSubview(cancelButton)
         cancelButton.snp.makeConstraints {
-            $0.width.greaterThanOrEqualTo(Size.buttonMinimumSize)
-            $0.height.equalTo(Size.buttonMinimumSize)
+            $0.width.equalTo(Size.alertViewWidth / 2)
+            $0.height.equalTo(Size.buttonMinimumHeight)
             $0.centerY.equalTo(buttonIntervalDivider.snp.centerY)
-            $0.trailing.equalTo(buttonIntervalDivider.snp.leading).offset(-44)
+            $0.trailing.equalTo(buttonIntervalDivider.snp.leading)
         }
         
         alertView.addSubview(actionButton)
         actionButton.snp.makeConstraints {
-            $0.width.greaterThanOrEqualTo(Size.buttonMinimumSize)
-            $0.height.equalTo(Size.buttonMinimumSize)
+            $0.width.equalTo(Size.alertViewWidth / 2)
+            $0.height.equalTo(Size.buttonMinimumHeight)
             $0.centerY.equalTo(buttonIntervalDivider.snp.centerY)
-            $0.leading.equalTo(buttonIntervalDivider.snp.trailing).offset(44)
+            $0.leading.equalTo(buttonIntervalDivider.snp.trailing)
         }
     }
     
