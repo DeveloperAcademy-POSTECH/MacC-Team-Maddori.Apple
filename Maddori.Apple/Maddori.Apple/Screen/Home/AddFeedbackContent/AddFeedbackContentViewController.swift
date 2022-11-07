@@ -11,7 +11,7 @@ import SnapKit
 
 class AddFeedbackContentViewController: BaseViewController {
     
-    private enum Length {
+    enum Length {
         static let keywordMinLength: Int = 0
         static let keywordMaxLength: Int = 15
         static let textViewMaxLength: Int = 200
@@ -320,7 +320,7 @@ class AddFeedbackContentViewController: BaseViewController {
         }
     }
     
-    private func checkMaxLength(textField: UITextField, maxLength: Int) {
+    func checkMaxLength(textField: UITextField, maxLength: Int) {
         if let text = textField.text {
             if text.count > maxLength {
                 let endIndex = text.index(text.startIndex, offsetBy: maxLength)

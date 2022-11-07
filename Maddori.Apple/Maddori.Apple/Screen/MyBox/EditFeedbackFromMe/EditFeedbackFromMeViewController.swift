@@ -12,6 +12,7 @@ import SnapKit
 final class EditFeedbackFromMeViewController: AddFeedbackContentViewController {
     
     private let model = FeedbackFromMeModel.mockData
+    private var isEdited: Bool = false
     
     // MARK: - life cycle
     
@@ -22,6 +23,10 @@ final class EditFeedbackFromMeViewController: AddFeedbackContentViewController {
         setupFeedbackContent()
         setupFeedbackStart()
         hideEditFeedbackUntilLabel()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
     }
     
     // MARK: - func
@@ -69,5 +74,21 @@ final class EditFeedbackFromMeViewController: AddFeedbackContentViewController {
             self.feedbackDoneButton.transform = .identity
         })
         editFeedbackUntilLabel.isHidden = true
+    }
+    
+    override func textFieldDidChangeSelection(_ textField: UITextField) {
+        setCounter(count: textField.text?.count ?? 0)
+        checkMaxLength(textField: feedbackKeywordTextField, maxLength: Length.keywordMaxLength)
+        if model.keyword != textField.text {
+            isEdited = true
+        }
+        feedbackDoneButton.isDisabled = !(isEdited)
+    }
+    
+    override func textViewDidChangeSelection(_ textView: UITextView) {
+        if model.info != feedbackContentTextView.text || model.start != feedbackStartTextView.text {
+            isEdited = true
+        }
+        feedbackDoneButton.isDisabled = !(isEdited)
     }
 }
