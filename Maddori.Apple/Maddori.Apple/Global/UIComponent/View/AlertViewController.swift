@@ -56,14 +56,14 @@ final class AlertViewController: BaseViewController {
     var teamName: String? = nil
     
     init(type: AlertType) {
-        super.init()
         self.type = type
+        super.init()
     }
     
     init(type: AlertType, teamName: String?) {
-        super.init()
         self.type = type
         self.teamName = teamName
+        super.init()
     }
     
     required init?(coder: NSCoder) { nil }
