@@ -63,4 +63,11 @@ final class EditFeedbackFromMeViewController: AddFeedbackContentViewController {
             $0.height.equalTo(95)
         }
     }
+    
+    @objc override func willHideKeyboard(notification: NSNotification) {
+        UIView.animate(withDuration: 0.2, animations: {
+            self.feedbackDoneButton.transform = .identity
+        })
+        editFeedbackUntilLabel.isHidden = true
+    }
 }

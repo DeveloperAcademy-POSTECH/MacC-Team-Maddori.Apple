@@ -151,7 +151,7 @@ class AddFeedbackContentViewController: BaseViewController {
         label.font = .body2
         return label
     }()
-    private lazy var feedbackDoneButton: MainButton = {
+    lazy var feedbackDoneButton: MainButton = {
         let button = MainButton()
         button.title = TextLiteral.addFeedbackContentViewControllerDoneButtonTitle
         button.isDisabled = true
@@ -374,7 +374,7 @@ class AddFeedbackContentViewController: BaseViewController {
         editFeedbackUntilLabel.isHidden = true
     }
     
-    @objc private func willHideKeyboard(notification: NSNotification) {
+    @objc func willHideKeyboard(notification: NSNotification) {
         UIView.animate(withDuration: 0.2, animations: {
             self.feedbackDoneButton.transform = .identity
         })
