@@ -126,7 +126,7 @@ final class AlertViewController: BaseViewController {
         button.titleLabel?.font = .caption2
         button.titleLabel?.textAlignment = .center
         let action = UIAction { [weak self] _ in
-            self?.dismiss(animated: true)
+            self?.didTappedActionButton(self!.type)
         }
         button.addAction(action, for: .touchUpInside)
         return button
@@ -206,5 +206,18 @@ final class AlertViewController: BaseViewController {
                 titleLabel.text = teamName
             }
         }
+    }
+    
+    private func didTappedActionButton(_ type: AlertType) {
+        switch type {
+        case .delete:
+            // FIXME: - 피드백 삭제 api 연결
+            print("Delete")
+        case .join:
+            // FIXME: - 팀 합류 api 연결
+            print("Join")
+        }
+        
+        self.dismiss(animated: true)
     }
 }
