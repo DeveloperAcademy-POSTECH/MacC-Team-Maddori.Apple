@@ -14,13 +14,6 @@ extension UICollectionView {
         self.backgroundView = emptyView
     }
     
-    func setEmptyFeedbackView(with label: String) {
-        let emptyView = EmptyFeedbackView()
-        emptyView.emptyFeedbackLabel.text = label
-        emptyView.sizeToFit()
-        self.backgroundView = emptyView
-    }
-    
     func restore() {
         self.backgroundView = nil
     }
