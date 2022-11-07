@@ -31,7 +31,7 @@ enum AlertType: String {
         }
     }
     
-    var okTitle: String {
+    var actionTitle: String {
         switch self {
         case .delete:
             return "삭제"
@@ -40,7 +40,7 @@ enum AlertType: String {
         }
     }
     
-    var okColor: UIColor {
+    var actionTitleColor: UIColor {
         switch self {
         case .delete:
             return .red100
@@ -121,8 +121,8 @@ final class AlertViewController: BaseViewController {
     }()
     private lazy var actionButton: UIButton = {
         let button = UIButton()
-        button.setTitle(type.okTitle, for: .normal)
-        button.setTitleColor(type.okColor, for: .normal)
+        button.setTitle(type.actionTitle, for: .normal)
+        button.setTitleColor(type.actionTitleColor, for: .normal)
         button.titleLabel?.font = .caption2
         button.titleLabel?.textAlignment = .center
         let action = UIAction { [weak self] _ in
@@ -196,7 +196,7 @@ final class AlertViewController: BaseViewController {
     
     private func setOkLabelColor() {
         if type == .join {
-            actionButton.setTitleColor(type.okColor, for: .normal)
+            actionButton.setTitleColor(type.actionTitleColor, for: .normal)
         }
     }
     
