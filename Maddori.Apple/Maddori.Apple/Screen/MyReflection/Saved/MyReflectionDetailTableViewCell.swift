@@ -12,6 +12,7 @@ import SnapKit
 final class MyReflectionDetailTableViewCell: BaseTableViewCell {
     
     // MARK: - property
+    
     let titleLabel: UILabel = {
         let label = UILabel()
         label.font = .label1
@@ -50,6 +51,7 @@ final class MyReflectionDetailTableViewCell: BaseTableViewCell {
     }()
     
     // MARK: - func
+    
     override func render() {
         contentView.addSubview(titleLabel)
         titleLabel.snp.makeConstraints {
