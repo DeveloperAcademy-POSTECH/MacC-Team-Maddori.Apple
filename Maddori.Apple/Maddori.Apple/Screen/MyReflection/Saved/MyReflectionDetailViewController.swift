@@ -36,6 +36,7 @@ final class MyReflectionDetailViewController: BaseViewController {
     }()
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
+        tableView.backgroundColor = .backgroundWhite
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(MyReflectionDetailTableViewCell.self, forCellReuseIdentifier: MyReflectionDetailTableViewCell.className)
@@ -49,7 +50,6 @@ final class MyReflectionDetailViewController: BaseViewController {
         control.addAction(action, for: .valueChanged)
         return control
     }()
-    
     // MARK: - life cycle
     
     override func render() {
