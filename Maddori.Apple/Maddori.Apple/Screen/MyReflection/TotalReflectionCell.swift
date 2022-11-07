@@ -19,7 +19,7 @@ final class TotalReflectionCell: BaseCollectionViewCell {
         return label
     }()
     
-    private let cellDate: UILabel = {
+    private let cellDateLabel: UILabel = {
         let label = UILabel()
         label.font = .body2
         label.textColor = .gray400
@@ -32,18 +32,22 @@ final class TotalReflectionCell: BaseCollectionViewCell {
         return imageView
     }()
     
+    // MARK: - life cycle
+    
     override func render() {
         contentView.addSubview(cellLabel)
         cellLabel.snp.makeConstraints {
             $0.leading.equalToSuperview()
             $0.top.equalToSuperview().inset(10)
+            $0.height.equalTo(16)
         }
         
-        contentView.addSubview(cellDate)
-        cellDate.snp.makeConstraints {
+        contentView.addSubview(cellDateLabel)
+        cellDateLabel.snp.makeConstraints {
             $0.leading.equalToSuperview()
             $0.top.equalTo(cellLabel.snp.bottom)
             $0.bottom.equalToSuperview().inset(10)
+            $0.height.equalTo(14)
         }
         
         contentView.addSubview(cellArrow)
@@ -63,6 +67,6 @@ final class TotalReflectionCell: BaseCollectionViewCell {
     
     func configLabel(text: String, date: String) {
         cellLabel.text = text
-        cellDate.text = date
+        cellDateLabel.text = date
     }
 }

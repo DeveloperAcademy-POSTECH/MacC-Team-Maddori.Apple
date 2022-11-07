@@ -21,7 +21,7 @@ final class ReflectionCollectionViewHeader: UICollectionReusableView {
     }()
     private lazy var headerLabel: UILabel = {
         let label = UILabel()
-        label.text = TextLiteral.
+        label.text = TextLiteral.MyReflectionViewHeaderHeaderLabel
         label.font = .label3
         return label
     }()
@@ -40,7 +40,7 @@ final class ReflectionCollectionViewHeader: UICollectionReusableView {
         self.addSubview(headerIcon)
         headerIcon.snp.makeConstraints {
             $0.bottom.equalToSuperview().inset(6)
-            $0.leading.equalToSuperview().inset(-2)
+            $0.leading.equalToSuperview()
             $0.height.width.equalTo(28)
         }
         
