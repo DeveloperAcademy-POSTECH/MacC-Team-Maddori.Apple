@@ -96,11 +96,6 @@ extension MyFeedbackCollectionView: UICollectionViewDataSource {
         }
         let hasContinue = mockData.contains(where: { $0.type == .continueType } )
         if hasContinue {
-            if mockData.filter({ $0.type == FeedBackType.allCases[section] }).count == 0 {
-                collectionView.setEmptyReflectionView()
-            } else {
-                collectionView.restore()
-            }
             return mockData.filter { $0.type == FeedBackType.allCases[section] }.count
         } else {
             return mockData.filter { $0.type == .stopType }.count
