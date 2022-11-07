@@ -12,27 +12,67 @@ import SnapKit
 enum AlertType: String {
     case delete = "삭제하기"
     case join = "합류하기"
+    
+    var title: String {
+        switch self {
+        case .delete:
+            return TextLiteral.feedbackFromMeDetailViewControllerAlertViewTitle
+        case .join:
+            return "합류 할 팀"
+        }
+    }
+    
+    var subTitle: String {
+        switch self {
+        case .delete:
+            return TextLiteral.feedbackFromMeDetailViewControllerAlertViewSubTitle
+        case .join:
+            return "팀에 합류하시겠어요?"
+        }
+    }
+    
+    var okTitle: String {
+        switch self {
+        case .delete:
+            return "삭제"
+        case .join:
+            return "참여"
+        }
+    }
+    
+    var okColor: UIColor {
+        switch self {
+        case .delete:
+            return .red100
+        case .join:
+            return .gray500
+        }
+    }
 }
 
 final class AlertViewController: BaseViewController {
+    
+    var type: AlertType
+    var teamName: String? = nil
+    
+    init(type: AlertType) {
+        self.type = type
+        super.init()
+    }
+    
+    init(type: AlertType, teamName: String?) {
+        self.type = type
+        self.teamName = teamName
+        super.init()
+    }
+    
+    required init?(coder: NSCoder) { nil }
     
     private enum Size {
         static let alertViewWidth: CGFloat = 265
         static let alertViewHeight: CGFloat = 163
         static let dividerWeight: CGFloat = 0.5
         static let buttonMinimumSize: CGFloat = 44
-    }
-    
-    override var title: String? {
-        didSet { setupAttribute() }
-    }
-    
-    var subTitle: String? {
-        didSet { setupAttribute() }
-    }
-    
-    var alertType: AlertType? {
-        didSet { setupAttribute() }
     }
     
     // MARK: - property
@@ -45,12 +85,14 @@ final class AlertViewController: BaseViewController {
     }()
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
+        label.text = type.title
         label.textColor = .blue200
         label.font = .main
         return label
     }()
     private lazy var subTitleLabel: UILabel = {
         let label = UILabel()
+        label.text = type.subTitle
         label.textColor = .gray400
         label.font = .caption1
         return label
@@ -79,6 +121,8 @@ final class AlertViewController: BaseViewController {
     }()
     private lazy var actionButton: UIButton = {
         let button = UIButton()
+        button.setTitle(type.okTitle, for: .normal)
+        button.setTitleColor(type.okColor, for: .normal)
         button.titleLabel?.font = .caption2
         button.titleLabel?.textAlignment = .center
         let action = UIAction { [weak self] _ in
@@ -92,6 +136,8 @@ final class AlertViewController: BaseViewController {
     
     override func configUI() {
         view.backgroundColor = .black100.withAlphaComponent(0.85)
+        setOkLabelColor()
+        setTeamName()
     }
     
     override func render() {
@@ -148,19 +194,17 @@ final class AlertViewController: BaseViewController {
     
     // MARK: - func
     
-    private func setupAttribute() {
-        titleLabel.text = title
-        subTitleLabel.text = subTitle
-        
-        switch alertType {
-        case .delete:
-            actionButton.setTitle(alertType?.rawValue, for: .normal)
-            actionButton.setTitleColor(.red100, for: .normal)
-        case .join:
-            actionButton.setTitle(alertType?.rawValue, for: .normal)
-            actionButton.setTitleColor(.gray500, for: .normal)
-        case .none:
-            return
+    private func setOkLabelColor() {
+        if type == .join {
+            actionButton.setTitleColor(type.okColor, for: .normal)
+        }
+    }
+    
+    private func setTeamName() {
+        if type == .join {
+            if teamName != nil {
+                titleLabel.text = teamName
+            }
         }
     }
 }

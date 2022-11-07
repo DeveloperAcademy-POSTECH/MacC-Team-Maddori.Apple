@@ -26,7 +26,7 @@ final class FeedbackFromMeDetailViewController: BaseViewController {
         button.titleLabel?.font = .label2
         button.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
         let action = UIAction { [weak self] _ in
-            self?.didTappedDeleteButton()
+            self?.showAlertView(type: .delete)
         }
         button.addAction(action, for: .touchUpInside)
         return button
@@ -251,15 +251,5 @@ final class FeedbackFromMeDetailViewController: BaseViewController {
             feedbackStartLabel.isHidden = true
             feedbackStartText.isHidden = true
         }
-    }
-    
-    private func didTappedDeleteButton() {
-        let childViewController = AlertViewController()
-        childViewController.modalPresentationStyle = .overCurrentContext
-        childViewController.modalTransitionStyle = .crossDissolve
-        childViewController.subTitle = TextLiteral.feedbackFromMeDetailViewControllerAlertViewSubTitle
-        childViewController.title = TextLiteral.feedbackFromMeDetailViewControllerAlertViewTitle
-        childViewController.alertType = .delete
-        present(childViewController, animated: true)
     }
 }
