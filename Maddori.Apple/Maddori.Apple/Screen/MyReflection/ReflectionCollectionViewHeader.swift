@@ -21,7 +21,7 @@ final class ReflectionCollectionViewHeader: UICollectionReusableView {
     }()
     private lazy var headerLabel: UILabel = {
         let label = UILabel()
-        label.text = "모음집"
+        label.text = TextLiteral.
         label.font = .label3
         return label
     }()

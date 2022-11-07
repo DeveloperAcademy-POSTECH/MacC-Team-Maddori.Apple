@@ -1,5 +1,5 @@
 //
-//  MyReflectionMainView.swift
+//  MyReflectionMainViewController.swift
 //  Maddori.Apple
 //
 //  Created by 이성민 on 2022/11/02.
