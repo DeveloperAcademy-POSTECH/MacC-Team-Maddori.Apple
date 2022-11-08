@@ -15,17 +15,17 @@ final class EditFeedbackFromMeViewController: AddFeedbackContentViewController {
     private var isFeedbackTypeChanged: Bool = false {
         didSet {
             if !(isTextInputChanged() || isFeedbackTypeChanged) {
-                feedbackDoneButton.isDisabled = true
+                super.feedbackDoneButton.isDisabled = true
             } else {
-                feedbackDoneButton.isDisabled = false
+                super.feedbackDoneButton.isDisabled = false
             }
         }
     }
     
     // MARK: - life cycle
     
-    override func configUI() {
-        super.configUI()
+    override func viewDidLoad() {
+        super.viewDidLoad()
         setupFeedbackType()
         setupFeedbackKeyword()
         setupFeedbackContent()
@@ -39,64 +39,45 @@ final class EditFeedbackFromMeViewController: AddFeedbackContentViewController {
     private func setupFeedbackType() {
         switch model.feedbackType {
         case .continueType:
-            self.feedbackTypeButtonView.touchUpToSelectType(.continueType)
+            super.feedbackTypeButtonView.touchUpToSelectType(.continueType)
         case .stopType:
-            self.feedbackTypeButtonView.touchUpToSelectType(.stopType)
+            super.feedbackTypeButtonView.touchUpToSelectType(.stopType)
         }
     }
     
     private func setupFeedbackKeyword() {
-        feedbackKeywordTextField.text = model.keyword
-        setCounter(count: model.keyword.count)
+        super.feedbackKeywordTextField.text = model.keyword
+        super.setCounter(count: model.keyword.count)
     }
     
     private func setupFeedbackContent() {
-        feedbackContentTextView.text = model.info
-        feedbackContentTextView.textColor = .black100
+        super.feedbackContentTextView.text = model.info
+        super.feedbackContentTextView.textColor = .black100
     }
     
     private func setupFeedbackStart() {
         if let start = model.start {
-            feedbackStartSwitch.isOn = true
-            feedbackStartTextViewLabel.isHidden = false
-            feedbackStartTextView.isHidden = false
-            feedbackStartTextView.text = start
-            feedbackStartTextView.textColor = .black100
+            super.feedbackStartSwitch.isOn = true
+            super.feedbackStartTextViewLabel.isHidden = false
+            super.feedbackStartTextView.isHidden = false
+            super.feedbackStartTextView.text = start
+            super.feedbackStartTextView.textColor = .black100
         }
     }
     
     private func hideEditFeedbackUntilLabel() {
-        editFeedbackUntilLabel.isHidden = true
-        feedbackDoneButtonView.snp.remakeConstraints {
+        super.editFeedbackUntilLabel.isHidden = true
+        super.feedbackDoneButtonView.snp.remakeConstraints {
             $0.bottom.equalToSuperview()
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(95)
         }
     }
     
-    @objc override func willHideKeyboard(notification: NSNotification) {
-        UIView.animate(withDuration: 0.2, animations: {
-            self.feedbackDoneButton.transform = .identity
-        })
-        editFeedbackUntilLabel.isHidden = true
-    }
-    
-    // MARK: - extension
-    
-    override func textFieldDidChangeSelection(_ textField: UITextField) {
-        setCounter(count: textField.text?.count ?? 0)
-        checkMaxLength(textField: feedbackKeywordTextField, maxLength: Length.keywordMaxLength)
-        feedbackDoneButton.isDisabled = !(isTextInputChanged() || isFeedbackTypeChanged)
-    }
-    
-    override func textViewDidChangeSelection(_ textView: UITextView) {
-        feedbackDoneButton.isDisabled = !(isTextInputChanged() || isFeedbackTypeChanged)
-    }
-    
     private func isTextInputChanged() -> Bool {
-        if feedbackContentTextView.text == model.info &&
-            feedbackStartTextView.text == model.start ?? TextLiteral.addFeedbackContentViewControllerStartTextViewPlaceholder &&
-            feedbackKeywordTextField.text == model.keyword {
+        if super.feedbackContentTextView.text == model.info &&
+            super.feedbackStartTextView.text == model.start ?? TextLiteral.addFeedbackContentViewControllerStartTextViewPlaceholder &&
+            super.feedbackKeywordTextField.text == model.keyword {
             return false
         } else {
             return true
@@ -104,12 +85,33 @@ final class EditFeedbackFromMeViewController: AddFeedbackContentViewController {
     }
     
     private func detectChangeOfFeedbackType() {
-        feedbackTypeButtonView.changeFeedbackType = { value in
+        super.feedbackTypeButtonView.changeFeedbackType = { value in
             if value == self.model.feedbackType {
                 self.isFeedbackTypeChanged = false
             } else {
                 self.isFeedbackTypeChanged = true
             }
         }
+    }
+    
+    // MARK: - selector
+    
+    @objc override func willHideKeyboard(notification: NSNotification) {
+        UIView.animate(withDuration: 0.2, animations: {
+            super.feedbackDoneButton.transform = .identity
+        })
+        super.editFeedbackUntilLabel.isHidden = true
+    }
+    
+    // MARK: - extension
+    
+    override func textFieldDidChangeSelection(_ textField: UITextField) {
+        super.setCounter(count: textField.text?.count ?? 0)
+        super.checkMaxLength(textField: feedbackKeywordTextField, maxLength: Length.keywordMaxLength)
+        super.feedbackDoneButton.isDisabled = !(isTextInputChanged() || isFeedbackTypeChanged)
+    }
+    
+    override func textViewDidChangeSelection(_ textView: UITextView) {
+        super.feedbackDoneButton.isDisabled = !(isTextInputChanged() || isFeedbackTypeChanged)
     }
 }

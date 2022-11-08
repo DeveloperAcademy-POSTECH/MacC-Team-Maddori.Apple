@@ -396,6 +396,10 @@ extension AddFeedbackContentViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         addFeedbackScrollView.scrollRectToVisible(CGRect(x: 0.0, y: 0.0, width: 375.0, height: 850.0), animated: true)
     }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        feedbackContentTextView.becomeFirstResponder()
+    }
 }
 
 extension AddFeedbackContentViewController: UITextViewDelegate {
