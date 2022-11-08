@@ -24,7 +24,7 @@ final class AddFeedbackMemberViewController: BaseViewController {
         return label
     }()
     private let memberCollectionView: MemberCollectionView = {
-       let collectionView = MemberCollectionView()
+        let collectionView = MemberCollectionView()
         collectionView.memberList = Member.getMemberListExceptUser()
         return collectionView
     }()
