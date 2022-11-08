@@ -107,7 +107,7 @@ final class EditFeedbackFromMeViewController: AddFeedbackContentViewController {
     
     override func textFieldDidChangeSelection(_ textField: UITextField) {
         super.setCounter(count: textField.text?.count ?? 0)
-        super.checkMaxLength(textField: feedbackKeywordTextField, maxLength: Length.keywordMaxLength)
+        super.checkMaxLength(textField: super.feedbackKeywordTextField, maxLength: Length.keywordMaxLength)
         super.feedbackDoneButton.isDisabled = !(isTextInputChanged() || isFeedbackTypeChanged)
     }
     
