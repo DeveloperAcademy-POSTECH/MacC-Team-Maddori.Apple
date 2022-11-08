@@ -18,7 +18,6 @@ final class TotalReflectionCell: BaseCollectionViewCell {
         label.font = .body3
         return label
     }()
-    
     private let cellDate: UILabel = {
         let label = UILabel()
         label.font = .body2
@@ -31,6 +30,8 @@ final class TotalReflectionCell: BaseCollectionViewCell {
         imageView.tintColor = .gray400
         return imageView
     }()
+    
+    // MARK: - life cycle
     
     override func render() {
         contentView.addSubview(cellLabel)
