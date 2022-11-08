@@ -19,13 +19,16 @@ final class FeedbackFromMeDetailViewController: BaseViewController {
     // MARK: - property
     
     private let backButton = BackButton(type: .system)
-    private let deleteButton: UIButton = {
+    private lazy var deleteButton: UIButton = {
         let button = UIButton()
         button.setTitle(TextLiteral.feedbackFromMeDetailViewControllerDeleteButtonText, for: .normal)
         button.setTitleColor(.red100, for: .normal)
         button.titleLabel?.font = .label2
         button.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
-        
+        let action = UIAction { [weak self] _ in
+            self?.showAlertView(type: .delete)
+        }
+        button.addAction(action, for: .touchUpInside)
         return button
     }()
     private let feedbackFromMeDetailScrollView = UIScrollView()

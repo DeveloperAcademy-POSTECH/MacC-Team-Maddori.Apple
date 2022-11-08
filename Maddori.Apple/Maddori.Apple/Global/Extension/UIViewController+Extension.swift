@@ -68,6 +68,13 @@ extension UIViewController {
     @objc func endEditingView() {
         view.endEditing(true)
     }
+    
+    func showAlertView(type: AlertType, teamName: String? = nil) {
+        let viewController = AlertViewController(type: type, teamName: teamName)
+        viewController.modalPresentationStyle = .overCurrentContext
+        viewController.modalTransitionStyle = .crossDissolve
+        self.present(viewController, animated: true)
+    }
 }
 
 extension UIViewController: UIGestureRecognizerDelegate {

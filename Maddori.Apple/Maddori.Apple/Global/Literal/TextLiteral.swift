@@ -105,4 +105,12 @@ enum TextLiteral {
     static let feedbackFromMeDetailViewControllerEditButtonText: String = "수정하러 가기"
     static let feedbackFromMeDetailViewControllerReflectionIsStartedLabel: String = "회고가 시작되었습니다"
     static let feedbackFromMeDetailViewControllerBeforeReflectionLabel: String = "담아둔 피드백은 회고 시간 전까지 수정 가능합니다"
+    
+    // MARK: - AlertViewController
+    
+    static let alertViewControllerTypeDeleteTitle = "피드백 삭제하기"
+    static let alertViewControllerTypeJoinTitle = "합류할 팀"
+    static let alertViewControllerTypeDeleteSubTitle = "삭제된 피드백은 복구할 수 없습니다"
+    static let alertViewControllerTypeJoinSubTitle = "팀에 합류하시겠어요?"
+    static let alertViewControllerCancelButtonText = "취소"
 }
