@@ -13,7 +13,7 @@ final class MemberCollectionView: UIView {
     
     // FIXME: - 목업 데이터 추후 데이터 연결한 후 삭제할 내용
     
-    let memberList: [String] = ["진저", "이드", "호야", "케미", "메리"]
+    var memberList: [String] = []
     var didTappedMember: (([String]) -> ())?
     private var selectedMemberList: [String] = []
     private enum Size {

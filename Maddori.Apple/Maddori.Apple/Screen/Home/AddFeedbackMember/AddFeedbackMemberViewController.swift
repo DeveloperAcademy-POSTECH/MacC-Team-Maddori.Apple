@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 
 final class AddFeedbackMemberViewController: BaseViewController {
-
+    
     // MARK: - property
     
     private let closeButton = CloseButton()
@@ -23,7 +23,11 @@ final class AddFeedbackMemberViewController: BaseViewController {
         label.setLineSpacing()
         return label
     }()
-    private let memberCollectionView = MemberCollectionView()
+    private let memberCollectionView: MemberCollectionView = {
+       let collectionView = MemberCollectionView()
+        collectionView.memberList = Member.getMemberListExceptUser()
+        return collectionView
+    }()
     
     // MARK: - life cycle
     
