@@ -20,7 +20,7 @@ final class EmptyReflectionView: UIView {
     // MARK: - property
     
     private let emptyReflectionImageView = UIImageView(image: ImageLiterals.imgEmptyCalendar)
-    var emptyReflectionLabel: UILabel = {
+    private let emptyReflectionLabel: UILabel = {
         let label = UILabel()
         label.text = TextLiteral.emptyViewMyReflection
         label.textColor = .gray700
