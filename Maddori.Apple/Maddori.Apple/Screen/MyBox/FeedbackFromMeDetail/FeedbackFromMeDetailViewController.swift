@@ -118,10 +118,6 @@ final class FeedbackFromMeDetailViewController: BaseViewController {
     
     // MARK: - life cycle
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
     override func configUI() {
         super.configUI()
         setupFeedbackSendTimeLabel()

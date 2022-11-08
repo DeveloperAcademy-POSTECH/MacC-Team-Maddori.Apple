@@ -10,33 +10,33 @@ import UIKit
 import SnapKit
 
 enum AlertType: String {
-    case delete = "삭제하기"
-    case join = "합류하기"
+    case delete = "삭제"
+    case join = "합류"
     
     var title: String {
         switch self {
         case .delete:
-            return TextLiteral.feedbackFromMeDetailViewControllerAlertViewTitle
+            return TextLiteral.alertViewControllerTypeDeleteTitle
         case .join:
-            return "합류 할 팀"
+            return TextLiteral.alertViewControllerTypeJoinTitle
         }
     }
     
     var subTitle: String {
         switch self {
         case .delete:
-            return TextLiteral.feedbackFromMeDetailViewControllerAlertViewSubTitle
+            return TextLiteral.alertViewControllerTypeDeleteSubTitle
         case .join:
-            return "팀에 합류하시겠어요?"
+            return TextLiteral.alertViewControllerTypeJoinSubTitle
         }
     }
     
     var actionTitle: String {
         switch self {
         case .delete:
-            return "삭제"
+            return self.rawValue
         case .join:
-            return "참여"
+            return self.rawValue
         }
     }
     
@@ -54,11 +54,6 @@ final class AlertViewController: BaseViewController {
     
     var type: AlertType
     var teamName: String? = nil
-    
-    init(type: AlertType) {
-        self.type = type
-        super.init()
-    }
     
     init(type: AlertType, teamName: String?) {
         self.type = type
@@ -109,9 +104,9 @@ final class AlertViewController: BaseViewController {
     }()
     private lazy var cancelButton: UIButton = {
         let button = UIButton()
-        button.setTitle(TextLiteral.alertViewCancelButtonText, for: .normal)
+        button.setTitle(TextLiteral.alertViewControllerCancelButtonText, for: .normal)
         button.setTitleColor(.gray500, for: .normal)
-        button.titleLabel?.font = .caption2
+        button.titleLabel?.font = .body2
         button.titleLabel?.textAlignment = .center
         let action = UIAction { [weak self] _ in
             self?.dismiss(animated: true)
@@ -123,10 +118,12 @@ final class AlertViewController: BaseViewController {
         let button = UIButton()
         button.setTitle(type.actionTitle, for: .normal)
         button.setTitleColor(type.actionTitleColor, for: .normal)
-        button.titleLabel?.font = .caption2
+        button.titleLabel?.font = .body2
         button.titleLabel?.textAlignment = .center
         let action = UIAction { [weak self] _ in
-            self?.didTappedActionButton(self!.type)
+            if let type = self?.type {
+                self?.didTappedActionButton(type)
+            }
         }
         button.addAction(action, for: .touchUpInside)
         return button
@@ -196,14 +193,18 @@ final class AlertViewController: BaseViewController {
     
     private func setOkLabelColor() {
         if type == .join {
-            actionButton.setTitleColor(type.actionTitleColor, for: .normal)
+            DispatchQueue.main.async {
+                self.actionButton.setTitleColor(self.type.actionTitleColor, for: .normal)
+            }
         }
     }
     
     private func setTeamName() {
         if type == .join {
             if teamName != nil {
-                titleLabel.text = teamName
+                DispatchQueue.main.async {
+                    self.titleLabel.text = self.teamName
+                }
             }
         }
     }
