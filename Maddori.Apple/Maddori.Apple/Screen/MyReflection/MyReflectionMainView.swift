@@ -13,8 +13,8 @@ final class MyReflectionMainViewController: BaseViewController {
     
     private let user = "진저"
     // TODO: reflection 이름 받아온 리스트를 이 totalReflections에 append 시키기
-    private let totalReflection = [ReflectionModel(title: "1차 회고", date: "2022.10.30.화"), ReflectionModel(title: "2차 회고", date: "2022.11.07.수"), ReflectionModel(title: "3차 회고", date: "2022.11.21.수")]
-//    private let totalReflection: [ReflectionModel] = []
+//    private let totalReflection = [ReflectionModel(title: "1차 회고", date: "2022.10.30.화"), ReflectionModel(title: "2차 회고", date: "2022.11.07.수"), ReflectionModel(title: "3차 회고", date: "2022.11.21.수")]
+    private let totalReflection: [ReflectionModel] = []
     
     private enum Size {
         static let headerHeight: CGFloat = 50
@@ -68,6 +68,8 @@ final class MyReflectionMainViewController: BaseViewController {
         reflectionCollectionView.dataSource = self
     }
 }
+
+// MARK: - extension
 
 extension MyReflectionMainViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

@@ -20,7 +20,7 @@ final class AddFeedbackMemberViewController: BaseViewController {
         label.font = .title
         label.textColor = .black100
         label.numberOfLines = 0
-        label.setLineSpacing()
+        label.setLineSpacing(to: 4)
         return label
     }()
     private let memberCollectionView = MemberCollectionView()

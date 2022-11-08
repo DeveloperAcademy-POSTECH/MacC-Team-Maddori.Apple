@@ -25,6 +25,7 @@ final class EmptyReflectionView: UIView {
         label.text = TextLiteral.emptyViewMyReflection
         label.textColor = .gray700
         label.font = .body3
+        label.setLineSpacing(to: 6)
         label.textAlignment = .center
         label.numberOfLines = 2
         return label
@@ -51,7 +52,7 @@ final class EmptyReflectionView: UIView {
         self.addSubview(emptyReflectionLabel)
         emptyReflectionLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(emptyReflectionImageView.snp.bottom).offset(18)
+            $0.top.equalTo(emptyReflectionImageView.snp.bottom).offset(20)
         }
     }
 }
