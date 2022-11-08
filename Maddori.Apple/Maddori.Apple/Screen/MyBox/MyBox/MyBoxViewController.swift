@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 
 final class MyBoxViewController: BaseViewController {
-    private let memberList: [String] = Member.getTotalMemberList()
+    private let memberList: [String] = Member.getMemberListExceptUser()
     
     private enum Size {
         static let horizontalPadding: CGFloat = 24
