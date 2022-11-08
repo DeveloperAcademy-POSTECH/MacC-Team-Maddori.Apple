@@ -20,7 +20,7 @@ final class EmptyFeedbackKeyword: UIView {
     
     private let emptyFeedbackLabel: UILabel = {
         let label = UILabel()
-        label.text = "피드백"
+        label.text = TextLiteral.emptyFeedbackKeywordLabel
         label.textColor = .gray700
         label.font = .main
         return label
@@ -44,8 +44,8 @@ final class EmptyFeedbackKeyword: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = .white200
         render()
+        configUI()
     }
     
     required init?(coder: NSCoder) { nil }
@@ -57,5 +57,9 @@ final class EmptyFeedbackKeyword: UIView {
         emptyFeedbackLabel.snp.makeConstraints {
             $0.center.equalToSuperview()
         }
+    }
+    
+    private func configUI() {
+        self.backgroundColor = .white200
     }
 }
