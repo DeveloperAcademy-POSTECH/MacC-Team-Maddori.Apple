@@ -33,5 +33,6 @@ struct Keyword {
         Keyword(string: "👕", type: .defaultKeyword, from: "이드", to: "진저"),
         Keyword(string: "👕", type: .defaultKeyword, from: "케미", to: "진저"),
     ]
+//    static let mockData: [Keyword] = []
     #endif
 }
