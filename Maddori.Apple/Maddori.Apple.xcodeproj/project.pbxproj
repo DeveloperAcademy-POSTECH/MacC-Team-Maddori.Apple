@@ -347,9 +347,7 @@
 		3977E1212910CFCB000E9761 /* MyReflection */ = {
 			isa = PBXGroup;
 			children = (
-				3EB5085B2912427600FB77CB /* MyReflectionMainViewController.swift */,
-				3EB508612912B12700FB77CB /* ReflectionCollectionViewHeader.swift */,
-				3EB50865291350BB00FB77CB /* TotalReflectionCell.swift */,
+				3EB50893291AA35100FB77CB /* Main */,
 			);
 			path = MyReflection;
 			sourceTree = "<group>";
@@ -433,6 +431,16 @@
 				3EB508682913560A00FB77CB /* Reflection.swift */,
 			);
 			path = Reflection;
+			sourceTree = "<group>";
+		};
+		3EB50893291AA35100FB77CB /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				3EB5085B2912427600FB77CB /* MyReflectionMainViewController.swift */,
+				3EB508612912B12700FB77CB /* ReflectionCollectionViewHeader.swift */,
+				3EB50865291350BB00FB77CB /* TotalReflectionCell.swift */,
+			);
+			path = Main;
 			sourceTree = "<group>";
 		};
 		525E721328FE9C5600EF3FCB /* AddFeedbackMember */ = {
