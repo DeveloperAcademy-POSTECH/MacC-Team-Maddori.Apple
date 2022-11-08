@@ -359,9 +359,7 @@
 		3977E1202910CF7E000E9761 /* MyBox */ = {
 			isa = PBXGroup;
 			children = (
-				39F1A138291262EA005E3456 /* Cell */,
-				39F1A136291262B4005E3456 /* UIComponent */,
-				39F1A13429125762005E3456 /* MyBoxViewController.swift */,
+				52294C47291A231300E81969 /* MyBox */,
 				52F07B98291253D30015BC8B /* FeedbackFromMeDetail */,
 			);
 			path = MyBox;
@@ -472,6 +470,16 @@
 				52294C452918F81500E81969 /* MemberModel.swift */,
 			);
 			path = Member;
+			sourceTree = "<group>";
+		};
+		52294C47291A231300E81969 /* MyBox */ = {
+			isa = PBXGroup;
+			children = (
+				39F1A138291262EA005E3456 /* Cell */,
+				39F1A136291262B4005E3456 /* UIComponent */,
+				39F1A13429125762005E3456 /* MyBoxViewController.swift */,
+			);
+			path = MyBox;
 			sourceTree = "<group>";
 		};
 		525E721328FE9C5600EF3FCB /* AddFeedbackMember */ = {
