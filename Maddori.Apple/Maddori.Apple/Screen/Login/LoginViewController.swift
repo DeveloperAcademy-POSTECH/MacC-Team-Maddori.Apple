@@ -51,7 +51,7 @@ final class LoginViewController: BaseViewController {
     override func render() {
         view.addSubview(keygoLogoImage)
         keygoLogoImage.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).inset(235)
+            $0.centerY.equalToSuperview().offset(-40)
             $0.centerX.equalToSuperview()
         }
         
