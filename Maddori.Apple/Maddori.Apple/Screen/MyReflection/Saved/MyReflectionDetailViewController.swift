@@ -11,8 +11,9 @@ import SnapKit
 
 final class MyReflectionDetailViewController: BaseViewController {
     
-    private let continueArray = ["test","test2"]
-    private let stopArray = ["test3","test4","test5"]
+    // FIXME - 데이터 연결시 수정예정
+    private let continueArray = ["c1","c"]
+    private let stopArray = ["s","s","s"]
     
     private lazy var contentArray = continueArray
     
