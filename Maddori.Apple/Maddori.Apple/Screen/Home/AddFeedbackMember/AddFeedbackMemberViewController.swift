@@ -16,11 +16,8 @@ final class AddFeedbackMemberViewController: BaseViewController {
     private let closeButton = CloseButton()
     private let selectMemberLabel: UILabel = {
         let label = UILabel()
-        label.text = TextLiteral.addFeedbackMemberViewControllerTitle
-        label.font = .title
+        label.setTitleFont(text: TextLiteral.addFeedbackMemberViewControllerTitle)
         label.textColor = .black100
-        label.numberOfLines = 0
-        label.setLineSpacing()
         return label
     }()
     private let memberCollectionView: MemberCollectionView = {
