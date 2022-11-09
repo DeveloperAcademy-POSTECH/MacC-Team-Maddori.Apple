@@ -113,4 +113,9 @@ enum TextLiteral {
     static let alertViewControllerTypeDeleteSubTitle = "삭제된 피드백은 복구할 수 없습니다"
     static let alertViewControllerTypeJoinSubTitle = "팀에 합류하시겠어요?"
     static let alertViewControllerCancelButtonText = "취소"
+    
+    // MARK: - LoginViewController
+    
+    static let loginViewControllerLogoText: String = "KeyGo"
+    static let loginViewControllerDescriptionText: String = "키워드로 회고하기"
 }

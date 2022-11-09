@@ -62,4 +62,26 @@ extension UILabel {
         label.sizeToFit()
         return label.frame.size
     }
+    
+    func setTextGradientColorTopToBottom(bound: CGRect) {
+        let gradient = gradientLayer(bounds: bound)
+        self.textColor = gradientColor(gradientLayer: gradient)
+    }
+    
+    func gradientLayer(bounds : CGRect) -> CAGradientLayer{
+        let gradient = CAGradientLayer()
+        gradient.frame = bounds
+        gradient.colors = [UIColor.gradientBlueTop.cgColor, UIColor.gradientBlueBottom.cgColor]
+        gradient.startPoint = CGPoint(x: 0.0, y: 0.0)
+        gradient.endPoint = CGPoint(x: 0.0, y: 1.0)
+        return gradient
+    }
+
+    func gradientColor(gradientLayer :CAGradientLayer) -> UIColor? {
+        UIGraphicsBeginImageContextWithOptions(gradientLayer.bounds.size, false, 0.0)
+        gradientLayer.render(in: UIGraphicsGetCurrentContext()!)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return UIColor(patternImage: image!)
+    }
 }
