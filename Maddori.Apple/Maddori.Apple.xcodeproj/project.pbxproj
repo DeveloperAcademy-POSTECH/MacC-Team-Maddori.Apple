@@ -520,7 +520,6 @@
 			path = Main;
 			sourceTree = "<group>";
 		};
-		52294C412917FD2C00E81969 /* EditFeedbackFromMe */ = {
 		52294C442918F80800E81969 /* Member */ = {
 			isa = PBXGroup;
 			children = (
