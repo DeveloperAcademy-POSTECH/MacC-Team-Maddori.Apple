@@ -40,7 +40,7 @@ final class ReflectionCollectionViewHeader: UICollectionReusableView {
         self.addSubview(headerIcon)
         headerIcon.snp.makeConstraints {
             $0.bottom.equalToSuperview().inset(6)
-            $0.leading.equalToSuperview()
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.height.width.equalTo(28)
         }
         

@@ -37,14 +37,14 @@ final class TotalReflectionCell: BaseCollectionViewCell {
     override func render() {
         contentView.addSubview(cellLabel)
         cellLabel.snp.makeConstraints {
-            $0.leading.equalToSuperview()
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.top.equalToSuperview().inset(10)
             $0.height.equalTo(16)
         }
         
         contentView.addSubview(cellDateLabel)
         cellDateLabel.snp.makeConstraints {
-            $0.leading.equalToSuperview()
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.top.equalTo(cellLabel.snp.bottom)
             $0.bottom.equalToSuperview().inset(10)
             $0.height.equalTo(14)
@@ -52,7 +52,7 @@ final class TotalReflectionCell: BaseCollectionViewCell {
         
         contentView.addSubview(cellArrow)
         cellArrow.snp.makeConstraints {
-            $0.trailing.equalTo(contentView.snp.trailing)
+            $0.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.centerY.equalToSuperview()
             $0.width.equalTo(12)
         }

@@ -56,7 +56,7 @@ final class MyReflectionMainViewController: BaseViewController {
         view.addSubview(reflectionCollectionView)
         reflectionCollectionView.snp.makeConstraints {
             $0.top.equalTo(myReflectionTitleLabel.snp.bottom).offset(20)
-            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.leading.trailing.equalToSuperview()
             $0.bottom.equalToSuperview()
         }
     }
@@ -70,15 +70,19 @@ final class MyReflectionMainViewController: BaseViewController {
 }
 
 extension MyReflectionMainViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
         if let cell = collectionView.cellForItem(at: indexPath) {
             UIView.animate(withDuration: 0.15, delay: 0, animations: {
                 cell.contentView.backgroundColor = .gray100
-            }) { _ in
-                UIView.animate(withDuration: 0.15, delay: 0, animations: {
-                    cell.contentView.backgroundColor = .white200
-                })
-            }
+            })
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
+        if let cell = collectionView.cellForItem(at: indexPath) {
+            UIView.animate(withDuration: 0.15, delay: 0, animations: {
+                cell.contentView.backgroundColor = .white200
+            })
         }
     }
 }
@@ -94,7 +98,7 @@ extension MyReflectionMainViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = view.frame.width - 2 * SizeLiteral.leadingTrailingPadding
+        let width = view.frame.width
         return CGSize(width: width, height: Size.totalReflectionCellHeight)
     }
     
