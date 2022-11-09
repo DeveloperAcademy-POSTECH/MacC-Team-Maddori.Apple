@@ -10,11 +10,8 @@ import UIKit
 import SnapKit
 
 final class FeedbackTypeButtonView: UIButton {
-    var changeFeedbackType: ((FeedbackType) -> ())?
-    enum FeedbackType: String {
-        case continueType = "Continue"
-        case stopType = "Stop"
-    }
+    var changeFeedbackType: ((FeedbackButtonType) -> ())?
+    
     private enum Size {
         static let width: CGFloat = 158
         static let height: CGFloat = 46
@@ -36,7 +33,7 @@ final class FeedbackTypeButtonView: UIButton {
         let view = UIView()
         view.backgroundColor = .white100
         view.layer.shadowOpacity = 0.2
-        view.layer.shadowRadius = 1
+        view.layer.shadowRadius = 2
         view.layer.shadowOffset = CGSize(width: 0, height: 0)
         view.layer.cornerRadius = SizeLiteral.componentCornerRadius
         return view
@@ -50,8 +47,8 @@ final class FeedbackTypeButtonView: UIButton {
         button.clipsToBounds = true
         button.layer.cornerRadius = SizeLiteral.componentCornerRadius
         let action = UIAction { [weak self] _ in
-            self?.touchUpToSelectType(.continueType)
-            self?.changeFeedbackType?(.continueType)
+            self?.touchUpToSelectType(FeedbackButtonType.continueType)
+            self?.changeFeedbackType?(FeedbackButtonType.continueType)
         }
         button.addAction(action, for: .touchUpInside)
         return button
@@ -65,8 +62,8 @@ final class FeedbackTypeButtonView: UIButton {
         button.clipsToBounds = true
         button.layer.cornerRadius = SizeLiteral.componentCornerRadius
         let action = UIAction { [weak self] _ in
-            self?.touchUpToSelectType(.stopType)
-            self?.changeFeedbackType?(.stopType)
+            self?.touchUpToSelectType(FeedbackButtonType.stopType)
+            self?.changeFeedbackType?(FeedbackButtonType.stopType)
         }
         button.addAction(action, for: .touchUpInside)
         return button
@@ -116,23 +113,19 @@ final class FeedbackTypeButtonView: UIButton {
     
     // MARK: - func
     
-    private func touchUpToSelectType(_ type: FeedbackType) {
+    func touchUpToSelectType(_ type: FeedbackButtonType) {
         switch type {
         case .continueType:
             continueButton.setTitleColor(.white100, for: .normal)
             continueButton.backgroundColor = .blue200
-            continueShadowView.layer.shadowRadius = 2
             stopButton.setTitleColor(.gray600, for: .normal)
             stopButton.backgroundColor = .white100
-            stopShadowView.layer.shadowRadius = 1
             // FIXME: - 선택된 feedback 타입 전달
         case .stopType:
             stopButton.setTitleColor(.white100, for: .normal)
             stopButton.backgroundColor = .blue200
-            stopShadowView.layer.shadowRadius = 2
             continueButton.setTitleColor(.gray600, for: .normal)
             continueButton.backgroundColor = .white100
-            continueShadowView.layer.shadowRadius = 1
             // FIXME: - 선택된 feedback 타입 전달
         }
     }

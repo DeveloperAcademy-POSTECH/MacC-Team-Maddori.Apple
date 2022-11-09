@@ -12,6 +12,9 @@ enum TextLiteral {
     // MARK: - Common
     
     static let doneButtonTitle = "입력완료"
+    static let feedbackTypeLabel = "피드백 종류"
+    static let feedbackKeywordLabel = "키워드"
+    static let feedbackContentLabel = "내용"
     
     // MARK: - MainViewController
     
@@ -41,15 +44,12 @@ enum TextLiteral {
     // MARK: - AddFeedbackContentViewController
     
     static let addFeedbackContentViewControllerTitleLabel = "에게 피드백 보내기"
-    static let addFeedbackContentViewControllerFeedbackTypeLabel = "피드백 종류"
-    static let addFeedbackContentViewControllerFeedbackKeywordLabel = "키워드"
     static let addFeedbackContentViewControllerFeedbackKeywordTextFieldPlaceholder = "피드백을 키워드로 작성해주세요"
-    static let addFeedbackContentViewControllerFeedbackTextViewLabel = "내용"
     static let addFeedbackContentViewControllerFeedbackContentTextViewPlaceholder = "키워드에 대한 자세한 내용을 작성해주세요"
     static let addFeedbackContentViewControllerDoneButtonTitle = "완료"
     static let addFeedbackContentViewControllerFeedbackStartLabel = "Start 제안하기"
     static let addFeedbackContentViewControllerStartTextViewPlaceholder = "제안하고 싶은 Start를 작성해주세요"
-    static let addFeedbackContentViewControllerFeedbackSendTimeLabel = "작성한 피드백은 회고 시간에 자동 제출됩니다"
+    static let addFeedbackContentViewControllerFeedbackSendTimeLabel = "작성한 피드백은 회고 시간 전까지 수정 가능합니다"
     
     // MARK: - JoinTeamViewController
     
@@ -85,6 +85,7 @@ enum TextLiteral {
     static let selectFeedbackMemberViewControllerDoneButtonText = "모든 회고 끝내기 "
     
     // MARK: - InProgressViewController
+    
     static let InProgressViewControllerTitleLabel = "님의 회고 시간"
     static let InProgressViewControllerSubTitleLabel = "님은 이야기 나누고 싶은\n키워드를 선택해주세요"
     static let InProgressViewControllerOthersSubTitleLabel = "님이 선택한 키워드를 확인해주세요"
@@ -95,4 +96,26 @@ enum TextLiteral {
     // MARK: - MyBoxViewController
     
     static let myBoxViewControllerTitleLabel = "내가 작성한 피드백"
+    
+    // MARK: - FeedbackFromMeDetailViewController
+    
+    static let feedbackFromMeDetailViewControllerDeleteButtonText: String = "삭제"
+    static let feedbackFromMeDetailViewControllerTitleLabel: String = "님께 작성한 피드백"
+    static let feedbackFromMeDetailViewControllerFeedbackStartLabel: String = "Start"
+    static let feedbackFromMeDetailViewControllerEditButtonText: String = "수정하러 가기"
+    static let feedbackFromMeDetailViewControllerReflectionIsStartedLabel: String = "회고가 시작되었습니다"
+    static let feedbackFromMeDetailViewControllerBeforeReflectionLabel: String = "담아둔 피드백은 회고 시간 전까지 수정 가능합니다"
+    
+    // MARK: - AlertViewController
+    
+    static let alertViewControllerTypeDeleteTitle = "피드백 삭제하기"
+    static let alertViewControllerTypeJoinTitle = "합류할 팀"
+    static let alertViewControllerTypeDeleteSubTitle = "삭제된 피드백은 복구할 수 없습니다"
+    static let alertViewControllerTypeJoinSubTitle = "팀에 합류하시겠어요?"
+    static let alertViewControllerCancelButtonText = "취소"
+    
+    // MARK: - LoginViewController
+    
+    static let loginViewControllerLogoText: String = "KeyGo"
+    static let loginViewControllerDescriptionText: String = "키워드로 회고하기"
 }
