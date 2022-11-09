@@ -93,6 +93,10 @@ enum TextLiteral {
     static let InProgressViewControllerGivenLabel = "내가 보낸 피드백"
     static let InProgressViewControllerOtherGivenLabel = "팀원들이 보낸 피드백"
     
+    // MARK: - MyReflectionViewHeader
+    
+    static let MyReflectionViewHeaderHeaderLabel = "모음집"
+    
     // MARK: - MyBoxViewController
     
     static let myBoxViewControllerTitleLabel = "내가 작성한 피드백"
@@ -113,4 +117,9 @@ enum TextLiteral {
     static let alertViewControllerTypeDeleteSubTitle = "삭제된 피드백은 복구할 수 없습니다"
     static let alertViewControllerTypeJoinSubTitle = "팀에 합류하시겠어요?"
     static let alertViewControllerCancelButtonText = "취소"
+    
+    // MARK: - LoginViewController
+    
+    static let loginViewControllerLogoText: String = "KeyGo"
+    static let loginViewControllerDescriptionText: String = "키워드로 회고하기"
 }
