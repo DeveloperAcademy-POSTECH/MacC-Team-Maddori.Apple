@@ -9,16 +9,18 @@ import UIKit
 
 import SnapKit
 
-final class AddFeedbackContentViewController: BaseViewController {
+class AddFeedbackContentViewController: BaseViewController {
     
-    private enum Length {
+    enum Length {
         static let keywordMinLength: Int = 0
         static let keywordMaxLength: Int = 15
         static let textViewMaxLength: Int = 200
     }
-    var type: FeedBackType = .continueType
+    var type: FeedbackButtonType = .continueType
     var fromNickname: String
     var toNickname: String
+    var keywordHasText: Bool = false
+    var contentHasText: Bool = false
     
     init(from: String, to: String) {
         self.fromNickname = from
@@ -61,15 +63,15 @@ final class AddFeedbackContentViewController: BaseViewController {
     }()
     private let feedbackTypeLabel: UILabel = {
         let label = UILabel()
-        label.text = TextLiteral.addFeedbackContentViewControllerFeedbackTypeLabel
+        label.text = TextLiteral.feedbackTypeLabel
         label.textColor = .black100
         label.font = .label2
         return label
     }()
-    private lazy var feedbackTypeButtonView: FeedbackTypeButtonView = {
+    lazy var feedbackTypeButtonView: FeedbackTypeButtonView = {
         let view = FeedbackTypeButtonView()
         view.changeFeedbackType = { [weak self] type in
-            if let typeValue = FeedBackType.init(rawValue: type.rawValue) {
+            if let typeValue = FeedbackButtonType.init(rawValue: type.rawValue) {
                 self?.type = typeValue
             }
         }
@@ -77,12 +79,12 @@ final class AddFeedbackContentViewController: BaseViewController {
     }()
     private let feedbackKeywordLabel: UILabel = {
         let label = UILabel()
-        label.text = TextLiteral.addFeedbackContentViewControllerFeedbackKeywordLabel
+        label.text = TextLiteral.feedbackKeywordLabel
         label.textColor = .black100
         label.font = .label2
         return label
     }()
-    private let feedbackKeywordTextField: KigoTextField = {
+    let feedbackKeywordTextField: KigoTextField = {
         let textField = KigoTextField()
         textField.placeHolderText = TextLiteral.addFeedbackContentViewControllerFeedbackKeywordTextFieldPlaceholder
         return textField
@@ -96,24 +98,17 @@ final class AddFeedbackContentViewController: BaseViewController {
     }()
     private let feedbackContentLabel: UILabel = {
         let label = UILabel()
-        label.text = TextLiteral.addFeedbackContentViewControllerFeedbackTextViewLabel
+        label.text = TextLiteral.feedbackContentLabel
         label.textColor = .black100
         label.font = .label2
         return label
     }()
-    private let feedbackContentOptionalLabel: UILabel = {
-        let label = UILabel()
-        label.text = "(선택사항)"
-        label.font = .body2
-        label.textColor = .gray400
-        return label
-    }()
-    private let feedbackContentTextView: FeedbackTextView = {
+    let feedbackContentTextView: FeedbackTextView = {
         let textView = FeedbackTextView()
         textView.placeholder = TextLiteral.addFeedbackContentViewControllerFeedbackContentTextViewPlaceholder
         return textView
     }()
-    private lazy var feedbackStartSwitch: UISwitch = {
+    lazy var feedbackStartSwitch: UISwitch = {
         let toggle = UISwitch()
         toggle.onTintColor = .blue200
         toggle.isOn = false
@@ -123,13 +118,6 @@ final class AddFeedbackContentViewController: BaseViewController {
         toggle.addAction(action, for: .touchUpInside)
         return toggle
     }()
-    private lazy var feedbackSendTimeLabel: UILabel = {
-        let label = UILabel()
-        label.setTextWithLineHeight(text: TextLiteral.addFeedbackContentViewControllerFeedbackSendTimeLabel, lineHeight: 22)
-        label.textColor = .gray400
-        label.font = .body2
-        return label
-    }()
     private let feedbackStartLabel: UILabel = {
         let label = UILabel()
         label.text = TextLiteral.addFeedbackContentViewControllerFeedbackStartLabel
@@ -137,26 +125,33 @@ final class AddFeedbackContentViewController: BaseViewController {
         label.font = .label2
         return label
     }()
-    private let feedbackStartTextViewLabel: UILabel = {
+    let feedbackStartTextViewLabel: UILabel = {
         let label = UILabel()
-        label.text = TextLiteral.addFeedbackContentViewControllerFeedbackTextViewLabel
+        label.text = TextLiteral.feedbackContentLabel
         label.textColor = .black100
         label.font = .label2
         label.isHidden = true
         return label
     }()
-    private let feedbackStartTextView: FeedbackTextView = {
+    let feedbackStartTextView: FeedbackTextView = {
         let textView = FeedbackTextView()
         textView.placeholder = TextLiteral.addFeedbackContentViewControllerStartTextViewPlaceholder
         textView.isHidden = true
         return textView
     }()
-    private let feedbackDoneButtonView: UIView = {
+    let feedbackDoneButtonView: UIView = {
         let view = UIView()
         view.backgroundColor = .white200
         return view
     }()
-    private lazy var feedbackDoneButton: MainButton = {
+    let editFeedbackUntilLabel: UILabel = {
+        let label = UILabel()
+        label.setTextWithLineHeight(text: TextLiteral.addFeedbackContentViewControllerFeedbackSendTimeLabel, lineHeight: 22)
+        label.textColor = .gray400
+        label.font = .body2
+        return label
+    }()
+    lazy var feedbackDoneButton: MainButton = {
         let button = MainButton()
         button.title = TextLiteral.addFeedbackContentViewControllerDoneButtonTitle
         button.isDisabled = true
@@ -175,13 +170,6 @@ final class AddFeedbackContentViewController: BaseViewController {
         setupDelegate()
     }
     
-    override func configUI() {
-        super.configUI()
-        if feedbackDate != nil {
-            feedbackSendTimeLabel.text = "작성한 피드백은 \(feedbackDate!.dateToMonthDayString)에 자동으로 제출됩니다"
-        }
-    }
-    
     override func render() {
         view.addSubview(addFeedbackScrollView)
         addFeedbackScrollView.snp.makeConstraints {
@@ -192,7 +180,7 @@ final class AddFeedbackContentViewController: BaseViewController {
         addFeedbackContentView.snp.makeConstraints {
             $0.edges.equalTo(addFeedbackScrollView.snp.edges)
             $0.width.equalTo(addFeedbackScrollView.snp.width)
-            $0.height.equalTo(view.frame.height)
+            $0.height.equalTo(1180)
         }
         
         addFeedbackContentView.addSubview(addFeedbackTitleLabel)
@@ -237,12 +225,6 @@ final class AddFeedbackContentViewController: BaseViewController {
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
-        addFeedbackScrollView.addSubview(feedbackContentOptionalLabel)
-        feedbackContentOptionalLabel.snp.makeConstraints {
-            $0.leading.equalTo(feedbackContentLabel.snp.trailing).offset(2)
-            $0.bottom.equalTo(feedbackContentLabel.snp.bottom)
-        }
-        
         addFeedbackContentView.addSubview(feedbackContentTextView)
         feedbackContentTextView.snp.makeConstraints {
             $0.top.equalTo(feedbackContentLabel.snp.bottom).offset(SizeLiteral.labelComponentPadding)
@@ -256,12 +238,6 @@ final class AddFeedbackContentViewController: BaseViewController {
             $0.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.width.equalTo(51)
             $0.height.equalTo(31)
-        }
-        
-        feedbackDoneButtonView.addSubview(feedbackSendTimeLabel)
-        feedbackSendTimeLabel.snp.makeConstraints {
-            $0.bottom.equalTo(feedbackDoneButton.snp.top).offset(-11)
-            $0.centerX.equalTo(feedbackDoneButtonView.snp.centerX)
         }
         
         addFeedbackContentView.addSubview(feedbackStartLabel)
@@ -295,8 +271,14 @@ final class AddFeedbackContentViewController: BaseViewController {
             $0.bottom.equalTo(feedbackDoneButtonView.snp.bottom).inset(36)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
-    }
         
+        feedbackDoneButtonView.addSubview(editFeedbackUntilLabel)
+        editFeedbackUntilLabel.snp.makeConstraints {
+            $0.bottom.equalTo(feedbackDoneButton.snp.top).offset(-11)
+            $0.centerX.equalTo(feedbackDoneButtonView.snp.centerX)
+        }
+    }
+    
     // MARK: - func
     
     override func setupNavigationBar() {
@@ -329,7 +311,7 @@ final class AddFeedbackContentViewController: BaseViewController {
         }
     }
     
-    private func setCounter(count: Int) {
+    func setCounter(count: Int) {
         if count <= Length.keywordMaxLength {
             textLimitLabel.text = "\(count)/\(Length.keywordMaxLength)"
         }
@@ -338,7 +320,7 @@ final class AddFeedbackContentViewController: BaseViewController {
         }
     }
     
-    private func checkMaxLength(textField: UITextField, maxLength: Int) {
+    func checkMaxLength(textField: UITextField, maxLength: Int) {
         if let text = textField.text {
             if text.count > maxLength {
                 let endIndex = text.index(text.startIndex, offsetBy: maxLength)
@@ -389,14 +371,14 @@ final class AddFeedbackContentViewController: BaseViewController {
                 self.feedbackDoneButton.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height + 25)
             })
         }
-        feedbackSendTimeLabel.isHidden = true
+        editFeedbackUntilLabel.isHidden = true
     }
     
-    @objc private func willHideKeyboard(notification: NSNotification) {
+    @objc func willHideKeyboard(notification: NSNotification) {
         UIView.animate(withDuration: 0.2, animations: {
             self.feedbackDoneButton.transform = .identity
         })
-        feedbackSendTimeLabel.isHidden = false
+        editFeedbackUntilLabel.isHidden = false
     }
 }
 
@@ -407,16 +389,25 @@ extension AddFeedbackContentViewController: UITextFieldDelegate {
         setCounter(count: textField.text?.count ?? 0)
         checkMaxLength(textField: feedbackKeywordTextField, maxLength: Length.keywordMaxLength)
         
-        let hasText = feedbackKeywordTextField.hasText
-        feedbackDoneButton.isDisabled = !hasText
+        keywordHasText = feedbackKeywordTextField.hasText
+        feedbackDoneButton.isDisabled = !(keywordHasText && contentHasText)
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         addFeedbackScrollView.scrollRectToVisible(CGRect(x: 0.0, y: 0.0, width: 375.0, height: 850.0), animated: true)
     }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        feedbackContentTextView.becomeFirstResponder()
+    }
 }
 
 extension AddFeedbackContentViewController: UITextViewDelegate {
+    func textViewDidChangeSelection(_ textView: UITextView) {
+        contentHasText = feedbackContentTextView.hasText && feedbackContentTextView.text != TextLiteral.addFeedbackContentViewControllerFeedbackContentTextViewPlaceholder
+        feedbackDoneButton.isDisabled = !(keywordHasText && contentHasText)
+    }
+    
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.text == TextLiteral.addFeedbackContentViewControllerFeedbackContentTextViewPlaceholder || textView.text == TextLiteral.addFeedbackContentViewControllerStartTextViewPlaceholder {
             textView.text = nil
