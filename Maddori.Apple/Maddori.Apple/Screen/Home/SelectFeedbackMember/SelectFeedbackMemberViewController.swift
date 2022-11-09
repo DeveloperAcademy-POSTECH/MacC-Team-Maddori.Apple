@@ -20,7 +20,11 @@ final class SelectFeedbackMemberViewController: BaseViewController {
         label.setTitleFont(text: TextLiteral.selectFeedbackMemberViewControllerTitleLabel)
         return label
     }()
-    private let memberCollectionView = MemberCollectionView()
+    private let memberCollectionView: MemberCollectionView = {
+        let collectionView = MemberCollectionView()
+        collectionView.memberList = Member.getTotalMemberList()
+        return collectionView
+    }()
     private lazy var feedbackDoneButton: MainButton = {
         let button = MainButton()
         button.title = TextLiteral.selectFeedbackMemberViewControllerDoneButtonText + "(0/\(memberCollectionView.memberList.count))"

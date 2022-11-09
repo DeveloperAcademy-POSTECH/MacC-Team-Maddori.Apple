@@ -27,7 +27,7 @@ final class TotalReflectionCell: BaseCollectionViewCell {
     }()
     private let cellArrow: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = ImageLiterals.icArrow
+        imageView.image = ImageLiterals.icRight
         imageView.tintColor = .gray400
         return imageView
     }()
