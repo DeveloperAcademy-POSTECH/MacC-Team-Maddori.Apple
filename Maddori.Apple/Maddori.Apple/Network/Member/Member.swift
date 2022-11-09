@@ -11,11 +11,6 @@ struct Member {
     let id: Int
     let nickname: String
     
-    init(id: Int, nickname: String) {
-        self.id = id
-        self.nickname = nickname
-    }
-    
     #if DEBUG
     static let mockData: [Member] = [
         Member(id: 0, nickname: "메리"),
