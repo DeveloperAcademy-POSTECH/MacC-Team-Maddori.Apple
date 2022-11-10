@@ -1,5 +1,5 @@
 //
-//  MyReflectionMainView.swift
+//  MyReflectionMainViewController.swift
 //  Maddori.Apple
 //
 //  Created by 이성민 on 2022/11/02.
@@ -23,7 +23,7 @@ final class MyReflectionMainViewController: BaseViewController {
     
     // MARK: - property
     
-    private lazy var myReflectionTitle: UILabel = {
+    private lazy var myReflectionTitleLabel: UILabel = {
         let label = UILabel()
         label.setTitleFont(text: user + "님의 회고")
         label.applyColor(to: user, with: .blue200)
@@ -47,16 +47,16 @@ final class MyReflectionMainViewController: BaseViewController {
     }
     
     override func render() {
-        view.addSubview(myReflectionTitle)
-        myReflectionTitle.snp.makeConstraints {
+        view.addSubview(myReflectionTitleLabel)
+        myReflectionTitleLabel.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.topPadding)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
         view.addSubview(reflectionCollectionView)
         reflectionCollectionView.snp.makeConstraints {
-            $0.top.equalTo(myReflectionTitle.snp.bottom).offset(20)
-            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.top.equalTo(myReflectionTitleLabel.snp.bottom).offset(20)
+            $0.leading.trailing.equalToSuperview()
             $0.bottom.equalToSuperview()
         }
     }
@@ -72,15 +72,19 @@ final class MyReflectionMainViewController: BaseViewController {
 // MARK: - extension
 
 extension MyReflectionMainViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
         if let cell = collectionView.cellForItem(at: indexPath) {
             UIView.animate(withDuration: 0.15, delay: 0, animations: {
                 cell.contentView.backgroundColor = .gray100
-            }) { _ in
-                UIView.animate(withDuration: 0.15, delay: 0, animations: {
-                    cell.contentView.backgroundColor = .white200
-                })
-            }
+            })
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
+        if let cell = collectionView.cellForItem(at: indexPath) {
+            UIView.animate(withDuration: 0.15, delay: 0, animations: {
+                cell.contentView.backgroundColor = .white200
+            })
         }
     }
 }
@@ -101,12 +105,12 @@ extension MyReflectionMainViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = view.frame.width - 2 * SizeLiteral.leadingTrailingPadding
+        let width = view.frame.width
         return CGSize(width: width, height: Size.totalReflectionCellHeight)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TotalReflectionCell.className, for: indexPath) as? TotalReflectionCell else { return UICollectionViewCell()}
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TotalReflectionCell.className, for: indexPath) as? TotalReflectionCell else { return UICollectionViewCell() }
         cell.configLabel(text: totalReflection[indexPath.item].title, date: totalReflection[indexPath.item].date)
         return cell
     }

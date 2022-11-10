@@ -26,7 +26,7 @@ final class TotalReflectionCell: BaseCollectionViewCell {
     }()
     private let cellArrow: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = ImageLiterals.icArrow
+        imageView.image = ImageLiterals.icRight
         imageView.tintColor = .gray400
         return imageView
     }()
@@ -36,20 +36,22 @@ final class TotalReflectionCell: BaseCollectionViewCell {
     override func render() {
         contentView.addSubview(cellLabel)
         cellLabel.snp.makeConstraints {
-            $0.leading.equalToSuperview()
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.top.equalToSuperview().inset(10)
+            $0.height.equalTo(16)
         }
         
-        contentView.addSubview(cellDate)
-        cellDate.snp.makeConstraints {
-            $0.leading.equalToSuperview()
+        contentView.addSubview(cellDateLabel)
+        cellDateLabel.snp.makeConstraints {
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.top.equalTo(cellLabel.snp.bottom)
             $0.bottom.equalToSuperview().inset(10)
+            $0.height.equalTo(14)
         }
         
         contentView.addSubview(cellArrow)
         cellArrow.snp.makeConstraints {
-            $0.trailing.equalTo(contentView.snp.trailing)
+            $0.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.centerY.equalToSuperview()
             $0.width.equalTo(12)
         }
@@ -64,6 +66,6 @@ final class TotalReflectionCell: BaseCollectionViewCell {
     
     func configLabel(text: String, date: String) {
         cellLabel.text = text
-        cellDate.text = date
+        cellDateLabel.text = date
     }
 }

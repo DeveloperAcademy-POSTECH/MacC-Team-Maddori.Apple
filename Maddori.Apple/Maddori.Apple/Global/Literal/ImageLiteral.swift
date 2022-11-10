@@ -16,7 +16,7 @@ enum ImageLiterals {
     static var icWarning: UIImage { .load(systemName: "exclamationmark.circle.fill") }
     static var icPin: UIImage { .load(systemName: "pin.circle.fill") }
     static var icBox: UIImage { .load(systemName: "archivebox.circle.fill") }
-    static var icArrow: UIImage { .load(systemName: "chevron.right") }
+    static var icRight: UIImage { .load(systemName: "chevron.right") }
     
     // MARK: - image
     
