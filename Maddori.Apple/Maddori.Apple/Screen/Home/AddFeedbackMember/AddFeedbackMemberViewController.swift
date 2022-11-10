@@ -18,6 +18,8 @@ final class AddFeedbackMemberViewController: BaseViewController {
         let label = UILabel()
         label.setTitleFont(text: TextLiteral.addFeedbackMemberViewControllerTitle)
         label.textColor = .black100
+        label.numberOfLines = 0
+        label.setLineSpacing(to: 4)
         return label
     }()
     private let memberCollectionView: MemberCollectionView = {

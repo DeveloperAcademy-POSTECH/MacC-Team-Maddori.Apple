@@ -18,8 +18,7 @@ final class TotalReflectionCell: BaseCollectionViewCell {
         label.font = .body3
         return label
     }()
-    
-    private let cellDateLabel: UILabel = {
+    private let cellDate: UILabel = {
         let label = UILabel()
         label.font = .body2
         label.textColor = .gray400
