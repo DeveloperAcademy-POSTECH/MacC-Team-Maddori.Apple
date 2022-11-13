@@ -28,7 +28,7 @@ final class MyFeedbackCollectionViewCell: BaseCollectionViewCell {
     }()
     private let rightImage: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = ImageLiterals.icArrow
+        imageView.image = ImageLiterals.icRight
         imageView.tintColor = .gray400
         return imageView
     }()
