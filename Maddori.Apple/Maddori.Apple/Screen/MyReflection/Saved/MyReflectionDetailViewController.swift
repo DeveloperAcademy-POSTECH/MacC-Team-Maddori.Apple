@@ -73,7 +73,7 @@ final class MyReflectionDetailViewController: BaseViewController {
         
         tableView.addSubview(segmentControl)
         segmentControl.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(12)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(12)
             $0.centerX.equalToSuperview()
             $0.width.equalTo(240)
             $0.height.equalTo(40)
