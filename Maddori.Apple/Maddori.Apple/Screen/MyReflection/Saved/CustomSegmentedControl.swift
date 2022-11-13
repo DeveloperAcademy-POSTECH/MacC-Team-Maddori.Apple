@@ -36,13 +36,13 @@ class CustomSegmentedControl: UISegmentedControl {
     
     override init(items: [Any]?) {
         super.init(items: items)
-        render()
+        configUI()
         self.removeBackgroundAndDivider()
     }
     
     required init?(coder: NSCoder) { nil }
     
-    private func render() {
+    private func configUI() {
         backgroundColor = .gray100
         selectedSegmentTintColor = .blue200
         
