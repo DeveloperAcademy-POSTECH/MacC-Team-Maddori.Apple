@@ -11,6 +11,7 @@ import SnapKit
 
 final class MyFeedbackCollectionView: UIView {
     private let mockData = FeedBack.mockData
+//    private let mockData: [FeedBack] = []
     private enum Size {
         static let horizontalPadding: CGFloat = 24
         static let topSpacing: CGFloat = 24
@@ -40,6 +41,7 @@ final class MyFeedbackCollectionView: UIView {
         collectionView.dataSource = self
         collectionView.register(MyFeedbackHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: MyFeedbackHeaderView.className)
         collectionView.register(MyFeedbackCollectionViewCell.self, forCellWithReuseIdentifier: MyFeedbackCollectionViewCell.className)
+        collectionView.register(EmptyFeedbackView.self, forCellWithReuseIdentifier: EmptyFeedbackView.className)
         return collectionView
     }()
     
@@ -65,28 +67,34 @@ final class MyFeedbackCollectionView: UIView {
 extension MyFeedbackCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: MyFeedbackHeaderView.className, for: indexPath) as? MyFeedbackHeaderView else { return UICollectionReusableView() }
-        if indexPath.section == 0 {
-            header.setDividerHidden(true)
-        } else {
-            header.setDividerHidden(false)
+        if !mockData.isEmpty {
+            if indexPath.section == 0 {
+                header.setDividerHidden(true)
+            } else {
+                header.setDividerHidden(false)
+            }
+            let hasContinue = mockData.contains(where: { $0.type == .continueType} )
+            if hasContinue {
+                header.setCssLabelText(with: indexPath.section)
+            } else {
+                header.setCssLabelText(with: 1)
+            }
+            switch kind {
+            case UICollectionView.elementKindSectionHeader:
+                return header
+            default:
+                return UICollectionReusableView()
+            }
         }
-        let hasContinue = mockData.contains(where: { $0.type == .continueType} )
-        if hasContinue {
-            header.setCssLabelText(with: indexPath.section)
-        } else {
-            header.setCssLabelText(with: 1)
-        }
-        switch kind {
-        case UICollectionView.elementKindSectionHeader:
-            return header
-        default:
-            return UICollectionReusableView()
-        }
+        return header
     }
 }
 extension MyFeedbackCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let hasContinue = mockData.contains(where: { $0.type == .continueType} )
+        if mockData.isEmpty {
+            return 1
+        }
+        let hasContinue = mockData.contains(where: { $0.type == .continueType } )
         if hasContinue {
             return mockData.filter { $0.type == FeedBackType.allCases[section] }.count
         } else {
@@ -95,6 +103,11 @@ extension MyFeedbackCollectionView: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if mockData.isEmpty {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EmptyFeedbackView.className, for: indexPath) as? EmptyFeedbackView else { return UICollectionViewCell() }
+            cell.emptyFeedbackLabel.text = TextLiteral.emptyViewMyBox
+            return cell
+        }
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyFeedbackCollectionViewCell.className, for: indexPath) as? MyFeedbackCollectionViewCell else { return UICollectionViewCell() }
         var data: [FeedBack] = []
         let hasContinue = mockData.contains(where: { $0.type == .continueType} )
@@ -120,7 +133,6 @@ extension MyFeedbackCollectionView: UICollectionViewDataSource {
         return cell
     }
     
-    // FIXME: - 예외 처리해야함 (continue와 start만 있다던지?)
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         if mockData.contains(where: { $0.type == .continueType }) && mockData.contains(where: { $0.type == .stopType }) {
             return 2
@@ -136,6 +148,9 @@ extension MyFeedbackCollectionView: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if mockData.isEmpty {
+            return CGSize(width: 300, height: 400)
+        }
         var data: [FeedBack] = []
         let hasContinue = mockData.contains(where: { $0.type == .continueType} )
         if hasContinue {

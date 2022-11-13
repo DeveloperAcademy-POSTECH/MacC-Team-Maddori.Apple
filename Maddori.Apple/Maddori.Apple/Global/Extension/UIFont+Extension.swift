@@ -35,11 +35,23 @@ extension UIFont {
         return font(.semibold, ofSize: 16)
     }
     
+    static var label3: UIFont {
+        return font(.bold, ofSize: 16)
+    }
+    
     static var body1: UIFont {
         return font(.regular, ofSize: 16)
     }
     
     static var body2: UIFont {
+        return font(.regular, ofSize: 14)
+    }
+    
+    static var body3: UIFont {
+        return font(.medium, ofSize: 16)
+    }
+    
+    static var body4: UIFont {
         return font(.regular, ofSize: 14)
     }
     

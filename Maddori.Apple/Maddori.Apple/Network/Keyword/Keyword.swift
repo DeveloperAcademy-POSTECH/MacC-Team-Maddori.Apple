@@ -27,11 +27,12 @@ struct Keyword {
         Keyword(string: "과몰입", type: .defaultKeyword, from: "이드", to: "진저"),
         Keyword(string: "사과처럼🍎", type: .defaultKeyword, from: "케미", to: "진저"),
         Keyword(string: "회고마스터", type: .defaultKeyword, from: "케미", to: "진저"),
-//        Keyword(string: "🧨", type: .defaultKeyword, from: "케미", to: "진저"),
+        Keyword(string: "🧨", type: .defaultKeyword, from: "케미", to: "진저"),
         Keyword(string: "👕", type: .defaultKeyword, from: "케미", to: "진저"),
         Keyword(string: "내돈을가져가", type: .defaultKeyword, from: "이드", to: "진저"),
         Keyword(string: "👕", type: .defaultKeyword, from: "이드", to: "진저"),
         Keyword(string: "👕", type: .defaultKeyword, from: "케미", to: "진저"),
     ]
+//    static let mockData: [Keyword] = []
     #endif
 }

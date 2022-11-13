@@ -40,7 +40,7 @@ final class MyReflectionDetailTableViewCell: BaseTableViewCell {
         label.text = "너무 좋아요~ 너무 좋아요~ 너무 좋아요~ 너무 좋아요~ 너무 좋아요~ 너무 좋아요~ 너무 좋아요~ 너무 좋아요~ 너무 좋아요~ 너무 좋아요~ 너무 좋아요~"
         label.numberOfLines = 2
         label.textColor = .gray400
-        label.setLineSpacing()
+        label.setLineSpacing(to: 4)
         return label
     }()
     private let rightImage: UIImageView = {

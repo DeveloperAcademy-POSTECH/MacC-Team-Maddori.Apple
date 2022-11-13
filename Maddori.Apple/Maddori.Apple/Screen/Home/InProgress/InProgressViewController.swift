@@ -13,11 +13,13 @@ final class InProgressViewController: BaseViewController {
     
     private var keywordData = Keyword.mockData
     private let currentRetrospectiveUser = "진저"
-//    private let user = "이드"
-    private let user = "진저"
+    private let user = "이드"
+//    private let user = "진저"
     private enum Size {
         static let keywordLabelHeight: CGFloat = 50
         static let sectionPadding: CGFloat = 60
+        static let myReflectionEmptyViewHeight: CGFloat = 500
+        static let othersReflectionEmptyViewHeight: CGFloat = 180
     }
     private var keywordsSectionList: [[Keyword]] = []
     private var isUserRetrospective: Bool {
@@ -51,6 +53,7 @@ final class InProgressViewController: BaseViewController {
         collectionView.backgroundColor = .white200
         collectionView.register(KeywordCollectionViewCell.self,
                                 forCellWithReuseIdentifier: KeywordCollectionViewCell.className)
+        collectionView.register(EmptyFeedbackView.self, forCellWithReuseIdentifier: EmptyFeedbackView.className)
         collectionView.register(SectionHeaderView.self,
                                 forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
                                 withReuseIdentifier: SectionHeaderView.className)
@@ -127,18 +130,6 @@ final class InProgressViewController: BaseViewController {
 // MARK: - extension
 
 extension InProgressViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        switch section {
-        case 0:
-            return keywordsSectionList[0].count
-        case 1:
-            return keywordsSectionList[1].count
-        default:
-            return keywordsSectionList[0].count
-        }
-    }
-    
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let cell = keywordCollectionView.dequeueReusableCell(withReuseIdentifier: KeywordCollectionViewCell.className, for: indexPath) as? KeywordCollectionViewCell else { return }
         let section = indexPath.section
@@ -160,6 +151,22 @@ extension InProgressViewController: UICollectionViewDataSource {
             return 1
         } else {
             return 2
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        let sectionIsEmpty = keywordsSectionList[section].isEmpty
+        if sectionIsEmpty {
+            return 1
+        } else {
+            switch section {
+            case 0:
+                return keywordsSectionList[0].count
+            case 1:
+                return keywordsSectionList[1].count
+            default:
+                return keywordsSectionList[0].count
+            }
         }
     }
     
@@ -185,8 +192,29 @@ extension InProgressViewController: UICollectionViewDataSource {
         guard let cell = keywordCollectionView.dequeueReusableCell(withReuseIdentifier: KeywordCollectionViewCell.className, for: indexPath) as? KeywordCollectionViewCell else {
             return UICollectionViewCell()
         }
+        guard let emptyCell = keywordCollectionView.dequeueReusableCell(withReuseIdentifier: EmptyFeedbackView.className, for: indexPath) as? EmptyFeedbackView else {
+            return UICollectionViewCell()
+        }
+        
         let section = indexPath.section
         let item = indexPath.item
+        let sectionIsEmpty = keywordsSectionList[section].isEmpty
+        
+        if sectionIsEmpty && !isUserRetrospective {
+            switch section {
+            case 0:
+                emptyCell.emptyFeedbackLabel.text = TextLiteral.emptyViewInProgressOthersRetrospectiveSelf
+            case 1:
+                emptyCell.emptyFeedbackLabel.text = TextLiteral.emptyViewInProgressOthersRetrospectiveOthers
+            default:
+                return emptyCell
+            }
+            return emptyCell
+        } else if sectionIsEmpty && isUserRetrospective {
+            emptyCell.emptyFeedbackLabel.text = TextLiteral.emptyViewInProgressMyRetrospective
+            return emptyCell
+        }
+        
         let keyword = keywordsSectionList[section][item]
         cell.keywordLabel.text = keyword.string
         cell.configLabel(type: keyword.type)
@@ -199,8 +227,14 @@ extension InProgressViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let section = indexPath.section
         let item = indexPath.item
-        let size = Size.keywordLabelHeight
-        return KeywordCollectionViewCell.fittingSize(availableHeight: size, keyword: keywordsSectionList[section][item].string)
+        let sectionIsEmpty = keywordsSectionList[section].isEmpty
+        if sectionIsEmpty && isUserRetrospective {
+            return CGSize(width: view.frame.width - 2 * SizeLiteral.leadingTrailingPadding, height: Size.myReflectionEmptyViewHeight)
+        } else if sectionIsEmpty && !isUserRetrospective {
+            return CGSize(width: view.frame.width - 2 * SizeLiteral.leadingTrailingPadding, height: Size.othersReflectionEmptyViewHeight)
+        }
+        return KeywordCollectionViewCell.fittingSize(availableHeight: Size.keywordLabelHeight,
+                                                     keyword: keywordsSectionList[section][item].string)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
