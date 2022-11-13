@@ -46,7 +46,9 @@ final class MyReflectionDetailViewController: BaseViewController {
     private lazy var segmentControl: CustomSegmentedControl = {
         let control = CustomSegmentedControl(items: ["Continue", "Stop"])
         let action = UIAction { [weak self] _ in
-            self?.didChangeValue(segment: self!.segmentControl)
+            if let segment = self?.segmentControl {
+                self?.didChangeValue(segment: segment)
+            }
         }
         control.addAction(action, for: .valueChanged)
         return control
