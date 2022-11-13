@@ -68,12 +68,12 @@ final class MyReflectionDetailViewController: BaseViewController {
             $0.top.equalTo(titleLabel.snp.bottom).offset(22)
             $0.leading.trailing.equalToSuperview()
             // FIXME
-            $0.bottom.equalToSuperview().inset(150)
+            $0.bottom.equalToSuperview()
         }
         
-        view.addSubview(segmentControl)
+        tableView.addSubview(segmentControl)
         segmentControl.snp.makeConstraints {
-            $0.top.equalTo(tableView.snp.bottom)
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(12)
             $0.centerX.equalToSuperview()
             $0.width.equalTo(240)
             $0.height.equalTo(40)

@@ -14,7 +14,7 @@ class CustomSegmentedControl: UISegmentedControl {
     // MARK: - property
     
     private lazy var selectedView: UIView = {
-        let width = self.bounds.size.width / CGFloat(self.numberOfSegments) - 4
+        let width = self.bounds.size.width / CGFloat(self.numberOfSegments) + 41.5
         let height = 32.0
         let xPosition = CGFloat(self.selectedSegmentIndex * Int(width))
         let yPosition = self.bounds.size.height - 1.0
