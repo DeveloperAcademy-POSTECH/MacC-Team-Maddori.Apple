@@ -53,6 +53,7 @@ final class MyReflectionDetailViewController: BaseViewController {
         control.addAction(action, for: .valueChanged)
         return control
     }()
+    
     // MARK: - life cycle
     
     override func render() {
