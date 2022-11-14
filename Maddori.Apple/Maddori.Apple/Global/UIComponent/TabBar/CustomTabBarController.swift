@@ -21,6 +21,7 @@ final class CustomTabBarController: UITabBarController {
         super.viewDidLoad()
         setupTabBar()
         configUI()
+        setupConfiguration()
     }
     
     // MARK: - func
@@ -43,6 +44,10 @@ final class CustomTabBarController: UITabBarController {
         self.setViewControllers(viewControllers, animated: false)
     }
     
+    private func setupConfiguration() {
+        self.navigationItem.hidesBackButton = true
+    }
+    
     private func configUI() {
         tabBar.tintColor = .blue200
         tabBar.backgroundColor = .backgroundWhite
@@ -53,5 +58,9 @@ final class CustomTabBarController: UITabBarController {
         
         tabBar.clearShadow()
         tabBar.makeShadow(color: .black, opacity: 0.15, offset: .zero, radius: 1)
+    }
+    
+    override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        return false
     }
 }

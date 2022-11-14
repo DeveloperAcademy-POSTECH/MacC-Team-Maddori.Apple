@@ -62,7 +62,12 @@ final class CreateTeamViewController: BaseTextFieldViewController {
         return button
     }()
     
-    // MARK: - func
+    // MARK: - life cycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupCreateButtonAction()
+    }
     
     override func setupNavigationBar() {
         super.setupNavigationBar()
@@ -72,5 +77,26 @@ final class CreateTeamViewController: BaseTextFieldViewController {
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.largeTitleDisplayMode = .never
         navigationItem.rightBarButtonItem = closeButton
+    }
+    
+    // MARK: - setup
+    
+    private func setupCreateButtonAction() {
+        let action = UIAction { [weak self] _ in
+            self?.pushHomeViewController()
+        }
+        super.doneButton.addAction(action, for: .touchUpInside)
+    }
+    
+    // MARK: - func
+    
+    private func pushHomeViewController() {
+        guard let parentViewController = presentingViewController as? UINavigationController else { return }
+        dismiss(animated: true) {
+            let rootViewController = UINavigationController(rootViewController: CustomTabBarController())
+            rootViewController.modalPresentationStyle = .fullScreen
+            rootViewController.modalTransitionStyle = .crossDissolve
+            parentViewController.present(rootViewController, animated: true)
+        }
     }
 }
