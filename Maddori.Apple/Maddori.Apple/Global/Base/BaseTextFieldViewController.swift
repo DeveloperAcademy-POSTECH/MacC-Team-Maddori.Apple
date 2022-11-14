@@ -91,8 +91,14 @@ class BaseTextFieldViewController: BaseViewController {
     private func setupDelegate() {
         nicknameTextField.delegate = self
     }
+    // FIXME: 작동을 안함
+//    override func endEditingView() {
+//        if !doneButton.isTouchInside {
+//            view.endEditing(true)
+//        }
+//    }
     
-    override func endEditingView() {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if !doneButton.isTouchInside {
             view.endEditing(true)
         }
