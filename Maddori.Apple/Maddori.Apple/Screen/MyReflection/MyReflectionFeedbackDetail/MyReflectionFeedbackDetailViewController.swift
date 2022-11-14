@@ -21,7 +21,7 @@ final class MyReflectionFeedbackDetailViewController: BaseViewController {
         button.addAction(action, for: .touchUpInside)
         return button
     }()
-    private let myReflectionScrollView = UIScrollView()
+    private let myReflectionScrollView: UIScrollView()
     private let myReflectionContentView = UIView()
     private let keywordTitleLabel: UILabel = {
         let label = UILabel()
@@ -66,7 +66,7 @@ final class MyReflectionFeedbackDetailViewController: BaseViewController {
     }()
     private let feedbackContentText: UILabel = {
         let label = UILabel()
-        label.setTextWithLineHeight(text: "며칠 전에 회의했을 때 되게 정신 없었는데 회의가 막힐 때 진행을 잘해요 며칠 전에 회의했을 때 되게 정신 없었는데 회의가 막힐 때 진행을 잘해요 며칠 전에 회의했을 때 되게 정신 없었는데 회의가 막힐 때 진행을 잘해요", lineHeight: 24)
+        label.setTextWithLineHeight(text: "며칠 전에 회의했을 때 되게 정신 없었는데 회의가 막힐 때 진행을 잘해요 며칠 전에 회의했을 때 되게 정신 없었는데 회의가 막힐 때 진행을 잘해요", lineHeight: 24)
         label.textColor = .gray400
         label.font = .body1
         label.numberOfLines = 0
@@ -81,7 +81,7 @@ final class MyReflectionFeedbackDetailViewController: BaseViewController {
     }()
     private let feedbackStartText: UILabel = {
         let label = UILabel()
-        label.setTextWithLineHeight(text: "이걸 해보면 어떨까용가리", lineHeight: 24)
+        label.setTextWithLineHeight(text: "며칠 전에 회의했을 때 되게 정신 없었는데 회의가 막힐 때 진행을 잘해요 며칠 전에 회의했을 때 되게 정신 없었는데 회의가 막힐 때 진행을 잘해요", lineHeight: 24)
         label.textColor = .gray400
         label.font = .body1
         label.numberOfLines = 0
@@ -100,7 +100,7 @@ final class MyReflectionFeedbackDetailViewController: BaseViewController {
         myReflectionContentView.snp.makeConstraints {
             $0.edges.equalTo(myReflectionScrollView.snp.edges)
             $0.width.equalTo(myReflectionScrollView.snp.width)
-            $0.height.equalTo(1180)
+            $0.height.equalTo(myReflectionScrollView.snp.height).offset(50)
         }
         
         myReflectionContentView.addSubview(keywordTitleLabel)
