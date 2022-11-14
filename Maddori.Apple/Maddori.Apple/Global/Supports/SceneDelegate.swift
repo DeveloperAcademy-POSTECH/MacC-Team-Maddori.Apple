@@ -18,21 +18,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
-        var isLogined = false
+        var isLogined = true
         var rootViewController: UIViewController
         if isLogined {
             rootViewController = CustomTabBarController()
         } else {
-            rootViewController = LoginViewController()
+            rootViewController = UINavigationController(rootViewController: LoginViewController())
         }
-        window?.rootViewController = UINavigationController(rootViewController: rootViewController)
+        window?.rootViewController = rootViewController
         window?.makeKeyAndVisible()
     }
     
-    // https://hellozo0.tistory.com/m/379    
+    // https://hellozo0.tistory.com/m/379
     func changeRootViewCustomTabBarView() {
         guard let window = window else { return }
-        window.rootViewController = UINavigationController(rootViewController: CustomTabBarController())
+        window.rootViewController = CustomTabBarController()
         UIView.transition(with: window, duration: 0.2, options: [.transitionCrossDissolve], animations: nil)
     }
 

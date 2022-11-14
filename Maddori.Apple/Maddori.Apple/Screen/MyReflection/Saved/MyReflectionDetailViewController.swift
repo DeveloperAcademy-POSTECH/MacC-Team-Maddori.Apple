@@ -56,6 +56,11 @@ final class MyReflectionDetailViewController: BaseViewController {
     
     // MARK: - life cycle
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupBackButton()
+    }
+    
     override func render() {
         view.addSubview(titleLabel)
         titleLabel.snp.makeConstraints {
@@ -98,6 +103,15 @@ final class MyReflectionDetailViewController: BaseViewController {
             contentArray = stopArray
         }
         tableView.reloadData()
+    }
+    
+    // MARK: - setup
+    
+    private func setupBackButton() {
+        let action = UIAction { [weak self] _ in
+            self?.navigationController?.popViewController(animated: true)
+        }
+        backButton.addAction(action, for: .touchUpInside)
     }
 }
 

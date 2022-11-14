@@ -190,11 +190,6 @@ final class HomeViewController: BaseViewController {
         }
     }
     
-    override func setupNavigationBar() {
-        super.setupNavigationBar()
-        navigationController?.navigationBar.isHidden = true
-    }
-    
     // MARK: - func
     
     private func setUpDelegation() {
