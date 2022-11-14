@@ -11,6 +11,9 @@ import SnapKit
 
 final class MyReflectionFeedbackDetailViewController: BaseViewController {
     
+    // FIXME: - api 연결
+    let model = FeedbackToMeModel.mockData
+    
     // MARK: - property
     
     private lazy var backButton: BackButton = {
@@ -23,9 +26,9 @@ final class MyReflectionFeedbackDetailViewController: BaseViewController {
     }()
     private let myReflectionScrollView = UIScrollView()
     private let myReflectionContentView = UIView()
-    private let keywordTitleLabel: UILabel = {
+    private lazy var keywordTitleLabel: UILabel = {
         let label = UILabel()
-        label.setTitleFont(text: "진저는")
+        label.setTitleFont(text: model.keyword)
         label.textColor = .black100
         return label
     }()
@@ -36,9 +39,9 @@ final class MyReflectionFeedbackDetailViewController: BaseViewController {
         label.font = .label2
         return label
     }()
-    private let feedbackTypeText: UILabel = {
+    private lazy var feedbackTypeText: UILabel = {
         let label = UILabel()
-        label.setTextWithLineHeight(text: "Continue", lineHeight: 24)
+        label.setTextWithLineHeight(text: model.feedbackType.rawValue, lineHeight: 24)
         label.textColor = .gray400
         label.font = .body1
         return label
@@ -50,9 +53,9 @@ final class MyReflectionFeedbackDetailViewController: BaseViewController {
         label.font = .label2
         return label
     }()
-    private let feedbackFromText: UILabel = {
+    private lazy var feedbackFromText: UILabel = {
         let label = UILabel()
-        label.setTextWithLineHeight(text: "메리", lineHeight: 24)
+        label.setTextWithLineHeight(text: model.from, lineHeight: 24)
         label.textColor = .gray400
         label.font = .body1
         return label
@@ -64,9 +67,9 @@ final class MyReflectionFeedbackDetailViewController: BaseViewController {
         label.font = .label2
         return label
     }()
-    private let feedbackContentText: UILabel = {
+    private lazy var feedbackContentText: UILabel = {
         let label = UILabel()
-        label.setTextWithLineHeight(text: "며칠 전에 회의했을 때 되게 정신 없었는데 회의가 막힐 때 진행을 잘해요 며칠 전에 회의했을 때 되게 정신 없었는데 회의가 막힐 때 진행을 잘해요", lineHeight: 24)
+        label.setTextWithLineHeight(text: model.content, lineHeight: 24)
         label.textColor = .gray400
         label.font = .body1
         label.numberOfLines = 0
@@ -79,9 +82,9 @@ final class MyReflectionFeedbackDetailViewController: BaseViewController {
         label.font = .label2
         return label
     }()
-    private let feedbackStartText: UILabel = {
+    private lazy var feedbackStartText: UILabel = {
         let label = UILabel()
-        label.setTextWithLineHeight(text: "며칠 전에 회의했을 때 되게 정신 없었는데 회의가 막힐 때 진행을 잘해요 며칠 전에 회의했을 때 되게 정신 없었는데 회의가 막힐 때 진행을 잘해요", lineHeight: 24)
+        label.setTextWithLineHeight(text: model.start, lineHeight: 24)
         label.textColor = .gray400
         label.font = .body1
         label.numberOfLines = 0
