@@ -34,6 +34,7 @@ final class LabelButtonView: UIView {
         let action = UIAction { [weak self] _ in
             self?.buttonAction?()
         }
+        button.tintColor = .blue200
         button.addAction(action, for: .touchUpInside)
         return button
     }()
