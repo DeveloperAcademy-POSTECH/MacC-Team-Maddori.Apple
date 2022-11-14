@@ -29,7 +29,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.makeKeyAndVisible()
     }
     
-    // https://hellozo0.tistory.com/m/379
     func changeRootViewCustomTabBarView() {
         guard let window = window else { return }
         window.rootViewController = CustomTabBarController()
