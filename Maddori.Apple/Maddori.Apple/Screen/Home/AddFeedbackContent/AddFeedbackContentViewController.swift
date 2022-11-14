@@ -44,7 +44,7 @@ class AddFeedbackContentViewController: BaseViewController {
         return button
     }()
     
-    private lazy var closeButton: CloseButton = {
+    lazy var closeButton: CloseButton = {
         let button = CloseButton(type: .system)
         let action = UIAction { [weak self] _ in
             self?.didTappedCloseButton()
