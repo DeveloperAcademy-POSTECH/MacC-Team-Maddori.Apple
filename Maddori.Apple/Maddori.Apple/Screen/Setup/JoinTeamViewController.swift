@@ -73,6 +73,13 @@ final class JoinTeamViewController: BaseTextFieldViewController {
         return view
     }()
     
+    // MARK: - life cycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupDoneButton()
+    }
+    
     override func render() {
         super.render()
         
@@ -94,6 +101,15 @@ final class JoinTeamViewController: BaseTextFieldViewController {
         navigationItem.leftBarButtonItem = backButton
     }
     
+    // MARK: - setup
+    
+    private func setupDoneButton() {
+        let action = UIAction { [weak self] _ in
+            self?.pushHomeViewController()
+        }
+        super.doneButton.addAction(action, for: .touchUpInside)
+    }
+    
     // MARK: - func
     
     private func presentCreateTeamViewController() {
@@ -101,5 +117,13 @@ final class JoinTeamViewController: BaseTextFieldViewController {
         let rootViewController = UINavigationController(rootViewController: viewController)
         rootViewController.modalPresentationStyle = .fullScreen
         present(rootViewController, animated: true)
+    }
+    
+    private func pushHomeViewController() {
+        let viewController = UINavigationController(rootViewController: CustomTabBarController())
+        let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
+        guard let delegate = sceneDelegate else { return }
+        delegate.changeRootViewController(viewController)
+        delegate.window?.rootViewController = viewController
     }
 }
