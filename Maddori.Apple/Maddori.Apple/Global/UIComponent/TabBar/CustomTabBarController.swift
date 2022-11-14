@@ -46,6 +46,7 @@ final class CustomTabBarController: UITabBarController {
     private func configUI() {
         tabBar.tintColor = .blue200
         tabBar.backgroundColor = .backgroundWhite
+        tabBar.unselectedItemTintColor = .gray300
         
         tabBar.layer.cornerRadius = 8
         tabBar.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
