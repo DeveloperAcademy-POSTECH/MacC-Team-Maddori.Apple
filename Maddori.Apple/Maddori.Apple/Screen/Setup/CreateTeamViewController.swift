@@ -91,12 +91,7 @@ final class CreateTeamViewController: BaseTextFieldViewController {
     // MARK: - func
     
     private func pushHomeViewController() {
-        guard let parentViewController = presentingViewController as? UINavigationController else { return }
-        dismiss(animated: true) {
-            let rootViewController = UINavigationController(rootViewController: CustomTabBarController())
-            rootViewController.modalPresentationStyle = .fullScreen
-            rootViewController.modalTransitionStyle = .crossDissolve
-            parentViewController.present(rootViewController, animated: true)
-        }
+        let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
+        sceneDelegate?.changeRootViewCustomTabBarView()
     }
 }

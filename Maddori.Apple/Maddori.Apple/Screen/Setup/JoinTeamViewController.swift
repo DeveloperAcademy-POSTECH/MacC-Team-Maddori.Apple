@@ -120,10 +120,7 @@ final class JoinTeamViewController: BaseTextFieldViewController {
     }
     
     private func pushHomeViewController() {
-        let viewController = UINavigationController(rootViewController: CustomTabBarController())
         let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
-        guard let delegate = sceneDelegate else { return }
-        delegate.changeRootViewController(viewController)
-        delegate.window?.rootViewController = viewController
+        sceneDelegate?.changeRootViewCustomTabBarView()
     }
 }
