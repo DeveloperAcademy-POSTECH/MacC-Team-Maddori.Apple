@@ -63,14 +63,9 @@ final class AddReflectionViewController: BaseViewController {
         picker.addAction(action, for: .valueChanged)
         return picker
     }()
-    private lazy var mainButton: MainButton = {
+    private let mainButton: MainButton = {
         let button = MainButton()
         button.title = TextLiteral.addReflectionViewControllerButtonText
-        let action = UIAction { [weak self] _ in
-            // FIXME: - 특정 시간이 되면 함수 실행하도록 변경. 현재는 확인용
-            self?.showStartReflectionView()
-        }
-        button.addAction(action, for: .touchUpInside)
         return button
     }()
     
@@ -78,6 +73,7 @@ final class AddReflectionViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupAddReflection()
     }
     
     override func render() {
@@ -140,5 +136,12 @@ final class AddReflectionViewController: BaseViewController {
         UIView.animate(withDuration: 1, animations: {
             childView.view.alpha = 1
         })
+    }
+    
+    private func setupAddReflection() {
+        let action = UIAction { [weak self] _ in
+            self?.dismiss(animated: true)
+        }
+        mainButton.addAction(action, for: .touchUpInside)
     }
 }
