@@ -75,4 +75,16 @@ final class JoinTeamViewController: BaseTextFieldViewController {
             $0.height.equalTo(SizeLiteral.minimumTouchArea)
         }
     }
+    
+    // MARK: - selector
+    
+    override func keyboardWillShow(notification: NSNotification) {
+        super.keyboardWillShow(notification: notification)
+        createView.isHidden = true
+    }
+    
+    override func keyboardWillHide(notification: NSNotification) {
+        super.keyboardWillHide(notification: notification)
+        createView.isHidden = false
+    }
 }

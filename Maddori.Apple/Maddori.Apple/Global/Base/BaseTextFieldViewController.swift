@@ -129,7 +129,7 @@ class BaseTextFieldViewController: BaseViewController {
     
     // MARK: - selector
     
-    @objc private func keyboardWillShow(notification:NSNotification) {
+    @objc func keyboardWillShow(notification:NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             UIView.animate(withDuration: 0.2, animations: {
                 self.doneButton.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height + 10)
@@ -137,7 +137,7 @@ class BaseTextFieldViewController: BaseViewController {
         }
     }
     
-    @objc private func keyboardWillHide(notification:NSNotification) {
+    @objc func keyboardWillHide(notification:NSNotification) {
         UIView.animate(withDuration: 0.2, animations: {
             self.doneButton.transform = .identity
         })
