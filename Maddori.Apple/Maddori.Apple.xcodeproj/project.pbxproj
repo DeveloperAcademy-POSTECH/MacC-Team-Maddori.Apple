@@ -67,7 +67,7 @@
 		525E721F28FFC89800EF3FCB /* AddFeedbackContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525E721E28FFC89800EF3FCB /* AddFeedbackContentViewController.swift */; };
 		525E722128FFC9A800EF3FCB /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525E722028FFC9A800EF3FCB /* BackButton.swift */; };
 		525E722528FFCFA600EF3FCB /* FeedbackTypeButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525E722428FFCFA600EF3FCB /* FeedbackTypeButtonView.swift */; };
-		52988B742921EAD50044A77F /* MyReflectionFeedbackDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52988B732921EAD50044A77F /* MyReflectionFeedbackDetailViewController.swift */; };
+		52988B742921EAD50044A77F /* FeedbackToMeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52988B732921EAD50044A77F /* FeedbackToMeDetailViewController.swift */; };
 		52AED2DD29128532004D70B9 /* FeedbackFromMeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52AED2DC29128532004D70B9 /* FeedbackFromMeModel.swift */; };
 		52DC9091291A98CC00904739 /* EditFeedbackFromMeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DC9090291A98CC00904739 /* EditFeedbackFromMeViewController.swift */; };
 		52F07B9A2912541B0015BC8B /* FeedbackFromMeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F07B992912541B0015BC8B /* FeedbackFromMeDetailViewController.swift */; };
@@ -149,7 +149,7 @@
 		525E721E28FFC89800EF3FCB /* AddFeedbackContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFeedbackContentViewController.swift; sourceTree = "<group>"; };
 		525E722028FFC9A800EF3FCB /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
 		525E722428FFCFA600EF3FCB /* FeedbackTypeButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackTypeButtonView.swift; sourceTree = "<group>"; };
-		52988B732921EAD50044A77F /* MyReflectionFeedbackDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReflectionFeedbackDetailViewController.swift; sourceTree = "<group>"; };
+		52988B732921EAD50044A77F /* FeedbackToMeDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackToMeDetailViewController.swift; sourceTree = "<group>"; };
 		52AED2DC29128532004D70B9 /* FeedbackFromMeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackFromMeModel.swift; sourceTree = "<group>"; };
 		52DC9090291A98CC00904739 /* EditFeedbackFromMeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditFeedbackFromMeViewController.swift; sourceTree = "<group>"; };
 		52F07B992912541B0015BC8B /* FeedbackFromMeDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackFromMeDetailViewController.swift; sourceTree = "<group>"; };
@@ -411,7 +411,7 @@
 		3977E1212910CFCB000E9761 /* MyReflection */ = {
 			isa = PBXGroup;
 			children = (
-				52988B722921EA580044A77F /* MyReflectionFeedbackDetail */,
+				52988B722921EA580044A77F /* FeedbackToMeDetail */,
 				3EB50893291AA35100FB77CB /* Main */,
 				D7AFB7C12916EA7C00E998B7 /* Saved */,
 			);
@@ -573,12 +573,12 @@
 			path = AddFeedbackContent;
 			sourceTree = "<group>";
 		};
-		52988B722921EA580044A77F /* MyReflectionFeedbackDetail */ = {
+		52988B722921EA580044A77F /* FeedbackToMeDetail */ = {
 			isa = PBXGroup;
 			children = (
-				52988B732921EAD50044A77F /* MyReflectionFeedbackDetailViewController.swift */,
+				52988B732921EAD50044A77F /* FeedbackToMeDetailViewController.swift */,
 			);
-			path = MyReflectionFeedbackDetail;
+			path = FeedbackToMeDetail;
 			sourceTree = "<group>";
 		};
 		52DC908F291A98B800904739 /* EditFeedbackFromMe */ = {
@@ -726,7 +726,7 @@
 				3E5580072906A7B200714E46 /* InProgressViewController.swift in Sources */,
 				39436C132912877D0083D77A /* MyFeedbackHeaderView.swift in Sources */,
 				52294C462918F81500E81969 /* Member.swift in Sources */,
-				52988B742921EAD50044A77F /* MyReflectionFeedbackDetailViewController.swift in Sources */,
+				52988B742921EAD50044A77F /* FeedbackToMeDetailViewController.swift in Sources */,
 				395C7E1828F9912700FC2FCA /* UIButton+Extension.swift in Sources */,
 				3E557FC328FE7BBC00714E46 /* HomeViewController.swift in Sources */,
 				D7AFB7C72916FF9400E998B7 /* CustomSegmentedControl.swift in Sources */,

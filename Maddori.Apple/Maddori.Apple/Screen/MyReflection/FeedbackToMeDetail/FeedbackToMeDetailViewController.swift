@@ -1,5 +1,5 @@
 //
-//  MyReflectionFeedbackDetailViewController.swift
+//  FeedbackToMeDetailViewController.swift
 //  Maddori.Apple
 //
 //  Created by 김유나 on 2022/11/14.
@@ -9,7 +9,7 @@ import UIKit
 
 import SnapKit
 
-final class MyReflectionFeedbackDetailViewController: BaseViewController {
+final class FeedbackToMeDetailViewController: BaseViewController {
     
     // FIXME: - api 연결
     let model = FeedbackToMeModel.mockData
