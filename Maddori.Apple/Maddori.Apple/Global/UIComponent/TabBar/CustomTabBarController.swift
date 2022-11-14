@@ -51,7 +51,7 @@ final class CustomTabBarController: UITabBarController {
         tabBar.layer.cornerRadius = 8
         tabBar.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         
-        UITabBar.clearShadow()
-        tabBar.makeShadow(color: .black, opacity: 0.2, offset: .zero, radius: 2)
+        tabBar.clearShadow()
+        tabBar.makeShadow(color: .black, opacity: 0.15, offset: .zero, radius: 1)
     }
 }
