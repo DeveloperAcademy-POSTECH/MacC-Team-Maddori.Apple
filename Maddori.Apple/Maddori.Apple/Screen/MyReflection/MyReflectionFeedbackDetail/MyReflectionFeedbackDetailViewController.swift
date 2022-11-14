@@ -21,7 +21,7 @@ final class MyReflectionFeedbackDetailViewController: BaseViewController {
         button.addAction(action, for: .touchUpInside)
         return button
     }()
-    private let myReflectionScrollView: UIScrollView()
+    private let myReflectionScrollView = UIScrollView()
     private let myReflectionContentView = UIView()
     private let keywordTitleLabel: UILabel = {
         let label = UILabel()
