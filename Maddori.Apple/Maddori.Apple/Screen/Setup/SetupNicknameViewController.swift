@@ -55,6 +55,10 @@ final class SetupNicknameViewController: BaseTextFieldViewController {
         super.setupNavigationBar()
     }
     
+    override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        return false
+    }
+    
     // MARK: - func
     
     private func pushJoinTeamViewController() {
