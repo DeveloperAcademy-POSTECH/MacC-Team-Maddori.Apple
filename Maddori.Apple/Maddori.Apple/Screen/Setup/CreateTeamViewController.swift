@@ -50,4 +50,27 @@ final class CreateTeamViewController: BaseTextFieldViewController {
             super.maxLength = newValue
         }
     }
+    
+    // MARK: - property
+    
+    private lazy var closeButton: CloseButton = {
+        let button = CloseButton()
+        let action = UIAction { [weak self] _ in
+            self?.dismiss(animated: true)
+        }
+        button.addAction(action, for: .touchUpInside)
+        return button
+    }()
+    
+    // MARK: - func
+    
+    override func setupNavigationBar() {
+        super.setupNavigationBar()
+        
+        let closeButton = makeBarButtonItem(with: closeButton)
+        
+        navigationController?.navigationBar.prefersLargeTitles = false
+        navigationItem.largeTitleDisplayMode = .never
+        navigationItem.rightBarButtonItem = closeButton
+    }
 }
