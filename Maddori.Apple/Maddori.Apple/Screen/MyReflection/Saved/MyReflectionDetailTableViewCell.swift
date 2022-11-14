@@ -52,6 +52,10 @@ final class MyReflectionDetailTableViewCell: BaseTableViewCell {
     
     // MARK: - func
     
+    override func configUI() {
+        backgroundColor = .backgroundWhite
+    }
+    
     override func render() {
         contentView.addSubview(titleLabel)
         titleLabel.snp.makeConstraints {

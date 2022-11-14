@@ -11,6 +11,12 @@ import SnapKit
 
 final class MyReflectionDetailViewController: BaseViewController {
     
+    // FIXME - 데이터 연결시 수정예정
+    private let continueArray = ["c1","c"]
+    private let stopArray = ["s","s","s"]
+    
+    private lazy var contentArray = continueArray
+    
     // MARK: - property
     
     private lazy var backButton: BackButton = {
@@ -31,17 +37,24 @@ final class MyReflectionDetailViewController: BaseViewController {
     }()
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
+        tableView.backgroundColor = .backgroundWhite
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(MyReflectionDetailTableViewCell.self, forCellReuseIdentifier: MyReflectionDetailTableViewCell.className)
         return tableView
     }()
+    private lazy var segmentControl: CustomSegmentedControl = {
+        let control = CustomSegmentedControl(items: ["Continue", "Stop"])
+        let action = UIAction { [weak self] _ in
+            if let segment = self?.segmentControl {
+                self?.didChangeValue(segment: segment)
+            }
+        }
+        control.addAction(action, for: .valueChanged)
+        return control
+    }()
     
     // MARK: - life cycle
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
     
     override func render() {
         view.addSubview(titleLabel)
@@ -55,7 +68,15 @@ final class MyReflectionDetailViewController: BaseViewController {
             $0.top.equalTo(titleLabel.snp.bottom).offset(22)
             $0.leading.trailing.equalToSuperview()
             // FIXME
-            $0.bottom.equalToSuperview().inset(150)
+            $0.bottom.equalToSuperview()
+        }
+        
+        tableView.addSubview(segmentControl)
+        segmentControl.snp.makeConstraints {
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(12)
+            $0.centerX.equalToSuperview()
+            $0.width.equalTo(240)
+            $0.height.equalTo(40)
         }
     }
     
@@ -68,12 +89,22 @@ final class MyReflectionDetailViewController: BaseViewController {
         
         navigationItem.leftBarButtonItem = backButton
     }
+    
+    private func didChangeValue(segment: UISegmentedControl) {
+        if segment.selectedSegmentIndex == 0 {
+            contentArray = continueArray
+        }
+        else {
+            contentArray = stopArray
+        }
+        tableView.reloadData()
+    }
 }
 
 extension MyReflectionDetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // FIXME
-        return 15
+        return contentArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
