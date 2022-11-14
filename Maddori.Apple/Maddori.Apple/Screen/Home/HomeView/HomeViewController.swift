@@ -141,7 +141,7 @@ final class HomeViewController: BaseViewController {
         
         view.addSubview(teamNameLabel)
         teamNameLabel.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(SizeLiteral.topPadding)
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(SizeLiteral.topPadding)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
@@ -168,7 +168,7 @@ final class HomeViewController: BaseViewController {
         view.addSubview(addFeedbackButton)
         addFeedbackButton.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(SizeLiteral.bottomPadding)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(SizeLiteral.bottomTabBarPadding)
             $0.height.equalTo(Size.mainButtonHeight)
         }
         
@@ -185,6 +185,11 @@ final class HomeViewController: BaseViewController {
             $0.bottom.equalTo(addFeedbackButton.snp.top)
             $0.height.equalTo(SizeLiteral.minimumTouchArea)
         }
+    }
+    
+    override func setupNavigationBar() {
+        super.setupNavigationBar()
+        navigationController?.navigationBar.isHidden = true
     }
     
     // MARK: - func

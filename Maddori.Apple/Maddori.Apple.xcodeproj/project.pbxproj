@@ -54,12 +54,11 @@
 		3EB508622912B12700FB77CB /* ReflectionCollectionViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB508612912B12700FB77CB /* ReflectionCollectionViewHeader.swift */; };
 		3EB50866291350BB00FB77CB /* TotalReflectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB50865291350BB00FB77CB /* TotalReflectionCell.swift */; };
 		3EB508692913560A00FB77CB /* Reflection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB508682913560A00FB77CB /* Reflection.swift */; };
-		52294C432917FD5100E81969 /* EditFeedbackFromMeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52294C422917FD5100E81969 /* EditFeedbackFromMeViewController.swift */; };
-		52294C462918F81500E81969 /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52294C452918F81500E81969 /* Member.swift */; };
 		3EB5088C2916C64800FB77CB /* EmptyFeedbackKeyword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB5088B2916C64800FB77CB /* EmptyFeedbackKeyword.swift */; };
 		3EB5088E2916D05F00FB77CB /* EmptyFeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB5088D2916D05F00FB77CB /* EmptyFeedbackView.swift */; };
 		3EB508902917525600FB77CB /* EmptyReflectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB5088F2917525600FB77CB /* EmptyReflectionView.swift */; };
 		3EB508922917585600FB77CB /* UICollectionView + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB508912917585600FB77CB /* UICollectionView + Extension.swift */; };
+		52294C462918F81500E81969 /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52294C452918F81500E81969 /* Member.swift */; };
 		522D99BF29041B51009CBD95 /* FeedbackTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522D99BE29041B51009CBD95 /* FeedbackTextView.swift */; };
 		525E721528FEEE8500EF3FCB /* AddFeedbackMemberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525E721428FEEE8500EF3FCB /* AddFeedbackMemberViewController.swift */; };
 		525E721A28FF0F1900EF3FCB /* MemberCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525E721928FF0F1900EF3FCB /* MemberCollectionViewCell.swift */; };
@@ -75,6 +74,8 @@
 		52FA42A02906608E00C35824 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FA429F2906608E00C35824 /* Date+Extension.swift */; };
 		7E2ECA102901136700A4D65C /* SetupNicknameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2ECA0F2901136700A4D65C /* SetupNicknameViewController.swift */; };
 		7E6B662F28FE887300C3BEEF /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6B662E28FE887300C3BEEF /* UILabel+Extension.swift */; };
+		7E7F160B2921CC4800C6BE96 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7F160A2921CC4800C6BE96 /* CustomTabBarController.swift */; };
+		7E7F160F2921CD4A00C6BE96 /* UITabBar+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7F160E2921CD4A00C6BE96 /* UITabBar+Extension.swift */; };
 		7EB4D58229011EF7001FC396 /* JoinTeamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB4D58129011EF7001FC396 /* JoinTeamViewController.swift */; };
 		D724790C28FEC8C900D67B50 /* BaseTextFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D724790B28FEC8C900D67B50 /* BaseTextFieldViewController.swift */; };
 		D724790E28FEEEC300D67B50 /* KigoTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D724790D28FEEEC300D67B50 /* KigoTextField.swift */; };
@@ -131,16 +132,15 @@
 		3E557FFC2901CD7400714E46 /* Keyword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keyword.swift; sourceTree = "<group>"; };
 		3E5580062906A7B200714E46 /* InProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InProgressViewController.swift; sourceTree = "<group>"; };
 		3E8052DE2906E09100A6449D /* SectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderView.swift; sourceTree = "<group>"; };
-		52294C452918F81500E81969 /* Member.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Member.swift; sourceTree = "<group>"; };
 		3EB5085B2912427600FB77CB /* MyReflectionMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReflectionMainViewController.swift; sourceTree = "<group>"; };
 		3EB508612912B12700FB77CB /* ReflectionCollectionViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReflectionCollectionViewHeader.swift; sourceTree = "<group>"; };
 		3EB50865291350BB00FB77CB /* TotalReflectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalReflectionCell.swift; sourceTree = "<group>"; };
 		3EB508682913560A00FB77CB /* Reflection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reflection.swift; sourceTree = "<group>"; };
-		52294C422917FD5100E81969 /* EditFeedbackFromMeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditFeedbackFromMeViewController.swift; sourceTree = "<group>"; };
 		3EB5088B2916C64800FB77CB /* EmptyFeedbackKeyword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyFeedbackKeyword.swift; sourceTree = "<group>"; };
 		3EB5088D2916D05F00FB77CB /* EmptyFeedbackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyFeedbackView.swift; sourceTree = "<group>"; };
 		3EB5088F2917525600FB77CB /* EmptyReflectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyReflectionView.swift; sourceTree = "<group>"; };
 		3EB508912917585600FB77CB /* UICollectionView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView + Extension.swift"; sourceTree = "<group>"; };
+		52294C452918F81500E81969 /* Member.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Member.swift; sourceTree = "<group>"; };
 		522D99BE29041B51009CBD95 /* FeedbackTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackTextView.swift; sourceTree = "<group>"; };
 		525E721428FEEE8500EF3FCB /* AddFeedbackMemberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFeedbackMemberViewController.swift; sourceTree = "<group>"; };
 		525E721928FF0F1900EF3FCB /* MemberCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -156,6 +156,8 @@
 		52FA429F2906608E00C35824 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		7E2ECA0F2901136700A4D65C /* SetupNicknameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupNicknameViewController.swift; sourceTree = "<group>"; };
 		7E6B662E28FE887300C3BEEF /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
+		7E7F160A2921CC4800C6BE96 /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
+		7E7F160E2921CD4A00C6BE96 /* UITabBar+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITabBar+Extension.swift"; sourceTree = "<group>"; };
 		7EB4D58129011EF7001FC396 /* JoinTeamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinTeamViewController.swift; sourceTree = "<group>"; };
 		D724790B28FEC8C900D67B50 /* BaseTextFieldViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTextFieldViewController.swift; sourceTree = "<group>"; };
 		D724790D28FEEEC300D67B50 /* KigoTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KigoTextField.swift; sourceTree = "<group>"; };
@@ -290,6 +292,7 @@
 		39257DE528F90F8100201E0B /* UIComponent */ = {
 			isa = PBXGroup;
 			children = (
+				7E7F16092921CC3200C6BE96 /* TabBar */,
 				3977E12929121B6A000E9761 /* View */,
 				3977E12829121A22000E9761 /* CollectionView */,
 				3977E127291219DC000E9761 /* TextField */,
@@ -313,6 +316,7 @@
 				39F5582A2908027500CD6F6E /* UIDevice+Extension.swift */,
 				39F5583C2908CFAD00CD6F6E /* Encodable+Extension.swift */,
 				3EB508912917585600FB77CB /* UICollectionView + Extension.swift */,
+				7E7F160E2921CD4A00C6BE96 /* UITabBar+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -593,6 +597,14 @@
 			path = SelectFeedbackMember;
 			sourceTree = "<group>";
 		};
+		7E7F16092921CC3200C6BE96 /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				7E7F160A2921CC4800C6BE96 /* CustomTabBarController.swift */,
+			);
+			path = TabBar;
+			sourceTree = "<group>";
+		};
 		D724790A28FEC8A800D67B50 /* Setup */ = {
 			isa = PBXGroup;
 			children = (
@@ -702,6 +714,7 @@
 				3EB5085C2912427600FB77CB /* MyReflectionMainViewController.swift in Sources */,
 				39257DEB28F9373900201E0B /* BaseViewController.swift in Sources */,
 				39436C1029127BBA0083D77A /* MyFeedbackCollectionView.swift in Sources */,
+				7E7F160F2921CD4A00C6BE96 /* UITabBar+Extension.swift in Sources */,
 				525E722128FFC9A800EF3FCB /* BackButton.swift in Sources */,
 				3E5580072906A7B200714E46 /* InProgressViewController.swift in Sources */,
 				39436C132912877D0083D77A /* MyFeedbackHeaderView.swift in Sources */,
@@ -735,6 +748,7 @@
 				D79D908E29041F42004DDC4A /* CreateTeamViewController.swift in Sources */,
 				3E557FFD2901CD7400714E46 /* Keyword.swift in Sources */,
 				3EB50866291350BB00FB77CB /* TotalReflectionCell.swift in Sources */,
+				7E7F160B2921CC4800C6BE96 /* CustomTabBarController.swift in Sources */,
 				395C7E1D28FEC8C400FC2FCA /* CloseButton.swift in Sources */,
 				D79D908C2903B6B1004DDC4A /* LabelButtonView.swift in Sources */,
 				39257DEF28F937A500201E0B /* BaseTableViewCell.swift in Sources */,

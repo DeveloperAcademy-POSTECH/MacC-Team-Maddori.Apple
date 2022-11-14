@@ -23,6 +23,9 @@ enum ImageLiterals {
     static var imgCalendar: UIImage { .load(name: "calendar") }
     static var imgKeygoLogo: UIImage { .load(name: "KeyGoIcon") }
     static var imgEmptyCalendar: UIImage { .load(name: "emptyCalendar") }
+    static var imgHomeTab: UIImage { .load(name: "Home") }
+    static var imgDocsTab: UIImage { .load(name: "Docs") }
+    static var imgPersonTab: UIImage { .load(name: "Person") }
 }
 
 extension UIImage {
