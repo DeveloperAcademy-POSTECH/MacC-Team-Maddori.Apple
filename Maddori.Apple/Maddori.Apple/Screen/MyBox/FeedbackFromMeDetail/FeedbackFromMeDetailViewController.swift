@@ -197,6 +197,7 @@ final class FeedbackFromMeDetailViewController: BaseViewController {
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
+        // FIXME: - layout 수정필요
         view.addSubview(feedbackEditButtonView)
         feedbackEditButtonView.snp.makeConstraints {
             $0.bottom.equalToSuperview()
