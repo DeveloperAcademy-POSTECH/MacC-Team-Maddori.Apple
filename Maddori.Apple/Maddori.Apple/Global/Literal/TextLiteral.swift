@@ -134,4 +134,10 @@ enum TextLiteral {
     
     static let loginViewControllerLogoText: String = "KeyGo"
     static let loginViewControllerDescriptionText: String = "키워드로 회고하기"
+    
+    // MARK: - TabBar
+    
+    static let homeTabTitle: String = "홈"
+    static let myboxTabTitle: String = "보관함"
+    static let myReflectionTabTitle: String = "나의회고"
 }

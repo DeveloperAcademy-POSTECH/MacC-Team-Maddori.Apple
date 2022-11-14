@@ -58,7 +58,7 @@ final class MyBoxViewController: BaseViewController {
     override func render() {
         view.addSubview(myFeedbackLabel)
         myFeedbackLabel.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(20)
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(SizeLiteral.topPadding)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
