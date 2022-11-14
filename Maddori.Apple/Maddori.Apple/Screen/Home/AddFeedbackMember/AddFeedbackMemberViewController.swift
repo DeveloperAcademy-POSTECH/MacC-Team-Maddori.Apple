@@ -22,9 +22,12 @@ final class AddFeedbackMemberViewController: BaseViewController {
         label.setLineSpacing(to: 4)
         return label
     }()
-    private let memberCollectionView: MemberCollectionView = {
+    private lazy var memberCollectionView: MemberCollectionView = {
         let collectionView = MemberCollectionView()
         collectionView.memberList = Member.getMemberListExceptUser()
+        collectionView.didTappedMember = { [weak self] arr in
+            self?.navigationController?.pushViewController(AddFeedbackContentViewController(from: "나", to: arr.last ?? "팀원"), animated: true)
+        }
         return collectionView
     }()
     

@@ -360,7 +360,7 @@ class AddFeedbackContentViewController: BaseViewController {
     }
     
     private func didTappedDoneButton() {
-        
+        dismiss(animated: true)
     }
     
     // MARK: - selector
