@@ -13,7 +13,7 @@ final class AddFeedbackMemberViewController: BaseViewController {
     
     // MARK: - property
     
-    private let closeButton = CloseButton()
+    private let closeButton = CloseButton(type: .system)
     private let selectMemberLabel: UILabel = {
         let label = UILabel()
         label.setTitleFont(text: TextLiteral.addFeedbackMemberViewControllerTitle)
@@ -30,6 +30,11 @@ final class AddFeedbackMemberViewController: BaseViewController {
     
     // MARK: - life cycle
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupCloseButtonAction()
+    }
+    
     override func render() {
         view.addSubview(selectMemberLabel)
         selectMemberLabel.snp.makeConstraints {
@@ -43,6 +48,15 @@ final class AddFeedbackMemberViewController: BaseViewController {
             $0.bottom.equalTo(view.safeAreaLayoutGuide)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
+    }
+    
+    // MARK: - setup
+    
+    private func setupCloseButtonAction() {
+        let action = UIAction { [weak self] _ in
+            self?.dismiss(animated: true)
+        }
+        closeButton.addAction(action, for: .touchUpInside)
     }
     
     // MARK: - func
