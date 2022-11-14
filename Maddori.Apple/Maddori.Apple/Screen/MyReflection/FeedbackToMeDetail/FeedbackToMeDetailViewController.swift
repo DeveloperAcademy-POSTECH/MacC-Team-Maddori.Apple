@@ -34,7 +34,7 @@ final class FeedbackToMeDetailViewController: BaseViewController {
     }()
     private let feedbackTypeLabel: UILabel = {
         let label = UILabel()
-        label.text = "피드백 종류"
+        label.text = TextLiteral.feedbackToMeDetailViewControllerFeedbackTypeLabel
         label.textColor = .black100
         label.font = .label2
         return label
@@ -48,7 +48,7 @@ final class FeedbackToMeDetailViewController: BaseViewController {
     }()
     private let feedbackFromLabel: UILabel = {
         let label = UILabel()
-        label.text = "작성자"
+        label.text = TextLiteral.feedbackToMeDetailViewControllerFeedbackFromLabel
         label.textColor = .black100
         label.font = .label2
         return label
@@ -62,7 +62,7 @@ final class FeedbackToMeDetailViewController: BaseViewController {
     }()
     private let feedbackContentLabel: UILabel = {
         let label = UILabel()
-        label.text = "내용"
+        label.text = TextLiteral.feedbackToMeDetailViewControllerFeedbackContentLabel
         label.textColor = .black100
         label.font = .label2
         return label
@@ -77,7 +77,7 @@ final class FeedbackToMeDetailViewController: BaseViewController {
     }()
     private let feedbackStartLabel: UILabel = {
         let label = UILabel()
-        label.text = "Start"
+        label.text = TextLiteral.feedbackToMeDetailViewControllerFeedbackStartLabel
         label.textColor = .black100
         label.font = .label2
         return label
