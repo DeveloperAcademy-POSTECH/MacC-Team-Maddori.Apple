@@ -93,6 +93,11 @@ final class MyReflectionFeedbackDetailViewController: BaseViewController {
     
     // MARK: - life cycle
     
+    override func configUI() {
+        super.configUI()
+        setupStartLabel()
+    }
+    
     override func render() {
         view.addSubview(myReflectionScrollView)
         myReflectionScrollView.snp.makeConstraints {
@@ -172,5 +177,11 @@ final class MyReflectionFeedbackDetailViewController: BaseViewController {
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.largeTitleDisplayMode = .never
         navigationItem.leftBarButtonItem = backButton
+    }
+    
+    private func setupStartLabel() {
+        if model.start == nil {
+            feedbackStartLabel.isHidden = true
+        }
     }
 }
