@@ -31,6 +31,10 @@ final class InvitedCodeViewController: BaseViewController {
         button.titleLabel?.font = .label2
         button.backgroundColor = .gray100
         button.layer.cornerRadius = 4
+        let action = UIAction { [weak self] _ in
+            UIPasteboard.general.string = self?.invitedCodeLabel.text
+        }
+        button.addAction(action, for: .touchUpInside)
         return button
     }()
     private lazy var startButton: MainButton = {
