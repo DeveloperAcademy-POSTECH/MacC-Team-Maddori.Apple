@@ -43,8 +43,8 @@ final class MyReflectionDetailViewController: BaseViewController {
         tableView.register(MyReflectionDetailTableViewCell.self, forCellReuseIdentifier: MyReflectionDetailTableViewCell.className)
         return tableView
     }()
-    private lazy var segmentControl: CustomSegmentedControl = {
-        let control = CustomSegmentedControl(items: ["Continue", "Stop"])
+    private lazy var segmentControl: CustomSegmentControl = {
+        let control = CustomSegmentControl(items: ["Continue", "Stop"])
         let action = UIAction { [weak self] _ in
             if let segment = self?.segmentControl {
                 self?.didChangeValue(segment: segment)

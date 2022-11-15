@@ -9,7 +9,7 @@ import UIKit
 
 import SnapKit
 
-class CustomSegmentedControl: UISegmentedControl {
+final class CustomSegmentControl: UISegmentedControl {
     
     // MARK: - property
     
