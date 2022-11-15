@@ -140,4 +140,9 @@ enum TextLiteral {
     static let homeTabTitle: String = "홈"
     static let myboxTabTitle: String = "보관함"
     static let myReflectionTabTitle: String = "나의회고"
+    
+    // MARK: - ToastPopUpView
+    
+    static let warningText: String = "아직 회고 시간이 아닙니다"
+    static let completeText: String = "초대코드가 복사되었습니다"
 }
