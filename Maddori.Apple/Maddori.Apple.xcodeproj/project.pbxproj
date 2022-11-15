@@ -274,7 +274,6 @@
 				39F52C512923307000B19A77 /* Response */,
 				39F52C502923306700B19A77 /* Reqeust */,
 				39F52C422923298800B19A77 /* Model */,
-				520FEC42292234AF009FC1F2 /* FeedbackToMe */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -527,6 +526,7 @@
 		39F52C422923298800B19A77 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				520FEC42292234AF009FC1F2 /* FeedbackToMe */,
 				3EB508672913550000FB77CB /* Reflection */,
 				52294C442918F80800E81969 /* Member */,
 				39436C162912A2D30083D77A /* Feedback */,
