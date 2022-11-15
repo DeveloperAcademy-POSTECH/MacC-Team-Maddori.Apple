@@ -67,4 +67,9 @@ final class SetupNicknameViewController: BaseTextFieldViewController {
         }
         super.doneButton.addAction(action, for: .touchUpInside)
     }
+    
+    override func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 }
