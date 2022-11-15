@@ -43,7 +43,6 @@ class AddFeedbackContentViewController: BaseViewController {
         button.addAction(action, for: .touchUpInside)
         return button
     }()
-    
     lazy var closeButton: CloseButton = {
         let button = CloseButton(type: .system)
         let action = UIAction { [weak self] _ in
