@@ -59,8 +59,4 @@ final class CustomTabBarController: UITabBarController {
         tabBar.clearShadow()
         tabBar.makeShadow(color: .black, opacity: 0.15, offset: .zero, radius: 1)
     }
-    
-    override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-        return false
-    }
 }
