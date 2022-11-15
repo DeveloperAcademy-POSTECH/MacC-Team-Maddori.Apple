@@ -106,9 +106,7 @@ final class FeedbackToMeDetailViewController: BaseViewController {
         
         myReflectionScrollView.addSubview(myReflectionContentView)
         myReflectionContentView.snp.makeConstraints {
-            $0.edges.equalTo(myReflectionScrollView.snp.edges)
-            $0.width.equalTo(myReflectionScrollView.snp.width)
-            $0.height.equalTo(myReflectionScrollView.snp.height).offset(50)
+            $0.width.top.bottom.equalToSuperview()
         }
         
         myReflectionContentView.addSubview(keywordTitleLabel)
@@ -163,6 +161,7 @@ final class FeedbackToMeDetailViewController: BaseViewController {
         feedbackStartText.snp.makeConstraints {
             $0.top.equalTo(feedbackStartLabel.snp.bottom).offset(SizeLiteral.labelComponentPadding)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.bottom.equalToSuperview().inset(20)
         }
     }
     
