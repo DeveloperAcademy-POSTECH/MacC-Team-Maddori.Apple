@@ -26,7 +26,7 @@ final class FeedbackFromMeDetailViewController: BaseViewController {
         button.titleLabel?.font = .label2
         button.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
         let action = UIAction { [weak self] _ in
-            self?.showAlertView(type: .delete)
+            self?.showAlertView(type: .delete, navigationViewController: self?.navigationController)
         }
         button.addAction(action, for: .touchUpInside)
         return button
@@ -118,6 +118,12 @@ final class FeedbackFromMeDetailViewController: BaseViewController {
     
     // MARK: - life cycle
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupCloseButton()
+        setupMainButton()
+    }
+    
     override func configUI() {
         super.configUI()
         setupFeedbackSendTimeLabel()
@@ -191,6 +197,7 @@ final class FeedbackFromMeDetailViewController: BaseViewController {
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
+        // FIXME: - layout 수정필요
         view.addSubview(feedbackEditButtonView)
         feedbackEditButtonView.snp.makeConstraints {
             $0.bottom.equalToSuperview()
@@ -247,5 +254,22 @@ final class FeedbackFromMeDetailViewController: BaseViewController {
             feedbackStartLabel.isHidden = true
             feedbackStartText.isHidden = true
         }
+    }
+    
+    // MARK: - setup
+    
+    private func setupCloseButton() {
+        let action = UIAction { [weak self] _ in
+            self?.navigationController?.popViewController(animated: true)
+        }
+        backButton.addAction(action, for: .touchUpInside)
+    }
+    
+    private func setupMainButton() {
+        let action = UIAction { [weak self ] _ in
+            // FIXME: - 내 데이터는 유저디폴트로 변경
+            self?.navigationController?.pushViewController(EditFeedbackFromMeViewController(from: "나", to: "케미"), animated: true)
+        }
+        feedbackEditButton.addAction(action, for: .touchUpInside)
     }
 }

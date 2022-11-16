@@ -34,7 +34,9 @@ final class LoginViewController: BaseViewController {
     private lazy var appleLoginButton: ASAuthorizationAppleIDButton = {
         let button = ASAuthorizationAppleIDButton(type: .signIn, style: .black)
         let action = UIAction { [weak self] _ in
-            self?.appleSignIn()
+            // FIXME: - 로그인 API연결
+            self?.presentSetupNickNameViewController()
+//            self?.appleSignIn()
         }
         button.cornerRadius = 15
         button.addAction(action, for: .touchUpInside)
@@ -93,6 +95,12 @@ final class LoginViewController: BaseViewController {
         controller.delegate = self
         controller.presentationContextProvider = self
         controller.performRequests()
+    }
+    
+    private func presentSetupNickNameViewController() {
+        let viewController = SetupNicknameViewController()
+        viewController.navigationItem.setHidesBackButton(true, animated: false)
+        navigationController?.pushViewController(viewController, animated: true)
     }
 }
 

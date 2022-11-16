@@ -43,8 +43,8 @@ final class MyReflectionDetailViewController: BaseViewController {
         tableView.register(MyReflectionDetailTableViewCell.self, forCellReuseIdentifier: MyReflectionDetailTableViewCell.className)
         return tableView
     }()
-    private lazy var segmentControl: CustomSegmentedControl = {
-        let control = CustomSegmentedControl(items: ["Continue", "Stop"])
+    private lazy var segmentControl: CustomSegmentControl = {
+        let control = CustomSegmentControl(items: ["Continue", "Stop"])
         let action = UIAction { [weak self] _ in
             if let segment = self?.segmentControl {
                 self?.didChangeValue(segment: segment)
@@ -55,6 +55,11 @@ final class MyReflectionDetailViewController: BaseViewController {
     }()
     
     // MARK: - life cycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupBackButton()
+    }
     
     override func render() {
         view.addSubview(titleLabel)
@@ -99,6 +104,15 @@ final class MyReflectionDetailViewController: BaseViewController {
         }
         tableView.reloadData()
     }
+    
+    // MARK: - setup
+    
+    private func setupBackButton() {
+        let action = UIAction { [weak self] _ in
+            self?.navigationController?.popViewController(animated: true)
+        }
+        backButton.addAction(action, for: .touchUpInside)
+    }
 }
 
 extension MyReflectionDetailViewController: UITableViewDataSource {
@@ -123,5 +137,6 @@ extension MyReflectionDetailViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        navigationController?.pushViewController(FeedbackToMeDetailViewController(), animated: true)
     }
 }
