@@ -9,7 +9,7 @@ import UIKit
 
 import SnapKit
 
-enum toastType {
+enum ToastType {
     case warning
     case complete
     
