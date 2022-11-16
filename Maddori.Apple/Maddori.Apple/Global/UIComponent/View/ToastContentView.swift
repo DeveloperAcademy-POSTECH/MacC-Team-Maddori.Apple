@@ -43,7 +43,7 @@ enum ToastType {
 
 final class ToastContentView: UIView {
     
-    var toastType: toastType? {
+    var toastType: ToastType? {
         didSet {
             setupAttribute()
         }
