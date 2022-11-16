@@ -18,9 +18,3 @@ struct FeedBackInfoResponse: Decodable {
     let Continue: [KeywordResponse]
     let Stop: [KeywordResponse]
 }
-
-struct KeywordResponse: Decodable {
-    let keyword: String?
-    let content: String?
-    let start_content: String?
-}
