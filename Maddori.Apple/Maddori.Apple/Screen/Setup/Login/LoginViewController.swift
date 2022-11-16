@@ -36,6 +36,8 @@ final class LoginViewController: BaseViewController {
         let action = UIAction { [weak self] _ in
             // FIXME: - 로그인 API연결
             self?.presentSetupNickNameViewController()
+            // FIXME: - AppleLogin 연결 후, 성공했을 때로 옮겨야 함.
+            self?.setLoginUserDefaults()
 //            self?.appleSignIn()
         }
         button.cornerRadius = 15
@@ -101,6 +103,10 @@ final class LoginViewController: BaseViewController {
         let viewController = SetNicknameViewController()
         viewController.navigationItem.setHidesBackButton(true, animated: false)
         navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    private func setLoginUserDefaults() {
+        UserData.setValue(true, forKey: .isLogin)
     }
 }
 
