@@ -16,6 +16,7 @@ struct FeedBackInfoResponse: Decodable {
     let to_id: Int?
     let to_username: String?
     let Continue: [KeywordResponse]
+    let Stop: [KeywordResponse]
 }
 
 struct KeywordResponse: Decodable {

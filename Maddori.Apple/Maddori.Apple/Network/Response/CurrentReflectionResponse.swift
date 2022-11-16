@@ -12,5 +12,5 @@ struct CurrentReflectionResponse: Decodable {
     let reflection_name: String?
     let reflection_date: String?
     let reflection_status: String?
-    let reflection_keywords: [String]
+    let reflection_keywords: [String]?
 }

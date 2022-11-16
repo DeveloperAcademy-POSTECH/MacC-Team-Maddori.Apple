@@ -10,6 +10,6 @@ import Foundation
 struct JoinTeamResponse: Decodable {
     let admin: Bool?
     let id: Int?
-    let user_id: String?
+    let user_id: Int?
     let team_id: Int?
 }
