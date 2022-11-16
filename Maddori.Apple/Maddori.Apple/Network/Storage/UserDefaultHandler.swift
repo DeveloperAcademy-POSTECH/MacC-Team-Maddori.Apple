@@ -16,7 +16,7 @@ struct UserDefaultHandler {
         UserData.setValue(isLogin, forKey: .isLogin)
     }
     
-    static func setUserID(userID: String) {
+    static func setUserID(userID: Int) {
         UserData.setValue(userID, forKey: .userID)
     }
     

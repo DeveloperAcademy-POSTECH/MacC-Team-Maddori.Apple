@@ -11,12 +11,10 @@ import Alamofire
 import SnapKit
 
 final class JoinTeamViewController: BaseTextFieldViewController {
-    // FIXME: - nil 일때 어떤 값을 표시해줄지??
-    var name = UserData.getValue(forKey: .nickname) ?? ""
     
     override var titleText: String {
         get {
-            return name + TextLiteral.joinTeamViewControllerTitleLabel
+            return UserDefaultStorage.nickname + TextLiteral.joinTeamViewControllerTitleLabel
         }
         
         set {

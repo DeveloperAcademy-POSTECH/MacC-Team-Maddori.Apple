@@ -18,12 +18,12 @@ struct UserDefaultStorage {
         return UserData<Bool>.getValue(forKey: .isLogin) ?? false
     }
     
-    static var userID: String {
-        return UserData<String>.getValue(forKey: .userID) ?? ""
+    static var userID: Int {
+        return UserData<Int>.getValue(forKey: .userID) ?? 1
     }
         
-    static var nickname: String? {
-        return UserData<String?>.getValue(forKey: .nickname) ?? nil
+    static var nickname: String {
+        return UserData<String>.getValue(forKey: .nickname) ?? ""
     }
 }
 

@@ -86,8 +86,11 @@ final class SetNicknameViewController: BaseTextFieldViewController {
         ).responseDecodable(of: BaseModel<MemberResponse>.self) { json in
             if let json = json.value {
                 dump(json)
-                guard let nickname = json.detail?.username else { return }
-                UserData.setValue(nickname, forKey: .nickname)
+                guard let nickname = json.detail?.username,
+                      let userId = json.detail?.id
+                else { return }
+                UserDefaultHandler.setUserID(userID: userId)
+                UserDefaultHandler.setNickname(nickname: nickname)
                 DispatchQueue.main.async {
                     self.navigationController?.pushViewController(JoinTeamViewController(), animated: true)
                 }

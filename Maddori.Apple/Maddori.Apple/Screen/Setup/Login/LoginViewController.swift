@@ -106,7 +106,7 @@ final class LoginViewController: BaseViewController {
     }
     
     private func setLoginUserDefaults() {
-        UserData.setValue(true, forKey: .isLogin)
+        UserDefaultHandler.setIsLogin(isLogin: true)
     }
 }
 
