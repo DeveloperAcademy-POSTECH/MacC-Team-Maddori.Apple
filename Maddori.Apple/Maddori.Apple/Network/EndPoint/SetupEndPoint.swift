@@ -15,11 +15,11 @@ enum SetupEndPoint<T: Encodable> {
     var address: String {
         switch self {
         case .login:
-            return "http://3.34.57.155:3000/api/v1/users/login"
+            return "\(UrlLiteral.baseUrl)/users/login"
         case .createTeam:
-            return "http://3.34.57.155:3000/api/v1/teams"
+            return "\(UrlLiteral.baseUrl)/teams"
         case .joinTeam:
-            return "http://3.34.57.155:3000/api/v1/users/join-team"
+            return "\(UrlLiteral.baseUrl)/users/join-team"
         }
     }
 
