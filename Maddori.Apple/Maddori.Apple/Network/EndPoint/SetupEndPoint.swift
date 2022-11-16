@@ -9,7 +9,8 @@ import Alamofire
 
 enum SetupEndPoint<T: Encodable> {
     case login(T)
-    case createTeam(T, header: String)
+    case createTeam(T, userId: String)
+    case joinTeam(T, userId: String)
     
     var address: String {
         switch self {
@@ -17,6 +18,8 @@ enum SetupEndPoint<T: Encodable> {
             return "http://3.34.57.155:3000/api/v1/users/login"
         case .createTeam:
             return "http://3.34.57.155:3000/api/v1/teams"
+        case .joinTeam:
+            return "http://3.34.57.155:3000/api/v1/users/join-team"
         }
     }
 
@@ -25,6 +28,8 @@ enum SetupEndPoint<T: Encodable> {
         case .login:
             return .post
         case .createTeam:
+            return .post
+        case .joinTeam:
             return .post
         }
     }
@@ -35,6 +40,8 @@ enum SetupEndPoint<T: Encodable> {
             return body
         case .createTeam(let body, _):
             return body
+        case .joinTeam(let body, _):
+            return body
         }
     }
     
@@ -42,8 +49,11 @@ enum SetupEndPoint<T: Encodable> {
         switch self {
         case .login:
             return nil
-        case .createTeam(_, let header):
-            let headers = ["user_id": header]
+        case .createTeam(_, let userId):
+            let headers = ["user_id": userId]
+            return HTTPHeaders(headers)
+        case .joinTeam(_, let userId):
+            let headers = ["user_id": userId]
             return HTTPHeaders(headers)
         }
     }
