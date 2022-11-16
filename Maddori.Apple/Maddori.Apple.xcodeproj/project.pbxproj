@@ -41,6 +41,29 @@
 		39A64ACE2905885F001DB020 /* StartSuggestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A64ACD2905885F001DB020 /* StartSuggestionView.swift */; };
 		39F1A13529125762005E3456 /* MyBoxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F1A13429125762005E3456 /* MyBoxViewController.swift */; };
 		39F1A13C2912637E005E3456 /* MyBoxMemberCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F1A13B2912637E005E3456 /* MyBoxMemberCollectionViewCell.swift */; };
+		39F52C44292329BA00B19A77 /* BaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F52C43292329BA00B19A77 /* BaseModel.swift */; };
+		39F52C4729232DD600B19A77 /* LoginDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F52C4629232DD600B19A77 /* LoginDTO.swift */; };
+		39F52C4929232DFB00B19A77 /* JoinTeamDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F52C4829232DFB00B19A77 /* JoinTeamDTO.swift */; };
+		39F52C4B29232E2600B19A77 /* CreateTeamDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F52C4A29232E2600B19A77 /* CreateTeamDTO.swift */; };
+		39F52C4D29232E5D00B19A77 /* AddReflectionDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F52C4C29232E5D00B19A77 /* AddReflectionDTO.swift */; };
+		39F52C4F29232E8B00B19A77 /* FeedBackContentDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F52C4E29232E8B00B19A77 /* FeedBackContentDTO.swift */; };
+		39F52C53292330D200B19A77 /* MemberResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F52C52292330D200B19A77 /* MemberResponse.swift */; };
+		39F52C552923311200B19A77 /* JoinTeamResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F52C542923311200B19A77 /* JoinTeamResponse.swift */; };
+		39F52C572923317500B19A77 /* CreateTeamResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F52C562923317500B19A77 /* CreateTeamResponse.swift */; };
+		39F52C592923321700B19A77 /* CertainTeamDetailResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F52C582923321700B19A77 /* CertainTeamDetailResponse.swift */; };
+		39F52C5B2923327F00B19A77 /* CurrentReflectionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F52C5A2923327F00B19A77 /* CurrentReflectionResponse.swift */; };
+		39F52C5D292332EA00B19A77 /* AddReflectionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F52C5C292332EA00B19A77 /* AddReflectionResponse.swift */; };
+		39F52C5F2923338B00B19A77 /* CurrentMemberResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F52C5E2923338B00B19A77 /* CurrentMemberResponse.swift */; };
+		39F52C612923344C00B19A77 /* FeedBackContentResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F52C602923344C00B19A77 /* FeedBackContentResponse.swift */; };
+		39F52C632923357700B19A77 /* FeedBackInfoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F52C622923357700B19A77 /* FeedBackInfoResponse.swift */; };
+		39F52C652923369000B19A77 /* EditFeedBackResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F52C642923369000B19A77 /* EditFeedBackResponse.swift */; };
+		39F52C68292472EB00B19A77 /* AllFeedBackResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F52C67292472EB00B19A77 /* AllFeedBackResponse.swift */; };
+		39F52C6A292473A800B19A77 /* ReflectionInfoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F52C69292473A800B19A77 /* ReflectionInfoResponse.swift */; };
+		39F52C6C292473EC00B19A77 /* AllReflectionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F52C6B292473EC00B19A77 /* AllReflectionResponse.swift */; };
+		39F52C6E2924742E00B19A77 /* ReflectionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F52C6D2924742E00B19A77 /* ReflectionResponse.swift */; };
+		39F52C702924747600B19A77 /* AllCertainTypeFeedBackResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F52C6F2924747600B19A77 /* AllCertainTypeFeedBackResponse.swift */; };
+		39F52C72292476AE00B19A77 /* KeywordResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F52C71292476AE00B19A77 /* KeywordResponse.swift */; };
+		39F52C74292476EA00B19A77 /* FeedBackResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F52C73292476EA00B19A77 /* FeedBackResponse.swift */; };
 		39F5582B2908027500CD6F6E /* UIDevice+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F5582A2908027500CD6F6E /* UIDevice+Extension.swift */; };
 		39F5583D2908CFAD00CD6F6E /* Encodable+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F5583C2908CFAD00CD6F6E /* Encodable+Extension.swift */; };
 		3E557FC328FE7BBC00714E46 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E557FC228FE7BBC00714E46 /* HomeViewController.swift */; };
@@ -126,6 +149,29 @@
 		39A64ACD2905885F001DB020 /* StartSuggestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartSuggestionView.swift; sourceTree = "<group>"; };
 		39F1A13429125762005E3456 /* MyBoxViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBoxViewController.swift; sourceTree = "<group>"; };
 		39F1A13B2912637E005E3456 /* MyBoxMemberCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBoxMemberCollectionViewCell.swift; sourceTree = "<group>"; };
+		39F52C43292329BA00B19A77 /* BaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseModel.swift; sourceTree = "<group>"; };
+		39F52C4629232DD600B19A77 /* LoginDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginDTO.swift; sourceTree = "<group>"; };
+		39F52C4829232DFB00B19A77 /* JoinTeamDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinTeamDTO.swift; sourceTree = "<group>"; };
+		39F52C4A29232E2600B19A77 /* CreateTeamDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTeamDTO.swift; sourceTree = "<group>"; };
+		39F52C4C29232E5D00B19A77 /* AddReflectionDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReflectionDTO.swift; sourceTree = "<group>"; };
+		39F52C4E29232E8B00B19A77 /* FeedBackContentDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedBackContentDTO.swift; sourceTree = "<group>"; };
+		39F52C52292330D200B19A77 /* MemberResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberResponse.swift; sourceTree = "<group>"; };
+		39F52C542923311200B19A77 /* JoinTeamResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinTeamResponse.swift; sourceTree = "<group>"; };
+		39F52C562923317500B19A77 /* CreateTeamResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTeamResponse.swift; sourceTree = "<group>"; };
+		39F52C582923321700B19A77 /* CertainTeamDetailResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertainTeamDetailResponse.swift; sourceTree = "<group>"; };
+		39F52C5A2923327F00B19A77 /* CurrentReflectionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentReflectionResponse.swift; sourceTree = "<group>"; };
+		39F52C5C292332EA00B19A77 /* AddReflectionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReflectionResponse.swift; sourceTree = "<group>"; };
+		39F52C5E2923338B00B19A77 /* CurrentMemberResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentMemberResponse.swift; sourceTree = "<group>"; };
+		39F52C602923344C00B19A77 /* FeedBackContentResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedBackContentResponse.swift; sourceTree = "<group>"; };
+		39F52C622923357700B19A77 /* FeedBackInfoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedBackInfoResponse.swift; sourceTree = "<group>"; };
+		39F52C642923369000B19A77 /* EditFeedBackResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditFeedBackResponse.swift; sourceTree = "<group>"; };
+		39F52C67292472EB00B19A77 /* AllFeedBackResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllFeedBackResponse.swift; sourceTree = "<group>"; };
+		39F52C69292473A800B19A77 /* ReflectionInfoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReflectionInfoResponse.swift; sourceTree = "<group>"; };
+		39F52C6B292473EC00B19A77 /* AllReflectionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllReflectionResponse.swift; sourceTree = "<group>"; };
+		39F52C6D2924742E00B19A77 /* ReflectionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReflectionResponse.swift; sourceTree = "<group>"; };
+		39F52C6F2924747600B19A77 /* AllCertainTypeFeedBackResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllCertainTypeFeedBackResponse.swift; sourceTree = "<group>"; };
+		39F52C71292476AE00B19A77 /* KeywordResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordResponse.swift; sourceTree = "<group>"; };
+		39F52C73292476EA00B19A77 /* FeedBackResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedBackResponse.swift; sourceTree = "<group>"; };
 		39F5582A2908027500CD6F6E /* UIDevice+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Extension.swift"; sourceTree = "<group>"; };
 		39F5583C2908CFAD00CD6F6E /* Encodable+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+Extension.swift"; sourceTree = "<group>"; };
 		3E557FC228FE7BBC00714E46 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -241,13 +287,9 @@
 		39257DD828F90EA900201E0B /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				520FEC42292234AF009FC1F2 /* FeedbackToMe */,
-				3EB508672913550000FB77CB /* Reflection */,
-				52294C442918F80800E81969 /* Member */,
-				39436C162912A2D30083D77A /* Feedback */,
-				52F07B9D2912849E0015BC8B /* FeedbackFromMe */,
-				391CBA1A290582030044CA30 /* ReflectionInfo */,
-				3E557FFB2901CD6600714E46 /* Keyword */,
+				39F52C512923307000B19A77 /* Response */,
+				39F52C502923306700B19A77 /* Reqeust */,
+				39F52C422923298800B19A77 /* Model */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -498,6 +540,65 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		39F52C422923298800B19A77 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				520FEC42292234AF009FC1F2 /* FeedbackToMe */,
+				3EB508672913550000FB77CB /* Reflection */,
+				52294C442918F80800E81969 /* Member */,
+				39436C162912A2D30083D77A /* Feedback */,
+				52F07B9D2912849E0015BC8B /* FeedbackFromMe */,
+				391CBA1A290582030044CA30 /* ReflectionInfo */,
+				3E557FFB2901CD6600714E46 /* Keyword */,
+				39F52C43292329BA00B19A77 /* BaseModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		39F52C4529232DBA00B19A77 /* DTO */ = {
+			isa = PBXGroup;
+			children = (
+				39F52C4629232DD600B19A77 /* LoginDTO.swift */,
+				39F52C4829232DFB00B19A77 /* JoinTeamDTO.swift */,
+				39F52C4A29232E2600B19A77 /* CreateTeamDTO.swift */,
+				39F52C4C29232E5D00B19A77 /* AddReflectionDTO.swift */,
+				39F52C4E29232E8B00B19A77 /* FeedBackContentDTO.swift */,
+			);
+			path = DTO;
+			sourceTree = "<group>";
+		};
+		39F52C502923306700B19A77 /* Reqeust */ = {
+			isa = PBXGroup;
+			children = (
+				39F52C4529232DBA00B19A77 /* DTO */,
+			);
+			path = Reqeust;
+			sourceTree = "<group>";
+		};
+		39F52C512923307000B19A77 /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				39F52C52292330D200B19A77 /* MemberResponse.swift */,
+				39F52C542923311200B19A77 /* JoinTeamResponse.swift */,
+				39F52C562923317500B19A77 /* CreateTeamResponse.swift */,
+				39F52C582923321700B19A77 /* CertainTeamDetailResponse.swift */,
+				39F52C5A2923327F00B19A77 /* CurrentReflectionResponse.swift */,
+				39F52C5C292332EA00B19A77 /* AddReflectionResponse.swift */,
+				39F52C5E2923338B00B19A77 /* CurrentMemberResponse.swift */,
+				39F52C602923344C00B19A77 /* FeedBackContentResponse.swift */,
+				39F52C622923357700B19A77 /* FeedBackInfoResponse.swift */,
+				39F52C642923369000B19A77 /* EditFeedBackResponse.swift */,
+				39F52C67292472EB00B19A77 /* AllFeedBackResponse.swift */,
+				39F52C69292473A800B19A77 /* ReflectionInfoResponse.swift */,
+				39F52C6B292473EC00B19A77 /* AllReflectionResponse.swift */,
+				39F52C6D2924742E00B19A77 /* ReflectionResponse.swift */,
+				39F52C6F2924747600B19A77 /* AllCertainTypeFeedBackResponse.swift */,
+				39F52C71292476AE00B19A77 /* KeywordResponse.swift */,
+				39F52C73292476EA00B19A77 /* FeedBackResponse.swift */,
+			);
+			path = Response;
+			sourceTree = "<group>";
+		};
 		3E557FC128FE7B9200714E46 /* HomeView */ = {
 			isa = PBXGroup;
 			children = (
@@ -729,11 +830,14 @@
 			files = (
 				525E721C28FF0F5B00EF3FCB /* MemberCollectionView.swift in Sources */,
 				395C7E2028FED7B500FC2FCA /* ReflectionNameView.swift in Sources */,
+				39F52C44292329BA00B19A77 /* BaseModel.swift in Sources */,
 				522D99BF29041B51009CBD95 /* FeedbackTextView.swift in Sources */,
 				3EA341C129221998005CBD1C /* ToastContentView.swift in Sources */,
 				39F1A13529125762005E3456 /* MyBoxViewController.swift in Sources */,
+				39F52C702924747600B19A77 /* AllCertainTypeFeedBackResponse.swift in Sources */,
 				391D217C29050427003FC871 /* CustomVisualEffectView.swift in Sources */,
 				391CBA1C290582130044CA30 /* ReflectionInfoModel.swift in Sources */,
+				39F52C5F2923338B00B19A77 /* CurrentMemberResponse.swift in Sources */,
 				3E557FFA2901CD4200714E46 /* KeywordCollectionViewCell.swift in Sources */,
 				52F0CB5229178C2700E39C50 /* AlertViewController.swift in Sources */,
 				395C7E0528F953D200FC2FCA /* UIViewController+Extension.swift in Sources */,
@@ -743,7 +847,9 @@
 				7E7F160F2921CD4A00C6BE96 /* UITabBar+Extension.swift in Sources */,
 				525E722128FFC9A800EF3FCB /* BackButton.swift in Sources */,
 				3E5580072906A7B200714E46 /* InProgressViewController.swift in Sources */,
+				39F52C4F29232E8B00B19A77 /* FeedBackContentDTO.swift in Sources */,
 				39436C132912877D0083D77A /* MyFeedbackHeaderView.swift in Sources */,
+				39F52C6E2924742E00B19A77 /* ReflectionResponse.swift in Sources */,
 				52294C462918F81500E81969 /* Member.swift in Sources */,
 				52988B742921EAD50044A77F /* FeedbackToMeDetailViewController.swift in Sources */,
 				395C7E1828F9912700FC2FCA /* UIButton+Extension.swift in Sources */,
@@ -760,10 +866,13 @@
 				391596622904176500A432D9 /* UIView+Extension.swift in Sources */,
 				3EB508922917585600FB77CB /* UICollectionView + Extension.swift in Sources */,
 				39257DC528F8FEBD00201E0B /* AppDelegate.swift in Sources */,
+				39F52C4B29232E2600B19A77 /* CreateTeamDTO.swift in Sources */,
+				39F52C74292476EA00B19A77 /* FeedBackResponse.swift in Sources */,
 				39F5583D2908CFAD00CD6F6E /* Encodable+Extension.swift in Sources */,
 				39257DC728F8FEBD00201E0B /* SceneDelegate.swift in Sources */,
 				52F07B9A2912541B0015BC8B /* FeedbackFromMeDetailViewController.swift in Sources */,
 				39307CF52917DA9300789AB6 /* LoginViewController.swift in Sources */,
+				39F52C652923369000B19A77 /* EditFeedBackResponse.swift in Sources */,
 				525E722528FFCFA600EF3FCB /* FeedbackTypeButtonView.swift in Sources */,
 				39A64ACE2905885F001DB020 /* StartSuggestionView.swift in Sources */,
 				525E721F28FFC89800EF3FCB /* AddFeedbackContentViewController.swift in Sources */,
@@ -778,23 +887,37 @@
 				3EB50866291350BB00FB77CB /* TotalReflectionCell.swift in Sources */,
 				7E7F160B2921CC4800C6BE96 /* CustomTabBarController.swift in Sources */,
 				395C7E1D28FEC8C400FC2FCA /* CloseButton.swift in Sources */,
+				39F52C572923317500B19A77 /* CreateTeamResponse.swift in Sources */,
 				D79D908C2903B6B1004DDC4A /* LabelButtonView.swift in Sources */,
 				39257DEF28F937A500201E0B /* BaseTableViewCell.swift in Sources */,
+				39F52C72292476AE00B19A77 /* KeywordResponse.swift in Sources */,
+				39F52C5B2923327F00B19A77 /* CurrentReflectionResponse.swift in Sources */,
 				3E557FC528FE854600714E46 /* KeywordLabel.swift in Sources */,
+				39F52C53292330D200B19A77 /* MemberResponse.swift in Sources */,
+				39F52C6A292473A800B19A77 /* ReflectionInfoResponse.swift in Sources */,
+				39F52C68292472EB00B19A77 /* AllFeedBackResponse.swift in Sources */,
 				39257DF128F93C2A00201E0B /* ImageLiteral.swift in Sources */,
 				395C7E252900E74700FC2FCA /* StartReflectionViewController.swift in Sources */,
 				3E557FF82901CD3400714E46 /* KeywordCollectionViewFlowLayout.swift in Sources */,
+				39F52C4729232DD600B19A77 /* LoginDTO.swift in Sources */,
+				39F52C592923321700B19A77 /* CertainTeamDetailResponse.swift in Sources */,
 				395C7E1B28FEC42900FC2FCA /* AddReflectionViewController.swift in Sources */,
+				39F52C612923344C00B19A77 /* FeedBackContentResponse.swift in Sources */,
 				D724790E28FEEEC300D67B50 /* KigoTextField.swift in Sources */,
 				7EB4D58229011EF7001FC396 /* JoinTeamViewController.swift in Sources */,
+				39F52C4929232DFB00B19A77 /* JoinTeamDTO.swift in Sources */,
+				39F52C552923311200B19A77 /* JoinTeamResponse.swift in Sources */,
 				39257DED28F9378D00201E0B /* BaseCollectionViewCell.swift in Sources */,
 				391CBA19290580460044CA30 /* ReflectionInfoViewController.swift in Sources */,
 				39F1A13C2912637E005E3456 /* MyBoxMemberCollectionViewCell.swift in Sources */,
 				525E721A28FF0F1900EF3FCB /* MemberCollectionViewCell.swift in Sources */,
 				395C7E2228FEDB6500FC2FCA /* UITextField+Extension.swift in Sources */,
 				D7AFB7C32916EAB100E998B7 /* MyReflectionDetailViewController.swift in Sources */,
+				39F52C632923357700B19A77 /* FeedBackInfoResponse.swift in Sources */,
+				39F52C5D292332EA00B19A77 /* AddReflectionResponse.swift in Sources */,
 				D72CF1B0290552960067A118 /* InvitedCodeViewController.swift in Sources */,
 				39257DF328F93D8900201E0B /* TextLiteral.swift in Sources */,
+				39F52C6C292473EC00B19A77 /* AllReflectionResponse.swift in Sources */,
 				3EB5088C2916C64800FB77CB /* EmptyFeedbackKeyword.swift in Sources */,
 				39436C15291287A00083D77A /* MyFeedbackCollectionViewCell.swift in Sources */,
 				395C7E0D28F959A500FC2FCA /* MainButton.swift in Sources */,
@@ -806,6 +929,7 @@
 				3E8052DF2906E09100A6449D /* SectionHeaderView.swift in Sources */,
 				39436C182912A2E10083D77A /* Feedback.swift in Sources */,
 				7E2ECA102901136700A4D65C /* SetupNicknameViewController.swift in Sources */,
+				39F52C4D29232E5D00B19A77 /* AddReflectionDTO.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
