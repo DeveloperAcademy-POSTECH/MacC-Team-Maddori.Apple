@@ -8,9 +8,14 @@
 import Foundation
 
 struct AddFeedbackDTO: Encodable {
-    let type: String
+    let type: FeedBackDTO
     let keyword: String
     let content: String
     let start_content: String
     let to_id: Int
+    
+    enum FeedBackDTO: Encodable {
+        case continueType
+        case stopType
+    }
 }
