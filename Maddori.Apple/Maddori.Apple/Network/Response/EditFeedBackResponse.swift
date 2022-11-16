@@ -24,11 +24,3 @@ struct FeedBackResponse: Decodable {
     let reflection: ReflectionResponse?
     let user: MemberResponse?
 }
-
-struct ReflectionResponse: Decodable {
-    let id: Int?
-    let reflection_name: String?
-    let date: String?
-    let state: String?
-    let team_id: Int?
-}

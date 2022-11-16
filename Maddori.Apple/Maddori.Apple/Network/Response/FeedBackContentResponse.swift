@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct AddFeedBackContentResponse: Decodable {
+struct FeedBackContentResponse: Decodable {
     let id: Int?
     let type: String?
     let keyword: String?
