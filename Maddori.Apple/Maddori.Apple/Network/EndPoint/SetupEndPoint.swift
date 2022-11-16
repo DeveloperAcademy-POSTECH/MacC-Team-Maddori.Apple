@@ -8,51 +8,51 @@
 import Alamofire
 
 enum SetupEndPoint<T: Encodable> {
-    case login(T)
-    case createTeam(T, userId: String)
-    case joinTeam(T, userId: String)
+    case dispatchlogin(T)
+    case dispatchCreateTeam(T, userId: String)
+    case dispatchJoinTeam(T, userId: String)
     
     var address: String {
         switch self {
-        case .login:
+        case .dispatchlogin:
             return "\(UrlLiteral.baseUrl)/users/login"
-        case .createTeam:
+        case .dispatchCreateTeam:
             return "\(UrlLiteral.baseUrl)/teams"
-        case .joinTeam:
+        case .dispatchJoinTeam:
             return "\(UrlLiteral.baseUrl)/users/join-team"
         }
     }
 
     var method: HTTPMethod {
         switch self {
-        case .login:
+        case .dispatchlogin:
             return .post
-        case .createTeam:
+        case .dispatchCreateTeam:
             return .post
-        case .joinTeam:
+        case .dispatchJoinTeam:
             return .post
         }
     }
     
     var body: T? {
         switch self {
-        case .login(let body):
+        case .dispatchlogin(let body):
             return body
-        case .createTeam(let body, _):
+        case .dispatchCreateTeam(let body, _):
             return body
-        case .joinTeam(let body, _):
+        case .dispatchJoinTeam(let body, _):
             return body
         }
     }
     
     var headers: HTTPHeaders? {
         switch self {
-        case .login:
+        case .dispatchlogin:
             return nil
-        case .createTeam(_, let userId):
+        case .dispatchCreateTeam(_, let userId):
             let headers = ["user_id": userId]
             return HTTPHeaders(headers)
-        case .joinTeam(_, let userId):
+        case .dispatchJoinTeam(_, let userId):
             let headers = ["user_id": userId]
             return HTTPHeaders(headers)
         }
