@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct AddFeedbackDTO: Encodable {
+struct FeedBackContentDTO: Encodable {
     let type: FeedBackDTO
     let keyword: String
     let content: String

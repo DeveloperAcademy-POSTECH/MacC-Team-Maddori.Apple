@@ -46,7 +46,7 @@
 		39F52C4929232DFB00B19A77 /* JoinTeamDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F52C4829232DFB00B19A77 /* JoinTeamDTO.swift */; };
 		39F52C4B29232E2600B19A77 /* CreateTeamDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F52C4A29232E2600B19A77 /* CreateTeamDTO.swift */; };
 		39F52C4D29232E5D00B19A77 /* AddReflectionDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F52C4C29232E5D00B19A77 /* AddReflectionDTO.swift */; };
-		39F52C4F29232E8B00B19A77 /* AddFeedbackDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F52C4E29232E8B00B19A77 /* AddFeedbackDTO.swift */; };
+		39F52C4F29232E8B00B19A77 /* FeedBackContentDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F52C4E29232E8B00B19A77 /* FeedBackContentDTO.swift */; };
 		39F52C53292330D200B19A77 /* MemberResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F52C52292330D200B19A77 /* MemberResponse.swift */; };
 		39F52C552923311200B19A77 /* JoinTeamResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F52C542923311200B19A77 /* JoinTeamResponse.swift */; };
 		39F52C572923317500B19A77 /* CreateTeamResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F52C562923317500B19A77 /* CreateTeamResponse.swift */; };
@@ -153,7 +153,7 @@
 		39F52C4829232DFB00B19A77 /* JoinTeamDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinTeamDTO.swift; sourceTree = "<group>"; };
 		39F52C4A29232E2600B19A77 /* CreateTeamDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTeamDTO.swift; sourceTree = "<group>"; };
 		39F52C4C29232E5D00B19A77 /* AddReflectionDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReflectionDTO.swift; sourceTree = "<group>"; };
-		39F52C4E29232E8B00B19A77 /* AddFeedbackDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFeedbackDTO.swift; sourceTree = "<group>"; };
+		39F52C4E29232E8B00B19A77 /* FeedBackContentDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedBackContentDTO.swift; sourceTree = "<group>"; };
 		39F52C52292330D200B19A77 /* MemberResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberResponse.swift; sourceTree = "<group>"; };
 		39F52C542923311200B19A77 /* JoinTeamResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinTeamResponse.swift; sourceTree = "<group>"; };
 		39F52C562923317500B19A77 /* CreateTeamResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTeamResponse.swift; sourceTree = "<group>"; };
@@ -559,7 +559,7 @@
 				39F52C4829232DFB00B19A77 /* JoinTeamDTO.swift */,
 				39F52C4A29232E2600B19A77 /* CreateTeamDTO.swift */,
 				39F52C4C29232E5D00B19A77 /* AddReflectionDTO.swift */,
-				39F52C4E29232E8B00B19A77 /* AddFeedbackDTO.swift */,
+				39F52C4E29232E8B00B19A77 /* FeedBackContentDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -843,7 +843,7 @@
 				7E7F160F2921CD4A00C6BE96 /* UITabBar+Extension.swift in Sources */,
 				525E722128FFC9A800EF3FCB /* BackButton.swift in Sources */,
 				3E5580072906A7B200714E46 /* InProgressViewController.swift in Sources */,
-				39F52C4F29232E8B00B19A77 /* AddFeedbackDTO.swift in Sources */,
+				39F52C4F29232E8B00B19A77 /* FeedBackContentDTO.swift in Sources */,
 				39436C132912877D0083D77A /* MyFeedbackHeaderView.swift in Sources */,
 				39F52C6E2924742E00B19A77 /* ReflectionResponse.swift in Sources */,
 				52294C462918F81500E81969 /* Member.swift in Sources */,
