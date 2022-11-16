@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct CurrentMemberResponse: Decodable {
+struct TeamMembersResponse: Decodable {
     let members: [MemberResponse]?
 }
