@@ -69,9 +69,9 @@ extension UIViewController {
         view.endEditing(true)
     }
     
-    func showAlertView(type: AlertType, teamName: String? = nil) {
-        let viewController = AlertViewController(type: type, teamName: teamName)
-        viewController.modalPresentationStyle = .overCurrentContext
+    func showAlertView(type: AlertType, teamName: String? = nil, navigationViewController: UINavigationController? = nil) {
+        let viewController = AlertViewController(type: type, teamName: teamName, navigation: navigationViewController)
+        viewController.modalPresentationStyle = .overFullScreen
         viewController.modalTransitionStyle = .crossDissolve
         self.present(viewController, animated: true)
     }

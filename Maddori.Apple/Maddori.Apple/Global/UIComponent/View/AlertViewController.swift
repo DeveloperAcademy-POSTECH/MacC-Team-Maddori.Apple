@@ -54,10 +54,12 @@ final class AlertViewController: BaseViewController {
     
     var type: AlertType
     var teamName: String? = nil
+    var navigation: UINavigationController? = nil
     
-    init(type: AlertType, teamName: String?) {
+    init(type: AlertType, teamName: String?, navigation: UINavigationController?) {
         self.type = type
         self.teamName = teamName
+        self.navigation = navigation
         super.init()
     }
     
@@ -218,7 +220,8 @@ final class AlertViewController: BaseViewController {
             // FIXME: - 팀 합류 api 연결
             print("Join")
         }
-        
-        self.dismiss(animated: true)
+        self.dismiss(animated: true) {
+            self.navigation?.popViewController(animated: true)
+        }
     }
 }

@@ -21,6 +21,7 @@ final class CustomTabBarController: UITabBarController {
         super.viewDidLoad()
         setupTabBar()
         configUI()
+        setupConfiguration()
     }
     
     // MARK: - func
@@ -30,17 +31,21 @@ final class CustomTabBarController: UITabBarController {
         homeViewController.tabBarItem.image = ImageLiterals.imgHomeTab
         homeViewController.tabBarItem.title = TextLiteral.homeTabTitle
         
-        let myBoxViewController = MyBoxViewController()
+        let myBoxViewController = UINavigationController(rootViewController: MyBoxViewController())
         myBoxViewController.tabBarItem.image = ImageLiterals.imgDocsTab
         myBoxViewController.tabBarItem.title = TextLiteral.myboxTabTitle
         
-        let myReflectionViewController = MyReflectionMainViewController()
+        let myReflectionViewController = UINavigationController(rootViewController: MyReflectionMainViewController())
         myReflectionViewController.tabBarItem.image = ImageLiterals.imgPersonTab
         myReflectionViewController.tabBarItem.title = TextLiteral.myReflectionTabTitle
         
         let viewControllers = [homeViewController, myBoxViewController, myReflectionViewController]
         
         self.setViewControllers(viewControllers, animated: false)
+    }
+    
+    private func setupConfiguration() {
+        self.navigationItem.hidesBackButton = true
     }
     
     private func configUI() {

@@ -51,7 +51,14 @@ final class MyBoxViewController: BaseViewController {
         view.backgroundColor = .gray300
         return view
     }()
-    private let feedbackCollectionView = MyFeedbackCollectionView()
+    private lazy var feedbackCollectionView: MyFeedbackCollectionView = {
+        let collectionView = MyFeedbackCollectionView()
+        // FIXME: - index로 해당 배열값 넘겨주기
+        collectionView.didTappedCell = { [weak self] index in
+            self?.navigationController?.pushViewController(FeedbackFromMeDetailViewController(), animated: true)
+        }
+        return collectionView
+    }()
     
     // MARK: - life cycle
     

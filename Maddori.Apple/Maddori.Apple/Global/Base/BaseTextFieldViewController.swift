@@ -26,7 +26,7 @@ class BaseTextFieldViewController: BaseViewController {
         label.setTitleFont(text: titleText)
         return label
     }()
-    private lazy var nicknameTextField: KigoTextField = {
+    private lazy var kigoTextField: KigoTextField = {
         let textField = KigoTextField()
         textField.placeHolderText = placeholderText
         return textField
@@ -62,15 +62,15 @@ class BaseTextFieldViewController: BaseViewController {
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
-        view.addSubview(nicknameTextField)
-        nicknameTextField.snp.makeConstraints {
+        view.addSubview(kigoTextField)
+        kigoTextField.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(40)
             $0.centerX.equalToSuperview()
         }
         
         view.addSubview(textLimitLabel)
         textLimitLabel.snp.makeConstraints {
-            $0.top.equalTo(nicknameTextField.snp.bottom).offset(4)
+            $0.top.equalTo(kigoTextField.snp.bottom).offset(4)
             $0.trailing.equalToSuperview().inset(27)
         }
         
@@ -89,7 +89,7 @@ class BaseTextFieldViewController: BaseViewController {
     }
     
     private func setupDelegate() {
-        nicknameTextField.delegate = self
+        kigoTextField.delegate = self
     }
     
     override func endEditingView() {
@@ -115,7 +115,7 @@ class BaseTextFieldViewController: BaseViewController {
                 textField.text = fixedText + " "
             
                 DispatchQueue.main.async {
-                    self.nicknameTextField.text = String(fixedText)
+                    self.kigoTextField.text = String(fixedText)
                 }
             }
         }
@@ -143,9 +143,14 @@ class BaseTextFieldViewController: BaseViewController {
 extension BaseTextFieldViewController: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
         setCounter(count: textField.text?.count ?? 0)
-        checkMaxLength(textField: nicknameTextField, maxLength: maxLength)
+        checkMaxLength(textField: kigoTextField, maxLength: maxLength)
         
-        let hasText = nicknameTextField.hasText
+        let hasText = kigoTextField.hasText
         doneButton.isDisabled = !hasText
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        kigoTextField.becomeFirstResponder()
+        return true
     }
 }

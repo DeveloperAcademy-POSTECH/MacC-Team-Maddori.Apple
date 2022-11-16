@@ -26,23 +26,15 @@ final class HomeViewController: BaseViewController {
     
     // MARK: - property
     
-    private let warningImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = ImageLiterals.icWarning
-        imageView.tintColor = .yellow300
-        return imageView
-    }()
-    private let toastLabel: UILabel = {
-        let label = UILabel()
-        label.text = "아직 회고 시간이 아닙니다"
-        label.font = UIFont.font(.medium, ofSize: 14)
-        label.textColor = .white100
-        return label
-    }()
     private let toastView: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 10
         view.clipsToBounds = true
+        return view
+    }()
+    private let toastContentView: ToastContentView = {
+        let view = ToastContentView()
+        view.toastType = .warning
         return view
     }()
     lazy var keywordCollectionView: UICollectionView = {
@@ -82,8 +74,11 @@ final class HomeViewController: BaseViewController {
         label.textColor = .black100
         return label
     }()
-    private let planLabelButtonView: LabelButtonView = {
+    private lazy var planLabelButtonView: LabelButtonView = {
         let labelButton = LabelButtonView()
+        labelButton.buttonAction = { [weak self] in
+            self?.presentAddReflectionViewController()
+        }
         labelButton.subText = TextLiteral.mainViewControllerPlanLabelButtonSubText
         labelButton.subButtonText = TextLiteral.mainViewControllerPlanLabelButtonSubButtonText
         return labelButton
@@ -122,22 +117,14 @@ final class HomeViewController: BaseViewController {
         toastView.snp.makeConstraints {
             $0.top.equalToSuperview().inset(-60)
             $0.centerX.equalToSuperview()
-            $0.width.equalTo(250)
             $0.height.equalTo(46)
         }
         
-        // FIXME: - 크기 수정 필요
-        toastView.addSubview(toastLabel)
-        toastLabel.snp.makeConstraints {
-            $0.centerY.equalToSuperview()
-            $0.trailing.equalToSuperview().inset(16)
+        toastView.addSubview(toastContentView)
+        toastContentView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
         }
-        
-        toastView.addSubview(warningImageView)
-        warningImageView.snp.makeConstraints {
-            $0.centerY.equalToSuperview()
-            $0.leading.equalToSuperview().inset(16)
-        }
+        toastContentView.render()
         
         view.addSubview(teamNameLabel)
         teamNameLabel.snp.makeConstraints {
@@ -187,11 +174,6 @@ final class HomeViewController: BaseViewController {
         }
     }
     
-    override func setupNavigationBar() {
-        super.setupNavigationBar()
-        navigationController?.navigationBar.isHidden = true
-    }
-    
     // MARK: - func
     
     private func setUpDelegation() {
@@ -223,6 +205,12 @@ final class HomeViewController: BaseViewController {
                 })
             })
         }
+    }
+    
+    private func presentAddReflectionViewController() {
+        let viewController = UINavigationController(rootViewController: AddReflectionViewController())
+        viewController.modalPresentationStyle = .fullScreen
+        present(viewController, animated: true)
     }
 }
 

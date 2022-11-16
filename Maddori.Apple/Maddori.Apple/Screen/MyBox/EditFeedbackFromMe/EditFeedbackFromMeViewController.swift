@@ -32,6 +32,7 @@ final class EditFeedbackFromMeViewController: AddFeedbackContentViewController {
         setupFeedbackStart()
         hideEditFeedbackUntilLabel()
         detectChangeOfFeedbackType()
+        setupNavigationRightItem()
     }
     
     // MARK: - func
@@ -92,6 +93,10 @@ final class EditFeedbackFromMeViewController: AddFeedbackContentViewController {
                 self.isFeedbackTypeChanged = true
             }
         }
+    }
+    
+    private func setupNavigationRightItem() {
+        super.closeButton.isHidden = true
     }
     
     // MARK: - selector

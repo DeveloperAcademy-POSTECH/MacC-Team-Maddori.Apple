@@ -19,7 +19,7 @@ final class FeedbackToMeDetailViewController: BaseViewController {
     private lazy var backButton: BackButton = {
         let button = BackButton(type: .system)
         let action = UIAction { [weak self] _ in
-            self?.navigationController?.dismiss(animated: true)
+            self?.navigationController?.popViewController(animated: true)
         }
         button.addAction(action, for: .touchUpInside)
         return button

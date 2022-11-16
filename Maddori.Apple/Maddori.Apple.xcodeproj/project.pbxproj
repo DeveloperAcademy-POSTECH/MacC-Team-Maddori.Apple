@@ -73,6 +73,7 @@
 		3E557FFD2901CD7400714E46 /* Keyword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E557FFC2901CD7400714E46 /* Keyword.swift */; };
 		3E5580072906A7B200714E46 /* InProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5580062906A7B200714E46 /* InProgressViewController.swift */; };
 		3E8052DF2906E09100A6449D /* SectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8052DE2906E09100A6449D /* SectionHeaderView.swift */; };
+		3EA341C129221998005CBD1C /* ToastContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA341C029221998005CBD1C /* ToastContentView.swift */; };
 		3EB5085C2912427600FB77CB /* MyReflectionMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB5085B2912427600FB77CB /* MyReflectionMainViewController.swift */; };
 		3EB508622912B12700FB77CB /* ReflectionCollectionViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB508612912B12700FB77CB /* ReflectionCollectionViewHeader.swift */; };
 		3EB50866291350BB00FB77CB /* TotalReflectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB50865291350BB00FB77CB /* TotalReflectionCell.swift */; };
@@ -180,6 +181,7 @@
 		3E557FFC2901CD7400714E46 /* Keyword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keyword.swift; sourceTree = "<group>"; };
 		3E5580062906A7B200714E46 /* InProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InProgressViewController.swift; sourceTree = "<group>"; };
 		3E8052DE2906E09100A6449D /* SectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderView.swift; sourceTree = "<group>"; };
+		3EA341C029221998005CBD1C /* ToastContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastContentView.swift; sourceTree = "<group>"; };
 		3EB5085B2912427600FB77CB /* MyReflectionMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReflectionMainViewController.swift; sourceTree = "<group>"; };
 		3EB508612912B12700FB77CB /* ReflectionCollectionViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReflectionCollectionViewHeader.swift; sourceTree = "<group>"; };
 		3EB50865291350BB00FB77CB /* TotalReflectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalReflectionCell.swift; sourceTree = "<group>"; };
@@ -507,6 +509,7 @@
 				3EB5088D2916D05F00FB77CB /* EmptyFeedbackView.swift */,
 				3EB5088F2917525600FB77CB /* EmptyReflectionView.swift */,
 				52F0CB5129178C2700E39C50 /* AlertViewController.swift */,
+				3EA341C029221998005CBD1C /* ToastContentView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -829,6 +832,7 @@
 				395C7E2028FED7B500FC2FCA /* ReflectionNameView.swift in Sources */,
 				39F52C44292329BA00B19A77 /* BaseModel.swift in Sources */,
 				522D99BF29041B51009CBD95 /* FeedbackTextView.swift in Sources */,
+				3EA341C129221998005CBD1C /* ToastContentView.swift in Sources */,
 				39F1A13529125762005E3456 /* MyBoxViewController.swift in Sources */,
 				39F52C702924747600B19A77 /* AllCertainTypeFeedBackResponse.swift in Sources */,
 				391D217C29050427003FC871 /* CustomVisualEffectView.swift in Sources */,
