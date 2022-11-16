@@ -13,7 +13,7 @@ final class AddFeedbackMemberViewController: BaseViewController {
     
     // MARK: - property
     
-    private let closeButton = CloseButton()
+    private let closeButton = CloseButton(type: .system)
     private let selectMemberLabel: UILabel = {
         let label = UILabel()
         label.setTitleFont(text: TextLiteral.addFeedbackMemberViewControllerTitle)
@@ -22,13 +22,21 @@ final class AddFeedbackMemberViewController: BaseViewController {
         label.setLineSpacing(to: 4)
         return label
     }()
-    private let memberCollectionView: MemberCollectionView = {
+    private lazy var memberCollectionView: MemberCollectionView = {
         let collectionView = MemberCollectionView()
         collectionView.memberList = Member.getMemberListExceptUser()
+        collectionView.didTappedMember = { [weak self] arr in
+            self?.navigationController?.pushViewController(AddFeedbackContentViewController(from: "나", to: arr.last ?? "팀원"), animated: true)
+        }
         return collectionView
     }()
     
     // MARK: - life cycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupCloseButtonAction()
+    }
     
     override func render() {
         view.addSubview(selectMemberLabel)
@@ -43,6 +51,15 @@ final class AddFeedbackMemberViewController: BaseViewController {
             $0.bottom.equalTo(view.safeAreaLayoutGuide)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
+    }
+    
+    // MARK: - setup
+    
+    private func setupCloseButtonAction() {
+        let action = UIAction { [weak self] _ in
+            self?.dismiss(animated: true)
+        }
+        closeButton.addAction(action, for: .touchUpInside)
     }
     
     // MARK: - func

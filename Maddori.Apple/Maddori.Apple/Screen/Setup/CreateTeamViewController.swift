@@ -50,4 +50,48 @@ final class CreateTeamViewController: BaseTextFieldViewController {
             super.maxLength = newValue
         }
     }
+    
+    // MARK: - property
+    
+    private lazy var closeButton: CloseButton = {
+        let button = CloseButton()
+        let action = UIAction { [weak self] _ in
+            self?.dismiss(animated: true)
+        }
+        button.addAction(action, for: .touchUpInside)
+        return button
+    }()
+    
+    // MARK: - life cycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupCreateButtonAction()
+    }
+    
+    override func setupNavigationBar() {
+        super.setupNavigationBar()
+        
+        let closeButton = makeBarButtonItem(with: closeButton)
+        
+        navigationController?.navigationBar.prefersLargeTitles = false
+        navigationItem.largeTitleDisplayMode = .never
+        navigationItem.rightBarButtonItem = closeButton
+    }
+    
+    // MARK: - setup
+    
+    private func setupCreateButtonAction() {
+        let action = UIAction { [weak self] _ in
+            self?.pushHomeViewController()
+        }
+        super.doneButton.addAction(action, for: .touchUpInside)
+    }
+    
+    // MARK: - func
+    
+    private func pushHomeViewController() {
+        let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
+        sceneDelegate?.changeRootViewCustomTabBarView()
+    }
 }

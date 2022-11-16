@@ -45,4 +45,31 @@ final class SetupNicknameViewController: BaseTextFieldViewController {
             super.buttonText = newValue
         }
     }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        pushJoinTeamViewController()
+    }
+    
+    override func setupNavigationBar() {
+        super.setupNavigationBar()
+    }
+    
+    override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        return false
+    }
+    
+    // MARK: - func
+    
+    private func pushJoinTeamViewController() {
+        let action = UIAction { [weak self] _ in
+            self?.navigationController?.pushViewController(JoinTeamViewController(), animated: true)
+        }
+        super.doneButton.addAction(action, for: .touchUpInside)
+    }
+    
+    override func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 }

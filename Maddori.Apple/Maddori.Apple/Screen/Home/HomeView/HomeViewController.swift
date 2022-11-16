@@ -82,8 +82,11 @@ final class HomeViewController: BaseViewController {
         label.textColor = .black100
         return label
     }()
-    private let planLabelButtonView: LabelButtonView = {
+    private lazy var planLabelButtonView: LabelButtonView = {
         let labelButton = LabelButtonView()
+        labelButton.buttonAction = { [weak self] in
+            self?.presentAddReflectionViewController()
+        }
         labelButton.subText = TextLiteral.mainViewControllerPlanLabelButtonSubText
         labelButton.subButtonText = TextLiteral.mainViewControllerPlanLabelButtonSubButtonText
         return labelButton
@@ -187,11 +190,6 @@ final class HomeViewController: BaseViewController {
         }
     }
     
-    override func setupNavigationBar() {
-        super.setupNavigationBar()
-        navigationController?.navigationBar.isHidden = true
-    }
-    
     // MARK: - func
     
     private func setUpDelegation() {
@@ -223,6 +221,12 @@ final class HomeViewController: BaseViewController {
                 })
             })
         }
+    }
+    
+    private func presentAddReflectionViewController() {
+        let viewController = UINavigationController(rootViewController: AddReflectionViewController())
+        viewController.modalPresentationStyle = .fullScreen
+        present(viewController, animated: true)
     }
 }
 

@@ -10,6 +10,7 @@ import UIKit
 import SnapKit
 
 final class MyFeedbackCollectionView: UIView {
+    var didTappedCell: ((Int) -> ())?
     private let mockData = FeedBack.mockData
 //    private let mockData: [FeedBack] = []
     private enum Size {
@@ -87,6 +88,10 @@ extension MyFeedbackCollectionView: UICollectionViewDelegate {
             }
         }
         return header
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        didTappedCell?(indexPath.item)
     }
 }
 extension MyFeedbackCollectionView: UICollectionViewDataSource {
