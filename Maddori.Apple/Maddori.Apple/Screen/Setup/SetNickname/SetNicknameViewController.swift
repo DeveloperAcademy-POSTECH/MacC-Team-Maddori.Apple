@@ -50,7 +50,6 @@ final class SetNicknameViewController: BaseTextFieldViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        pushJoinTeamViewController()
         setupDoneButton()
     }
     
@@ -63,13 +62,6 @@ final class SetNicknameViewController: BaseTextFieldViewController {
     }
     
     // MARK: - func
-    
-    private func pushJoinTeamViewController() {
-        let action = UIAction { [weak self] _ in
-            self?.navigationController?.pushViewController(JoinTeamViewController(), animated: true)
-        }
-//        super.doneButton.addAction(action, for: .touchUpInside)
-    }
     
     override func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
@@ -92,7 +84,6 @@ final class SetNicknameViewController: BaseTextFieldViewController {
                    parameters: api.body,
                    encoder: JSONParameterEncoder.default
         ).responseDecodable(of: BaseModel<MemberResponse>.self) { json in
-            print("code: ", json.response?.statusCode)
             if let json = json.value {
                 dump(json)
                 DispatchQueue.main.async {
