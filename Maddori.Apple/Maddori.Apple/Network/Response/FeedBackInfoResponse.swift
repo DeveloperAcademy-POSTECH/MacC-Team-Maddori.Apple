@@ -15,8 +15,8 @@ struct FeedBackInfoResponse: Decodable {
     let fromId: Int?
     let toId: Int?
     let toUsername: String?
-    let Continue: [KeywordResponse]
-    let Stop: [KeywordResponse]
+    let continueArray: [KeywordResponse]
+    let stopArray: [KeywordResponse]
     
     enum CodingKeys: String, CodingKey {
         case teamId = "team_id"
@@ -26,7 +26,7 @@ struct FeedBackInfoResponse: Decodable {
         case fromId = "from_id"
         case toId = "to_id"
         case toUsername = "to_username"
-        case Continue
-        case Stop
+        case continueArray = "Continue"
+        case stopArray = "Stop"
     }
 }
