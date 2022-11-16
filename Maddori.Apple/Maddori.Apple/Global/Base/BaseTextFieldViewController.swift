@@ -26,8 +26,8 @@ class BaseTextFieldViewController: BaseViewController {
         label.setTitleFont(text: titleText)
         return label
     }()
-    private lazy var kigoTextField: KigoTextField = {
-        let textField = KigoTextField()
+    private lazy var kigoTextField: CustomTextField = {
+        let textField = CustomTextField()
         textField.placeHolderText = placeholderText
         return textField
     }()

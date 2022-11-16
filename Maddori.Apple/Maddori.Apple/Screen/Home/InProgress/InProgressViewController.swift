@@ -31,7 +31,7 @@ final class InProgressViewController: BaseViewController {
     private let backButton = BackButton(type: .system)
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.setTitleFont(text: currentRetrospectiveUser + TextLiteral.InProgressViewControllerTitleLabel)
+        label.setTitleFont(text: currentRetrospectiveUser + TextLiteral.inProgressViewControllerTitleLabel)
         label.textColor = .black100
         return label
     }()
@@ -40,9 +40,9 @@ final class InProgressViewController: BaseViewController {
         label.font = .caption1
         label.textColor = .gray400
         if user == currentRetrospectiveUser {
-            label.text = currentRetrospectiveUser + TextLiteral.InProgressViewControllerSubTitleLabel
+            label.text = currentRetrospectiveUser + TextLiteral.inProgressViewControllerSubTitleLabel
         } else {
-            label.text = currentRetrospectiveUser + TextLiteral.InProgressViewControllerOthersSubTitleLabel
+            label.text = currentRetrospectiveUser + TextLiteral.inProgressViewControllerOthersSubTitleLabel
         }
         label.numberOfLines = 0
         return label
@@ -54,9 +54,9 @@ final class InProgressViewController: BaseViewController {
         collectionView.register(KeywordCollectionViewCell.self,
                                 forCellWithReuseIdentifier: KeywordCollectionViewCell.className)
         collectionView.register(EmptyFeedbackView.self, forCellWithReuseIdentifier: EmptyFeedbackView.className)
-        collectionView.register(SectionHeaderView.self,
+        collectionView.register(KeywordSectionHeaderView.self,
                                 forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
-                                withReuseIdentifier: SectionHeaderView.className)
+                                withReuseIdentifier: KeywordSectionHeaderView.className)
         return collectionView
     }()
     
@@ -171,13 +171,13 @@ extension InProgressViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: SectionHeaderView.className, for: indexPath) as? SectionHeaderView else { return UICollectionReusableView() }
+        guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: KeywordSectionHeaderView.className, for: indexPath) as? KeywordSectionHeaderView else { return UICollectionReusableView() }
         if isUserRetrospective {
-            header.label.text = TextLiteral.InProgressViewControllerReceivedLabel
+            header.label.text = TextLiteral.inProgressViewControllerReceivedLabel
         } else if indexPath.section == 0 {
-            header.label.text = TextLiteral.InProgressViewControllerGivenLabel
+            header.label.text = TextLiteral.inProgressViewControllerGivenLabel
         } else if indexPath.section == 1 {
-            header.label.text = TextLiteral.InProgressViewControllerOtherGivenLabel
+            header.label.text = TextLiteral.inProgressViewControllerOtherGivenLabel
         }
         
         switch kind {

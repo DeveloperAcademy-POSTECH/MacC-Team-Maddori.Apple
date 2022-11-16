@@ -24,32 +24,32 @@ enum TextLiteral {
     static let mainViewControllerPlanLabelButtonSubButtonText = "일정 만들기"
     static let mainViewControllerButtonText = "피드백 추가하기"
     
-    // MARK: - AddFeedbackMemberViewController
+    // MARK: - SelectFeedbackMemberViewController
     
-    static let addFeedbackMemberViewControllerTitle = "피드백을 주고 싶은\n팀원을 선택해주세요"
+    static let selectFeedbackMemberViewControllerTitle = "피드백을 주고 싶은\n팀원을 선택해주세요"
     
-    // MARK: - AddReflectionViewController
+    // MARK: - CreateReflectionViewController
     
-    static let addReflectionViewControllerTitle = "새로운 회고 정보를\n입력해주세요"
-    static let addReflectionViewControllerName = "회고 이름"
-    static let addReflectionViewControllerTextFieldPlaceHolder = "예) 1차 스프린트"
-    static let addReflectionViewControllerDateLabel = "회고 일시"
-    static let addReflectionViewControllerButtonText = "추가하기"
+    static let createReflectionViewControllerTitle = "새로운 회고 정보를\n입력해주세요"
+    static let createReflectionViewControllerName = "회고 이름"
+    static let createReflectionViewControllerTextFieldPlaceHolder = "예) 1차 스프린트"
+    static let createReflectionViewControllerDateLabel = "회고 일시"
+    static let createReflectionViewControllerButtonText = "추가하기"
     
-    // MARK: - SetupNicknameViewController
+    // MARK: - SetNicknameViewController
     
-    static let setupNicknameViewControllerTitleLabel = "키고에서 사용할 \n닉네임을 입력해주세요"
-    static let setupNicknameViewControllerNicknameTextFieldPlaceHolder = "예) 진저, 호야, 성민"
+    static let setNicknameViewControllerTitleLabel = "키고에서 사용할 \n닉네임을 입력해주세요"
+    static let setNicknameViewControllerNicknameTextFieldPlaceHolder = "예) 진저, 호야, 성민"
     
-    // MARK: - AddFeedbackContentViewController
+    // MARK: - AddFeedbackViewController
     
-    static let addFeedbackContentViewControllerTitleLabel = "에게 피드백 보내기"
-    static let addFeedbackContentViewControllerFeedbackKeywordTextFieldPlaceholder = "피드백을 키워드로 작성해주세요"
-    static let addFeedbackContentViewControllerFeedbackContentTextViewPlaceholder = "키워드에 대한 자세한 내용을 작성해주세요"
-    static let addFeedbackContentViewControllerDoneButtonTitle = "완료"
-    static let addFeedbackContentViewControllerFeedbackStartLabel = "Start 제안하기"
-    static let addFeedbackContentViewControllerStartTextViewPlaceholder = "제안하고 싶은 Start를 작성해주세요"
-    static let addFeedbackContentViewControllerFeedbackSendTimeLabel = "작성한 피드백은 회고 시간 전까지 수정 가능합니다"
+    static let addFeedbackViewControllerTitleLabel = "에게 피드백 보내기"
+    static let addFeedbackViewControllerFeedbackKeywordTextFieldPlaceholder = "피드백을 키워드로 작성해주세요"
+    static let addFeedbackViewControllerFeedbackContentTextViewPlaceholder = "키워드에 대한 자세한 내용을 작성해주세요"
+    static let addFeedbackViewControllerDoneButtonTitle = "완료"
+    static let addFeedbackViewControllerFeedbackStartLabel = "Start 제안하기"
+    static let addFeedbackViewControllerStartTextViewPlaceholder = "제안하고 싶은 Start를 작성해주세요"
+    static let addFeedbackViewControllerFeedbackSendTimeLabel = "작성한 피드백은 회고 시간 전까지 수정 가능합니다"
     
     // MARK: - JoinTeamViewController
     
@@ -68,34 +68,34 @@ enum TextLiteral {
     static let createTeamViewControllerTitleLabel = "팀 이름을 입력해주세요"
     static let createTeamViewControllerTextFieldPlaceHolder = "예) 맛쟁이 사과처럼"
     
-    // MARK: - InvitedCodeViewController
+    // MARK: - InvitationCodeViewController
     
-    static let invitedCodeViewControllerTitleLabel = "초대코드를 공유하여\n팀원들을 초대해주세요"
-    static let invitedCodeViewControllerCopyCodeButtonText = "코드 복사하기"
-    static let invitedCodeViewControllerStartButtonText = "시작하기"
-    static let invitedCodeViewControllerSubLabelText = "초대코드는 다시 복사할 수 있습니다."
+    static let invitationCodeViewControllerTitleLabel = "초대코드를 공유하여\n팀원들을 초대해주세요"
+    static let invitationCodeViewControllerCopyCodeButtonText = "코드 복사하기"
+    static let invitationCodeViewControllerStartButtonText = "시작하기"
+    static let invitationCodeViewControllerSubLabelText = "초대코드는 다시 복사할 수 있습니다."
     
     // MARK: - StartSuggestionView
     
     static let startSuggestionViewStartText = "⭐️ Start"
     
-    // MARK: - SelectFeedbackMemberViewController
+    // MARK: - SelectReflectionMemberViewController
     
-    static let selectFeedbackMemberViewControllerTitleLabel = "피드백을 듣고 싶은\n팀원을 선택해주세요"
-    static let selectFeedbackMemberViewControllerDoneButtonText = "모든 회고 끝내기 "
+    static let selectReflectionMemberViewControllerTitleLabel = "피드백을 듣고 싶은\n팀원을 선택해주세요"
+    static let selectReflectionMemberViewControllerDoneButtonText = "모든 회고 끝내기 "
     
     // MARK: - InProgressViewController
     
-    static let InProgressViewControllerTitleLabel = "님의 회고 시간"
-    static let InProgressViewControllerSubTitleLabel = "님은 이야기 나누고 싶은\n키워드를 선택해주세요"
-    static let InProgressViewControllerOthersSubTitleLabel = "님이 선택한 키워드를 확인해주세요"
-    static let InProgressViewControllerReceivedLabel = "내가 받은 피드백"
-    static let InProgressViewControllerGivenLabel = "내가 보낸 피드백"
-    static let InProgressViewControllerOtherGivenLabel = "팀원들이 보낸 피드백"
+    static let inProgressViewControllerTitleLabel = "님의 회고 시간"
+    static let inProgressViewControllerSubTitleLabel = "님은 이야기 나누고 싶은\n키워드를 선택해주세요"
+    static let inProgressViewControllerOthersSubTitleLabel = "님이 선택한 키워드를 확인해주세요"
+    static let inProgressViewControllerReceivedLabel = "내가 받은 피드백"
+    static let inProgressViewControllerGivenLabel = "내가 보낸 피드백"
+    static let inProgressViewControllerOtherGivenLabel = "팀원들이 보낸 피드백"
     
-    // MARK: - MyReflectionViewHeader
+    // MARK: - MyReflectionCollectionViewHeader
     
-    static let MyReflectionViewHeaderHeaderLabel = "모음집"
+    static let myReflectionCollectionViewHeaderHeaderLabel = "모음집"
     
     // MARK: - EmptyFeedbackView
     
@@ -109,18 +109,18 @@ enum TextLiteral {
     
     static let emptyFeedbackKeywordLabel = "피드백"
     
-    // MARK: - MyBoxViewController
+    // MARK: - MyFeedbackViewController
     
-    static let myBoxViewControllerTitleLabel = "내가 작성한 피드백"
+    static let myFeedbackViewControllerTitleLabel = "내가 작성한 피드백"
     
-    // MARK: - FeedbackFromMeDetailViewController
+    // MARK: - MyFeedbackDetailViewController
     
-    static let feedbackFromMeDetailViewControllerDeleteButtonText: String = "삭제"
-    static let feedbackFromMeDetailViewControllerTitleLabel: String = "님께 작성한 피드백"
-    static let feedbackFromMeDetailViewControllerFeedbackStartLabel: String = "Start"
-    static let feedbackFromMeDetailViewControllerEditButtonText: String = "수정하러 가기"
-    static let feedbackFromMeDetailViewControllerReflectionIsStartedLabel: String = "회고가 시작되었습니다"
-    static let feedbackFromMeDetailViewControllerBeforeReflectionLabel: String = "담아둔 피드백은 회고 시간 전까지 수정 가능합니다"
+    static let myFeedbackDetailViewControllerDeleteButtonText: String = "삭제"
+    static let myFeedbackDetailViewControllerTitleLabel: String = "님께 작성한 피드백"
+    static let myFeedbackDetailViewControllerFeedbackStartLabel: String = "Start"
+    static let myFeedbackDetailViewControllerEditButtonText: String = "수정하러 가기"
+    static let myFeedbackDetailViewControllerReflectionIsStartedLabel: String = "회고가 시작되었습니다"
+    static let myFeedbackDetailViewControllerBeforeReflectionLabel: String = "담아둔 피드백은 회고 시간 전까지 수정 가능합니다"
     
     // MARK: - AlertViewController
     
@@ -135,17 +135,17 @@ enum TextLiteral {
     static let loginViewControllerLogoText: String = "KeyGo"
     static let loginViewControllerDescriptionText: String = "키워드로 회고하기"
     
-    // MARK: - FeedbackToMeDetailViewController
+    // MARK: - MyReflectionFeedbackViewController
     
-    static let feedbackToMeDetailViewControllerFeedbackTypeLabel = "피드백 종류"
-    static let feedbackToMeDetailViewControllerFeedbackFromLabel = "작성자"
-    static let feedbackToMeDetailViewControllerFeedbackContentLabel = "내용"
-    static let feedbackToMeDetailViewControllerFeedbackStartLabel = "Start"
+    static let myReflectionFeedbackViewControllerFeedbackTypeLabel = "피드백 종류"
+    static let myReflectionFeedbackViewControllerFeedbackFromLabel = "작성자"
+    static let myReflectionFeedbackViewControllerFeedbackContentLabel = "내용"
+    static let myReflectionFeedbackViewControllerFeedbackStartLabel = "Start"
 
     // MARK: - TabBar
     
     static let homeTabTitle: String = "홈"
-    static let myboxTabTitle: String = "보관함"
+    static let myFeedbackTabTitle: String = "보관함"
     static let myReflectionTabTitle: String = "나의회고"
     
     // MARK: - ToastPopUpView

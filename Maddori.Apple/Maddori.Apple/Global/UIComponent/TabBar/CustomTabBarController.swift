@@ -31,15 +31,15 @@ final class CustomTabBarController: UITabBarController {
         homeViewController.tabBarItem.image = ImageLiterals.imgHomeTab
         homeViewController.tabBarItem.title = TextLiteral.homeTabTitle
         
-        let myBoxViewController = UINavigationController(rootViewController: MyBoxViewController())
-        myBoxViewController.tabBarItem.image = ImageLiterals.imgDocsTab
-        myBoxViewController.tabBarItem.title = TextLiteral.myboxTabTitle
+        let myFeedbackViewController = UINavigationController(rootViewController: MyFeedbackViewController())
+        myFeedbackViewController.tabBarItem.image = ImageLiterals.imgDocsTab
+        myFeedbackViewController.tabBarItem.title = TextLiteral.myFeedbackTabTitle
         
-        let myReflectionViewController = UINavigationController(rootViewController: MyReflectionMainViewController())
+        let myReflectionViewController = UINavigationController(rootViewController: MyReflectionViewController())
         myReflectionViewController.tabBarItem.image = ImageLiterals.imgPersonTab
         myReflectionViewController.tabBarItem.title = TextLiteral.myReflectionTabTitle
         
-        let viewControllers = [homeViewController, myBoxViewController, myReflectionViewController]
+        let viewControllers = [homeViewController, myFeedbackViewController, myReflectionViewController]
         
         self.setViewControllers(viewControllers, animated: false)
     }
