@@ -7,6 +7,8 @@
 
 import UIKit
 
+import Alamofire
+
 final class SetNicknameViewController: BaseTextFieldViewController {
     
     override var titleText: String {
@@ -49,6 +51,7 @@ final class SetNicknameViewController: BaseTextFieldViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         pushJoinTeamViewController()
+        setupDoneButton()
     }
     
     override func setupNavigationBar() {
@@ -65,11 +68,42 @@ final class SetNicknameViewController: BaseTextFieldViewController {
         let action = UIAction { [weak self] _ in
             self?.navigationController?.pushViewController(JoinTeamViewController(), animated: true)
         }
-        super.doneButton.addAction(action, for: .touchUpInside)
+//        super.doneButton.addAction(action, for: .touchUpInside)
     }
     
     override func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+    
+    private func setupDoneButton() {
+        let action = UIAction { [weak self] _ in
+            guard let nickname = self?.kigoTextField.text else { return }
+            self?.dispatchUserLogin(api: .login(LoginDTO(username: nickname)))
+        }
+        super.doneButton.addAction(action, for: .touchUpInside)
+    }
+    
+    // MARK: - api
+    
+    private func dispatchUserLogin(api: SetupEndPoint<LoginDTO>) {
+        AF.request(api.address,
+                   method: api.method,
+                   parameters: api.body,
+                   encoder: JSONParameterEncoder.default
+        ).responseDecodable(of: BaseModel<MemberResponse>.self) { json in
+            print("code: ", json.response?.statusCode)
+            if let json = json.value {
+                dump(json)
+                DispatchQueue.main.async {
+                    self.navigationController?.pushViewController(JoinTeamViewController(), animated: true)
+                }
+            } else {
+                DispatchQueue.main.async {
+                    // FIXME: - UXWriting 필요
+                    self.makeAlert(title: "에러", message: "중복된 닉네임입니다람쥐")
+                }
+            }
+        }
     }
 }
