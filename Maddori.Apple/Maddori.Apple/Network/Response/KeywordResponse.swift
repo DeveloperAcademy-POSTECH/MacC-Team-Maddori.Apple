@@ -10,5 +10,11 @@ import Foundation
 struct KeywordResponse: Decodable {
     let keyword: String?
     let content: String?
-    let start_content: String?
+    let startContent: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case keyword
+        case content
+        case startContent = "start_content"
+    }
 }

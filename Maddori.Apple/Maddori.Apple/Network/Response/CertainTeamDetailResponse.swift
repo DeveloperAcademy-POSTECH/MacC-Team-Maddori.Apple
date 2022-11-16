@@ -8,8 +8,15 @@
 import Foundation
 
 struct CertainTeamDetailResponse: Decodable {
-    let team_id: Int?
-    let team_name: String?
-    let invitation_code: String?
+    let teamId: Int?
+    let teamName: String?
+    let invitationCode: String?
     let admin: Bool?
+    
+    enum CodingKeys: String, CodingKey {
+        case teamId = "team_id"
+        case teamName = "team_name"
+        case invitationCode = "invitation_code"
+        case admin
+    }
 }

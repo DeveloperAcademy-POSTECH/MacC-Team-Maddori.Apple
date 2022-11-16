@@ -10,6 +10,13 @@ import Foundation
 struct JoinTeamResponse: Decodable {
     let admin: Bool?
     let id: Int?
-    let user_id: Int?
-    let team_id: Int?
+    let userId: Int?
+    let teamId: Int?
+    
+    enum CodingKeys: String, CodingKey {
+        case admin
+        case id
+        case userId = "user_id"
+        case teamId = "team_id"
+    }
 }

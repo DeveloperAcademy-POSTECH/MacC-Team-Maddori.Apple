@@ -9,6 +9,12 @@ import Foundation
 
 struct AllFeedBackResponse: Decodable {
     let category: String?
-    let user_feedback: [FeedBackContentResponse]?
-    let team_feedback: [FeedBackContentResponse]?
+    let userFeedback: [FeedBackContentResponse]?
+    let teamFeedback: [FeedBackContentResponse]?
+    
+    enum CodingKeys: String, CodingKey {
+        case category
+        case userFeedback = "user_feedback"
+        case teamFeedback = "team_feedback"
+    }
 }

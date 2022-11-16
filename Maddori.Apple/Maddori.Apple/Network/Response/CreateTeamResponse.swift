@@ -9,6 +9,12 @@ import Foundation
 
 struct CreateTeamResponse: Decodable {
     let id: Int?
-    let team_name: String?
-    let invitation_code: String?
+    let teamName: String?
+    let invitationCode: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case teamName = "team_name"
+        case invitationCode = "invitation_code"
+    }
 }

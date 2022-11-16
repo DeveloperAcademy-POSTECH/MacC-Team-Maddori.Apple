@@ -8,9 +8,17 @@
 import Foundation
 
 struct CurrentReflectionResponse: Decodable {
-    let current_reflection_id: Int?
-    let reflection_name: String?
-    let reflection_date: String?
-    let reflection_status: String?
-    let reflection_keywords: [String]?
+    let currentReflectionId: Int?
+    let reflectionName: String?
+    let reflectionDate: String?
+    let reflectionStatus: String?
+    let reflectionKeywords: [String]?
+    
+    enum CodingKeys: String, CodingKey {
+        case currentReflectionId = "current_reflection_id"
+        case reflectionName = "reflection_name"
+        case reflectionDate = "reflection_date"
+        case reflectionStatus = "reflection_status"
+        case reflectionKeywords = "reflection_keywords"
+    }
 }

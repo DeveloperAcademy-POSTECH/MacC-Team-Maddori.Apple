@@ -8,13 +8,25 @@
 import Foundation
 
 struct FeedBackInfoResponse: Decodable {
-    let team_id: Int?
-    let reflection_id: Int?
-    let reflection_name: String?
-    let reflection_status: String?
-    let from_id: Int?
-    let to_id: Int?
-    let to_username: String?
+    let teamId: Int?
+    let reflectionId: Int?
+    let reflectionName: String?
+    let reflectionStatus: String?
+    let fromId: Int?
+    let toId: Int?
+    let toUsername: String?
     let Continue: [KeywordResponse]
     let Stop: [KeywordResponse]
+    
+    enum CodingKeys: String, CodingKey {
+        case teamId = "team_id"
+        case reflectionId = "reflection_id"
+        case reflectionName = "reflection_name"
+        case reflectionStatus = "reflection_status"
+        case fromId = "from_id"
+        case toId = "to_id"
+        case toUsername = "to_username"
+        case Continue
+        case Stop
+    }
 }
