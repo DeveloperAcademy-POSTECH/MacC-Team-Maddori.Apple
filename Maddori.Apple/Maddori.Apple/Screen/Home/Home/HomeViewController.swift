@@ -77,7 +77,7 @@ final class HomeViewController: BaseViewController {
     private lazy var planLabelButtonView: LabelButtonView = {
         let labelButton = LabelButtonView()
         labelButton.buttonAction = { [weak self] in
-            self?.presentAddReflectionViewController()
+            self?.presentCreateReflectionViewController()
         }
         labelButton.subText = TextLiteral.mainViewControllerPlanLabelButtonSubText
         labelButton.subButtonText = TextLiteral.mainViewControllerPlanLabelButtonSubButtonText
@@ -207,8 +207,8 @@ final class HomeViewController: BaseViewController {
         }
     }
     
-    private func presentAddReflectionViewController() {
-        let viewController = UINavigationController(rootViewController: AddReflectionViewController())
+    private func presentCreateReflectionViewController() {
+        let viewController = UINavigationController(rootViewController: CreateReflectionViewController())
         viewController.modalPresentationStyle = .fullScreen
         present(viewController, animated: true)
     }
