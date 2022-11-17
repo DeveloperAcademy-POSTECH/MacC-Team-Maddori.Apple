@@ -17,10 +17,6 @@ final class MemberCollectionViewCell: BaseCollectionViewCell {
         static let frame = CGRect(x: 0, y: 0, width: Size.width, height: Size.height)
     }
     
-//    override var isSelected: Bool {
-//        didSet { setupAttribute() }
-//    }
-    
     // MARK: - property
     
     let memberLabel: UILabel = {
