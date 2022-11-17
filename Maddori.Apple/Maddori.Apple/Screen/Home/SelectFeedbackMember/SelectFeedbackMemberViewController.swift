@@ -36,7 +36,7 @@ final class SelectFeedbackMemberViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCloseButtonAction()
-        fetchCurrentTeamMember(type: .fetchCurrentTeamMember(teamId: 1.description, userId: 1.description))
+        fetchCurrentTeamMember(type: .fetchCurrentTeamMember(teamId: 1, userId: 1))
     }
     
     override func render() {

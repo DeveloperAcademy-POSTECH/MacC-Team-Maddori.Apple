@@ -10,8 +10,8 @@ import Foundation
 import Alamofire
 
 enum AddFeedBackEndPoint<T: Encodable> {
-    case fetchCurrentTeamMember(teamId: String, userId: String)
-    case dispatchAddFeedBack(teamId: String, reflectionId: String, userId: String, T)
+    case fetchCurrentTeamMember(teamId: Int, userId: Int)
+    case dispatchAddFeedBack(teamId: Int, reflectionId: Int, userId: Int, T)
     
     var address: String {
         switch self {
@@ -43,10 +43,10 @@ enum AddFeedBackEndPoint<T: Encodable> {
     var headers: HTTPHeaders? {
         switch self {
         case .fetchCurrentTeamMember(_, let userId):
-            let headers = ["user_id": userId]
+            let headers = ["user_id": "\(userId)"]
             return HTTPHeaders(headers)
         case .dispatchAddFeedBack(_, _, let userId, _):
-            let headers = ["user_id": userId]
+            let headers = ["user_id": "\(userId)"]
             return HTTPHeaders(headers)
         }
     }
