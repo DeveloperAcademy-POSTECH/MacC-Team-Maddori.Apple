@@ -7,7 +7,7 @@
 
 import Alamofire
 
-enum MyFeedBackEndPoint<T: Encodable> {
+enum MyFeedBackEndPoint<T: Encodable>: EndPointable {
     case fetchCurrentTeamMember(teamId: Int, userId: Int)
     case fetchCertainMemberFeedBack(teamId: Int, memberId: Int, userId: Int)
     case deleteFeedBack(teamId: Int, reflectionId: Int, feedBackId: Int, userId: Int)

@@ -9,7 +9,7 @@ import Foundation
 
 import Alamofire
 
-enum AddFeedBackEndPoint<T: Encodable> {
+enum AddFeedBackEndPoint<T: Encodable>: EndPointable {
     case fetchCurrentTeamMember(teamId: Int, userId: Int)
     case dispatchAddFeedBack(teamId: Int, reflectionId: Int, userId: Int, T)
     
