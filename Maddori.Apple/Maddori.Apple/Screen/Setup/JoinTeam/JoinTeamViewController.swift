@@ -106,7 +106,7 @@ final class JoinTeamViewController: BaseTextFieldViewController {
         let action = UIAction { [weak self] _ in
             guard let invitationCode = self?.kigoTextField.text else { return }
             // FIXME: - userId는 우선 UserDefaults로 변경. -> 이후엔 토큰으로 처리
-            self?.fetchCertainTeam(type: .fetchCertainTeam(invitationCode: invitationCode, userId: 19))
+            self?.fetchCertainTeam(type: .fetchCertainTeam(invitationCode: invitationCode, userId: UserDefaultStorage.userID))
         }
         super.doneButton.addAction(action, for: .touchUpInside)
     }
