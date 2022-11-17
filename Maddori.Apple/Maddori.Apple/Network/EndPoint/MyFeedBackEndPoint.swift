@@ -21,7 +21,7 @@ enum MyFeedBackEndPoint<T: Encodable> {
             return "\(UrlLiteral.baseUrl)/teams/\(teamId)/reflections/current/feedbacks/from-me?members=\(memberId)"
         case .deleteFeedBack(let teamId, let reflectionId, let feedBackId, _):
             return "\(UrlLiteral.baseUrl)/teams/\(teamId)/reflections/\(reflectionId)/feedbacks/\(feedBackId)"
-        case .putEditFeedBack(let teamId,let reflectionId, let feedBackId, _, _):
+        case .putEditFeedBack(let teamId, let reflectionId, let feedBackId, _, _):
             return "\(UrlLiteral.baseUrl)/teams/\(teamId)/reflections/\(reflectionId)/feedbacks/\(feedBackId)"
         }
     }
