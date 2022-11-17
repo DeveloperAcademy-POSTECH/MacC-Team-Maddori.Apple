@@ -7,12 +7,14 @@
 
 import UIKit
 
+import Alamofire
 import SnapKit
 
 final class HomeViewController: BaseViewController {
     
     var keywordList: [Keyword] = Keyword.mockData
     var isTouched = false
+    
     private enum Size {
         static let keywordLabelHeight: CGFloat = 50
         static let labelButtonPadding: CGFloat = 6
@@ -44,9 +46,8 @@ final class HomeViewController: BaseViewController {
         collectionView.register(KeywordCollectionViewCell.self, forCellWithReuseIdentifier: KeywordCollectionViewCell.className)
         return collectionView
     }()
-    private let teamNameLabel: UILabel = {
+    private lazy var teamNameLabel: UILabel = {
         let label = UILabel()
-        label.setTitleFont(text: "맛쟁이 사과처럼")
         label.textColor = .black100
         label.numberOfLines = 0
         return label
@@ -105,6 +106,13 @@ final class HomeViewController: BaseViewController {
         super.viewDidLoad()
         setUpDelegation()
         render()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // FIXME: - teamId 와 userId는 일단은 UserDefaults에서 -> 추후에 토큰으로
+        fetchCertainTeamDetail(type: .fetchCertainTeamDetail(teamId: "1", userId: "1"))
+        fetchCurrentReflectionDetail(type: .fetchCurrentReflectionDetail(teamId: "1", userId: "1"))
     }
     
     override func configUI() {
@@ -211,6 +219,37 @@ final class HomeViewController: BaseViewController {
         let viewController = UINavigationController(rootViewController: CreateReflectionViewController())
         viewController.modalPresentationStyle = .fullScreen
         present(viewController, animated: true)
+    }
+    
+    // MARK: - api
+    
+    private func fetchCertainTeamDetail(type: HomeEndPoint) {
+        AF.request(type.address,
+                   method: type.method,
+                   headers: type.header
+        ).responseDecodable(of: BaseModel<CertainTeamDetailResponse>.self) { json in
+            if let json = json.value {
+//                dump(json)
+                guard let teamName = json.detail?.teamName else { return }
+                DispatchQueue.main.async {
+                    self.teamNameLabel.setTitleFont(text: teamName)
+                }
+            }
+        }
+    }
+    
+    private func fetchCurrentReflectionDetail(type: HomeEndPoint) {
+        AF.request(type.address,
+                   method: type.method,
+                   headers: type.header
+        ).responseDecodable(of: BaseModel<CurrentReflectionResponse>.self) { json in
+            if let json = json.value {
+//                dump(json)
+                guard let list = json.detail?.reflectionKeywords else { return }
+                HomeViewController.fetchedKeywordList = list
+                print(HomeViewController.fetchedKeywordList)
+            }
+        }
     }
 }
 
