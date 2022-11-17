@@ -56,13 +56,11 @@ final class AlertViewController: BaseViewController {
     var type: AlertType
     var teamName: String? = nil
     var navigation: UINavigationController? = nil
-    let teamId: Int?
     
     init(type: AlertType, teamName: String?, navigation: UINavigationController?, teamId: Int? = nil) {
         self.type = type
         self.teamName = teamName
         self.navigation = navigation
-        self.teamId = teamId
         super.init()
     }
     
@@ -222,7 +220,7 @@ final class AlertViewController: BaseViewController {
         case .join:
             // FIXME: - 팀 합류 api 연결
             self.pushHomeViewController()
-            dispatchJoinTeam(type: .dispatchJoinTeam(teamId: teamId ?? 0, userId: UserDefaultStorage.userID))
+            dispatchJoinTeam(type: .dispatchJoinTeam(teamId: UserDefaultStorage.teamId, userId: UserDefaultStorage.userID))
         }
         self.dismiss(animated: true) {
             self.navigation?.popViewController(animated: true)

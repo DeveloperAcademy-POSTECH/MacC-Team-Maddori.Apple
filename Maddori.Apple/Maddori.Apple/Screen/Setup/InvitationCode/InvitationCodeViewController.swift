@@ -190,6 +190,8 @@ final class InvitationCodeViewController: BaseViewController {
         ).responseDecodable(of: BaseModel<CreateTeamResponse>.self) { json in
             if let json = json.value {
                 dump(json)
+                guard let teamId = json.detail?.id else { return }
+                UserDefaultHandler.setTeamId(teamId: teamId)
                 DispatchQueue.main.async {
                     self.invitedCodeLabel.text = json.detail?.invitationCode
                 }

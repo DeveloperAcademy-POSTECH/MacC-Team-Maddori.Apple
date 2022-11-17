@@ -110,6 +110,7 @@ final class HomeViewController: BaseViewController {
     override func configUI() {
         view.backgroundColor = .white200
         setGradientToastView()
+        print(UserDefaultStorage.teamId)
     }
     
     override func render() {

@@ -121,7 +121,7 @@ final class JoinTeamViewController: BaseTextFieldViewController {
     }
         
     private func presentCertainTeamViewController(teamName: String, teamId: Int) {
-        self.showAlertView(type: .join,teamName: teamName, teamId: teamId)
+        self.showAlertView(type: .join,teamName: teamName, teamId: UserDefaultStorage.teamId)
     }
     
     // MARK: - api
@@ -135,7 +135,8 @@ final class JoinTeamViewController: BaseTextFieldViewController {
                 guard let teamId = json.detail?.id,
                       let teamName = json.detail?.teamName
                 else { return }
-                self.presentCertainTeamViewController(teamName: teamName, teamId: teamId)
+                UserDefaultHandler.setTeamId(teamId: teamId)
+                self.presentCertainTeamViewController(teamName: teamName, teamId: UserDefaultStorage.teamId)
             } else {
                 DispatchQueue.main.async {
                     // FIXME: - UXWriting 필요
