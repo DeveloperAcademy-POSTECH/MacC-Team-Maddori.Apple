@@ -126,7 +126,7 @@ final class JoinTeamViewController: BaseTextFieldViewController {
     
     // MARK: - api
     
-    private func fetchCertainTeam(type: SetupEndPoint<CertainTeamDTO>) {
+    private func fetchCertainTeam(type: SetupEndPoint<EncodeDTO>) {
         AF.request(type.address,
                    method: type.method,
                    headers: type.headers
