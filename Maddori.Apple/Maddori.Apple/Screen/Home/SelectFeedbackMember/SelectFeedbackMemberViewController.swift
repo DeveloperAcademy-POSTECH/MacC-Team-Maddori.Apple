@@ -7,6 +7,7 @@
 
 import UIKit
 
+import Alamofire
 import SnapKit
 
 final class SelectFeedbackMemberViewController: BaseViewController {
@@ -36,6 +37,11 @@ final class SelectFeedbackMemberViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCloseButtonAction()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        fetchCurrentTeamMember(type: .fetchCurrentTeamMember(teamId: 1.description, userId: 1.description))
     }
     
     override func render() {
@@ -71,5 +77,17 @@ final class SelectFeedbackMemberViewController: BaseViewController {
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.largeTitleDisplayMode = .never
         navigationItem.rightBarButtonItem = rightButton
+    }
+    
+    // MARK: - api
+    
+    private func fetchCurrentTeamMember(type: AddFeedBackEndPoint<AddReflectionDTO>) {
+        AF.request(
+            type.address,
+            method: type.method,
+            headers: type.headers
+        ).responseDecodable(of: BaseModel<TeamMembersResponse>.self) { json in
+            dump(json.value)
+        }
     }
 }
