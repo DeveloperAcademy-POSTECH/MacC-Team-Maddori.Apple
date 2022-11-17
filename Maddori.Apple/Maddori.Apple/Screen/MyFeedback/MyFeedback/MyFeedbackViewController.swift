@@ -105,6 +105,7 @@ final class MyFeedbackViewController: BaseViewController {
                    headers: type.headers
         ).responseDecodable(of: BaseModel<TeamMembersResponse>.self) { json in
             if let data = json.value {
+                // FIXME: - memberList에 데이터 넣기
                 dump(data)
             }
         }
@@ -116,6 +117,7 @@ final class MyFeedbackViewController: BaseViewController {
                    headers: type.headers
         ).responseDecodable(of: BaseModel<FeedBackInfoResponse>.self) { json in
             if let data = json.value {
+                // FIXME: - collectionView에 데이터 전달
                 dump(data)
             }
         }

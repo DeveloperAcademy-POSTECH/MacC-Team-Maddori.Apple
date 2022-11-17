@@ -268,7 +268,7 @@ final class MyFeedbackDetailViewController: BaseViewController {
     private func setupMainButton() {
         let action = UIAction { [weak self ] _ in
             // FIXME: - 내 데이터는 유저디폴트로 변경
-            self?.navigationController?.pushViewController(MyFeedbackEditViewController(from: "나", to: "케미"), animated: true)
+            self?.navigationController?.pushViewController(MyFeedbackEditViewController(to: "케미", toUserId: 0), animated: true)
         }
         feedbackEditButton.addAction(action, for: .touchUpInside)
     }

@@ -42,6 +42,7 @@
 		397E495A2924F871004220D6 /* UserDefaultStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397E49592924F871004220D6 /* UserDefaultStorage.swift */; };
 		397E495C2924F8A2004220D6 /* UserDefaultHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397E495B2924F8A2004220D6 /* UserDefaultHandler.swift */; };
 		398474222925CF4800EDC139 /* TeamInfoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398474212925CF4800EDC139 /* TeamInfoResponse.swift */; };
+		39847424292603B000EDC139 /* AddFeedBackEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39847423292603B000EDC139 /* AddFeedBackEndPoint.swift */; };
 		3984742629264ACE00EDC139 /* MyFeedBackEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3984742529264ACE00EDC139 /* MyFeedBackEndPoint.swift */; };
 		39847428292656EB00EDC139 /* VoidModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39847427292656EB00EDC139 /* VoidModel.swift */; };
 		39A64ACE2905885F001DB020 /* StartSuggestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A64ACD2905885F001DB020 /* StartSuggestionView.swift */; };
@@ -112,7 +113,8 @@
 		7E7F160B2921CC4800C6BE96 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7F160A2921CC4800C6BE96 /* CustomTabBarController.swift */; };
 		7E7F160F2921CD4A00C6BE96 /* UITabBar+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7F160E2921CD4A00C6BE96 /* UITabBar+Extension.swift */; };
 		7EB4D58229011EF7001FC396 /* JoinTeamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB4D58129011EF7001FC396 /* JoinTeamViewController.swift */; };
-		7EE38BAD2925DDD200FD738D /* CertainTeamDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE38BAC2925DDD200FD738D /* CertainTeamDTO.swift */; };
+		7EE38BAD2925DDD200FD738D /* EncodeDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE38BAC2925DDD200FD738D /* EncodeDTO.swift */; };
+		7EE38BB3292623F500FD738D /* MyReflectionEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE38BB2292623F500FD738D /* MyReflectionEndPoint.swift */; };
 		D724790C28FEC8C900D67B50 /* BaseTextFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D724790B28FEC8C900D67B50 /* BaseTextFieldViewController.swift */; };
 		D724790E28FEEEC300D67B50 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D724790D28FEEEC300D67B50 /* CustomTextField.swift */; };
 		D72CF1B0290552960067A118 /* InvitationCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72CF1AF290552960067A118 /* InvitationCodeViewController.swift */; };
@@ -160,6 +162,7 @@
 		397E49592924F871004220D6 /* UserDefaultStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultStorage.swift; sourceTree = "<group>"; };
 		397E495B2924F8A2004220D6 /* UserDefaultHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultHandler.swift; sourceTree = "<group>"; };
 		398474212925CF4800EDC139 /* TeamInfoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamInfoResponse.swift; sourceTree = "<group>"; };
+		39847423292603B000EDC139 /* AddFeedBackEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFeedBackEndPoint.swift; sourceTree = "<group>"; };
 		3984742529264ACE00EDC139 /* MyFeedBackEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFeedBackEndPoint.swift; sourceTree = "<group>"; };
 		39847427292656EB00EDC139 /* VoidModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoidModel.swift; sourceTree = "<group>"; };
 		39A64ACD2905885F001DB020 /* StartSuggestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartSuggestionView.swift; sourceTree = "<group>"; };
@@ -229,7 +232,8 @@
 		7E7F160A2921CC4800C6BE96 /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 		7E7F160E2921CD4A00C6BE96 /* UITabBar+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITabBar+Extension.swift"; sourceTree = "<group>"; };
 		7EB4D58129011EF7001FC396 /* JoinTeamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinTeamViewController.swift; sourceTree = "<group>"; };
-		7EE38BAC2925DDD200FD738D /* CertainTeamDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertainTeamDTO.swift; sourceTree = "<group>"; };
+		7EE38BAC2925DDD200FD738D /* EncodeDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncodeDTO.swift; sourceTree = "<group>"; };
+		7EE38BB2292623F500FD738D /* MyReflectionEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReflectionEndPoint.swift; sourceTree = "<group>"; };
 		D724790B28FEC8C900D67B50 /* BaseTextFieldViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTextFieldViewController.swift; sourceTree = "<group>"; };
 		D724790D28FEEEC300D67B50 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		D72CF1AF290552960067A118 /* InvitationCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationCodeViewController.swift; sourceTree = "<group>"; };
@@ -592,6 +596,7 @@
 				39F52C4E29232E8B00B19A77 /* FeedBackContentDTO.swift */,
 				7EE38BAC2925DDD200FD738D /* CertainTeamDTO.swift */,
 				39F909D6292679C400DAD0A3 /* EditFeedBackDTO.swift */,
+				7EE38BAC2925DDD200FD738D /* EncodeDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -633,7 +638,9 @@
 			isa = PBXGroup;
 			children = (
 				39F52C792924CC9600B19A77 /* SetupEndPoint.swift */,
+				39847423292603B000EDC139 /* AddFeedBackEndPoint.swift */,
 				3984742529264ACE00EDC139 /* MyFeedBackEndPoint.swift */,
+				7EE38BB2292623F500FD738D /* MyReflectionEndPoint.swift */,
 			);
 			path = EndPoint;
 			sourceTree = "<group>";
@@ -978,11 +985,12 @@
 				3E5580072906A7B200714E46 /* InProgressViewController.swift in Sources */,
 				39F52C4F29232E8B00B19A77 /* FeedBackContentDTO.swift in Sources */,
 				39436C132912877D0083D77A /* MyFeedbackHeaderView.swift in Sources */,
+				7EE38BB3292623F500FD738D /* MyReflectionEndPoint.swift in Sources */,
 				39F52C6E2924742E00B19A77 /* ReflectionResponse.swift in Sources */,
 				52294C462918F81500E81969 /* Member.swift in Sources */,
 				52988B742921EAD50044A77F /* MyReflectionFeedbackViewController.swift in Sources */,
 				395C7E1828F9912700FC2FCA /* UIButton+Extension.swift in Sources */,
-				7EE38BAD2925DDD200FD738D /* CertainTeamDTO.swift in Sources */,
+				7EE38BAD2925DDD200FD738D /* EncodeDTO.swift in Sources */,
 				3E557FC328FE7BBC00714E46 /* HomeViewController.swift in Sources */,
 				39847428292656EB00EDC139 /* VoidModel.swift in Sources */,
 				D7AFB7C72916FF9400E998B7 /* CustomSegmentControl.swift in Sources */,
@@ -1033,6 +1041,7 @@
 				39257DF128F93C2A00201E0B /* ImageLiteral.swift in Sources */,
 				395C7E252900E74700FC2FCA /* StartReflectionViewController.swift in Sources */,
 				3E557FF82901CD3400714E46 /* KeywordCollectionViewFlowLayout.swift in Sources */,
+				39847424292603B000EDC139 /* AddFeedBackEndPoint.swift in Sources */,
 				39F52C4729232DD600B19A77 /* LoginDTO.swift in Sources */,
 				39F52C592923321700B19A77 /* CertainTeamDetailResponse.swift in Sources */,
 				397E495A2924F871004220D6 /* UserDefaultStorage.swift in Sources */,

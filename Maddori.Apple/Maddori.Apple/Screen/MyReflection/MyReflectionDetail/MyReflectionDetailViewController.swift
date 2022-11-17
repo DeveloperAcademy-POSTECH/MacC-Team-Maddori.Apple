@@ -7,6 +7,7 @@
 
 import UIKit
 
+import Alamofire
 import SnapKit
 
 final class MyReflectionDetailViewController: BaseViewController {
@@ -60,6 +61,11 @@ final class MyReflectionDetailViewController: BaseViewController {
         super.viewDidLoad()
         setupBackButton()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // FIXME: reflectionId, CssType 받아오기
+        fetchCertainTypeFeedbackAll(type: .fetchCertainTypeFeedbackAllID(teamId: UserDefaultStorage.teamId, userId: UserDefaultStorage.userID, reflectionId: 3, cssType: "Continue"))
+    }
     
     override func render() {
         view.addSubview(titleLabel)
@@ -103,6 +109,22 @@ final class MyReflectionDetailViewController: BaseViewController {
             contentArray = stopArray
         }
         tableView.reloadData()
+    }
+    
+    // MARK: - api
+    
+    private func fetchCertainTypeFeedbackAll(type: MyReflectionEndPoint<EncodeDTO>) {
+        AF.request(type.address,
+                   method: type.method,
+                   headers: type.headers
+        ).responseDecodable(of: BaseModel<AllCertainTypeFeedBackResponse>.self) { json in
+            if let json = json.value {
+                
+            } else {
+                
+            }
+            print(json.response?.statusCode)
+        }
     }
     
     // MARK: - setup
