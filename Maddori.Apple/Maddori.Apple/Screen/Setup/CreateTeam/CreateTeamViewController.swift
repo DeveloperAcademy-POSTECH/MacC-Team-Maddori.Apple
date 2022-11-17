@@ -86,7 +86,6 @@ final class CreateTeamViewController: BaseTextFieldViewController {
         let action = UIAction { [weak self] _ in
             guard let teamName = self?.kigoTextField.text else { return }
             // FIXME: - header에는 user defaults에 있는 내 유저 id 값 넣기 -> 나중에는 로그인 토큰으로 변환 예정
-//            self?.dispatchCreateTeam(type: .dispatchCreateTeam(CreateTeamDTO(team_name: teamName), userId: UserDefaultStorage.userID.description))
             self?.pushInvitationViewController()
         }
         super.doneButton.addAction(action, for: .touchUpInside)
@@ -95,35 +94,14 @@ final class CreateTeamViewController: BaseTextFieldViewController {
     // MARK: - func
     
     private func pushInvitationViewController() {
-        let viewController = InvitationCodeViewController()
-        self.navigationController?.pushViewController(viewController, animated: true)
+        if let teamName = super.kigoTextField.text {
+            let viewController = InvitationCodeViewController(teamName: teamName)
+            self.navigationController?.pushViewController(viewController, animated: true)
+        }
     }
     
     private func pushHomeViewController() {
         let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
         sceneDelegate?.changeRootViewCustomTabBarView()
-    }
-    
-    // MARK: - api
-    
-    private func dispatchCreateTeam(type: SetupEndPoint<CreateTeamDTO>) {
-        AF.request(type.address,
-                   method: type.method,
-                   parameters: type.body,
-                   encoder: JSONParameterEncoder.default,
-                   headers: type.headers
-        ).responseDecodable(of: BaseModel<CreateTeamResponse>.self) { json in
-            if let json = json.value {
-                dump(json)
-                DispatchQueue.main.async {
-                    self.pushHomeViewController()
-                }
-            } else {
-                DispatchQueue.main.async {
-                    // FIXME: - UXWriting 필요
-                    self.makeAlert(title: "에러", message: "중복된 팀 이름입니다람쥐")
-                }
-            }
-        }
     }
 }

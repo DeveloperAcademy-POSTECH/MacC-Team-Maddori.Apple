@@ -7,9 +7,19 @@
 
 import UIKit
 
+import Alamofire
 import SnapKit
 
 final class InvitationCodeViewController: BaseViewController {
+    
+    let teamName: String
+    
+    init(teamName: String) {
+        self.teamName = teamName
+        super.init()
+    }
+    
+    required init?(coder: NSCoder) { nil }
     
     // MARK: - property
     private lazy var backButton: BackButton = {
@@ -27,7 +37,6 @@ final class InvitationCodeViewController: BaseViewController {
     }()
     private let invitedCodeLabel: UILabel = {
         let label = UILabel()
-        label.text = "1BCDFF"
         label.font = UIFont.font(.bold, ofSize: 32)
         return label
     }()
@@ -52,7 +61,14 @@ final class InvitationCodeViewController: BaseViewController {
         label.textColor = .gray400
         return label
     }()
+    
     // MARK: - life cycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.dispatchCreateTeam(type: .dispatchCreateTeam(CreateTeamDTO(team_name: teamName), userId: UserDefaultStorage.userID.description))
+        setupStartButton()
+    }
     
     override func setupNavigationBar() {
         super.setupNavigationBar()
@@ -63,7 +79,6 @@ final class InvitationCodeViewController: BaseViewController {
         navigationItem.largeTitleDisplayMode = .never
         navigationItem.leftBarButtonItem = backButton
     }
-    // MARK: - func
     
     override func render() {
 
@@ -97,6 +112,50 @@ final class InvitationCodeViewController: BaseViewController {
             $0.centerX.equalToSuperview()
             $0.bottom.equalTo(startButton.snp.top)
             $0.height.equalTo(SizeLiteral.minimumTouchArea)
+        }
+    }
+    
+    // MARK: - func
+    
+    private func setupCopyCodeButton() {
+        let action = UIAction { [weak self] _ in
+            UIPasteboard.general.string = self?.invitedCodeLabel.text
+        }
+        copyCodeButton.addAction(action, for: .touchUpInside)
+    }
+    
+    private func setupStartButton() {
+        let action = UIAction { [weak self] _ in
+            self?.pushHomeViewController()
+        }
+        startButton.addAction(action, for: .touchUpInside)
+    }
+    
+    private func pushHomeViewController() {
+        let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
+        sceneDelegate?.changeRootViewCustomTabBarView()
+    }
+    
+    // MARK: - api
+    
+    private func dispatchCreateTeam(type: SetupEndPoint<CreateTeamDTO>) {
+        AF.request(type.address,
+                   method: type.method,
+                   parameters: type.body,
+                   encoder: JSONParameterEncoder.default,
+                   headers: type.headers
+        ).responseDecodable(of: BaseModel<CreateTeamResponse>.self) { json in
+            if let json = json.value {
+                dump(json)
+                DispatchQueue.main.async {
+                    self.invitedCodeLabel.text = json.detail?.invitationCode
+                }
+            } else {
+                DispatchQueue.main.async {
+                    // FIXME: - UXWriting 필요
+                    self.makeAlert(title: "에러", message: "중복된 팀 이름입니다람쥐")
+                }
+            }
         }
     }
 }
