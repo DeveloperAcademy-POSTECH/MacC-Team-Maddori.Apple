@@ -87,7 +87,7 @@ final class SelectFeedbackMemberViewController: BaseViewController {
                 guard let allMemberList = data.detail?.members else { return }
                 let memberList = allMemberList.filter { $0.username != UserDefaultStorage.nickname }
                 DispatchQueue.main.async {
-                    self.memberCollectionView.memberList = memberList.map { $0.username ?? "" }
+                    self.memberCollectionView.memberList = memberList
                 }
             }
         }

@@ -22,7 +22,7 @@ final class SelectReflectionMemberViewController: BaseViewController {
     }()
     private let memberCollectionView: MemberCollectionView = {
         let collectionView = MemberCollectionView()
-        collectionView.memberList = Member.getTotalMemberList()
+//        collectionView.memberList = Member.getTotalMemberList()
         return collectionView
     }()
     private lazy var feedbackDoneButton: MainButton = {

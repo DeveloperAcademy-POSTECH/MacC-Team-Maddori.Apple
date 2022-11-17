@@ -13,7 +13,7 @@ final class MemberCollectionView: UIView {
     
     // FIXME: - 목업 데이터 추후 데이터 연결한 후 삭제할 내용
     
-    var memberList: [String] = [] {
+    var memberList: [MemberResponse] = [] {
         didSet {
             collectionView.reloadData()
         }
@@ -73,8 +73,8 @@ final class MemberCollectionView: UIView {
 
 extension MemberCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if !selectedMemberList.contains(memberList[indexPath.item]) {
-            selectedMemberList.append(memberList[indexPath.item])
+        if !selectedMemberList.contains(memberList[indexPath.item].username ?? "") {
+            selectedMemberList.append(memberList[indexPath.item].username ?? "")
         }
         didTappedMember?(selectedMemberList)
     }
@@ -90,7 +90,7 @@ extension MemberCollectionView: UICollectionViewDataSource {
             assert(false, "Wrong Cell")
             return UICollectionViewCell()
         }
-        cell.memberLabel.text = memberList[indexPath.item]
+        cell.memberLabel.text = memberList[indexPath.item].username
         return cell
     }
 }
