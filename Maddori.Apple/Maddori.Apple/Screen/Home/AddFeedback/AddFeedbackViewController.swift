@@ -7,6 +7,7 @@
 
 import UIKit
 
+import Alamofire
 import SnapKit
 
 class AddFeedbackViewController: BaseViewController {
@@ -17,14 +18,14 @@ class AddFeedbackViewController: BaseViewController {
         static let textViewMaxLength: Int = 200
     }
     var type: FeedbackButtonType = .continueType
-    var fromNickname: String
     var toNickname: String
+    var toUserId: Int
     var keywordHasText: Bool = false
     var contentHasText: Bool = false
     
-    init(from: String, to: String) {
-        self.fromNickname = from
+    init(to: String, toUserId: Int) {
         self.toNickname = to
+        self.toUserId = toUserId
         super.init()
     }
     
@@ -359,7 +360,27 @@ class AddFeedbackViewController: BaseViewController {
     }
     
     private func didTappedDoneButton() {
-        dismiss(animated: true)
+        guard let keyword = feedbackKeywordTextField.text,
+              let content = feedbackContentTextView.text
+        else { return }
+        let dto = FeedBackContentDTO(type: .continueType, keyword: keyword, content: content, start_content: feedbackStartTextView.text, to_id: toUserId)
+        dispatchAddFeedBack(type: .dispatchAddFeedBack(teamId: 1.description, reflectionId: 2.description, userId: 1.description, dto))
+    }
+    
+    // MARK: - api
+    
+    private func dispatchAddFeedBack(type: AddFeedBackEndPoint<FeedBackContentDTO>) {
+        AF.request(type.address,
+                   method: type.method,
+                   parameters: type.body,
+                   encoder: JSONParameterEncoder.default,
+                   headers: type.headers
+        ).responseDecodable(of: BaseModel<FeedBackContentResponse>.self) { json in
+            dump(json.value)
+            DispatchQueue.main.async {
+                self.dismiss(animated: true)
+            }
+        }
     }
     
     // MARK: - selector
