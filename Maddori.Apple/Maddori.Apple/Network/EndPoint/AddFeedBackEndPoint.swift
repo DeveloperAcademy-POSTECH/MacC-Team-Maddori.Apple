@@ -11,11 +11,14 @@ import Alamofire
 
 enum AddFeedBackEndPoint<T: Encodable> {
     case fetchCurrentTeamMember(teamId: String, userId: String)
+    case dispatchAddFeedBack(teamId: String, reflectionId: String, userId: String, T)
     
     var address: String {
         switch self {
         case .fetchCurrentTeamMember(let teamId, _):
             return "\(UrlLiteral.baseUrl)/teams/\(teamId)/members"
+        case .dispatchAddFeedBack(let teamId, let reflectionId, _, _):
+            return "\(UrlLiteral.baseUrl)/teams/\(teamId)/reflections/\(reflectionId)/feedbacks"
         }
     }
 
@@ -23,6 +26,8 @@ enum AddFeedBackEndPoint<T: Encodable> {
         switch self {
         case .fetchCurrentTeamMember:
             return .get
+        case .dispatchAddFeedBack:
+            return .post
         }
     }
     
@@ -30,14 +35,19 @@ enum AddFeedBackEndPoint<T: Encodable> {
         switch self {
         case .fetchCurrentTeamMember:
             return nil
+        case .dispatchAddFeedBack(_, _, _, let body):
+            return body
         }
     }
     
     var headers: HTTPHeaders? {
         switch self {
         case .fetchCurrentTeamMember(_, let userId):
-            let header = ["user_id": userId]
-            return HTTPHeaders(header)
+            let headers = ["user_id": userId]
+            return HTTPHeaders(headers)
+        case .dispatchAddFeedBack(_, _, let userId, _):
+            let headers = ["user_id": userId]
+            return HTTPHeaders(headers)
         }
     }
 }
