@@ -68,7 +68,7 @@ final class HomeViewController: BaseViewController {
      }()
     private let descriptionLabel: UILabel = {
         let label = UILabel()
-        label.text = "아직 회고 일정이 정해지지 않았습니다"
+//        label.text = "아직 회고 일정이 정해지지 않았습니다"
         label.font = .caption1
         label.textColor = .gray400
         return label
@@ -115,12 +115,14 @@ final class HomeViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        // FIXME: - teamId 와 userId는 일단은 UserDefaults에서 -> 추후에 토큰으로
-//        fetchCertainTeamDetail(type: .fetchCertainTeamDetail(teamId: UserDefaultStorage.teamID, userId: UserDefaultStorage.userID))
-//        fetchCurrentReflectionDetail(type: .fetchCurrentReflectionDetail(teamId: UserDefaultStorage.teamID, userId: UserDefaultStorage.userID))
+        
         // FIXME: - 테스트용으로는 넣어둔 데이터 -> UserDefaults로
         fetchCertainTeamDetail(type: .fetchCertainTeamDetail(teamId: 40, userId: 83))
         fetchCurrentReflectionDetail(type: .fetchCurrentReflectionDetail(teamId: 40, userId: 83))
+        
+        // FIXME: - teamId 와 userId는 일단은 UserDefaults에서 -> 추후에 토큰으로
+//        fetchCertainTeamDetail(type: .fetchCertainTeamDetail(teamId: UserDefaultStorage.teamID, userId: UserDefaultStorage.userID))
+//        fetchCurrentReflectionDetail(type: .fetchCurrentReflectionDetail(teamId: UserDefaultStorage.teamID, userId: UserDefaultStorage.userID))
     }
     
     override func configUI() {
@@ -229,6 +231,16 @@ final class HomeViewController: BaseViewController {
         present(viewController, animated: true)
     }
     
+    private func showStartReflectionView() {
+        let viewController = StartReflectionViewController()
+        viewController.modalPresentationStyle = .overFullScreen
+        viewController.dismissChildView = { [weak self] in
+            self?.dismiss(animated: true)
+        }
+        present(viewController, animated: true)
+        // FIXME: - 모달 띄우고 시작하기만 가능한 건 동작을 너무 제한시킴 -> 추가하기 버튼이 채워지면서 시작하기로 바뀌는건 어떨까?
+    }
+    
     private func convertFetchedKeywordList(of list: [String]) {
         keywordList = []
         for i in 0..<list.count {
@@ -259,11 +271,25 @@ final class HomeViewController: BaseViewController {
                    headers: type.header
         ).responseDecodable(of: BaseModel<CurrentReflectionResponse>.self) { json in
             if let json = json.value {
-                guard let previewKeywordList = json.detail?.reflectionKeywords else { return }
-                if previewKeywordList.count > 0 {
-                    self.convertFetchedKeywordList(of: previewKeywordList)
+                
+                let reflectionDetail = json.detail
+                guard let reflectionDate = reflectionDetail?.reflectionDate?.formatDateString(to: "MM월 dd일 HH시") else { return }
+                guard let reflectionStatus = reflectionDetail?.reflectionStatus else { return }
+                guard let reflectionKeywordList = reflectionDetail?.reflectionKeywords else { return }
+                
+                if reflectionKeywordList.count > 0 {
+                    self.convertFetchedKeywordList(of: reflectionKeywordList)
                     DispatchQueue.main.async {
-                        self.flowLayout.count = previewKeywordList.count
+                        switch reflectionStatus {
+                        case .SettingRequired, .Done:
+                            self.descriptionLabel.text = "아직 회고 일정이 정해지지 않았습니다"
+                        case .Before:
+                            self.descriptionLabel.text = "다음 회고는 \(reflectionDate)입니다"
+                        case .Progressing:
+                            self.descriptionLabel.text = "다음 회고는 \(reflectionDate)입니다"
+                            self.showStartReflectionView()
+                        }
+                        self.flowLayout.count = reflectionKeywordList.count
                         self.keywordCollectionView.reloadData()
                     }
                 }

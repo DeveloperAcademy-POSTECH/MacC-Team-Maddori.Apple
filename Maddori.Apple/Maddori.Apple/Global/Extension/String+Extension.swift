@@ -6,3 +6,16 @@
 //
 
 import Foundation
+
+extension String {
+    func formatDateString(to format: String) -> String {
+        let stringToDateFormatter = DateFormatter()
+        stringToDateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        
+        guard let date: Date = stringToDateFormatter.date(from: self) else { return "" }
+        let dateToStringFormatter = DateFormatter()
+        dateToStringFormatter.dateFormat = format
+        
+        return dateToStringFormatter.string(from: date)
+    }
+}
