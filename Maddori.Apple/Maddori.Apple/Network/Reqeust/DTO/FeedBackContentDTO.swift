@@ -14,8 +14,9 @@ struct FeedBackContentDTO: Encodable {
     let start_content: String
     let to_id: Int
     
-    enum FeedBackDTO: String, Encodable {
-        case continueType = "Continue"
-        case stopType = "Stop"
-    }
+}
+
+enum FeedBackDTO: String, Encodable {
+    case continueType = "Continue"
+    case stopType = "Stop"
 }
