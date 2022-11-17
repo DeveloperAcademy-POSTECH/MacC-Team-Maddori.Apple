@@ -11,6 +11,7 @@ enum DataKeys: String, CaseIterable {
     case isLogin = "isLogin"
     case userID = "userID"
     case nickname = "nickname"
+    case teamId = "teamId"
 }
 
 struct UserDefaultStorage {
@@ -24,6 +25,10 @@ struct UserDefaultStorage {
         
     static var nickname: String {
         return UserData<String>.getValue(forKey: .nickname) ?? ""
+    }
+    
+    static var teamId: Int {
+        return UserData<Int>.getValue(forKey: .teamId) ?? 1
     }
 }
 
