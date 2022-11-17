@@ -49,7 +49,7 @@ final class MyReflectionViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        dispatchAllReflection(type: .fetchPastReflectionList(userId: 1))
+        dispatchAllReflection(type: .fetchPastReflectionList(teamId: 63, userId: 122))
     }
     
     override func render() {
@@ -145,3 +145,8 @@ extension MyReflectionViewController: UICollectionViewDelegateFlowLayout {
         return CGSize(width: view.frame.width, height: Size.headerHeight)
     }
 }
+
+
+//홀리몰리
+//userid 122
+//teamid 63

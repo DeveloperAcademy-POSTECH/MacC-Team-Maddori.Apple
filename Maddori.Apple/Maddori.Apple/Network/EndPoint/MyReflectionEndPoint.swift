@@ -8,18 +8,23 @@
 import Alamofire
 
 enum MyReflectionEndPoint<T: Encodable> {
-    case fetchPastReflectionList(userId: Int)
+    case fetchPastReflectionList(teamId: Int ,userId: Int)
+    case fetchCertainTypeFeedbackAllID(teamId:Int, userId: Int, reflectionId: Int, cssType: String)
     
     var address: String {
         switch self {
-        case .fetchPastReflectionList(let teamId):
+        case .fetchPastReflectionList(let teamId, _):
             return "\(UrlLiteral.baseUrl)/teams/\(teamId)/reflections"
+        case .fetchCertainTypeFeedbackAllID(let teamId, _, let reflectionId, _):
+            return "\(UrlLiteral.baseUrl)/teams/\(teamId)/reflections/\(reflectionId)/feedbacks"
         }
     }
     
     var method: HTTPMethod {
         switch self {
         case .fetchPastReflectionList:
+            return .get
+        case .fetchCertainTypeFeedbackAllID:
             return .get
         }
     }
@@ -28,12 +33,17 @@ enum MyReflectionEndPoint<T: Encodable> {
         switch self {
         case .fetchPastReflectionList:
             return nil
+        case .fetchCertainTypeFeedbackAllID:
+            return nil
         }
     }
     
     var headers: HTTPHeaders? {
         switch self {
-        case .fetchPastReflectionList(let userId):
+        case .fetchPastReflectionList(_, let userId):
+            let headers = ["user_id": "\(userId)"]
+            return HTTPHeaders(headers)
+        case .fetchCertainTypeFeedbackAllID(_, let userId, _, _):
             let headers = ["user_id": "\(userId)"]
             return HTTPHeaders(headers)
         }
