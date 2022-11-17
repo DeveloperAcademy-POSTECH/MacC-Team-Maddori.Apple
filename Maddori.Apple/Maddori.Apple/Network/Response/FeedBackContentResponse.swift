@@ -8,6 +8,7 @@
 import Foundation
 
 struct FeedBackContentResponse: Decodable {
+    // MARK: - createFeedback
     let id: Int?
     let type: String?
     let keyword: String?
@@ -17,6 +18,7 @@ struct FeedBackContentResponse: Decodable {
     let toId: Int?
     let teamId: Int?
     let reflectionId: Int?
+    let fromUser: MemberResponse?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -28,5 +30,6 @@ struct FeedBackContentResponse: Decodable {
         case toId = "to_id"
         case teamId = "team_id"
         case reflectionId = "reflection_id"
+        case fromUser = "from_user"
     }
 }
