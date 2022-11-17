@@ -7,6 +7,7 @@
 
 import UIKit
 
+import Alamofire
 import SnapKit
 
 class AddFeedbackViewController: BaseViewController {
@@ -16,15 +17,15 @@ class AddFeedbackViewController: BaseViewController {
         static let keywordMaxLength: Int = 15
         static let textViewMaxLength: Int = 200
     }
-    var type: FeedbackButtonType = .continueType
-    var fromNickname: String
+    var type: FeedBackDTO = .continueType
     var toNickname: String
+    var toUserId: Int
     var keywordHasText: Bool = false
     var contentHasText: Bool = false
     
-    init(from: String, to: String) {
-        self.fromNickname = from
+    init(to: String, toUserId: Int) {
         self.toNickname = to
+        self.toUserId = toUserId
         super.init()
     }
     
@@ -70,7 +71,7 @@ class AddFeedbackViewController: BaseViewController {
     lazy var feedbackTypeButtonView: FeedbackTypeButtonView = {
         let view = FeedbackTypeButtonView()
         view.changeFeedbackType = { [weak self] type in
-            if let typeValue = FeedbackButtonType.init(rawValue: type.rawValue) {
+            if let typeValue = FeedBackDTO.init(rawValue: type.rawValue) {
                 self?.type = typeValue
             }
         }
@@ -359,7 +360,29 @@ class AddFeedbackViewController: BaseViewController {
     }
     
     private func didTappedDoneButton() {
-        dismiss(animated: true)
+        let startContent = feedbackStartSwitch.isOn ? feedbackStartTextView.text : nil
+        guard let keyword = feedbackKeywordTextField.text,
+              let content = feedbackContentTextView.text
+        else { return }
+        let dto = FeedBackContentDTO(type: type, keyword: keyword, content: content, start_content: startContent, to_id: toUserId)
+        // FIXME: - 각 id들 UserDefault에 저장되어 있는 값을 불러와야 함.
+        dispatchAddFeedBack(type: .dispatchAddFeedBack(teamId: 1, reflectionId: 2, userId: 1, dto))
+    }
+    
+    // MARK: - api
+    
+    private func dispatchAddFeedBack(type: AddFeedBackEndPoint<FeedBackContentDTO>) {
+        AF.request(type.address,
+                   method: type.method,
+                   parameters: type.body,
+                   encoder: JSONParameterEncoder.default,
+                   headers: type.headers
+        ).responseDecodable(of: BaseModel<FeedBackContentResponse>.self) { json in
+            dump(json.value)
+            DispatchQueue.main.async {
+                self.dismiss(animated: true)
+            }
+        }
     }
     
     // MARK: - selector

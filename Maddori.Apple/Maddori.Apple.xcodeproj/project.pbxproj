@@ -42,6 +42,7 @@
 		397E495A2924F871004220D6 /* UserDefaultStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397E49592924F871004220D6 /* UserDefaultStorage.swift */; };
 		397E495C2924F8A2004220D6 /* UserDefaultHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397E495B2924F8A2004220D6 /* UserDefaultHandler.swift */; };
 		398474222925CF4800EDC139 /* TeamInfoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398474212925CF4800EDC139 /* TeamInfoResponse.swift */; };
+		39847424292603B000EDC139 /* AddFeedBackEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39847423292603B000EDC139 /* AddFeedBackEndPoint.swift */; };
 		3984742629264ACE00EDC139 /* MyFeedBackEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3984742529264ACE00EDC139 /* MyFeedBackEndPoint.swift */; };
 		39A64ACE2905885F001DB020 /* StartSuggestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A64ACD2905885F001DB020 /* StartSuggestionView.swift */; };
 		39F1A13529125762005E3456 /* MyFeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F1A13429125762005E3456 /* MyFeedbackViewController.swift */; };
@@ -159,6 +160,7 @@
 		397E49592924F871004220D6 /* UserDefaultStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultStorage.swift; sourceTree = "<group>"; };
 		397E495B2924F8A2004220D6 /* UserDefaultHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultHandler.swift; sourceTree = "<group>"; };
 		398474212925CF4800EDC139 /* TeamInfoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamInfoResponse.swift; sourceTree = "<group>"; };
+		39847423292603B000EDC139 /* AddFeedBackEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFeedBackEndPoint.swift; sourceTree = "<group>"; };
 		3984742529264ACE00EDC139 /* MyFeedBackEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFeedBackEndPoint.swift; sourceTree = "<group>"; };
 		39A64ACD2905885F001DB020 /* StartSuggestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartSuggestionView.swift; sourceTree = "<group>"; };
 		39F1A13429125762005E3456 /* MyFeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFeedbackViewController.swift; sourceTree = "<group>"; };
@@ -629,6 +631,7 @@
 			isa = PBXGroup;
 			children = (
 				39F52C792924CC9600B19A77 /* SetupEndPoint.swift */,
+				39847423292603B000EDC139 /* AddFeedBackEndPoint.swift */,
 				3984742529264ACE00EDC139 /* MyFeedBackEndPoint.swift */,
 				7EE38BB2292623F500FD738D /* MyReflectionEndPoint.swift */,
 			);
@@ -1029,6 +1032,7 @@
 				39257DF128F93C2A00201E0B /* ImageLiteral.swift in Sources */,
 				395C7E252900E74700FC2FCA /* StartReflectionViewController.swift in Sources */,
 				3E557FF82901CD3400714E46 /* KeywordCollectionViewFlowLayout.swift in Sources */,
+				39847424292603B000EDC139 /* AddFeedBackEndPoint.swift in Sources */,
 				39F52C4729232DD600B19A77 /* LoginDTO.swift in Sources */,
 				39F52C592923321700B19A77 /* CertainTeamDetailResponse.swift in Sources */,
 				397E495A2924F871004220D6 /* UserDefaultStorage.swift in Sources */,
