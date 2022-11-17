@@ -7,6 +7,7 @@
 
 import UIKit
 
+import Alamofire
 import SnapKit
 
 final class MyReflectionViewController: BaseViewController {
@@ -46,6 +47,11 @@ final class MyReflectionViewController: BaseViewController {
         setUpDelegation()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        dispatchAllReflection(type: .fetchPastReflectionList(userId: 1))
+    }
+    
     override func render() {
         view.addSubview(myReflectionTitleLabel)
         myReflectionTitleLabel.snp.makeConstraints {
@@ -66,6 +72,20 @@ final class MyReflectionViewController: BaseViewController {
     private func setUpDelegation() {
         reflectionCollectionView.delegate = self
         reflectionCollectionView.dataSource = self
+    }
+    
+    // MARK: - api
+    
+    private func dispatchAllReflection(type: MyReflectionEndPoint<AllReflectionDTO>) {
+        AF.request(type.address,
+                   method: type.method,
+                   headers: type.headers
+        ).responseDecodable(of: BaseModel<AllReflectionResponse>.self) { json in
+            if let json = json.value {
+                dump(json)
+            }
+            print(json.response?.statusCode)
+        }
     }
 }
 
