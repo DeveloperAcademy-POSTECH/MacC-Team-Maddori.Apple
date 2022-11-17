@@ -65,7 +65,7 @@ final class MyFeedbackViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        fetchCurrentTeamMember(type: .fetchCurrentTeamMember(teamId: 1, userId: 1))
+        fetchCurrentTeamMember(type: .fetchCurrentTeamMember(teamId: 1, userId: 1))
         fetchCertainMemberFeedBack(type: .fetchCertainMemberFeedBack(teamId: 1, memberId: 2, userId: 1))
     }
     
