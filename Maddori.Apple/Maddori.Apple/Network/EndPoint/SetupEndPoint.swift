@@ -10,7 +10,8 @@ import Alamofire
 enum SetupEndPoint<T: Encodable> {
     case dispatchLogin(T)
     case dispatchCreateTeam(T, userId: String)
-    case dispatchJoinTeam(T, userId: String)
+    case dispatchJoinTeam(teamId: Int, userId: String)
+    case fetchCertainTeam(invitationCode: String, userId: String)
     
     var address: String {
         switch self {
@@ -18,8 +19,10 @@ enum SetupEndPoint<T: Encodable> {
             return "\(UrlLiteral.baseUrl)/users/login"
         case .dispatchCreateTeam:
             return "\(UrlLiteral.baseUrl)/teams"
-        case .dispatchJoinTeam:
-            return "\(UrlLiteral.baseUrl)/users/join-team"
+        case .dispatchJoinTeam(let teamId, _):
+            return "\(UrlLiteral.baseUrl)/users/join-team/\(teamId)"
+        case .fetchCertainTeam(let invitationCode, _):
+            return "\(UrlLiteral.baseUrl)/teams?invitation_code=\(invitationCode)"
         }
     }
 
@@ -31,6 +34,8 @@ enum SetupEndPoint<T: Encodable> {
             return .post
         case .dispatchJoinTeam:
             return .post
+        case .fetchCertainTeam:
+            return .get
         }
     }
     
@@ -40,8 +45,10 @@ enum SetupEndPoint<T: Encodable> {
             return body
         case .dispatchCreateTeam(let body, _):
             return body
-        case .dispatchJoinTeam(let body, _):
-            return body
+        case .dispatchJoinTeam:
+            return nil
+        case .fetchCertainTeam:
+            return nil
         }
     }
     
@@ -53,6 +60,9 @@ enum SetupEndPoint<T: Encodable> {
             let headers = ["user_id": userId]
             return HTTPHeaders(headers)
         case .dispatchJoinTeam(_, let userId):
+            let headers = ["user_id": userId]
+            return HTTPHeaders(headers)
+        case .fetchCertainTeam(_, let userId):
             let headers = ["user_id": userId]
             return HTTPHeaders(headers)
         }

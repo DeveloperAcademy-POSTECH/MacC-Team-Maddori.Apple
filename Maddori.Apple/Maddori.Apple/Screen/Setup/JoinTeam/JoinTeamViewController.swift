@@ -106,7 +106,8 @@ final class JoinTeamViewController: BaseTextFieldViewController {
         let action = UIAction { [weak self] _ in
             guard let invitationCode = self?.kigoTextField.text else { return }
             // FIXME: - userId는 우선 UserDefaults로 변경. -> 이후엔 토큰으로 처리
-            self?.dispatchJoinTeam(type: .dispatchJoinTeam(JoinTeamDTO(invitation_code: invitationCode), userId: 18.description))
+//            self?.dispatchJoinTeam(type: .dispatchJoinTeam(teamId: 1, userId: 18.description))
+            self?.fetchCertainTeam(type: .fetchCertainTeam(invitationCode: invitationCode, userId: 19.description))
         }
         super.doneButton.addAction(action, for: .touchUpInside)
     }
@@ -119,26 +120,23 @@ final class JoinTeamViewController: BaseTextFieldViewController {
         rootViewController.modalPresentationStyle = .fullScreen
         present(rootViewController, animated: true)
     }
-    
-    private func pushHomeViewController() {
-        let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
-        sceneDelegate?.changeRootViewCustomTabBarView()
+        
+    private func presentCertainTeamViewController(teamName: String, teamId: Int) {
+        self.showAlertView(type: .join,teamName: teamName, teamId: teamId)
     }
     
     // MARK: - api
     
-    private func dispatchJoinTeam(type: SetupEndPoint<JoinTeamDTO>) {
+    private func fetchCertainTeam(type: SetupEndPoint<CertainTeamDTO>) {
         AF.request(type.address,
                    method: type.method,
-                   parameters: type.body,
-                   encoder: JSONParameterEncoder.default,
                    headers: type.headers
-        ).responseDecodable(of: BaseModel<JoinTeamResponse>.self) { json in
+        ).responseDecodable(of: BaseModel<TeamInfoResponse>.self) { json in
             if let json = json.value {
-                dump(json)
-                DispatchQueue.main.async {
-                    self.pushHomeViewController()
-                }
+                guard let teamId = json.detail?.id,
+                      let teamName = json.detail?.teamName
+                else { return }
+                self.presentCertainTeamViewController(teamName: teamName, teamId: teamId)
             } else {
                 DispatchQueue.main.async {
                     // FIXME: - UXWriting 필요
