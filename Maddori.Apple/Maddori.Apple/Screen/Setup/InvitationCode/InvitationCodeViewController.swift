@@ -12,7 +12,14 @@ import SnapKit
 final class InvitationCodeViewController: BaseViewController {
     
     // MARK: - property
-    
+    private lazy var backButton: BackButton = {
+        let button = BackButton()
+        let action = UIAction { [weak self] _ in
+            self?.navigationController?.popViewController(animated: true)
+        }
+        button.addAction(action, for: .touchUpInside)
+        return button
+    }()
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.setTitleFont(text: TextLiteral.invitationCodeViewControllerTitleLabel)
@@ -47,6 +54,15 @@ final class InvitationCodeViewController: BaseViewController {
     }()
     // MARK: - life cycle
     
+    override func setupNavigationBar() {
+        super.setupNavigationBar()
+        
+        let button = removeBarButtonItemOffset(with: backButton, offsetX: 10)
+        let backButton = makeBarButtonItem(with: button)
+        navigationController?.navigationBar.prefersLargeTitles = false
+        navigationItem.largeTitleDisplayMode = .never
+        navigationItem.leftBarButtonItem = backButton
+    }
     // MARK: - func
     
     override func render() {

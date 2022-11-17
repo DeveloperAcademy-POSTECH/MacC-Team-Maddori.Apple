@@ -86,12 +86,18 @@ final class CreateTeamViewController: BaseTextFieldViewController {
         let action = UIAction { [weak self] _ in
             guard let teamName = self?.kigoTextField.text else { return }
             // FIXME: - header에는 user defaults에 있는 내 유저 id 값 넣기 -> 나중에는 로그인 토큰으로 변환 예정
-            self?.dispatchCreateTeam(type: .dispatchCreateTeam(CreateTeamDTO(team_name: teamName), userId: UserDefaultStorage.userID.description))
+//            self?.dispatchCreateTeam(type: .dispatchCreateTeam(CreateTeamDTO(team_name: teamName), userId: UserDefaultStorage.userID.description))
+            self?.pushInvitationViewController()
         }
         super.doneButton.addAction(action, for: .touchUpInside)
     }
     
     // MARK: - func
+    
+    private func pushInvitationViewController() {
+        let viewController = InvitationCodeViewController()
+        self.navigationController?.pushViewController(viewController, animated: true)
+    }
     
     private func pushHomeViewController() {
         let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
