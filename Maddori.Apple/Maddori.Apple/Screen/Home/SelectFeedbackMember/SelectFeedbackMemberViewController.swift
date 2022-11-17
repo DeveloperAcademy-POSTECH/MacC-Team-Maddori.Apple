@@ -25,7 +25,6 @@ final class SelectFeedbackMemberViewController: BaseViewController {
     }()
     private lazy var memberCollectionView: MemberCollectionView = {
         let collectionView = MemberCollectionView()
-        collectionView.memberList = Member.getMemberListExceptUser()
         collectionView.didTappedMember = { [weak self] arr in
             self?.navigationController?.pushViewController(AddFeedbackViewController(from: "나", to: arr.last ?? "팀원"), animated: true)
         }
@@ -37,10 +36,6 @@ final class SelectFeedbackMemberViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCloseButtonAction()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         fetchCurrentTeamMember(type: .fetchCurrentTeamMember(teamId: 1.description, userId: 1.description))
     }
     
@@ -88,6 +83,13 @@ final class SelectFeedbackMemberViewController: BaseViewController {
             headers: type.headers
         ).responseDecodable(of: BaseModel<TeamMembersResponse>.self) { json in
             dump(json.value)
+            if let data = json.value {
+                guard let allMemberList = data.detail?.members else { return }
+                let memberList = allMemberList.filter { $0.username != UserDefaultStorage.nickname }
+                DispatchQueue.main.async {
+                    self.memberCollectionView.memberList = memberList.map { $0.username ?? "" }
+                }
+            }
         }
     }
 }
