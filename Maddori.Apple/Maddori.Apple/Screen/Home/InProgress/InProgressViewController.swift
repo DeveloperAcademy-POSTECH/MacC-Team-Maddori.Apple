@@ -7,6 +7,7 @@
 
 import UIKit
 
+import Alamofire
 import SnapKit
 
 final class InProgressViewController: BaseViewController {
@@ -66,6 +67,7 @@ final class InProgressViewController: BaseViewController {
         super.viewDidLoad()
         setUpDelegation()
         setUpKeywordType()
+        fetchTeamAndUserFeedback(type: .fetchTeamAndUserFeedback(reflectionId: 67, teamId: 63, memberId: 122, userId: 123))
     }
     
     // MARK: - func
@@ -123,6 +125,17 @@ final class InProgressViewController: BaseViewController {
             }
             keywordsSectionList.append(myKeywords)
             keywordsSectionList.append(otherKeywords)
+        }
+    }
+    
+    // MARK: - api
+    
+    private func fetchTeamAndUserFeedback(type: InProgressEndPoint) {
+        AF.request(type.address,
+                   method: type.method,
+                   headers: type.header
+        ).responseDecodable(of: BaseModel<AllFeedBackResponse>.self) { json in
+            dump(json)
         }
     }
 }
