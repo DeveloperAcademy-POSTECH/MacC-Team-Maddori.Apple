@@ -11,15 +11,22 @@ import SnapKit
 
 final class MemberCollectionView: UIView {
     
+    enum CollectionType {
+        case addFeedback
+        case selectMember
+    }
     // FIXME: - 목업 데이터 추후 데이터 연결한 후 삭제할 내용
     
+    var type: CollectionType
+    var currentToUserId = 0
     var memberList: [MemberResponse] = [] {
         didSet {
             collectionView.reloadData()
         }
     }
-    var didTappedMember: (([String]) -> ())?
-    private var selectedMemberList: [String] = []
+    var didTappedMember: (([MemberResponse]) -> ())?
+    var didTappedFeedBackMember: ((MemberResponse) -> ())?
+    private var selectedMemberList: [MemberResponse] = []
     private enum Size {
         static let collectionHorizontalSpacing: CGFloat = 14
         static let collectionTopSpacing: CGFloat = 40
@@ -54,8 +61,9 @@ final class MemberCollectionView: UIView {
     
     // MARK: - life cycle
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init(type: CollectionType) {
+        self.type = type
+        super.init(frame: .zero)
         render()
     }
     
@@ -73,10 +81,17 @@ final class MemberCollectionView: UIView {
 
 extension MemberCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if !selectedMemberList.contains(memberList[indexPath.item].username ?? "") {
-            selectedMemberList.append(memberList[indexPath.item].username ?? "")
+        switch type {
+        case .addFeedback:
+            didTappedFeedBackMember?(memberList[indexPath.item])
+        case .selectMember:
+            if !selectedMemberList.contains(where: { $0.username == memberList[indexPath.item].username} ) {
+                selectedMemberList.append(memberList[indexPath.item])
+            }
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MemberCollectionViewCell.className, for: indexPath) as? MemberCollectionViewCell else { return }
+            cell.setupAttribute()
+            didTappedMember?(selectedMemberList)
         }
-        didTappedMember?(selectedMemberList)
     }
 }
 
