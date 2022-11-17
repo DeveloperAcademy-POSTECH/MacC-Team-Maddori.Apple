@@ -116,8 +116,11 @@ final class HomeViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         // FIXME: - teamId 와 userId는 일단은 UserDefaults에서 -> 추후에 토큰으로
-        fetchCertainTeamDetail(type: .fetchCertainTeamDetail(teamId: "40", userId: "83"))
-        fetchCurrentReflectionDetail(type: .fetchCurrentReflectionDetail(teamId: "40", userId: "83"))
+//        fetchCertainTeamDetail(type: .fetchCertainTeamDetail(teamId: UserDefaultStorage.teamID, userId: UserDefaultStorage.userID))
+//        fetchCurrentReflectionDetail(type: .fetchCurrentReflectionDetail(teamId: UserDefaultStorage.teamID, userId: UserDefaultStorage.userID))
+        // FIXME: - 테스트용으로는 넣어둔 데이터 -> UserDefaults로
+        fetchCertainTeamDetail(type: .fetchCertainTeamDetail(teamId: 40, userId: 83))
+        fetchCurrentReflectionDetail(type: .fetchCurrentReflectionDetail(teamId: 40, userId: 83))
     }
     
     override func configUI() {
