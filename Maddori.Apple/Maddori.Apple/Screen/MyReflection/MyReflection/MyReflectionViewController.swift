@@ -49,7 +49,7 @@ final class MyReflectionViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        dispatchAllReflection(type: .fetchPastReflectionList(teamId: 63, userId: 122))
+        dispatchAllReflection(type: .fetchPastReflectionList(teamId: UserDefaultStorage.teamId, userId: UserDefaultStorage.userID))
     }
     
     override func render() {
@@ -76,7 +76,7 @@ final class MyReflectionViewController: BaseViewController {
     
     // MARK: - api
     
-    private func dispatchAllReflection(type: MyReflectionEndPoint<AllReflectionDTO>) {
+    private func dispatchAllReflection(type: MyReflectionEndPoint<EncodeDTO>) {
         AF.request(type.address,
                    method: type.method,
                    headers: type.headers
@@ -145,8 +145,3 @@ extension MyReflectionViewController: UICollectionViewDelegateFlowLayout {
         return CGSize(width: view.frame.width, height: Size.headerHeight)
     }
 }
-
-
-//홀리몰리
-//userid 122
-//teamid 63

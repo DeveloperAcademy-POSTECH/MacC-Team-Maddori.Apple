@@ -15,8 +15,8 @@ enum MyReflectionEndPoint<T: Encodable> {
         switch self {
         case .fetchPastReflectionList(let teamId, _):
             return "\(UrlLiteral.baseUrl)/teams/\(teamId)/reflections"
-        case .fetchCertainTypeFeedbackAllID(let teamId, _, let reflectionId, _):
-            return "\(UrlLiteral.baseUrl)/teams/\(teamId)/reflections/\(reflectionId)/feedbacks"
+        case .fetchCertainTypeFeedbackAllID(let teamId, _, let reflectionId, let cssType):
+            return "\(UrlLiteral.baseUrl)/teams/\(teamId)/reflections/\(reflectionId)/feedbacks?type=\(cssType)"
         }
     }
     
