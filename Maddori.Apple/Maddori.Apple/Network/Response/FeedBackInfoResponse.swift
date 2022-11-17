@@ -8,6 +8,7 @@
 import Foundation
 
 struct FeedBackInfoResponse: Decodable {
+    // MARK: - getFromMeToCertainMemberFeedbackAll
     let teamId: Int?
     let reflectionId: Int?
     let reflectionName: String?

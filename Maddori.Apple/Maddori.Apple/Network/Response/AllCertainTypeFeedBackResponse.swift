@@ -8,5 +8,6 @@
 import Foundation
 
 struct AllCertainTypeFeedBackResponse: Decodable {
+    // MARK: - getCertainTypeFeedbackAll-id
     let feedback: [FeedBackResponse]
 }

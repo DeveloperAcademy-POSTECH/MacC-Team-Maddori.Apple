@@ -8,6 +8,7 @@
 import Foundation
 
 struct KeywordResponse: Decodable {
+    // FIXME: - 사용이 안되는 거 같은데 ???
     let keyword: String?
     let content: String?
     let startContent: String?

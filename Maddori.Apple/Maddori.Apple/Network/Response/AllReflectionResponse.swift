@@ -8,5 +8,6 @@
 import Foundation
 
 struct AllReflectionResponse: Decodable {
+    // MARK: - getPastReflectionList
     let reflection: [ReflectionResponse]?
 }

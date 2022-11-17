@@ -8,5 +8,6 @@
 import Foundation
 
 struct ReflectionInfoResponse: Decodable {
+    // MARK: - endInProgressReflection
     let reflection: ReflectionResponse?
 }
