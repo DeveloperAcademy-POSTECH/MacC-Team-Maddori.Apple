@@ -9,9 +9,9 @@ import Alamofire
 
 enum SetupEndPoint<T: Encodable> {
     case dispatchLogin(T)
-    case dispatchCreateTeam(T, userId: String)
-    case dispatchJoinTeam(teamId: Int, userId: String)
-    case fetchCertainTeam(invitationCode: String, userId: String)
+    case dispatchCreateTeam(T, userId: Int)
+    case dispatchJoinTeam(teamId: Int, userId: Int)
+    case fetchCertainTeam(invitationCode: String, userId: Int)
     
     var address: String {
         switch self {
@@ -57,13 +57,13 @@ enum SetupEndPoint<T: Encodable> {
         case .dispatchLogin:
             return nil
         case .dispatchCreateTeam(_, let userId):
-            let headers = ["user_id": userId]
+            let headers = ["user_id": "\(userId)"]
             return HTTPHeaders(headers)
         case .dispatchJoinTeam(_, let userId):
-            let headers = ["user_id": userId]
+            let headers = ["user_id": "\(userId)"]
             return HTTPHeaders(headers)
         case .fetchCertainTeam(_, let userId):
-            let headers = ["user_id": userId]
+            let headers = ["user_id": "\(userId)"]
             return HTTPHeaders(headers)
         }
     }

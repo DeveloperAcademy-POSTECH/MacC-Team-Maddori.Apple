@@ -222,7 +222,7 @@ final class AlertViewController: BaseViewController {
         case .join:
             // FIXME: - 팀 합류 api 연결
             self.pushHomeViewController()
-            print("Join")
+            dispatchJoinTeam(type: .dispatchJoinTeam(teamId: teamId ?? 0, userId: UserDefaultStorage.userID))
         }
         self.dismiss(animated: true) {
             self.navigation?.popViewController(animated: true)
