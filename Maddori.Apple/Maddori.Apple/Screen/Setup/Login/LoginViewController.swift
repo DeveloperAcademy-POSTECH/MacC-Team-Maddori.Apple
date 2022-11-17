@@ -50,7 +50,6 @@ final class LoginViewController: BaseViewController {
     override func configUI() {
         super.configUI()
         setGradientText()
-        print(UserDefaultStorage.teamId)
     }
     
     override func render() {
