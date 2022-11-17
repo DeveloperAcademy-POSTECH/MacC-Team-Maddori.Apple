@@ -99,7 +99,7 @@ final class MyFeedbackViewController: BaseViewController {
     
     // MARK: - api
     
-    private func fetchCurrentTeamMember(type: MyFeedBackEndPoint) {
+    private func fetchCurrentTeamMember(type: MyFeedBackEndPoint<VoidModel>) {
         AF.request(type.address,
                    method: type.method,
                    headers: type.headers
@@ -110,7 +110,7 @@ final class MyFeedbackViewController: BaseViewController {
         }
     }
     
-    private func fetchCertainMemberFeedBack(type: MyFeedBackEndPoint) {
+    private func fetchCertainMemberFeedBack(type: MyFeedBackEndPoint<VoidModel>) {
         AF.request(type.address,
                    method: .get,
                    headers: type.headers

@@ -248,7 +248,7 @@ final class AlertViewController: BaseViewController {
         }
     }
     
-    private func deleteFeedBack(type: MyFeedBackEndPoint) {
+    private func deleteFeedBack(type: MyFeedBackEndPoint<VoidModel>) {
         AF.request(type.address,
                    method: type.method,
                    headers: type.headers
