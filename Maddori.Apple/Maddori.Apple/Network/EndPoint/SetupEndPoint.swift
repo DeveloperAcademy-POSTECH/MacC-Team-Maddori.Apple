@@ -12,6 +12,7 @@ enum SetupEndPoint<T: Encodable> {
     case dispatchCreateTeam(T, userId: Int)
     case dispatchJoinTeam(teamId: Int, userId: Int)
     case fetchCertainTeam(invitationCode: String, userId: Int)
+    case deleteLeaveTeam(teamId: Int, userId: Int)
     
     var address: String {
         switch self {
@@ -23,6 +24,8 @@ enum SetupEndPoint<T: Encodable> {
             return "\(UrlLiteral.baseUrl)/users/join-team/\(teamId)"
         case .fetchCertainTeam(let invitationCode, _):
             return "\(UrlLiteral.baseUrl)/teams?invitation_code=\(invitationCode)"
+        case .deleteLeaveTeam(let teamId, _):
+            return "\(UrlLiteral.baseUrl)/users/team/\(teamId)/leave"
         }
     }
 
@@ -36,6 +39,8 @@ enum SetupEndPoint<T: Encodable> {
             return .post
         case .fetchCertainTeam:
             return .get
+        case .deleteLeaveTeam:
+            return .delete
         }
     }
     
@@ -48,6 +53,8 @@ enum SetupEndPoint<T: Encodable> {
         case .dispatchJoinTeam:
             return nil
         case .fetchCertainTeam:
+            return nil
+        case .deleteLeaveTeam:
             return nil
         }
     }
@@ -63,6 +70,9 @@ enum SetupEndPoint<T: Encodable> {
             let headers = ["user_id": "\(userId)"]
             return HTTPHeaders(headers)
         case .fetchCertainTeam(_, let userId):
+            let headers = ["user_id": "\(userId)"]
+            return HTTPHeaders(headers)
+        case .deleteLeaveTeam(_, let userId):
             let headers = ["user_id": "\(userId)"]
             return HTTPHeaders(headers)
         }
