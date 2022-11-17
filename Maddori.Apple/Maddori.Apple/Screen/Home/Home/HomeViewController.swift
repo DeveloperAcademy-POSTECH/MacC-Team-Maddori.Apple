@@ -12,7 +12,8 @@ import SnapKit
 
 final class HomeViewController: BaseViewController {
     
-    var keywordList: [Keyword] = Keyword.mockData
+//    var keywordList: [Keyword] = Keyword.mockData
+    var keywordList: [String] = ["첫 번째", "키워드를", "📝", "작성해보세요", "✚"]
     var isTouched = false
     
     private enum Size {
@@ -39,8 +40,12 @@ final class HomeViewController: BaseViewController {
         view.toastType = .warning
         return view
     }()
+    private lazy var flowLayout: KeywordCollectionViewFlowLayout = {
+        let layout = KeywordCollectionViewFlowLayout()
+        layout.count = keywordList.count
+        return layout
+    }()
     lazy var keywordCollectionView: UICollectionView = {
-        let flowLayout = KeywordCollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         collectionView.backgroundColor = .white200
         collectionView.register(KeywordCollectionViewCell.self, forCellWithReuseIdentifier: KeywordCollectionViewCell.className)
@@ -111,8 +116,8 @@ final class HomeViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         // FIXME: - teamId 와 userId는 일단은 UserDefaults에서 -> 추후에 토큰으로
-        fetchCertainTeamDetail(type: .fetchCertainTeamDetail(teamId: "1", userId: "1"))
-        fetchCurrentReflectionDetail(type: .fetchCurrentReflectionDetail(teamId: "1", userId: "1"))
+        fetchCertainTeamDetail(type: .fetchCertainTeamDetail(teamId: "40", userId: "83"))
+        fetchCurrentReflectionDetail(type: .fetchCurrentReflectionDetail(teamId: "40", userId: "83"))
     }
     
     override func configUI() {
@@ -221,6 +226,14 @@ final class HomeViewController: BaseViewController {
         present(viewController, animated: true)
     }
     
+    private func convertFetchedKeywordList(of list: [String]) {
+        keywordList = []
+        for i in 0..<list.count {
+            keywordList.append(list[i])
+        }
+        print(keywordList)
+    }
+    
     // MARK: - api
     
     private func fetchCertainTeamDetail(type: HomeEndPoint) {
@@ -229,7 +242,6 @@ final class HomeViewController: BaseViewController {
                    headers: type.header
         ).responseDecodable(of: BaseModel<CertainTeamDetailResponse>.self) { json in
             if let json = json.value {
-//                dump(json)
                 guard let teamName = json.detail?.teamName else { return }
                 DispatchQueue.main.async {
                     self.teamNameLabel.setTitleFont(text: teamName)
@@ -244,10 +256,14 @@ final class HomeViewController: BaseViewController {
                    headers: type.header
         ).responseDecodable(of: BaseModel<CurrentReflectionResponse>.self) { json in
             if let json = json.value {
-//                dump(json)
-                guard let list = json.detail?.reflectionKeywords else { return }
-                HomeViewController.fetchedKeywordList = list
-                print(HomeViewController.fetchedKeywordList)
+                guard let previewKeywordList = json.detail?.reflectionKeywords else { return }
+                if previewKeywordList.count > 0 {
+                    self.convertFetchedKeywordList(of: previewKeywordList)
+                    DispatchQueue.main.async {
+                        self.flowLayout.count = previewKeywordList.count
+                        self.keywordCollectionView.reloadData()
+                    }
+                }
             }
         }
     }
@@ -268,7 +284,7 @@ extension HomeViewController: UICollectionViewDataSource {
         }
         let keyword = keywordList[indexPath.item]
         // FIXME: cell을 여기서 접근하는건 안좋은 방법일수도?
-        cell.keywordLabel.text = keyword.string
+        cell.keywordLabel.text = keyword
         cell.configShadow(type: .previewKeyword)
         cell.configLabel(type: .previewKeyword)
         return cell
@@ -283,7 +299,7 @@ extension HomeViewController: UICollectionViewDataSource {
 extension HomeViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let size = Size.keywordLabelHeight
-        return KeywordCollectionViewCell.fittingSize(availableHeight: size, keyword: keywordList[indexPath.item].string)
+        return KeywordCollectionViewCell.fittingSize(availableHeight: size, keyword: keywordList[indexPath.item])
     }
 }
 
