@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct CertainTeamDTO: Encodable {
+struct EncodeDTO: Encodable {
     
 }
