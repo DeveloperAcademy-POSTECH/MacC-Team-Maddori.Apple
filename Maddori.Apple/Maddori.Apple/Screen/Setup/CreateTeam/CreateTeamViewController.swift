@@ -7,6 +7,7 @@
 
 import UIKit
 
+import Alamofire
 import SnapKit
 
 final class CreateTeamViewController: BaseTextFieldViewController {
@@ -66,7 +67,7 @@ final class CreateTeamViewController: BaseTextFieldViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupCreateButtonAction()
+        setupDoneButton()
     }
     
     override func setupNavigationBar() {
@@ -81,9 +82,11 @@ final class CreateTeamViewController: BaseTextFieldViewController {
     
     // MARK: - setup
     
-    private func setupCreateButtonAction() {
+    private func setupDoneButton() {
         let action = UIAction { [weak self] _ in
-            self?.pushHomeViewController()
+            guard let teamName = self?.kigoTextField.text else { return }
+            // FIXME: - header에는 user defaults에 있는 내 유저 id 값 넣기 -> 나중에는 로그인 토큰으로 변환 예정
+            self?.dispatchCreateTeam(type: .dispatchCreateTeam(CreateTeamDTO(team_name: teamName), userId: UserDefaultStorage.userID.description))
         }
         super.doneButton.addAction(action, for: .touchUpInside)
     }
@@ -93,5 +96,28 @@ final class CreateTeamViewController: BaseTextFieldViewController {
     private func pushHomeViewController() {
         let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
         sceneDelegate?.changeRootViewCustomTabBarView()
+    }
+    
+    // MARK: - api
+    
+    private func dispatchCreateTeam(type: SetupEndPoint<CreateTeamDTO>) {
+        AF.request(type.address,
+                   method: type.method,
+                   parameters: type.body,
+                   encoder: JSONParameterEncoder.default,
+                   headers: type.headers
+        ).responseDecodable(of: BaseModel<CreateTeamResponse>.self) { json in
+            if let json = json.value {
+                dump(json)
+                DispatchQueue.main.async {
+                    self.pushHomeViewController()
+                }
+            } else {
+                DispatchQueue.main.async {
+                    // FIXME: - UXWriting 필요
+                    self.makeAlert(title: "에러", message: "중복된 팀 이름입니다람쥐")
+                }
+            }
+        }
     }
 }
