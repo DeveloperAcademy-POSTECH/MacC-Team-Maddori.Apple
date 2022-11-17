@@ -7,6 +7,8 @@
 
 import UIKit
 
+import Alamofire
+
 final class SetNicknameViewController: BaseTextFieldViewController {
     
     override var titleText: String {
@@ -48,7 +50,7 @@ final class SetNicknameViewController: BaseTextFieldViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        pushJoinTeamViewController()
+        setupDoneButton()
     }
     
     override func setupNavigationBar() {
@@ -61,15 +63,43 @@ final class SetNicknameViewController: BaseTextFieldViewController {
     
     // MARK: - func
     
-    private func pushJoinTeamViewController() {
+    override func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    private func setupDoneButton() {
         let action = UIAction { [weak self] _ in
-            self?.navigationController?.pushViewController(JoinTeamViewController(), animated: true)
+            guard let nickname = self?.kigoTextField.text else { return }
+            self?.dispatchUserLogin(type: .dispatchLogin(LoginDTO(username: nickname)))
         }
         super.doneButton.addAction(action, for: .touchUpInside)
     }
     
-    override func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
+    // MARK: - api
+    
+    private func dispatchUserLogin(type: SetupEndPoint<LoginDTO>) {
+        AF.request(type.address,
+                   method: type.method,
+                   parameters: type.body,
+                   encoder: JSONParameterEncoder.default
+        ).responseDecodable(of: BaseModel<MemberResponse>.self) { json in
+            if let json = json.value {
+                dump(json)
+                guard let nickname = json.detail?.username,
+                      let userId = json.detail?.id
+                else { return }
+                UserDefaultHandler.setUserID(userID: userId)
+                UserDefaultHandler.setNickname(nickname: nickname)
+                DispatchQueue.main.async {
+                    self.navigationController?.pushViewController(JoinTeamViewController(), animated: true)
+                }
+            } else {
+                DispatchQueue.main.async {
+                    // FIXME: - UXWriting 필요
+                    self.makeAlert(title: "에러", message: "중복된 닉네임입니다람쥐")
+                }
+            }
+        }
     }
 }

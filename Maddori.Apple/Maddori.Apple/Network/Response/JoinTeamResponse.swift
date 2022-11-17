@@ -8,6 +8,7 @@
 import Foundation
 
 struct JoinTeamResponse: Decodable {
+    // MARK: - userJoinTeam
     let admin: Bool?
     let id: Int?
     let userId: Int?

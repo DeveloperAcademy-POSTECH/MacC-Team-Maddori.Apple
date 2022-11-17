@@ -18,7 +18,7 @@ struct FeedBackResponse: Decodable {
     let teamId: Int?
     let reflectionId: Int?
     let reflection: ReflectionResponse?
-    let user: MemberResponse?
+    let fromUser: MemberResponse?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -31,6 +31,6 @@ struct FeedBackResponse: Decodable {
         case teamId = "team_id"
         case reflectionId = "reflection_id"
         case reflection
-        case user
+        case fromUser = "from_user"
     }
 }

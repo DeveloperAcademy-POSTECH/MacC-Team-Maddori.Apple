@@ -8,6 +8,7 @@
 import Foundation
 
 struct AllFeedBackResponse: Decodable {
+    // MARK: - getTeamAndUserFeedback
     let category: String?
     let userFeedback: [FeedBackContentResponse]?
     let teamFeedback: [FeedBackContentResponse]?

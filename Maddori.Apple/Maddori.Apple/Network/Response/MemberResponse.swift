@@ -8,6 +8,7 @@
 import Foundation
 
 struct MemberResponse: Decodable {
+    // MARK: - userLogin
     let id: Int?
     let username: String?
 }

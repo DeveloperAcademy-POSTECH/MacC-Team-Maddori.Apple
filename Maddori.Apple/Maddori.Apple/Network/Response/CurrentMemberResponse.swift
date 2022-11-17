@@ -8,5 +8,6 @@
 import Foundation
 
 struct TeamMembersResponse: Decodable {
+    // MARK: - getTeamMembers
     let members: [MemberResponse]?
 }

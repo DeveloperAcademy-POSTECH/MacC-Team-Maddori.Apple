@@ -8,6 +8,7 @@
 import Foundation
 
 struct ReflectionResponse: Decodable {
+    // MARK: - endInProgressReflection
     let id: Int?
     let reflectionName: String?
     let date: String?
