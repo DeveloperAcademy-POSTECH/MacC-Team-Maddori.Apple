@@ -13,7 +13,7 @@ final class MemberCollectionView: UIView {
     
     enum CollectionType {
         case addFeedback
-        case selectMember
+        case progressReflection
     }
     // FIXME: - 목업 데이터 추후 데이터 연결한 후 삭제할 내용
     
@@ -84,7 +84,7 @@ extension MemberCollectionView: UICollectionViewDelegate {
         switch type {
         case .addFeedback:
             didTappedFeedBackMember?(memberList[indexPath.item])
-        case .selectMember:
+        case .progressReflection:
             if !selectedMemberList.contains(where: { $0.username == memberList[indexPath.item].username} ) {
                 selectedMemberList.append(memberList[indexPath.item])
             }

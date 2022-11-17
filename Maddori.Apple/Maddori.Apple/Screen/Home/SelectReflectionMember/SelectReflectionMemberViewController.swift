@@ -20,7 +20,7 @@ final class SelectReflectionMemberViewController: BaseViewController {
         label.setTitleFont(text: TextLiteral.selectReflectionMemberViewControllerTitleLabel)
         return label
     }()
-    private let memberCollectionView = MemberCollectionView(type: .selectMember)
+    private let memberCollectionView = MemberCollectionView(type: .progressReflection)
     private lazy var feedbackDoneButton: MainButton = {
         let button = MainButton()
         button.title = TextLiteral.selectReflectionMemberViewControllerDoneButtonText + "(0/\(memberCollectionView.memberList.count))"
