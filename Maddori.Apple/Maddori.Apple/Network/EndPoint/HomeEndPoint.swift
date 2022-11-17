@@ -14,11 +14,9 @@ enum HomeEndPoint {
     var address: String {
         switch self {
         case .fetchCertainTeamDetail(let teamId, _):
-//            return "\(UrlLiteral)/teams/{team_id}"
-            return "http://3.34.57.155:3000/api/v1/teams/\(teamId)"
+            return "\(UrlLiteral.baseUrl)/teams/\(teamId)"
         case .fetchCurrentReflectionDetail(let teamId, _):
-//            return "\(UrlLiteral)/teams/{team_id}/reflections/current"
-            return "http://3.34.57.155:3000/api/v1/teams/\(teamId)/reflections/current"
+            return "\(UrlLiteral.baseUrl)/teams/\(teamId)/reflections/current"
         }
     }
     

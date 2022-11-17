@@ -306,7 +306,6 @@
 				39F52C512923307000B19A77 /* Response */,
 				39F52C502923306700B19A77 /* Reqeust */,
 				39F52C422923298800B19A77 /* Model */,
-				3EA341E52924E2AD005CBD1C /* HomeEndPoint.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -625,6 +624,7 @@
 			isa = PBXGroup;
 			children = (
 				39F52C792924CC9600B19A77 /* SetupEndPoint.swift */,
+				3EA341E52924E2AD005CBD1C /* HomeEndPoint.swift */,
 			);
 			path = EndPoint;
 			sourceTree = "<group>";
