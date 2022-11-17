@@ -17,7 +17,7 @@ class AddFeedbackViewController: BaseViewController {
         static let keywordMaxLength: Int = 15
         static let textViewMaxLength: Int = 200
     }
-    var type: FeedbackButtonType = .continueType
+    var type: FeedBackDTO = .continueType
     var toNickname: String
     var toUserId: Int
     var keywordHasText: Bool = false
@@ -71,7 +71,7 @@ class AddFeedbackViewController: BaseViewController {
     lazy var feedbackTypeButtonView: FeedbackTypeButtonView = {
         let view = FeedbackTypeButtonView()
         view.changeFeedbackType = { [weak self] type in
-            if let typeValue = FeedbackButtonType.init(rawValue: type.rawValue) {
+            if let typeValue = FeedBackDTO.init(rawValue: type.rawValue) {
                 self?.type = typeValue
             }
         }
@@ -360,10 +360,11 @@ class AddFeedbackViewController: BaseViewController {
     }
     
     private func didTappedDoneButton() {
+        let startContent = feedbackStartSwitch.isOn ? feedbackStartTextView.text : nil
         guard let keyword = feedbackKeywordTextField.text,
               let content = feedbackContentTextView.text
         else { return }
-        let dto = FeedBackContentDTO(type: .continueType, keyword: keyword, content: content, start_content: feedbackStartTextView.text, to_id: toUserId)
+        let dto = FeedBackContentDTO(type: type, keyword: keyword, content: content, start_content: startContent, to_id: toUserId)
         // FIXME: - 각 id들 UserDefault에 저장되어 있는 값을 불러와야 함.
         dispatchAddFeedBack(type: .dispatchAddFeedBack(teamId: 1.description, reflectionId: 2.description, userId: 1.description, dto))
     }
