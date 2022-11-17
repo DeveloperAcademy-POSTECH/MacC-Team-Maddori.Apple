@@ -364,6 +364,7 @@ class AddFeedbackViewController: BaseViewController {
               let content = feedbackContentTextView.text
         else { return }
         let dto = FeedBackContentDTO(type: .continueType, keyword: keyword, content: content, start_content: feedbackStartTextView.text, to_id: toUserId)
+        // FIXME: - 각 id들 UserDefault에 저장되어 있는 값을 불러와야 함.
         dispatchAddFeedBack(type: .dispatchAddFeedBack(teamId: 1.description, reflectionId: 2.description, userId: 1.description, dto))
     }
     
