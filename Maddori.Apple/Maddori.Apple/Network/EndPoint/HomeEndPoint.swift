@@ -8,14 +8,14 @@
 import Alamofire
 
 enum HomeEndPoint {
-    case fetchCertainTeamDetail(teamId: Int, userId: Int)
-    case fetchCurrentReflectionDetail(teamId: Int, userId: Int)
+    case fetchCertainTeamDetail(teamId: Int)
+    case fetchCurrentReflectionDetail(teamId: Int)
     
     var address: String {
         switch self {
-        case .fetchCertainTeamDetail(let teamId, _):
+        case .fetchCertainTeamDetail(let teamId):
             return "\(UrlLiteral.baseUrl)/teams/\(teamId)"
-        case .fetchCurrentReflectionDetail(let teamId, _):
+        case .fetchCurrentReflectionDetail(let teamId):
             return "\(UrlLiteral.baseUrl)/teams/\(teamId)/reflections/current"
         }
     }
@@ -31,11 +31,11 @@ enum HomeEndPoint {
     
     var header: HTTPHeaders {
         switch self {
-        case .fetchCertainTeamDetail(_, let userId):
-            let headers = ["user_id": "\(userId)"]
+        case .fetchCertainTeamDetail:
+            let headers = ["user_id": "\(UserDefaultStorage.userId)"]
             return HTTPHeaders(headers)
-        case .fetchCurrentReflectionDetail(_, let userId):
-            let headers = ["user_id": "\(userId)"]
+        case .fetchCurrentReflectionDetail:
+            let headers = ["user_id": "\(UserDefaultStorage.userId)"]
             return HTTPHeaders(headers)
         }
     }

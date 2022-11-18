@@ -9,9 +9,9 @@ import Alamofire
 
 enum SetupEndPoint<T: Encodable> {
     case dispatchLogin(T)
-    case dispatchCreateTeam(T, userId: Int)
-    case dispatchJoinTeam(teamId: Int, userId: Int)
-    case fetchCertainTeam(invitationCode: String, userId: Int)
+    case dispatchCreateTeam(T)
+    case dispatchJoinTeam(teamId: Int)
+    case fetchCertainTeam(invitationCode: String)
     
     var address: String {
         switch self {
@@ -19,9 +19,9 @@ enum SetupEndPoint<T: Encodable> {
             return "\(UrlLiteral.baseUrl)/users/login"
         case .dispatchCreateTeam:
             return "\(UrlLiteral.baseUrl)/teams"
-        case .dispatchJoinTeam(let teamId, _):
+        case .dispatchJoinTeam(let teamId):
             return "\(UrlLiteral.baseUrl)/users/join-team/\(teamId)"
-        case .fetchCertainTeam(let invitationCode, _):
+        case .fetchCertainTeam(let invitationCode):
             return "\(UrlLiteral.baseUrl)/teams?invitation_code=\(invitationCode)"
         }
     }
@@ -43,7 +43,7 @@ enum SetupEndPoint<T: Encodable> {
         switch self {
         case .dispatchLogin(let body):
             return body
-        case .dispatchCreateTeam(let body, _):
+        case .dispatchCreateTeam(let body):
             return body
         case .dispatchJoinTeam:
             return nil
@@ -56,14 +56,14 @@ enum SetupEndPoint<T: Encodable> {
         switch self {
         case .dispatchLogin:
             return nil
-        case .dispatchCreateTeam(_, let userId):
-            let headers = ["user_id": "\(userId)"]
+        case .dispatchCreateTeam:
+            let headers = ["user_id": "\(UserDefaultStorage.userId)"]
             return HTTPHeaders(headers)
-        case .dispatchJoinTeam(_, let userId):
-            let headers = ["user_id": "\(userId)"]
+        case .dispatchJoinTeam:
+            let headers = ["user_id": "\(UserDefaultStorage.userId)"]
             return HTTPHeaders(headers)
-        case .fetchCertainTeam(_, let userId):
-            let headers = ["user_id": "\(userId)"]
+        case .fetchCertainTeam:
+            let headers = ["user_id": "\(UserDefaultStorage.userId)"]
             return HTTPHeaders(headers)
         }
     }
