@@ -71,7 +71,10 @@ final class SetNicknameViewController: BaseTextFieldViewController {
     private func setupDoneButton() {
         let action = UIAction { [weak self] _ in
             guard let nickname = self?.kigoTextField.text else { return }
-            self?.dispatchUserLogin(type: .dispatchLogin(LoginDTO(username: nickname)))
+            UserDefaultHandler.setNickname(nickname: nickname)
+            DispatchQueue.main.async {
+                self?.navigationController?.pushViewController(JoinTeamViewController(), animated: true)
+            }
         }
         super.doneButton.addAction(action, for: .touchUpInside)
     }
@@ -87,7 +90,7 @@ final class SetNicknameViewController: BaseTextFieldViewController {
             if let json = json.value {
                 dump(json)
                 guard let nickname = json.detail?.username,
-                      let userId = json.detail?.userId
+                      let userId = json.detail?.id
                 else { return }
                 UserDefaultHandler.setUserId(userId: userId)
                 UserDefaultHandler.setNickname(nickname: nickname)

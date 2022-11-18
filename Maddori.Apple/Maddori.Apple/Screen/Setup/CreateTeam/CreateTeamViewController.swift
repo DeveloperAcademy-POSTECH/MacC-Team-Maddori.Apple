@@ -84,8 +84,8 @@ final class CreateTeamViewController: BaseTextFieldViewController {
     
     private func setupDoneButton() {
         let action = UIAction { [weak self] _ in
-            guard let teamName = self?.kigoTextField.text else { return }
             // FIXME: - header에는 user defaults에 있는 내 유저 id 값 넣기 -> 나중에는 로그인 토큰으로 변환 예정
+            self?.dispatchUserLogin(type: .dispatchLogin(LoginDTO(username: UserDefaultStorage.nickname)))
             self?.pushInvitationViewController()
         }
         super.doneButton.addAction(action, for: .touchUpInside)
@@ -100,8 +100,27 @@ final class CreateTeamViewController: BaseTextFieldViewController {
         }
     }
     
-    private func pushHomeViewController() {
-        let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
-        sceneDelegate?.changeRootViewCustomTabBarView()
+    // MARK: - api
+    
+    private func dispatchUserLogin(type: SetupEndPoint<LoginDTO>) {
+        AF.request(type.address,
+                   method: type.method,
+                   parameters: type.body,
+                   encoder: JSONParameterEncoder.default
+        ).responseDecodable(of: BaseModel<MemberResponse>.self) { json in
+            if let json = json.value {
+                dump(json)
+                guard let nickname = json.detail?.username,
+                      let userId = json.detail?.id
+                else { return }
+                UserDefaultHandler.setUserId(userId : userId)
+                UserDefaultHandler.setNickname(nickname: nickname)
+            } else {
+                DispatchQueue.main.async {
+                    // FIXME: - UXWriting 필요
+                    self.makeAlert(title: "에러", message: "중복된 닉네임입니다람쥐")
+                }
+            }
+        }
     }
 }
