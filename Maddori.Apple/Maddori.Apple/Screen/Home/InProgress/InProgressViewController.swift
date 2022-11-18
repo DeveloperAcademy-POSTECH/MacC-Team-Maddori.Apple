@@ -19,27 +19,21 @@ final class InProgressViewController: BaseViewController {
         static let othersReflectionEmptyViewHeight: CGFloat = 180
     }
     
-    private var userKeywordData: [Keyword] = [] {
-        didSet {
-            keywordCollectionView.reloadData()
-        }
-    }
-    private var teamKeywordData: [Keyword] = [] {
-        didSet {
-            keywordCollectionView.reloadData()
-        }
-    }
+    private var userKeywordData: [Keyword] = []
+    private var teamKeywordData: [Keyword] = []
     
     private var currentReflectionMemberName: String
     private var currentReflectionMemberId: Int
-    private var userId: Int = 5
+    private var userId: Int = 11
     
-    private var keywordsSectionList: [[Keyword]] = []
+    private var keywordsSectionList: [[Keyword]] = [[], []] {
+        didSet {
+            keywordCollectionView.reloadData()
+        }
+    }
     private var isUserRetrospective: Bool {
         return userId == currentReflectionMemberId ? true : false
     }
-    
-//    private let user = "이드"
     
     init(memberId: Int, memberUsername: String) {
         self.currentReflectionMemberId = memberId
@@ -70,8 +64,8 @@ final class InProgressViewController: BaseViewController {
         label.numberOfLines = 0
         return label
     }()
+    private let flowLayout = KeywordCollectionViewFlowLayout()
     private lazy var keywordCollectionView: UICollectionView = {
-        let flowLayout = KeywordCollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         collectionView.backgroundColor = .white200
         collectionView.register(KeywordCollectionViewCell.self,
@@ -87,9 +81,7 @@ final class InProgressViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetchTeamAndUserFeedback(type: .fetchTeamAndUserFeedback(teamId: 1, reflectionId: 2, memberId: currentReflectionMemberId, userId: userId))
-        print(currentReflectionMemberId)
-        print(userId)
+        fetchTeamAndUserFeedback(type: .fetchTeamAndUserFeedback(teamId: 6, reflectionId: 8, memberId: currentReflectionMemberId, userId: userId))
         setUpDelegation()
         setUpKeywordType()
     }
@@ -170,19 +162,19 @@ final class InProgressViewController: BaseViewController {
                    headers: type.headers
         ).responseDecodable(of: BaseModel<AllFeedBackResponse>.self) { json in
             if let json = json.value {
-                dump(json)
                 guard let userFeedbackList = json.detail?.userFeedback else { return }
                 guard let teamFeedbackList = json.detail?.teamFeedback else { return }
+                
                 self.userKeywordData = self.convert(userFeedbackList)
                 self.teamKeywordData = self.convert(teamFeedbackList)
                 
                 if self.isUserRetrospective {
-                    self.keywordsSectionList.append(self.teamKeywordData)
+                    self.keywordsSectionList[0] = self.teamKeywordData
                 } else {
-                    self.keywordsSectionList.append(self.userKeywordData)
-                    self.keywordsSectionList.append(self.teamKeywordData)
+                    self.keywordsSectionList[0] = self.userKeywordData
+                    self.keywordsSectionList[1] = self.teamKeywordData
                 }
-                print(self.keywordsSectionList)
+                self.flowLayout.count = self.keywordsSectionList.flatMap { $0 }.count
             }
         }
     }
@@ -192,17 +184,12 @@ final class InProgressViewController: BaseViewController {
 
 extension InProgressViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let cell = keywordCollectionView.dequeueReusableCell(withReuseIdentifier: KeywordCollectionViewCell.className, for: indexPath) as? KeywordCollectionViewCell else { return }
-        let section = indexPath.section
-        let item = indexPath.item
-        keywordsSectionList[section][item].style = .disabledKeyword
+        guard let cell = keywordCollectionView.cellForItem(at: indexPath) as? KeywordCollectionViewCell else { return }
         DispatchQueue.main.async {
-            UIView.performWithoutAnimation {
-                cell.configLabel(type: .disabledKeyword)
-                cell.configShadow(type: .disabledKeyword)
-                self.keywordCollectionView.reloadItems(at: [indexPath])
-            }
+            cell.setupAttribute()
         }
+        
+        
     }
 }
 

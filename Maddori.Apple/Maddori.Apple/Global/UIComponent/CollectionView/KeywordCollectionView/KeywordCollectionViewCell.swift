@@ -61,6 +61,13 @@ final class KeywordCollectionViewCell: BaseCollectionViewCell {
         keywordLabel.text = keyword
     }
     
+    func setupAttribute() {
+        if isSelected {
+            configLabel(type: .disabledKeyword)
+            configShadow(type: .disabledKeyword)
+        }
+    }
+    
     static func fittingSize(availableHeight: CGFloat, keyword: String?) -> CGSize {
         let cell = KeywordCollectionViewCell()
         cell.configLabelText(keyword: keyword)
