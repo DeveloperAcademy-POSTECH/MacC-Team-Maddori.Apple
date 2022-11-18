@@ -268,16 +268,17 @@ final class AlertViewController: BaseViewController {
                    parameters: type.body,
                    encoder: JSONParameterEncoder.default
         ).responseDecodable(of: BaseModel<MemberResponse>.self) { [weak self] json in
+            guard let self else { return }
             if let json = json.value {
                 dump(json)
                 guard let userId = json.detail?.id
                 else { return }
                 UserDefaultHandler.setUserId(userId: userId)
-                self?.dispatchJoinTeam(type: .dispatchJoinTeam(teamId: UserDefaultStorage.teamId))
+                self.dispatchJoinTeam(type: .dispatchJoinTeam(teamId: UserDefaultStorage.teamId))
             } else {
                 DispatchQueue.main.async {
                     // FIXME: - UXWriting 필요
-                    self?.makeAlert(title: "에러", message: "중복된 닉네임입니다람쥐")
+                    self.makeAlert(title: "에러", message: "중복된 닉네임입니다람쥐")
                 }
             }
         }
