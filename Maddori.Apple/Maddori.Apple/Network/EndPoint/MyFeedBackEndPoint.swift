@@ -8,15 +8,15 @@
 import Alamofire
 
 enum MyFeedBackEndPoint<T: Encodable> {
-    case fetchCurrentTeamMember(teamId: Int, userId: Int)
+    case fetchCurrentTeamMember
     case fetchCertainMemberFeedBack(teamId: Int, memberId: Int, userId: Int)
     case deleteFeedBack(teamId: Int, reflectionId: Int, feedBackId: Int, userId: Int)
     case putEditFeedBack(teamId: Int, reflectionId: Int, feedBackId: Int, T, userId: Int)
     
     var address: String {
         switch self {
-        case .fetchCurrentTeamMember(let teamId, _):
-            return "\(UrlLiteral.baseUrl)/teams/\(teamId)/members"
+        case .fetchCurrentTeamMember:
+            return "\(UrlLiteral.baseUrl)/teams/\(UserDefaultStorage.teamId)/members"
         case .fetchCertainMemberFeedBack(let teamId, let memberId, _):
             return "\(UrlLiteral.baseUrl)/teams/\(teamId)/reflections/current/feedbacks/from-me?members=\(memberId)"
         case .deleteFeedBack(let teamId, let reflectionId, let feedBackId, _):
@@ -54,8 +54,8 @@ enum MyFeedBackEndPoint<T: Encodable> {
     
     var headers: HTTPHeaders? {
         switch self {
-        case .fetchCurrentTeamMember(_, let userId):
-            let headers = ["user_id": "\(userId)"]
+        case .fetchCurrentTeamMember:
+            let headers = ["user_id": "\(UserDefaultStorage.userId)"]
             return HTTPHeaders(headers)
         case .fetchCertainMemberFeedBack(_, _, let userId):
             let headers = ["user_id": "\(userId)"]
