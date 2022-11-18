@@ -95,7 +95,7 @@ final class InProgressViewController: BaseViewController {
         super.viewDidLoad()
         fetchTeamAndUserFeedback(type: .fetchTeamAndUserFeedback(
             teamId: teamId,
-            reflectionId: 8,
+            reflectionId: currentReflectionId,
             memberId: currentReflectionMemberId,
             userId: userId)
         )

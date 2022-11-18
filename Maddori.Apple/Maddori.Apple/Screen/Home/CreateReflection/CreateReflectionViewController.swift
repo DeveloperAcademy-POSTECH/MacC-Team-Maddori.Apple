@@ -122,22 +122,6 @@ final class CreateReflectionViewController: BaseViewController {
     
     // MARK: - func
     
-    private func showStartReflectionView() {
-        let childView = StartReflectionViewController()
-        childView.dismissChildView = {
-            childView.willMove(toParent: nil)
-            childView.removeFromParent()
-            childView.view.removeFromSuperview()
-        }
-        childView.view.alpha = 0
-        self.addChild(childView)
-        self.view.addSubview(childView.view)
-        self.didMove(toParent: childView)
-        UIView.animate(withDuration: 1, animations: {
-            childView.view.alpha = 1
-        })
-    }
-    
     private func setupAddReflection() {
         let action = UIAction { [weak self] _ in
             self?.dismiss(animated: true)

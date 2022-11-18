@@ -232,7 +232,7 @@ final class HomeViewController: BaseViewController {
     }
     
     private func showStartReflectionView() {
-        let viewController = StartReflectionViewController()
+        let viewController = StartReflectionViewController(reflectionId: currentReflectionId)
         viewController.modalPresentationStyle = .overFullScreen
         viewController.dismissChildView = { [weak self] in
             self?.dismiss(animated: true)
@@ -246,7 +246,6 @@ final class HomeViewController: BaseViewController {
         for i in 0..<list.count {
             keywordList.append(list[i])
         }
-        print(keywordList)
     }
     
     // MARK: - api
@@ -271,10 +270,10 @@ final class HomeViewController: BaseViewController {
                    headers: type.header
         ).responseDecodable(of: BaseModel<CurrentReflectionResponse>.self) { json in
             if let json = json.value {
-                
                 let reflectionDetail = json.detail
                 guard let reflectionStatus = reflectionDetail?.reflectionStatus,
-                      let reflectionId = reflectionDetail?.currentReflectionId
+                      let reflectionId = reflectionDetail?.currentReflectionId,
+                      let reflectionDate = reflectionDetail?.reflectionDate?.formatDateString(to: "MM월 dd일 a hh시")
                 else { return }
                 
                 self.currentReflectionId = reflectionId
@@ -287,11 +286,9 @@ final class HomeViewController: BaseViewController {
                                 self.descriptionLabel.text = TextLiteral.homeViewControllerEmptyDescriptionLabel
                             case .Before:
                                 // FIXME: - 분기 처리 추가
-                                let reflectionDate = reflectionDetail?.reflectionDate?.formatDateString(to: "MM월 dd일 a hh시")
-                                self.descriptionLabel.text = "다음 회고는 \(reflectionDate)입니다"
+                                self.descriptionLabel.text = "다음 회고는 \(reflectionDate.description)입니다"
                             case .Progressing:
                                 // FIXME: - 분기 처리 추가
-                                let reflectionDate = reflectionDetail?.reflectionDate?.formatDateString(to: "MM월 dd일 a hh시")
                                 self.descriptionLabel.text = "다음 회고는 \(reflectionDate)입니다"
                                 self.showStartReflectionView()
                             }

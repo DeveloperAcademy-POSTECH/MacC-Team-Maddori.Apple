@@ -12,6 +12,16 @@ import SnapKit
 
 final class SelectReflectionMemberViewController: BaseViewController {
         
+    let reflectionId: Int
+    
+    init(reflectionId: Int) {
+        self.reflectionId = reflectionId
+        print("reflectionId: \(reflectionId)")
+        super.init()
+    }
+    
+    required init?(coder: NSCoder) { nil }
+    
     // MARK: - property
     
     private let closeButton = CloseButton(type: .system)
@@ -25,8 +35,11 @@ final class SelectReflectionMemberViewController: BaseViewController {
         let collectionView = MemberCollectionView(type: .progressReflection)
         collectionView.didTappedFeedBackMember = { [weak self] _ in
             let member = collectionView.selectedMember
-            guard let id = member?.userId, let username = member?.userName else { return }
-            let viewController = InProgressViewController(memberId: id, memberUsername: username, reflectionId: 1)
+            guard let id = member?.userId,
+                    let username = member?.userName,
+                  let reflectionId = self?.reflectionId
+            else { return }
+            let viewController = InProgressViewController(memberId: id, memberUsername: username, reflectionId: reflectionId)
             self?.navigationController?.pushViewController(viewController, animated: true)
         }
         return collectionView
