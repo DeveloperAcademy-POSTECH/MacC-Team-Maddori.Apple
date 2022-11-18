@@ -267,7 +267,7 @@ final class AlertViewController: BaseViewController {
                    method: type.method,
                    parameters: type.body,
                    encoder: JSONParameterEncoder.default
-        ).responseDecodable(of: BaseModel<MemberResponse>.self) { [weak self] json in
+        ).responseDecodable(of: BaseModel<JoimMemberResponse>.self) { [weak self] json in
             guard let self else { return }
             if let json = json.value {
                 dump(json)

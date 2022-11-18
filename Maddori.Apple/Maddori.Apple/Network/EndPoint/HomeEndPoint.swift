@@ -8,15 +8,15 @@
 import Alamofire
 
 enum HomeEndPoint {
-    case fetchCertainTeamDetail(teamId: Int)
-    case fetchCurrentReflectionDetail(teamId: Int)
+    case fetchCertainTeamDetail
+    case fetchCurrentReflectionDetail
     
     var address: String {
         switch self {
-        case .fetchCertainTeamDetail(let teamId):
-            return "\(UrlLiteral.baseUrl)/teams/\(teamId)"
-        case .fetchCurrentReflectionDetail(let teamId):
-            return "\(UrlLiteral.baseUrl)/teams/\(teamId)/reflections/current"
+        case .fetchCertainTeamDetail:
+            return "\(UrlLiteral.baseUrl)/teams/\(UserDefaultStorage.teamId)"
+        case .fetchCurrentReflectionDetail:
+            return "\(UrlLiteral.baseUrl)/teams/\(UserDefaultStorage.teamId)/reflections/current"
         }
     }
     
