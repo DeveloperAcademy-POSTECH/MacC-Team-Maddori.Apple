@@ -11,8 +11,11 @@ import SnapKit
 
 final class MyFeedbackCollectionView: UIView {
     var didTappedCell: ((Int) -> ())?
-    private let mockData = FeedBack.mockData
-//    private let mockData: [FeedBack] = []
+    var mockData: FeedBackInfoResponse? {
+        didSet {
+            feedbackCollectionView.reloadData()
+        }
+    }
     private enum Size {
         static let horizontalPadding: CGFloat = 24
         static let topSpacing: CGFloat = 24
@@ -63,18 +66,18 @@ final class MyFeedbackCollectionView: UIView {
     }
 }
 
-    // MARK: - extension
+// MARK: - extension
 
 extension MyFeedbackCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: MyFeedbackHeaderView.className, for: indexPath) as? MyFeedbackHeaderView else { return UICollectionReusableView() }
-        if !mockData.isEmpty {
+        if let mockData {
             if indexPath.section == 0 {
                 header.setDividerHidden(true)
             } else {
                 header.setDividerHidden(false)
             }
-            let hasContinue = mockData.contains(where: { $0.type == .continueType} )
+            let hasContinue = !mockData.continueArray.isEmpty
             if hasContinue {
                 header.setCssLabelText(with: indexPath.section)
             } else {
@@ -96,50 +99,54 @@ extension MyFeedbackCollectionView: UICollectionViewDelegate {
 }
 extension MyFeedbackCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if mockData.isEmpty {
+        guard let data = mockData else { return 0 }
+        if data.continueArray.isEmpty && data.stopArray.isEmpty {
             return 1
         }
-        let hasContinue = mockData.contains(where: { $0.type == .continueType } )
+        let hasContinue = !data.continueArray.isEmpty
         if hasContinue {
-            return mockData.filter { $0.type == FeedBackType.allCases[section] }.count
+            return data.continueArray.count
         } else {
-            return mockData.filter { $0.type == .stopType }.count
+            return data.stopArray.count
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if mockData.isEmpty {
+        guard let data = mockData else { return UICollectionViewCell() }
+        if data.continueArray.isEmpty && data.stopArray.isEmpty {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EmptyFeedbackView.className, for: indexPath) as? EmptyFeedbackView else { return UICollectionViewCell() }
             cell.emptyFeedbackLabel.text = TextLiteral.emptyViewMyBox
             return cell
+        } else {
+            
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyFeedbackCollectionViewCell.className, for: indexPath) as? MyFeedbackCollectionViewCell else { return UICollectionViewCell() }
+            guard let data = mockData else { return UICollectionViewCell() }
+            let hasContinue = !data.continueArray.isEmpty
+            switch indexPath.section {
+            case 0:
+                if hasContinue {
+                    cell.setCellLabel(title: data.continueArray[indexPath.item].keyword ?? "", content: data.continueArray[indexPath.item].content ?? "")
+                } else {
+                    cell.setCellLabel(title: data.stopArray[indexPath.item].keyword ?? "", content: data.stopArray[indexPath.item].content ?? "")
+                }
+                if indexPath.item == data.continueArray.count - 1 {
+                    cell.setDividerHidden(true)
+                }
+            case 1:
+                cell.setCellLabel(title: data.stopArray[indexPath.item].keyword ?? "", content: data.stopArray[indexPath.item].content ?? "")
+                if indexPath.item == data.stopArray.count - 1 {
+                    cell.setDividerHidden(true)
+                }
+            default:
+                break
+            }
+            return cell
         }
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyFeedbackCollectionViewCell.className, for: indexPath) as? MyFeedbackCollectionViewCell else { return UICollectionViewCell() }
-        var data: [FeedBack] = []
-        let hasContinue = mockData.contains(where: { $0.type == .continueType} )
-        switch indexPath.section {
-        case 0:
-            if hasContinue {
-                data = mockData.filter { $0.type == .continueType }
-            } else {
-                data = mockData.filter { $0.type == .stopType }
-            }
-            if indexPath.item == data.count - 1 {
-                cell.setDividerHidden(true)
-            }
-        case 1:
-            data = mockData.filter { $0.type == .stopType }
-            if indexPath.item == data.count - 1 {
-                cell.setDividerHidden(true)
-            }
-        default:
-            break
-        }
-        cell.setCellLabel(title: data[indexPath.item].title, content: data[indexPath.item].content)
-        return cell
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        if mockData.contains(where: { $0.type == .continueType }) && mockData.contains(where: { $0.type == .stopType }) {
+        guard let data = mockData else { return 1 }
+        if !data.continueArray.isEmpty && !data.stopArray.isEmpty {
             return 2
         } else {
             return 1
@@ -153,26 +160,29 @@ extension MyFeedbackCollectionView: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if mockData.isEmpty {
+        guard let data = mockData else { return .zero}
+        if data.continueArray.isEmpty && data.stopArray.isEmpty {
             return CGSize(width: 300, height: 400)
-        }
-        var data: [FeedBack] = []
-        let hasContinue = mockData.contains(where: { $0.type == .continueType} )
-        if hasContinue {
-            if indexPath.section == 0 {
-                data = mockData.filter { $0.type == .continueType }
+        } else {
+            var feedbackList: [String] = []
+            guard let data = mockData else { return .zero}
+            let hasContinue = !data.continueArray.isEmpty
+            if hasContinue {
+                if indexPath.section == 0 {
+                    feedbackList = mockData?.continueArray.map { $0.content ?? "" } ?? []
+                } else {
+                    feedbackList = mockData?.stopArray.map { $0.content ?? "" } ?? []
+                }
             } else {
-                data = mockData.filter { $0.type == .stopType }
+                feedbackList = mockData?.stopArray.map { $0.content ?? "" } ?? []
             }
-        } else {
-            data = mockData.filter { $0.type == .stopType }
-        }
-        let cellHeight = UILabel.textSize(font: .body2, text: data[indexPath.item].content, width: Size.cellContentWidth - 24, height: 0).height
-        let isOneTextLine = cellHeight < 18
-        if isOneTextLine {
-            return CGSize(width: Size.cellWidth, height: Size.resizingTextLineOneHeight)
-        } else {
-            return CGSize(width: Size.cellWidth, height: Size.resizingTextLineTwoHeight)
+            let cellHeight = UILabel.textSize(font: .body2, text: feedbackList[indexPath.item], width: Size.cellContentWidth - 24, height: 0).height
+            let isOneTextLine = cellHeight < 18
+            if isOneTextLine {
+                return CGSize(width: Size.cellWidth, height: Size.resizingTextLineOneHeight)
+            } else {
+                return CGSize(width: Size.cellWidth, height: Size.resizingTextLineTwoHeight)
+            }
         }
     }
 }

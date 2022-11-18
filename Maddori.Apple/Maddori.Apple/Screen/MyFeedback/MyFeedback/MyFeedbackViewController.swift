@@ -70,7 +70,7 @@ final class MyFeedbackViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchCurrentTeamMember(type: .fetchCurrentTeamMember)
-        fetchCertainMemberFeedBack(type: .fetchCertainMemberFeedBack(teamId: 1, memberId: 2, userId: 1))
+//        fetchCertainMemberFeedBack(type: .fetchCertainMemberFeedBack(memberId: 2))
     }
     
     override func render() {
@@ -123,6 +123,8 @@ final class MyFeedbackViewController: BaseViewController {
         ).responseDecodable(of: BaseModel<FeedBackInfoResponse>.self) { json in
             if let data = json.value {
                 // FIXME: - collectionView에 데이터 전달
+                guard let detail = data.detail else { return }
+                self.feedbackCollectionView.mockData = detail
                 dump(data)
             }
         }
@@ -131,7 +133,12 @@ final class MyFeedbackViewController: BaseViewController {
 
 // MARK: - extension
 
-extension MyFeedbackViewController: UICollectionViewDelegate { }
+extension MyFeedbackViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let memberId = memberList[indexPath.item].userId else { return }
+        fetchCertainMemberFeedBack(type: .fetchCertainMemberFeedBack(memberId: memberId))
+    }
+}
 
 extension MyFeedbackViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
