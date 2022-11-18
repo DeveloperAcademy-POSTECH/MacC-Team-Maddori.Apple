@@ -88,10 +88,10 @@ extension MemberCollectionView: UICollectionViewDelegate {
             if !selectedMemberList.contains(where: { $0.username == memberList[indexPath.item].username} ) {
                 selectedMemberList.append(memberList[indexPath.item])
             }
-//            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MemberCollectionViewCell.className, for: indexPath) as? MemberCollectionViewCell else { return }
             guard let cell = collectionView.cellForItem(at: indexPath) as? MemberCollectionViewCell else { return }
             cell.setupAttribute()
             didTappedMember?(selectedMemberList)
+            didTappedFeedBackMember?(selectedMemberList[indexPath.item])
         }
     }
 }

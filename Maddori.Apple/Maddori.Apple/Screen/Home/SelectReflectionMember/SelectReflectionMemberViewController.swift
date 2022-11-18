@@ -23,13 +23,9 @@ final class SelectReflectionMemberViewController: BaseViewController {
     }()
     private lazy var memberCollectionView: MemberCollectionView = {
         let collectionView = MemberCollectionView(type: .progressReflection)
-        let member: Member
-//        collectionView.memberList = Member.getTotalMemberList()
-//        collectionView.didTappedMember = { [weak self] arr in
-//            self?.presentInProgressViewController(currentReflectionMember: arr.last)
-//        }
-        collectionView.didTappedMember = { [weak self] _ in
-            self?.navigationController?.pushViewController(InProgressViewController(memberId: 122, memberUsername: "홀리몰리"), animated: true)
+        collectionView.didTappedFeedBackMember = { [weak self] _ in
+            let viewController = InProgressViewController(memberId: 122, memberUsername: "홀리몰리")
+            self?.navigationController?.pushViewController(viewController, animated: true)
         }
         return collectionView
     }()
