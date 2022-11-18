@@ -23,4 +23,8 @@ struct UserDefaultHandler {
     static func setNickname(nickname: String) {
         UserData.setValue(nickname, forKey: .nickname)
     }
+    
+    static func setTeamId(teamId: Int) {
+        UserData.setValue(teamId, forKey: .teamId)
+    }
 }

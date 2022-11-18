@@ -17,10 +17,6 @@ final class MemberCollectionViewCell: BaseCollectionViewCell {
         static let frame = CGRect(x: 0, y: 0, width: Size.width, height: Size.height)
     }
     
-    override var isSelected: Bool {
-        didSet { setupAttribute() }
-    }
-    
     // MARK: - property
     
     let memberLabel: UILabel = {
@@ -61,7 +57,7 @@ final class MemberCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - func
     
-    private func setupAttribute() {
+    func setupAttribute() {
         if isSelected {
             memberLabel.textColor = .gray300
             memberLabel.backgroundColor = .white100
