@@ -113,7 +113,7 @@ final class CreateTeamViewController: BaseTextFieldViewController {
                 guard let nickname = json.detail?.username,
                       let userId = json.detail?.id
                 else { return }
-                UserDefaultHandler.setUserID(userID: userId)
+                UserDefaultHandler.setUserId(userId : userId)
                 UserDefaultHandler.setNickname(nickname: nickname)
             } else {
                 DispatchQueue.main.async {

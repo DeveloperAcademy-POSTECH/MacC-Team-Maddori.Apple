@@ -90,7 +90,7 @@ final class SetNicknameViewController: BaseTextFieldViewController {
             if let json = json.value {
                 dump(json)
                 guard let nickname = json.detail?.username,
-                      let userId = json.detail?.userId
+                      let userId = json.detail?.id
                 else { return }
                 UserDefaultHandler.setUserId(userId: userId)
                 UserDefaultHandler.setNickname(nickname: nickname)

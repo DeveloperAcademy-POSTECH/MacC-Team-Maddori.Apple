@@ -221,7 +221,7 @@ final class AlertViewController: BaseViewController {
             // FIXME: - 팀 합류 api 연결
             self.pushHomeViewController()
             self.dispatchUserLogin(type: .dispatchLogin(LoginDTO(username: UserDefaultStorage.nickname)))
-            dispatchJoinTeam(type: .dispatchJoinTeam(teamId: UserDefaultStorage.teamId, userId: UserDefaultStorage.userID))
+            dispatchJoinTeam(type: .dispatchJoinTeam(teamId: UserDefaultStorage.teamId, userId: UserDefaultStorage.userId))
         }
         self.dismiss(animated: true) {
             self.navigation?.popViewController(animated: true)
@@ -271,7 +271,7 @@ final class AlertViewController: BaseViewController {
                 guard let nickname = json.detail?.username,
                       let userId = json.detail?.id
                 else { return }
-                UserDefaultHandler.setUserID(userID: userId)
+                UserDefaultHandler.setUserId(userId: userId)
                 DispatchQueue.main.async {
                     self.navigationController?.pushViewController(JoinTeamViewController(), animated: true)
                 }
