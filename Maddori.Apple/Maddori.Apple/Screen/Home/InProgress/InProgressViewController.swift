@@ -32,13 +32,14 @@ final class InProgressViewController: BaseViewController {
     
     private var currentReflectionMemberName: String
     private var currentReflectionMemberId: Int
-    private var userId: Int = 122
+    private var userId: Int = 5
     
-    private let user = "이드"
     private var keywordsSectionList: [[Keyword]] = []
     private var isUserRetrospective: Bool {
-        return user == currentReflectionMemberName ? true : false
+        return userId == currentReflectionMemberId ? true : false
     }
+    
+//    private let user = "이드"
     
     init(memberId: Int, memberUsername: String) {
         self.currentReflectionMemberId = memberId
@@ -61,7 +62,7 @@ final class InProgressViewController: BaseViewController {
         let label = UILabel()
         label.font = .caption1
         label.textColor = .gray400
-        if user == currentReflectionMemberName {
+        if isUserRetrospective {
             label.text = currentReflectionMemberName + TextLiteral.inProgressViewControllerSubTitleLabel
         } else {
             label.text = currentReflectionMemberName + TextLiteral.inProgressViewControllerOthersSubTitleLabel
@@ -86,9 +87,11 @@ final class InProgressViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchTeamAndUserFeedback(type: .fetchTeamAndUserFeedback(teamId: 1, reflectionId: 2, memberId: currentReflectionMemberId, userId: userId))
+        print(currentReflectionMemberId)
+        print(userId)
         setUpDelegation()
         setUpKeywordType()
-        fetchTeamAndUserFeedback(type: .fetchTeamAndUserFeedback(teamId: 63, reflectionId: 67, memberId: currentReflectionMemberId, userId: userId))
     }
     
     // MARK: - func
@@ -131,22 +134,32 @@ final class InProgressViewController: BaseViewController {
     
     private func setUpKeywordType() {
         if isUserRetrospective {
-            for i in 0..<keywordData.count {
-                keywordData[i].type = .defaultKeyword
+            for i in 0..<teamKeywordData.count {
+                teamKeywordData[i].style = .defaultKeyword
             }
-            keywordsSectionList.append(keywordData)
         } else {
-            var myKeywords = keywordData.filter { $0.from == user}
-            var otherKeywords = keywordData.filter { $0.from != user}
-            for i in 0..<myKeywords.count {
-                myKeywords[i].type = .defaultKeyword
+            for i in 0..<userKeywordData.count {
+                userKeywordData[i].style = .defaultKeyword
             }
-            for j in 0..<otherKeywords.count {
-                otherKeywords[j].type = .subKeyword
+            for j in 0..<teamKeywordData.count {
+                teamKeywordData[j].style = .subKeyword
             }
-            keywordsSectionList.append(myKeywords)
-            keywordsSectionList.append(otherKeywords)
         }
+    }
+    
+    private func convert(_ response: [FeedBackContentResponse]) -> [Keyword] {
+        var keywordList: [Keyword] = []
+        for feedback in response {
+            let keyword = Keyword(
+                type: feedback.type ?? "Continue",
+                keyword: feedback.keyword ?? "키워드",
+                content: feedback.content ?? "",
+                startContent: feedback.startContent ?? "",
+                fromUser: feedback.fromUser?.username ?? "팀원"
+            )
+            keywordList.append(keyword)
+        }
+        return keywordList
     }
     
     // MARK: - api
@@ -158,8 +171,18 @@ final class InProgressViewController: BaseViewController {
         ).responseDecodable(of: BaseModel<AllFeedBackResponse>.self) { json in
             if let json = json.value {
                 dump(json)
-                userKeywordData = json.detail?.userFeedback
-                teamKeywordData = json.detail?.teamFeedback
+                guard let userFeedbackList = json.detail?.userFeedback else { return }
+                guard let teamFeedbackList = json.detail?.teamFeedback else { return }
+                self.userKeywordData = self.convert(userFeedbackList)
+                self.teamKeywordData = self.convert(teamFeedbackList)
+                
+                if self.isUserRetrospective {
+                    self.keywordsSectionList.append(self.teamKeywordData)
+                } else {
+                    self.keywordsSectionList.append(self.userKeywordData)
+                    self.keywordsSectionList.append(self.teamKeywordData)
+                }
+                print(self.keywordsSectionList)
             }
         }
     }
@@ -172,7 +195,7 @@ extension InProgressViewController: UICollectionViewDelegate {
         guard let cell = keywordCollectionView.dequeueReusableCell(withReuseIdentifier: KeywordCollectionViewCell.className, for: indexPath) as? KeywordCollectionViewCell else { return }
         let section = indexPath.section
         let item = indexPath.item
-        keywordsSectionList[section][item].type = .disabledKeyword
+        keywordsSectionList[section][item].style = .disabledKeyword
         DispatchQueue.main.async {
             UIView.performWithoutAnimation {
                 cell.configLabel(type: .disabledKeyword)
@@ -254,9 +277,9 @@ extension InProgressViewController: UICollectionViewDataSource {
         }
         
         let keyword = keywordsSectionList[section][item]
-        cell.keywordLabel.text = keyword.string
-        cell.configLabel(type: keyword.type)
-        cell.configShadow(type: keyword.type)
+        cell.keywordLabel.text = keyword.keyword
+        cell.configLabel(type: keyword.style ?? .defaultKeyword)
+        cell.configShadow(type: keyword.style ?? .defaultKeyword)
         return cell
     }
 }
@@ -272,7 +295,7 @@ extension InProgressViewController: UICollectionViewDelegateFlowLayout {
             return CGSize(width: view.frame.width - 2 * SizeLiteral.leadingTrailingPadding, height: Size.othersReflectionEmptyViewHeight)
         }
         return KeywordCollectionViewCell.fittingSize(availableHeight: Size.keywordLabelHeight,
-                                                     keyword: keywordsSectionList[section][item].string)
+                                                     keyword: keywordsSectionList[section][item].keyword)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
