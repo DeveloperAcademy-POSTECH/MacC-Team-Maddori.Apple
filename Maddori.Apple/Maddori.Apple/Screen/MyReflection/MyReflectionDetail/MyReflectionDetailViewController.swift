@@ -64,7 +64,7 @@ final class MyReflectionDetailViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         // FIXME: reflectionId, CssType 받아오기
-        fetchCertainTypeFeedbackAll(type: .fetchCertainTypeFeedbackAllID(teamId: UserDefaultStorage.teamId, userId: UserDefaultStorage.userID, reflectionId: 3, cssType: "Continue"))
+        fetchCertainTypeFeedbackAll(type: .fetchCertainTypeFeedbackAllID(teamId: UserDefaultStorage.teamId, userId: UserDefaultStorage.userId, reflectionId: 3, cssType: "Continue"))
     }
     
     override func render() {

@@ -7,12 +7,20 @@
 
 import UIKit
 
+import Alamofire
 import SnapKit
 
 final class HomeViewController: BaseViewController {
     
-    var keywordList: [Keyword] = Keyword.mockData
+    var keywordList: [String] = [
+        TextLiteral.homeViewControllerCollectionViewEmtpyText0,
+        TextLiteral.homeViewControllerCollectionViewEmtpyText1,
+        TextLiteral.homeViewControllerCollectionViewEmtpyText2,
+        TextLiteral.homeViewControllerCollectionViewEmtpyText3,
+        TextLiteral.homeViewControllerCollectionViewEmtpyText4
+    ]
     var isTouched = false
+    
     private enum Size {
         static let keywordLabelHeight: CGFloat = 50
         static let labelButtonPadding: CGFloat = 6
@@ -37,16 +45,19 @@ final class HomeViewController: BaseViewController {
         view.toastType = .warning
         return view
     }()
+    private lazy var flowLayout: KeywordCollectionViewFlowLayout = {
+        let layout = KeywordCollectionViewFlowLayout()
+        layout.count = keywordList.count
+        return layout
+    }()
     lazy var keywordCollectionView: UICollectionView = {
-        let flowLayout = KeywordCollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         collectionView.backgroundColor = .white200
         collectionView.register(KeywordCollectionViewCell.self, forCellWithReuseIdentifier: KeywordCollectionViewCell.className)
         return collectionView
     }()
-    private let teamNameLabel: UILabel = {
+    private lazy var teamNameLabel: UILabel = {
         let label = UILabel()
-        label.setTitleFont(text: "맛쟁이 사과처럼")
         label.textColor = .black100
         label.numberOfLines = 0
         return label
@@ -62,7 +73,6 @@ final class HomeViewController: BaseViewController {
      }()
     private let descriptionLabel: UILabel = {
         let label = UILabel()
-        label.text = "아직 회고 일정이 정해지지 않았습니다"
         label.font = .caption1
         label.textColor = .gray400
         return label
@@ -105,6 +115,14 @@ final class HomeViewController: BaseViewController {
         super.viewDidLoad()
         setUpDelegation()
         render()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // FIXME: - teamId 와 userId는 일단은 UserDefaults에서 -> 추후에 토큰으로
+        fetchCertainTeamDetail(type: .fetchCertainTeamDetail(teamId: UserDefaultStorage.teamId, userId: UserDefaultStorage.userId))
+        fetchCurrentReflectionDetail(type: .fetchCurrentReflectionDetail(teamId: UserDefaultStorage.teamId, userId: UserDefaultStorage.userId))
     }
     
     override func configUI() {
@@ -212,6 +230,72 @@ final class HomeViewController: BaseViewController {
         viewController.modalPresentationStyle = .fullScreen
         present(viewController, animated: true)
     }
+    
+    private func showStartReflectionView() {
+        let viewController = StartReflectionViewController()
+        viewController.modalPresentationStyle = .overFullScreen
+        viewController.dismissChildView = { [weak self] in
+            self?.dismiss(animated: true)
+        }
+        present(viewController, animated: true)
+        // FIXME: - 모달 띄우고 시작하기만 가능한 건 동작을 너무 제한시킴 -> 추가하기 버튼이 채워지면서 시작하기로 바뀌는건 어떨까?
+    }
+    
+    private func convertFetchedKeywordList(of list: [String]) {
+        keywordList = []
+        for i in 0..<list.count {
+            keywordList.append(list[i])
+        }
+        print(keywordList)
+    }
+    
+    // MARK: - api
+    
+    private func fetchCertainTeamDetail(type: HomeEndPoint) {
+        AF.request(type.address,
+                   method: type.method,
+                   headers: type.header
+        ).responseDecodable(of: BaseModel<CertainTeamDetailResponse>.self) { json in
+            if let json = json.value {
+                guard let teamName = json.detail?.teamName else { return }
+                DispatchQueue.main.async {
+                    self.teamNameLabel.setTitleFont(text: teamName)
+                }
+            }
+        }
+    }
+    
+    private func fetchCurrentReflectionDetail(type: HomeEndPoint) {
+        AF.request(type.address,
+                   method: type.method,
+                   headers: type.header
+        ).responseDecodable(of: BaseModel<CurrentReflectionResponse>.self) { json in
+            if let json = json.value {
+                
+                let reflectionDetail = json.detail
+                guard let reflectionDate = reflectionDetail?.reflectionDate?.formatDateString(to: "MM월 dd일 a hh시"),
+                      let reflectionStatus = reflectionDetail?.reflectionStatus,
+                      let reflectionKeywordList = reflectionDetail?.reflectionKeywords else { return }
+                
+                if reflectionKeywordList.count > 0 {
+                    self.convertFetchedKeywordList(of: reflectionKeywordList)
+                    DispatchQueue.main.async {
+                        switch reflectionStatus {
+                        case .SettingRequired, .Done:
+                            self.descriptionLabel.text = TextLiteral.homeViewControllerEmptyDescriptionLabel
+                        case .Before:
+                            self.descriptionLabel.text = "다음 회고는 \(reflectionDate)입니다"
+                        case .Progressing:
+                            self.descriptionLabel.text = "다음 회고는 \(reflectionDate)입니다"
+                            self.showStartReflectionView()
+                        }
+                        self.flowLayout.count = reflectionKeywordList.count
+                        self.keywordCollectionView.reloadData()
+                    }
+                }
+            }
+        }
+    }
 }
 
 // MARK: - extension
@@ -229,7 +313,7 @@ extension HomeViewController: UICollectionViewDataSource {
         }
         let keyword = keywordList[indexPath.item]
         // FIXME: cell을 여기서 접근하는건 안좋은 방법일수도?
-        cell.keywordLabel.text = keyword.string
+        cell.keywordLabel.text = keyword
         cell.configShadow(type: .previewKeyword)
         cell.configLabel(type: .previewKeyword)
         return cell
@@ -244,7 +328,7 @@ extension HomeViewController: UICollectionViewDataSource {
 extension HomeViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let size = Size.keywordLabelHeight
-        return KeywordCollectionViewCell.fittingSize(availableHeight: size, keyword: keywordList[indexPath.item].string)
+        return KeywordCollectionViewCell.fittingSize(availableHeight: size, keyword: keywordList[indexPath.item])
     }
 }
 
