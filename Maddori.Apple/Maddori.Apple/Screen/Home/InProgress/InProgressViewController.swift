@@ -23,10 +23,8 @@ final class InProgressViewController: BaseViewController {
     private var currentReflectionMemberName: String
     private var currentReflectionId: Int
     
-//    private let userId = UserDefaultStorage.userId
-//    private let teamId = UserDefaultStorage.teamId
-    private let userId = 12
-    private let teamId = 6
+    private let userId = UserDefaultStorage.userId
+    private let teamId = UserDefaultStorage.teamId
     
     private var userKeywordData: [Keyword] = []
     private var teamKeywordData: [Keyword] = []
@@ -34,6 +32,7 @@ final class InProgressViewController: BaseViewController {
     private var keywordsSectionList: [[Keyword]] = [[], []] {
         didSet {
             keywordCollectionView.reloadData()
+            setUpKeywordType()
         }
     }
     private var isUserRetrospective: Bool {
@@ -220,7 +219,7 @@ extension InProgressViewController: UICollectionViewDelegate {
             info: keyword.content, start: startContent
         )
         DispatchQueue.main.async {
-            cell.setupAttribute()
+            cell.setupAttribute(to: .disabledKeyword)
             self.presentDetailView(feedbackInfo: feedbackInfo)
         }
     }
@@ -298,7 +297,6 @@ extension InProgressViewController: UICollectionViewDataSource {
         
         let keyword = keywordsSectionList[section][item]
         cell.keywordLabel.text = keyword.keyword
-//        print(keyword.style)
         cell.configLabel(type: keyword.style ?? .defaultKeyword)
         cell.configShadow(type: keyword.style ?? .defaultKeyword)
         return cell

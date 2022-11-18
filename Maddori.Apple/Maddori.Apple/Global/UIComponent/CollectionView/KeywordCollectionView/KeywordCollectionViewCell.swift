@@ -61,10 +61,10 @@ final class KeywordCollectionViewCell: BaseCollectionViewCell {
         keywordLabel.text = keyword
     }
     
-    func setupAttribute() {
+    func setupAttribute(to style: KeywordType) {
         if isSelected {
-            configLabel(type: .disabledKeyword)
-            configShadow(type: .disabledKeyword)
+            configLabel(type: style)
+            configShadow(type: style)
         }
     }
     
