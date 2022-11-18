@@ -100,11 +100,6 @@ final class CreateTeamViewController: BaseTextFieldViewController {
         }
     }
     
-    private func pushHomeViewController() {
-        let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
-        sceneDelegate?.changeRootViewCustomTabBarView()
-    }
-    
     // MARK: - api
     
     private func dispatchUserLogin(type: SetupEndPoint<LoginDTO>) {

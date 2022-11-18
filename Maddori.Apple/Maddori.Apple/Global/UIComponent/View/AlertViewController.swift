@@ -272,8 +272,6 @@ final class AlertViewController: BaseViewController {
                       let userId = json.detail?.id
                 else { return }
                 UserDefaultHandler.setUserID(userID: userId)
-                print("UserDefaultStorage.nickname,apiCall", nickname)
-//                UserDefaultHandler.setNickname(nickname: nickname)
                 DispatchQueue.main.async {
                     self.navigationController?.pushViewController(JoinTeamViewController(), animated: true)
                 }
