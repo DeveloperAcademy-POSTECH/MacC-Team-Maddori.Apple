@@ -9,7 +9,7 @@ import UIKit
 
 struct Keyword {
     var style: KeywordType?
-    let type: String
+    let type: FeedBackType
     let keyword: String
     let content: String
     let startContent: String?

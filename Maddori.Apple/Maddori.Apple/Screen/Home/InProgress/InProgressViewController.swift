@@ -23,8 +23,10 @@ final class InProgressViewController: BaseViewController {
     private var currentReflectionMemberName: String
     private var currentReflectionId: Int
     
-    private let userId = UserDefaultStorage.userId
-    private let teamId = UserDefaultStorage.teamId
+//    private let userId = UserDefaultStorage.userId
+//    private let teamId = UserDefaultStorage.teamId
+    private let userId = 11
+    private let teamId = 6
     
     private var userKeywordData: [Keyword] = []
     private var teamKeywordData: [Keyword] = []
@@ -102,8 +104,6 @@ final class InProgressViewController: BaseViewController {
         setUpKeywordType()
     }
     
-    // MARK: - func
-    
     override func render() {
         view.addSubview(titleLabel)
         titleLabel.snp.makeConstraints {
@@ -123,6 +123,8 @@ final class InProgressViewController: BaseViewController {
             $0.leading.trailing.bottom.equalToSuperview()
         }
     }
+    
+    // MARK: - setup
     
     override func setupNavigationBar() {
         super.setupNavigationBar()
@@ -155,11 +157,13 @@ final class InProgressViewController: BaseViewController {
         }
     }
     
+    // MARK: - func
+    
     private func convert(_ response: [FeedBackContentResponse]) -> [Keyword] {
         var keywordList: [Keyword] = []
         for feedback in response {
             let keyword = Keyword(
-                type: feedback.type ?? "Continue",
+                type: feedback.type ?? .continueType,
                 keyword: feedback.keyword ?? "키워드",
                 content: feedback.content ?? "",
                 // FIXME: startContent가 없을 경우 "" 로 둬도 될까?
@@ -170,6 +174,11 @@ final class InProgressViewController: BaseViewController {
         }
         return keywordList
     }
+    
+    private func presentDetailView(feedbackInfo: ReflectionInfoModel) {
+         let viewController = InProgressDetailViewController(feedbackInfo: feedbackInfo)
+         self.present(viewController, animated: true)
+     }
     
     // MARK: - api
     
@@ -202,8 +211,12 @@ final class InProgressViewController: BaseViewController {
 extension InProgressViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let cell = keywordCollectionView.cellForItem(at: indexPath) as? KeywordCollectionViewCell else { return }
+        let keyword = keywordsSectionList[indexPath.section][indexPath.item]
+        guard let startContent = keyword.startContent else { return }
+        let feedbackInfo = ReflectionInfoModel(nickname: keyword.fromUser, feedbackType: keyword.type, keyword: keyword.keyword, info: keyword.content, start: startContent)
         DispatchQueue.main.async {
             cell.setupAttribute()
+            self.presentDetailView(feedbackInfo: feedbackInfo)
         }
     }
 }
