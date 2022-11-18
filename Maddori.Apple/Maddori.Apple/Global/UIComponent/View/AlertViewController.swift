@@ -134,6 +134,10 @@ final class AlertViewController: BaseViewController {
     
     // MARK: - life cycle
     
+    deinit {
+        print("alert ViewController deinit")
+    }
+    
     override func configUI() {
         view.backgroundColor = .black100.withAlphaComponent(0.85)
         setOkLabelColor()
@@ -219,9 +223,7 @@ final class AlertViewController: BaseViewController {
             print("Delete")
         case .join:
             // FIXME: - 팀 합류 api 연결
-            self.pushHomeViewController()
             self.dispatchUserLogin(type: .dispatchLogin(LoginDTO(username: UserDefaultStorage.nickname)))
-            dispatchJoinTeam(type: .dispatchJoinTeam(teamId: UserDefaultStorage.teamId, userId: UserDefaultStorage.userId))
         }
         self.dismiss(animated: true) {
             self.navigation?.popViewController(animated: true)
@@ -265,16 +267,14 @@ final class AlertViewController: BaseViewController {
                    method: type.method,
                    parameters: type.body,
                    encoder: JSONParameterEncoder.default
-        ).responseDecodable(of: BaseModel<MemberResponse>.self) { json in
+        ).responseDecodable(of: BaseModel<JoimMemberResponse>.self) { [weak self] json in
+            guard let self else { return }
             if let json = json.value {
                 dump(json)
-                guard let nickname = json.detail?.username,
-                      let userId = json.detail?.id
+                guard let userId = json.detail?.id
                 else { return }
                 UserDefaultHandler.setUserId(userId: userId)
-                DispatchQueue.main.async {
-                    self.navigationController?.pushViewController(JoinTeamViewController(), animated: true)
-                }
+                self.dispatchJoinTeam(type: .dispatchJoinTeam(teamId: UserDefaultStorage.teamId))
             } else {
                 DispatchQueue.main.async {
                     // FIXME: - UXWriting 필요

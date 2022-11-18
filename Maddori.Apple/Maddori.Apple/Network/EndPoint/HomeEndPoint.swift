@@ -8,15 +8,15 @@
 import Alamofire
 
 enum HomeEndPoint {
-    case fetchCertainTeamDetail(teamId: Int, userId: Int)
-    case fetchCurrentReflectionDetail(teamId: Int, userId: Int)
+    case fetchCertainTeamDetail
+    case fetchCurrentReflectionDetail
     
     var address: String {
         switch self {
-        case .fetchCertainTeamDetail(let teamId, _):
-            return "\(UrlLiteral.baseUrl)/teams/\(teamId)"
-        case .fetchCurrentReflectionDetail(let teamId, _):
-            return "\(UrlLiteral.baseUrl)/teams/\(teamId)/reflections/current"
+        case .fetchCertainTeamDetail:
+            return "\(UrlLiteral.baseUrl)/teams/\(UserDefaultStorage.teamId)"
+        case .fetchCurrentReflectionDetail:
+            return "\(UrlLiteral.baseUrl)/teams/\(UserDefaultStorage.teamId)/reflections/current"
         }
     }
     
@@ -31,11 +31,11 @@ enum HomeEndPoint {
     
     var header: HTTPHeaders {
         switch self {
-        case .fetchCertainTeamDetail(_, let userId):
-            let headers = ["user_id": "\(userId)"]
+        case .fetchCertainTeamDetail:
+            let headers = ["user_id": "\(UserDefaultStorage.userId)"]
             return HTTPHeaders(headers)
-        case .fetchCurrentReflectionDetail(_, let userId):
-            let headers = ["user_id": "\(userId)"]
+        case .fetchCurrentReflectionDetail:
+            let headers = ["user_id": "\(UserDefaultStorage.userId)"]
             return HTTPHeaders(headers)
         }
     }

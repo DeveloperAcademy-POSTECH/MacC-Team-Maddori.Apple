@@ -11,7 +11,7 @@ import Alamofire
 import SnapKit
 
 final class HomeViewController: BaseViewController {
-    
+    var currentReflectionId: Int = 0
     var keywordList: [String] = [
         TextLiteral.homeViewControllerCollectionViewEmtpyText0,
         TextLiteral.homeViewControllerCollectionViewEmtpyText1,
@@ -121,8 +121,8 @@ final class HomeViewController: BaseViewController {
         super.viewWillAppear(animated)
         
         // FIXME: - teamId 와 userId는 일단은 UserDefaults에서 -> 추후에 토큰으로
-        fetchCertainTeamDetail(type: .fetchCertainTeamDetail(teamId: UserDefaultStorage.teamId, userId: UserDefaultStorage.userId))
-        fetchCurrentReflectionDetail(type: .fetchCurrentReflectionDetail(teamId: UserDefaultStorage.teamId, userId: UserDefaultStorage.userId))
+        fetchCertainTeamDetail(type: .fetchCertainTeamDetail)
+        fetchCurrentReflectionDetail(type: .fetchCurrentReflectionDetail)
     }
     
     override func configUI() {
@@ -200,7 +200,7 @@ final class HomeViewController: BaseViewController {
     }
     
     private func didTapAddFeedbackButton() {
-        let viewController = UINavigationController(rootViewController: SelectFeedbackMemberViewController())
+        let viewController = UINavigationController(rootViewController: SelectFeedbackMemberViewController(currentReflectionId: self.currentReflectionId))
         viewController.modalPresentationStyle = .fullScreen
         present(viewController, animated: true)
     }
@@ -273,24 +273,31 @@ final class HomeViewController: BaseViewController {
             if let json = json.value {
                 
                 let reflectionDetail = json.detail
-                guard let reflectionDate = reflectionDetail?.reflectionDate?.formatDateString(to: "MM월 dd일 a hh시"),
-                      let reflectionStatus = reflectionDetail?.reflectionStatus,
-                      let reflectionKeywordList = reflectionDetail?.reflectionKeywords else { return }
+                guard let reflectionStatus = reflectionDetail?.reflectionStatus,
+                      let reflectionId = reflectionDetail?.currentReflectionId
+                else { return }
                 
-                if reflectionKeywordList.count > 0 {
-                    self.convertFetchedKeywordList(of: reflectionKeywordList)
-                    DispatchQueue.main.async {
-                        switch reflectionStatus {
-                        case .SettingRequired, .Done:
-                            self.descriptionLabel.text = TextLiteral.homeViewControllerEmptyDescriptionLabel
-                        case .Before:
-                            self.descriptionLabel.text = "다음 회고는 \(reflectionDate)입니다"
-                        case .Progressing:
-                            self.descriptionLabel.text = "다음 회고는 \(reflectionDate)입니다"
-                            self.showStartReflectionView()
+                self.currentReflectionId = reflectionId
+                if let reflectionKeywordList = reflectionDetail?.reflectionKeywords {
+                    if reflectionKeywordList.count > 0 {
+                        self.convertFetchedKeywordList(of: reflectionKeywordList)
+                        DispatchQueue.main.async {
+                            switch reflectionStatus {
+                            case .SettingRequired, .Done:
+                                self.descriptionLabel.text = TextLiteral.homeViewControllerEmptyDescriptionLabel
+                            case .Before:
+                                // FIXME: - 분기 처리 추가
+                                let reflectionDate = reflectionDetail?.reflectionDate?.formatDateString(to: "MM월 dd일 a hh시")
+                                self.descriptionLabel.text = "다음 회고는 \(reflectionDate)입니다"
+                            case .Progressing:
+                                // FIXME: - 분기 처리 추가
+                                let reflectionDate = reflectionDetail?.reflectionDate?.formatDateString(to: "MM월 dd일 a hh시")
+                                self.descriptionLabel.text = "다음 회고는 \(reflectionDate)입니다"
+                                self.showStartReflectionView()
+                            }
+                            self.flowLayout.count = reflectionKeywordList.count
+                            self.keywordCollectionView.reloadData()
                         }
-                        self.flowLayout.count = reflectionKeywordList.count
-                        self.keywordCollectionView.reloadData()
                     }
                 }
             }

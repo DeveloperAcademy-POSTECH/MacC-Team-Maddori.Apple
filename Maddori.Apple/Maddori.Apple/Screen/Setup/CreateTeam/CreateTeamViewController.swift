@@ -86,7 +86,6 @@ final class CreateTeamViewController: BaseTextFieldViewController {
         let action = UIAction { [weak self] _ in
             // FIXME: - header에는 user defaults에 있는 내 유저 id 값 넣기 -> 나중에는 로그인 토큰으로 변환 예정
             self?.dispatchUserLogin(type: .dispatchLogin(LoginDTO(username: UserDefaultStorage.nickname)))
-            self?.pushInvitationViewController()
         }
         super.doneButton.addAction(action, for: .touchUpInside)
     }
@@ -110,11 +109,12 @@ final class CreateTeamViewController: BaseTextFieldViewController {
         ).responseDecodable(of: BaseModel<MemberResponse>.self) { json in
             if let json = json.value {
                 dump(json)
-                guard let nickname = json.detail?.username,
-                      let userId = json.detail?.id
+                guard let userId = json.detail?.userId
                 else { return }
                 UserDefaultHandler.setUserId(userId : userId)
-                UserDefaultHandler.setNickname(nickname: nickname)
+                DispatchQueue.main.async {
+                    self.pushInvitationViewController()
+                }
             } else {
                 DispatchQueue.main.async {
                     // FIXME: - UXWriting 필요
