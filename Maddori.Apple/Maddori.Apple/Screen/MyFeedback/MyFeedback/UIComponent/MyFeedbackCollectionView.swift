@@ -78,10 +78,15 @@ extension MyFeedbackCollectionView: UICollectionViewDelegate {
                 header.setDividerHidden(false)
             }
             let hasContinue = !mockData.continueArray.isEmpty
+            let hasOnlyStop = !mockData.stopArray.isEmpty
             if hasContinue {
+                header.isHidden = false
                 header.setCssLabelText(with: indexPath.section)
-            } else {
+            } else if hasOnlyStop {
+                header.isHidden = false
                 header.setCssLabelText(with: 1)
+            } else {
+                header.isHidden = true
             }
             switch kind {
             case UICollectionView.elementKindSectionHeader:
