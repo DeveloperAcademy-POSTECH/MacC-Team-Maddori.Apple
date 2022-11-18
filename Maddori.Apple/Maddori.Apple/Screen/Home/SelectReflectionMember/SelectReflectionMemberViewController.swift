@@ -22,11 +22,14 @@ final class SelectReflectionMemberViewController: BaseViewController {
         return label
     }()
     private lazy var memberCollectionView: MemberCollectionView = {
-        let collectionView = MemberCollectionView()
+        let collectionView = MemberCollectionView(type: .progressReflection)
         let member: Member
-        collectionView.memberList = Member.getTotalMemberList()
-        collectionView.didTappedMember = { [weak self] arr in
-            self?.presentInProgressViewController(currentReflectionMember: arr.last)
+//        collectionView.memberList = Member.getTotalMemberList()
+//        collectionView.didTappedMember = { [weak self] arr in
+//            self?.presentInProgressViewController(currentReflectionMember: arr.last)
+//        }
+        collectionView.didTappedMember = { [weak self] _ in
+            self?.navigationController?.pushViewController(InProgressViewController(memberId: 122, memberUsername: "홀리몰리"), animated: true)
         }
         return collectionView
     }()
@@ -90,10 +93,10 @@ final class SelectReflectionMemberViewController: BaseViewController {
         }
     }
     
-    private func presentInProgressViewController(currentReflectionMember: Member) {
-        let viewController = InProgressViewController(currentReflectionMember: currentReflectionMember)
-        navigationController?.pushViewController(viewController, animated: true)
-    }
+//    private func presentInProgressViewController(currentReflectionMember: Member) {
+//        let viewController = InProgressViewController(currentReflectionMember: currentReflectionMember)
+//        navigationController?.pushViewController(viewController, animated: true)
+//    }
     
     // MARK: - api
     
@@ -104,16 +107,10 @@ final class SelectReflectionMemberViewController: BaseViewController {
         ).responseDecodable(of: BaseModel<TeamMembersResponse>.self) { json in
             if let json = json.value {
                 dump(json)
-                var memberList: [String] = []
                 // FIXME: - username이 바깥으로 빠지면 코드 변경 필요
                 guard let fetchedMemberList = json.detail?.members else { return }
-                for member in fetchedMemberList {
-                    guard let username = member.username else { return }
-                    memberList.append(username)
-                }
                 DispatchQueue.main.async {
-                    self.memberCollectionView.memberList = memberList
-                    self.memberCollectionView.collectionView.reloadData()
+                    self.memberCollectionView.memberList = fetchedMemberList
                 }
             }
         }

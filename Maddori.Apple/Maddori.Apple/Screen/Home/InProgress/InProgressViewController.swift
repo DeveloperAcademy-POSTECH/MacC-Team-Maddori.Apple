@@ -19,18 +19,18 @@ final class InProgressViewController: BaseViewController {
         static let othersReflectionEmptyViewHeight: CGFloat = 180
     }
     private var keywordData = Keyword.mockData
-    private var currentReflectionMember: String
+    private var currentReflectionMemberName: String
     private var currentReflectionMemberId: Int
     private let user = "이드"
 //    private let user = "진저"
     private var keywordsSectionList: [[Keyword]] = []
     private var isUserRetrospective: Bool {
-        return user == currentReflectionMember ? true : false
+        return user == currentReflectionMemberName ? true : false
     }
     
-    init(currentReflectionMember: Member) {
-        self.currentReflectionMember = currentReflectionMember.nickname
-        self.currentReflectionMemberId = currentReflectionMember.id
+    init(memberId: Int, memberUsername: String) {
+        self.currentReflectionMemberId = memberId
+        self.currentReflectionMemberName = memberUsername
         super.init()
     }
     
@@ -41,7 +41,7 @@ final class InProgressViewController: BaseViewController {
     private let backButton = BackButton(type: .system)
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.setTitleFont(text: currentReflectionMember + TextLiteral.inProgressViewControllerTitleLabel)
+        label.setTitleFont(text: currentReflectionMemberName + TextLiteral.inProgressViewControllerTitleLabel)
         label.textColor = .black100
         return label
     }()
@@ -49,10 +49,10 @@ final class InProgressViewController: BaseViewController {
         let label = UILabel()
         label.font = .caption1
         label.textColor = .gray400
-        if user == currentReflectionMember {
-            label.text = currentReflectionMember + TextLiteral.inProgressViewControllerSubTitleLabel
+        if user == currentReflectionMemberName {
+            label.text = currentReflectionMemberName + TextLiteral.inProgressViewControllerSubTitleLabel
         } else {
-            label.text = currentReflectionMember + TextLiteral.inProgressViewControllerOthersSubTitleLabel
+            label.text = currentReflectionMemberName + TextLiteral.inProgressViewControllerOthersSubTitleLabel
         }
         label.numberOfLines = 0
         return label
