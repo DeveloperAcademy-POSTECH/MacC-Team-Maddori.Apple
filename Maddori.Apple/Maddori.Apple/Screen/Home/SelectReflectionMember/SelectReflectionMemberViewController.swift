@@ -24,11 +24,11 @@ final class SelectReflectionMemberViewController: BaseViewController {
     private lazy var memberCollectionView: MemberCollectionView = {
         let collectionView = MemberCollectionView(type: .progressReflection)
         collectionView.didTappedFeedBackMember = { [weak self] _ in
-            // FIXME: - userdefaults 들어오면 input 값들 바꾸기
+            
             let member = collectionView.selectedMember
             guard let id = member?.id, let username = member?.username else { return }
             
-            let viewController = InProgressViewController(memberId: id, memberUsername: username)
+            let viewController = InProgressViewController(memberId: id, memberUsername: username, reflectionId: 1)
             self?.navigationController?.pushViewController(viewController, animated: true)
         }
         return collectionView
@@ -45,12 +45,7 @@ final class SelectReflectionMemberViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         didTappedMember()
-        // FIXME: usedefaults 연결
         fetchTeamMembers(type: .fetchTeamMembers(teamId: UserDefaultStorage.teamId, userId: UserDefaultStorage.userId))
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
     }
     
     override func render() {
@@ -102,8 +97,6 @@ final class SelectReflectionMemberViewController: BaseViewController {
                    headers: type.headers
         ).responseDecodable(of: BaseModel<TeamMembersResponse>.self) { json in
             if let json = json.value {
-                // FIXME: - username이 바깥으로 빠지면 코드 변경 필요
-                dump(json)
                 guard let fetchedMemberList = json.detail?.members else { return }
                 dump(fetchedMemberList)
                 DispatchQueue.main.async {

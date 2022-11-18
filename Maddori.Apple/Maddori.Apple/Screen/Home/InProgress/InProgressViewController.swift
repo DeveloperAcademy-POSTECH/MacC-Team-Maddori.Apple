@@ -19,14 +19,15 @@ final class InProgressViewController: BaseViewController {
         static let othersReflectionEmptyViewHeight: CGFloat = 180
     }
     
-    private var userKeywordData: [Keyword] = []
-    private var teamKeywordData: [Keyword] = []
-    
-    private var currentReflectionMemberName: String
     private var currentReflectionMemberId: Int
+    private var currentReflectionMemberName: String
+    private var currentReflectionId: Int
     
     private let userId = UserDefaultStorage.userId
     private let teamId = UserDefaultStorage.teamId
+    
+    private var userKeywordData: [Keyword] = []
+    private var teamKeywordData: [Keyword] = []
     
     private var keywordsSectionList: [[Keyword]] = [[], []] {
         didSet {
@@ -37,9 +38,10 @@ final class InProgressViewController: BaseViewController {
         return userId == currentReflectionMemberId ? true : false
     }
     
-    init(memberId: Int, memberUsername: String) {
+    init(memberId: Int, memberUsername: String, reflectionId: Int) {
         self.currentReflectionMemberId = memberId
         self.currentReflectionMemberName = memberUsername
+        self.currentReflectionId = reflectionId
         super.init()
     }
     
@@ -160,6 +162,7 @@ final class InProgressViewController: BaseViewController {
                 type: feedback.type ?? "Continue",
                 keyword: feedback.keyword ?? "키워드",
                 content: feedback.content ?? "",
+                // FIXME: startContent가 없을 경우 "" 로 둬도 될까?
                 startContent: feedback.startContent ?? "",
                 fromUser: feedback.fromUser?.username ?? "팀원"
             )
@@ -202,8 +205,6 @@ extension InProgressViewController: UICollectionViewDelegate {
         DispatchQueue.main.async {
             cell.setupAttribute()
         }
-        
-        
     }
 }
 
@@ -295,8 +296,10 @@ extension InProgressViewController: UICollectionViewDelegateFlowLayout {
         } else if sectionIsEmpty && !isUserRetrospective {
             return CGSize(width: view.frame.width - 2 * SizeLiteral.leadingTrailingPadding, height: Size.othersReflectionEmptyViewHeight)
         }
-        return KeywordCollectionViewCell.fittingSize(availableHeight: Size.keywordLabelHeight,
-                                                     keyword: keywordsSectionList[section][item].keyword)
+        return KeywordCollectionViewCell.fittingSize(
+            availableHeight: Size.keywordLabelHeight,
+            keyword: keywordsSectionList[section][item].keyword
+        )
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
