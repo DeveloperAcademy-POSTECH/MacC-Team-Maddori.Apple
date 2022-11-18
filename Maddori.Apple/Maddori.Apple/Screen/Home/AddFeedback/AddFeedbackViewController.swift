@@ -20,12 +20,14 @@ class AddFeedbackViewController: BaseViewController {
     var type: FeedBackDTO = .continueType
     var toNickname: String
     var toUserId: Int
+    var currentReflectionId: Int
     var keywordHasText: Bool = false
     var contentHasText: Bool = false
     
-    init(to: String, toUserId: Int) {
+    init(to: String, toUserId: Int, reflectionId: Int) {
         self.toNickname = to
         self.toUserId = toUserId
+        self.currentReflectionId = reflectionId
         super.init()
     }
     
@@ -366,7 +368,7 @@ class AddFeedbackViewController: BaseViewController {
         else { return }
         let dto = FeedBackContentDTO(type: type, keyword: keyword, content: content, start_content: startContent, to_id: toUserId)
         // FIXME: - 각 id들 UserDefault에 저장되어 있는 값을 불러와야 함.
-        dispatchAddFeedBack(type: .dispatchAddFeedBack(teamId: 1, reflectionId: 2, userId: 1, dto))
+        dispatchAddFeedBack(type: .dispatchAddFeedBack(reflectionId: currentReflectionId, dto))
     }
     
     // MARK: - api
