@@ -11,4 +11,9 @@ struct MemberResponse: Decodable {
     // MARK: - userLogin
     let id: Int?
     let username: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case id = "user_id"
+        case username
+    }
 }

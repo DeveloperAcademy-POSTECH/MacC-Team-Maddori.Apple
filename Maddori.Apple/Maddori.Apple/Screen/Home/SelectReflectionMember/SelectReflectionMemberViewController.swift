@@ -21,9 +21,13 @@ final class SelectReflectionMemberViewController: BaseViewController {
         label.setTitleFont(text: TextLiteral.selectReflectionMemberViewControllerTitleLabel)
         return label
     }()
-    private let memberCollectionView: MemberCollectionView = {
+    private lazy var memberCollectionView: MemberCollectionView = {
         let collectionView = MemberCollectionView()
+        let member: Member
         collectionView.memberList = Member.getTotalMemberList()
+        collectionView.didTappedMember = { [weak self] arr in
+            self?.presentInProgressViewController(currentReflectionMember: arr.last)
+        }
         return collectionView
     }()
     private lazy var feedbackDoneButton: MainButton = {
@@ -84,6 +88,11 @@ final class SelectReflectionMemberViewController: BaseViewController {
                 self?.feedbackDoneButton.isDisabled = false
             }
         }
+    }
+    
+    private func presentInProgressViewController(currentReflectionMember: Member) {
+        let viewController = InProgressViewController(currentReflectionMember: currentReflectionMember)
+        navigationController?.pushViewController(viewController, animated: true)
     }
     
     // MARK: - api

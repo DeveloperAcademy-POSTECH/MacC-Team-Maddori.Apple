@@ -12,27 +12,36 @@ import SnapKit
 
 final class InProgressViewController: BaseViewController {
     
-    private var keywordData = Keyword.mockData
-    private let currentRetrospectiveUser = "진저"
-    private let user = "이드"
-//    private let user = "진저"
     private enum Size {
         static let keywordLabelHeight: CGFloat = 50
         static let sectionPadding: CGFloat = 60
         static let myReflectionEmptyViewHeight: CGFloat = 500
         static let othersReflectionEmptyViewHeight: CGFloat = 180
     }
+    private var keywordData = Keyword.mockData
+    private var currentReflectionMember: String
+    private var currentReflectionMemberId: Int
+    private let user = "이드"
+//    private let user = "진저"
     private var keywordsSectionList: [[Keyword]] = []
     private var isUserRetrospective: Bool {
-        return user == currentRetrospectiveUser ? true : false
+        return user == currentReflectionMember ? true : false
     }
+    
+    init(currentReflectionMember: Member) {
+        self.currentReflectionMember = currentReflectionMember.nickname
+        self.currentReflectionMemberId = currentReflectionMember.id
+        super.init()
+    }
+    
+    required init?(coder: NSCoder) { nil }
     
     // MARK: - property
     
     private let backButton = BackButton(type: .system)
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.setTitleFont(text: currentRetrospectiveUser + TextLiteral.inProgressViewControllerTitleLabel)
+        label.setTitleFont(text: currentReflectionMember + TextLiteral.inProgressViewControllerTitleLabel)
         label.textColor = .black100
         return label
     }()
@@ -40,10 +49,10 @@ final class InProgressViewController: BaseViewController {
         let label = UILabel()
         label.font = .caption1
         label.textColor = .gray400
-        if user == currentRetrospectiveUser {
-            label.text = currentRetrospectiveUser + TextLiteral.inProgressViewControllerSubTitleLabel
+        if user == currentReflectionMember {
+            label.text = currentReflectionMember + TextLiteral.inProgressViewControllerSubTitleLabel
         } else {
-            label.text = currentRetrospectiveUser + TextLiteral.inProgressViewControllerOthersSubTitleLabel
+            label.text = currentReflectionMember + TextLiteral.inProgressViewControllerOthersSubTitleLabel
         }
         label.numberOfLines = 0
         return label
@@ -67,7 +76,7 @@ final class InProgressViewController: BaseViewController {
         super.viewDidLoad()
         setUpDelegation()
         setUpKeywordType()
-        fetchTeamAndUserFeedback(type: .fetchTeamAndUserFeedback(reflectionId: 67, teamId: 63, memberId: 122, userId: 123))
+        fetchTeamAndUserFeedback(type: .fetchTeamAndUserFeedback(teamId: 63, reflectionId: 67, memberId: 122, userId: 123))
     }
     
     // MARK: - func
@@ -133,7 +142,7 @@ final class InProgressViewController: BaseViewController {
     private func fetchTeamAndUserFeedback(type: InProgressEndPoint) {
         AF.request(type.address,
                    method: type.method,
-                   headers: type.header
+                   headers: type.headers
         ).responseDecodable(of: BaseModel<AllFeedBackResponse>.self) { json in
             dump(json)
         }
