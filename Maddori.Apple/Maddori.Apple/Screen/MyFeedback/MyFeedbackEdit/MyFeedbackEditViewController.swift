@@ -7,6 +7,7 @@
 
 import UIKit
 
+import Alamofire
 import SnapKit
 
 final class MyFeedbackEditViewController: AddFeedbackViewController {
@@ -106,6 +107,21 @@ final class MyFeedbackEditViewController: AddFeedbackViewController {
             super.feedbackDoneButton.transform = .identity
         })
         super.editFeedbackUntilLabel.isHidden = true
+    }
+    
+    // MARK: - api
+    
+    private func putEditFeedBack(type: MyFeedBackEndPoint<EditFeedBackDTO>) {
+        AF.request(type.address,
+                   method: type.method,
+                   parameters: type.body,
+                   encoder: JSONParameterEncoder.default,
+                   headers: type.headers
+        ).responseDecodable(of: BaseModel<EditFeedBackResponse>.self) { json in
+            if let data = json.value {
+                dump(data)
+            }
+        }
     }
     
     // MARK: - extension

@@ -7,6 +7,7 @@
 
 import UIKit
 
+import Alamofire
 import SnapKit
 
 final class MyFeedbackViewController: BaseViewController {
@@ -62,6 +63,12 @@ final class MyFeedbackViewController: BaseViewController {
     
     // MARK: - life cycle
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        fetchCurrentTeamMember(type: .fetchCurrentTeamMember(teamId: 1, userId: 1))
+        fetchCertainMemberFeedBack(type: .fetchCertainMemberFeedBack(teamId: 1, memberId: 2, userId: 1))
+    }
+    
     override func render() {
         view.addSubview(myFeedbackLabel)
         myFeedbackLabel.snp.makeConstraints {
@@ -87,6 +94,32 @@ final class MyFeedbackViewController: BaseViewController {
         feedbackCollectionView.snp.makeConstraints {
             $0.leading.trailing.bottom.equalToSuperview()
             $0.top.equalTo(dividerView.snp.bottom)
+        }
+    }
+    
+    // MARK: - api
+    
+    private func fetchCurrentTeamMember(type: MyFeedBackEndPoint<VoidModel>) {
+        AF.request(type.address,
+                   method: type.method,
+                   headers: type.headers
+        ).responseDecodable(of: BaseModel<TeamMembersResponse>.self) { json in
+            if let data = json.value {
+                // FIXME: - memberList에 데이터 넣기
+                dump(data)
+            }
+        }
+    }
+    
+    private func fetchCertainMemberFeedBack(type: MyFeedBackEndPoint<VoidModel>) {
+        AF.request(type.address,
+                   method: .get,
+                   headers: type.headers
+        ).responseDecodable(of: BaseModel<FeedBackInfoResponse>.self) { json in
+            if let data = json.value {
+                // FIXME: - collectionView에 데이터 전달
+                dump(data)
+            }
         }
     }
 }

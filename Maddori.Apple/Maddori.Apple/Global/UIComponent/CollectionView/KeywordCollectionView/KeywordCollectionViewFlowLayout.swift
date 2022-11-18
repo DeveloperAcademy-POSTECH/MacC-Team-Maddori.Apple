@@ -14,13 +14,13 @@ final class KeywordCollectionViewFlowLayout: UICollectionViewFlowLayout {
         static let keywordLabelXSpacing: CGFloat = 10
     }
     
+    var count: Int = 0
     let cellSpacing: CGFloat = Size.keywordLabelXSpacing
     
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         self.minimumLineSpacing = Size.keywordLabelRowSpacing
         self.sectionInset = UIEdgeInsets(top: 15, left: SizeLiteral.leadingTrailingPadding, bottom: 0, right: SizeLiteral.leadingTrailingPadding)
         let attributes = super.layoutAttributesForElements(in: rect)
-        
         var leftMargin = sectionInset.left
         var maxY: CGFloat = -1.0
         attributes?.forEach { layoutAttribute in
@@ -32,7 +32,7 @@ final class KeywordCollectionViewFlowLayout: UICollectionViewFlowLayout {
             maxY = max(layoutAttribute.frame.maxY, maxY)
         }
         
-        for i in Keyword.mockData.count..<(attributes?.count ?? 0) {
+        for i in count..<(attributes?.count ?? 0) {
             attributes?[i].frame.origin.x = SizeLiteral.leadingTrailingPadding
         }
         

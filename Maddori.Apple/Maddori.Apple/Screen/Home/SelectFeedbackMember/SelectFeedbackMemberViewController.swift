@@ -7,6 +7,7 @@
 
 import UIKit
 
+import Alamofire
 import SnapKit
 
 final class SelectFeedbackMemberViewController: BaseViewController {
@@ -23,10 +24,9 @@ final class SelectFeedbackMemberViewController: BaseViewController {
         return label
     }()
     private lazy var memberCollectionView: MemberCollectionView = {
-        let collectionView = MemberCollectionView()
-        collectionView.memberList = Member.getMemberListExceptUser()
-        collectionView.didTappedMember = { [weak self] arr in
-            self?.navigationController?.pushViewController(AddFeedbackViewController(from: "나", to: arr.last ?? "팀원"), animated: true)
+        let collectionView = MemberCollectionView(type: .addFeedback)
+        collectionView.didTappedFeedBackMember = { [weak self] user in
+            self?.navigationController?.pushViewController(AddFeedbackViewController(to: user.username ?? "", toUserId: user.userId ?? 0), animated: true)
         }
         return collectionView
     }()
@@ -36,6 +36,7 @@ final class SelectFeedbackMemberViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCloseButtonAction()
+        fetchCurrentTeamMember(type: .fetchCurrentTeamMember(teamId: 1, userId: 1))
     }
     
     override func render() {
@@ -71,5 +72,24 @@ final class SelectFeedbackMemberViewController: BaseViewController {
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.largeTitleDisplayMode = .never
         navigationItem.rightBarButtonItem = rightButton
+    }
+    
+    // MARK: - api
+    
+    private func fetchCurrentTeamMember(type: AddFeedBackEndPoint<AddReflectionDTO>) {
+        AF.request(
+            type.address,
+            method: type.method,
+            headers: type.headers
+        ).responseDecodable(of: BaseModel<TeamMembersResponse>.self) { json in
+            dump(json.value)
+            if let data = json.value {
+                guard let allMemberList = data.detail?.members else { return }
+                let memberList = allMemberList.filter { $0.username != UserDefaultStorage.nickname }
+                DispatchQueue.main.async {
+                    self.memberCollectionView.memberList = memberList
+                }
+            }
+        }
     }
 }

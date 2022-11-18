@@ -7,6 +7,7 @@
 
 import UIKit
 
+import Alamofire
 import SnapKit
 
 enum AlertType: String {
@@ -56,7 +57,7 @@ final class AlertViewController: BaseViewController {
     var teamName: String? = nil
     var navigation: UINavigationController? = nil
     
-    init(type: AlertType, teamName: String?, navigation: UINavigationController?) {
+    init(type: AlertType, teamName: String?, navigation: UINavigationController?, teamId: Int? = nil) {
         self.type = type
         self.teamName = teamName
         self.navigation = navigation
@@ -218,10 +219,43 @@ final class AlertViewController: BaseViewController {
             print("Delete")
         case .join:
             // FIXME: - 팀 합류 api 연결
-            print("Join")
+            self.pushHomeViewController()
+            dispatchJoinTeam(type: .dispatchJoinTeam(teamId: UserDefaultStorage.teamId, userId: UserDefaultStorage.userId))
         }
         self.dismiss(animated: true) {
             self.navigation?.popViewController(animated: true)
+        }
+    }
+    
+    private func pushHomeViewController() {
+        let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
+        sceneDelegate?.changeRootViewCustomTabBarView()
+    }
+    
+    // MARK: - api
+    
+    private func dispatchJoinTeam(type: SetupEndPoint<JoinTeamDTO>) {
+        AF.request(type.address,
+                   method: type.method,
+                   headers: type.headers
+        ).responseDecodable(of: BaseModel<JoinTeamResponse>.self) { json in
+            if let json = json.value {
+                dump(json)
+                DispatchQueue.main.async {
+                    self.pushHomeViewController()
+                }
+            }
+        }
+    }
+    
+    private func deleteFeedBack(type: MyFeedBackEndPoint<VoidModel>) {
+        AF.request(type.address,
+                   method: type.method,
+                   headers: type.headers
+        ).responseDecodable(of: BaseModel<VoidModel>.self) { json in
+            if let data = json.value {
+                dump(data)
+            }
         }
     }
 }

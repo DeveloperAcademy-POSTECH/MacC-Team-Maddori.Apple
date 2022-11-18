@@ -9,8 +9,9 @@ import Foundation
 
 enum DataKeys: String, CaseIterable {
     case isLogin = "isLogin"
-    case userID = "userID"
+    case userId = "userId"
     case nickname = "nickname"
+    case teamId = "teamId"
 }
 
 struct UserDefaultStorage {
@@ -18,12 +19,16 @@ struct UserDefaultStorage {
         return UserData<Bool>.getValue(forKey: .isLogin) ?? false
     }
     
-    static var userID: Int {
-        return UserData<Int>.getValue(forKey: .userID) ?? 1
+    static var userId: Int {
+        return UserData<Int>.getValue(forKey: .userId) ?? 1
     }
         
     static var nickname: String {
         return UserData<String>.getValue(forKey: .nickname) ?? ""
+    }
+    
+    static var teamId: Int {
+        return UserData<Int>.getValue(forKey: .teamId) ?? 1
     }
 }
 
