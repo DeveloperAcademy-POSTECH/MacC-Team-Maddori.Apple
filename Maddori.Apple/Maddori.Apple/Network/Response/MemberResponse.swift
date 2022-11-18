@@ -9,11 +9,6 @@ import Foundation
 
 struct MemberResponse: Decodable {
     // MARK: - userLogin
-    let userId: Int?
+    let id: Int?
     let username: String?
-    
-    enum CodingKeys: String, CodingKey {
-        case userId = "user_id"
-        case username
-    }
 }
