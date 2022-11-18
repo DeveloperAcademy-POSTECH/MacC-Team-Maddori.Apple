@@ -7,6 +7,7 @@
 
 import UIKit
 
+import Alamofire
 import SnapKit
 
 final class SelectReflectionMemberViewController: BaseViewController {
@@ -37,6 +38,11 @@ final class SelectReflectionMemberViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         didTappedMember()
+        fetchTeamMembers(type: .fetchTeamMembers(teamId: 63, userId: 122))
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
     }
     
     override func render() {
@@ -76,6 +82,30 @@ final class SelectReflectionMemberViewController: BaseViewController {
             self?.feedbackDoneButton.title = TextLiteral.selectReflectionMemberViewControllerDoneButtonText + "(\(member.count)/\(self?.memberCollectionView.memberList.count ?? 0))"
             if member.count == self?.memberCollectionView.memberList.count {
                 self?.feedbackDoneButton.isDisabled = false
+            }
+        }
+    }
+    
+    // MARK: - api
+    
+    private func fetchTeamMembers(type: InProgressEndPoint) {
+        AF.request(type.address,
+                   method: type.method,
+                   headers: type.headers
+        ).responseDecodable(of: BaseModel<TeamMembersResponse>.self) { json in
+            if let json = json.value {
+                dump(json)
+                var memberList: [String] = []
+                // FIXME: - username이 바깥으로 빠지면 코드 변경 필요
+                guard let fetchedMemberList = json.detail?.members else { return }
+                for member in fetchedMemberList {
+                    guard let username = member.username else { return }
+                    memberList.append(username)
+                }
+                DispatchQueue.main.async {
+                    self.memberCollectionView.memberList = memberList
+                    self.memberCollectionView.collectionView.reloadData()
+                }
             }
         }
     }
