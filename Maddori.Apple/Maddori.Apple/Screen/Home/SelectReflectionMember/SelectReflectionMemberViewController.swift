@@ -24,10 +24,8 @@ final class SelectReflectionMemberViewController: BaseViewController {
     private lazy var memberCollectionView: MemberCollectionView = {
         let collectionView = MemberCollectionView(type: .progressReflection)
         collectionView.didTappedFeedBackMember = { [weak self] _ in
-            
             let member = collectionView.selectedMember
-            guard let id = member?.id, let username = member?.username else { return }
-            
+            guard let id = member?.userId, let username = member?.userName else { return }
             let viewController = InProgressViewController(memberId: id, memberUsername: username, reflectionId: 1)
             self?.navigationController?.pushViewController(viewController, animated: true)
         }
@@ -98,7 +96,6 @@ final class SelectReflectionMemberViewController: BaseViewController {
         ).responseDecodable(of: BaseModel<TeamMembersResponse>.self) { json in
             if let json = json.value {
                 guard let fetchedMemberList = json.detail?.members else { return }
-                dump(fetchedMemberList)
                 DispatchQueue.main.async {
                     self.memberCollectionView.memberList = fetchedMemberList
                 }

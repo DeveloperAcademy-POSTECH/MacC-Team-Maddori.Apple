@@ -25,7 +25,7 @@ final class InProgressViewController: BaseViewController {
     
 //    private let userId = UserDefaultStorage.userId
 //    private let teamId = UserDefaultStorage.teamId
-    private let userId = 11
+    private let userId = 12
     private let teamId = 6
     
     private var userKeywordData: [Keyword] = []
@@ -168,7 +168,7 @@ final class InProgressViewController: BaseViewController {
                 content: feedback.content ?? "",
                 // FIXME: startContent가 없을 경우 "" 로 둬도 될까?
                 startContent: feedback.startContent ?? "",
-                fromUser: feedback.fromUser?.username ?? "팀원"
+                fromUser: feedback.fromUser?.userName ?? "팀원"
             )
             keywordList.append(keyword)
         }
@@ -213,7 +213,12 @@ extension InProgressViewController: UICollectionViewDelegate {
         guard let cell = keywordCollectionView.cellForItem(at: indexPath) as? KeywordCollectionViewCell else { return }
         let keyword = keywordsSectionList[indexPath.section][indexPath.item]
         guard let startContent = keyword.startContent else { return }
-        let feedbackInfo = ReflectionInfoModel(nickname: keyword.fromUser, feedbackType: keyword.type, keyword: keyword.keyword, info: keyword.content, start: startContent)
+        let feedbackInfo = ReflectionInfoModel(
+            nickname: keyword.fromUser,
+            feedbackType: keyword.type,
+            keyword: keyword.keyword,
+            info: keyword.content, start: startContent
+        )
         DispatchQueue.main.async {
             cell.setupAttribute()
             self.presentDetailView(feedbackInfo: feedbackInfo)
@@ -293,6 +298,7 @@ extension InProgressViewController: UICollectionViewDataSource {
         
         let keyword = keywordsSectionList[section][item]
         cell.keywordLabel.text = keyword.keyword
+//        print(keyword.style)
         cell.configLabel(type: keyword.style ?? .defaultKeyword)
         cell.configShadow(type: keyword.style ?? .defaultKeyword)
         return cell
