@@ -18,7 +18,7 @@ enum InProgressEndPoint {
         case .fetchTeamMembers(let teamId, _):
             return "\(UrlLiteral.baseUrl)/teams/\(teamId)/members"
         case .fetchTeamAndUserFeedback(let teamId, let reflectionId, let memberId, _):
-            return "\(UrlLiteral.baseUrl)/teams/\(teamId)/reflections/\(reflectionId)/feedbacks?members=\(memberId)"
+            return "\(UrlLiteral.baseUrl)/teams/\(teamId)/reflections/\(reflectionId)/feedbacks/from-team?members=\(memberId)"
         }
     }
     

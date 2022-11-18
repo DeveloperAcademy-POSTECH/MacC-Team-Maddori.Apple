@@ -18,11 +18,23 @@ final class InProgressViewController: BaseViewController {
         static let myReflectionEmptyViewHeight: CGFloat = 500
         static let othersReflectionEmptyViewHeight: CGFloat = 180
     }
-    private var keywordData = Keyword.mockData
+    
+    private var userKeywordData: [Keyword] = [] {
+        didSet {
+            keywordCollectionView.reloadData()
+        }
+    }
+    private var teamKeywordData: [Keyword] = [] {
+        didSet {
+            keywordCollectionView.reloadData()
+        }
+    }
+    
     private var currentReflectionMemberName: String
     private var currentReflectionMemberId: Int
+    private var userId: Int = 122
+    
     private let user = "이드"
-//    private let user = "진저"
     private var keywordsSectionList: [[Keyword]] = []
     private var isUserRetrospective: Bool {
         return user == currentReflectionMemberName ? true : false
@@ -76,7 +88,7 @@ final class InProgressViewController: BaseViewController {
         super.viewDidLoad()
         setUpDelegation()
         setUpKeywordType()
-        fetchTeamAndUserFeedback(type: .fetchTeamAndUserFeedback(teamId: 63, reflectionId: 67, memberId: 122, userId: 123))
+        fetchTeamAndUserFeedback(type: .fetchTeamAndUserFeedback(teamId: 63, reflectionId: 67, memberId: currentReflectionMemberId, userId: userId))
     }
     
     // MARK: - func
@@ -144,7 +156,11 @@ final class InProgressViewController: BaseViewController {
                    method: type.method,
                    headers: type.headers
         ).responseDecodable(of: BaseModel<AllFeedBackResponse>.self) { json in
-            dump(json)
+            if let json = json.value {
+                dump(json)
+                userKeywordData = json.detail?.userFeedback
+                teamKeywordData = json.detail?.teamFeedback
+            }
         }
     }
 }

@@ -24,6 +24,7 @@ final class SelectReflectionMemberViewController: BaseViewController {
     private lazy var memberCollectionView: MemberCollectionView = {
         let collectionView = MemberCollectionView(type: .progressReflection)
         collectionView.didTappedFeedBackMember = { [weak self] _ in
+            // FIXME: - userdefaults 들어오면 input 값들 바꾸기
             let viewController = InProgressViewController(memberId: 122, memberUsername: "홀리몰리")
             self?.navigationController?.pushViewController(viewController, animated: true)
         }
@@ -89,11 +90,6 @@ final class SelectReflectionMemberViewController: BaseViewController {
         }
     }
     
-//    private func presentInProgressViewController(currentReflectionMember: Member) {
-//        let viewController = InProgressViewController(currentReflectionMember: currentReflectionMember)
-//        navigationController?.pushViewController(viewController, animated: true)
-//    }
-    
     // MARK: - api
     
     private func fetchTeamMembers(type: InProgressEndPoint) {
@@ -102,7 +98,6 @@ final class SelectReflectionMemberViewController: BaseViewController {
                    headers: type.headers
         ).responseDecodable(of: BaseModel<TeamMembersResponse>.self) { json in
             if let json = json.value {
-                dump(json)
                 // FIXME: - username이 바깥으로 빠지면 코드 변경 필요
                 guard let fetchedMemberList = json.detail?.members else { return }
                 DispatchQueue.main.async {
