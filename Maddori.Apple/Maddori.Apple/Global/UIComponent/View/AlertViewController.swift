@@ -267,11 +267,11 @@ final class AlertViewController: BaseViewController {
                    method: type.method,
                    parameters: type.body,
                    encoder: JSONParameterEncoder.default
-        ).responseDecodable(of: BaseModel<MemberResponse>.self) { [weak self] json in
+        ).responseDecodable(of: BaseModel<JoimMemberResponse>.self) { [weak self] json in
             guard let self else { return }
             if let json = json.value {
                 dump(json)
-                guard let userId = json.detail?.userId
+                guard let userId = json.detail?.id
                 else { return }
                 UserDefaultHandler.setUserId(userId: userId)
                 self.dispatchJoinTeam(type: .dispatchJoinTeam(teamId: UserDefaultStorage.teamId))
