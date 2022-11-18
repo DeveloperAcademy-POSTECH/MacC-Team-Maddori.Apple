@@ -11,7 +11,11 @@ import Alamofire
 import SnapKit
 
 final class MyFeedbackViewController: BaseViewController {
-    private let memberList: [String] = Member.getMemberListExceptUser()
+    private var memberList: [MemberResponse] = [] {
+        didSet {
+            memberCollectionView.reloadData()
+        }
+    }
     
     private enum Size {
         static let horizontalPadding: CGFloat = 24
@@ -65,7 +69,7 @@ final class MyFeedbackViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetchCurrentTeamMember(type: .fetchCurrentTeamMember(teamId: 1, userId: 1))
+        fetchCurrentTeamMember(type: .fetchCurrentTeamMember)
         fetchCertainMemberFeedBack(type: .fetchCertainMemberFeedBack(teamId: 1, memberId: 2, userId: 1))
     }
     
@@ -103,9 +107,10 @@ final class MyFeedbackViewController: BaseViewController {
         AF.request(type.address,
                    method: type.method,
                    headers: type.headers
-        ).responseDecodable(of: BaseModel<TeamMembersResponse>.self) { json in
+        ).responseDecodable(of: BaseModel<TeamMembersResponse>.self) { [weak self] json in
             if let data = json.value {
-                // FIXME: - memberList에 데이터 넣기
+                guard let members = json.value?.detail?.members else { return }
+                self?.memberList = members
                 dump(data)
             }
         }
@@ -137,7 +142,7 @@ extension MyFeedbackViewController: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyFeedbackMemberCollectionViewCell.className, for: indexPath) as? MyFeedbackMemberCollectionViewCell else {
             return UICollectionViewCell()
         }
-        cell.setMemberName(name: memberList[indexPath.item])
+        cell.setMemberName(name: memberList[indexPath.item].userName ?? "")
         if indexPath.item == 0 {
             cell.isSelected = true
             collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .init())
