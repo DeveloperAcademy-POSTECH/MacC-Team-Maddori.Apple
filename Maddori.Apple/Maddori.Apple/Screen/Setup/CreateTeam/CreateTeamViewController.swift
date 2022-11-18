@@ -109,8 +109,8 @@ final class CreateTeamViewController: BaseTextFieldViewController {
         ).responseDecodable(of: BaseModel<MemberResponse>.self) { json in
             if let json = json.value {
                 dump(json)
-                guard let nickname = json.detail?.username,
-                      let userId = json.detail?.id
+                guard let nickname = json.detail?.userName,
+                      let userId = json.detail?.userId
                 else { return }
                 UserDefaultHandler.setUserId(userId : userId)
                 UserDefaultHandler.setNickname(nickname: nickname)

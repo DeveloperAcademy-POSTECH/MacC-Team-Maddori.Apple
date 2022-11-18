@@ -271,7 +271,7 @@ final class AlertViewController: BaseViewController {
             guard let self else { return }
             if let json = json.value {
                 dump(json)
-                guard let userId = json.detail?.id
+                guard let userId = json.detail?.userId
                 else { return }
                 UserDefaultHandler.setUserId(userId: userId)
                 self.dispatchJoinTeam(type: .dispatchJoinTeam(teamId: UserDefaultStorage.teamId))
