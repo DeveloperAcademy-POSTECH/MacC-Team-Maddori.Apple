@@ -91,9 +91,10 @@ extension MemberCollectionView: UICollectionViewDelegate {
             }
             guard let cell = collectionView.cellForItem(at: indexPath) as? MemberCollectionViewCell else { return }
             selectedMember = memberList[indexPath.item]
+            guard let member = selectedMember else { return }
             cell.setupAttribute()
             didTappedMember?(selectedMemberList)
-            didTappedFeedBackMember?(selectedMemberList[indexPath.item])
+            didTappedFeedBackMember?(member)
         }
     }
 }
