@@ -49,7 +49,7 @@ final class MyReflectionViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        dispatchAllReflection(type: .fetchPastReflectionList(teamId: UserDefaultStorage.teamId, userId: UserDefaultStorage.userID))
+        dispatchAllReflection(type: .fetchPastReflectionList(teamId: UserDefaultStorage.teamId, userId: UserDefaultStorage.userId))
     }
     
     override func render() {
