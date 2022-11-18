@@ -84,6 +84,8 @@
 		3E5580072906A7B200714E46 /* InProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5580062906A7B200714E46 /* InProgressViewController.swift */; };
 		3E8052DF2906E09100A6449D /* KeywordSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8052DE2906E09100A6449D /* KeywordSectionHeaderView.swift */; };
 		3EA341C129221998005CBD1C /* ToastContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA341C029221998005CBD1C /* ToastContentView.swift */; };
+		3EA341E62924E2AD005CBD1C /* HomeEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA341E52924E2AD005CBD1C /* HomeEndPoint.swift */; };
+		3EA341E82925E5EA005CBD1C /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA341E72925E5EA005CBD1C /* String+Extension.swift */; };
 		3EB5085C2912427600FB77CB /* MyReflectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB5085B2912427600FB77CB /* MyReflectionViewController.swift */; };
 		3EB508622912B12700FB77CB /* MyReflectionCollectionViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB508612912B12700FB77CB /* MyReflectionCollectionViewHeader.swift */; };
 		3EB50866291350BB00FB77CB /* TotalReflectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB50865291350BB00FB77CB /* TotalReflectionCell.swift */; };
@@ -203,6 +205,8 @@
 		3E5580062906A7B200714E46 /* InProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InProgressViewController.swift; sourceTree = "<group>"; };
 		3E8052DE2906E09100A6449D /* KeywordSectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordSectionHeaderView.swift; sourceTree = "<group>"; };
 		3EA341C029221998005CBD1C /* ToastContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastContentView.swift; sourceTree = "<group>"; };
+		3EA341E52924E2AD005CBD1C /* HomeEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeEndPoint.swift; sourceTree = "<group>"; };
+		3EA341E72925E5EA005CBD1C /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		3EB5085B2912427600FB77CB /* MyReflectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReflectionViewController.swift; sourceTree = "<group>"; };
 		3EB508612912B12700FB77CB /* MyReflectionCollectionViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReflectionCollectionViewHeader.swift; sourceTree = "<group>"; };
 		3EB50865291350BB00FB77CB /* TotalReflectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalReflectionCell.swift; sourceTree = "<group>"; };
@@ -392,6 +396,7 @@
 				39F5583C2908CFAD00CD6F6E /* Encodable+Extension.swift */,
 				3EB508912917585600FB77CB /* UICollectionView + Extension.swift */,
 				7E7F160E2921CD4A00C6BE96 /* UITabBar+Extension.swift */,
+				3EA341E72925E5EA005CBD1C /* String+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -641,6 +646,7 @@
 				39847423292603B000EDC139 /* AddFeedBackEndPoint.swift */,
 				3984742529264ACE00EDC139 /* MyFeedBackEndPoint.swift */,
 				7EE38BB2292623F500FD738D /* MyReflectionEndPoint.swift */,
+				3EA341E52924E2AD005CBD1C /* HomeEndPoint.swift */,
 			);
 			path = EndPoint;
 			sourceTree = "<group>";
@@ -996,6 +1002,7 @@
 				D7AFB7C72916FF9400E998B7 /* CustomSegmentControl.swift in Sources */,
 				3EB508692913560A00FB77CB /* Reflection.swift in Sources */,
 				52DC9091291A98CC00904739 /* MyFeedbackEditViewController.swift in Sources */,
+				3EA341E82925E5EA005CBD1C /* String+Extension.swift in Sources */,
 				D7AFB7C72916FF9400E998B7 /* CustomSegmentControl.swift in Sources */,
 				52FA42A02906608E00C35824 /* Date+Extension.swift in Sources */,
 				39F5582B2908027500CD6F6E /* UIDevice+Extension.swift in Sources */,
@@ -1064,6 +1071,7 @@
 				39F52C6C292473EC00B19A77 /* AllReflectionResponse.swift in Sources */,
 				3EB5088C2916C64800FB77CB /* EmptyFeedbackKeyword.swift in Sources */,
 				39436C15291287A00083D77A /* MyFeedbackCollectionViewCell.swift in Sources */,
+				3EA341E62924E2AD005CBD1C /* HomeEndPoint.swift in Sources */,
 				395C7E0D28F959A500FC2FCA /* MainButton.swift in Sources */,
 				525E721528FEEE8500EF3FCB /* SelectFeedbackMemberViewController.swift in Sources */,
 				3EB508622912B12700FB77CB /* MyReflectionCollectionViewHeader.swift in Sources */,
