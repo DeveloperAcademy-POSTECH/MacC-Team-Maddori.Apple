@@ -58,6 +58,7 @@ final class StartReflectionViewController: BaseViewController {
         let button = UIButton(type: .system)
         let action = UIAction { [weak self] _ in
             // FIXME: - dismisschildview를 해서 blur를 내린 뒤 present?
+//            self?.dismissChildView?()
             self?.presentSelectReflectionMemberViewController()
         }
         button.setTitle(TextLiteral.startReflectionViewControllerStartText, for: .normal)

@@ -24,7 +24,14 @@ final class SelectReflectionMemberViewController: BaseViewController {
     
     // MARK: - property
     
-    private let closeButton = CloseButton(type: .system)
+    private lazy var closeButton: CloseButton = {
+        let button = CloseButton()
+        let action = UIAction { [weak self] _ in
+            self?.dismiss(animated: true)
+        }
+        button.addAction(action, for: .touchUpInside)
+        return button
+    }()
     private let selectFeedbackMemberTitleLabel: UILabel = {
         let label = UILabel()
         label.textColor = .black100
@@ -36,7 +43,7 @@ final class SelectReflectionMemberViewController: BaseViewController {
         collectionView.didTappedFeedBackMember = { [weak self] _ in
             let member = collectionView.selectedMember
             guard let id = member?.userId,
-                    let username = member?.userName,
+                  let username = member?.userName,
                   let reflectionId = self?.reflectionId
             else { return }
             let viewController = InProgressViewController(memberId: id, memberUsername: username, reflectionId: reflectionId)
@@ -46,7 +53,15 @@ final class SelectReflectionMemberViewController: BaseViewController {
     }()
     private lazy var feedbackDoneButton: MainButton = {
         let button = MainButton()
+        let action = UIAction { [weak self] _ in
+            guard let reflectionId = self?.reflectionId else { return }
+            self?.patchEndReflection(type: .patchEndReflection(reflectionId: reflectionId))
+            self?.dismiss(animated: true)
+//            self?.parent?.dismiss(animated: true)
+            
+        }
         button.title = TextLiteral.selectReflectionMemberViewControllerDoneButtonText + "(0/\(memberCollectionView.memberList.count))"
+        button.addAction(action, for: .touchUpInside)
         button.isDisabled = true
         return button
     }()
@@ -56,7 +71,7 @@ final class SelectReflectionMemberViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         didTappedMember()
-        fetchTeamMembers(type: .fetchTeamMembers(teamId: UserDefaultStorage.teamId, userId: UserDefaultStorage.userId))
+        fetchTeamMembers(type: .fetchTeamMembers)
     }
     
     override func render() {
@@ -113,6 +128,18 @@ final class SelectReflectionMemberViewController: BaseViewController {
                     self.memberCollectionView.memberList = fetchedMemberList
                 }
             }
+        }
+    }
+    
+    private func patchEndReflection(type: InProgressEndPoint) {
+        AF.request(type.address,
+                   method: type.method,
+                   headers: type.headers
+        ).responseDecodable(of: BaseModel<ReflectionInfoResponse>.self) { json in
+//            if let json = json.value {
+//
+//            }
+            dump(json)
         }
     }
 }

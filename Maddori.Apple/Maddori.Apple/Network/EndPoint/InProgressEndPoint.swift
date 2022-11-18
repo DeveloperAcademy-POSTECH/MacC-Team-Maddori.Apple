@@ -10,15 +10,18 @@ import Foundation
 import Alamofire
 
 enum InProgressEndPoint {
-    case fetchTeamMembers(teamId: Int, userId: Int)
-    case fetchTeamAndUserFeedback(teamId: Int, reflectionId: Int, memberId: Int, userId: Int)
+    case fetchTeamMembers
+    case fetchTeamAndUserFeedback(reflectionId: Int, memberId: Int)
+    case patchEndReflection(reflectionId: Int)
     
     var address: String {
         switch self {
-        case .fetchTeamMembers(let teamId, _):
-            return "\(UrlLiteral.baseUrl)/teams/\(teamId)/members"
-        case .fetchTeamAndUserFeedback(let teamId, let reflectionId, let memberId, _):
-            return "\(UrlLiteral.baseUrl)/teams/\(teamId)/reflections/\(reflectionId)/feedbacks/from-team?members=\(memberId)"
+        case .fetchTeamMembers:
+            return "\(UrlLiteral.baseUrl)/teams/\(UserDefaultStorage.teamId)/members"
+        case .fetchTeamAndUserFeedback(let reflectionId, let memberId):
+            return "\(UrlLiteral.baseUrl)/teams/\(UserDefaultStorage.teamId)/reflections/\(reflectionId)/feedbacks/from-team?members=\(memberId)"
+        case .patchEndReflection(let reflectionId):
+            return "\(UrlLiteral.baseUrl)/teams/\(UserDefaultStorage.teamId)/reflections/\(reflectionId)/end"
         }
     }
     
@@ -28,16 +31,21 @@ enum InProgressEndPoint {
             return .get
         case .fetchTeamAndUserFeedback:
             return .get
+        case .patchEndReflection:
+            return .patch
         }
     }
     
     var headers: HTTPHeaders? {
         switch self {
-        case .fetchTeamMembers(_, let userId):
-            let headers = ["user_id": "\(userId)"]
+        case .fetchTeamMembers:
+            let headers = ["user_id": "\(UserDefaultStorage.userId)"]
             return HTTPHeaders(headers)
-        case .fetchTeamAndUserFeedback(_, _, _, let userId):
-            let headers = ["user_id": "\(userId)"]
+        case .fetchTeamAndUserFeedback:
+            let headers = ["user_id": "\(UserDefaultStorage.userId)"]
+            return HTTPHeaders(headers)
+        case .patchEndReflection:
+            let headers = ["user_id": "\(UserDefaultStorage.userId)"]
             return HTTPHeaders(headers)
         }
     }

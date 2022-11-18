@@ -94,10 +94,9 @@ final class InProgressViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchTeamAndUserFeedback(type: .fetchTeamAndUserFeedback(
-            teamId: teamId,
             reflectionId: currentReflectionId,
-            memberId: currentReflectionMemberId,
-            userId: userId)
+            memberId: currentReflectionMemberId
+            )
         )
         setUpDelegation()
         setUpKeywordType()
