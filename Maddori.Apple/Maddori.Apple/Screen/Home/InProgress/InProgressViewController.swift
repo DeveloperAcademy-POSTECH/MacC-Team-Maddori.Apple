@@ -24,7 +24,9 @@ final class InProgressViewController: BaseViewController {
     
     private var currentReflectionMemberName: String
     private var currentReflectionMemberId: Int
-    private var userId: Int = 11
+    
+    private let userId = UserDefaultStorage.userId
+    private let teamId = UserDefaultStorage.teamId
     
     private var keywordsSectionList: [[Keyword]] = [[], []] {
         didSet {
@@ -45,7 +47,14 @@ final class InProgressViewController: BaseViewController {
     
     // MARK: - property
     
-    private let backButton = BackButton(type: .system)
+    private lazy var backButton: BackButton = {
+        let button = BackButton()
+        let action = UIAction { [weak self] _ in
+            self?.navigationController?.popViewController(animated: true)
+        }
+        button.addAction(action, for: .touchUpInside)
+        return button
+    }()
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.setTitleFont(text: currentReflectionMemberName + TextLiteral.inProgressViewControllerTitleLabel)
@@ -81,7 +90,12 @@ final class InProgressViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetchTeamAndUserFeedback(type: .fetchTeamAndUserFeedback(teamId: 6, reflectionId: 8, memberId: currentReflectionMemberId, userId: userId))
+        fetchTeamAndUserFeedback(type: .fetchTeamAndUserFeedback(
+            teamId: teamId,
+            reflectionId: 8,
+            memberId: currentReflectionMemberId,
+            userId: userId)
+        )
         setUpDelegation()
         setUpKeywordType()
     }

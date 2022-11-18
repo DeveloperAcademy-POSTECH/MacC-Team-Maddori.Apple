@@ -26,6 +26,7 @@ final class MemberCollectionView: UIView {
     }
     var didTappedMember: (([MemberResponse]) -> ())?
     var didTappedFeedBackMember: ((MemberResponse) -> ())?
+    var selectedMember: MemberResponse?
     private var selectedMemberList: [MemberResponse] = []
     private enum Size {
         static let collectionHorizontalSpacing: CGFloat = 14
@@ -89,6 +90,7 @@ extension MemberCollectionView: UICollectionViewDelegate {
                 selectedMemberList.append(memberList[indexPath.item])
             }
             guard let cell = collectionView.cellForItem(at: indexPath) as? MemberCollectionViewCell else { return }
+            selectedMember = memberList[indexPath.item]
             cell.setupAttribute()
             didTappedMember?(selectedMemberList)
             didTappedFeedBackMember?(selectedMemberList[indexPath.item])
