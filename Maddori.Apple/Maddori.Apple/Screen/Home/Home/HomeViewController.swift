@@ -287,11 +287,11 @@ final class HomeViewController: BaseViewController {
                                 self.descriptionLabel.text = TextLiteral.homeViewControllerEmptyDescriptionLabel
                             case .Before:
                                 // FIXME: - 분기 처리 추가
-                                let reflectionDate = reflectionDetail?.reflectionDate?.formatDateString(to: "MM월 dd일 a hh시")
+                                let reflectionDate = reflectionDetail?.reflectionDate?.formatDateString(to: "MM월 dd일 a h시 mm분")
                                 self.descriptionLabel.text = "다음 회고는 \(reflectionDate ?? String(describing: Date()))입니다"
                             case .Progressing:
                                 // FIXME: - 분기 처리 추가
-                                let reflectionDate = reflectionDetail?.reflectionDate?.formatDateString(to: "MM월 dd일 a hh시")
+                                let reflectionDate = reflectionDetail?.reflectionDate?.formatDateString(to: "MM월 dd일 a hh시 mm분")
                                 self.descriptionLabel.text = "다음 회고는 \(reflectionDate ?? String(describing: Date()))입니다"
                                 self.showStartReflectionView()
                             }

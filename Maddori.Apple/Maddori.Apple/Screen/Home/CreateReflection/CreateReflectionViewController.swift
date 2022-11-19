@@ -134,10 +134,7 @@ final class CreateReflectionViewController: BaseViewController {
     
     private func setupAddReflection() {
         let action = UIAction { [weak self] _ in
-            guard let date = self?.datePicker.date else { return }
-            guard let time = self?.timePicker.date else { return }
-            guard let reflectionDate = self?.combineDateAndTime(date: date, time: time) else { return }
-            print(reflectionDate)
+            guard let reflectionDate = self?.combineDateAndTime() else { return }
             guard let reflectionName = self?.reflectionNameView.nameTextField.text,
                   let reflectionId = self?.reflectionId
             else { return }
@@ -171,7 +168,10 @@ final class CreateReflectionViewController: BaseViewController {
         })
     }
     
-    private func combineDateAndTime(date: Date, time: Date) -> Date {
+    private func combineDateAndTime() -> Date {
+        let date = datePicker.date
+        let time = timePicker.date
+        
         let calendar = NSCalendar.current
         let dateComponents = calendar.dateComponents([.year, .month, .day], from: date)
         let timeComponents = calendar.dateComponents([.hour, .minute], from: time)
