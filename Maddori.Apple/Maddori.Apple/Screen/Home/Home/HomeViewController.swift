@@ -248,12 +248,6 @@ final class HomeViewController: BaseViewController {
         }
     }
     
-//    func presentSelectReflectionMemberViewController() {
-//        let viewController = UINavigationController(rootViewController: SelectReflectionMemberViewController(reflectionId: reflectionId))
-//        viewController.modalPresentationStyle = .fullScreen
-//        present(viewController, animated: true)
-//    }
-    
     // MARK: - api
     
     private func fetchCertainTeamDetail(type: HomeEndPoint) {
