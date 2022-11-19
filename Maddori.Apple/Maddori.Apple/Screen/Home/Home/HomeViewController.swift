@@ -288,11 +288,11 @@ final class HomeViewController: BaseViewController {
                             case .Before:
                                 // FIXME: - 분기 처리 추가
                                 let reflectionDate = reflectionDetail?.reflectionDate?.formatDateString(to: "MM월 dd일 a hh시")
-                                self.descriptionLabel.text = "다음 회고는 \(reflectionDate)입니다"
+                                self.descriptionLabel.text = "다음 회고는 \(reflectionDate ?? String(describing: Date()))입니다"
                             case .Progressing:
                                 // FIXME: - 분기 처리 추가
                                 let reflectionDate = reflectionDetail?.reflectionDate?.formatDateString(to: "MM월 dd일 a hh시")
-                                self.descriptionLabel.text = "다음 회고는 \(reflectionDate)입니다"
+                                self.descriptionLabel.text = "다음 회고는 \(reflectionDate ?? String(describing: Date()))입니다"
                                 self.showStartReflectionView()
                             }
                             self.flowLayout.count = reflectionKeywordList.count
