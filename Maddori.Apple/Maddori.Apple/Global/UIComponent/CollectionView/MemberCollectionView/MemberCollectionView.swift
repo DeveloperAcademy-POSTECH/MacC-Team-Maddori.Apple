@@ -50,7 +50,7 @@ final class MemberCollectionView: UIView {
         flowLayout.minimumLineSpacing = 29
         return flowLayout
     }()
-    lazy var collectionView: UICollectionView = {
+    private lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewFlowLayout)
         collectionView.backgroundColor = .clear
         collectionView.dataSource = self

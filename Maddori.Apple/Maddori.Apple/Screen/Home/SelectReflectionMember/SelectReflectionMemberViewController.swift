@@ -57,8 +57,6 @@ final class SelectReflectionMemberViewController: BaseViewController {
             guard let reflectionId = self?.reflectionId else { return }
             self?.patchEndReflection(type: .patchEndReflection(reflectionId: reflectionId))
             self?.dismiss(animated: true)
-//            self?.parent?.dismiss(animated: true)
-            
         }
         button.title = TextLiteral.selectReflectionMemberViewControllerDoneButtonText + "(0/\(memberCollectionView.memberList.count))"
         button.addAction(action, for: .touchUpInside)
@@ -136,9 +134,6 @@ final class SelectReflectionMemberViewController: BaseViewController {
                    method: type.method,
                    headers: type.headers
         ).responseDecodable(of: BaseModel<ReflectionInfoResponse>.self) { json in
-//            if let json = json.value {
-//
-//            }
             dump(json)
         }
     }
