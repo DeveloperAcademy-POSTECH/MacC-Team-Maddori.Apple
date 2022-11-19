@@ -134,8 +134,8 @@ final class CreateReflectionViewController: BaseViewController {
     
     private func setupAddReflection() {
         let action = UIAction { [weak self] _ in
-            guard let reflectionDate = self?.combineDateAndTime() else { return }
-            guard let reflectionName = self?.reflectionNameView.nameTextField.text,
+            guard let reflectionDate = self?.combineDateAndTime(),
+                  let reflectionName = self?.reflectionNameView.nameTextField.text,
                   let reflectionId = self?.reflectionId
             else { return }
             self?.patchReflectionDetail(type: .patchReflectionDetail(
