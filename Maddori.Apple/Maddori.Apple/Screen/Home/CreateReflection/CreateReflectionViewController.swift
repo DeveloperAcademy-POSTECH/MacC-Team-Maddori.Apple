@@ -12,6 +12,15 @@ import SnapKit
 
 final class CreateReflectionViewController: BaseViewController {
     
+    var reflectionId: Int
+    
+    init(reflectionId: Int) {
+        self.reflectionId = reflectionId
+        super.init()
+    }
+    
+    required init?(coder: NSCoder) { nil }
+    
     // MARK: - property
     
     private lazy var closeButton: CloseButton = {
@@ -129,9 +138,11 @@ final class CreateReflectionViewController: BaseViewController {
             guard let time = self?.timePicker.date else { return }
             guard let reflectionDate = self?.combineDateAndTime(date: date, time: time) else { return }
             print(reflectionDate)
-            guard let reflectionName = self?.reflectionNameView.nameTextField.text else { return }
+            guard let reflectionName = self?.reflectionNameView.nameTextField.text,
+                  let reflectionId = self?.reflectionId
+            else { return }
             self?.patchReflectionDetail(type: .patchReflectionDetail(
-                reflectionId: 12,
+                reflectionId: reflectionId,
                 AddReflectionDTO(
                     reflection_name: reflectionName,
                     reflection_date: String(describing: reflectionDate)

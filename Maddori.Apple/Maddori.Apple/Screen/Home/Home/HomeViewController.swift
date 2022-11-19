@@ -226,7 +226,7 @@ final class HomeViewController: BaseViewController {
     }
     
     private func presentCreateReflectionViewController() {
-        let viewController = UINavigationController(rootViewController: CreateReflectionViewController())
+        let viewController = UINavigationController(rootViewController: CreateReflectionViewController(reflectionId: currentReflectionId))
         viewController.modalPresentationStyle = .fullScreen
         present(viewController, animated: true)
     }
