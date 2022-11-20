@@ -166,7 +166,7 @@ extension MyFeedbackCollectionView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         guard let data = mockData else { return .zero }
         if data.continueArray.isEmpty && data.stopArray.isEmpty {
-            return CGSize(width: 300, height: 400)
+            return CGSize(width: 300, height: 300)
         } else {
             var feedbackList: [String] = []
             guard let data = mockData else { return .zero}
