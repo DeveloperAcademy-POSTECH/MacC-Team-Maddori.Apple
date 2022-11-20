@@ -122,7 +122,7 @@ final class MyFeedbackViewController: BaseViewController {
         ).responseDecodable(of: BaseModel<FeedBackInfoResponse>.self) { json in
             if let data = json.value {
                 guard let detail = data.detail else { return }
-                self.feedbackCollectionView.mockData = detail
+                self.feedbackCollectionView.feedbackInfo = detail
                 dump(data)
             }
         }

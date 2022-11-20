@@ -11,7 +11,7 @@ import SnapKit
 
 final class MyFeedbackCollectionView: UIView {
     var didTappedCell: ((Int) -> ())?
-    var mockData: FeedBackInfoResponse? {
+    var feedbackInfo: FeedBackInfoResponse? {
         didSet {
             feedbackCollectionView.reloadData()
         }
@@ -71,14 +71,14 @@ final class MyFeedbackCollectionView: UIView {
 extension MyFeedbackCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: MyFeedbackHeaderView.className, for: indexPath) as? MyFeedbackHeaderView else { return UICollectionReusableView() }
-        if let mockData {
+        if let feedbackInfo {
             if indexPath.section == 0 {
                 header.setDividerHidden(true)
             } else {
                 header.setDividerHidden(false)
             }
-            let hasContinue = !mockData.continueArray.isEmpty
-            let hasOnlyStop = !mockData.stopArray.isEmpty
+            let hasContinue = !feedbackInfo.continueArray.isEmpty
+            let hasOnlyStop = !feedbackInfo.stopArray.isEmpty
             if hasContinue {
                 header.isHidden = false
                 header.setCssLabelText(with: indexPath.section)
@@ -104,7 +104,7 @@ extension MyFeedbackCollectionView: UICollectionViewDelegate {
 }
 extension MyFeedbackCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        guard let data = mockData else { return 0 }
+        guard let data = feedbackInfo else { return 0 }
         if data.continueArray.isEmpty && data.stopArray.isEmpty {
             return 1
         }
@@ -117,14 +117,14 @@ extension MyFeedbackCollectionView: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let data = mockData else { return UICollectionViewCell() }
+        guard let data = feedbackInfo else { return UICollectionViewCell() }
         if data.continueArray.isEmpty && data.stopArray.isEmpty {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EmptyFeedbackView.className, for: indexPath) as? EmptyFeedbackView else { return UICollectionViewCell() }
             cell.emptyFeedbackLabel.text = TextLiteral.emptyViewMyBox
             return cell
         } else {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyFeedbackCollectionViewCell.className, for: indexPath) as? MyFeedbackCollectionViewCell else { return UICollectionViewCell() }
-            guard let data = mockData else { return UICollectionViewCell() }
+            guard let data = feedbackInfo else { return UICollectionViewCell() }
             let hasContinue = !data.continueArray.isEmpty
             switch indexPath.section {
             case 0:
@@ -149,7 +149,7 @@ extension MyFeedbackCollectionView: UICollectionViewDataSource {
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        guard let data = mockData else { return 1 }
+        guard let data = feedbackInfo else { return 1 }
         if !data.continueArray.isEmpty && !data.stopArray.isEmpty {
             return 2
         } else {
@@ -164,21 +164,21 @@ extension MyFeedbackCollectionView: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        guard let data = mockData else { return .zero }
+        guard let data = feedbackInfo else { return .zero }
         if data.continueArray.isEmpty && data.stopArray.isEmpty {
             return CGSize(width: 300, height: 300)
         } else {
             var feedbackList: [String] = []
-            guard let data = mockData else { return .zero}
+            guard let data = feedbackInfo else { return .zero}
             let hasContinue = !data.continueArray.isEmpty
             if hasContinue {
                 if indexPath.section == 0 {
-                    feedbackList = mockData?.continueArray.map { $0.content ?? "" } ?? []
+                    feedbackList = feedbackInfo?.continueArray.map { $0.content ?? "" } ?? []
                 } else {
-                    feedbackList = mockData?.stopArray.map { $0.content ?? "" } ?? []
+                    feedbackList = feedbackInfo?.stopArray.map { $0.content ?? "" } ?? []
                 }
             } else {
-                feedbackList = mockData?.stopArray.map { $0.content ?? "" } ?? []
+                feedbackList = feedbackInfo?.stopArray.map { $0.content ?? "" } ?? []
             }
             let cellHeight = UILabel.textSize(font: .body2, text: feedbackList[indexPath.item], width: Size.cellContentWidth - 24, height: 0).height
             let isOneTextLine = cellHeight < 18
