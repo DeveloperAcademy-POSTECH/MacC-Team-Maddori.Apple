@@ -142,6 +142,8 @@ extension MyReflectionDetailViewController: UITableViewDataSource {
         // FIXME
         if contentArray.isEmpty {
             tableView.setEmptyFeedbackView()
+        } else {
+            tableView.restore()
         }
         return contentArray.count
     }
