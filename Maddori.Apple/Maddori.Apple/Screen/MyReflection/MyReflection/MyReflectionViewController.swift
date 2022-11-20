@@ -13,9 +13,11 @@ import SnapKit
 final class MyReflectionViewController: BaseViewController {
     
     private let user = UserDefaultStorage.nickname
-    // TODO: reflection 이름 받아온 리스트를 이 totalReflections에 append 시키기
-//    private let totalReflection = [ReflectionModel(title: "1차 회고", date: "2022.10.30.화"), ReflectionModel(title: "2차 회고", date: "2022.11.07.수"), ReflectionModel(title: "3차 회고", date: "2022.11.21.수")]
-    private let totalReflection: [ReflectionResponse] = []
+    private var totalReflection: [[ReflectionResponse]?] = [] {
+        didSet {
+            reflectionCollectionView.reloadData()
+        }
+    }
     
     private enum Size {
         static let headerHeight: CGFloat = 50
@@ -82,7 +84,8 @@ final class MyReflectionViewController: BaseViewController {
                    headers: type.headers
         ).responseDecodable(of: BaseModel<AllReflectionResponse>.self) { json in
             if let json = json.value {
-                dump(json)
+                guard let reflections = json.detail?.reflection else { return }
+                self.totalReflection = reflections
             }
             print(json.response?.statusCode)
         }
@@ -135,8 +138,10 @@ extension MyReflectionViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TotalReflectionCell.className, for: indexPath) as? TotalReflectionCell else { return UICollectionViewCell() }
-        guard let reflectionName = totalReflection[indexPath.item].reflectionName,
-              let date = totalReflection[indexPath.item].date else { return UICollectionViewCell() }
+//        guard let reflectionName = totalReflection[indexPath.item].reflectionName,
+//              let date = totalReflection[indexPath.item].date else { return UICollectionViewCell() }
+        guard let reflectionName = totalReflection[0]?[indexPath.item].reflectionName,
+              let date = totalReflection[0]?[indexPath.item].date else { return UICollectionViewCell() }
         cell.configLabel(text: reflectionName, date: date)
         return cell
     }
