@@ -242,11 +242,12 @@ final class HomeViewController: BaseViewController {
     }
     
     private func convertFetchedKeywordList(of list: [String]) {
-        keywordList = []
-        for i in 0..<list.count {
-            keywordList.append(list[i])
+        if !list.isEmpty {
+            keywordList = []
+            for i in 0..<list.count {
+                keywordList.append(list[i])
+            }
         }
-        print(keywordList)
     }
     
     // MARK: - api
@@ -271,7 +272,6 @@ final class HomeViewController: BaseViewController {
                    headers: type.header
         ).responseDecodable(of: BaseModel<CurrentReflectionResponse>.self) { json in
             if let json = json.value {
-                
                 let reflectionDetail = json.detail
                 guard let reflectionStatus = reflectionDetail?.reflectionStatus,
                       let reflectionId = reflectionDetail?.currentReflectionId
@@ -279,25 +279,23 @@ final class HomeViewController: BaseViewController {
                 
                 self.currentReflectionId = reflectionId
                 if let reflectionKeywordList = reflectionDetail?.reflectionKeywords {
-                    if reflectionKeywordList.count > 0 {
-                        self.convertFetchedKeywordList(of: reflectionKeywordList)
-                        DispatchQueue.main.async {
-                            switch reflectionStatus {
-                            case .SettingRequired, .Done:
-                                self.descriptionLabel.text = TextLiteral.homeViewControllerEmptyDescriptionLabel
-                            case .Before:
-                                // FIXME: - 분기 처리 추가
-                                let reflectionDate = reflectionDetail?.reflectionDate?.formatDateString(to: "MM월 dd일 a h시 mm분")
-                                self.descriptionLabel.text = "다음 회고는 \(reflectionDate ?? String(describing: Date()))입니다"
-                            case .Progressing:
-                                // FIXME: - 분기 처리 추가
-                                let reflectionDate = reflectionDetail?.reflectionDate?.formatDateString(to: "MM월 dd일 a hh시 mm분")
-                                self.descriptionLabel.text = "다음 회고는 \(reflectionDate ?? String(describing: Date()))입니다"
-                                self.showStartReflectionView()
-                            }
-                            self.flowLayout.count = reflectionKeywordList.count
-                            self.keywordCollectionView.reloadData()
+                    self.convertFetchedKeywordList(of: reflectionKeywordList)
+                    DispatchQueue.main.async {
+                        switch reflectionStatus {
+                        case .SettingRequired, .Done:
+                            self.descriptionLabel.text = TextLiteral.homeViewControllerEmptyDescriptionLabel
+                        case .Before:
+                            // FIXME: - 분기 처리 추가
+                            let reflectionDate = reflectionDetail?.reflectionDate?.formatDateString(to: "MM월 dd일 a h시 mm분")
+                            self.descriptionLabel.text = "다음 회고는 \(reflectionDate ?? String(describing: Date()))입니다"
+                        case .Progressing:
+                            // FIXME: - 분기 처리 추가
+                            let reflectionDate = reflectionDetail?.reflectionDate?.formatDateString(to: "MM월 dd일 a hh시 mm분")
+                            self.descriptionLabel.text = "다음 회고는 \(reflectionDate ?? String(describing: Date()))입니다"
+                            self.showStartReflectionView()
                         }
+                        self.flowLayout.count = reflectionKeywordList.count
+                        self.keywordCollectionView.reloadData()
                     }
                 }
             }
