@@ -169,7 +169,7 @@ extension MyFeedbackCollectionView: UICollectionViewDelegateFlowLayout {
             return CGSize(width: 300, height: 300)
         } else {
             var feedbackList: [String] = []
-            guard let data = feedbackInfo else { return .zero}
+            guard let data = feedbackInfo else { return .zero }
             let hasContinue = !data.continueArray.isEmpty
             if hasContinue {
                 if indexPath.section == 0 {
