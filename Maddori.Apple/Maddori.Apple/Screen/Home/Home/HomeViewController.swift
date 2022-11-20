@@ -94,13 +94,11 @@ final class HomeViewController: BaseViewController {
         }
         labelButton.subText = TextLiteral.mainViewControllerPlanLabelButtonSubText
         labelButton.subButtonText = TextLiteral.mainViewControllerPlanLabelButtonSubButtonText
-        labelButton.tag = 100
         return labelButton
     }()
     private lazy var planLableButtonBackgroundView: UIView = {
         let view = UIView()
         view.backgroundColor = .backgroundWhite
-        view.tag = 100
         return view
     }()
     private lazy var addFeedbackButton: UIButton = {
@@ -258,6 +256,11 @@ final class HomeViewController: BaseViewController {
         // FIXME: - 모달 띄우고 시작하기만 가능한 건 동작을 너무 제한시킴 -> 추가하기 버튼이 채워지면서 시작하기로 바뀌는건 어떨까?
     }
     
+    private func hidePlanLabelButton() {
+        planLabelButtonView.isHidden = true
+        planLableButtonBackgroundView.isHidden = true
+    }
+    
     private func convertFetchedKeywordList(of list: [String]) {
         keywordList = []
         for i in 0..<list.count {
@@ -274,8 +277,9 @@ final class HomeViewController: BaseViewController {
                    headers: type.header
         ).responseDecodable(of: BaseModel<CertainTeamDetailResponse>.self) { json in
             if let json = json.value {
-                guard let teamName = json.detail?.teamName else { return }
-                guard let isAdmin = json.detail?.admin else { return }
+                guard let teamName = json.detail?.teamName,
+                      let isAdmin = json.detail?.admin
+                else { return }
                 DispatchQueue.main.async {
                     self.teamNameLabel.setTitleFont(text: teamName)
                     if isAdmin {
@@ -307,13 +311,11 @@ final class HomeViewController: BaseViewController {
                             case .SettingRequired, .Done:
                                 self.descriptionLabel.text = TextLiteral.homeViewControllerEmptyDescriptionLabel
                             case .Before:
-                                let view = self.view.viewWithTag(100)
-                                view?.removeFromSuperview()
+                                self.hidePlanLabelButton()
                                 let reflectionDate = reflectionDetail?.reflectionDate?.formatDateString(to: "MM월 dd일 a hh시")
                                 self.descriptionLabel.text = "다음 회고는 \(reflectionDate)입니다"
                             case .Progressing:
-                                let view = self.view.viewWithTag(100)
-                                view?.removeFromSuperview()
+                                self.hidePlanLabelButton()
                                 let reflectionDate = reflectionDetail?.reflectionDate?.formatDateString(to: "MM월 dd일 a hh시")
                                 self.descriptionLabel.text = "다음 회고는 \(reflectionDate)입니다"
                                 self.showStartReflectionView()
