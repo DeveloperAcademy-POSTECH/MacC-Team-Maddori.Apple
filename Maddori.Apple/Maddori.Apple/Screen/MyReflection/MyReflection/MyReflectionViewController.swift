@@ -13,7 +13,8 @@ import SnapKit
 final class MyReflectionViewController: BaseViewController {
     
     private let user = UserDefaultStorage.nickname
-    private var totalReflection: [[ReflectionResponse]?] = [] {
+    private var allReflection: AllReflectionResponse? 
+    private var totalReflection: [ReflectionResponse] = [] {
         didSet {
             reflectionCollectionView.reloadData()
         }
@@ -84,10 +85,10 @@ final class MyReflectionViewController: BaseViewController {
                    headers: type.headers
         ).responseDecodable(of: BaseModel<AllReflectionResponse>.self) { json in
             if let json = json.value {
-                guard let reflections = json.detail?.reflection else { return }
-                self.totalReflection = reflections
+                guard let jsonDetail = json.detail else { return }
+                self.allReflection = jsonDetail
+                self.totalReflection = (self.allReflection?.reflection[0]!)!
             }
-            print(json.response?.statusCode)
         }
     }
 }
@@ -138,10 +139,9 @@ extension MyReflectionViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TotalReflectionCell.className, for: indexPath) as? TotalReflectionCell else { return UICollectionViewCell() }
-//        guard let reflectionName = totalReflection[indexPath.item].reflectionName,
-//              let date = totalReflection[indexPath.item].date else { return UICollectionViewCell() }
-        guard let reflectionName = totalReflection[0]?[indexPath.item].reflectionName,
-              let date = totalReflection[0]?[indexPath.item].date else { return UICollectionViewCell() }
+        guard let reflectionName = totalReflection[indexPath.item].reflectionName,
+              let date = totalReflection[indexPath.item].date else { return UICollectionViewCell() }
+        
         cell.configLabel(text: reflectionName, date: date)
         return cell
     }
