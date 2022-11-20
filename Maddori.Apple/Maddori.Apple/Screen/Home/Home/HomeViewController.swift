@@ -11,7 +11,7 @@ import Alamofire
 import SnapKit
 
 final class HomeViewController: BaseViewController {
-    var currentReflectionId: Int = 0
+    
     var keywordList: [String] = [
         TextLiteral.homeViewControllerCollectionViewEmtpyText0,
         TextLiteral.homeViewControllerCollectionViewEmtpyText1,
@@ -31,6 +31,9 @@ final class HomeViewController: BaseViewController {
         static let subButtonHeight: CGFloat = 20
         static let planReflectionViewHeight: CGFloat = 40
     }
+    
+    var currentReflectionId: Int = 0
+    var isAdmin: Bool = false
     
     // MARK: - property
     
@@ -91,7 +94,14 @@ final class HomeViewController: BaseViewController {
         }
         labelButton.subText = TextLiteral.mainViewControllerPlanLabelButtonSubText
         labelButton.subButtonText = TextLiteral.mainViewControllerPlanLabelButtonSubButtonText
+        labelButton.tag = 100
         return labelButton
+    }()
+    private lazy var planLableButtonBackgroundView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .backgroundWhite
+        view.tag = 100
+        return view
     }()
     private lazy var addFeedbackButton: UIButton = {
         let button = UIButton()
@@ -183,13 +193,6 @@ final class HomeViewController: BaseViewController {
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             $0.bottom.equalTo(addFeedbackButton.snp.top).offset(-10)
         }
-        
-        view.addSubview(planLabelButtonView)
-        planLabelButtonView.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.bottom.equalTo(addFeedbackButton.snp.top)
-            $0.height.equalTo(SizeLiteral.minimumTouchArea)
-        }
     }
     
     // MARK: - func
@@ -197,6 +200,20 @@ final class HomeViewController: BaseViewController {
     private func setUpDelegation() {
         keywordCollectionView.delegate = self
         keywordCollectionView.dataSource = self
+    }
+    
+    private func renderPlanLabelButton() {
+        view.addSubview(planLableButtonBackgroundView)
+        planLableButtonBackgroundView.snp.makeConstraints {
+            $0.horizontalEdges.equalToSuperview()
+            $0.bottom.equalTo(addFeedbackButton.snp.top)
+            $0.height.equalTo(SizeLiteral.minimumTouchArea)
+        }
+        
+        planLableButtonBackgroundView.addSubview(planLabelButtonView)
+        planLabelButtonView.snp.makeConstraints {
+            $0.top.bottom.centerX.equalToSuperview()
+        }
     }
     
     private func didTapAddFeedbackButton() {
@@ -258,8 +275,12 @@ final class HomeViewController: BaseViewController {
         ).responseDecodable(of: BaseModel<CertainTeamDetailResponse>.self) { json in
             if let json = json.value {
                 guard let teamName = json.detail?.teamName else { return }
+                guard let isAdmin = json.detail?.admin else { return }
                 DispatchQueue.main.async {
                     self.teamNameLabel.setTitleFont(text: teamName)
+                    if isAdmin {
+                        self.renderPlanLabelButton()
+                    }
                 }
             }
         }
@@ -286,11 +307,13 @@ final class HomeViewController: BaseViewController {
                             case .SettingRequired, .Done:
                                 self.descriptionLabel.text = TextLiteral.homeViewControllerEmptyDescriptionLabel
                             case .Before:
-                                // FIXME: - 분기 처리 추가
+                                let view = self.view.viewWithTag(100)
+                                view?.removeFromSuperview()
                                 let reflectionDate = reflectionDetail?.reflectionDate?.formatDateString(to: "MM월 dd일 a hh시")
                                 self.descriptionLabel.text = "다음 회고는 \(reflectionDate)입니다"
                             case .Progressing:
-                                // FIXME: - 분기 처리 추가
+                                let view = self.view.viewWithTag(100)
+                                view?.removeFromSuperview()
                                 let reflectionDate = reflectionDetail?.reflectionDate?.formatDateString(to: "MM월 dd일 a hh시")
                                 self.descriptionLabel.text = "다음 회고는 \(reflectionDate)입니다"
                                 self.showStartReflectionView()
