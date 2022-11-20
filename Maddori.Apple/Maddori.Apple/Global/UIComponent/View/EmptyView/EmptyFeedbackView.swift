@@ -36,7 +36,8 @@ final class EmptyFeedbackView: BaseCollectionViewCell {
         self.addSubview(emptyFeedbackKeyword)
         emptyFeedbackKeyword.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.centerY.equalToSuperview().offset(-Size.capsuleYOffset)
+//            $0.centerY.equalToSuperview().offset(-Size.capsuleYOffset)
+            $0.centerY.equalToSuperview().offset(-105)
             $0.width.equalTo(Size.capsuleWidth)
             $0.height.equalTo(Size.capsuleHeight)
         }
