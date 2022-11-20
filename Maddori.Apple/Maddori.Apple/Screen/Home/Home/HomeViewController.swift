@@ -96,7 +96,7 @@ final class HomeViewController: BaseViewController {
         labelButton.subButtonText = TextLiteral.mainViewControllerPlanLabelButtonSubButtonText
         return labelButton
     }()
-    private lazy var planLableButtonBackgroundView: UIView = {
+    private let planLableButtonBackgroundView: UIView = {
         let view = UIView()
         view.backgroundColor = .backgroundWhite
         return view
