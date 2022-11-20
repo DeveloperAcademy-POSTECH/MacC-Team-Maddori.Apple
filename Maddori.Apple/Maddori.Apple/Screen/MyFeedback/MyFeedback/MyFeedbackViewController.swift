@@ -70,7 +70,6 @@ final class MyFeedbackViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchCurrentTeamMember(type: .fetchCurrentTeamMember)
-//        fetchCertainMemberFeedBack(type: .fetchCertainMemberFeedBack(memberId: 2))
     }
     
     override func render() {
@@ -122,7 +121,6 @@ final class MyFeedbackViewController: BaseViewController {
                    headers: type.headers
         ).responseDecodable(of: BaseModel<FeedBackInfoResponse>.self) { json in
             if let data = json.value {
-                // FIXME: - collectionView에 데이터 전달
                 guard let detail = data.detail else { return }
                 self.feedbackCollectionView.mockData = detail
                 dump(data)
