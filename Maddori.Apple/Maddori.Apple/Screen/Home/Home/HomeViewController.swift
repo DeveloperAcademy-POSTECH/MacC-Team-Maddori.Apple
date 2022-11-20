@@ -210,9 +210,12 @@ final class HomeViewController: BaseViewController {
         toastView.setGradient(colorTop: .gradientGrayTop, colorBottom: .gradientGrayBottom)
     }
     
-    private func showToastPopUp() {
+    private func showToastPopUp(of type: ToastType) {
         if !isTouched {
             isTouched = true
+            DispatchQueue.main.async {
+                self.toastContentView.toastType = type
+            }
             UIView.animate(withDuration: 0.5, delay: 0, animations: {
                 self.toastView.transform = CGAffineTransform(translationX: 0, y: 115)
             }, completion: {_ in
@@ -223,6 +226,14 @@ final class HomeViewController: BaseViewController {
                 })
             })
         }
+    }
+    
+    private func setupCopyCodeButton(code: String) {
+        let action = UIAction { [weak self] _ in
+            UIPasteboard.general.string = code
+            self?.showToastPopUp(of: .complete)
+        }
+        invitationCodeButton.addAction(action, for: .touchUpInside)
     }
     
     private func presentCreateReflectionViewController() {
@@ -258,8 +269,10 @@ final class HomeViewController: BaseViewController {
         ).responseDecodable(of: BaseModel<CertainTeamDetailResponse>.self) { json in
             if let json = json.value {
                 guard let teamName = json.detail?.teamName else { return }
+                guard let invitationCode = json.detail?.invitationCode else { return }
                 DispatchQueue.main.async {
                     self.teamNameLabel.setTitleFont(text: teamName)
+                    self.setupCopyCodeButton(code: invitationCode)
                 }
             }
         }
@@ -328,7 +341,7 @@ extension HomeViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         UIDevice.vibrate()
-        showToastPopUp()
+        showToastPopUp(of: .warning)
     }
 }
 
