@@ -74,9 +74,9 @@ final class MyFeedbackMemberCollectionViewCell: BaseCollectionViewCell {
     }
     
     func setMemberName(name: String) {
-        if name.count >= 4 {
+        if name.count >= 3 {
             var reducedName = name
-            let range = name.index(name.startIndex, offsetBy: 3)..<name.endIndex
+            let range = name.index(name.startIndex, offsetBy: 2)..<name.endIndex
             reducedName.replaceSubrange(range, with: "..")
             memberNameLabel.text = reducedName
         } else {
