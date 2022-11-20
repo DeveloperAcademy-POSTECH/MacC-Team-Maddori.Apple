@@ -96,7 +96,7 @@ final class HomeViewController: BaseViewController {
         labelButton.subButtonText = TextLiteral.mainViewControllerPlanLabelButtonSubButtonText
         return labelButton
     }()
-    private let planLableButtonBackgroundView: UIView = {
+    private let planLabelButtonBackgroundView: UIView = {
         let view = UIView()
         view.backgroundColor = .backgroundWhite
         return view
@@ -201,14 +201,14 @@ final class HomeViewController: BaseViewController {
     }
     
     private func renderPlanLabelButton() {
-        view.addSubview(planLableButtonBackgroundView)
-        planLableButtonBackgroundView.snp.makeConstraints {
+        view.addSubview(planLabelButtonBackgroundView)
+        planLabelButtonBackgroundView.snp.makeConstraints {
             $0.horizontalEdges.equalToSuperview()
             $0.bottom.equalTo(addFeedbackButton.snp.top)
             $0.height.equalTo(SizeLiteral.minimumTouchArea)
         }
         
-        planLableButtonBackgroundView.addSubview(planLabelButtonView)
+        planLabelButtonBackgroundView.addSubview(planLabelButtonView)
         planLabelButtonView.snp.makeConstraints {
             $0.top.bottom.centerX.equalToSuperview()
         }
@@ -258,7 +258,7 @@ final class HomeViewController: BaseViewController {
     
     private func hidePlanLabelButton() {
         planLabelButtonView.isHidden = true
-        planLableButtonBackgroundView.isHidden = true
+        planLabelButtonBackgroundView.isHidden = true
     }
     
     private func convertFetchedKeywordList(of list: [String]) {
