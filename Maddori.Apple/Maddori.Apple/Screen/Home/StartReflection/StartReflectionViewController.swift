@@ -11,7 +11,6 @@ import SnapKit
 
 final class StartReflectionViewController: BaseViewController {
     
-    var dismissChildView: (() -> ())?
     let reflectionId: Int
     
     init(reflectionId: Int) {

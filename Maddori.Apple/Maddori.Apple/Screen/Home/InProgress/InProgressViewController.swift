@@ -186,8 +186,8 @@ final class InProgressViewController: BaseViewController {
                    headers: type.headers
         ).responseDecodable(of: BaseModel<AllFeedBackResponse>.self) { json in
             if let json = json.value {
-                guard let userFeedbackList = json.detail?.userFeedback else { return }
-                guard let teamFeedbackList = json.detail?.teamFeedback else { return }
+                guard let userFeedbackList = json.detail?.userFeedback, let teamFeedbackList = json.detail?.teamFeedback
+                else { return }
                 
                 self.userKeywordData = self.convert(userFeedbackList)
                 self.teamKeywordData = self.convert(teamFeedbackList)

@@ -234,9 +234,6 @@ final class HomeViewController: BaseViewController {
     private func showStartReflectionView() {
         let viewController = StartReflectionViewController(reflectionId: currentReflectionId)
         viewController.modalPresentationStyle = .overFullScreen
-        viewController.dismissChildView = { [weak self] in
-            self?.dismiss(animated: true)
-        }
         present(viewController, animated: true)
         // FIXME: - 모달 띄우고 시작하기만 가능한 건 동작을 너무 제한시킴 -> 추가하기 버튼이 채워지면서 시작하기로 바뀌는건 어떨까?
     }
