@@ -13,7 +13,7 @@ import SnapKit
 final class MyReflectionDetailViewController: BaseViewController {
     
     // FIXME - 데이터 연결시 수정예정
-    private let continueArray: [String] = ["c1", "c2"]
+    private let continueArray: [String] = []
     private let stopArray = ["s","s","s"]
     
     private lazy var contentArray = continueArray
@@ -80,7 +80,7 @@ final class MyReflectionDetailViewController: BaseViewController {
             $0.top.equalTo(titleLabel.snp.bottom).offset(22)
             $0.leading.trailing.equalToSuperview()
             // FIXME
-            $0.bottom.equalToSuperview()
+            $0.bottom.equalTo(view.safeAreaLayoutGuide)
         }
         
         tableView.addSubview(segmentControl)
@@ -141,11 +141,7 @@ final class MyReflectionDetailViewController: BaseViewController {
 extension MyReflectionDetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // FIXME
-        if contentArray.isEmpty {
-            return 1
-        } else {
-            return contentArray.count
-        }
+        return contentArray.isEmpty ? 1 : contentArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -168,7 +164,7 @@ extension MyReflectionDetailViewController: UITableViewDataSource {
 extension MyReflectionDetailViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if contentArray.isEmpty {
-            return tableView.frame.height - 150
+            return tableView.frame.height - 90
         } else {
             return 100
         }

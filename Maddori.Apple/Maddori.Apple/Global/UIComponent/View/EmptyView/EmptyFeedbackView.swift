@@ -72,6 +72,10 @@ final class EmptyTableFeedbackView: BaseTableViewCell {
     
     // MARK: - life cycle
     
+    override func configUI() {
+        backgroundColor = .backgroundWhite
+    }
+    
     override func render() {
         self.addSubview(emptyFeedbackKeyword)
         emptyFeedbackKeyword.snp.makeConstraints {
