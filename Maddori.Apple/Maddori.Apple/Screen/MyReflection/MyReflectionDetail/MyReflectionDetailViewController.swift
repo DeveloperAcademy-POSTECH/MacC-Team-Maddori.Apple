@@ -13,7 +13,7 @@ import SnapKit
 final class MyReflectionDetailViewController: BaseViewController {
     
     // FIXME - 데이터 연결시 수정예정
-    private let continueArray = ["c1","c"]
+    private let continueArray: [String] = []
     private let stopArray = ["s","s","s"]
     
     private lazy var contentArray = continueArray
@@ -140,6 +140,9 @@ final class MyReflectionDetailViewController: BaseViewController {
 extension MyReflectionDetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // FIXME
+        if contentArray.isEmpty {
+            tableView.setEmptyFeedbackView()
+        }
         return contentArray.count
     }
     
