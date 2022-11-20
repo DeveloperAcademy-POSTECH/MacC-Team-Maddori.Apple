@@ -213,6 +213,7 @@ final class HomeViewController: BaseViewController {
     private func showToastPopUp(of type: ToastType) {
         if !isTouched {
             isTouched = true
+            UIDevice.vibrate()
             DispatchQueue.main.async {
                 self.toastContentView.toastType = type
             }
@@ -340,7 +341,6 @@ extension HomeViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        UIDevice.vibrate()
         showToastPopUp(of: .warning)
     }
 }
