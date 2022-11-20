@@ -42,6 +42,7 @@ final class MyReflectionDetailViewController: BaseViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(MyReflectionDetailTableViewCell.self, forCellReuseIdentifier: MyReflectionDetailTableViewCell.className)
+        tableView.register(EmptyTableFeedbackView.self, forCellReuseIdentifier: EmptyTableFeedbackView.className)
         return tableView
     }()
     private lazy var segmentControl: CustomSegmentControl = {
@@ -141,25 +142,36 @@ extension MyReflectionDetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // FIXME
         if contentArray.isEmpty {
-            tableView.setEmptyFeedbackView()
+            return 1
         } else {
-            tableView.restore()
+            return contentArray.count
         }
-        return contentArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: MyReflectionDetailTableViewCell.className, for: indexPath) as? MyReflectionDetailTableViewCell else { return UITableViewCell() }
-        
-        // FIXME
-        cell.titleLabel.text = "필기능력"
-        return cell
+        if contentArray.isEmpty {
+            guard let emptyCell = tableView.dequeueReusableCell(withIdentifier: EmptyTableFeedbackView.className, for: indexPath) as? EmptyTableFeedbackView else { return UITableViewCell() }
+            emptyCell.emptyFeedbackLabel.text = TextLiteral.emptyViewMyReflectionDetail
+            emptyCell.isUserInteractionEnabled = false
+            tableView.separatorStyle = .none
+            tableView.isScrollEnabled = false
+            return emptyCell
+        } else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: MyReflectionDetailTableViewCell.className, for: indexPath) as? MyReflectionDetailTableViewCell else { return UITableViewCell() }
+            // FIXME
+            cell.titleLabel.text = "필기능력"
+            return cell
+        }
     }
 }
 
 extension MyReflectionDetailViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        if contentArray.isEmpty {
+            return tableView.frame.height - 150
+        } else {
+            return 100
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

@@ -42,7 +42,7 @@ final class MyFeedbackCollectionView: UIView {
         collectionView.dataSource = self
         collectionView.register(MyFeedbackHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: MyFeedbackHeaderView.className)
         collectionView.register(MyFeedbackCollectionViewCell.self, forCellWithReuseIdentifier: MyFeedbackCollectionViewCell.className)
-        collectionView.register(EmptyFeedbackView.self, forCellWithReuseIdentifier: EmptyFeedbackView.className)
+        collectionView.register(EmptyCollectionFeedbackView.self, forCellWithReuseIdentifier: EmptyCollectionFeedbackView.className)
         return collectionView
     }()
     
@@ -109,7 +109,7 @@ extension MyFeedbackCollectionView: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if mockData.isEmpty {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EmptyFeedbackView.className, for: indexPath) as? EmptyFeedbackView else { return UICollectionViewCell() }
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EmptyCollectionFeedbackView.className, for: indexPath) as? EmptyCollectionFeedbackView else { return UICollectionViewCell() }
             cell.emptyFeedbackLabel.text = TextLiteral.emptyViewMyBox
             return cell
         }
