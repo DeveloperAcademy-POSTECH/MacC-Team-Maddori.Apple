@@ -13,7 +13,7 @@ import SnapKit
 final class MyReflectionDetailViewController: BaseViewController {
     
     // FIXME - 데이터 연결시 수정예정
-    private let continueArray: [String] = []
+    private let continueArray: [String] = ["c1", "c2"]
     private let stopArray = ["s","s","s"]
     
     private lazy var contentArray = continueArray
