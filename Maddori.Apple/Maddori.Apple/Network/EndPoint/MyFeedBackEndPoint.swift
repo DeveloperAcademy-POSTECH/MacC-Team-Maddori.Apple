@@ -11,7 +11,7 @@ enum MyFeedBackEndPoint<T: Encodable> {
     case fetchCurrentTeamMember
     case fetchCertainMemberFeedBack(memberId: Int)
     case deleteFeedBack(teamId: Int, reflectionId: Int, feedBackId: Int, userId: Int)
-    case putEditFeedBack(teamId: Int, reflectionId: Int, feedBackId: Int, T, userId: Int)
+    case putEditFeedBack(reflectionId: Int, feedBackId: Int, T)
     
     var address: String {
         switch self {
@@ -21,8 +21,8 @@ enum MyFeedBackEndPoint<T: Encodable> {
             return "\(UrlLiteral.baseUrl)/teams/\(UserDefaultStorage.teamId)/reflections/current/feedbacks/from-me?members=\(memberId)"
         case .deleteFeedBack(let teamId, let reflectionId, let feedBackId, _):
             return "\(UrlLiteral.baseUrl)/teams/\(teamId)/reflections/\(reflectionId)/feedbacks/\(feedBackId)"
-        case .putEditFeedBack(let teamId, let reflectionId, let feedBackId, _, _):
-            return "\(UrlLiteral.baseUrl)/teams/\(teamId)/reflections/\(reflectionId)/feedbacks/\(feedBackId)"
+        case .putEditFeedBack(let reflectionId, let feedBackId, _):
+            return "\(UrlLiteral.baseUrl)/teams/\(UserDefaultStorage.teamId)/reflections/\(reflectionId)/feedbacks/\(feedBackId)"
         }
     }
     
@@ -47,7 +47,7 @@ enum MyFeedBackEndPoint<T: Encodable> {
             return nil
         case .deleteFeedBack:
             return nil
-        case .putEditFeedBack(_, _, _, let body, _):
+        case .putEditFeedBack(_, _, let body):
             return body
         }
     }
@@ -63,8 +63,8 @@ enum MyFeedBackEndPoint<T: Encodable> {
         case .deleteFeedBack(_, _, _, let userId):
             let headers = ["user_id": "\(userId)"]
             return HTTPHeaders(headers)
-        case .putEditFeedBack(_, _, _, _, let userId):
-            let headers = ["user_id": "\(userId)"]
+        case .putEditFeedBack(_, _, _):
+            let headers = ["user_id": "\(UserDefaultStorage.userId)"]
             return HTTPHeaders(headers)
         }
     }
