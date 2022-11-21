@@ -34,6 +34,8 @@ final class MyFeedbackMemberCollectionViewCell: BaseCollectionViewCell {
         let label = UILabel()
         label.font = .body2
         label.textColor = .gray400
+        label.lineBreakMode = .byTruncatingTail
+        label.textAlignment = .center
         return label
     }()
     
@@ -52,6 +54,7 @@ final class MyFeedbackMemberCollectionViewCell: BaseCollectionViewCell {
         self.addSubview(memberNameLabel)
         memberNameLabel.snp.makeConstraints {
             $0.center.equalToSuperview()
+            $0.leading.trailing.equalToSuperview().inset(4)
         }
     }
     
@@ -74,13 +77,6 @@ final class MyFeedbackMemberCollectionViewCell: BaseCollectionViewCell {
     }
     
     func setMemberName(name: String) {
-        if name.count >= 3 {
-            var reducedName = name
-            let range = name.index(name.startIndex, offsetBy: 2)..<name.endIndex
-            reducedName.replaceSubrange(range, with: "..")
-            memberNameLabel.text = reducedName
-        } else {
-            memberNameLabel.text = name
-        }
+        memberNameLabel.text = name
     }
 }
