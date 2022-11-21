@@ -106,6 +106,14 @@ final class MyFeedbackEditViewController: AddFeedbackViewController {
         super.closeButton.isHidden = true
     }
     
+    override func didTappedDoneButton() {
+        let dto = EditFeedBackDTO(type: super.type,
+                                  keyword: super.feedbackKeywordTextField.text ?? "",
+                                  content: super.feedbackContentTextView.text ?? "",
+                                  start_content: super.feedbackStartSwitch.isOn ? super.feedbackStartTextView.text ?? "" : nil)
+        putEditFeedBack(type: .putEditFeedBack(reflectionId: feedbackDetail.reflectionId, feedBackId: feedbackDetail.feedbackId, dto))
+    }
+    
     // MARK: - selector
     
     @objc override func willHideKeyboard(notification: NSNotification) {
