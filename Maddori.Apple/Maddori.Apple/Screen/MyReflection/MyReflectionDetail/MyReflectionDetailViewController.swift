@@ -16,6 +16,7 @@ final class MyReflectionDetailViewController: BaseViewController {
     private let continueArray = ["c1","c"]
     private let stopArray = ["s","s","s"]
     
+    private let reflectionId: Int
     private lazy var contentArray = continueArray
     
     // MARK: - property
@@ -56,6 +57,13 @@ final class MyReflectionDetailViewController: BaseViewController {
     }()
     
     // MARK: - life cycle
+    
+    init(reflectionId: Int) {
+        self.reflectionId = reflectionId
+        super.init()
+    }
+    
+    required init?(coder: NSCoder) { nil }
     
     override func viewDidLoad() {
         super.viewDidLoad()

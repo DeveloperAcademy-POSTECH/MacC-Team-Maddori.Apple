@@ -113,7 +113,8 @@ extension MyReflectionViewController: UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.navigationController?.pushViewController(MyReflectionDetailViewController(), animated: true)
+        guard let reflectionId = totalReflection[indexPath.item].id else { return }
+        self.navigationController?.pushViewController(MyReflectionDetailViewController(reflectionId: reflectionId), animated: true)
     }
 }
 
