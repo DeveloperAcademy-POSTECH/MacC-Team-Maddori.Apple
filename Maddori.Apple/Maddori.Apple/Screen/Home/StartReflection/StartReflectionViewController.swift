@@ -32,20 +32,31 @@ final class StartReflectionViewController: BaseViewController {
         let dimmedView = UIView()
         dimmedView.backgroundColor = .white.withAlphaComponent(0.6)
         dimmedView.frame = self.view.bounds
-        
         containerView.addSubview(customBlurEffectView)
         containerView.addSubview(dimmedView)
+        containerView.layer.zPosition = 100
         return containerView
+    }()
+    private lazy var touchView: UIView = {
+        let view = UIView()
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapToClose))
+        view.addGestureRecognizer(tapGesture)
+        view.isUserInteractionEnabled = true
+        view.frame = self.view.bounds
+        view.layer.zPosition = 100
+        return view
     }()
     private let calendarImage: UIImageView = {
         let view = UIImageView()
         view.image = ImageLiterals.imgCalendar
+        view.layer.zPosition = 102
         return view
     }()
     private let startPopupView: UIView = {
         let view = UIView()
         view.clipsToBounds = true
         view.layer.cornerRadius = 10
+        view.layer.zPosition = 101
         return view
     }()
     private let startLabel: UILabel = {
@@ -90,6 +101,8 @@ final class StartReflectionViewController: BaseViewController {
     override func render() {
         view.addSubview(blurredView)
         view.sendSubviewToBack(blurredView)
+        
+        view.addSubview(touchView)
                 
         view.addSubview(startPopupView)
         startPopupView.snp.makeConstraints {
@@ -127,5 +140,12 @@ final class StartReflectionViewController: BaseViewController {
     private func setPopupGradient() {
         startPopupView.layoutIfNeeded()
         startPopupView.setGradient(colorTop: .gradientBlue100Top, colorBottom: .gradientBlue100Bottom)
+    }
+    
+    // MARK: - selector
+    
+    @objc private func tapToClose() {
+        self.dismiss(animated: true)
+        print("tapped")
     }
 }
