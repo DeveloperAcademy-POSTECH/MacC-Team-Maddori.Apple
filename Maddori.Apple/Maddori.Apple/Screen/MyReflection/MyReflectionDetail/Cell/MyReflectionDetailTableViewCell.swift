@@ -87,7 +87,7 @@ final class MyReflectionDetailTableViewCell: BaseTableViewCell {
          }
     }
     
-        // MARK: - func
+    // MARK: - func
     
     func configLabel(title: String, fromLabel: String, content: String) {
         DispatchQueue.main.async {
