@@ -65,13 +65,8 @@ final class MyReflectionDetailViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupBackButton()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         fetchCertainTypeFeedbackAll(type: .fetchCertainTypeFeedbackAllID(teamId: UserDefaultStorage.teamId, userId: UserDefaultStorage.userId, reflectionId: reflectionId, cssType: .continueType))
     }
-
     
     override func render() {
         view.addSubview(titleLabel)
