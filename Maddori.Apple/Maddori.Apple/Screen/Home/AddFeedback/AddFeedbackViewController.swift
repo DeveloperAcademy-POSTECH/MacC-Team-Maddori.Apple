@@ -33,9 +33,6 @@ class AddFeedbackViewController: BaseViewController {
     
     required init?(coder: NSCoder) { nil }
     
-    // FIXME: - 회고 날짜 받아오기 / 현재는 있는 상태
-    private let feedbackDate: Date? = Date()
-    
     // MARK: - property
     
     private lazy var backButton: BackButton = {
