@@ -133,14 +133,13 @@ final class MyFeedbackDetailViewController: BaseViewController {
     override func render() {
         view.addSubview(feedbackFromMeDetailScrollView)
         feedbackFromMeDetailScrollView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+            $0.leading.trailing.top.equalToSuperview()
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(100)
         }
         
         feedbackFromMeDetailScrollView.addSubview(feedbackFromMeDetailContentView)
         feedbackFromMeDetailContentView.snp.makeConstraints {
-            $0.edges.equalTo(feedbackFromMeDetailScrollView.snp.edges)
-            $0.width.equalTo(feedbackFromMeDetailScrollView.snp.width)
-            $0.height.equalTo(view.frame.height)
+            $0.width.top.bottom.equalToSuperview()
         }
         
         feedbackFromMeDetailContentView.addSubview(feedbackFromMeDetailTitleLabel)
@@ -195,19 +194,19 @@ final class MyFeedbackDetailViewController: BaseViewController {
         feedbackStartText.snp.makeConstraints {
             $0.top.equalTo(feedbackStartLabel.snp.bottom).offset(SizeLiteral.labelComponentPadding)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.bottom.equalToSuperview().inset(20)
         }
         
-        // FIXME: - layout 수정필요
         view.addSubview(feedbackEditButtonView)
         feedbackEditButtonView.snp.makeConstraints {
-            $0.bottom.equalToSuperview()
+            $0.bottom.equalTo(view.safeAreaLayoutGuide)
             $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(134)
+            $0.height.equalTo(100)
         }
         
         feedbackEditButtonView.addSubview(feedbackEditButton)
         feedbackEditButton.snp.makeConstraints {
-            $0.bottom.equalTo(feedbackEditButtonView.snp.bottom).inset(44)
+            $0.bottom.equalTo(feedbackEditButtonView.snp.bottom).inset(10)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
