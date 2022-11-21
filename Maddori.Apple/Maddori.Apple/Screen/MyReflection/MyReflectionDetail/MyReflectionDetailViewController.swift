@@ -65,7 +65,7 @@ final class MyReflectionDetailViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupBackButton()
-        fetchCertainTypeFeedbackAll(type: .fetchCertainTypeFeedbackAllID(teamId: UserDefaultStorage.teamId, userId: UserDefaultStorage.userId, reflectionId: reflectionId, cssType: .continueType))
+        fetchCertainTypeFeedbackAll(type: .fetchCertainTypeFeedbackAllID(reflectionId: reflectionId, cssType: .continueType))
     }
     
     override func render() {
@@ -104,10 +104,10 @@ final class MyReflectionDetailViewController: BaseViewController {
     
     private func didChangeValue(segment: UISegmentedControl) {
         if segment.selectedSegmentIndex == 0 {
-            fetchCertainTypeFeedbackAll(type: .fetchCertainTypeFeedbackAllID(teamId: UserDefaultStorage.teamId, userId: UserDefaultStorage.userId, reflectionId: reflectionId, cssType: .continueType))
+            fetchCertainTypeFeedbackAll(type: .fetchCertainTypeFeedbackAllID(reflectionId: reflectionId, cssType: .continueType))
         }
         else {
-            fetchCertainTypeFeedbackAll(type: .fetchCertainTypeFeedbackAllID(teamId: UserDefaultStorage.teamId, userId: UserDefaultStorage.userId, reflectionId: reflectionId, cssType: .stopType))
+            fetchCertainTypeFeedbackAll(type: .fetchCertainTypeFeedbackAllID(reflectionId: reflectionId, cssType: .stopType))
         }
         tableView.reloadData()
     }
