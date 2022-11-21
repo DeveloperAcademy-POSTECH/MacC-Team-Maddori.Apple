@@ -12,7 +12,7 @@ import SnapKit
 
 final class MyReflectionDetailViewController: BaseViewController {
     
-    private let reflectionName: String
+    private var reflectionName: String
     private let reflectionId: Int
     private var contentArray: [FeedBackResponse] = []
     
@@ -26,12 +26,11 @@ final class MyReflectionDetailViewController: BaseViewController {
         button.addAction(action, for: .touchUpInside)
         return button
     }()
-    private let titleLabel: UILabel = {
+    private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        // FIXME
-        label.setTitleFont(text: "배포 후 3차 스프린트를 돌아보세요")
         label.textColor = .black100
-        label.applyColor(to: "배포 후 3차 스프린트", with: .blue200)
+        label.setTitleFont(text: reflectionName + "를\n돌아보세요")
+        label.applyColor(to: reflectionName, with: .blue200)
         return label
     }()
     private lazy var tableView: UITableView = {
