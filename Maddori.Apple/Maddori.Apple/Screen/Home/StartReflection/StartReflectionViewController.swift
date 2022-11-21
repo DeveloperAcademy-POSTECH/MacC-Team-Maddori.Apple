@@ -15,6 +15,15 @@ final class StartReflectionViewController: BaseViewController {
     
     // MARK: - property
     
+    private lazy var closeButton: CloseButton = {
+        let button = CloseButton()
+        let action = UIAction { [weak self] _ in
+            self?.dismiss(animated: true)
+        }
+        button.tintColor = .white100
+        button.addAction(action, for: .touchUpInside)
+        return button
+    }()
     private lazy var blurredView: UIView = {
         let containerView = UIView()
         let blurEffect = UIBlurEffect(style: .light)
@@ -93,6 +102,12 @@ final class StartReflectionViewController: BaseViewController {
         calendarImage.snp.makeConstraints {
             $0.bottom.equalTo(startPopupView.snp.top).inset(39)
             $0.centerX.equalToSuperview()
+        }
+        
+        startPopupView.addSubview(closeButton)
+        closeButton.snp.makeConstraints {
+            $0.width.height.equalTo(SizeLiteral.minimumTouchArea)
+            $0.top.trailing.equalToSuperview()
         }
         
         startPopupView.addSubview(startLabel)
