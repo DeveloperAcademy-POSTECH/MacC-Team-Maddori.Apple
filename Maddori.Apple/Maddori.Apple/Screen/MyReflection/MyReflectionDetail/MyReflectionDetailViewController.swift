@@ -163,6 +163,6 @@ extension MyReflectionDetailViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        navigationController?.pushViewController(MyReflectionFeedbackViewController(), animated: true)
+        navigationController?.pushViewController(MyReflectionFeedbackViewController(model: contentArray[indexPath.row]), animated: true)
     }
 }
