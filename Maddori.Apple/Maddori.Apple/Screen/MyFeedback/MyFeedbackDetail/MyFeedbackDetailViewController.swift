@@ -207,14 +207,14 @@ final class MyFeedbackDetailViewController: BaseViewController {
         // FIXME: - layout 수정필요
         view.addSubview(feedbackEditButtonView)
         feedbackEditButtonView.snp.makeConstraints {
-            $0.bottom.equalToSuperview()
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
             $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(134)
+            $0.height.equalTo(100)
         }
         
         feedbackEditButtonView.addSubview(feedbackEditButton)
         feedbackEditButton.snp.makeConstraints {
-            $0.bottom.equalTo(feedbackEditButtonView.snp.bottom).inset(44)
+            $0.bottom.equalToSuperview().inset(10)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
