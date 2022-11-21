@@ -87,7 +87,9 @@ final class MyReflectionViewController: BaseViewController {
             if let json = json.value {
                 guard let jsonDetail = json.detail else { return }
                 self.allReflection = jsonDetail
-                self.totalReflection = (self.allReflection?.reflection[0]!)!
+                if let reflection = jsonDetail.reflection?[0] {
+                    self.totalReflection = reflection
+                }
             }
         }
     }
