@@ -35,7 +35,7 @@ class AddFeedbackViewController: BaseViewController {
     
     // MARK: - property
     
-    private lazy var backButton: BackButton = {
+    lazy var backButton: BackButton = {
         let button = BackButton(type: .system)
         let action = UIAction { [weak self] _ in
             self?.didTappedBackButton()
@@ -43,7 +43,7 @@ class AddFeedbackViewController: BaseViewController {
         button.addAction(action, for: .touchUpInside)
         return button
     }()
-    lazy var closeButton: CloseButton = {
+    private lazy var closeButton: CloseButton = {
         let button = CloseButton(type: .system)
         let action = UIAction { [weak self] _ in
             self?.didTappedCloseButton()
