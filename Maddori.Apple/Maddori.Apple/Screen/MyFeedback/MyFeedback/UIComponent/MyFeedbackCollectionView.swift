@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 
 final class MyFeedbackCollectionView: UIView {
-    var didTappedCell: ((Int) -> ())?
+    var didTappedCell: ((FeedbackFromMeModel) -> ())?
     var feedbackInfo: FeedBackInfoResponse? {
         didSet {
             feedbackCollectionView.reloadData()
@@ -99,7 +99,27 @@ extension MyFeedbackCollectionView: UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        didTappedCell?(indexPath.item)
+        let feedbackId = indexPath.section == 0
+        ? feedbackInfo?.continueArray[indexPath.item].id ?? 0
+        : feedbackInfo?.stopArray[indexPath.item].id ?? 0
+        let nickName = feedbackInfo?.toUsername ?? ""
+        let keyword = indexPath.section == 0
+        ? feedbackInfo?.continueArray[indexPath.item].keyword ?? ""
+        : feedbackInfo?.stopArray[indexPath.item].keyword ?? ""
+        let info = indexPath.section == 0
+        ? feedbackInfo?.continueArray[indexPath.item].content ?? ""
+        : feedbackInfo?.stopArray[indexPath.item].content ?? ""
+        let start = indexPath.section == 0
+        ? feedbackInfo?.continueArray[indexPath.item].startContent
+        : feedbackInfo?.stopArray[indexPath.item].startContent
+        
+        let data = FeedbackFromMeModel(feedbackId: feedbackId,
+                                       nickname: nickName,
+                                       feedbackType: indexPath.section == 0 ? .continueType : .stopType,
+                                       keyword: keyword,
+                                       info: info,
+                                       start: start)
+        didTappedCell?(data)
     }
 }
 extension MyFeedbackCollectionView: UICollectionViewDataSource {

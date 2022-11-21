@@ -58,9 +58,15 @@ final class MyFeedbackViewController: BaseViewController {
     }()
     private lazy var feedbackCollectionView: MyFeedbackCollectionView = {
         let collectionView = MyFeedbackCollectionView()
-        // FIXME: - index로 해당 배열값 넘겨주기
-        collectionView.didTappedCell = { [weak self] index in
-            self?.navigationController?.pushViewController(MyFeedbackDetailViewController(), animated: true)
+        collectionView.didTappedCell = { [weak self] data in
+            let data = FeedbackFromMeModel(feedbackId: data.feedbackId,
+                                           nickname: data.nickname,
+                                           feedbackType: data.feedbackType,
+                                           keyword: data.keyword,
+                                           info: data.info,
+                                           start: data.start
+            )
+            self?.navigationController?.pushViewController(MyFeedbackDetailViewController(feedbackDetail: data), animated: true)
         }
         return collectionView
     }()

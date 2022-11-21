@@ -13,7 +13,7 @@ final class MyFeedbackDetailViewController: BaseViewController {
     
     // FIXME: - 추후 API 연결 (현재는 mock data)
     
-    private let model = FeedbackFromMeModel.mockData
+    private let feedbackDetail: FeedbackFromMeModel
     private let reflectionDate: Date? = nil
     
     // MARK: - property
@@ -35,7 +35,7 @@ final class MyFeedbackDetailViewController: BaseViewController {
     private let feedbackFromMeDetailContentView = UIView()
     private lazy var feedbackFromMeDetailTitleLabel: UILabel = {
         let label = UILabel()
-        label.setTitleFont(text: model.nickname + TextLiteral.myFeedbackDetailViewControllerTitleLabel)
+        label.setTitleFont(text: feedbackDetail.nickname + TextLiteral.myFeedbackDetailViewControllerTitleLabel)
         label.textColor = .black100
         return label
     }()
@@ -48,7 +48,7 @@ final class MyFeedbackDetailViewController: BaseViewController {
     }()
     private lazy var feedbackTypeText: UILabel = {
         let label = UILabel()
-        label.text = model.feedbackType.rawValue
+        label.text = feedbackDetail.feedbackType.rawValue
         label.textColor = .gray400
         label.font = .body1
         return label
@@ -62,7 +62,7 @@ final class MyFeedbackDetailViewController: BaseViewController {
     }()
     private lazy var feedbackKeywordText: UILabel = {
         let label = UILabel()
-        label.setTextWithLineHeight(text: model.keyword, lineHeight: 24)
+        label.setTextWithLineHeight(text: feedbackDetail.keyword, lineHeight: 24)
         label.textColor = .gray400
         label.font = .body1
         return label
@@ -76,7 +76,7 @@ final class MyFeedbackDetailViewController: BaseViewController {
     }()
     private lazy var feedbackContentText: UILabel = {
         let label = UILabel()
-        label.setTextWithLineHeight(text: model.info, lineHeight: 24)
+        label.setTextWithLineHeight(text: feedbackDetail.info, lineHeight: 24)
         label.textColor = .gray400
         label.font = .body1
         label.numberOfLines = 0
@@ -91,7 +91,7 @@ final class MyFeedbackDetailViewController: BaseViewController {
     }()
     private lazy var feedbackStartText: UILabel = {
         let label = UILabel()
-        label.setTextWithLineHeight(text: model.start, lineHeight: 24)
+        label.setTextWithLineHeight(text: feedbackDetail.start, lineHeight: 24)
         label.textColor = .gray400
         label.font = .body1
         label.numberOfLines = 0
@@ -117,6 +117,13 @@ final class MyFeedbackDetailViewController: BaseViewController {
     }()
     
     // MARK: - life cycle
+    
+    init(feedbackDetail: FeedbackFromMeModel) {
+        self.feedbackDetail = feedbackDetail
+        super.init()
+    }
+    
+    required init?(coder: NSCoder) { nil }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -250,7 +257,7 @@ final class MyFeedbackDetailViewController: BaseViewController {
     }
 
     private func setupOptionalComponents() {
-        if model.start == nil {
+        if feedbackDetail.start == nil {
             feedbackStartLabel.isHidden = true
             feedbackStartText.isHidden = true
         }
