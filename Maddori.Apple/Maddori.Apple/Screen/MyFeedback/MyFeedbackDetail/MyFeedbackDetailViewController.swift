@@ -265,7 +265,7 @@ final class MyFeedbackDetailViewController: BaseViewController {
     }
     
     private func setupMainButton() {
-        let action = UIAction { [weak self ] _ in
+        let action = UIAction { [weak self] _ in
             // FIXME: - 내 데이터는 유저디폴트로 변경
             let viewController = UINavigationController(rootViewController: MyFeedbackEditViewController(to: "케미", toUserId: 0, reflectionId: 0))
             viewController.modalPresentationStyle = .fullScreen
