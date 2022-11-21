@@ -87,10 +87,13 @@ final class HomeViewController: BaseViewController {
         label.textColor = .black100
         return label
     }()
-    private let joinReflectionButton: JoinReflectionButton = {
+    private lazy var joinReflectionButton: JoinReflectionButton = {
         let joinButton = JoinReflectionButton()
         joinButton.layer.cornerRadius = 10
         joinButton.clipsToBounds = true
+        joinButton.buttonAction = { [weak self] in
+            self?.presentSelectReflectionMemberViewController()
+        }
         return joinButton
     }()
     private lazy var planLabelButtonView: LabelButtonView = {
@@ -253,6 +256,12 @@ final class HomeViewController: BaseViewController {
     
     private func presentCreateReflectionViewController() {
         let viewController = UINavigationController(rootViewController: CreateReflectionViewController(reflectionId: currentReflectionId))
+        viewController.modalPresentationStyle = .fullScreen
+        present(viewController, animated: true)
+    }
+    
+    private func presentSelectReflectionMemberViewController() {
+        let viewController = UINavigationController(rootViewController: SelectReflectionMemberViewController())
         viewController.modalPresentationStyle = .fullScreen
         present(viewController, animated: true)
     }

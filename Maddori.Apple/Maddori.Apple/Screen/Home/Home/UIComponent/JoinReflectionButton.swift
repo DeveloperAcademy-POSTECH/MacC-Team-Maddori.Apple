@@ -15,9 +15,12 @@ final class JoinReflectionButton: UIView {
     
     // MARK: - property
     
-    private let joinButton: UIButton = {
+    private lazy var joinButton: UIButton = {
         let button = UIButton()
-        
+        let action = UIAction { [weak self] _ in
+            self?.buttonAction?()
+        }
+        button.addAction(action, for: .touchUpInside)
         return button
     }()
     private let reflectionStatusLabel: UILabel = {
@@ -41,15 +44,9 @@ final class JoinReflectionButton: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         render()
-//        configUI()
     }
 
     required init?(coder: NSCoder) { nil }
-//
-//    private func configUI() {
-//        self.layer.cornerRadius = 10
-//        self.layer.
-//    }
     
     func render() {
         self.addSubview(joinButton)
@@ -67,7 +64,6 @@ final class JoinReflectionButton: UIView {
         touchToEnterLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(18)
             $0.top.equalTo(reflectionStatusLabel.snp.bottom).offset(6)
-//            $0.bottom.equalToSuperview().inset(16)
         }
         
         joinButton.addSubview(calendarImageView)
@@ -80,4 +76,5 @@ final class JoinReflectionButton: UIView {
     }
     
     // MARK: - func
+    
 }
