@@ -201,6 +201,7 @@ class AddFeedbackViewController: BaseViewController {
         feedbackTypeButtonView.snp.makeConstraints {
             $0.top.equalTo(feedbackTypeLabel.snp.bottom).offset(SizeLiteral.labelComponentPadding)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.height.equalTo(46)
         }
         
         addFeedbackContentView.addSubview(feedbackKeywordLabel)
@@ -262,14 +263,16 @@ class AddFeedbackViewController: BaseViewController {
             $0.height.equalTo(150)
         }
         
-        addFeedbackContentView.addSubview(feedbackDoneButtonView)
+//        addFeedbackContentView.addSubview(feedbackDoneButtonView)
+        view.addSubview(feedbackDoneButtonView)
         feedbackDoneButtonView.snp.makeConstraints {
             $0.bottom.equalTo(view.snp.bottom)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(134)
         }
         
-        addFeedbackContentView.addSubview(feedbackDoneButton)
+//        addFeedbackContentView.addSubview(feedbackDoneButton)
+        feedbackDoneButtonView.addSubview(feedbackDoneButton)
         feedbackDoneButton.snp.makeConstraints {
             $0.bottom.equalTo(feedbackDoneButtonView.snp.bottom).inset(36)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
@@ -310,7 +313,6 @@ class AddFeedbackViewController: BaseViewController {
     
     override func endEditingView() {
         if !feedbackDoneButton.isTouchInside {
-            view.endEditing(true)
             if feedbackStartSwitch.isOn {
                 feedbackStartSwitch.snp.remakeConstraints {
                     $0.top.equalTo(feedbackContentTextView.snp.bottom).offset(SizeLiteral.componentIntervalPadding)
@@ -322,7 +324,7 @@ class AddFeedbackViewController: BaseViewController {
                     $0.top.equalTo(feedbackStartTextViewLabel.snp.bottom).offset(SizeLiteral.labelComponentPadding)
                     $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
                     $0.height.equalTo(150)
-                    $0.bottom.equalToSuperview()
+                    $0.bottom.equalToSuperview().inset(100)
                 }
             } else {
                 feedbackStartSwitch.snp.remakeConstraints {
@@ -338,6 +340,7 @@ class AddFeedbackViewController: BaseViewController {
                     $0.height.equalTo(150)
                 }
             }
+            view.endEditing(true)
         }
     }
     
@@ -383,9 +386,9 @@ class AddFeedbackViewController: BaseViewController {
                 $0.top.equalTo(feedbackStartTextViewLabel.snp.bottom).offset(SizeLiteral.labelComponentPadding)
                 $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
                 $0.height.equalTo(150)
-                $0.bottom.equalToSuperview()
+                $0.bottom.equalToSuperview().inset(200)
             }
-            addFeedbackScrollView.scrollRectToVisible(CGRect(x: 0.0, y: 0.0, width: 375.0, height: 2000.0), animated: true)
+            addFeedbackScrollView.setContentOffset(CGPoint(x: 0, y: 300), animated: true)
         } else {
             feedbackStartSwitch.snp.remakeConstraints {
                 $0.top.equalTo(feedbackContentTextView.snp.bottom).offset(SizeLiteral.componentIntervalPadding)
@@ -437,17 +440,23 @@ class AddFeedbackViewController: BaseViewController {
     @objc private func willShowKeyboard(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             UIView.animate(withDuration: 0.2, animations: {
-                self.feedbackDoneButton.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height + 25)
+                self.feedbackDoneButtonView.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height + 25)
             })
+        }
+        feedbackDoneButtonView.snp.updateConstraints {
+            $0.height.equalTo(100)
         }
         editFeedbackUntilLabel.isHidden = true
     }
     
     @objc func willHideKeyboard(notification: NSNotification) {
         UIView.animate(withDuration: 0.2, animations: {
-            self.feedbackDoneButton.transform = .identity
+            self.feedbackDoneButtonView.transform = .identity
         })
         editFeedbackUntilLabel.isHidden = false
+        feedbackDoneButtonView.snp.updateConstraints {
+            $0.height.equalTo(134)
+        }
     }
 }
 
@@ -475,7 +484,7 @@ extension AddFeedbackViewController: UITextFieldDelegate {
             $0.height.equalTo(150)
             $0.bottom.equalToSuperview()
         }
-        addFeedbackScrollView.scrollRectToVisible(CGRect(x: 0.0, y: 0.0, width: 375.0, height: 920.0), animated: true)
+        addFeedbackScrollView.setContentOffset(CGPoint(x: 0, y: 90), animated: true)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -520,10 +529,10 @@ extension AddFeedbackViewController: UITextViewDelegate {
                     $0.top.equalTo(feedbackStartTextViewLabel.snp.bottom).offset(SizeLiteral.labelComponentPadding)
                     $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
                     $0.height.equalTo(150)
-                    $0.bottom.equalToSuperview().inset(80)
+                    $0.bottom.equalToSuperview().inset(90)
                 }
-                addFeedbackScrollView.scrollRectToVisible(CGRect(x: 0.0, y: 0.0, width: 375.0, height: 920.0), animated: true)
             }
+            addFeedbackScrollView.setContentOffset(CGPoint(x: 0, y: 160), animated: true)
         } else {
             feedbackStartSwitch.snp.remakeConstraints {
                 $0.top.equalTo(feedbackContentTextView.snp.bottom).offset(SizeLiteral.componentIntervalPadding)
@@ -535,9 +544,9 @@ extension AddFeedbackViewController: UITextViewDelegate {
                 $0.top.equalTo(feedbackStartTextViewLabel.snp.bottom).offset(SizeLiteral.labelComponentPadding)
                 $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
                 $0.height.equalTo(150)
-                $0.bottom.equalToSuperview().inset(250)
+                $0.bottom.equalToSuperview().inset(200)
             }
-            addFeedbackScrollView.scrollRectToVisible(CGRect(x: 0.0, y: 0.0, width: 375.0, height: 2000.0), animated: true)
+            addFeedbackScrollView.setContentOffset(CGPoint(x: 0, y: 350), animated: true)
         }
     }
     
