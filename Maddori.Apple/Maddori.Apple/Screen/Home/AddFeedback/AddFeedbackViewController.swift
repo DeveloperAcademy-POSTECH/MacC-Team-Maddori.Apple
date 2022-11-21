@@ -176,7 +176,7 @@ class AddFeedbackViewController: BaseViewController {
         view.addSubview(addFeedbackScrollView)
         addFeedbackScrollView.snp.makeConstraints {
             $0.leading.top.trailing.equalToSuperview()
-            $0.bottom.equalToSuperview().inset(134)
+            $0.bottom.equalToSuperview()
         }
         
         addFeedbackScrollView.addSubview(addFeedbackContentView)
@@ -262,14 +262,14 @@ class AddFeedbackViewController: BaseViewController {
             $0.height.equalTo(150)
         }
         
-        view.addSubview(feedbackDoneButtonView)
+        addFeedbackContentView.addSubview(feedbackDoneButtonView)
         feedbackDoneButtonView.snp.makeConstraints {
-            $0.bottom.equalToSuperview()
+            $0.bottom.equalTo(view.snp.bottom)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(134)
         }
         
-        feedbackDoneButtonView.addSubview(feedbackDoneButton)
+        addFeedbackContentView.addSubview(feedbackDoneButton)
         feedbackDoneButton.snp.makeConstraints {
             $0.bottom.equalTo(feedbackDoneButtonView.snp.bottom).inset(36)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
@@ -311,6 +311,33 @@ class AddFeedbackViewController: BaseViewController {
     override func endEditingView() {
         if !feedbackDoneButton.isTouchInside {
             view.endEditing(true)
+            if feedbackStartSwitch.isOn {
+                feedbackStartSwitch.snp.remakeConstraints {
+                    $0.top.equalTo(feedbackContentTextView.snp.bottom).offset(SizeLiteral.componentIntervalPadding)
+                    $0.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+                    $0.width.equalTo(51)
+                    $0.height.equalTo(31)
+                }
+                feedbackStartTextView.snp.remakeConstraints {
+                    $0.top.equalTo(feedbackStartTextViewLabel.snp.bottom).offset(SizeLiteral.labelComponentPadding)
+                    $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+                    $0.height.equalTo(150)
+                    $0.bottom.equalToSuperview()
+                }
+            } else {
+                feedbackStartSwitch.snp.remakeConstraints {
+                    $0.top.equalTo(feedbackContentTextView.snp.bottom).offset(SizeLiteral.componentIntervalPadding)
+                    $0.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+                    $0.width.equalTo(51)
+                    $0.height.equalTo(31)
+                    $0.bottom.equalToSuperview()
+                }
+                feedbackStartTextView.snp.remakeConstraints {
+                    $0.top.equalTo(feedbackStartTextViewLabel.snp.bottom).offset(SizeLiteral.labelComponentPadding)
+                    $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+                    $0.height.equalTo(150)
+                }
+            }
         }
     }
     
@@ -356,9 +383,9 @@ class AddFeedbackViewController: BaseViewController {
                 $0.top.equalTo(feedbackStartTextViewLabel.snp.bottom).offset(SizeLiteral.labelComponentPadding)
                 $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
                 $0.height.equalTo(150)
-                $0.bottom.equalToSuperview().inset(280)
+                $0.bottom.equalToSuperview()
             }
-            addFeedbackScrollView.scrollRectToVisible(CGRect(x: 0.0, y: 0.0, width: 375.0, height: 1100.0), animated: true)
+            addFeedbackScrollView.scrollRectToVisible(CGRect(x: 0.0, y: 0.0, width: 375.0, height: 2000.0), animated: true)
         } else {
             feedbackStartSwitch.snp.remakeConstraints {
                 $0.top.equalTo(feedbackContentTextView.snp.bottom).offset(SizeLiteral.componentIntervalPadding)
@@ -469,6 +496,35 @@ extension AddFeedbackViewController: UITextViewDelegate {
         }
         
         if textView == feedbackContentTextView {
+            if feedbackStartSwitch.isOn {
+                feedbackStartSwitch.snp.remakeConstraints {
+                    $0.top.equalTo(feedbackContentTextView.snp.bottom).offset(SizeLiteral.componentIntervalPadding)
+                    $0.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+                    $0.width.equalTo(51)
+                    $0.height.equalTo(31)
+                }
+                feedbackStartTextView.snp.remakeConstraints {
+                    $0.top.equalTo(feedbackStartTextViewLabel.snp.bottom).offset(SizeLiteral.labelComponentPadding)
+                    $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+                    $0.height.equalTo(150)
+                    $0.bottom.equalToSuperview().inset(180)
+                }
+            } else {
+                feedbackStartSwitch.snp.remakeConstraints {
+                    $0.top.equalTo(feedbackContentTextView.snp.bottom).offset(SizeLiteral.componentIntervalPadding)
+                    $0.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+                    $0.width.equalTo(51)
+                    $0.height.equalTo(31)
+                }
+                feedbackStartTextView.snp.remakeConstraints {
+                    $0.top.equalTo(feedbackStartTextViewLabel.snp.bottom).offset(SizeLiteral.labelComponentPadding)
+                    $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+                    $0.height.equalTo(150)
+                    $0.bottom.equalToSuperview().inset(80)
+                }
+                addFeedbackScrollView.scrollRectToVisible(CGRect(x: 0.0, y: 0.0, width: 375.0, height: 920.0), animated: true)
+            }
+        } else {
             feedbackStartSwitch.snp.remakeConstraints {
                 $0.top.equalTo(feedbackContentTextView.snp.bottom).offset(SizeLiteral.componentIntervalPadding)
                 $0.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
@@ -479,17 +535,9 @@ extension AddFeedbackViewController: UITextViewDelegate {
                 $0.top.equalTo(feedbackStartTextViewLabel.snp.bottom).offset(SizeLiteral.labelComponentPadding)
                 $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
                 $0.height.equalTo(150)
-                $0.bottom.equalToSuperview().inset(280)
+                $0.bottom.equalToSuperview().inset(250)
             }
-            addFeedbackScrollView.scrollRectToVisible(CGRect(x: 0.0, y: 0.0, width: 375.0, height: 920.0), animated: true)
-        } else {
-            feedbackStartTextView.snp.remakeConstraints {
-                $0.top.equalTo(feedbackStartTextViewLabel.snp.bottom).offset(SizeLiteral.labelComponentPadding)
-                $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-                $0.height.equalTo(150)
-                $0.bottom.equalToSuperview().inset(280)
-            }
-            addFeedbackScrollView.scrollRectToVisible(CGRect(x: 0.0, y: 0.0, width: 375.0, height: 1100.0), animated: true)
+            addFeedbackScrollView.scrollRectToVisible(CGRect(x: 0.0, y: 0.0, width: 375.0, height: 2000.0), animated: true)
         }
     }
     
