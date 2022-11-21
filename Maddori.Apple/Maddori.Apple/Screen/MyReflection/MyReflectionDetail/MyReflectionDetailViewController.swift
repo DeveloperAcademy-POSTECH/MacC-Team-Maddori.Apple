@@ -12,12 +12,8 @@ import SnapKit
 
 final class MyReflectionDetailViewController: BaseViewController {
     
-    // FIXME - 데이터 연결시 수정예정
-    private let continueArray = ["c1","c"]
-    private let stopArray = ["s","s","s"]
-    
     private let reflectionId: Int
-    private lazy var contentArray = continueArray
+    private var contentArray: [FeedBackResponse] = []
     
     // MARK: - property
     
@@ -46,7 +42,7 @@ final class MyReflectionDetailViewController: BaseViewController {
         return tableView
     }()
     private lazy var segmentControl: CustomSegmentControl = {
-        let control = CustomSegmentControl(items: ["Continue", "Stop"])
+        let control = CustomSegmentControl(items: [FeedBackDTO.continueType.rawValue, FeedBackDTO.stopType.rawValue])
         let action = UIAction { [weak self] _ in
             if let segment = self?.segmentControl {
                 self?.didChangeValue(segment: segment)
@@ -69,11 +65,12 @@ final class MyReflectionDetailViewController: BaseViewController {
         super.viewDidLoad()
         setupBackButton()
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        // FIXME: reflectionId, CssType 받아오기
-        fetchCertainTypeFeedbackAll(type: .fetchCertainTypeFeedbackAllID(teamId: UserDefaultStorage.teamId, userId: UserDefaultStorage.userId, reflectionId: 3, cssType: "Continue"))
+        fetchCertainTypeFeedbackAll(type: .fetchCertainTypeFeedbackAllID(teamId: UserDefaultStorage.teamId, userId: UserDefaultStorage.userId, reflectionId: reflectionId, cssType: .continueType))
     }
+
     
     override func render() {
         view.addSubview(titleLabel)
@@ -111,10 +108,10 @@ final class MyReflectionDetailViewController: BaseViewController {
     
     private func didChangeValue(segment: UISegmentedControl) {
         if segment.selectedSegmentIndex == 0 {
-            contentArray = continueArray
+            fetchCertainTypeFeedbackAll(type: .fetchCertainTypeFeedbackAllID(teamId: UserDefaultStorage.teamId, userId: UserDefaultStorage.userId, reflectionId: reflectionId, cssType: .continueType))
         }
         else {
-            contentArray = stopArray
+            fetchCertainTypeFeedbackAll(type: .fetchCertainTypeFeedbackAllID(teamId: UserDefaultStorage.teamId, userId: UserDefaultStorage.userId, reflectionId: reflectionId, cssType: .stopType))
         }
         tableView.reloadData()
     }
@@ -127,9 +124,11 @@ final class MyReflectionDetailViewController: BaseViewController {
                    headers: type.headers
         ).responseDecodable(of: BaseModel<AllCertainTypeFeedBackResponse>.self) { json in
             if let json = json.value {
-                
-            } else {
-                
+                guard let jsonDetail = json.detail else { return }
+                self.contentArray = jsonDetail.feedback
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
             }
             print(json.response?.statusCode)
         }

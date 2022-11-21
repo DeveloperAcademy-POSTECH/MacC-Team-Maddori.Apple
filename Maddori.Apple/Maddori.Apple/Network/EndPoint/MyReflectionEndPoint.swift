@@ -9,14 +9,14 @@ import Alamofire
 
 enum MyReflectionEndPoint<T: Encodable> {
     case fetchPastReflectionList(teamId: Int ,userId: Int)
-    case fetchCertainTypeFeedbackAllID(teamId:Int, userId: Int, reflectionId: Int, cssType: String)
+    case fetchCertainTypeFeedbackAllID(teamId:Int, userId: Int, reflectionId: Int, cssType: FeedBackDTO)
     
     var address: String {
         switch self {
         case .fetchPastReflectionList(let teamId, _):
             return "\(UrlLiteral.baseUrl)/teams/\(teamId)/reflections"
         case .fetchCertainTypeFeedbackAllID(let teamId, _, let reflectionId, let cssType):
-            return "\(UrlLiteral.baseUrl)/teams/\(teamId)/reflections/\(reflectionId)/feedbacks?type=\(cssType)"
+            return "\(UrlLiteral.baseUrl)/teams/\(teamId)/reflections/\(reflectionId)/feedbacks?type=\(cssType.rawValue)"
         }
     }
     
