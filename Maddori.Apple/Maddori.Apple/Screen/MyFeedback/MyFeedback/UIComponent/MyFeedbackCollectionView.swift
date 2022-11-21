@@ -99,6 +99,7 @@ extension MyFeedbackCollectionView: UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let reflectionId = feedbackInfo?.reflectionId ?? 0
         let feedbackId = indexPath.section == 0
         ? feedbackInfo?.continueArray[indexPath.item].id ?? 0
         : feedbackInfo?.stopArray[indexPath.item].id ?? 0
@@ -113,7 +114,8 @@ extension MyFeedbackCollectionView: UICollectionViewDelegate {
         ? feedbackInfo?.continueArray[indexPath.item].startContent
         : feedbackInfo?.stopArray[indexPath.item].startContent
         
-        let data = FeedbackFromMeModel(feedbackId: feedbackId,
+        let data = FeedbackFromMeModel(reflectionId: reflectionId,
+                                       feedbackId: feedbackId,
                                        nickname: nickName,
                                        feedbackType: indexPath.section == 0 ? .continueType : .stopType,
                                        keyword: keyword,

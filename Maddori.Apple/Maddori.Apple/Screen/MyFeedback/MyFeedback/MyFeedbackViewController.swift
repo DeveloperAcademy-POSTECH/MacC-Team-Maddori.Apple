@@ -59,7 +59,8 @@ final class MyFeedbackViewController: BaseViewController {
     private lazy var feedbackCollectionView: MyFeedbackCollectionView = {
         let collectionView = MyFeedbackCollectionView()
         collectionView.didTappedCell = { [weak self] data in
-            let data = FeedbackFromMeModel(feedbackId: data.feedbackId,
+            let data = FeedbackFromMeModel(reflectionId: data.reflectionId,
+                                           feedbackId: data.feedbackId,
                                            nickname: data.nickname,
                                            feedbackType: data.feedbackType,
                                            keyword: data.keyword,
