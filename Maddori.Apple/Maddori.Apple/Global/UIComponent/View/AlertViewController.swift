@@ -56,11 +56,15 @@ final class AlertViewController: BaseViewController {
     var type: AlertType
     var teamName: String? = nil
     var navigation: UINavigationController? = nil
+    var reflectionId: Int
+    var feedbackId: Int
     
-    init(type: AlertType, teamName: String?, navigation: UINavigationController?, teamId: Int? = nil) {
+    init(type: AlertType, teamName: String?, navigation: UINavigationController?, reflectionId: Int = 0, feedbackId: Int = 0) {
         self.type = type
         self.teamName = teamName
         self.navigation = navigation
+        self.reflectionId = reflectionId
+        self.feedbackId = feedbackId
         super.init()
     }
     
@@ -133,10 +137,6 @@ final class AlertViewController: BaseViewController {
     }()
     
     // MARK: - life cycle
-    
-    deinit {
-        print("alert ViewController deinit")
-    }
     
     override func configUI() {
         view.backgroundColor = .black100.withAlphaComponent(0.85)
@@ -219,10 +219,8 @@ final class AlertViewController: BaseViewController {
     private func didTappedActionButton(_ type: AlertType) {
         switch type {
         case .delete:
-            // FIXME: - 피드백 삭제 api 연결
-            print("Delete")
+            self.deleteFeedBack(type: .deleteFeedBack(reflectionId: self.reflectionId, feedBackId: self.feedbackId))
         case .join:
-            // FIXME: - 팀 합류 api 연결
             self.dispatchUserLogin(type: .dispatchLogin(LoginDTO(username: UserDefaultStorage.nickname)))
         }
         self.dismiss(animated: true) {

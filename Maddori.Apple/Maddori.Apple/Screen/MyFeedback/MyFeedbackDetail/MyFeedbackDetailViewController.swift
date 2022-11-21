@@ -26,7 +26,7 @@ final class MyFeedbackDetailViewController: BaseViewController {
         button.titleLabel?.font = .label2
         button.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
         let action = UIAction { [weak self] _ in
-            self?.showAlertView(type: .delete, navigationViewController: self?.navigationController)
+            self?.showAlertView(type: .delete, navigationViewController: self?.navigationController, reflectionId: self?.feedbackDetail.reflectionId ?? 0, feedbackId: self?.feedbackDetail.feedbackId ?? 0)
         }
         button.addAction(action, for: .touchUpInside)
         return button
