@@ -11,8 +11,7 @@ import Alamofire
 import SnapKit
 
 final class MyFeedbackEditViewController: AddFeedbackViewController {
-    
-    private let model = FeedbackFromMeModel.mockData
+    private let feedbackDetail: FeedbackFromMeModel
     private var isFeedbackTypeChanged: Bool = false {
         didSet {
             if !(isTextInputChanged() || isFeedbackTypeChanged) {
@@ -24,6 +23,13 @@ final class MyFeedbackEditViewController: AddFeedbackViewController {
     }
     
     // MARK: - life cycle
+    
+    init(feedbackDetail: FeedbackFromMeModel) {
+        self.feedbackDetail = feedbackDetail
+        super.init(to: feedbackDetail.nickname, toUserId: 0, reflectionId: feedbackDetail.reflectionId)
+    }
+    
+    required init?(coder: NSCoder) { nil }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +45,7 @@ final class MyFeedbackEditViewController: AddFeedbackViewController {
     // MARK: - func
     
     private func setupFeedbackType() {
-        switch model.feedbackType {
+        switch feedbackDetail.feedbackType {
         case .continueType:
             super.feedbackTypeButtonView.touchUpToSelectType(.continueType)
         case .stopType:
@@ -48,17 +54,17 @@ final class MyFeedbackEditViewController: AddFeedbackViewController {
     }
     
     private func setupFeedbackKeyword() {
-        super.feedbackKeywordTextField.text = model.keyword
-        super.setCounter(count: model.keyword.count)
+        super.feedbackKeywordTextField.text = feedbackDetail.keyword
+        super.setCounter(count: feedbackDetail.keyword.count)
     }
     
     private func setupFeedbackContent() {
-        super.feedbackContentTextView.text = model.info
+        super.feedbackContentTextView.text = feedbackDetail.info
         super.feedbackContentTextView.textColor = .black100
     }
     
     private func setupFeedbackStart() {
-        if let start = model.start {
+        if let start = feedbackDetail.start {
             super.feedbackStartSwitch.isOn = true
             super.feedbackStartTextViewLabel.isHidden = false
             super.feedbackStartTextView.isHidden = false
@@ -77,9 +83,9 @@ final class MyFeedbackEditViewController: AddFeedbackViewController {
     }
     
     private func isTextInputChanged() -> Bool {
-        if super.feedbackContentTextView.text == model.info &&
-            super.feedbackStartTextView.text == model.start ?? TextLiteral.addFeedbackViewControllerStartTextViewPlaceholder &&
-            super.feedbackKeywordTextField.text == model.keyword {
+        if super.feedbackContentTextView.text == feedbackDetail.info &&
+            super.feedbackStartTextView.text == feedbackDetail.start ?? TextLiteral.addFeedbackViewControllerStartTextViewPlaceholder &&
+            super.feedbackKeywordTextField.text == feedbackDetail.keyword {
             return false
         } else {
             return true
@@ -87,11 +93,11 @@ final class MyFeedbackEditViewController: AddFeedbackViewController {
     }
     
     private func detectChangeOfFeedbackType() {
-        super.feedbackTypeButtonView.changeFeedbackType = { value in
-            if value == self.model.feedbackType {
-                self.isFeedbackTypeChanged = false
+        super.feedbackTypeButtonView.changeFeedbackType = { [weak self] value in
+            if value == self?.feedbackDetail.feedbackType {
+                self?.isFeedbackTypeChanged = false
             } else {
-                self.isFeedbackTypeChanged = true
+                self?.isFeedbackTypeChanged = true
             }
         }
     }
