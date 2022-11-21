@@ -131,7 +131,14 @@ extension MyFeedbackCollectionView: UICollectionViewDataSource {
             return 1
         }
         let hasContinue = !data.continueArray.isEmpty
-        if hasContinue {
+        let hasBoth = hasContinue && !data.stopArray.isEmpty
+        if hasBoth {
+            if section == 0 {
+                return data.continueArray.count
+            } else {
+                return data.stopArray.count
+            }
+        } else if hasContinue {
             return data.continueArray.count
         } else {
             return data.stopArray.count
