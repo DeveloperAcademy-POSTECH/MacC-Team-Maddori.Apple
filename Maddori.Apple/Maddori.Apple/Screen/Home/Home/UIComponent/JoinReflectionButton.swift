@@ -41,11 +41,17 @@ final class JoinReflectionButton: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         render()
+//        configUI()
     }
-    
+
     required init?(coder: NSCoder) { nil }
+//
+//    private func configUI() {
+//        self.layer.cornerRadius = 10
+//        self.layer.
+//    }
     
-    private func render() {
+    func render() {
         self.addSubview(joinButton)
         joinButton.snp.makeConstraints {
             $0.edges.equalToSuperview()
@@ -54,21 +60,22 @@ final class JoinReflectionButton: UIView {
         joinButton.addSubview(reflectionStatusLabel)
         reflectionStatusLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(18)
-            $0.top.equalToSuperview().inset(20)
+            $0.top.equalToSuperview().inset(18)
         }
         
         joinButton.addSubview(touchToEnterLabel)
         touchToEnterLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(18)
             $0.top.equalTo(reflectionStatusLabel.snp.bottom).offset(6)
-            $0.bottom.equalToSuperview().inset(16)
+//            $0.bottom.equalToSuperview().inset(16)
         }
         
         joinButton.addSubview(calendarImageView)
         calendarImageView.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(18)
+            $0.trailing.equalToSuperview().inset(18)
             $0.verticalEdges.equalToSuperview().inset(16)
             $0.width.equalTo(37)
+            $0.height.equalTo(39)
         }
     }
     

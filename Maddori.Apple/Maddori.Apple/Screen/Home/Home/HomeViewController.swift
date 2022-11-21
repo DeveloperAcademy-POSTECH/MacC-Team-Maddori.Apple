@@ -87,6 +87,12 @@ final class HomeViewController: BaseViewController {
         label.textColor = .black100
         return label
     }()
+    private let joinReflectionButton: JoinReflectionButton = {
+        let joinButton = JoinReflectionButton()
+        joinButton.layer.cornerRadius = 10
+        joinButton.clipsToBounds = true
+        return joinButton
+    }()
     private lazy var planLabelButtonView: LabelButtonView = {
         let labelButton = LabelButtonView()
         labelButton.buttonAction = { [weak self] in
@@ -225,6 +231,11 @@ final class HomeViewController: BaseViewController {
         toastView.setGradient(colorTop: .gradientGrayTop, colorBottom: .gradientGrayBottom)
     }
     
+    private func setGradientJoinReflectionView() {
+        joinReflectionButton.layoutIfNeeded()
+        joinReflectionButton.setGradient(colorTop: .gradientBlueTop, colorBottom: .gradientBlueBottom)
+    }
+    
     private func showToastPopUp() {
         if !isTouched {
             isTouched = true
@@ -253,7 +264,30 @@ final class HomeViewController: BaseViewController {
             self?.dismiss(animated: true)
         }
         present(viewController, animated: true)
-        // FIXME: - 모달 띄우고 시작하기만 가능한 건 동작을 너무 제한시킴 -> 추가하기 버튼이 채워지면서 시작하기로 바뀌는건 어떨까?
+    }
+    
+    private func showReflectionJoinButton() {
+        addFeedbackButton.isHidden = true
+        
+        view.addSubview(joinReflectionButton)
+        joinReflectionButton.snp.makeConstraints {
+            $0.top.equalTo(descriptionLabel.snp.bottom).offset(16)
+            $0.horizontalEdges.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+        
+        currentReflectionLabel.snp.remakeConstraints {
+            $0.top.equalTo(joinReflectionButton.snp.bottom).offset(24)
+            $0.horizontalEdges.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+        
+        keywordCollectionView.snp.remakeConstraints {
+            $0.top.equalTo(currentReflectionLabel.snp.bottom).offset(SizeLiteral.titleSubtitleSpacing)
+            $0.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-SizeLiteral.bottomTabBarPadding)
+        }
+        
+        setGradientJoinReflectionView()
+        joinReflectionButton.render()
     }
     
     private func hidePlanLabelButton() {
@@ -320,6 +354,7 @@ final class HomeViewController: BaseViewController {
                             self.descriptionLabel.text = "다음 회고는 \(reflectionDate ?? String(describing: Date()))입니다"
                             self.hidePlanLabelButton()
                             self.showStartReflectionView()
+                            self.showReflectionJoinButton()
                         }
                         self.flowLayout.count = reflectionKeywordList.count
                         self.keywordCollectionView.reloadData()
