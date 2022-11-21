@@ -152,9 +152,10 @@ extension MyReflectionDetailViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: MyReflectionDetailTableViewCell.className, for: indexPath) as? MyReflectionDetailTableViewCell else { return UITableViewCell() }
-        
-        // FIXME
-        cell.titleLabel.text = "필기능력"
+        guard let keyword = contentArray[indexPath.row].keyword,
+              let fromLabelText = contentArray[indexPath.row].fromUser?.userName,
+              let content = contentArray[indexPath.row].content else { return UITableViewCell() }
+        cell.configLabel(title: keyword, fromLabel: fromLabelText, content: content)
         return cell
     }
 }
