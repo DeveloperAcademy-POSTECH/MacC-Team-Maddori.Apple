@@ -12,6 +12,7 @@ import SnapKit
 
 final class MyReflectionDetailViewController: BaseViewController {
     
+    private let reflectionName: String
     private let reflectionId: Int
     private var contentArray: [FeedBackResponse] = []
     
@@ -54,8 +55,9 @@ final class MyReflectionDetailViewController: BaseViewController {
     
     // MARK: - life cycle
     
-    init(reflectionId: Int) {
+    init(reflectionId: Int, reflectionName: String) {
         self.reflectionId = reflectionId
+        self.reflectionName = reflectionName
         super.init()
     }
     
