@@ -152,6 +152,5 @@ final class StartReflectionViewController: BaseViewController {
     
     @objc private func tapToClose() {
         self.dismiss(animated: true)
-        print("tapped")
     }
 }
