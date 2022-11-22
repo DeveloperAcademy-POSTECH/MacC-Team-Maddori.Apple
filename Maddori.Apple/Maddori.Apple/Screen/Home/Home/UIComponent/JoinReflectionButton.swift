@@ -15,14 +15,7 @@ final class JoinReflectionButton: UIView {
     
     // MARK: - property
     
-    private lazy var joinButton: UIButton = {
-        let button = UIButton()
-        let action = UIAction { [weak self] _ in
-            self?.buttonAction?()
-        }
-        button.addAction(action, for: .touchUpInside)
-        return button
-    }()
+    private let joinButton = UIButton()
     private let reflectionStatusLabel: UILabel = {
         let label = UILabel()
         label.font = .label2
@@ -44,6 +37,7 @@ final class JoinReflectionButton: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         render()
+        setupJoinButtonAction()
     }
 
     required init?(coder: NSCoder) { nil }
@@ -77,4 +71,10 @@ final class JoinReflectionButton: UIView {
     
     // MARK: - func
     
+    private func setupJoinButtonAction() {
+        let action = UIAction { [weak self] _ in
+            self?.buttonAction?()
+        }
+        joinButton.addAction(action, for: .touchUpInside)
+    }
 }
