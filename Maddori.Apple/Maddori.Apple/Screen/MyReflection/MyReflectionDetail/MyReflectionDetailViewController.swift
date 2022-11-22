@@ -12,11 +12,9 @@ import SnapKit
 
 final class MyReflectionDetailViewController: BaseViewController {
     
-    // FIXME - 데이터 연결시 수정예정
-    private let continueArray = ["c1","c"]
-    private let stopArray = ["s","s","s"]
-    
-    private lazy var contentArray = continueArray
+    private var reflectionName: String
+    private let reflectionId: Int
+    private var contentArray: [FeedBackResponse] = []
     
     // MARK: - property
     
@@ -28,12 +26,11 @@ final class MyReflectionDetailViewController: BaseViewController {
         button.addAction(action, for: .touchUpInside)
         return button
     }()
-    private let titleLabel: UILabel = {
+    private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        // FIXME
-        label.setTitleFont(text: "배포 후 3차 스프린트를 돌아보세요")
         label.textColor = .black100
-        label.applyColor(to: "배포 후 3차 스프린트", with: .blue200)
+        label.setTitleFont(text: reflectionName + "를\n돌아보세요")
+        label.applyColor(to: reflectionName, with: .blue200)
         return label
     }()
     private lazy var tableView: UITableView = {
@@ -45,7 +42,7 @@ final class MyReflectionDetailViewController: BaseViewController {
         return tableView
     }()
     private lazy var segmentControl: CustomSegmentControl = {
-        let control = CustomSegmentControl(items: ["Continue", "Stop"])
+        let control = CustomSegmentControl(items: [FeedBackDTO.continueType.rawValue, FeedBackDTO.stopType.rawValue])
         let action = UIAction { [weak self] _ in
             if let segment = self?.segmentControl {
                 self?.didChangeValue(segment: segment)
@@ -57,14 +54,18 @@ final class MyReflectionDetailViewController: BaseViewController {
     
     // MARK: - life cycle
     
+    init(reflectionId: Int, reflectionName: String) {
+        self.reflectionId = reflectionId
+        self.reflectionName = reflectionName
+        super.init()
+    }
+    
+    required init?(coder: NSCoder) { nil }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupBackButton()
-    }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        // FIXME: reflectionId, CssType 받아오기
-        fetchCertainTypeFeedbackAll(type: .fetchCertainTypeFeedbackAllID(teamId: UserDefaultStorage.teamId, userId: UserDefaultStorage.userId, reflectionId: 3, cssType: "Continue"))
+        fetchCertainTypeFeedbackAll(type: .fetchCertainTypeFeedbackAllID(reflectionId: reflectionId, cssType: .continueType))
     }
     
     override func render() {
@@ -103,10 +104,10 @@ final class MyReflectionDetailViewController: BaseViewController {
     
     private func didChangeValue(segment: UISegmentedControl) {
         if segment.selectedSegmentIndex == 0 {
-            contentArray = continueArray
+            fetchCertainTypeFeedbackAll(type: .fetchCertainTypeFeedbackAllID(reflectionId: reflectionId, cssType: .continueType))
         }
         else {
-            contentArray = stopArray
+            fetchCertainTypeFeedbackAll(type: .fetchCertainTypeFeedbackAllID(reflectionId: reflectionId, cssType: .stopType))
         }
         tableView.reloadData()
     }
@@ -119,9 +120,11 @@ final class MyReflectionDetailViewController: BaseViewController {
                    headers: type.headers
         ).responseDecodable(of: BaseModel<AllCertainTypeFeedBackResponse>.self) { json in
             if let json = json.value {
-                
-            } else {
-                
+                guard let jsonDetail = json.detail else { return }
+                self.contentArray = jsonDetail.feedback
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
             }
             print(json.response?.statusCode)
         }
@@ -145,9 +148,10 @@ extension MyReflectionDetailViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: MyReflectionDetailTableViewCell.className, for: indexPath) as? MyReflectionDetailTableViewCell else { return UITableViewCell() }
-        
-        // FIXME
-        cell.titleLabel.text = "필기능력"
+        guard let keyword = contentArray[indexPath.row].keyword,
+              let fromLabelText = contentArray[indexPath.row].fromUser?.userName,
+              let content = contentArray[indexPath.row].content else { return UITableViewCell() }
+        cell.configLabel(title: keyword, fromLabel: fromLabelText, content: content)
         return cell
     }
 }
