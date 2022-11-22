@@ -220,7 +220,7 @@ final class AlertViewController: BaseViewController {
         switch type {
         case .delete:
             // FIXME: - 피드백 삭제 api 연결
-            self.navigation?.tabBarController?.tabBar.isHidden = false
+            print("Delete")
         case .join:
             // FIXME: - 팀 합류 api 연결
             self.dispatchUserLogin(type: .dispatchLogin(LoginDTO(username: UserDefaultStorage.nickname)))
