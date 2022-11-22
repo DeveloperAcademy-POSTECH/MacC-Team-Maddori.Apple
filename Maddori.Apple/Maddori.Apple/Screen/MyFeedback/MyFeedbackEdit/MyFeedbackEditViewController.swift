@@ -142,4 +142,8 @@ final class MyFeedbackEditViewController: AddFeedbackViewController {
     override func textViewDidChangeSelection(_ textView: UITextView) {
         super.feedbackDoneButton.isDisabled = !(isTextInputChanged() || isFeedbackTypeChanged)
     }
+    
+    override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
 }
