@@ -11,6 +11,7 @@ import Alamofire
 import SnapKit
 
 final class MyFeedbackEditViewController: AddFeedbackViewController {
+    private var feedbackType: FeedBackDTO = .continueType
     private let feedbackDetail: FeedbackFromMeModel
     private var isFeedbackTypeChanged: Bool = false {
         didSet {
@@ -93,11 +94,14 @@ final class MyFeedbackEditViewController: AddFeedbackViewController {
     }
     
     private func detectChangeOfFeedbackType() {
-        super.feedbackTypeButtonView.changeFeedbackType = { [weak self] value in
-            if value == self?.feedbackDetail.feedbackType {
+        super.feedbackTypeButtonView.changeFeedbackType = { [weak self] type in
+            guard let feedbackType = FeedBackDTO.init(rawValue: type.rawValue) else { return }
+            if type == self?.feedbackDetail.feedbackType {
                 self?.isFeedbackTypeChanged = false
+                self?.feedbackType = feedbackType
             } else {
                 self?.isFeedbackTypeChanged = true
+                self?.feedbackType = feedbackType
             }
         }
     }
@@ -107,7 +111,7 @@ final class MyFeedbackEditViewController: AddFeedbackViewController {
     }
     
     override func didTappedDoneButton() {
-        let dto = EditFeedBackDTO(type: super.type,
+        let dto = EditFeedBackDTO(type: feedbackType,
                                   keyword: super.feedbackKeywordTextField.text ?? "",
                                   content: super.feedbackContentTextView.text ?? "",
                                   start_content: super.feedbackStartSwitch.isOn ? super.feedbackStartTextView.text ?? "" : nil)
