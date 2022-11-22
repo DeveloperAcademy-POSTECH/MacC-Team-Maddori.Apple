@@ -15,13 +15,9 @@ final class StartReflectionViewController: BaseViewController {
     
     // MARK: - property
     
-    private lazy var closeButton: CloseButton = {
+    private let closeButton: CloseButton = {
         let button = CloseButton()
-        let action = UIAction { [weak self] _ in
-            self?.dismiss(animated: true)
-        }
         button.tintColor = .white100
-        button.addAction(action, for: .touchUpInside)
         return button
     }()
     private lazy var blurredView: UIView = {
@@ -91,6 +87,7 @@ final class StartReflectionViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         render()
+        setupCloseButtonAction()
     }
     
     override func configUI() {
@@ -135,6 +132,15 @@ final class StartReflectionViewController: BaseViewController {
             $0.bottom.equalToSuperview().inset(24)
             $0.height.equalTo(42)
         }
+    }
+    
+    // MARK: - func
+    
+    private func setupCloseButtonAction() {
+        let action = UIAction { [weak self] _ in
+            self?.dismiss(animated: true)
+        }
+        closeButton.addAction(action, for: .touchUpInside)
     }
     
     private func setPopupGradient() {
