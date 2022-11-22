@@ -132,8 +132,8 @@ final class MyFeedbackEditViewController: AddFeedbackViewController {
                    encoder: JSONParameterEncoder.default,
                    headers: type.headers
         ).responseDecodable(of: BaseModel<EditFeedBackResponse>.self) { json in
-            if let data = json.value {
-                dump(data)
+            if let _ = json.value {
+                self.navigationController?.popToRootViewController(animated: true)
             }
         }
     }

@@ -11,9 +11,11 @@ import Alamofire
 import SnapKit
 
 final class MyFeedbackViewController: BaseViewController {
+    var selectedIndex: Int = 0
     private var memberList: [MemberResponse] = [] {
         didSet {
             memberCollectionView.reloadData()
+            fetchCertainMemberFeedBack(type: .fetchCertainMemberFeedBack(memberId: memberList[selectedIndex].userId ?? 0))
         }
     }
     
@@ -74,8 +76,8 @@ final class MyFeedbackViewController: BaseViewController {
     
     // MARK: - life cycle
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         fetchCurrentTeamMember(type: .fetchCurrentTeamMember)
     }
     
@@ -126,10 +128,10 @@ final class MyFeedbackViewController: BaseViewController {
         AF.request(type.address,
                    method: .get,
                    headers: type.headers
-        ).responseDecodable(of: BaseModel<FeedBackInfoResponse>.self) { json in
+        ).responseDecodable(of: BaseModel<FeedBackInfoResponse>.self) { [weak self] json in
             if let data = json.value {
                 guard let detail = data.detail else { return }
-                self.feedbackCollectionView.feedbackInfo = detail
+                self?.feedbackCollectionView.feedbackInfo = detail
                 dump(data)
             }
         }
@@ -142,6 +144,7 @@ extension MyFeedbackViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let memberId = memberList[indexPath.item].userId else { return }
         fetchCertainMemberFeedBack(type: .fetchCertainMemberFeedBack(memberId: memberId))
+        selectedIndex = indexPath.item
     }
 }
 
@@ -155,7 +158,7 @@ extension MyFeedbackViewController: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         cell.setMemberName(name: memberList[indexPath.item].userName ?? "")
-        if indexPath.item == 0 {
+        if indexPath.item == selectedIndex {
             cell.isSelected = true
             collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .init())
         }
