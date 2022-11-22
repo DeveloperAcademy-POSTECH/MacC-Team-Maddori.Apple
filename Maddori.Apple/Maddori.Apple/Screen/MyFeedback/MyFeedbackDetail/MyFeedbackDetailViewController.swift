@@ -104,6 +104,7 @@ final class MyFeedbackDetailViewController: BaseViewController {
     }()
     private lazy var editFeedbackUntilLabel: UILabel = {
         let label = UILabel()
+        label.setTextWithLineHeight(text: TextLiteral.myFeedbackDetailViewControllerBeforeReflectionLabel, lineHeight: 22)
         label.text = TextLiteral.myFeedbackDetailViewControllerBeforeReflectionLabel
         label.textColor = .gray400
         label.font = .body2
@@ -120,6 +121,7 @@ final class MyFeedbackDetailViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tabBarController?.tabBar.isHidden = true
         setupCloseButton()
         setupMainButton()
     }
@@ -199,14 +201,14 @@ final class MyFeedbackDetailViewController: BaseViewController {
         
         view.addSubview(feedbackEditButtonView)
         feedbackEditButtonView.snp.makeConstraints {
-            $0.bottom.equalTo(view.safeAreaLayoutGuide)
+            $0.bottom.equalTo(view.snp.bottom)
             $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(100)
+            $0.height.equalTo(134)
         }
         
         feedbackEditButtonView.addSubview(feedbackEditButton)
         feedbackEditButton.snp.makeConstraints {
-            $0.bottom.equalTo(feedbackEditButtonView.snp.bottom).inset(10)
+            $0.bottom.equalTo(feedbackEditButtonView.snp.bottom).inset(36)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
@@ -260,6 +262,7 @@ final class MyFeedbackDetailViewController: BaseViewController {
     private func setupCloseButton() {
         let action = UIAction { [weak self] _ in
             self?.navigationController?.popViewController(animated: true)
+            self?.tabBarController?.tabBar.isHidden = false
         }
         backButton.addAction(action, for: .touchUpInside)
     }
