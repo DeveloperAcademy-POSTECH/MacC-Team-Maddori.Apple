@@ -7,9 +7,19 @@
 
 import UIKit
 
+import Alamofire
 import SnapKit
 
 final class CreateReflectionViewController: BaseViewController {
+    
+    var reflectionId: Int
+    
+    init(reflectionId: Int) {
+        self.reflectionId = reflectionId
+        super.init()
+    }
+    
+    required init?(coder: NSCoder) { nil }
     
     // MARK: - property
     
@@ -120,6 +130,26 @@ final class CreateReflectionViewController: BaseViewController {
         navigationItem.rightBarButtonItem = item
     }
     
+    // MARK: - setup
+    
+    private func setupAddReflection() {
+        let action = UIAction { [weak self] _ in
+            guard let reflectionDate = self?.combineDateAndTime(),
+                  let reflectionName = self?.reflectionNameView.nameTextField.text,
+                  let reflectionId = self?.reflectionId
+            else { return }
+            self?.patchReflectionDetail(type: .patchReflectionDetail(
+                reflectionId: reflectionId,
+                AddReflectionDTO(
+                    reflection_name: reflectionName,
+                    reflection_date: String(describing: reflectionDate)
+                )
+            ))
+            self?.dismiss(animated: true)
+        }
+        mainButton.addAction(action, for: .touchUpInside)
+    }
+    
     // MARK: - func
     
     private func showStartReflectionView() {
@@ -138,10 +168,37 @@ final class CreateReflectionViewController: BaseViewController {
         })
     }
     
-    private func setupAddReflection() {
-        let action = UIAction { [weak self] _ in
-            self?.dismiss(animated: true)
+    private func combineDateAndTime() -> Date {
+        let date = datePicker.date
+        let time = timePicker.date
+        
+        let calendar = NSCalendar.current
+        let dateComponents = calendar.dateComponents([.year, .month, .day], from: date)
+        let timeComponents = calendar.dateComponents([.hour, .minute], from: time)
+        
+        var combinedDateComponents = DateComponents()
+        combinedDateComponents.year = dateComponents.year
+        combinedDateComponents.month = dateComponents.month
+        combinedDateComponents.day = dateComponents.day
+        combinedDateComponents.hour = timeComponents.hour
+        combinedDateComponents.minute = timeComponents.minute
+        
+        guard let combinedDate = calendar.date(from: combinedDateComponents) else { return Date() }
+        
+        return combinedDate
+    }
+    
+    // MARK: - api
+    
+    private func patchReflectionDetail(type: CreateReflectionEndPoint<AddReflectionDTO>) {
+        AF.request(type.address,
+                   method: type.method,
+                   parameters: type.body,
+                   encoder: JSONParameterEncoder.default,
+                   headers: type.header
+        ).responseDecodable(of: BaseModel<AddReflectionResponse>.self) {
+            json in
+            dump(json)
         }
-        mainButton.addAction(action, for: .touchUpInside)
     }
 }

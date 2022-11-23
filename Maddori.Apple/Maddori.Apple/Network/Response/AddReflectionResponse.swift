@@ -12,7 +12,7 @@ struct AddReflectionResponse: Decodable {
     let id: Int?
     let reflectionName: String?
     let date: String?
-    let state: String?
+    let state: ReflectionStatus?
     let teamId: Int?
     
     enum CodingKeys: String, CodingKey {

@@ -18,6 +18,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
+        UserDefaultHandler.clearAllData()
+        UserData.setValue(6, forKey: .teamId)
+        UserData.setValue(11, forKey: .userId)
+        UserData.setValue("홀리몰리", forKey: .nickname)
+        UserData.setValue(true, forKey: .isLogin)
         let isLogined = UserDefaultStorage.isLogin
         var rootViewController: UIViewController
         if isLogined {

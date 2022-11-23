@@ -21,7 +21,7 @@ final class ReflectionNameView: UIView {
         label.textColor = .black100
         return label
     }()
-    private lazy var nameTextField: UITextField = {
+    lazy var nameTextField: UITextField = {
         let textField = UITextField()
         textField.delegate = self
         textField.backgroundColor = .white300
