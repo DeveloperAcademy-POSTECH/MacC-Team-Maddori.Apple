@@ -115,9 +115,12 @@ final class LoginViewController: BaseViewController {
     private func dispatchAppleLogin(type: SetupEndPoint<AppleLoginDTO>) {
         AF.request(type.address,
                    method: type.method,
-                   parameters: type.body
+                   parameters: type.body,
+                   encoder: JSONParameterEncoder.default,
+                   headers: type.headers
         ).responseDecodable(of: BaseModel<AppleLoginResponse>.self) { [weak self] json in
             if let data = json.value {
+                dump(data)
                 self?.presentSetupNickNameViewController()
             }
         }

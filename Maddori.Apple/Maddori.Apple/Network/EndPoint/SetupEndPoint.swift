@@ -25,7 +25,7 @@ enum SetupEndPoint<T: Encodable> {
         case .fetchCertainTeam(let invitationCode):
             return "\(UrlLiteral.baseUrl)/teams?invitation_code=\(invitationCode)"
         case .dispatchAppleLogin:
-            return "\(UrlLiteral.baseUrl)/login"
+            return "http://15.165.21.115:3000/api/v1/login"
         }
     }
 
