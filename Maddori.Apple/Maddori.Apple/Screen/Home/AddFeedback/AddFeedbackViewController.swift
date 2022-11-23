@@ -349,7 +349,7 @@ class AddFeedbackViewController: BaseViewController {
         }
     }
     
-    private func didTappedCloseButton() {
+    func didTappedCloseButton() {
         self.dismiss(animated: true)
     }
     

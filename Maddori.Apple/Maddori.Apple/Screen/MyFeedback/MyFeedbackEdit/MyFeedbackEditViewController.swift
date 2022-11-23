@@ -125,6 +125,11 @@ final class MyFeedbackEditViewController: AddFeedbackViewController {
         putEditFeedBack(type: .putEditFeedBack(reflectionId: feedbackDetail.reflectionId, feedBackId: feedbackDetail.feedbackId, dto))
     }
     
+    override func didTappedCloseButton() {
+        // FIXME: - X 버튼이 아닌 뒤로가기 버튼이라던지 수정이 필요함
+        navigationController?.popViewController(animated: true)
+    }
+    
     // MARK: - selector
     
     @objc override func willHideKeyboard(notification: NSNotification) {
