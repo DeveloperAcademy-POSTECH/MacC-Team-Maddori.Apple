@@ -239,7 +239,7 @@ final class HomeViewController: BaseViewController {
         joinReflectionButton.setGradient(colorTop: .gradientBlueTop, colorBottom: .gradientBlueBottom)
     }
     
-    private func showToastPopUp() {
+    private func showToastPopUp(of type: ToastType) {
         if !isTouched {
             isTouched = true
             DispatchQueue.main.async {
