@@ -101,29 +101,54 @@ extension MyFeedbackCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let data = feedbackInfo else { return }
         if !(data.continueArray.isEmpty && data.stopArray.isEmpty) {
-            let reflectionId = feedbackInfo?.reflectionId ?? 0
-            let feedbackId = indexPath.section == 0
-            ? feedbackInfo?.continueArray[indexPath.item].id ?? 0
-            : feedbackInfo?.stopArray[indexPath.item].id ?? 0
-            let nickName = feedbackInfo?.toUsername ?? ""
-            let keyword = indexPath.section == 0
-            ? feedbackInfo?.continueArray[indexPath.item].keyword ?? ""
-            : feedbackInfo?.stopArray[indexPath.item].keyword ?? ""
-            let info = indexPath.section == 0
-            ? feedbackInfo?.continueArray[indexPath.item].content ?? ""
-            : feedbackInfo?.stopArray[indexPath.item].content ?? ""
-            let start = indexPath.section == 0
-            ? feedbackInfo?.continueArray[indexPath.item].startContent
-            : feedbackInfo?.stopArray[indexPath.item].startContent
-            
-            let data = FeedbackFromMeModel(reflectionId: reflectionId,
-                                           feedbackId: feedbackId,
-                                           nickname: nickName,
-                                           feedbackType: indexPath.section == 0 ? .continueType : .stopType,
-                                           keyword: keyword,
-                                           info: info,
-                                           start: start)
-            didTappedCell?(data)
+            if collectionView.numberOfSections == 2 {
+                let reflectionId = feedbackInfo?.reflectionId ?? 0
+                let feedbackId = indexPath.section == 0
+                ? feedbackInfo?.continueArray[indexPath.item].id ?? 0
+                : feedbackInfo?.stopArray[indexPath.item].id ?? 0
+                let nickName = feedbackInfo?.toUsername ?? ""
+                let keyword = indexPath.section == 0
+                ? feedbackInfo?.continueArray[indexPath.item].keyword ?? ""
+                : feedbackInfo?.stopArray[indexPath.item].keyword ?? ""
+                let info = indexPath.section == 0
+                ? feedbackInfo?.continueArray[indexPath.item].content ?? ""
+                : feedbackInfo?.stopArray[indexPath.item].content ?? ""
+                let start = indexPath.section == 0
+                ? feedbackInfo?.continueArray[indexPath.item].startContent
+                : feedbackInfo?.stopArray[indexPath.item].startContent
+                
+                let data = FeedbackFromMeModel(reflectionId: reflectionId,
+                                               feedbackId: feedbackId,
+                                               nickname: nickName,
+                                               feedbackType: indexPath.section == 0 ? .continueType : .stopType,
+                                               keyword: keyword,
+                                               info: info,
+                                               start: start)
+                didTappedCell?(data)
+            } else {
+                if let continueArray = feedbackInfo?.continueArray,
+                   let stopArray = feedbackInfo?.stopArray {
+                    if !continueArray.isEmpty {
+                        let data = FeedbackFromMeModel(reflectionId: feedbackInfo?.reflectionId ?? 0,
+                                                       feedbackId: continueArray[indexPath.item].id ?? 0,
+                                                       nickname: feedbackInfo?.toUsername ?? "",
+                                                       feedbackType: .continueType,
+                                                       keyword: continueArray[indexPath.item].keyword ?? "",
+                                                       info: continueArray[indexPath.item].content ?? "",
+                                                       start: continueArray[indexPath.item].startContent)
+                        didTappedCell?(data)
+                    } else {
+                        let data = FeedbackFromMeModel(reflectionId: feedbackInfo?.reflectionId ?? 0,
+                                                       feedbackId: stopArray[indexPath.item].id ?? 0,
+                                                       nickname: feedbackInfo?.toUsername ?? "",
+                                                       feedbackType: .stopType,
+                                                       keyword: stopArray[indexPath.item].keyword ?? "",
+                                                       info: stopArray[indexPath.item].content ?? "",
+                                                       start: stopArray[indexPath.item].startContent)
+                        didTappedCell?(data)
+                    }
+                }
+            }
         }
     }
 }
