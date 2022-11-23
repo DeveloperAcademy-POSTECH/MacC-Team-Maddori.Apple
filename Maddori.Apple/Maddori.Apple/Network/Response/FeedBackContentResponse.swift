@@ -10,7 +10,7 @@ import Foundation
 struct FeedBackContentResponse: Decodable {
     // MARK: - createFeedback
     let id: Int?
-    let type: String?
+    let type: FeedBackType?
     let keyword: String?
     let content: String?
     let startContent: String?

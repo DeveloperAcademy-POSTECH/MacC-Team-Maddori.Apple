@@ -258,11 +258,8 @@ final class HomeViewController: BaseViewController {
     }
     
     private func showStartReflectionView() {
-        let viewController = StartReflectionViewController()
+        let viewController = StartReflectionViewController(reflectionId: currentReflectionId)
         viewController.modalPresentationStyle = .overFullScreen
-        viewController.dismissChildView = { [weak self] in
-            self?.dismiss(animated: true)
-        }
         present(viewController, animated: true)
         // FIXME: - 모달 띄우고 시작하기만 가능한 건 동작을 너무 제한시킴 -> 추가하기 버튼이 채워지면서 시작하기로 바뀌는건 어떨까?
     }
@@ -327,7 +324,7 @@ final class HomeViewController: BaseViewController {
                             self.descriptionLabel.text = "다음 회고는 \(reflectionDate ?? String(describing: Date()))입니다"
                             self.hidePlanLabelButton()
                         case .Progressing:
-                            let reflectionDate = reflectionDetail?.reflectionDate?.formatDateString(to: "MM월 dd일 a hh시 mm분")
+                            let reflectionDate = reflectionDetail?.reflectionDate?.formatDateString(to: "MM월 dd일 a h시 mm분")
                             self.descriptionLabel.text = "다음 회고는 \(reflectionDate ?? String(describing: Date()))입니다"
                             self.showStartReflectionView()
                             self.hidePlanLabelButton()
