@@ -113,6 +113,7 @@ enum TextLiteral {
     static let emptyViewInProgressMyRetrospective = "팀원에게 받은 피드백이 없습니다"
     static let emptyViewInProgressOthersRetrospectiveSelf = "내가 보낸 피드백이 없습니다"
     static let emptyViewInProgressOthersRetrospectiveOthers = "팀원들이 보낸 피드백이 없습니다"
+    static let emptyViewMyReflectionDetail = "팀원에게 받은 피드백이 없습니다"
     
     // MARK: - EmptyFeedbackKeyword
     
