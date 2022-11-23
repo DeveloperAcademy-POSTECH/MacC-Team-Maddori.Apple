@@ -8,6 +8,7 @@
 import AuthenticationServices
 import UIKit
 
+import Alamofire
 import SnapKit
 
 final class LoginViewController: BaseViewController {
@@ -35,10 +36,10 @@ final class LoginViewController: BaseViewController {
         let button = ASAuthorizationAppleIDButton(type: .signIn, style: .black)
         let action = UIAction { [weak self] _ in
             // FIXME: - 로그인 API연결
-            self?.presentSetupNickNameViewController()
+//            self?.presentSetupNickNameViewController()
             // FIXME: - AppleLogin 연결 후, 성공했을 때로 옮겨야 함.
-            self?.setLoginUserDefaults()
-//            self?.appleSignIn()
+//            self?.setLoginUserDefaults()
+            self?.appleSignIn()
         }
         button.cornerRadius = 15
         button.addAction(action, for: .touchUpInside)
@@ -108,6 +109,19 @@ final class LoginViewController: BaseViewController {
     private func setLoginUserDefaults() {
         UserDefaultHandler.setIsLogin(isLogin: true)
     }
+    
+    // MARK: - api
+    
+    private func dispatchAppleLogin(type: SetupEndPoint<AppleLoginDTO>) {
+        AF.request(type.address,
+                   method: type.method,
+                   parameters: type.body
+        ).responseDecodable(of: BaseModel<AppleLoginResponse>.self) { [weak self] json in
+            if let data = json.value {
+                self?.presentSetupNickNameViewController()
+            }
+        }
+    }
 }
 
     // MARK: - extension
@@ -125,16 +139,16 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
                     // The Apple ID credential is valid. Show Home UI Here
                     guard let token = appleIDCredential.identityToken else { return }
                     guard let tokenToString = String(data: token, encoding: .utf8) else { return }
-                    print(tokenToString)
-                    Task {
-                        // API 코드 작성
-                    }
+                    let dto = AppleLoginDTO(token: tokenToString)
+                    self.dispatchAppleLogin(type: .dispatchAppleLogin(dto))
                     break
                 case .revoked:
                     // The Apple ID credential is revoked. Show SignIn UI Here.
+                    print("revoked")
                     break
                 case .notFound:
                     // No credential was found. Show SignIn UI Here.
+                    print("notFound")
                     break
                 default:
                     break
