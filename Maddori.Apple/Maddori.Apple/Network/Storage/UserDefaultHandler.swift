@@ -27,4 +27,12 @@ struct UserDefaultHandler {
     static func setTeamId(teamId: Int) {
         UserData.setValue(teamId, forKey: .teamId)
     }
+    
+    static func setAccessToken(accessToken: String) {
+        UserData.setValue(accessToken, forKey: .accessToken)
+    }
+    
+    static func setRefreshToken(refreshToken: String) {
+        UserData.setValue(refreshToken, forKey: .refreshToken)
+    }
 }
