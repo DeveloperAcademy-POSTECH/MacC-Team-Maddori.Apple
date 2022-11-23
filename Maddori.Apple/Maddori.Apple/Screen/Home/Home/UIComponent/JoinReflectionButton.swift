@@ -19,14 +19,14 @@ final class JoinReflectionButton: UIView {
     private let reflectionStatusLabel: UILabel = {
         let label = UILabel()
         label.font = .label2
-        label.text = "회고가 시작되었습니다!"
+        label.text = TextLiteral.joinReflectionButtonStatusText
         label.textColor = .white100
         return label
     }()
     private let touchToEnterLabel: UILabel = {
         let label = UILabel()
         label.font = .caption3
-        label.text = "터치하여 회고에 참여해주세요"
+        label.text = TextLiteral.joinReflectionTouchToEnterLabel
         label.textColor = .white100
         return label
     }()

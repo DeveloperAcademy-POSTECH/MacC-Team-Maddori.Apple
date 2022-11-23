@@ -161,4 +161,9 @@ enum TextLiteral {
     
     static let warningText: String = "아직 회고 시간이 아닙니다"
     static let completeText: String = "초대코드가 복사되었습니다"
+    
+    // MARK: - JoinReflectionButton
+    
+    static let joinReflectionButtonStatusText: String = "회고가 시작되었습니다!"
+    static let joinReflectionTouchToEnterLabel: String = "터치하여 회고에 참여해주세요"
 }
