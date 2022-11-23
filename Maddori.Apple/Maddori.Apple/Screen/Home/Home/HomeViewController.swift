@@ -36,7 +36,7 @@ final class HomeViewController: BaseViewController {
     var isAdmin: Bool = false
     var hasSeenReflectionAlert: Bool = UserDefaultStorage.hasSeenReflectionAlert {
         willSet {
-            UserData.setValue(newValue, forKey: .hasSeenAlert)
+            UserDefaultHandler.setHasSeenAlert(to: newValue)
         }
     }
     
