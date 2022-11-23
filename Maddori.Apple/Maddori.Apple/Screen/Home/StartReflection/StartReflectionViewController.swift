@@ -11,7 +11,14 @@ import SnapKit
 
 final class StartReflectionViewController: BaseViewController {
     
-    var dismissChildView: (() -> ())?
+    let reflectionId: Int
+    
+    init(reflectionId: Int) {
+        self.reflectionId = reflectionId
+        super.init()
+    }
+    
+    required init?(coder: NSCoder) { nil }
     
     // MARK: - property
     
@@ -65,7 +72,8 @@ final class StartReflectionViewController: BaseViewController {
     private lazy var startButton: UIButton = {
         let button = UIButton(type: .system)
         let action = UIAction { [weak self] _ in
-            self?.dismissChildView?()
+            // FIXME: - dismisschildview를 해서 blur를 내린 뒤 present?
+            self?.presentSelectReflectionMemberViewController()
         }
         button.setTitle(TextLiteral.startReflectionViewControllerStartText, for: .normal)
         button.titleLabel?.font = .label2
@@ -134,7 +142,7 @@ final class StartReflectionViewController: BaseViewController {
         }
     }
     
-    // MARK: - func
+    // MARK: - setup
     
     private func setupCloseButtonAction() {
         let action = UIAction { [weak self] _ in
@@ -146,6 +154,14 @@ final class StartReflectionViewController: BaseViewController {
     private func setPopupGradient() {
         startPopupView.layoutIfNeeded()
         startPopupView.setGradient(colorTop: .gradientBlue100Top, colorBottom: .gradientBlue100Bottom)
+    }
+    
+    // MARK: - func
+    
+    private func presentSelectReflectionMemberViewController() {
+        let viewController = UINavigationController(rootViewController: SelectReflectionMemberViewController(reflectionId: reflectionId))
+        viewController.modalPresentationStyle = .fullScreen
+        present(viewController, animated: true)
     }
     
     // MARK: - selector

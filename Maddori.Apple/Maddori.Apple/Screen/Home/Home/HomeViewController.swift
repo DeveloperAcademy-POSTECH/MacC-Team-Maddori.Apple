@@ -278,11 +278,8 @@ final class HomeViewController: BaseViewController {
     }
     
     private func showStartReflectionView() {
-        let viewController = StartReflectionViewController()
+        let viewController = StartReflectionViewController(reflectionId: currentReflectionId)
         viewController.modalPresentationStyle = .overFullScreen
-        viewController.dismissChildView = { [weak self] in
-            self?.dismiss(animated: true)
-        }
         present(viewController, animated: true)
     }
     
@@ -370,7 +367,7 @@ final class HomeViewController: BaseViewController {
                             self.descriptionLabel.text = "다음 회고는 \(reflectionDate ?? String(describing: Date()))입니다"
                             self.hidePlanLabelButton()
                         case .Progressing:
-                            let reflectionDate = reflectionDetail?.reflectionDate?.formatDateString(to: "MM월 dd일 a hh시 mm분")
+                            let reflectionDate = reflectionDetail?.reflectionDate?.formatDateString(to: "MM월 dd일 a h시 mm분")
                             self.descriptionLabel.text = "다음 회고는 \(reflectionDate ?? String(describing: Date()))입니다"
                             self.hidePlanLabelButton()
                             self.showStartReflectionView()
