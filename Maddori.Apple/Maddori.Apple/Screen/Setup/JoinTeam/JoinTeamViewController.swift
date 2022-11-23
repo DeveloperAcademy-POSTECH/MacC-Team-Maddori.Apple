@@ -121,7 +121,7 @@ final class JoinTeamViewController: BaseTextFieldViewController {
     }
         
     private func presentCertainTeamViewController(teamName: String, teamId: Int) {
-        self.showAlertView(type: .join,teamName: teamName, teamId: UserDefaultStorage.teamId)
+        self.showAlertView(type: .join, teamName: teamName)
     }
     
     // MARK: - api

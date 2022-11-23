@@ -13,7 +13,7 @@ final class MyFeedbackDetailViewController: BaseViewController {
     
     // FIXME: - 추후 API 연결 (현재는 mock data)
     
-    private let model = FeedbackFromMeModel.mockData
+    private let feedbackDetail: FeedbackFromMeModel
     private let reflectionDate: Date? = nil
     
     // MARK: - property
@@ -26,7 +26,7 @@ final class MyFeedbackDetailViewController: BaseViewController {
         button.titleLabel?.font = .label2
         button.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
         let action = UIAction { [weak self] _ in
-            self?.showAlertView(type: .delete, navigationViewController: self?.navigationController)
+            self?.showAlertView(type: .delete, navigationViewController: self?.navigationController, reflectionId: self?.feedbackDetail.reflectionId ?? 0, feedbackId: self?.feedbackDetail.feedbackId ?? 0)
         }
         button.addAction(action, for: .touchUpInside)
         return button
@@ -35,7 +35,7 @@ final class MyFeedbackDetailViewController: BaseViewController {
     private let feedbackFromMeDetailContentView = UIView()
     private lazy var feedbackFromMeDetailTitleLabel: UILabel = {
         let label = UILabel()
-        label.setTitleFont(text: model.nickname + TextLiteral.myFeedbackDetailViewControllerTitleLabel)
+        label.setTitleFont(text: feedbackDetail.nickname + TextLiteral.myFeedbackDetailViewControllerTitleLabel)
         label.textColor = .black100
         return label
     }()
@@ -48,7 +48,7 @@ final class MyFeedbackDetailViewController: BaseViewController {
     }()
     private lazy var feedbackTypeText: UILabel = {
         let label = UILabel()
-        label.text = model.feedbackType.rawValue
+        label.text = feedbackDetail.feedbackType.rawValue
         label.textColor = .gray400
         label.font = .body1
         return label
@@ -62,7 +62,7 @@ final class MyFeedbackDetailViewController: BaseViewController {
     }()
     private lazy var feedbackKeywordText: UILabel = {
         let label = UILabel()
-        label.setTextWithLineHeight(text: model.keyword, lineHeight: 24)
+        label.setTextWithLineHeight(text: feedbackDetail.keyword, lineHeight: 24)
         label.textColor = .gray400
         label.font = .body1
         return label
@@ -76,7 +76,7 @@ final class MyFeedbackDetailViewController: BaseViewController {
     }()
     private lazy var feedbackContentText: UILabel = {
         let label = UILabel()
-        label.setTextWithLineHeight(text: model.info, lineHeight: 24)
+        label.setTextWithLineHeight(text: feedbackDetail.info, lineHeight: 24)
         label.textColor = .gray400
         label.font = .body1
         label.numberOfLines = 0
@@ -91,7 +91,7 @@ final class MyFeedbackDetailViewController: BaseViewController {
     }()
     private lazy var feedbackStartText: UILabel = {
         let label = UILabel()
-        label.setTextWithLineHeight(text: model.start, lineHeight: 24)
+        label.setTextWithLineHeight(text: feedbackDetail.start, lineHeight: 24)
         label.textColor = .gray400
         label.font = .body1
         label.numberOfLines = 0
@@ -118,6 +118,13 @@ final class MyFeedbackDetailViewController: BaseViewController {
     }()
     
     // MARK: - life cycle
+    
+    init(feedbackDetail: FeedbackFromMeModel) {
+        self.feedbackDetail = feedbackDetail
+        super.init()
+    }
+    
+    required init?(coder: NSCoder) { nil }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -207,7 +214,7 @@ final class MyFeedbackDetailViewController: BaseViewController {
         feedbackEditButtonView.snp.makeConstraints {
             $0.bottom.equalTo(view.snp.bottom)
             $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(134)
+            $0.height.equalTo(100)
         }
         
         feedbackEditButtonView.addSubview(feedbackEditButton)
@@ -255,7 +262,7 @@ final class MyFeedbackDetailViewController: BaseViewController {
     }
 
     private func setupOptionalComponents() {
-        if model.start == nil {
+        if feedbackDetail.start == nil {
             feedbackStartLabel.isHidden = true
             feedbackStartText.isHidden = true
         }
@@ -272,11 +279,10 @@ final class MyFeedbackDetailViewController: BaseViewController {
     }
     
     private func setupMainButton() {
-        let action = UIAction { [weak self] _ in
-            // FIXME: - 내 데이터는 유저디폴트로 변경
-            let viewController = UINavigationController(rootViewController: MyFeedbackEditViewController(to: "케미", toUserId: 0, reflectionId: 0))
-            viewController.modalPresentationStyle = .fullScreen
-            self?.present(viewController, animated: true)
+        let action = UIAction { [weak self ] _ in
+            if let feedbackDetail = self?.feedbackDetail {
+                self?.navigationController?.pushViewController(MyFeedbackEditViewController(feedbackDetail: feedbackDetail), animated: true)
+            }
         }
         feedbackEditButton.addAction(action, for: .touchUpInside)
     }

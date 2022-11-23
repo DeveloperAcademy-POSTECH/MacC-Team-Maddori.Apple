@@ -349,7 +349,7 @@ class AddFeedbackViewController: BaseViewController {
         }
     }
     
-    private func didTappedCloseButton() {
+    func didTappedCloseButton() {
         self.dismiss(animated: true)
     }
     
@@ -380,7 +380,7 @@ class AddFeedbackViewController: BaseViewController {
         navigationController?.popViewController(animated: true)
     }
     
-    private func didTappedDoneButton() {
+    func didTappedDoneButton() {
         let startContent = feedbackStartSwitch.isOn ? feedbackStartTextView.text : nil
         guard let keyword = feedbackKeywordTextField.text,
               let content = feedbackContentTextView.text
