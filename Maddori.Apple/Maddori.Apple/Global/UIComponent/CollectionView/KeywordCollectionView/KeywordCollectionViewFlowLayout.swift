@@ -34,6 +34,7 @@ final class KeywordCollectionViewFlowLayout: UICollectionViewFlowLayout {
                 layoutAttribute.frame.origin.x = SizeLiteral.leadingTrailingPadding
             }
         }
+        
         return attributes
     }
 }

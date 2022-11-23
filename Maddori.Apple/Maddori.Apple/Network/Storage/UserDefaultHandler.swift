@@ -27,4 +27,8 @@ struct UserDefaultHandler {
     static func setTeamId(teamId: Int) {
         UserData.setValue(teamId, forKey: .teamId)
     }
+    
+    static func setHasSeenAlert(to value: Bool) {
+        UserData.setValue(value, forKey: .hasSeenAlert)
+    }
 }
