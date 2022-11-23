@@ -52,7 +52,7 @@ enum TextLiteral {
     
     // MARK: - AddFeedbackViewController
     
-    static let addFeedbackViewControllerTitleLabel = "에게 피드백 보내기"
+    static let addFeedbackViewControllerTitleLabel = "에게 피드백 주기"
     static let addFeedbackViewControllerFeedbackKeywordTextFieldPlaceholder = "피드백을 키워드로 작성해주세요"
     static let addFeedbackViewControllerFeedbackContentTextViewPlaceholder = "키워드에 대한 자세한 내용을 작성해주세요"
     static let addFeedbackViewControllerDoneButtonTitle = "완료"
