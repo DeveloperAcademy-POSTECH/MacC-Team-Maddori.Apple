@@ -119,7 +119,11 @@ final class MyFeedbackViewController: BaseViewController {
         ).responseDecodable(of: BaseModel<TeamMembersResponse>.self) { [weak self] json in
             if let data = json.value {
                 guard let members = json.value?.detail?.members else { return }
-                self?.memberList = members
+                members.forEach {
+                    if $0.userName != UserDefaultStorage.nickname {
+                        self?.memberList.append($0)
+                    }
+                }
                 dump(data)
             }
         }
