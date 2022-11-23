@@ -10,28 +10,44 @@ import UIKit
 import SnapKit
 
 final class InProgressDetailViewController: BaseViewController {
-    let model = ReflectionInfoModel.mockData
+    
+    let feedbackInfo: ReflectionInfoModel
+    
+    init(feedbackInfo: ReflectionInfoModel) {
+        self.feedbackInfo = feedbackInfo
+        super.init()
+    }
+    
+    required init?(coder: NSCoder) { nil }
     
     // MARK: - property
     
+    private lazy var closeButton: CloseButton = {
+        let button = CloseButton()
+        let action = UIAction { [weak self] _ in
+            self?.dismiss(animated: true)
+        }
+        button.addAction(action, for: .touchUpInside)
+        return button
+    }()
     private lazy var sendFromLabel: UILabel = {
         let label = UILabel()
-        label.text = "\(model.nickname)님이 보낸 \(model.feedbackType.rawValue)"
+        label.text = "\(feedbackInfo.nickname)님이 보낸 \(feedbackInfo.feedbackType.rawValue)"
         label.textColor = .gray400
-        label.applyColor(to: "\(model.feedbackType.rawValue)", with: .blue200)
+        label.applyColor(to: "\(feedbackInfo.feedbackType.rawValue)", with: .blue200)
         label.font = .caption1
         return label
     }()
     private lazy var keywordLabel: UILabel = {
         let label = UILabel()
-        label.text = model.keyword
+        label.text = feedbackInfo.keyword
         label.font = .title
         label.textColor = .black100
         return label
     }()
     private lazy var infoLabel: UILabel = {
         let label = UILabel()
-        label.text = model.info
+        label.text = feedbackInfo.info
         label.font = .body1
         label.textColor = .gray400
         label.numberOfLines = 0
@@ -43,13 +59,19 @@ final class InProgressDetailViewController: BaseViewController {
         view.backgroundColor = .blue100
         view.clipsToBounds = true
         view.layer.cornerRadius = 10
-        view.setStartInfoLabel(info: model.start)
+        view.setStartInfoLabel(info: feedbackInfo.start)
         return view
     }()
     
     // MARK: - life cycle
         
     override func render() {
+        view.addSubview(closeButton)
+        closeButton.snp.makeConstraints {
+            $0.trailing.equalToSuperview().inset(3)
+            $0.top.equalToSuperview().inset(6)
+        }
+        
         view.addSubview(sendFromLabel)
         sendFromLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
@@ -68,10 +90,12 @@ final class InProgressDetailViewController: BaseViewController {
             $0.top.equalTo(keywordLabel.snp.bottom).offset(32)
         }
         
-        view.addSubview(startView)
-        startView.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-            $0.top.equalTo(infoLabel.snp.bottom).offset(28)
+        if !feedbackInfo.start.isEmpty {
+            view.addSubview(startView)
+            startView.snp.makeConstraints {
+                $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+                $0.top.equalTo(infoLabel.snp.bottom).offset(28)
+            }
         }
     }
 }

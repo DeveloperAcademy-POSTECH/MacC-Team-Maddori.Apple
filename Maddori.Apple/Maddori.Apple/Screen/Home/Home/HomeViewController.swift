@@ -45,7 +45,7 @@ final class HomeViewController: BaseViewController {
     }()
     private let toastContentView: ToastContentView = {
         let view = ToastContentView()
-        view.toastType = .warning
+        view.toastType = .complete
         return view
     }()
     private lazy var flowLayout: KeywordCollectionViewFlowLayout = {
@@ -225,9 +225,12 @@ final class HomeViewController: BaseViewController {
         toastView.setGradient(colorTop: .gradientGrayTop, colorBottom: .gradientGrayBottom)
     }
     
-    private func showToastPopUp() {
+    private func showToastPopUp(of type: ToastType) {
         if !isTouched {
             isTouched = true
+            DispatchQueue.main.async {
+                self.toastContentView.toastType = type
+            }
             UIView.animate(withDuration: 0.5, delay: 0, animations: {
                 self.toastView.transform = CGAffineTransform(translationX: 0, y: 115)
             }, completion: {_ in
@@ -240,6 +243,14 @@ final class HomeViewController: BaseViewController {
         }
     }
     
+    private func setupCopyCodeButton(code: String) {
+        let action = UIAction { [weak self] _ in
+            UIPasteboard.general.string = code
+            self?.showToastPopUp(of: .complete)
+        }
+        invitationCodeButton.addAction(action, for: .touchUpInside)
+    }
+    
     private func presentCreateReflectionViewController() {
         let viewController = UINavigationController(rootViewController: CreateReflectionViewController(reflectionId: currentReflectionId))
         viewController.modalPresentationStyle = .fullScreen
@@ -247,11 +258,8 @@ final class HomeViewController: BaseViewController {
     }
     
     private func showStartReflectionView() {
-        let viewController = StartReflectionViewController()
+        let viewController = StartReflectionViewController(reflectionId: currentReflectionId)
         viewController.modalPresentationStyle = .overFullScreen
-        viewController.dismissChildView = { [weak self] in
-            self?.dismiss(animated: true)
-        }
         present(viewController, animated: true)
         // FIXME: - 모달 띄우고 시작하기만 가능한 건 동작을 너무 제한시킴 -> 추가하기 버튼이 채워지면서 시작하기로 바뀌는건 어떨까?
     }
@@ -278,11 +286,13 @@ final class HomeViewController: BaseViewController {
                    headers: type.header
         ).responseDecodable(of: BaseModel<CertainTeamDetailResponse>.self) { json in
             if let json = json.value {
-                guard let teamName = json.detail?.teamName,
-                      let isAdmin = json.detail?.admin
+                guard let isAdmin = json.detail?.admin,
+                      let teamName = json.detail?.teamName,
+                      let invitationCode = json.detail?.invitationCode
                 else { return }
                 DispatchQueue.main.async {
                     self.teamNameLabel.setTitleFont(text: teamName)
+                    self.setupCopyCodeButton(code: invitationCode)
                     if isAdmin {
                         self.renderPlanLabelButton()
                     }
@@ -310,14 +320,14 @@ final class HomeViewController: BaseViewController {
                         case .SettingRequired, .Done:
                             self.descriptionLabel.text = TextLiteral.homeViewControllerEmptyDescriptionLabel
                         case .Before:
-                            // FIXME: - 분기 처리 추가
                             let reflectionDate = reflectionDetail?.reflectionDate?.formatDateString(to: "MM월 dd일 a h시 mm분")
                             self.descriptionLabel.text = "다음 회고는 \(reflectionDate ?? String(describing: Date()))입니다"
+                            self.hidePlanLabelButton()
                         case .Progressing:
-                            // FIXME: - 분기 처리 추가
-                            let reflectionDate = reflectionDetail?.reflectionDate?.formatDateString(to: "MM월 dd일 a hh시 mm분")
+                            let reflectionDate = reflectionDetail?.reflectionDate?.formatDateString(to: "MM월 dd일 a h시 mm분")
                             self.descriptionLabel.text = "다음 회고는 \(reflectionDate ?? String(describing: Date()))입니다"
                             self.showStartReflectionView()
+                            self.hidePlanLabelButton()
                         }
                         self.flowLayout.count = reflectionKeywordList.count
                         self.keywordCollectionView.reloadData()
@@ -351,7 +361,7 @@ extension HomeViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         UIDevice.vibrate()
-        showToastPopUp()
+        showToastPopUp(of: .warning)
     }
 }
 

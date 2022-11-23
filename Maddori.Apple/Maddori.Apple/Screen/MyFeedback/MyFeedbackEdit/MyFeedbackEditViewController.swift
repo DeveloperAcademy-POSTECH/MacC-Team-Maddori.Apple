@@ -40,7 +40,7 @@ final class MyFeedbackEditViewController: AddFeedbackViewController {
         setupFeedbackStart()
         hideEditFeedbackUntilLabel()
         detectChangeOfFeedbackType()
-        setupNavigationRightItem()
+        setupNavigationLeftItem()
     }
     
     // MARK: - func
@@ -71,6 +71,13 @@ final class MyFeedbackEditViewController: AddFeedbackViewController {
             super.feedbackStartTextView.isHidden = false
             super.feedbackStartTextView.text = start
             super.feedbackStartTextView.textColor = .black100
+        }
+        super.feedbackStartSwitchBottomEqualToSuperView?.constraint.deactivate()
+        super.feedbackStartTextView.snp.remakeConstraints {
+            $0.top.equalTo(feedbackStartTextViewLabel.snp.bottom).offset(SizeLiteral.labelComponentPadding)
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.height.equalTo(150)
+            $0.bottom.equalToSuperview().inset(80)
         }
     }
     
@@ -106,8 +113,8 @@ final class MyFeedbackEditViewController: AddFeedbackViewController {
         }
     }
     
-    private func setupNavigationRightItem() {
-        super.closeButton.isHidden = true
+    private func setupNavigationLeftItem() {
+        super.backButton.isHidden = true
     }
     
     override func didTappedDoneButton() {
@@ -122,7 +129,7 @@ final class MyFeedbackEditViewController: AddFeedbackViewController {
     
     @objc override func willHideKeyboard(notification: NSNotification) {
         UIView.animate(withDuration: 0.2, animations: {
-            super.feedbackDoneButton.transform = .identity
+            super.feedbackDoneButtonView.transform = .identity
         })
         super.editFeedbackUntilLabel.isHidden = true
     }
@@ -152,5 +159,9 @@ final class MyFeedbackEditViewController: AddFeedbackViewController {
     
     override func textViewDidChangeSelection(_ textView: UITextView) {
         super.feedbackDoneButton.isDisabled = !(isTextInputChanged() || isFeedbackTypeChanged)
+    }
+    
+    override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
     }
 }

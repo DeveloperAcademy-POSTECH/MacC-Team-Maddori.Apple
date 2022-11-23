@@ -81,6 +81,11 @@ final class MyFeedbackViewController: BaseViewController {
         fetchCurrentTeamMember(type: .fetchCurrentTeamMember)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tabBarController?.tabBar.isHidden = false
+    }
+    
     override func render() {
         view.addSubview(myFeedbackLabel)
         myFeedbackLabel.snp.makeConstraints {

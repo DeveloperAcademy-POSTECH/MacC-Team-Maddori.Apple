@@ -104,6 +104,7 @@ final class MyFeedbackDetailViewController: BaseViewController {
     }()
     private lazy var editFeedbackUntilLabel: UILabel = {
         let label = UILabel()
+        label.setTextWithLineHeight(text: TextLiteral.myFeedbackDetailViewControllerBeforeReflectionLabel, lineHeight: 22)
         label.text = TextLiteral.myFeedbackDetailViewControllerBeforeReflectionLabel
         label.textColor = .gray400
         label.font = .body2
@@ -131,6 +132,11 @@ final class MyFeedbackDetailViewController: BaseViewController {
         setupMainButton()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tabBarController?.tabBar.isHidden = true
+    }
+    
     override func configUI() {
         super.configUI()
         setupFeedbackSendTimeLabel()
@@ -140,14 +146,13 @@ final class MyFeedbackDetailViewController: BaseViewController {
     override func render() {
         view.addSubview(feedbackFromMeDetailScrollView)
         feedbackFromMeDetailScrollView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+            $0.leading.trailing.top.equalToSuperview()
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(100)
         }
         
         feedbackFromMeDetailScrollView.addSubview(feedbackFromMeDetailContentView)
         feedbackFromMeDetailContentView.snp.makeConstraints {
-            $0.edges.equalTo(feedbackFromMeDetailScrollView.snp.edges)
-            $0.width.equalTo(feedbackFromMeDetailScrollView.snp.width)
-            $0.height.equalTo(view.frame.height)
+            $0.width.top.bottom.equalToSuperview()
         }
         
         feedbackFromMeDetailContentView.addSubview(feedbackFromMeDetailTitleLabel)
@@ -202,19 +207,19 @@ final class MyFeedbackDetailViewController: BaseViewController {
         feedbackStartText.snp.makeConstraints {
             $0.top.equalTo(feedbackStartLabel.snp.bottom).offset(SizeLiteral.labelComponentPadding)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.bottom.equalToSuperview().inset(20)
         }
         
-        // FIXME: - layout 수정필요
         view.addSubview(feedbackEditButtonView)
         feedbackEditButtonView.snp.makeConstraints {
-            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
+            $0.bottom.equalTo(view.snp.bottom)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(100)
         }
         
         feedbackEditButtonView.addSubview(feedbackEditButton)
         feedbackEditButton.snp.makeConstraints {
-            $0.bottom.equalToSuperview().inset(10)
+            $0.bottom.equalTo(feedbackEditButtonView.snp.bottom).inset(36)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
@@ -268,6 +273,7 @@ final class MyFeedbackDetailViewController: BaseViewController {
     private func setupCloseButton() {
         let action = UIAction { [weak self] _ in
             self?.navigationController?.popViewController(animated: true)
+            self?.tabBarController?.tabBar.isHidden = false
         }
         backButton.addAction(action, for: .touchUpInside)
     }

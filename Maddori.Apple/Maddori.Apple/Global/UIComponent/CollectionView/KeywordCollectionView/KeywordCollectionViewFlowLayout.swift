@@ -30,12 +30,10 @@ final class KeywordCollectionViewFlowLayout: UICollectionViewFlowLayout {
             layoutAttribute.frame.origin.x = leftMargin
             leftMargin += layoutAttribute.frame.width + cellSpacing
             maxY = max(layoutAttribute.frame.maxY, maxY)
+            if layoutAttribute.representedElementKind == UICollectionView.elementKindSectionHeader {
+                layoutAttribute.frame.origin.x = SizeLiteral.leadingTrailingPadding
+            }
         }
-        
-        for i in count..<(attributes?.count ?? 0) {
-            attributes?[i].frame.origin.x = SizeLiteral.leadingTrailingPadding
-        }
-        
         return attributes
     }
 }
