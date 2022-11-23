@@ -167,6 +167,7 @@
 		396334D6292DADBE00E74B77 /* AppleLoginDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginDTO.swift; sourceTree = "<group>"; };
 		396334D8292DAE0000E74B77 /* AppleLoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginResponse.swift; sourceTree = "<group>"; };
 		396334DA292DAE8300E74B77 /* UserResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserResponse.swift; sourceTree = "<group>"; };
+		396334DC292DB07100E74B77 /* Maddori.Apple.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Maddori.Apple.entitlements; sourceTree = "<group>"; };
 		397E49562924D93F004220D6 /* UrlLiteral.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlLiteral.swift; sourceTree = "<group>"; };
 		397E49592924F871004220D6 /* UserDefaultStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultStorage.swift; sourceTree = "<group>"; };
 		397E495B2924F8A2004220D6 /* UserDefaultHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultHandler.swift; sourceTree = "<group>"; };
@@ -313,6 +314,7 @@
 		39257DC328F8FEBD00201E0B /* Maddori.Apple */ = {
 			isa = PBXGroup;
 			children = (
+				396334DC292DB07100E74B77 /* Maddori.Apple.entitlements */,
 				39257DD828F90EA900201E0B /* Network */,
 				39257DD928F90EB100201E0B /* Screen */,
 				39257DDA28F90EBD00201E0B /* Global */,
@@ -1236,9 +1238,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Maddori.Apple/Maddori.Apple.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = HF8GHZB58X;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Maddori.Apple/Global/Supports/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "키고";
@@ -1268,9 +1271,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Maddori.Apple/Maddori.Apple.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = HF8GHZB58X;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Maddori.Apple/Global/Supports/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "키고";
