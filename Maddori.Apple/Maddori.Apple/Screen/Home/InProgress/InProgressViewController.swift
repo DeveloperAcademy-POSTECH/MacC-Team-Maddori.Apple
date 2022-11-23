@@ -82,7 +82,7 @@ final class InProgressViewController: BaseViewController {
         collectionView.backgroundColor = .white200
         collectionView.register(KeywordCollectionViewCell.self,
                                 forCellWithReuseIdentifier: KeywordCollectionViewCell.className)
-        collectionView.register(EmptyFeedbackView.self, forCellWithReuseIdentifier: EmptyFeedbackView.className)
+        collectionView.register(EmptyCollectionFeedbackView.self, forCellWithReuseIdentifier: EmptyCollectionFeedbackView.className)
         collectionView.register(KeywordSectionHeaderView.self,
                                 forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
                                 withReuseIdentifier: KeywordSectionHeaderView.className)
@@ -272,7 +272,7 @@ extension InProgressViewController: UICollectionViewDataSource {
         guard let cell = keywordCollectionView.dequeueReusableCell(withReuseIdentifier: KeywordCollectionViewCell.className, for: indexPath) as? KeywordCollectionViewCell else {
             return UICollectionViewCell()
         }
-        guard let emptyCell = keywordCollectionView.dequeueReusableCell(withReuseIdentifier: EmptyFeedbackView.className, for: indexPath) as? EmptyFeedbackView else {
+        guard let emptyCell = keywordCollectionView.dequeueReusableCell(withReuseIdentifier: EmptyCollectionFeedbackView.className, for: indexPath) as? EmptyCollectionFeedbackView else {
             return UICollectionViewCell()
         }
         
