@@ -296,8 +296,8 @@ final class HomeViewController: BaseViewController {
             if let json = json.value {
                 let reflectionDetail = json.detail
                 guard let reflectionStatus = reflectionDetail?.reflectionStatus,
-                      let reflectionId = reflectionDetail?.currentReflectionId,
-                      let reflectionDate = reflectionDetail?.reflectionDate?.formatDateString(to: "MM월 dd일 a hh시")
+                      let reflectionId = reflectionDetail?.currentReflectionId
+//                      let reflectionDate = reflectionDetail?.reflectionDate?.formatDateString(to: "MM월 dd일 a hh시")
                 else { return }
                 
                 self.currentReflectionId = reflectionId
