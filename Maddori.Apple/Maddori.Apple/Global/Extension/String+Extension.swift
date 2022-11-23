@@ -14,6 +14,7 @@ extension String {
         
         guard let date: Date = stringToDateFormatter.date(from: self) else { return "" }
         let dateToStringFormatter = DateFormatter()
+        dateToStringFormatter.locale = Locale(identifier:"ko_KR")
         dateToStringFormatter.dateFormat = format
         
         return dateToStringFormatter.string(from: date)

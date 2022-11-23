@@ -11,7 +11,7 @@ import Alamofire
 import SnapKit
 
 final class HomeViewController: BaseViewController {
-    var currentReflectionId: Int = 0
+    
     var keywordList: [String] = [
         TextLiteral.homeViewControllerCollectionViewEmtpyText0,
         TextLiteral.homeViewControllerCollectionViewEmtpyText1,
@@ -31,6 +31,9 @@ final class HomeViewController: BaseViewController {
         static let subButtonHeight: CGFloat = 20
         static let planReflectionViewHeight: CGFloat = 40
     }
+    
+    var currentReflectionId: Int = 0
+    var isAdmin: Bool = false
     
     // MARK: - property
     
@@ -92,6 +95,11 @@ final class HomeViewController: BaseViewController {
         labelButton.subText = TextLiteral.mainViewControllerPlanLabelButtonSubText
         labelButton.subButtonText = TextLiteral.mainViewControllerPlanLabelButtonSubButtonText
         return labelButton
+    }()
+    private let planLabelButtonBackgroundView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .backgroundWhite
+        return view
     }()
     private lazy var addFeedbackButton: UIButton = {
         let button = UIButton()
@@ -183,13 +191,6 @@ final class HomeViewController: BaseViewController {
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             $0.bottom.equalTo(addFeedbackButton.snp.top).offset(-10)
         }
-        
-        view.addSubview(planLabelButtonView)
-        planLabelButtonView.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.bottom.equalTo(addFeedbackButton.snp.top)
-            $0.height.equalTo(SizeLiteral.minimumTouchArea)
-        }
     }
     
     // MARK: - func
@@ -197,6 +198,20 @@ final class HomeViewController: BaseViewController {
     private func setUpDelegation() {
         keywordCollectionView.delegate = self
         keywordCollectionView.dataSource = self
+    }
+    
+    private func renderPlanLabelButton() {
+        view.addSubview(planLabelButtonBackgroundView)
+        planLabelButtonBackgroundView.snp.makeConstraints {
+            $0.horizontalEdges.equalToSuperview()
+            $0.bottom.equalTo(addFeedbackButton.snp.top)
+            $0.height.equalTo(SizeLiteral.minimumTouchArea)
+        }
+        
+        planLabelButtonBackgroundView.addSubview(planLabelButtonView)
+        planLabelButtonView.snp.makeConstraints {
+            $0.top.bottom.centerX.equalToSuperview()
+        }
     }
     
     private func didTapAddFeedbackButton() {
@@ -237,7 +252,7 @@ final class HomeViewController: BaseViewController {
     }
     
     private func presentCreateReflectionViewController() {
-        let viewController = UINavigationController(rootViewController: CreateReflectionViewController())
+        let viewController = UINavigationController(rootViewController: CreateReflectionViewController(reflectionId: currentReflectionId))
         viewController.modalPresentationStyle = .fullScreen
         present(viewController, animated: true)
     }
@@ -252,12 +267,18 @@ final class HomeViewController: BaseViewController {
         // FIXME: - 모달 띄우고 시작하기만 가능한 건 동작을 너무 제한시킴 -> 추가하기 버튼이 채워지면서 시작하기로 바뀌는건 어떨까?
     }
     
+    private func hidePlanLabelButton() {
+        planLabelButtonView.isHidden = true
+        planLabelButtonBackgroundView.isHidden = true
+    }
+    
     private func convertFetchedKeywordList(of list: [String]) {
-        keywordList = []
-        for i in 0..<list.count {
-            keywordList.append(list[i])
+        if !list.isEmpty {
+            keywordList = []
+            for i in 0..<list.count {
+                keywordList.append(list[i])
+            }
         }
-        print(keywordList)
     }
     
     // MARK: - api
@@ -268,11 +289,16 @@ final class HomeViewController: BaseViewController {
                    headers: type.header
         ).responseDecodable(of: BaseModel<CertainTeamDetailResponse>.self) { json in
             if let json = json.value {
-                guard let teamName = json.detail?.teamName else { return }
-                guard let invitationCode = json.detail?.invitationCode else { return }
+                guard let isAdmin = json.detail?.admin,
+                      let teamName = json.detail?.teamName,
+                      let invitationCode = json.detail?.invitationCode
+                else { return }
                 DispatchQueue.main.async {
                     self.teamNameLabel.setTitleFont(text: teamName)
                     self.setupCopyCodeButton(code: invitationCode)
+                    if isAdmin {
+                        self.renderPlanLabelButton()
+                    }
                 }
             }
         }
@@ -284,7 +310,6 @@ final class HomeViewController: BaseViewController {
                    headers: type.header
         ).responseDecodable(of: BaseModel<CurrentReflectionResponse>.self) { json in
             if let json = json.value {
-                
                 let reflectionDetail = json.detail
                 guard let reflectionStatus = reflectionDetail?.reflectionStatus,
                       let reflectionId = reflectionDetail?.currentReflectionId
@@ -292,25 +317,23 @@ final class HomeViewController: BaseViewController {
                 
                 self.currentReflectionId = reflectionId
                 if let reflectionKeywordList = reflectionDetail?.reflectionKeywords {
-                    if reflectionKeywordList.count > 0 {
-                        self.convertFetchedKeywordList(of: reflectionKeywordList)
-                        DispatchQueue.main.async {
-                            switch reflectionStatus {
-                            case .SettingRequired, .Done:
-                                self.descriptionLabel.text = TextLiteral.homeViewControllerEmptyDescriptionLabel
-                            case .Before:
-                                // FIXME: - 분기 처리 추가
-                                let reflectionDate = reflectionDetail?.reflectionDate?.formatDateString(to: "MM월 dd일 a hh시")
-                                self.descriptionLabel.text = "다음 회고는 \(reflectionDate)입니다"
-                            case .Progressing:
-                                // FIXME: - 분기 처리 추가
-                                let reflectionDate = reflectionDetail?.reflectionDate?.formatDateString(to: "MM월 dd일 a hh시")
-                                self.descriptionLabel.text = "다음 회고는 \(reflectionDate)입니다"
-                                self.showStartReflectionView()
-                            }
-                            self.flowLayout.count = reflectionKeywordList.count
-                            self.keywordCollectionView.reloadData()
+                    self.convertFetchedKeywordList(of: reflectionKeywordList)
+                    DispatchQueue.main.async {
+                        switch reflectionStatus {
+                        case .SettingRequired, .Done:
+                            self.descriptionLabel.text = TextLiteral.homeViewControllerEmptyDescriptionLabel
+                        case .Before:
+                            let reflectionDate = reflectionDetail?.reflectionDate?.formatDateString(to: "MM월 dd일 a h시 mm분")
+                            self.descriptionLabel.text = "다음 회고는 \(reflectionDate ?? String(describing: Date()))입니다"
+                            self.hidePlanLabelButton()
+                        case .Progressing:
+                            let reflectionDate = reflectionDetail?.reflectionDate?.formatDateString(to: "MM월 dd일 a hh시 mm분")
+                            self.descriptionLabel.text = "다음 회고는 \(reflectionDate ?? String(describing: Date()))입니다"
+                            self.showStartReflectionView()
+                            self.hidePlanLabelButton()
                         }
+                        self.flowLayout.count = reflectionKeywordList.count
+                        self.keywordCollectionView.reloadData()
                     }
                 }
             }
