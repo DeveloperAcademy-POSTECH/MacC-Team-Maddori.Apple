@@ -66,3 +66,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 }
 
+extension SceneDelegate {
+    func logout() {
+        window?.rootViewController = LoginViewController()
+    }
+}
