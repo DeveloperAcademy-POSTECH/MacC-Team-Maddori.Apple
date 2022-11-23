@@ -63,6 +63,10 @@ extension UIFont {
         return font(.semibold, ofSize: 12)
     }
     
+    static var caption3: UIFont {
+        return font(.medium, ofSize: 12)
+    }
+    
     static var toast: UIFont {
         return font(.semibold, ofSize: 14)
     }

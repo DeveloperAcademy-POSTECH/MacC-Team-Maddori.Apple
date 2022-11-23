@@ -22,6 +22,11 @@ final class StartReflectionViewController: BaseViewController {
     
     // MARK: - property
     
+    private let closeButton: CloseButton = {
+        let button = CloseButton()
+        button.tintColor = .white100
+        return button
+    }()
     private lazy var blurredView: UIView = {
         let containerView = UIView()
         let blurEffect = UIBlurEffect(style: .light)
@@ -30,20 +35,31 @@ final class StartReflectionViewController: BaseViewController {
         let dimmedView = UIView()
         dimmedView.backgroundColor = .white.withAlphaComponent(0.6)
         dimmedView.frame = self.view.bounds
-        
         containerView.addSubview(customBlurEffectView)
         containerView.addSubview(dimmedView)
+        containerView.layer.zPosition = 100
         return containerView
+    }()
+    private lazy var touchView: UIView = {
+        let view = UIView()
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapToClose))
+        view.addGestureRecognizer(tapGesture)
+        view.isUserInteractionEnabled = true
+        view.frame = self.view.bounds
+        view.layer.zPosition = 100
+        return view
     }()
     private let calendarImage: UIImageView = {
         let view = UIImageView()
         view.image = ImageLiterals.imgCalendar
+        view.layer.zPosition = 102
         return view
     }()
     private let startPopupView: UIView = {
         let view = UIView()
         view.clipsToBounds = true
         view.layer.cornerRadius = 10
+        view.layer.zPosition = 101
         return view
     }()
     private let startLabel: UILabel = {
@@ -79,6 +95,7 @@ final class StartReflectionViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         render()
+        setupCloseButtonAction()
     }
     
     override func configUI() {
@@ -89,6 +106,8 @@ final class StartReflectionViewController: BaseViewController {
     override func render() {
         view.addSubview(blurredView)
         view.sendSubviewToBack(blurredView)
+        
+        view.addSubview(touchView)
                 
         view.addSubview(startPopupView)
         startPopupView.snp.makeConstraints {
@@ -101,6 +120,12 @@ final class StartReflectionViewController: BaseViewController {
         calendarImage.snp.makeConstraints {
             $0.bottom.equalTo(startPopupView.snp.top).inset(39)
             $0.centerX.equalToSuperview()
+        }
+        
+        startPopupView.addSubview(closeButton)
+        closeButton.snp.makeConstraints {
+            $0.width.height.equalTo(SizeLiteral.minimumTouchArea)
+            $0.top.trailing.equalToSuperview()
         }
         
         startPopupView.addSubview(startLabel)
@@ -119,6 +144,13 @@ final class StartReflectionViewController: BaseViewController {
     
     // MARK: - setup
     
+    private func setupCloseButtonAction() {
+        let action = UIAction { [weak self] _ in
+            self?.dismiss(animated: true)
+        }
+        closeButton.addAction(action, for: .touchUpInside)
+    }
+    
     private func setPopupGradient() {
         startPopupView.layoutIfNeeded()
         startPopupView.setGradient(colorTop: .gradientBlue100Top, colorBottom: .gradientBlue100Bottom)
@@ -130,5 +162,11 @@ final class StartReflectionViewController: BaseViewController {
         let viewController = UINavigationController(rootViewController: SelectReflectionMemberViewController(reflectionId: reflectionId))
         viewController.modalPresentationStyle = .fullScreen
         present(viewController, animated: true)
+    }
+    
+    // MARK: - selector
+    
+    @objc private func tapToClose() {
+        self.dismiss(animated: true)
     }
 }

@@ -55,6 +55,7 @@ final class SelectReflectionMemberViewController: BaseViewController {
         let button = MainButton()
         let action = UIAction { [weak self] _ in
             guard let reflectionId = self?.reflectionId else { return }
+            UserDefaultHandler.setHasSeenAlert(to: false)
             self?.patchEndReflection(type: .patchEndReflection(reflectionId: reflectionId))
             self?.dismiss(animated: true)
         }

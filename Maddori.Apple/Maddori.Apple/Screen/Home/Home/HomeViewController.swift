@@ -34,6 +34,11 @@ final class HomeViewController: BaseViewController {
     
     var currentReflectionId: Int = 0
     var isAdmin: Bool = false
+    var hasSeenReflectionAlert: Bool = UserDefaultStorage.hasSeenReflectionAlert {
+        willSet {
+            UserDefaultHandler.setHasSeenAlert(to: newValue)
+        }
+    }
     
     // MARK: - property
     
@@ -86,6 +91,15 @@ final class HomeViewController: BaseViewController {
         label.font = .label2
         label.textColor = .black100
         return label
+    }()
+    private lazy var joinReflectionButton: JoinReflectionButton = {
+        let joinButton = JoinReflectionButton()
+        joinButton.layer.cornerRadius = 10
+        joinButton.clipsToBounds = true
+        joinButton.buttonAction = { [weak self] in
+            self?.presentSelectReflectionMemberViewController()
+        }
+        return joinButton
     }()
     private lazy var planLabelButtonView: LabelButtonView = {
         let labelButton = LabelButtonView()
@@ -225,6 +239,11 @@ final class HomeViewController: BaseViewController {
         toastView.setGradient(colorTop: .gradientGrayTop, colorBottom: .gradientGrayBottom)
     }
     
+    private func setGradientJoinReflectionView() {
+        joinReflectionButton.layoutIfNeeded()
+        joinReflectionButton.setGradient(colorTop: .gradientBlueTop, colorBottom: .gradientBlueBottom)
+    }
+    
     private func showToastPopUp(of type: ToastType) {
         if !isTouched {
             isTouched = true
@@ -257,16 +276,66 @@ final class HomeViewController: BaseViewController {
         present(viewController, animated: true)
     }
     
+    private func presentSelectReflectionMemberViewController() {
+        let viewController = UINavigationController(rootViewController: SelectReflectionMemberViewController(reflectionId: currentReflectionId))
+        viewController.modalPresentationStyle = .fullScreen
+        present(viewController, animated: true)
+    }
+    
     private func showStartReflectionView() {
         let viewController = StartReflectionViewController(reflectionId: currentReflectionId)
         viewController.modalPresentationStyle = .overFullScreen
         present(viewController, animated: true)
-        // FIXME: - 모달 띄우고 시작하기만 가능한 건 동작을 너무 제한시킴 -> 추가하기 버튼이 채워지면서 시작하기로 바뀌는건 어떨까?
+        hasSeenReflectionAlert = true
+    }
+    
+    private func showPlanLabelButton() {
+        planLabelButtonView.isHidden = false
+        planLabelButtonBackgroundView.isHidden = false
+    }
+    
+    private func showJoinReflectionButton() {
+        view.addSubview(joinReflectionButton)
+        joinReflectionButton.snp.makeConstraints {
+            $0.top.equalTo(descriptionLabel.snp.bottom).offset(16)
+            $0.horizontalEdges.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+        
+        currentReflectionLabel.snp.remakeConstraints {
+            $0.top.equalTo(joinReflectionButton.snp.bottom).offset(24)
+            $0.horizontalEdges.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+        
+        keywordCollectionView.snp.remakeConstraints {
+            $0.top.equalTo(currentReflectionLabel.snp.bottom).offset(SizeLiteral.titleSubtitleSpacing)
+            $0.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-SizeLiteral.bottomTabBarPadding)
+        }
+        
+        setGradientJoinReflectionView()
+        joinReflectionButton.render()
+    }
+    
+    private func restoreView() {
+        currentReflectionLabel.snp.remakeConstraints {
+            $0.top.equalTo(descriptionLabel.snp.bottom).offset(Size.propertyPadding)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+        
+        keywordCollectionView.snp.remakeConstraints {
+            $0.top.equalTo(currentReflectionLabel.snp.bottom).offset(SizeLiteral.titleSubtitleSpacing)
+            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            $0.bottom.equalTo(addFeedbackButton.snp.top).offset(-10)
+        }
     }
     
     private func hidePlanLabelButton() {
         planLabelButtonView.isHidden = true
         planLabelButtonBackgroundView.isHidden = true
+    }
+    
+    private func hideJoinReflectionButton() {
+        joinReflectionButton.removeFromSuperview()
     }
     
     private func convertFetchedKeywordList(of list: [String]) {
@@ -319,6 +388,10 @@ final class HomeViewController: BaseViewController {
                         switch reflectionStatus {
                         case .SettingRequired, .Done:
                             self.descriptionLabel.text = TextLiteral.homeViewControllerEmptyDescriptionLabel
+                            self.hideJoinReflectionButton()
+                            self.addFeedbackButton.isHidden = false
+                            self.showPlanLabelButton()
+                            self.restoreView()
                         case .Before:
                             let reflectionDate = reflectionDetail?.reflectionDate?.formatDateString(to: "MM월 dd일 a h시 mm분")
                             self.descriptionLabel.text = "다음 회고는 \(reflectionDate ?? String(describing: Date()))입니다"
@@ -326,8 +399,13 @@ final class HomeViewController: BaseViewController {
                         case .Progressing:
                             let reflectionDate = reflectionDetail?.reflectionDate?.formatDateString(to: "MM월 dd일 a h시 mm분")
                             self.descriptionLabel.text = "다음 회고는 \(reflectionDate ?? String(describing: Date()))입니다"
-                            self.showStartReflectionView()
+                            self.addFeedbackButton.isHidden = true
                             self.hidePlanLabelButton()
+                            self.showJoinReflectionButton()
+                            self.hidePlanLabelButton()
+                            if !self.hasSeenReflectionAlert {
+                                self.showStartReflectionView()
+                            }
                         }
                         self.flowLayout.count = reflectionKeywordList.count
                         self.keywordCollectionView.reloadData()
