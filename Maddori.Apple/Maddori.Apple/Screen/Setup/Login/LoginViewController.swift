@@ -35,10 +35,6 @@ final class LoginViewController: BaseViewController {
     private lazy var appleLoginButton: ASAuthorizationAppleIDButton = {
         let button = ASAuthorizationAppleIDButton(type: .signIn, style: .black)
         let action = UIAction { [weak self] _ in
-            // FIXME: - 로그인 API연결
-//            self?.presentSetupNickNameViewController()
-            // FIXME: - AppleLogin 연결 후, 성공했을 때로 옮겨야 함.
-//            self?.setLoginUserDefaults()
             self?.appleSignIn()
         }
         button.cornerRadius = 15
@@ -100,8 +96,7 @@ final class LoginViewController: BaseViewController {
         controller.performRequests()
     }
     
-    private func presentSetupNickNameViewController() {
-        let viewController = SetNicknameViewController()
+    private func presentViewController(viewController: UIViewController) {
         viewController.navigationItem.setHidesBackButton(true, animated: false)
         navigationController?.pushViewController(viewController, animated: true)
     }
@@ -121,7 +116,29 @@ final class LoginViewController: BaseViewController {
         ).responseDecodable(of: BaseModel<AppleLoginResponse>.self) { [weak self] json in
             if let data = json.value {
                 dump(data)
-                self?.presentSetupNickNameViewController()
+                guard let accessToken = data.detail?.accessToken,
+                      let refreshToken = data.detail?.refreshToken
+                else { return }
+                UserDefaultHandler.setAccessToken(accessToken: accessToken)
+                UserDefaultHandler.setRefreshToken(refreshToken: refreshToken)
+                let hasNickName = data.detail?.user?.userName != nil
+                let hasTeamId = data.detail?.user?.teamId != nil
+                if hasNickName && hasTeamId {
+                    guard let nickName = data.detail?.user?.userName,
+                          let teamId = data.detail?.user?.teamId
+                    else { return }
+                    UserDefaultHandler.setNickname(nickname: nickName)
+                    UserDefaultHandler.setTeamId(teamId: teamId)
+                    let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
+                    sceneDelegate?.changeRootViewCustomTabBarView()
+                } else if hasNickName {
+                    guard let nickName = data.detail?.user?.userName else { return }
+                    UserDefaultHandler.setNickname(nickname: nickName)
+                    self?.presentViewController(viewController: JoinTeamViewController())
+                } else {
+                    self?.presentViewController(viewController: SetNicknameViewController())
+                }
+                self?.setLoginUserDefaults()
             }
         }
     }
