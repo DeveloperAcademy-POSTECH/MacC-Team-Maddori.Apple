@@ -87,7 +87,9 @@ final class MyReflectionViewController: BaseViewController {
             if let json = json.value {
                 guard let jsonDetail = json.detail else { return }
                 self.allReflection = jsonDetail
-                self.totalReflection = (self.allReflection?.reflection[0]!)!
+                if let reflection = jsonDetail.reflection?[0] {
+                    self.totalReflection = reflection
+                }
             }
         }
     }
@@ -113,7 +115,9 @@ extension MyReflectionViewController: UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.navigationController?.pushViewController(MyReflectionDetailViewController(), animated: true)
+        guard let reflectionId = totalReflection[indexPath.item].id,
+              let reflectionName = totalReflection[indexPath.item].reflectionName else { return }
+        self.navigationController?.pushViewController(MyReflectionDetailViewController(reflectionId: reflectionId, reflectionName: reflectionName), animated: true)
     }
 }
 

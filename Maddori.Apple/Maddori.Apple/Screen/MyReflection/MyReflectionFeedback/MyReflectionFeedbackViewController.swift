@@ -11,8 +11,7 @@ import SnapKit
 
 final class MyReflectionFeedbackViewController: BaseViewController {
     
-    // FIXME: - api 연결
-    let model = FeedbackToMeModel.mockData
+    var model: FeedBackResponse
     
     // MARK: - property
     
@@ -28,8 +27,10 @@ final class MyReflectionFeedbackViewController: BaseViewController {
     private let myReflectionContentView = UIView()
     private lazy var keywordTitleLabel: UILabel = {
         let label = UILabel()
-        label.setTitleFont(text: model.keyword)
-        label.textColor = .black100
+        if let keyword = model.keyword {
+            label.setTitleFont(text: keyword)
+            label.textColor = .black100
+        }
         return label
     }()
     private let feedbackTypeLabel: UILabel = {
@@ -41,7 +42,7 @@ final class MyReflectionFeedbackViewController: BaseViewController {
     }()
     private lazy var feedbackTypeText: UILabel = {
         let label = UILabel()
-        label.setTextWithLineHeight(text: model.feedbackType.rawValue, lineHeight: 24)
+        label.setTextWithLineHeight(text: model.type, lineHeight: 24)
         label.textColor = .gray400
         label.font = .body1
         return label
@@ -55,7 +56,7 @@ final class MyReflectionFeedbackViewController: BaseViewController {
     }()
     private lazy var feedbackFromText: UILabel = {
         let label = UILabel()
-        label.setTextWithLineHeight(text: model.from, lineHeight: 24)
+        label.setTextWithLineHeight(text: model.fromUser?.userName, lineHeight: 24)
         label.textColor = .gray400
         label.font = .body1
         return label
@@ -84,7 +85,7 @@ final class MyReflectionFeedbackViewController: BaseViewController {
     }()
     private lazy var feedbackStartText: UILabel = {
         let label = UILabel()
-        label.setTextWithLineHeight(text: model.start, lineHeight: 24)
+        label.setTextWithLineHeight(text: model.startContent, lineHeight: 24)
         label.textColor = .gray400
         label.font = .body1
         label.numberOfLines = 0
@@ -92,6 +93,13 @@ final class MyReflectionFeedbackViewController: BaseViewController {
     }()
     
     // MARK: - life cycle
+    
+    init(model: FeedBackResponse) {
+        self.model = model
+        super.init()
+    }
+    
+    required init?(coder: NSCoder) { nil }
     
     override func configUI() {
         super.configUI()
@@ -179,7 +187,7 @@ final class MyReflectionFeedbackViewController: BaseViewController {
     }
     
     private func setupStartLabel() {
-        if model.start == nil {
+        if model.startContent == nil {
             feedbackStartLabel.isHidden = true
         }
     }
