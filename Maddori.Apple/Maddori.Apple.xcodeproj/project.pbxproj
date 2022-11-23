@@ -38,6 +38,9 @@
 		395C7E2028FED7B500FC2FCA /* ReflectionNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395C7E1F28FED7B500FC2FCA /* ReflectionNameView.swift */; };
 		395C7E2228FEDB6500FC2FCA /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395C7E2128FEDB6500FC2FCA /* UITextField+Extension.swift */; };
 		395C7E252900E74700FC2FCA /* StartReflectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395C7E242900E74700FC2FCA /* StartReflectionViewController.swift */; };
+		396334D7292DADBE00E74B77 /* AppleLoginDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396334D6292DADBE00E74B77 /* AppleLoginDTO.swift */; };
+		396334D9292DAE0000E74B77 /* AppleLoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396334D8292DAE0000E74B77 /* AppleLoginResponse.swift */; };
+		396334DB292DAE8300E74B77 /* UserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396334DA292DAE8300E74B77 /* UserResponse.swift */; };
 		397E49572924D93F004220D6 /* UrlLiteral.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397E49562924D93F004220D6 /* UrlLiteral.swift */; };
 		397E495A2924F871004220D6 /* UserDefaultStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397E49592924F871004220D6 /* UserDefaultStorage.swift */; };
 		397E495C2924F8A2004220D6 /* UserDefaultHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397E495B2924F8A2004220D6 /* UserDefaultHandler.swift */; };
@@ -161,6 +164,9 @@
 		395C7E1F28FED7B500FC2FCA /* ReflectionNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReflectionNameView.swift; sourceTree = "<group>"; };
 		395C7E2128FEDB6500FC2FCA /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
 		395C7E242900E74700FC2FCA /* StartReflectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartReflectionViewController.swift; sourceTree = "<group>"; };
+		396334D6292DADBE00E74B77 /* AppleLoginDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginDTO.swift; sourceTree = "<group>"; };
+		396334D8292DAE0000E74B77 /* AppleLoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginResponse.swift; sourceTree = "<group>"; };
+		396334DA292DAE8300E74B77 /* UserResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserResponse.swift; sourceTree = "<group>"; };
 		397E49562924D93F004220D6 /* UrlLiteral.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlLiteral.swift; sourceTree = "<group>"; };
 		397E49592924F871004220D6 /* UserDefaultStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultStorage.swift; sourceTree = "<group>"; };
 		397E495B2924F8A2004220D6 /* UserDefaultHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultHandler.swift; sourceTree = "<group>"; };
@@ -603,6 +609,7 @@
 				39F52C4E29232E8B00B19A77 /* FeedBackContentDTO.swift */,
 				39F909D6292679C400DAD0A3 /* EditFeedBackDTO.swift */,
 				7EE38BAC2925DDD200FD738D /* EncodeDTO.swift */,
+				396334D6292DADBE00E74B77 /* AppleLoginDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -636,6 +643,8 @@
 				39F52C71292476AE00B19A77 /* KeywordResponse.swift */,
 				39F52C73292476EA00B19A77 /* FeedBackResponse.swift */,
 				398474212925CF4800EDC139 /* TeamInfoResponse.swift */,
+				396334D8292DAE0000E74B77 /* AppleLoginResponse.swift */,
+				396334DA292DAE8300E74B77 /* UserResponse.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -1029,6 +1038,7 @@
 				52AED2DD29128532004D70B9 /* FeedbackFromMeModel.swift in Sources */,
 				D724790C28FEC8C900D67B50 /* BaseTextFieldViewController.swift in Sources */,
 				7E6B662F28FE887300C3BEEF /* UILabel+Extension.swift in Sources */,
+				396334D9292DAE0000E74B77 /* AppleLoginResponse.swift in Sources */,
 				397E495C2924F8A2004220D6 /* UserDefaultHandler.swift in Sources */,
 				395C7E0B28F9550A00FC2FCA /* NSObject+Extension.swift in Sources */,
 				39F909D7292679C400DAD0A3 /* EditFeedBackDTO.swift in Sources */,
@@ -1053,6 +1063,7 @@
 				39847424292603B000EDC139 /* AddFeedBackEndPoint.swift in Sources */,
 				39F52C4729232DD600B19A77 /* LoginDTO.swift in Sources */,
 				39F52C592923321700B19A77 /* CertainTeamDetailResponse.swift in Sources */,
+				396334D7292DADBE00E74B77 /* AppleLoginDTO.swift in Sources */,
 				397E495A2924F871004220D6 /* UserDefaultStorage.swift in Sources */,
 				395C7E1B28FEC42900FC2FCA /* CreateReflectionViewController.swift in Sources */,
 				39F52C612923344C00B19A77 /* FeedBackContentResponse.swift in Sources */,
@@ -1077,6 +1088,7 @@
 				3EA341E62924E2AD005CBD1C /* HomeEndPoint.swift in Sources */,
 				395C7E0D28F959A500FC2FCA /* MainButton.swift in Sources */,
 				525E721528FEEE8500EF3FCB /* SelectFeedbackMemberViewController.swift in Sources */,
+				396334DB292DAE8300E74B77 /* UserResponse.swift in Sources */,
 				3EB508622912B12700FB77CB /* MyReflectionCollectionViewHeader.swift in Sources */,
 				39257DF528F93E4700201E0B /* UIColor+Extension.swift in Sources */,
 				52F2D1C12906F172009CBF89 /* SelectReflectionMemberViewController.swift in Sources */,
