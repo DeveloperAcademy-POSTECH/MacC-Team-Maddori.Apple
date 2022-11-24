@@ -72,7 +72,6 @@ final class SetNicknameViewController: BaseTextFieldViewController {
         let action = UIAction { [weak self] _ in
             guard let nickname = self?.kigoTextField.text else { return }
             UserDefaultHandler.setNickname(nickname: nickname)
-            print(UserDefaultStorage.nickname)
             DispatchQueue.main.async {
                 self?.navigationController?.pushViewController(JoinTeamViewController(), animated: true)
             }

@@ -115,7 +115,6 @@ final class LoginViewController: BaseViewController {
                    headers: type.headers
         ).responseDecodable(of: BaseModel<AppleLoginResponse>.self) { [weak self] json in
             if let data = json.value {
-                dump(data)
                 guard let accessToken = data.detail?.accessToken,
                       let refreshToken = data.detail?.refreshToken
                 else { return }
