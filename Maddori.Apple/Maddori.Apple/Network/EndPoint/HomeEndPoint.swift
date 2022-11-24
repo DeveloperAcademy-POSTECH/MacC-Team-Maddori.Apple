@@ -7,7 +7,7 @@
 
 import Alamofire
 
-enum HomeEndPoint {
+enum HomeEndPoint<T: Encodable>: EndPointable {
     case fetchCertainTeamDetail
     case fetchCurrentReflectionDetail
     
@@ -29,7 +29,16 @@ enum HomeEndPoint {
         }
     }
     
-    var header: HTTPHeaders {
+    var body: T? {
+        switch self {
+        case .fetchCertainTeamDetail:
+            return nil
+        case .fetchCurrentReflectionDetail:
+            return nil
+        }
+    }
+    
+    var headers: HTTPHeaders? {
         switch self {
         case .fetchCertainTeamDetail:
             let headers = ["user_id": "\(UserDefaultStorage.userId)"]
