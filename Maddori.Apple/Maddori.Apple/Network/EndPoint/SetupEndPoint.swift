@@ -12,6 +12,7 @@ enum SetupEndPoint<T: Encodable> {
     case dispatchCreateTeam(T)
     case dispatchJoinTeam(teamId: Int)
     case fetchCertainTeam(invitationCode: String)
+    case dispatchAppleLogin(T)
     
     var address: String {
         switch self {
@@ -23,6 +24,8 @@ enum SetupEndPoint<T: Encodable> {
             return "\(UrlLiteral.baseUrl)/users/join-team/\(teamId)"
         case .fetchCertainTeam(let invitationCode):
             return "\(UrlLiteral.baseUrl)/teams?invitation_code=\(invitationCode)"
+        case .dispatchAppleLogin:
+            return "http://15.165.21.115:3000/api/v1/login"
         }
     }
 
@@ -36,6 +39,8 @@ enum SetupEndPoint<T: Encodable> {
             return .post
         case .fetchCertainTeam:
             return .get
+        case .dispatchAppleLogin:
+            return .post
         }
     }
     
@@ -49,6 +54,8 @@ enum SetupEndPoint<T: Encodable> {
             return nil
         case .fetchCertainTeam:
             return nil
+        case .dispatchAppleLogin(let body):
+            return body
         }
     }
     
@@ -65,6 +72,8 @@ enum SetupEndPoint<T: Encodable> {
         case .fetchCertainTeam:
             let headers = ["user_id": "\(UserDefaultStorage.userId)"]
             return HTTPHeaders(headers)
+        case .dispatchAppleLogin:
+            return nil
         }
     }
 }
