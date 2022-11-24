@@ -96,7 +96,7 @@ final class SetNicknameViewController: BaseTextFieldViewController {
             } else {
                 DispatchQueue.main.async {
                     // FIXME: - UXWriting 필요
-                    self.makeAlert(title: "에러", message: "중복된 닉네임입니다람쥐")
+                    self.makeAlert(title: "에러", message: "중복된 닉네임입니다.")
                 }
             }
         }
