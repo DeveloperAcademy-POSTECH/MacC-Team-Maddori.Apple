@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 
 final class MyFeedbackCollectionView: UIView {
-    var didTappedCell: ((Int) -> ())?
+    var didTappedCell: ((FeedbackFromMeModel) -> ())?
     var feedbackInfo: FeedBackInfoResponse? {
         didSet {
             feedbackCollectionView.reloadData()
@@ -45,7 +45,7 @@ final class MyFeedbackCollectionView: UIView {
         collectionView.dataSource = self
         collectionView.register(MyFeedbackHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: MyFeedbackHeaderView.className)
         collectionView.register(MyFeedbackCollectionViewCell.self, forCellWithReuseIdentifier: MyFeedbackCollectionViewCell.className)
-        collectionView.register(EmptyFeedbackView.self, forCellWithReuseIdentifier: EmptyFeedbackView.className)
+        collectionView.register(EmptyCollectionFeedbackView.self, forCellWithReuseIdentifier: EmptyCollectionFeedbackView.className)
         return collectionView
     }()
     
@@ -99,7 +99,57 @@ extension MyFeedbackCollectionView: UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        didTappedCell?(indexPath.item)
+        guard let data = feedbackInfo else { return }
+        if !(data.continueArray.isEmpty && data.stopArray.isEmpty) {
+            if collectionView.numberOfSections == 2 {
+                let reflectionId = feedbackInfo?.reflectionId ?? 0
+                let feedbackId = indexPath.section == 0
+                ? feedbackInfo?.continueArray[indexPath.item].id ?? 0
+                : feedbackInfo?.stopArray[indexPath.item].id ?? 0
+                let nickName = feedbackInfo?.toUsername ?? ""
+                let keyword = indexPath.section == 0
+                ? feedbackInfo?.continueArray[indexPath.item].keyword ?? ""
+                : feedbackInfo?.stopArray[indexPath.item].keyword ?? ""
+                let info = indexPath.section == 0
+                ? feedbackInfo?.continueArray[indexPath.item].content ?? ""
+                : feedbackInfo?.stopArray[indexPath.item].content ?? ""
+                let start = indexPath.section == 0
+                ? feedbackInfo?.continueArray[indexPath.item].startContent
+                : feedbackInfo?.stopArray[indexPath.item].startContent
+                
+                let data = FeedbackFromMeModel(reflectionId: reflectionId,
+                                               feedbackId: feedbackId,
+                                               nickname: nickName,
+                                               feedbackType: indexPath.section == 0 ? .continueType : .stopType,
+                                               keyword: keyword,
+                                               info: info,
+                                               start: start)
+                didTappedCell?(data)
+            } else {
+                if let continueArray = feedbackInfo?.continueArray,
+                   let stopArray = feedbackInfo?.stopArray {
+                    if !continueArray.isEmpty {
+                        let data = FeedbackFromMeModel(reflectionId: feedbackInfo?.reflectionId ?? 0,
+                                                       feedbackId: continueArray[indexPath.item].id ?? 0,
+                                                       nickname: feedbackInfo?.toUsername ?? "",
+                                                       feedbackType: .continueType,
+                                                       keyword: continueArray[indexPath.item].keyword ?? "",
+                                                       info: continueArray[indexPath.item].content ?? "",
+                                                       start: continueArray[indexPath.item].startContent)
+                        didTappedCell?(data)
+                    } else {
+                        let data = FeedbackFromMeModel(reflectionId: feedbackInfo?.reflectionId ?? 0,
+                                                       feedbackId: stopArray[indexPath.item].id ?? 0,
+                                                       nickname: feedbackInfo?.toUsername ?? "",
+                                                       feedbackType: .stopType,
+                                                       keyword: stopArray[indexPath.item].keyword ?? "",
+                                                       info: stopArray[indexPath.item].content ?? "",
+                                                       start: stopArray[indexPath.item].startContent)
+                        didTappedCell?(data)
+                    }
+                }
+            }
+        }
     }
 }
 extension MyFeedbackCollectionView: UICollectionViewDataSource {
@@ -109,7 +159,14 @@ extension MyFeedbackCollectionView: UICollectionViewDataSource {
             return 1
         }
         let hasContinue = !data.continueArray.isEmpty
-        if hasContinue {
+        let hasBoth = hasContinue && !data.stopArray.isEmpty
+        if hasBoth {
+            if section == 0 {
+                return data.continueArray.count
+            } else {
+                return data.stopArray.count
+            }
+        } else if hasContinue {
             return data.continueArray.count
         } else {
             return data.stopArray.count
@@ -119,7 +176,7 @@ extension MyFeedbackCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let data = feedbackInfo else { return UICollectionViewCell() }
         if data.continueArray.isEmpty && data.stopArray.isEmpty {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EmptyFeedbackView.className, for: indexPath) as? EmptyFeedbackView else { return UICollectionViewCell() }
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EmptyCollectionFeedbackView.className, for: indexPath) as? EmptyCollectionFeedbackView else { return UICollectionViewCell() }
             cell.emptyFeedbackLabel.text = TextLiteral.emptyViewMyBox
             return cell
         } else {

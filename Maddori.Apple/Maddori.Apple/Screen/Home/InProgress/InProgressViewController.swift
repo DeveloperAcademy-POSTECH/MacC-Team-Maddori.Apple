@@ -7,31 +7,60 @@
 
 import UIKit
 
+import Alamofire
 import SnapKit
 
 final class InProgressViewController: BaseViewController {
     
-    private var keywordData = Keyword.mockData
-    private let currentRetrospectiveUser = "진저"
-    private let user = "이드"
-//    private let user = "진저"
     private enum Size {
         static let keywordLabelHeight: CGFloat = 50
         static let sectionPadding: CGFloat = 60
         static let myReflectionEmptyViewHeight: CGFloat = 500
         static let othersReflectionEmptyViewHeight: CGFloat = 180
     }
-    private var keywordsSectionList: [[Keyword]] = []
-    private var isUserRetrospective: Bool {
-        return user == currentRetrospectiveUser ? true : false
+    
+    private var currentReflectionMemberId: Int
+    private var currentReflectionMemberName: String
+    private var currentReflectionId: Int
+    
+    private let userId = UserDefaultStorage.userId
+    private let teamId = UserDefaultStorage.teamId
+    
+    private var userKeywordData: [Keyword] = []
+    private var teamKeywordData: [Keyword] = []
+    
+    private var keywordsSectionList: [[Keyword]] = [[], []] {
+        didSet {
+            keywordCollectionView.reloadData()
+            setUpKeywordType()
+        }
     }
+    private var isUserRetrospective: Bool {
+        return userId == currentReflectionMemberId ? true : false
+    }
+    
+    init(memberId: Int, memberUsername: String, reflectionId: Int) {
+        self.currentReflectionMemberId = memberId
+        self.currentReflectionMemberName = memberUsername
+        self.currentReflectionId = reflectionId
+        super.init()
+    }
+    
+    required init?(coder: NSCoder) { nil }
     
     // MARK: - property
     
-    private let backButton = BackButton(type: .system)
+    private lazy var backButton: BackButton = {
+        let button = BackButton()
+        let action = UIAction { [weak self] _ in
+            self?.navigationController?.popViewController(animated: true)
+        }
+        button.addAction(action, for: .touchUpInside)
+        return button
+    }()
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.setTitleFont(text: currentRetrospectiveUser + TextLiteral.inProgressViewControllerTitleLabel)
+        label.setTitleFont(text: currentReflectionMemberName + TextLiteral.inProgressViewControllerTitleLabel)
         label.textColor = .black100
         return label
     }()
@@ -39,21 +68,21 @@ final class InProgressViewController: BaseViewController {
         let label = UILabel()
         label.font = .caption1
         label.textColor = .gray400
-        if user == currentRetrospectiveUser {
-            label.text = currentRetrospectiveUser + TextLiteral.inProgressViewControllerSubTitleLabel
+        if isUserRetrospective {
+            label.text = currentReflectionMemberName + TextLiteral.inProgressViewControllerSubTitleLabel
         } else {
-            label.text = currentRetrospectiveUser + TextLiteral.inProgressViewControllerOthersSubTitleLabel
+            label.text = currentReflectionMemberName + TextLiteral.inProgressViewControllerOthersSubTitleLabel
         }
         label.numberOfLines = 0
         return label
     }()
+    private let flowLayout = KeywordCollectionViewFlowLayout()
     private lazy var keywordCollectionView: UICollectionView = {
-        let flowLayout = KeywordCollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         collectionView.backgroundColor = .white200
         collectionView.register(KeywordCollectionViewCell.self,
                                 forCellWithReuseIdentifier: KeywordCollectionViewCell.className)
-        collectionView.register(EmptyFeedbackView.self, forCellWithReuseIdentifier: EmptyFeedbackView.className)
+        collectionView.register(EmptyCollectionFeedbackView.self, forCellWithReuseIdentifier: EmptyCollectionFeedbackView.className)
         collectionView.register(KeywordSectionHeaderView.self,
                                 forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
                                 withReuseIdentifier: KeywordSectionHeaderView.className)
@@ -64,11 +93,14 @@ final class InProgressViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchTeamAndUserFeedback(type: .fetchTeamAndUserFeedback(
+            reflectionId: currentReflectionId,
+            memberId: currentReflectionMemberId
+            )
+        )
         setUpDelegation()
         setUpKeywordType()
     }
-    
-    // MARK: - func
     
     override func render() {
         view.addSubview(titleLabel)
@@ -90,6 +122,8 @@ final class InProgressViewController: BaseViewController {
         }
     }
     
+    // MARK: - setup
+    
     override func setupNavigationBar() {
         super.setupNavigationBar()
         // FIXME: - 터치영역 34로 되어있음
@@ -108,21 +142,65 @@ final class InProgressViewController: BaseViewController {
     
     private func setUpKeywordType() {
         if isUserRetrospective {
-            for i in 0..<keywordData.count {
-                keywordData[i].type = .defaultKeyword
+            for i in 0..<teamKeywordData.count {
+                teamKeywordData[i].style = .defaultKeyword
             }
-            keywordsSectionList.append(keywordData)
         } else {
-            var myKeywords = keywordData.filter { $0.from == user}
-            var otherKeywords = keywordData.filter { $0.from != user}
-            for i in 0..<myKeywords.count {
-                myKeywords[i].type = .defaultKeyword
+            for i in 0..<userKeywordData.count {
+                userKeywordData[i].style = .defaultKeyword
             }
-            for j in 0..<otherKeywords.count {
-                otherKeywords[j].type = .subKeyword
+            for j in 0..<teamKeywordData.count {
+                teamKeywordData[j].style = .subKeyword
             }
-            keywordsSectionList.append(myKeywords)
-            keywordsSectionList.append(otherKeywords)
+        }
+    }
+    
+    // MARK: - func
+    
+    private func convert(_ response: [FeedBackContentResponse]) -> [Keyword] {
+        var keywordList: [Keyword] = []
+        for feedback in response {
+            let keyword = Keyword(
+                type: feedback.type ?? .continueType,
+                keyword: feedback.keyword ?? "키워드",
+                content: feedback.content ?? "",
+                // FIXME: startContent가 없을 경우 "" 로 둬도 될까?
+                startContent: feedback.startContent ?? "",
+                fromUser: feedback.fromUser?.userName ?? "팀원"
+            )
+            keywordList.append(keyword)
+        }
+        return keywordList
+    }
+    
+    private func presentDetailView(feedbackInfo: ReflectionInfoModel) {
+         let viewController = InProgressDetailViewController(feedbackInfo: feedbackInfo)
+         self.present(viewController, animated: true)
+     }
+    
+    // MARK: - api
+    
+    private func fetchTeamAndUserFeedback(type: InProgressEndPoint) {
+        AF.request(type.address,
+                   method: type.method,
+                   headers: type.headers
+        ).responseDecodable(of: BaseModel<AllFeedBackResponse>.self) { json in
+            if let json = json.value {
+                guard let userFeedbackList = json.detail?.userFeedback,
+                      let teamFeedbackList = json.detail?.teamFeedback
+                else { return }
+                
+                self.userKeywordData = self.convert(userFeedbackList)
+                self.teamKeywordData = self.convert(teamFeedbackList)
+                
+                if self.isUserRetrospective {
+                    self.keywordsSectionList[0] = self.teamKeywordData
+                } else {
+                    self.keywordsSectionList[0] = self.userKeywordData
+                    self.keywordsSectionList[1] = self.teamKeywordData
+                }
+                self.flowLayout.count = self.keywordsSectionList.flatMap { $0 }.count
+            }
         }
     }
 }
@@ -131,16 +209,18 @@ final class InProgressViewController: BaseViewController {
 
 extension InProgressViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let cell = keywordCollectionView.dequeueReusableCell(withReuseIdentifier: KeywordCollectionViewCell.className, for: indexPath) as? KeywordCollectionViewCell else { return }
-        let section = indexPath.section
-        let item = indexPath.item
-        keywordsSectionList[section][item].type = .disabledKeyword
+        guard let cell = keywordCollectionView.cellForItem(at: indexPath) as? KeywordCollectionViewCell else { return }
+        let keyword = keywordsSectionList[indexPath.section][indexPath.item]
+        guard let startContent = keyword.startContent else { return }
+        let feedbackInfo = ReflectionInfoModel(
+            nickname: keyword.fromUser,
+            feedbackType: keyword.type,
+            keyword: keyword.keyword,
+            info: keyword.content, start: startContent
+        )
         DispatchQueue.main.async {
-            UIView.performWithoutAnimation {
-                cell.configLabel(type: .disabledKeyword)
-                cell.configShadow(type: .disabledKeyword)
-                self.keywordCollectionView.reloadItems(at: [indexPath])
-            }
+            cell.setupAttribute(to: .disabledKeyword)
+            self.presentDetailView(feedbackInfo: feedbackInfo)
         }
     }
 }
@@ -192,7 +272,7 @@ extension InProgressViewController: UICollectionViewDataSource {
         guard let cell = keywordCollectionView.dequeueReusableCell(withReuseIdentifier: KeywordCollectionViewCell.className, for: indexPath) as? KeywordCollectionViewCell else {
             return UICollectionViewCell()
         }
-        guard let emptyCell = keywordCollectionView.dequeueReusableCell(withReuseIdentifier: EmptyFeedbackView.className, for: indexPath) as? EmptyFeedbackView else {
+        guard let emptyCell = keywordCollectionView.dequeueReusableCell(withReuseIdentifier: EmptyCollectionFeedbackView.className, for: indexPath) as? EmptyCollectionFeedbackView else {
             return UICollectionViewCell()
         }
         
@@ -216,9 +296,9 @@ extension InProgressViewController: UICollectionViewDataSource {
         }
         
         let keyword = keywordsSectionList[section][item]
-        cell.keywordLabel.text = keyword.string
-        cell.configLabel(type: keyword.type)
-        cell.configShadow(type: keyword.type)
+        cell.keywordLabel.text = keyword.keyword
+        cell.configLabel(type: keyword.style ?? .defaultKeyword)
+        cell.configShadow(type: keyword.style ?? .defaultKeyword)
         return cell
     }
 }
@@ -233,8 +313,10 @@ extension InProgressViewController: UICollectionViewDelegateFlowLayout {
         } else if sectionIsEmpty && !isUserRetrospective {
             return CGSize(width: view.frame.width - 2 * SizeLiteral.leadingTrailingPadding, height: Size.othersReflectionEmptyViewHeight)
         }
-        return KeywordCollectionViewCell.fittingSize(availableHeight: Size.keywordLabelHeight,
-                                                     keyword: keywordsSectionList[section][item].string)
+        return KeywordCollectionViewCell.fittingSize(
+            availableHeight: Size.keywordLabelHeight,
+            keyword: keywordsSectionList[section][item].keyword
+        )
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {

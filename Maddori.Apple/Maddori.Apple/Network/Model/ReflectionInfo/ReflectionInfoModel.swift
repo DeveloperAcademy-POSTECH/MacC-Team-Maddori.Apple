@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum FeedBackType: String, CaseIterable {
+enum FeedBackType: String, CaseIterable, Decodable {
     case continueType = "Continue"
     case stopType = "Stop"
     case startType = "Start"

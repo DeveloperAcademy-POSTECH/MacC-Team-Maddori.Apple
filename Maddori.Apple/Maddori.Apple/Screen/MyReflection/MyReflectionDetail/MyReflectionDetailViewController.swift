@@ -39,6 +39,7 @@ final class MyReflectionDetailViewController: BaseViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(MyReflectionDetailTableViewCell.self, forCellReuseIdentifier: MyReflectionDetailTableViewCell.className)
+        tableView.register(EmptyTableFeedbackView.self, forCellReuseIdentifier: EmptyTableFeedbackView.className)
         return tableView
     }()
     private lazy var segmentControl: CustomSegmentControl = {
@@ -80,7 +81,7 @@ final class MyReflectionDetailViewController: BaseViewController {
             $0.top.equalTo(titleLabel.snp.bottom).offset(22)
             $0.leading.trailing.equalToSuperview()
             // FIXME
-            $0.bottom.equalToSuperview()
+            $0.bottom.equalTo(view.safeAreaLayoutGuide)
         }
         
         tableView.addSubview(segmentControl)
@@ -126,7 +127,6 @@ final class MyReflectionDetailViewController: BaseViewController {
                     self.tableView.reloadData()
                 }
             }
-            print(json.response?.statusCode)
         }
     }
     
@@ -143,22 +143,35 @@ final class MyReflectionDetailViewController: BaseViewController {
 extension MyReflectionDetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // FIXME
-        return contentArray.count
+        return contentArray.isEmpty ? 1 : contentArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: MyReflectionDetailTableViewCell.className, for: indexPath) as? MyReflectionDetailTableViewCell else { return UITableViewCell() }
-        guard let keyword = contentArray[indexPath.row].keyword,
-              let fromLabelText = contentArray[indexPath.row].fromUser?.userName,
-              let content = contentArray[indexPath.row].content else { return UITableViewCell() }
-        cell.configLabel(title: keyword, fromLabel: fromLabelText, content: content)
-        return cell
+        if contentArray.isEmpty {
+            guard let emptyCell = tableView.dequeueReusableCell(withIdentifier: EmptyTableFeedbackView.className, for: indexPath) as? EmptyTableFeedbackView else { return UITableViewCell() }
+            emptyCell.emptyFeedbackLabel.text = TextLiteral.emptyViewMyReflectionDetail
+            emptyCell.isUserInteractionEnabled = false
+            tableView.separatorStyle = .none
+            tableView.isScrollEnabled = false
+            return emptyCell
+        } else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: MyReflectionDetailTableViewCell.className, for: indexPath) as? MyReflectionDetailTableViewCell else { return UITableViewCell() }
+            guard let keyword = contentArray[indexPath.row].keyword,
+                  let fromLabelText = contentArray[indexPath.row].fromUser?.userName,
+                  let content = contentArray[indexPath.row].content else { return UITableViewCell() }
+            cell.configLabel(title: keyword, fromLabel: fromLabelText, content: content)
+            return cell
+        }
     }
 }
 
 extension MyReflectionDetailViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        if contentArray.isEmpty {
+            return tableView.frame.height - 90
+        } else {
+            return 100
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

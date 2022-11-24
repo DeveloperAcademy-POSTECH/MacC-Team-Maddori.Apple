@@ -63,13 +63,13 @@ final class MyReflectionDetailTableViewCell: BaseTableViewCell {
         fromLabelBackView.snp.makeConstraints {
             $0.leading.equalTo(titleLabel.snp.trailing).offset(6)
             $0.centerY.equalTo(titleLabel.snp.centerY)
-            $0.width.equalTo(33)
-            $0.height.equalTo(20)
         }
         
         fromLabelBackView.addSubview(fromLabel)
         fromLabel.snp.makeConstraints {
-            $0.center.equalToSuperview()
+            $0.top.equalToSuperview().inset(3)
+            $0.bottom.equalToSuperview().inset(2)
+            $0.horizontalEdges.equalToSuperview().inset(4)
         }
         
         contentView.addSubview(contentLabel)

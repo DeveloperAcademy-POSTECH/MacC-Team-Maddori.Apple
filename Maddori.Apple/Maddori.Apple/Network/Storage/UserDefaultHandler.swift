@@ -35,4 +35,8 @@ struct UserDefaultHandler {
     static func setRefreshToken(refreshToken: String) {
         UserData.setValue(refreshToken, forKey: .refreshToken)
     }
+    
+    static func setHasSeenAlert(to value: Bool) {
+        UserData.setValue(value, forKey: .hasSeenAlert)
+    }
 }
