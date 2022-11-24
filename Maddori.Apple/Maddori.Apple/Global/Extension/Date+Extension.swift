@@ -13,4 +13,11 @@ extension Date {
         formatter.dateFormat = "M월 d일"
         return formatter.string(from: self)
     }
+    
+    var dateToYearMonthDayWeekString: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "Y. M. d. (E)"
+        formatter.locale = Locale(identifier: "ko_KR")
+        return formatter.string(from: self)
+    }
 }
