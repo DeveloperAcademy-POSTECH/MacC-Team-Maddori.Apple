@@ -26,6 +26,7 @@ final class MemberCollectionView: UIView {
     }
     var didTappedMember: (([MemberResponse]) -> ())?
     var didTappedFeedBackMember: ((MemberResponse) -> ())?
+    var selectedMember: MemberResponse?
     private var selectedMemberList: [MemberResponse] = []
     private enum Size {
         static let collectionHorizontalSpacing: CGFloat = 14
@@ -85,12 +86,15 @@ extension MemberCollectionView: UICollectionViewDelegate {
         case .addFeedback:
             didTappedFeedBackMember?(memberList[indexPath.item])
         case .progressReflection:
-            if !selectedMemberList.contains(where: { $0.username == memberList[indexPath.item].username} ) {
+            if !selectedMemberList.contains(where: { $0.userName == memberList[indexPath.item].userName} ) {
                 selectedMemberList.append(memberList[indexPath.item])
             }
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MemberCollectionViewCell.className, for: indexPath) as? MemberCollectionViewCell else { return }
+            guard let cell = collectionView.cellForItem(at: indexPath) as? MemberCollectionViewCell else { return }
+            selectedMember = memberList[indexPath.item]
+            guard let member = selectedMember else { return }
             cell.setupAttribute()
             didTappedMember?(selectedMemberList)
+            didTappedFeedBackMember?(member)
         }
     }
 }
@@ -105,7 +109,7 @@ extension MemberCollectionView: UICollectionViewDataSource {
             assert(false, "Wrong Cell")
             return UICollectionViewCell()
         }
-        cell.memberLabel.text = memberList[indexPath.item].username
+        cell.memberLabel.text = memberList[indexPath.item].userName
         return cell
     }
 }

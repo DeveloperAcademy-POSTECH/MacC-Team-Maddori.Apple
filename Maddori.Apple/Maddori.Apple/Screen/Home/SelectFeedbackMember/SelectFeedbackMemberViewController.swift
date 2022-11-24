@@ -11,7 +11,7 @@ import Alamofire
 import SnapKit
 
 final class SelectFeedbackMemberViewController: BaseViewController {
-    
+    var currentReflectionId: Int
     // MARK: - property
     
     private let closeButton = CloseButton(type: .system)
@@ -26,17 +26,24 @@ final class SelectFeedbackMemberViewController: BaseViewController {
     private lazy var memberCollectionView: MemberCollectionView = {
         let collectionView = MemberCollectionView(type: .addFeedback)
         collectionView.didTappedFeedBackMember = { [weak self] user in
-            self?.navigationController?.pushViewController(AddFeedbackViewController(to: user.username ?? "", toUserId: user.userId ?? 0), animated: true)
+            self?.navigationController?.pushViewController(AddFeedbackViewController(to: user.userName ?? "", toUserId: user.userId ?? 0, reflectionId: self?.currentReflectionId ?? 0), animated: true)
         }
         return collectionView
     }()
     
     // MARK: - life cycle
     
+    init(currentReflectionId: Int) {
+        self.currentReflectionId = currentReflectionId
+        super.init()
+    }
+    
+    required init?(coder: NSCoder) { nil }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCloseButtonAction()
-        fetchCurrentTeamMember(type: .fetchCurrentTeamMember(teamId: 1, userId: 1))
+        fetchCurrentTeamMember(type: .fetchCurrentTeamMember)
     }
     
     override func render() {
@@ -85,7 +92,7 @@ final class SelectFeedbackMemberViewController: BaseViewController {
             dump(json.value)
             if let data = json.value {
                 guard let allMemberList = data.detail?.members else { return }
-                let memberList = allMemberList.filter { $0.username != UserDefaultStorage.nickname }
+                let memberList = allMemberList.filter { $0.userName != UserDefaultStorage.nickname }
                 DispatchQueue.main.async {
                     self.memberCollectionView.memberList = memberList
                 }

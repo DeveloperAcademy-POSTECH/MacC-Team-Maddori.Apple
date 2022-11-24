@@ -7,22 +7,22 @@
 
 import Alamofire
 
-enum MyFeedBackEndPoint<T: Encodable>: EndPointable {
-    case fetchCurrentTeamMember(teamId: Int, userId: Int)
-    case fetchCertainMemberFeedBack(teamId: Int, memberId: Int, userId: Int)
-    case deleteFeedBack(teamId: Int, reflectionId: Int, feedBackId: Int, userId: Int)
-    case putEditFeedBack(teamId: Int, reflectionId: Int, feedBackId: Int, T, userId: Int)
+enum MyFeedBackEndPoint<T: Encodable> {
+    case fetchCurrentTeamMember
+    case fetchCertainMemberFeedBack(memberId: Int)
+    case deleteFeedBack(reflectionId: Int, feedBackId: Int)
+    case putEditFeedBack(reflectionId: Int, feedBackId: Int, T)
     
     var address: String {
         switch self {
-        case .fetchCurrentTeamMember(let teamId, _):
-            return "\(UrlLiteral.baseUrl)/teams/\(teamId)/members"
-        case .fetchCertainMemberFeedBack(let teamId, let memberId, _):
-            return "\(UrlLiteral.baseUrl)/teams/\(teamId)/reflections/current/feedbacks/from-me?members=\(memberId)"
-        case .deleteFeedBack(let teamId, let reflectionId, let feedBackId, _):
-            return "\(UrlLiteral.baseUrl)/teams/\(teamId)/reflections/\(reflectionId)/feedbacks/\(feedBackId)"
-        case .putEditFeedBack(let teamId, let reflectionId, let feedBackId, _, _):
-            return "\(UrlLiteral.baseUrl)/teams/\(teamId)/reflections/\(reflectionId)/feedbacks/\(feedBackId)"
+        case .fetchCurrentTeamMember:
+            return "\(UrlLiteral.baseUrl)/teams/\(UserDefaultStorage.teamId)/members"
+        case .fetchCertainMemberFeedBack(let memberId):
+            return "\(UrlLiteral.baseUrl)/teams/\(UserDefaultStorage.teamId)/reflections/current/feedbacks/from-me?members=\(memberId)"
+        case .deleteFeedBack(let reflectionId, let feedBackId):
+            return "\(UrlLiteral.baseUrl)/teams/\(UserDefaultStorage.teamId)/reflections/\(reflectionId)/feedbacks/\(feedBackId)"
+        case .putEditFeedBack(let reflectionId, let feedBackId, _):
+            return "\(UrlLiteral.baseUrl)/teams/\(UserDefaultStorage.teamId)/reflections/\(reflectionId)/feedbacks/\(feedBackId)"
         }
     }
     
@@ -47,24 +47,24 @@ enum MyFeedBackEndPoint<T: Encodable>: EndPointable {
             return nil
         case .deleteFeedBack:
             return nil
-        case .putEditFeedBack(_, _, _, let body, _):
+        case .putEditFeedBack(_, _, let body):
             return body
         }
     }
     
     var headers: HTTPHeaders? {
         switch self {
-        case .fetchCurrentTeamMember(_, let userId):
-            let headers = ["user_id": "\(userId)"]
+        case .fetchCurrentTeamMember:
+            let headers = ["user_id": "\(UserDefaultStorage.userId)"]
             return HTTPHeaders(headers)
-        case .fetchCertainMemberFeedBack(_, _, let userId):
-            let headers = ["user_id": "\(userId)"]
+        case .fetchCertainMemberFeedBack:
+            let headers = ["user_id": "\(UserDefaultStorage.userId)"]
             return HTTPHeaders(headers)
-        case .deleteFeedBack(_, _, _, let userId):
-            let headers = ["user_id": "\(userId)"]
+        case .deleteFeedBack:
+            let headers = ["user_id": "\(UserDefaultStorage.userId)"]
             return HTTPHeaders(headers)
-        case .putEditFeedBack(_, _, _, _, let userId):
-            let headers = ["user_id": "\(userId)"]
+        case .putEditFeedBack:
+            let headers = ["user_id": "\(UserDefaultStorage.userId)"]
             return HTTPHeaders(headers)
         }
     }

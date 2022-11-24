@@ -27,8 +27,6 @@ final class MyReflectionDetailTableViewCell: BaseTableViewCell {
     }()
     let fromLabel: UILabel = {
         let label = UILabel()
-        // FIXME
-        label.text = "메리"
         label.font = .caption2
         label.textColor = .gray400
         return label
@@ -36,8 +34,6 @@ final class MyReflectionDetailTableViewCell: BaseTableViewCell {
     let contentLabel: UILabel = {
         let label = UILabel()
         label.font = .body2
-        // FIXME
-        label.text = "너무 좋아요~ 너무 좋아요~ 너무 좋아요~ 너무 좋아요~ 너무 좋아요~ 너무 좋아요~ 너무 좋아요~ 너무 좋아요~ 너무 좋아요~ 너무 좋아요~ 너무 좋아요~"
         label.numberOfLines = 2
         label.textColor = .gray400
         label.setLineSpacing(to: 4)
@@ -50,7 +46,7 @@ final class MyReflectionDetailTableViewCell: BaseTableViewCell {
         return imageView
     }()
     
-    // MARK: - func
+    // MARK: - life cycle
     
     override func configUI() {
         backgroundColor = .backgroundWhite
@@ -67,13 +63,13 @@ final class MyReflectionDetailTableViewCell: BaseTableViewCell {
         fromLabelBackView.snp.makeConstraints {
             $0.leading.equalTo(titleLabel.snp.trailing).offset(6)
             $0.centerY.equalTo(titleLabel.snp.centerY)
-            $0.width.equalTo(33)
-            $0.height.equalTo(20)
         }
         
         fromLabelBackView.addSubview(fromLabel)
         fromLabel.snp.makeConstraints {
-            $0.center.equalToSuperview()
+            $0.top.equalToSuperview().inset(3)
+            $0.bottom.equalToSuperview().inset(2)
+            $0.horizontalEdges.equalToSuperview().inset(4)
         }
         
         contentView.addSubview(contentLabel)
@@ -89,5 +85,15 @@ final class MyReflectionDetailTableViewCell: BaseTableViewCell {
              $0.width.equalTo(12)
              $0.height.equalTo(20)
          }
+    }
+    
+    // MARK: - func
+    
+    func configLabel(title: String, fromLabel: String, content: String) {
+        DispatchQueue.main.async {
+            self.titleLabel.text = title
+            self.fromLabel.text = fromLabel
+            self.contentLabel.text = content
+        }
     }
 }

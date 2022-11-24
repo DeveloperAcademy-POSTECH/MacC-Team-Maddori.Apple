@@ -56,11 +56,15 @@ final class AlertViewController: BaseViewController {
     var type: AlertType
     var teamName: String? = nil
     var navigation: UINavigationController? = nil
+    var reflectionId: Int
+    var feedbackId: Int
     
-    init(type: AlertType, teamName: String?, navigation: UINavigationController?, teamId: Int? = nil) {
+    init(type: AlertType, teamName: String?, navigation: UINavigationController?, reflectionId: Int = 0, feedbackId: Int = 0) {
         self.type = type
         self.teamName = teamName
         self.navigation = navigation
+        self.reflectionId = reflectionId
+        self.feedbackId = feedbackId
         super.init()
     }
     
@@ -215,12 +219,9 @@ final class AlertViewController: BaseViewController {
     private func didTappedActionButton(_ type: AlertType) {
         switch type {
         case .delete:
-            // FIXME: - 피드백 삭제 api 연결
-            print("Delete")
+            self.deleteFeedBack(type: .deleteFeedBack(reflectionId: self.reflectionId, feedBackId: self.feedbackId))
         case .join:
-            // FIXME: - 팀 합류 api 연결
-            self.pushHomeViewController()
-            dispatchJoinTeam(type: .dispatchJoinTeam(teamId: UserDefaultStorage.teamId, userId: UserDefaultStorage.userID))
+            self.dispatchUserLogin(type: .dispatchLogin(LoginDTO(username: UserDefaultStorage.nickname)))
         }
         self.dismiss(animated: true) {
             self.navigation?.popViewController(animated: true)
@@ -255,6 +256,28 @@ final class AlertViewController: BaseViewController {
         ).responseDecodable(of: BaseModel<VoidModel>.self) { json in
             if let data = json.value {
                 dump(data)
+            }
+        }
+    }
+    
+    private func dispatchUserLogin(type: SetupEndPoint<LoginDTO>) {
+        AF.request(type.address,
+                   method: type.method,
+                   parameters: type.body,
+                   encoder: JSONParameterEncoder.default
+        ).responseDecodable(of: BaseModel<JoimMemberResponse>.self) { [weak self] json in
+            guard let self else { return }
+            if let json = json.value {
+                dump(json)
+                guard let userId = json.detail?.id
+                else { return }
+                UserDefaultHandler.setUserId(userId: userId)
+                self.dispatchJoinTeam(type: .dispatchJoinTeam(teamId: UserDefaultStorage.teamId))
+            } else {
+                DispatchQueue.main.async {
+                    // FIXME: - UXWriting 필요
+                    self.makeAlert(title: "에러", message: "중복된 닉네임입니다람쥐")
+                }
             }
         }
     }

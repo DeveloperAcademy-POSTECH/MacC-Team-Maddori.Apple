@@ -11,7 +11,13 @@ import Alamofire
 import SnapKit
 
 final class MyFeedbackViewController: BaseViewController {
-    private let memberList: [String] = Member.getMemberListExceptUser()
+    var selectedIndex: Int = 0
+    private var memberList: [MemberResponse] = [] {
+        didSet {
+            memberCollectionView.reloadData()
+            fetchCertainMemberFeedBack(type: .fetchCertainMemberFeedBack(memberId: memberList[selectedIndex].userId ?? 0))
+        }
+    }
     
     private enum Size {
         static let horizontalPadding: CGFloat = 24
@@ -54,19 +60,26 @@ final class MyFeedbackViewController: BaseViewController {
     }()
     private lazy var feedbackCollectionView: MyFeedbackCollectionView = {
         let collectionView = MyFeedbackCollectionView()
-        // FIXME: - index로 해당 배열값 넘겨주기
-        collectionView.didTappedCell = { [weak self] index in
-            self?.navigationController?.pushViewController(MyFeedbackDetailViewController(), animated: true)
+        collectionView.didTappedCell = { [weak self] data in
+            let data = FeedbackFromMeModel(reflectionId: data.reflectionId,
+                                           feedbackId: data.feedbackId,
+                                           nickname: data.nickname,
+                                           feedbackType: data.feedbackType,
+                                           keyword: data.keyword,
+                                           info: data.info,
+                                           start: data.start
+            )
+            self?.navigationController?.pushViewController(MyFeedbackDetailViewController(feedbackDetail: data), animated: true)
         }
         return collectionView
     }()
     
     // MARK: - life cycle
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        fetchCurrentTeamMember(type: .fetchCurrentTeamMember(teamId: 1, userId: 1))
-        fetchCertainMemberFeedBack(type: .fetchCertainMemberFeedBack(teamId: 1, memberId: 2, userId: 1))
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        fetchCurrentTeamMember(type: .fetchCurrentTeamMember)
+        tabBarController?.tabBar.isHidden = false
     }
     
     override func render() {
@@ -103,9 +116,14 @@ final class MyFeedbackViewController: BaseViewController {
         AF.request(type.address,
                    method: type.method,
                    headers: type.headers
-        ).responseDecodable(of: BaseModel<TeamMembersResponse>.self) { json in
+        ).responseDecodable(of: BaseModel<TeamMembersResponse>.self) { [weak self] json in
             if let data = json.value {
-                // FIXME: - memberList에 데이터 넣기
+                guard let members = json.value?.detail?.members else { return }
+                members.forEach {
+                    if $0.userName != UserDefaultStorage.nickname {
+                        self?.memberList.append($0)
+                    }
+                }
                 dump(data)
             }
         }
@@ -115,9 +133,10 @@ final class MyFeedbackViewController: BaseViewController {
         AF.request(type.address,
                    method: .get,
                    headers: type.headers
-        ).responseDecodable(of: BaseModel<FeedBackInfoResponse>.self) { json in
+        ).responseDecodable(of: BaseModel<FeedBackInfoResponse>.self) { [weak self] json in
             if let data = json.value {
-                // FIXME: - collectionView에 데이터 전달
+                guard let detail = data.detail else { return }
+                self?.feedbackCollectionView.feedbackInfo = detail
                 dump(data)
             }
         }
@@ -126,7 +145,13 @@ final class MyFeedbackViewController: BaseViewController {
 
 // MARK: - extension
 
-extension MyFeedbackViewController: UICollectionViewDelegate { }
+extension MyFeedbackViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let memberId = memberList[indexPath.item].userId else { return }
+        fetchCertainMemberFeedBack(type: .fetchCertainMemberFeedBack(memberId: memberId))
+        selectedIndex = indexPath.item
+    }
+}
 
 extension MyFeedbackViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -137,8 +162,8 @@ extension MyFeedbackViewController: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyFeedbackMemberCollectionViewCell.className, for: indexPath) as? MyFeedbackMemberCollectionViewCell else {
             return UICollectionViewCell()
         }
-        cell.setMemberName(name: memberList[indexPath.item])
-        if indexPath.item == 0 {
+        cell.setMemberName(name: memberList[indexPath.item].userName ?? "")
+        if indexPath.item == selectedIndex {
             cell.isSelected = true
             collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .init())
         }

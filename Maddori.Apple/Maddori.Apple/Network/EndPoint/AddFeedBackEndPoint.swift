@@ -9,16 +9,16 @@ import Foundation
 
 import Alamofire
 
-enum AddFeedBackEndPoint<T: Encodable>: EndPointable {
-    case fetchCurrentTeamMember(teamId: Int, userId: Int)
-    case dispatchAddFeedBack(teamId: Int, reflectionId: Int, userId: Int, T)
+enum AddFeedBackEndPoint<T: Encodable> {
+    case fetchCurrentTeamMember
+    case dispatchAddFeedBack(reflectionId: Int, T)
     
     var address: String {
         switch self {
-        case .fetchCurrentTeamMember(let teamId, _):
-            return "\(UrlLiteral.baseUrl)/teams/\(teamId)/members"
-        case .dispatchAddFeedBack(let teamId, let reflectionId, _, _):
-            return "\(UrlLiteral.baseUrl)/teams/\(teamId)/reflections/\(reflectionId)/feedbacks"
+        case .fetchCurrentTeamMember:
+            return "\(UrlLiteral.baseUrl)/teams/\(UserDefaultStorage.teamId)/members"
+        case .dispatchAddFeedBack(let reflectionId, _):
+            return "\(UrlLiteral.baseUrl)/teams/\(UserDefaultStorage.teamId)/reflections/\(reflectionId)/feedbacks"
         }
     }
 
@@ -35,18 +35,18 @@ enum AddFeedBackEndPoint<T: Encodable>: EndPointable {
         switch self {
         case .fetchCurrentTeamMember:
             return nil
-        case .dispatchAddFeedBack(_, _, _, let body):
+        case .dispatchAddFeedBack(_, let body):
             return body
         }
     }
     
     var headers: HTTPHeaders? {
         switch self {
-        case .fetchCurrentTeamMember(_, let userId):
-            let headers = ["user_id": "\(userId)"]
+        case .fetchCurrentTeamMember:
+            let headers = ["user_id": "\(UserDefaultStorage.userId)"]
             return HTTPHeaders(headers)
-        case .dispatchAddFeedBack(_, _, let userId, _):
-            let headers = ["user_id": "\(userId)"]
+        case .dispatchAddFeedBack:
+            let headers = ["user_id": "\(UserDefaultStorage.userId)"]
             return HTTPHeaders(headers)
         }
     }

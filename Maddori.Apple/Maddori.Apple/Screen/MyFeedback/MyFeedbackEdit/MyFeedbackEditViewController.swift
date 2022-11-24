@@ -11,8 +11,8 @@ import Alamofire
 import SnapKit
 
 final class MyFeedbackEditViewController: AddFeedbackViewController {
-    
-    private let model = FeedbackFromMeModel.mockData
+    private var feedbackType: FeedBackDTO = .continueType
+    private let feedbackDetail: FeedbackFromMeModel
     private var isFeedbackTypeChanged: Bool = false {
         didSet {
             if !(isTextInputChanged() || isFeedbackTypeChanged) {
@@ -25,6 +25,13 @@ final class MyFeedbackEditViewController: AddFeedbackViewController {
     
     // MARK: - life cycle
     
+    init(feedbackDetail: FeedbackFromMeModel) {
+        self.feedbackDetail = feedbackDetail
+        super.init(to: feedbackDetail.nickname, toUserId: 0, reflectionId: feedbackDetail.reflectionId)
+    }
+    
+    required init?(coder: NSCoder) { nil }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupFeedbackType()
@@ -33,13 +40,13 @@ final class MyFeedbackEditViewController: AddFeedbackViewController {
         setupFeedbackStart()
         hideEditFeedbackUntilLabel()
         detectChangeOfFeedbackType()
-        setupNavigationRightItem()
+        setupNavigationLeftItem()
     }
     
     // MARK: - func
     
     private func setupFeedbackType() {
-        switch model.feedbackType {
+        switch feedbackDetail.feedbackType {
         case .continueType:
             super.feedbackTypeButtonView.touchUpToSelectType(.continueType)
         case .stopType:
@@ -48,22 +55,29 @@ final class MyFeedbackEditViewController: AddFeedbackViewController {
     }
     
     private func setupFeedbackKeyword() {
-        super.feedbackKeywordTextField.text = model.keyword
-        super.setCounter(count: model.keyword.count)
+        super.feedbackKeywordTextField.text = feedbackDetail.keyword
+        super.setCounter(count: feedbackDetail.keyword.count)
     }
     
     private func setupFeedbackContent() {
-        super.feedbackContentTextView.text = model.info
+        super.feedbackContentTextView.text = feedbackDetail.info
         super.feedbackContentTextView.textColor = .black100
     }
     
     private func setupFeedbackStart() {
-        if let start = model.start {
+        if let start = feedbackDetail.start {
             super.feedbackStartSwitch.isOn = true
             super.feedbackStartTextViewLabel.isHidden = false
             super.feedbackStartTextView.isHidden = false
             super.feedbackStartTextView.text = start
             super.feedbackStartTextView.textColor = .black100
+        }
+        super.feedbackStartSwitchBottomEqualToSuperView?.constraint.deactivate()
+        super.feedbackStartTextView.snp.remakeConstraints {
+            $0.top.equalTo(feedbackStartTextViewLabel.snp.bottom).offset(SizeLiteral.labelComponentPadding)
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.height.equalTo(150)
+            $0.bottom.equalToSuperview().inset(80)
         }
     }
     
@@ -77,9 +91,9 @@ final class MyFeedbackEditViewController: AddFeedbackViewController {
     }
     
     private func isTextInputChanged() -> Bool {
-        if super.feedbackContentTextView.text == model.info &&
-            super.feedbackStartTextView.text == model.start ?? TextLiteral.addFeedbackViewControllerStartTextViewPlaceholder &&
-            super.feedbackKeywordTextField.text == model.keyword {
+        if super.feedbackContentTextView.text == feedbackDetail.info &&
+            super.feedbackStartTextView.text == feedbackDetail.start ?? TextLiteral.addFeedbackViewControllerStartTextViewPlaceholder &&
+            super.feedbackKeywordTextField.text == feedbackDetail.keyword {
             return false
         } else {
             return true
@@ -87,24 +101,40 @@ final class MyFeedbackEditViewController: AddFeedbackViewController {
     }
     
     private func detectChangeOfFeedbackType() {
-        super.feedbackTypeButtonView.changeFeedbackType = { value in
-            if value == self.model.feedbackType {
-                self.isFeedbackTypeChanged = false
+        super.feedbackTypeButtonView.changeFeedbackType = { [weak self] type in
+            guard let feedbackType = FeedBackDTO.init(rawValue: type.rawValue) else { return }
+            if type == self?.feedbackDetail.feedbackType {
+                self?.isFeedbackTypeChanged = false
+                self?.feedbackType = feedbackType
             } else {
-                self.isFeedbackTypeChanged = true
+                self?.isFeedbackTypeChanged = true
+                self?.feedbackType = feedbackType
             }
         }
     }
     
-    private func setupNavigationRightItem() {
-        super.closeButton.isHidden = true
+    private func setupNavigationLeftItem() {
+        super.backButton.isHidden = true
+    }
+    
+    override func didTappedDoneButton() {
+        let dto = EditFeedBackDTO(type: feedbackType,
+                                  keyword: super.feedbackKeywordTextField.text ?? "",
+                                  content: super.feedbackContentTextView.text ?? "",
+                                  start_content: super.feedbackStartSwitch.isOn ? super.feedbackStartTextView.text ?? "" : nil)
+        putEditFeedBack(type: .putEditFeedBack(reflectionId: feedbackDetail.reflectionId, feedBackId: feedbackDetail.feedbackId, dto))
+    }
+    
+    override func didTappedCloseButton() {
+        // FIXME: - X 버튼이 아닌 뒤로가기 버튼이라던지 수정이 필요함
+        navigationController?.popViewController(animated: true)
     }
     
     // MARK: - selector
     
     @objc override func willHideKeyboard(notification: NSNotification) {
         UIView.animate(withDuration: 0.2, animations: {
-            super.feedbackDoneButton.transform = .identity
+            super.feedbackDoneButtonView.transform = .identity
         })
         super.editFeedbackUntilLabel.isHidden = true
     }
@@ -118,8 +148,8 @@ final class MyFeedbackEditViewController: AddFeedbackViewController {
                    encoder: JSONParameterEncoder.default,
                    headers: type.headers
         ).responseDecodable(of: BaseModel<EditFeedBackResponse>.self) { json in
-            if let data = json.value {
-                dump(data)
+            if let _ = json.value {
+                self.navigationController?.popToRootViewController(animated: true)
             }
         }
     }
@@ -134,5 +164,9 @@ final class MyFeedbackEditViewController: AddFeedbackViewController {
     
     override func textViewDidChangeSelection(_ textView: UITextView) {
         super.feedbackDoneButton.isDisabled = !(isTextInputChanged() || isFeedbackTypeChanged)
+    }
+    
+    override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
     }
 }

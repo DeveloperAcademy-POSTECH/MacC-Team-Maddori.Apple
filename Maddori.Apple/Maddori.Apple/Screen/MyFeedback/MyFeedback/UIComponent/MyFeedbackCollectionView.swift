@@ -10,9 +10,12 @@ import UIKit
 import SnapKit
 
 final class MyFeedbackCollectionView: UIView {
-    var didTappedCell: ((Int) -> ())?
-    private let mockData = FeedBack.mockData
-//    private let mockData: [FeedBack] = []
+    var didTappedCell: ((FeedbackFromMeModel) -> ())?
+    var feedbackInfo: FeedBackInfoResponse? {
+        didSet {
+            feedbackCollectionView.reloadData()
+        }
+    }
     private enum Size {
         static let horizontalPadding: CGFloat = 24
         static let topSpacing: CGFloat = 24
@@ -42,7 +45,7 @@ final class MyFeedbackCollectionView: UIView {
         collectionView.dataSource = self
         collectionView.register(MyFeedbackHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: MyFeedbackHeaderView.className)
         collectionView.register(MyFeedbackCollectionViewCell.self, forCellWithReuseIdentifier: MyFeedbackCollectionViewCell.className)
-        collectionView.register(EmptyFeedbackView.self, forCellWithReuseIdentifier: EmptyFeedbackView.className)
+        collectionView.register(EmptyCollectionFeedbackView.self, forCellWithReuseIdentifier: EmptyCollectionFeedbackView.className)
         return collectionView
     }()
     
@@ -63,22 +66,27 @@ final class MyFeedbackCollectionView: UIView {
     }
 }
 
-    // MARK: - extension
+// MARK: - extension
 
 extension MyFeedbackCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: MyFeedbackHeaderView.className, for: indexPath) as? MyFeedbackHeaderView else { return UICollectionReusableView() }
-        if !mockData.isEmpty {
+        if let feedbackInfo {
             if indexPath.section == 0 {
                 header.setDividerHidden(true)
             } else {
                 header.setDividerHidden(false)
             }
-            let hasContinue = mockData.contains(where: { $0.type == .continueType} )
+            let hasContinue = !feedbackInfo.continueArray.isEmpty
+            let hasOnlyStop = !feedbackInfo.stopArray.isEmpty
             if hasContinue {
+                header.isHidden = false
                 header.setCssLabelText(with: indexPath.section)
-            } else {
+            } else if hasOnlyStop {
+                header.isHidden = false
                 header.setCssLabelText(with: 1)
+            } else {
+                header.isHidden = true
             }
             switch kind {
             case UICollectionView.elementKindSectionHeader:
@@ -91,55 +99,115 @@ extension MyFeedbackCollectionView: UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        didTappedCell?(indexPath.item)
+        guard let data = feedbackInfo else { return }
+        if !(data.continueArray.isEmpty && data.stopArray.isEmpty) {
+            if collectionView.numberOfSections == 2 {
+                let reflectionId = feedbackInfo?.reflectionId ?? 0
+                let feedbackId = indexPath.section == 0
+                ? feedbackInfo?.continueArray[indexPath.item].id ?? 0
+                : feedbackInfo?.stopArray[indexPath.item].id ?? 0
+                let nickName = feedbackInfo?.toUsername ?? ""
+                let keyword = indexPath.section == 0
+                ? feedbackInfo?.continueArray[indexPath.item].keyword ?? ""
+                : feedbackInfo?.stopArray[indexPath.item].keyword ?? ""
+                let info = indexPath.section == 0
+                ? feedbackInfo?.continueArray[indexPath.item].content ?? ""
+                : feedbackInfo?.stopArray[indexPath.item].content ?? ""
+                let start = indexPath.section == 0
+                ? feedbackInfo?.continueArray[indexPath.item].startContent
+                : feedbackInfo?.stopArray[indexPath.item].startContent
+                
+                let data = FeedbackFromMeModel(reflectionId: reflectionId,
+                                               feedbackId: feedbackId,
+                                               nickname: nickName,
+                                               feedbackType: indexPath.section == 0 ? .continueType : .stopType,
+                                               keyword: keyword,
+                                               info: info,
+                                               start: start)
+                didTappedCell?(data)
+            } else {
+                if let continueArray = feedbackInfo?.continueArray,
+                   let stopArray = feedbackInfo?.stopArray {
+                    if !continueArray.isEmpty {
+                        let data = FeedbackFromMeModel(reflectionId: feedbackInfo?.reflectionId ?? 0,
+                                                       feedbackId: continueArray[indexPath.item].id ?? 0,
+                                                       nickname: feedbackInfo?.toUsername ?? "",
+                                                       feedbackType: .continueType,
+                                                       keyword: continueArray[indexPath.item].keyword ?? "",
+                                                       info: continueArray[indexPath.item].content ?? "",
+                                                       start: continueArray[indexPath.item].startContent)
+                        didTappedCell?(data)
+                    } else {
+                        let data = FeedbackFromMeModel(reflectionId: feedbackInfo?.reflectionId ?? 0,
+                                                       feedbackId: stopArray[indexPath.item].id ?? 0,
+                                                       nickname: feedbackInfo?.toUsername ?? "",
+                                                       feedbackType: .stopType,
+                                                       keyword: stopArray[indexPath.item].keyword ?? "",
+                                                       info: stopArray[indexPath.item].content ?? "",
+                                                       start: stopArray[indexPath.item].startContent)
+                        didTappedCell?(data)
+                    }
+                }
+            }
+        }
     }
 }
 extension MyFeedbackCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if mockData.isEmpty {
+        guard let data = feedbackInfo else { return 0 }
+        if data.continueArray.isEmpty && data.stopArray.isEmpty {
             return 1
         }
-        let hasContinue = mockData.contains(where: { $0.type == .continueType } )
-        if hasContinue {
-            return mockData.filter { $0.type == FeedBackType.allCases[section] }.count
+        let hasContinue = !data.continueArray.isEmpty
+        let hasBoth = hasContinue && !data.stopArray.isEmpty
+        if hasBoth {
+            if section == 0 {
+                return data.continueArray.count
+            } else {
+                return data.stopArray.count
+            }
+        } else if hasContinue {
+            return data.continueArray.count
         } else {
-            return mockData.filter { $0.type == .stopType }.count
+            return data.stopArray.count
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if mockData.isEmpty {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EmptyFeedbackView.className, for: indexPath) as? EmptyFeedbackView else { return UICollectionViewCell() }
+        guard let data = feedbackInfo else { return UICollectionViewCell() }
+        if data.continueArray.isEmpty && data.stopArray.isEmpty {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EmptyCollectionFeedbackView.className, for: indexPath) as? EmptyCollectionFeedbackView else { return UICollectionViewCell() }
             cell.emptyFeedbackLabel.text = TextLiteral.emptyViewMyBox
             return cell
+        } else {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyFeedbackCollectionViewCell.className, for: indexPath) as? MyFeedbackCollectionViewCell else { return UICollectionViewCell() }
+            guard let data = feedbackInfo else { return UICollectionViewCell() }
+            let hasContinue = !data.continueArray.isEmpty
+            switch indexPath.section {
+            case 0:
+                if hasContinue {
+                    cell.setCellLabel(title: data.continueArray[indexPath.item].keyword ?? "", content: data.continueArray[indexPath.item].content ?? "")
+                } else {
+                    cell.setCellLabel(title: data.stopArray[indexPath.item].keyword ?? "", content: data.stopArray[indexPath.item].content ?? "")
+                }
+                if indexPath.item == data.continueArray.count - 1 {
+                    cell.setDividerHidden(true)
+                }
+            case 1:
+                cell.setCellLabel(title: data.stopArray[indexPath.item].keyword ?? "", content: data.stopArray[indexPath.item].content ?? "")
+                if indexPath.item == data.stopArray.count - 1 {
+                    cell.setDividerHidden(true)
+                }
+            default:
+                break
+            }
+            return cell
         }
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyFeedbackCollectionViewCell.className, for: indexPath) as? MyFeedbackCollectionViewCell else { return UICollectionViewCell() }
-        var data: [FeedBack] = []
-        let hasContinue = mockData.contains(where: { $0.type == .continueType} )
-        switch indexPath.section {
-        case 0:
-            if hasContinue {
-                data = mockData.filter { $0.type == .continueType }
-            } else {
-                data = mockData.filter { $0.type == .stopType }
-            }
-            if indexPath.item == data.count - 1 {
-                cell.setDividerHidden(true)
-            }
-        case 1:
-            data = mockData.filter { $0.type == .stopType }
-            if indexPath.item == data.count - 1 {
-                cell.setDividerHidden(true)
-            }
-        default:
-            break
-        }
-        cell.setCellLabel(title: data[indexPath.item].title, content: data[indexPath.item].content)
-        return cell
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        if mockData.contains(where: { $0.type == .continueType }) && mockData.contains(where: { $0.type == .stopType }) {
+        guard let data = feedbackInfo else { return 1 }
+        if !data.continueArray.isEmpty && !data.stopArray.isEmpty {
             return 2
         } else {
             return 1
@@ -153,26 +221,29 @@ extension MyFeedbackCollectionView: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if mockData.isEmpty {
-            return CGSize(width: 300, height: 400)
-        }
-        var data: [FeedBack] = []
-        let hasContinue = mockData.contains(where: { $0.type == .continueType} )
-        if hasContinue {
-            if indexPath.section == 0 {
-                data = mockData.filter { $0.type == .continueType }
+        guard let data = feedbackInfo else { return .zero }
+        if data.continueArray.isEmpty && data.stopArray.isEmpty {
+            return CGSize(width: 300, height: 300)
+        } else {
+            var feedbackList: [String] = []
+            guard let data = feedbackInfo else { return .zero }
+            let hasContinue = !data.continueArray.isEmpty
+            if hasContinue {
+                if indexPath.section == 0 {
+                    feedbackList = feedbackInfo?.continueArray.map { $0.content ?? "" } ?? []
+                } else {
+                    feedbackList = feedbackInfo?.stopArray.map { $0.content ?? "" } ?? []
+                }
             } else {
-                data = mockData.filter { $0.type == .stopType }
+                feedbackList = feedbackInfo?.stopArray.map { $0.content ?? "" } ?? []
             }
-        } else {
-            data = mockData.filter { $0.type == .stopType }
-        }
-        let cellHeight = UILabel.textSize(font: .body2, text: data[indexPath.item].content, width: Size.cellContentWidth - 24, height: 0).height
-        let isOneTextLine = cellHeight < 18
-        if isOneTextLine {
-            return CGSize(width: Size.cellWidth, height: Size.resizingTextLineOneHeight)
-        } else {
-            return CGSize(width: Size.cellWidth, height: Size.resizingTextLineTwoHeight)
+            let cellHeight = UILabel.textSize(font: .body2, text: feedbackList[indexPath.item], width: Size.cellContentWidth - 24, height: 0).height
+            let isOneTextLine = cellHeight < 18
+            if isOneTextLine {
+                return CGSize(width: Size.cellWidth, height: Size.resizingTextLineOneHeight)
+            } else {
+                return CGSize(width: Size.cellWidth, height: Size.resizingTextLineTwoHeight)
+            }
         }
     }
 }

@@ -41,9 +41,18 @@ enum TextLiteral {
     static let setNicknameViewControllerTitleLabel = "키고에서 사용할 \n닉네임을 입력해주세요"
     static let setNicknameViewControllerNicknameTextFieldPlaceHolder = "예) 진저, 호야, 성민"
     
+    // MARK: - HomeViewController
+    
+    static let homeViewControllerEmptyDescriptionLabel = "아직 회고 일정이 정해지지 않았습니다"
+    static let homeViewControllerCollectionViewEmtpyText0 = "첫 번째"
+    static let homeViewControllerCollectionViewEmtpyText1 = "키워드를"
+    static let homeViewControllerCollectionViewEmtpyText2 = "📝"
+    static let homeViewControllerCollectionViewEmtpyText3 = "작성해보세요"
+    static let homeViewControllerCollectionViewEmtpyText4 = "✚"
+    
     // MARK: - AddFeedbackViewController
     
-    static let addFeedbackViewControllerTitleLabel = "에게 피드백 보내기"
+    static let addFeedbackViewControllerTitleLabel = "에게 피드백 주기"
     static let addFeedbackViewControllerFeedbackKeywordTextFieldPlaceholder = "피드백을 키워드로 작성해주세요"
     static let addFeedbackViewControllerFeedbackContentTextViewPlaceholder = "키워드에 대한 자세한 내용을 작성해주세요"
     static let addFeedbackViewControllerDoneButtonTitle = "완료"
@@ -104,6 +113,7 @@ enum TextLiteral {
     static let emptyViewInProgressMyRetrospective = "팀원에게 받은 피드백이 없습니다"
     static let emptyViewInProgressOthersRetrospectiveSelf = "내가 보낸 피드백이 없습니다"
     static let emptyViewInProgressOthersRetrospectiveOthers = "팀원들이 보낸 피드백이 없습니다"
+    static let emptyViewMyReflectionDetail = "팀원에게 받은 피드백이 없습니다"
     
     // MARK: - EmptyFeedbackKeyword
     
@@ -152,4 +162,9 @@ enum TextLiteral {
     
     static let warningText: String = "아직 회고 시간이 아닙니다"
     static let completeText: String = "초대코드가 복사되었습니다"
+    
+    // MARK: - JoinReflectionButton
+    
+    static let joinReflectionButtonStatusText: String = "회고가 시작되었습니다!"
+    static let joinReflectionTouchToEnterLabel: String = "터치하여 회고에 참여해주세요"
 }
