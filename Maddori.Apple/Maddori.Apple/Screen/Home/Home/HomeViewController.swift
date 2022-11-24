@@ -393,11 +393,11 @@ final class HomeViewController: BaseViewController {
                             self.showPlanLabelButton()
                             self.restoreView()
                         case .Before:
-                            let reflectionDate = reflectionDetail?.reflectionDate?.formatDateString(to: "MM월 dd일 a h시 mm분")
+                            let reflectionDate = reflectionDetail?.reflectionDate?.formatDateString(to: "M월 d일 a h시 m분")
                             self.descriptionLabel.text = "다음 회고는 \(reflectionDate ?? String(describing: Date()))입니다"
                             self.hidePlanLabelButton()
                         case .Progressing:
-                            let reflectionDate = reflectionDetail?.reflectionDate?.formatDateString(to: "MM월 dd일 a h시 mm분")
+                            let reflectionDate = reflectionDetail?.reflectionDate?.formatDateString(to: "M월 d일 a h시 m분")
                             self.descriptionLabel.text = "다음 회고는 \(reflectionDate ?? String(describing: Date()))입니다"
                             self.addFeedbackButton.isHidden = true
                             self.hidePlanLabelButton()

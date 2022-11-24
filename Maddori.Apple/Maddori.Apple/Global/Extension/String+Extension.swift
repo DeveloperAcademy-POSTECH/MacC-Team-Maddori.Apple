@@ -17,6 +17,11 @@ extension String {
         dateToStringFormatter.locale = Locale(identifier:"ko_KR")
         dateToStringFormatter.dateFormat = format
         
-        return dateToStringFormatter.string(from: date)
+        var returnDateString = dateToStringFormatter.string(from: date)
+        if returnDateString.contains(" 0분") {
+            returnDateString = dateToStringFormatter.string(from: date).replacingOccurrences(of: " 0분", with: "")
+        }
+        
+        return returnDateString
     }
 }
