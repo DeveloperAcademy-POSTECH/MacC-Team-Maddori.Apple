@@ -11,7 +11,7 @@ struct JoinTeamResponse: Decodable {
     // MARK: - userJoinTeam
     let admin: Bool?
     let id: Int?
-    let userId: String?
+    let userId: Int?
     let teamId: String?
     
     enum CodingKeys: String, CodingKey {

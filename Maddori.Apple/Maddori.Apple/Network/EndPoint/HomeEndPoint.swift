@@ -41,10 +41,16 @@ enum HomeEndPoint<T: Encodable>: EndPointable {
     var headers: HTTPHeaders? {
         switch self {
         case .fetchCertainTeamDetail:
-            let headers = ["user_id": "\(UserDefaultStorage.userId)"]
+            let headers = [
+                "access_token": "\(UserDefaultStorage.accessToken)",
+                "refresh_token": "\(UserDefaultStorage.refreshToken)"
+            ]
             return HTTPHeaders(headers)
         case .fetchCurrentReflectionDetail:
-            let headers = ["user_id": "\(UserDefaultStorage.userId)"]
+            let headers = [
+                "access_token": "\(UserDefaultStorage.accessToken)",
+                "refresh_token": "\(UserDefaultStorage.refreshToken)"
+            ]
             return HTTPHeaders(headers)
         }
     }

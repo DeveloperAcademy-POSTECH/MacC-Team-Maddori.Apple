@@ -60,7 +60,7 @@ final class MyReflectionViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        dispatchAllReflection(type: .fetchPastReflectionList(teamId: UserDefaultStorage.teamId, userId: UserDefaultStorage.userId))
+        dispatchAllReflection(type: .fetchPastReflectionList(teamId: UserDefaultStorage.teamId))
     }
     
     override func render() {
@@ -164,7 +164,7 @@ extension MyReflectionViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TotalReflectionCell.className, for: indexPath) as? TotalReflectionCell else { return UICollectionViewCell() }
         guard let reflectionName = totalReflection[indexPath.item].reflectionName,
-              let date = totalReflection[indexPath.item].date else { return UICollectionViewCell() }
+              let date = totalReflection[indexPath.item].date?.formatDateString(to: "Y. M. d. (E)") else { return UICollectionViewCell() }
         
         cell.configLabel(text: reflectionName, date: date)
         return cell
