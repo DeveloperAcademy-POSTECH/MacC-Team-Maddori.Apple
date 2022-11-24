@@ -62,7 +62,11 @@ enum SetupEndPoint<T: Encodable>: EndPointable {
     var headers: HTTPHeaders? {
         switch self {
         case .dispatchLogin:
-            return nil
+            let headers = [
+                "access_token": "\(UserDefaultStorage.accessToken)",
+                "refresh_token": "\(UserDefaultStorage.refreshToken)"
+            ]
+            return HTTPHeaders(headers)
         case .dispatchCreateTeam:
             let headers = [
                 "access_token": "\(UserDefaultStorage.accessToken)",

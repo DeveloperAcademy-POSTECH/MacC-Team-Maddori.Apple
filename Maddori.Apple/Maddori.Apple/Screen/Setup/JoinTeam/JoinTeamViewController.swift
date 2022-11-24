@@ -136,6 +136,8 @@ final class JoinTeamViewController: BaseTextFieldViewController {
                       let teamName = json.detail?.teamName
                 else { return }
                 UserDefaultHandler.setTeamId(teamId: teamId)
+                print("fetchCertainTeam")
+                dump(json)
                 self.presentCertainTeamViewController(teamName: teamName, teamId: UserDefaultStorage.teamId)
             } else {
                 DispatchQueue.main.async {

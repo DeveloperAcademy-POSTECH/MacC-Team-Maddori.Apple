@@ -241,6 +241,7 @@ final class AlertViewController: BaseViewController {
                    headers: type.headers
         ).responseDecodable(of: BaseModel<JoinTeamResponse>.self) { json in
             if let json = json.value {
+                print("---")
                 dump(json)
                 DispatchQueue.main.async {
                     self.pushHomeViewController()
@@ -265,13 +266,16 @@ final class AlertViewController: BaseViewController {
                    method: type.method,
                    parameters: type.body,
                    encoder: JSONParameterEncoder.default
-        ).responseDecodable(of: BaseModel<JoimMemberResponse>.self) { [weak self] json in
+        ).responseDecodable(of: BaseModel<JoinMemberResponse>.self) { [weak self] json in
             guard let self else { return }
+            print("----------------")
+            dump(json)
             if let json = json.value {
+                print("---")
                 dump(json)
-                guard let userId = json.detail?.id
-                else { return }
-                UserDefaultHandler.setUserId(userId: userId)
+//                guard let userId = json.detail?.id
+//                else { return }
+//                UserDefaultHandler.setUserId(userId: userId)
                 self.dispatchJoinTeam(type: .dispatchJoinTeam(teamId: UserDefaultStorage.teamId))
             } else {
                 DispatchQueue.main.async {
