@@ -353,7 +353,7 @@ class AddFeedbackViewController: BaseViewController {
         self.dismiss(animated: true)
     }
     
-    private func didTappedSwitch() {
+    func didTappedSwitch() {
         feedbackStartTextViewLabel.isHidden.toggle()
         feedbackStartTextView.isHidden.toggle()
         

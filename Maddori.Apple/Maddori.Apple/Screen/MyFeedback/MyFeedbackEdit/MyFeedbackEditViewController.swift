@@ -11,11 +11,20 @@ import Alamofire
 import SnapKit
 
 final class MyFeedbackEditViewController: AddFeedbackViewController {
-    private var feedbackType: FeedBackDTO = .continueType
+    private var feedbackType: FeedBackDTO
     private let feedbackDetail: FeedbackFromMeModel
+    private var isStartSwitchToggleChanged: Bool = false {
+        didSet {
+            if !(isTextInputChanged() || isFeedbackTypeChanged || isStartSwitchToggleChanged) {
+                super.feedbackDoneButton.isDisabled = true
+            } else {
+                super.feedbackDoneButton.isDisabled = false
+            }
+        }
+    }
     private var isFeedbackTypeChanged: Bool = false {
         didSet {
-            if !(isTextInputChanged() || isFeedbackTypeChanged) {
+            if !(isTextInputChanged() || isFeedbackTypeChanged || isStartSwitchToggleChanged) {
                 super.feedbackDoneButton.isDisabled = true
             } else {
                 super.feedbackDoneButton.isDisabled = false
@@ -27,6 +36,7 @@ final class MyFeedbackEditViewController: AddFeedbackViewController {
     
     init(feedbackDetail: FeedbackFromMeModel) {
         self.feedbackDetail = feedbackDetail
+        self.feedbackType = FeedBackDTO.init(rawValue: feedbackDetail.feedbackType.rawValue) ?? .continueType
         super.init(to: feedbackDetail.nickname, toUserId: 0, reflectionId: feedbackDetail.reflectionId)
     }
     
@@ -92,9 +102,45 @@ final class MyFeedbackEditViewController: AddFeedbackViewController {
         }
     }
     
+    override func didTappedSwitch() {
+        super.didTappedSwitch()
+        if let start = self.feedbackDetail.start {
+            let hasStart = !start.isEmpty
+            if hasStart != super.feedbackStartSwitch.isOn {
+                isStartSwitchToggleChanged = true
+            } else {
+                isStartSwitchToggleChanged = false
+            }
+        } else {
+            if super.feedbackStartSwitch.isOn {
+                isStartSwitchToggleChanged = true
+            }
+        }
+    }
+    
+    private func isStartContent() -> Bool {
+        if let start = self.feedbackDetail.start {
+            if super.feedbackStartTextView.text == TextLiteral.addFeedbackViewControllerStartTextViewPlaceholder {
+                return true
+            } else {
+                if super.feedbackStartTextView.text == start {
+                    return true
+                } else {
+                    return false
+                }
+            }
+        } else {
+            if super.feedbackStartTextView.text == TextLiteral.addFeedbackViewControllerStartTextViewPlaceholder {
+                return true
+            } else {
+                return false
+            }
+        }
+    }
+    
     private func isTextInputChanged() -> Bool {
         if super.feedbackContentTextView.text == feedbackDetail.info &&
-            super.feedbackStartTextView.text == feedbackDetail.start ?? TextLiteral.addFeedbackViewControllerStartTextViewPlaceholder &&
+            isStartContent() &&
             super.feedbackKeywordTextField.text == feedbackDetail.keyword {
             return false
         } else {
