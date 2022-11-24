@@ -118,12 +118,14 @@ final class MyFeedbackViewController: BaseViewController {
                    headers: type.headers
         ).responseDecodable(of: BaseModel<TeamMembersResponse>.self) { [weak self] json in
             if let data = json.value {
+                var memberArray: [MemberResponse] = []
                 guard let members = json.value?.detail?.members else { return }
                 members.forEach {
                     if $0.userName != UserDefaultStorage.nickname {
-                        self?.memberList.append($0)
+                        memberArray.append($0)
                     }
                 }
+                self?.memberList = memberArray
                 dump(data)
             }
         }
