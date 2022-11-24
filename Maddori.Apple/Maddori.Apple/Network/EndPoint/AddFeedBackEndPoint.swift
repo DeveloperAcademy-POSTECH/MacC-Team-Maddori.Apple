@@ -5,6 +5,8 @@
 //  Created by Mingwan Choi on 2022/11/17.
 //
 
+import Foundation
+
 import Alamofire
 
 enum AddFeedBackEndPoint<T: Encodable> {

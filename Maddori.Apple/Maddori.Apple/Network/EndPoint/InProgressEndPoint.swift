@@ -5,6 +5,8 @@
 //  Created by 이성민 on 2022/11/17.
 //
 
+import Foundation
+
 import Alamofire
 
 enum InProgressEndPoint<T: Encodable>: EndPointable {
