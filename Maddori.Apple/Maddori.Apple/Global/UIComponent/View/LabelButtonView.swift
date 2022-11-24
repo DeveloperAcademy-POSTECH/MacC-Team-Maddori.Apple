@@ -30,6 +30,7 @@ final class LabelButtonView: UIView {
     private lazy var subButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle(subButtonText, for: .normal)
+        button.setTitleColor(UIColor.blue200, for: .normal)
         button.titleLabel?.font = .body2
         let action = UIAction { [weak self] _ in
             self?.buttonAction?()
