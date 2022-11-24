@@ -66,11 +66,13 @@ final class MyFeedbackEditViewController: AddFeedbackViewController {
     
     private func setupFeedbackStart() {
         if let start = feedbackDetail.start {
-            super.feedbackStartSwitch.isOn = true
-            super.feedbackStartTextViewLabel.isHidden = false
-            super.feedbackStartTextView.isHidden = false
-            super.feedbackStartTextView.text = start
-            super.feedbackStartTextView.textColor = .black100
+            if !start.isEmpty {
+                super.feedbackStartSwitch.isOn = true
+                super.feedbackStartTextViewLabel.isHidden = false
+                super.feedbackStartTextView.isHidden = false
+                super.feedbackStartTextView.text = start
+                super.feedbackStartTextView.textColor = .black100
+            }
         }
         super.feedbackStartSwitchBottomEqualToSuperView?.constraint.deactivate()
         super.feedbackStartTextView.snp.remakeConstraints {
@@ -121,7 +123,7 @@ final class MyFeedbackEditViewController: AddFeedbackViewController {
         let dto = EditFeedBackDTO(type: feedbackType,
                                   keyword: super.feedbackKeywordTextField.text ?? "",
                                   content: super.feedbackContentTextView.text ?? "",
-                                  start_content: super.feedbackStartSwitch.isOn ? super.feedbackStartTextView.text ?? "" : nil)
+                                  start_content: super.feedbackStartSwitch.isOn ? super.feedbackStartTextView.text ?? "" : "")
         putEditFeedBack(type: .putEditFeedBack(reflectionId: feedbackDetail.reflectionId, feedBackId: feedbackDetail.feedbackId, dto))
     }
     
