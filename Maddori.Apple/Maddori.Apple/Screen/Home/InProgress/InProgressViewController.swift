@@ -180,7 +180,7 @@ final class InProgressViewController: BaseViewController {
     
     // MARK: - api
     
-    private func fetchTeamAndUserFeedback(type: InProgressEndPoint) {
+    private func fetchTeamAndUserFeedback(type: InProgressEndPoint<VoidModel>) {
         AF.request(type.address,
                    method: type.method,
                    headers: type.headers

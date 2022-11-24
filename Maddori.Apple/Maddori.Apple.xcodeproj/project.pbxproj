@@ -49,6 +49,7 @@
 		3984742629264ACE00EDC139 /* MyFeedBackEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3984742529264ACE00EDC139 /* MyFeedBackEndPoint.swift */; };
 		39847428292656EB00EDC139 /* VoidModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39847427292656EB00EDC139 /* VoidModel.swift */; };
 		39A64ACE2905885F001DB020 /* StartSuggestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A64ACD2905885F001DB020 /* StartSuggestionView.swift */; };
+		39AC287F29269BC6006CFEE6 /* Endpointable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39AC287E29269BC6006CFEE6 /* Endpointable.swift */; };
 		39F1A13529125762005E3456 /* MyFeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F1A13429125762005E3456 /* MyFeedbackViewController.swift */; };
 		39F1A13C2912637E005E3456 /* MyFeedbackMemberCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F1A13B2912637E005E3456 /* MyFeedbackMemberCollectionViewCell.swift */; };
 		39F52C44292329BA00B19A77 /* BaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F52C43292329BA00B19A77 /* BaseModel.swift */; };
@@ -178,6 +179,7 @@
 		3984742529264ACE00EDC139 /* MyFeedBackEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFeedBackEndPoint.swift; sourceTree = "<group>"; };
 		39847427292656EB00EDC139 /* VoidModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoidModel.swift; sourceTree = "<group>"; };
 		39A64ACD2905885F001DB020 /* StartSuggestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartSuggestionView.swift; sourceTree = "<group>"; };
+		39AC287E29269BC6006CFEE6 /* Endpointable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpointable.swift; sourceTree = "<group>"; };
 		39F1A13429125762005E3456 /* MyFeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFeedbackViewController.swift; sourceTree = "<group>"; };
 		39F1A13B2912637E005E3456 /* MyFeedbackMemberCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFeedbackMemberCollectionViewCell.swift; sourceTree = "<group>"; };
 		39F52C43292329BA00B19A77 /* BaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseModel.swift; sourceTree = "<group>"; };
@@ -329,6 +331,7 @@
 		39257DD828F90EA900201E0B /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				39AC287D29269BBB006CFEE6 /* Protocol */,
 				397E49582924F80E004220D6 /* Storage */,
 				39F52C782924CC8600B19A77 /* EndPoint */,
 				39F52C512923307000B19A77 /* Response */,
@@ -569,6 +572,14 @@
 				39A64ACD2905885F001DB020 /* StartSuggestionView.swift */,
 			);
 			path = UIComponent;
+			sourceTree = "<group>";
+		};
+		39AC287D29269BBB006CFEE6 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				39AC287E29269BC6006CFEE6 /* Endpointable.swift */,
+			);
+			path = Protocol;
 			sourceTree = "<group>";
 		};
 		39F1A136291262B4005E3456 /* UIComponent */ = {
@@ -1023,6 +1034,7 @@
 				52294C462918F81500E81969 /* Member.swift in Sources */,
 				52988B742921EAD50044A77F /* MyReflectionFeedbackViewController.swift in Sources */,
 				395C7E1828F9912700FC2FCA /* UIButton+Extension.swift in Sources */,
+				39AC287F29269BC6006CFEE6 /* Endpointable.swift in Sources */,
 				7EE38BAD2925DDD200FD738D /* EncodeDTO.swift in Sources */,
 				3E557FC328FE7BBC00714E46 /* HomeViewController.swift in Sources */,
 				39847428292656EB00EDC139 /* VoidModel.swift in Sources */,

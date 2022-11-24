@@ -7,7 +7,7 @@
 
 import Alamofire
 
-enum MyReflectionEndPoint<T: Encodable> {
+enum MyReflectionEndPoint<T: Encodable>: EndPointable {
     case fetchPastReflectionList(teamId: Int ,userId: Int)
     case fetchCertainTypeFeedbackAllID(reflectionId: Int, cssType: FeedBackDTO)
     

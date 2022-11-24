@@ -349,10 +349,10 @@ final class HomeViewController: BaseViewController {
     
     // MARK: - api
     
-    private func fetchCertainTeamDetail(type: HomeEndPoint) {
+    private func fetchCertainTeamDetail(type: HomeEndPoint<VoidModel>) {
         AF.request(type.address,
                    method: type.method,
-                   headers: type.header
+                   headers: type.headers
         ).responseDecodable(of: BaseModel<CertainTeamDetailResponse>.self) { json in
             if let json = json.value {
                 guard let isAdmin = json.detail?.admin,
@@ -370,10 +370,10 @@ final class HomeViewController: BaseViewController {
         }
     }
     
-    private func fetchCurrentReflectionDetail(type: HomeEndPoint) {
+    private func fetchCurrentReflectionDetail(type: HomeEndPoint<VoidModel>) {
         AF.request(type.address,
                    method: type.method,
-                   headers: type.header
+                   headers: type.headers
         ).responseDecodable(of: BaseModel<CurrentReflectionResponse>.self) { json in
             if let json = json.value {
                 let reflectionDetail = json.detail

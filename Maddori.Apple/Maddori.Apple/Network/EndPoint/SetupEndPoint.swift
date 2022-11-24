@@ -7,7 +7,7 @@
 
 import Alamofire
 
-enum SetupEndPoint<T: Encodable> {
+enum SetupEndPoint<T: Encodable>: EndPointable {
     case dispatchLogin(T)
     case dispatchCreateTeam(T)
     case dispatchJoinTeam(teamId: Int)

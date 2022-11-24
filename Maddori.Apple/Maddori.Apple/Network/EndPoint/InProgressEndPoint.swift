@@ -9,7 +9,7 @@ import Foundation
 
 import Alamofire
 
-enum InProgressEndPoint {
+enum InProgressEndPoint<T: Encodable>: EndPointable {
     case fetchTeamMembers
     case fetchTeamAndUserFeedback(reflectionId: Int, memberId: Int)
     case patchEndReflection(reflectionId: Int)
@@ -33,6 +33,17 @@ enum InProgressEndPoint {
             return .get
         case .patchEndReflection:
             return .patch
+        }
+    }
+    
+    var body: T? {
+        switch self {
+        case .fetchTeamMembers:
+            return nil
+        case .fetchTeamAndUserFeedback(let reflectionId, let memberId):
+            return nil
+        case .patchEndReflection(let reflectionId):
+            return nil
         }
     }
     

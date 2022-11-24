@@ -116,7 +116,7 @@ final class SelectReflectionMemberViewController: BaseViewController {
     
     // MARK: - api
     
-    private func fetchTeamMembers(type: InProgressEndPoint) {
+    private func fetchTeamMembers(type: InProgressEndPoint<VoidModel>) {
         AF.request(type.address,
                    method: type.method,
                    headers: type.headers
@@ -130,7 +130,7 @@ final class SelectReflectionMemberViewController: BaseViewController {
         }
     }
     
-    private func patchEndReflection(type: InProgressEndPoint) {
+    private func patchEndReflection(type: InProgressEndPoint<VoidModel>) {
         AF.request(type.address,
                    method: type.method,
                    headers: type.headers
