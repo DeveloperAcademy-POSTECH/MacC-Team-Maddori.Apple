@@ -102,23 +102,7 @@ final class MyFeedbackEditViewController: AddFeedbackViewController {
         }
     }
     
-    override func didTappedSwitch() {
-        super.didTappedSwitch()
-        if let start = self.feedbackDetail.start {
-            let hasStart = !start.isEmpty
-            if hasStart != super.feedbackStartSwitch.isOn {
-                isStartSwitchToggleChanged = true
-            } else {
-                isStartSwitchToggleChanged = false
-            }
-        } else {
-            if super.feedbackStartSwitch.isOn {
-                isStartSwitchToggleChanged = true
-            }
-        }
-    }
-    
-    private func isStartContent() -> Bool {
+    private func notChangedStartContent() -> Bool {
         if let start = self.feedbackDetail.start {
             if super.feedbackStartTextView.text == TextLiteral.addFeedbackViewControllerStartTextViewPlaceholder {
                 return true
@@ -130,7 +114,7 @@ final class MyFeedbackEditViewController: AddFeedbackViewController {
                 }
             }
         } else {
-            if super.feedbackStartTextView.text == TextLiteral.addFeedbackViewControllerStartTextViewPlaceholder {
+            if super.feedbackStartTextView.text == TextLiteral.addFeedbackViewControllerStartTextViewPlaceholder || super.feedbackStartTextView.text.isEmpty {
                 return true
             } else {
                 return false
@@ -140,7 +124,7 @@ final class MyFeedbackEditViewController: AddFeedbackViewController {
     
     private func isTextInputChanged() -> Bool {
         if super.feedbackContentTextView.text == feedbackDetail.info &&
-            isStartContent() &&
+            notChangedStartContent() &&
             super.feedbackKeywordTextField.text == feedbackDetail.keyword {
             return false
         } else {
@@ -176,6 +160,22 @@ final class MyFeedbackEditViewController: AddFeedbackViewController {
     override func didTappedCloseButton() {
         // FIXME: - X 버튼이 아닌 뒤로가기 버튼이라던지 수정이 필요함
         navigationController?.popViewController(animated: true)
+    }
+    
+    override func didTappedSwitch() {
+        super.didTappedSwitch()
+        if let start = self.feedbackDetail.start {
+            let hasStart = !start.isEmpty
+            if hasStart != super.feedbackStartSwitch.isOn {
+                isStartSwitchToggleChanged = true
+            } else {
+                isStartSwitchToggleChanged = false
+            }
+        } else {
+            if super.feedbackStartSwitch.isOn {
+                isStartSwitchToggleChanged = true
+            }
+        }
     }
     
     // MARK: - selector
