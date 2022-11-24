@@ -121,6 +121,7 @@
 		7E6B662F28FE887300C3BEEF /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6B662E28FE887300C3BEEF /* UILabel+Extension.swift */; };
 		7E7F160B2921CC4800C6BE96 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7F160A2921CC4800C6BE96 /* CustomTabBarController.swift */; };
 		7E7F160F2921CD4A00C6BE96 /* UITabBar+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7F160E2921CD4A00C6BE96 /* UITabBar+Extension.swift */; };
+		7E8CDC67292E19B000984742 /* LogOutButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8CDC66292E19B000984742 /* LogOutButton.swift */; };
 		7EB4D58229011EF7001FC396 /* JoinTeamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB4D58129011EF7001FC396 /* JoinTeamViewController.swift */; };
 		7EE38BAD2925DDD200FD738D /* EncodeDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE38BAC2925DDD200FD738D /* EncodeDTO.swift */; };
 		7EE38BB3292623F500FD738D /* MyReflectionEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE38BB2292623F500FD738D /* MyReflectionEndPoint.swift */; };
@@ -250,6 +251,7 @@
 		7E6B662E28FE887300C3BEEF /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
 		7E7F160A2921CC4800C6BE96 /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 		7E7F160E2921CD4A00C6BE96 /* UITabBar+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITabBar+Extension.swift"; sourceTree = "<group>"; };
+		7E8CDC66292E19B000984742 /* LogOutButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogOutButton.swift; sourceTree = "<group>"; };
 		7EB4D58129011EF7001FC396 /* JoinTeamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinTeamViewController.swift; sourceTree = "<group>"; };
 		7EE38BAC2925DDD200FD738D /* EncodeDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncodeDTO.swift; sourceTree = "<group>"; };
 		7EE38BB2292623F500FD738D /* MyReflectionEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReflectionEndPoint.swift; sourceTree = "<group>"; };
@@ -523,6 +525,7 @@
 				525E722028FFC9A800EF3FCB /* BackButton.swift */,
 				395C7E1C28FEC8C400FC2FCA /* CloseButton.swift */,
 				395C7E0C28F959A500FC2FCA /* MainButton.swift */,
+				7E8CDC66292E19B000984742 /* LogOutButton.swift */,
 			);
 			path = Button;
 			sourceTree = "<group>";
@@ -1044,6 +1047,7 @@
 				3EA341E82925E5EA005CBD1C /* String+Extension.swift in Sources */,
 				D7AFB7C72916FF9400E998B7 /* CustomSegmentControl.swift in Sources */,
 				52FA42A02906608E00C35824 /* Date+Extension.swift in Sources */,
+				7E8CDC67292E19B000984742 /* LogOutButton.swift in Sources */,
 				39F5582B2908027500CD6F6E /* UIDevice+Extension.swift in Sources */,
 				395C7E1328F9841A00FC2FCA /* SizeLiteral.swift in Sources */,
 				3EB508902917525600FB77CB /* EmptyReflectionView.swift in Sources */,

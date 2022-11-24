@@ -11,6 +11,7 @@ enum ImageLiterals {
     
     // MARK: - icon
     
+    static var icLogOut: UIImage { .load(systemName: "rectangle.portrait.and.arrow.right") }
     static var icClose: UIImage { .load(systemName: "xmark") }
     static var icBack: UIImage { .load(systemName: "chevron.left") }
     static var icWarning: UIImage { .load(systemName: "exclamationmark.circle.fill") }
