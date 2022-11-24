@@ -221,7 +221,7 @@ final class AlertViewController: BaseViewController {
         case .delete:
             self.deleteFeedBack(type: .deleteFeedBack(reflectionId: self.reflectionId, feedBackId: self.feedbackId))
         case .join:
-            self.dispatchUserLogin(type: .dispatchLogin(LoginDTO(username: UserDefaultStorage.nickname)))
+            self.dispatchJoinTeam(type: .dispatchJoinTeam(teamId: UserDefaultStorage.teamId))
         }
         self.dismiss(animated: true) {
             self.navigation?.popViewController(animated: true)
@@ -241,6 +241,7 @@ final class AlertViewController: BaseViewController {
                    headers: type.headers
         ).responseDecodable(of: BaseModel<JoinTeamResponse>.self) { json in
             if let json = json.value {
+                dump(json)
                 DispatchQueue.main.async {
                     self.pushHomeViewController()
                 }
@@ -255,27 +256,6 @@ final class AlertViewController: BaseViewController {
         ).responseDecodable(of: BaseModel<VoidModel>.self) { json in
             if let data = json.value {
                 dump(data)
-            }
-        }
-    }
-    
-    private func dispatchUserLogin(type: SetupEndPoint<LoginDTO>) {
-        AF.request(type.address,
-                   method: type.method,
-                   parameters: type.body,
-                   encoder: JSONParameterEncoder.default,
-                   headers: type.headers
-        ).responseDecodable(of: BaseModel<JoinMemberResponse>.self) { [weak self] json in
-            guard let self else { return }
-            if let json = json.value {
-                guard let userId = json.detail?.id else { return }
-                UserDefaultHandler.setUserId(userId: userId)
-                self.dispatchJoinTeam(type: .dispatchJoinTeam(teamId: UserDefaultStorage.teamId))
-            } else {
-                DispatchQueue.main.async {
-                    // FIXME: - UXWriting 필요
-                    self.makeAlert(title: "에러", message: "중복된 닉네임입니다람쥐")
-                }
             }
         }
     }

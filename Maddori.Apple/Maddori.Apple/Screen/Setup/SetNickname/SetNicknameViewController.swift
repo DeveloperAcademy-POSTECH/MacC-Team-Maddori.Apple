@@ -72,10 +72,33 @@ final class SetNicknameViewController: BaseTextFieldViewController {
         let action = UIAction { [weak self] _ in
             guard let nickname = self?.kigoTextField.text else { return }
             UserDefaultHandler.setNickname(nickname: nickname)
+            self?.dispatchUserLogin(type: .dispatchLogin(LoginDTO(username: UserDefaultStorage.nickname)))
             DispatchQueue.main.async {
                 self?.navigationController?.pushViewController(JoinTeamViewController(), animated: true)
             }
         }
         super.doneButton.addAction(action, for: .touchUpInside)
+    }
+    
+    // MARK: - api
+    
+    private func dispatchUserLogin(type: SetupEndPoint<LoginDTO>) {
+        AF.request(type.address,
+                   method: type.method,
+                   parameters: type.body,
+                   encoder: JSONParameterEncoder.default,
+                   headers: type.headers
+        ).responseDecodable(of: BaseModel<JoinMemberResponse>.self) { [weak self] json in
+            guard let self else { return }
+            if let json = json.value {
+                guard let userId = json.detail?.id else { return }
+                UserDefaultHandler.setUserId(userId: userId)
+            } else {
+                DispatchQueue.main.async {
+                    // FIXME: - UXWriting 필요
+                    self.makeAlert(title: "에러", message: "중복된 닉네임입니다람쥐")
+                }
+            }
+        }
     }
 }
