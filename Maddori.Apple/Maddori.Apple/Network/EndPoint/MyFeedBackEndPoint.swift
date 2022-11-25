@@ -55,16 +55,28 @@ enum MyFeedBackEndPoint<T: Encodable> {
     var headers: HTTPHeaders? {
         switch self {
         case .fetchCurrentTeamMember:
-            let headers = ["user_id": "\(UserDefaultStorage.userId)"]
+            let headers = [
+                "access_token": "\(UserDefaultStorage.accessToken)",
+                "refresh_token": "\(UserDefaultStorage.refreshToken)"
+            ]
             return HTTPHeaders(headers)
         case .fetchCertainMemberFeedBack:
-            let headers = ["user_id": "\(UserDefaultStorage.userId)"]
+            let headers = [
+                "access_token": "\(UserDefaultStorage.accessToken)",
+                "refresh_token": "\(UserDefaultStorage.refreshToken)"
+            ]
             return HTTPHeaders(headers)
         case .deleteFeedBack:
-            let headers = ["user_id": "\(UserDefaultStorage.userId)"]
+            let headers = [
+                "access_token": "\(UserDefaultStorage.accessToken)",
+                "refresh_token": "\(UserDefaultStorage.refreshToken)"
+            ]
             return HTTPHeaders(headers)
         case .putEditFeedBack:
-            let headers = ["user_id": "\(UserDefaultStorage.userId)"]
+            let headers = [
+                "access_token": "\(UserDefaultStorage.accessToken)",
+                "refresh_token": "\(UserDefaultStorage.refreshToken)"
+            ]
             return HTTPHeaders(headers)
         }
     }

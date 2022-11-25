@@ -59,7 +59,6 @@ final class SelectReflectionMemberViewController: BaseViewController {
             self?.patchEndReflection(type: .patchEndReflection(reflectionId: reflectionId))
             self?.dismiss(animated: true)
         }
-        button.title = TextLiteral.selectReflectionMemberViewControllerDoneButtonText + "(0/\(memberCollectionView.memberList.count))"
         button.addAction(action, for: .touchUpInside)
         button.isDisabled = true
         return button
@@ -125,6 +124,7 @@ final class SelectReflectionMemberViewController: BaseViewController {
                 guard let fetchedMemberList = json.detail?.members else { return }
                 DispatchQueue.main.async {
                     self.memberCollectionView.memberList = fetchedMemberList
+                    self.feedbackDoneButton.title = TextLiteral.selectReflectionMemberViewControllerDoneButtonText + "(0/\(self.memberCollectionView.memberList.count))"
                 }
             }
         }

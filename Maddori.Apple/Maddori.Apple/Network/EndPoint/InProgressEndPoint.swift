@@ -40,9 +40,9 @@ enum InProgressEndPoint<T: Encodable>: EndPointable {
         switch self {
         case .fetchTeamMembers:
             return nil
-        case .fetchTeamAndUserFeedback(let reflectionId, let memberId):
+        case .fetchTeamAndUserFeedback:
             return nil
-        case .patchEndReflection(let reflectionId):
+        case .patchEndReflection:
             return nil
         }
     }
@@ -50,13 +50,22 @@ enum InProgressEndPoint<T: Encodable>: EndPointable {
     var headers: HTTPHeaders? {
         switch self {
         case .fetchTeamMembers:
-            let headers = ["user_id": "\(UserDefaultStorage.userId)"]
+            let headers = [
+                "access_token": "\(UserDefaultStorage.accessToken)",
+                "refresh_token": "\(UserDefaultStorage.refreshToken)"
+            ]
             return HTTPHeaders(headers)
         case .fetchTeamAndUserFeedback:
-            let headers = ["user_id": "\(UserDefaultStorage.userId)"]
+            let headers = [
+                "access_token": "\(UserDefaultStorage.accessToken)",
+                "refresh_token": "\(UserDefaultStorage.refreshToken)"
+            ]
             return HTTPHeaders(headers)
         case .patchEndReflection:
-            let headers = ["user_id": "\(UserDefaultStorage.userId)"]
+            let headers = [
+                "access_token": "\(UserDefaultStorage.accessToken)",
+                "refresh_token": "\(UserDefaultStorage.refreshToken)"
+            ]
             return HTTPHeaders(headers)
         }
     }

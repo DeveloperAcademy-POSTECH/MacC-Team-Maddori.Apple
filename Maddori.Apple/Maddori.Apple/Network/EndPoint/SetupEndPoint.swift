@@ -25,7 +25,7 @@ enum SetupEndPoint<T: Encodable>: EndPointable {
         case .fetchCertainTeam(let invitationCode):
             return "\(UrlLiteral.baseUrl)/teams?invitation_code=\(invitationCode)"
         case .dispatchAppleLogin:
-            return "http://15.165.21.115:3000/api/v1/login"
+            return "\(UrlLiteral.baseUrl)/login"
         }
     }
 
@@ -62,15 +62,28 @@ enum SetupEndPoint<T: Encodable>: EndPointable {
     var headers: HTTPHeaders? {
         switch self {
         case .dispatchLogin:
-            return nil
+            let headers = [
+                "access_token": "\(UserDefaultStorage.accessToken)",
+                "refresh_token": "\(UserDefaultStorage.refreshToken)"
+            ]
+            return HTTPHeaders(headers)
         case .dispatchCreateTeam:
-            let headers = ["user_id": "\(UserDefaultStorage.userId)"]
+            let headers = [
+                "access_token": "\(UserDefaultStorage.accessToken)",
+                "refresh_token": "\(UserDefaultStorage.refreshToken)"
+            ]
             return HTTPHeaders(headers)
         case .dispatchJoinTeam:
-            let headers = ["user_id": "\(UserDefaultStorage.userId)"]
+            let headers = [
+                "access_token": "\(UserDefaultStorage.accessToken)",
+                "refresh_token": "\(UserDefaultStorage.refreshToken)"
+            ]
             return HTTPHeaders(headers)
         case .fetchCertainTeam:
-            let headers = ["user_id": "\(UserDefaultStorage.userId)"]
+            let headers = [
+                "access_token": "\(UserDefaultStorage.accessToken)",
+                "refresh_token": "\(UserDefaultStorage.refreshToken)"
+            ]
             return HTTPHeaders(headers)
         case .dispatchAppleLogin:
             return nil

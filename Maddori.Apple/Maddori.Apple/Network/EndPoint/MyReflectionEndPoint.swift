@@ -8,12 +8,12 @@
 import Alamofire
 
 enum MyReflectionEndPoint<T: Encodable>: EndPointable {
-    case fetchPastReflectionList(teamId: Int ,userId: Int)
+    case fetchPastReflectionList(teamId: Int)
     case fetchCertainTypeFeedbackAllID(reflectionId: Int, cssType: FeedBackDTO)
     
     var address: String {
         switch self {
-        case .fetchPastReflectionList(let teamId, _):
+        case .fetchPastReflectionList(let teamId):
             return "\(UrlLiteral.baseUrl)/teams/\(teamId)/reflections"
         case .fetchCertainTypeFeedbackAllID(let reflectionId, let cssType):
             return "\(UrlLiteral.baseUrl)/teams/\(UserDefaultStorage.teamId)/reflections/\(reflectionId)/feedbacks?type=\(cssType.rawValue)"
@@ -40,11 +40,17 @@ enum MyReflectionEndPoint<T: Encodable>: EndPointable {
     
     var headers: HTTPHeaders? {
         switch self {
-        case .fetchPastReflectionList(_, let userId):
-            let headers = ["user_id": "\(userId)"]
+        case .fetchPastReflectionList(_):
+            let headers = [
+                "access_token": "\(UserDefaultStorage.accessToken)",
+                "refresh_token": "\(UserDefaultStorage.refreshToken)"
+            ]
             return HTTPHeaders(headers)
         case .fetchCertainTypeFeedbackAllID(_, _):
-            let headers = ["user_id": "\(UserDefaultStorage.userId)"]
+            let headers = [
+                "access_token": "\(UserDefaultStorage.accessToken)",
+                "refresh_token": "\(UserDefaultStorage.refreshToken)"
+            ]
             return HTTPHeaders(headers)
         }
     }
