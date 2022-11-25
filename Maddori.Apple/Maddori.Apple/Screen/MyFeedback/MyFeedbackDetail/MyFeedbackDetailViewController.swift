@@ -262,7 +262,7 @@ final class MyFeedbackDetailViewController: BaseViewController {
     }
 
     private func setupOptionalComponents() {
-        if feedbackDetail.start == nil {
+        if feedbackDetail.start == nil || feedbackDetail.start == "" {
             feedbackStartLabel.isHidden = true
             feedbackStartText.isHidden = true
         }

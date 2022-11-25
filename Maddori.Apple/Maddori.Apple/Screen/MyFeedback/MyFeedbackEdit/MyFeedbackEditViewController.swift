@@ -11,11 +11,20 @@ import Alamofire
 import SnapKit
 
 final class MyFeedbackEditViewController: AddFeedbackViewController {
-    private var feedbackType: FeedBackDTO = .continueType
+    private var feedbackType: FeedBackDTO
     private let feedbackDetail: FeedbackFromMeModel
+    private var isStartSwitchToggleChanged: Bool = false {
+        didSet {
+            if !(isTextInputChanged() || isFeedbackTypeChanged || isStartSwitchToggleChanged) {
+                super.feedbackDoneButton.isDisabled = true
+            } else {
+                super.feedbackDoneButton.isDisabled = false
+            }
+        }
+    }
     private var isFeedbackTypeChanged: Bool = false {
         didSet {
-            if !(isTextInputChanged() || isFeedbackTypeChanged) {
+            if !(isTextInputChanged() || isFeedbackTypeChanged || isStartSwitchToggleChanged) {
                 super.feedbackDoneButton.isDisabled = true
             } else {
                 super.feedbackDoneButton.isDisabled = false
@@ -27,6 +36,7 @@ final class MyFeedbackEditViewController: AddFeedbackViewController {
     
     init(feedbackDetail: FeedbackFromMeModel) {
         self.feedbackDetail = feedbackDetail
+        self.feedbackType = FeedBackDTO.init(rawValue: feedbackDetail.feedbackType.rawValue) ?? .continueType
         super.init(to: feedbackDetail.nickname, toUserId: 0, reflectionId: feedbackDetail.reflectionId)
     }
     
@@ -66,11 +76,13 @@ final class MyFeedbackEditViewController: AddFeedbackViewController {
     
     private func setupFeedbackStart() {
         if let start = feedbackDetail.start {
-            super.feedbackStartSwitch.isOn = true
-            super.feedbackStartTextViewLabel.isHidden = false
-            super.feedbackStartTextView.isHidden = false
-            super.feedbackStartTextView.text = start
-            super.feedbackStartTextView.textColor = .black100
+            if !start.isEmpty {
+                super.feedbackStartSwitch.isOn = true
+                super.feedbackStartTextViewLabel.isHidden = false
+                super.feedbackStartTextView.isHidden = false
+                super.feedbackStartTextView.text = start
+                super.feedbackStartTextView.textColor = .black100
+            }
         }
         super.feedbackStartSwitchBottomEqualToSuperView?.constraint.deactivate()
         super.feedbackStartTextView.snp.remakeConstraints {
@@ -90,9 +102,19 @@ final class MyFeedbackEditViewController: AddFeedbackViewController {
         }
     }
     
+    private func notChangedStartContent() -> Bool {
+        if let start = self.feedbackDetail.start {
+            return super.feedbackStartTextView.text == TextLiteral.addFeedbackViewControllerStartTextViewPlaceholder || super.feedbackStartTextView.text == start ?
+            true : false
+        } else {
+            return super.feedbackStartTextView.text == TextLiteral.addFeedbackViewControllerStartTextViewPlaceholder ||
+            super.feedbackStartTextView.text.isEmpty ? true : false
+        }
+    }
+    
     private func isTextInputChanged() -> Bool {
         if super.feedbackContentTextView.text == feedbackDetail.info &&
-            super.feedbackStartTextView.text == feedbackDetail.start ?? TextLiteral.addFeedbackViewControllerStartTextViewPlaceholder &&
+            notChangedStartContent() &&
             super.feedbackKeywordTextField.text == feedbackDetail.keyword {
             return false
         } else {
@@ -121,13 +143,29 @@ final class MyFeedbackEditViewController: AddFeedbackViewController {
         let dto = EditFeedBackDTO(type: feedbackType,
                                   keyword: super.feedbackKeywordTextField.text ?? "",
                                   content: super.feedbackContentTextView.text ?? "",
-                                  start_content: super.feedbackStartSwitch.isOn ? super.feedbackStartTextView.text ?? "" : nil)
+                                  start_content: super.feedbackStartSwitch.isOn ? super.feedbackStartTextView.text ?? "" : "")
         putEditFeedBack(type: .putEditFeedBack(reflectionId: feedbackDetail.reflectionId, feedBackId: feedbackDetail.feedbackId, dto))
     }
     
     override func didTappedCloseButton() {
         // FIXME: - X 버튼이 아닌 뒤로가기 버튼이라던지 수정이 필요함
         navigationController?.popViewController(animated: true)
+    }
+    
+    override func didTappedSwitch() {
+        super.didTappedSwitch()
+        if let start = self.feedbackDetail.start {
+            let hasStart = !start.isEmpty
+            if hasStart != super.feedbackStartSwitch.isOn {
+                isStartSwitchToggleChanged = true
+            } else {
+                isStartSwitchToggleChanged = false
+            }
+        } else {
+            if super.feedbackStartSwitch.isOn {
+                isStartSwitchToggleChanged = true
+            }
+        }
     }
     
     // MARK: - selector
