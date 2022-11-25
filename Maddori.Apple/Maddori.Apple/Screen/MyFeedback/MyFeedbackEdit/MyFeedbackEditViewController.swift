@@ -11,6 +11,7 @@ import Alamofire
 import SnapKit
 
 final class MyFeedbackEditViewController: AddFeedbackViewController {
+    var parentNavigationViewController: UINavigationController
     private var feedbackType: FeedBackDTO
     private let feedbackDetail: FeedbackFromMeModel
     private var isStartSwitchToggleChanged: Bool = false {
@@ -34,9 +35,10 @@ final class MyFeedbackEditViewController: AddFeedbackViewController {
     
     // MARK: - life cycle
     
-    init(feedbackDetail: FeedbackFromMeModel) {
+    init(feedbackDetail: FeedbackFromMeModel, parentNavigationViewController: UINavigationController) {
         self.feedbackDetail = feedbackDetail
         self.feedbackType = FeedBackDTO.init(rawValue: feedbackDetail.feedbackType.rawValue) ?? .continueType
+        self.parentNavigationViewController = parentNavigationViewController
         super.init(to: feedbackDetail.nickname, toUserId: 0, reflectionId: feedbackDetail.reflectionId)
     }
     
@@ -148,8 +150,7 @@ final class MyFeedbackEditViewController: AddFeedbackViewController {
     }
     
     override func didTappedCloseButton() {
-        // FIXME: - X 버튼이 아닌 뒤로가기 버튼이라던지 수정이 필요함
-        navigationController?.popViewController(animated: true)
+        self.dismiss(animated: true)
     }
     
     override func didTappedSwitch() {
@@ -188,7 +189,9 @@ final class MyFeedbackEditViewController: AddFeedbackViewController {
         ).responseDecodable(of: BaseModel<EditFeedBackResponse>.self) { json in
             if let _ = json.value {
                 DispatchQueue.main.async {
-                    self.dismiss(animated: true)
+                    self.dismiss(animated: true) {
+                        self.parentNavigationViewController.popViewController(animated: true)
+                    }
                 }
             }
         }

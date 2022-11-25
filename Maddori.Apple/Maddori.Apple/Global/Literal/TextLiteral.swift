@@ -126,7 +126,7 @@ enum TextLiteral {
     // MARK: - MyFeedbackDetailViewController
     
     static let myFeedbackDetailViewControllerDeleteButtonText: String = "삭제"
-    static let myFeedbackDetailViewControllerTitleLabel: String = "님께 작성한 피드백"
+    static let myFeedbackDetailViewControllerTitleLabel: String = "에게 쓴 피드백"
     static let myFeedbackDetailViewControllerFeedbackStartLabel: String = "Start"
     static let myFeedbackDetailViewControllerEditButtonText: String = "수정하러 가기"
     static let myFeedbackDetailViewControllerReflectionIsStartedLabel: String = "회고가 시작되었습니다"
