@@ -73,6 +73,7 @@ final class SetNicknameViewController: BaseTextFieldViewController {
             guard let nickname = self?.kigoTextField.text else { return }
             UserDefaultHandler.setNickname(nickname: nickname)
             self?.dispatchUserLogin(type: .dispatchLogin(LoginDTO(username: UserDefaultStorage.nickname)))
+            self?.kigoTextField.resignFirstResponder()
             DispatchQueue.main.async {
                 self?.navigationController?.pushViewController(JoinTeamViewController(), animated: true)
             }
