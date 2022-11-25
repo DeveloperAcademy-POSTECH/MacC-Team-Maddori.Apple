@@ -104,21 +104,11 @@ final class MyFeedbackEditViewController: AddFeedbackViewController {
     
     private func notChangedStartContent() -> Bool {
         if let start = self.feedbackDetail.start {
-            if super.feedbackStartTextView.text == TextLiteral.addFeedbackViewControllerStartTextViewPlaceholder {
-                return true
-            } else {
-                if super.feedbackStartTextView.text == start {
-                    return true
-                } else {
-                    return false
-                }
-            }
+            return super.feedbackStartTextView.text == TextLiteral.addFeedbackViewControllerStartTextViewPlaceholder || super.feedbackStartTextView.text == start ?
+            true : false
         } else {
-            if super.feedbackStartTextView.text == TextLiteral.addFeedbackViewControllerStartTextViewPlaceholder || super.feedbackStartTextView.text.isEmpty {
-                return true
-            } else {
-                return false
-            }
+            return super.feedbackStartTextView.text == TextLiteral.addFeedbackViewControllerStartTextViewPlaceholder ||
+            super.feedbackStartTextView.text.isEmpty ? true : false
         }
     }
     
