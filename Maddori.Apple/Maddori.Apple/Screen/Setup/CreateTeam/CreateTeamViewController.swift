@@ -94,9 +94,9 @@ final class CreateTeamViewController: BaseTextFieldViewController {
     
     // MARK: - func
     
-    private func pushInvitationViewController() {
+    private func pushInvitationViewController(invitationCode: String) {
         if let teamName = super.kigoTextField.text {
-            let viewController = InvitationCodeViewController(teamName: teamName)
+            let viewController = InvitationCodeViewController(teamName: teamName, invitationCode: invitationCode)
             self.navigationController?.pushViewController(viewController, animated: true)
         }
     }
@@ -115,7 +115,9 @@ final class CreateTeamViewController: BaseTextFieldViewController {
                 guard let teamId = json.detail?.id else { return }
                 UserDefaultHandler.setTeamId(teamId: teamId)
                 DispatchQueue.main.async {
-                    self.pushInvitationViewController()
+                    if let invitationCode = json.detail?.invitationCode {
+                        self.pushInvitationViewController(invitationCode: invitationCode)
+                    }
                 }
             } else {
                 DispatchQueue.main.async {

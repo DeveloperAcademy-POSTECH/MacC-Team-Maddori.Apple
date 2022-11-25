@@ -13,9 +13,11 @@ import SnapKit
 final class InvitationCodeViewController: BaseViewController {
     
     let teamName: String
+    let invitationCode: String
     
-    init(teamName: String) {
+    init(teamName: String, invitationCode: String) {
         self.teamName = teamName
+        self.invitationCode = invitationCode
         super.init()
     }
     
@@ -28,8 +30,9 @@ final class InvitationCodeViewController: BaseViewController {
         label.setTitleFont(text: TextLiteral.invitationCodeViewControllerTitleLabel)
         return label
     }()
-    private let invitedCodeLabel: UILabel = {
+    private lazy var invitedCodeLabel: UILabel = {
         let label = UILabel()
+        label.text = invitationCode
         label.font = UIFont.font(.bold, ofSize: 32)
         return label
     }()
