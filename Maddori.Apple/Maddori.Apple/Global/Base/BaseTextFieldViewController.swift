@@ -51,8 +51,12 @@ class BaseTextFieldViewController: BaseViewController {
         super.viewDidLoad()
         configUI()
         render()
-        setupNotificationCenter()
         setupDelegate()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupNotificationCenter()
     }
     
     override func render() {
@@ -150,7 +154,7 @@ extension BaseTextFieldViewController: UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        kigoTextField.becomeFirstResponder()
+        textField.resignFirstResponder()
         return true
     }
 }
