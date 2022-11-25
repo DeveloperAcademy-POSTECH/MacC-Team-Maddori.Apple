@@ -143,7 +143,7 @@ final class MyFeedbackEditViewController: AddFeedbackViewController {
         let dto = EditFeedBackDTO(type: feedbackType,
                                   keyword: super.feedbackKeywordTextField.text ?? "",
                                   content: super.feedbackContentTextView.text ?? "",
-                                  start_content: super.feedbackStartSwitch.isOn ? super.feedbackStartTextView.text ?? "" : "")
+                                  start_content: !super.feedbackStartSwitch.isOn || super.feedbackStartTextView.text == TextLiteral.addFeedbackViewControllerStartTextViewPlaceholder ? nil : super.feedbackStartTextView.text)
         putEditFeedBack(type: .putEditFeedBack(reflectionId: feedbackDetail.reflectionId, feedBackId: feedbackDetail.feedbackId, dto))
     }
     

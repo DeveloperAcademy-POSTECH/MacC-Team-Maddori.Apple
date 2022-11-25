@@ -381,7 +381,7 @@ class AddFeedbackViewController: BaseViewController {
     }
     
     func didTappedDoneButton() {
-        let startContent = feedbackStartSwitch.isOn ? feedbackStartTextView.text : ""
+        let startContent = !feedbackStartSwitch.isOn || feedbackStartTextView.text == TextLiteral.addFeedbackViewControllerStartTextViewPlaceholder ? nil : feedbackStartTextView.text
         guard let keyword = feedbackKeywordTextField.text,
               let content = feedbackContentTextView.text
         else { return }
