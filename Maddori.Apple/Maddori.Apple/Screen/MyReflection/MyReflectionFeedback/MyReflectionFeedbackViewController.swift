@@ -187,7 +187,7 @@ final class MyReflectionFeedbackViewController: BaseViewController {
     }
     
     private func setupStartLabel() {
-        if model.startContent == nil {
+        if model.startContent == nil || model.startContent == "" {
             feedbackStartLabel.isHidden = true
         }
     }
