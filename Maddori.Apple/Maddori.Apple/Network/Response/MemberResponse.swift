@@ -13,7 +13,7 @@ struct MemberResponse: Decodable {
     let userName: String?
     
     enum CodingKeys: String, CodingKey {
-        case userId = "user_id"
+        case userId = "id"
         case userName = "username"
     }
 }
