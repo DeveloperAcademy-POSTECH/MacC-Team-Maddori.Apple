@@ -117,10 +117,12 @@ final class LoginViewController: BaseViewController {
             if let data = json.value {
                 dump(data)
                 guard let accessToken = data.detail?.accessToken,
-                      let refreshToken = data.detail?.refreshToken
+                      let refreshToken = data.detail?.refreshToken,
+                      let userId = data.detail?.user?.userId
                 else { return }
                 UserDefaultHandler.setAccessToken(accessToken: accessToken)
                 UserDefaultHandler.setRefreshToken(refreshToken: refreshToken)
+                UserDefaultHandler.setUserId(userId: userId)
                 let hasNickName = data.detail?.user?.userName != nil
                 let hasTeamId = data.detail?.user?.teamId != nil
                 if hasNickName && hasTeamId {
