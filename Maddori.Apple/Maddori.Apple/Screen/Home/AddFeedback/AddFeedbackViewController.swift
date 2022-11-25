@@ -13,7 +13,7 @@ import SnapKit
 class AddFeedbackViewController: BaseViewController {
     enum Length {
         static let keywordMinLength: Int = 0
-        static let keywordMaxLength: Int = 15
+        static let keywordMaxLength: Int = 10
         static let textViewMaxLength: Int = 200
     }
     var type: FeedBackDTO = .continueType
