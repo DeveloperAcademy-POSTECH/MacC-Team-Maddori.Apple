@@ -34,7 +34,10 @@ enum CreateReflectionEndPoint<T: Encodable> {
     var header: HTTPHeaders {
         switch self {
         case .patchReflectionDetail:
-            let headers = ["user_id": "\(UserDefaultStorage.userId)"]
+            let headers = [
+                "access_token": "\(UserDefaultStorage.accessToken)",
+                "refresh_token": "\(UserDefaultStorage.refreshToken)"
+            ]
             return HTTPHeaders(headers)
         }
     }

@@ -8,5 +8,5 @@
 import Foundation
 
 enum UrlLiteral {
-    static let baseUrl = "http://3.34.57.155:3000/api/v1"
+    static let baseUrl = "http://15.165.21.115:3000/api/v1"
 }
