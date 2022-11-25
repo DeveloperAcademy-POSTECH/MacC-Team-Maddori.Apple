@@ -141,8 +141,7 @@ final class MyReflectionDetailViewController: BaseViewController {
 
 extension MyReflectionDetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // FIXME
-        return contentArray.isEmpty ? 1 : contentArray.count + 1
+        return contentArray.isEmpty ? 1 : contentArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -155,19 +154,12 @@ extension MyReflectionDetailViewController: UITableViewDataSource {
             return emptyCell
         } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: MyReflectionDetailTableViewCell.className, for: indexPath) as? MyReflectionDetailTableViewCell else { return UITableViewCell() }
-            if indexPath.row == contentArray.count {
-                cell.rightImage.isHidden = true
-                cell.fromLabelBackView.isHidden = true
-                cell.isUserInteractionEnabled = false
-                return cell
-            } else {
-                guard let keyword = contentArray[indexPath.row].keyword,
-                      let fromLabelText = contentArray[indexPath.row].fromUser?.userName,
-                      let content = contentArray[indexPath.row].content else { return UITableViewCell() }
-                cell.configLabel(title: keyword, fromLabel: fromLabelText, content: content)
-                tableView.isScrollEnabled = true
-                return cell
-            }
+            guard let keyword = contentArray[indexPath.row].keyword,
+                  let fromLabelText = contentArray[indexPath.row].fromUser?.userName,
+                  let content = contentArray[indexPath.row].content else { return UITableViewCell() }
+            cell.configLabel(title: keyword, fromLabel: fromLabelText, content: content)
+            tableView.isScrollEnabled = true
+            return cell
         }
     }
 }
@@ -176,10 +168,7 @@ extension MyReflectionDetailViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if contentArray.isEmpty {
             return tableView.frame.height - 90
-        } else if indexPath.row == contentArray.count {
-            return 44
-        }
-        else {
+        } else {
             return 100
         }
     }
