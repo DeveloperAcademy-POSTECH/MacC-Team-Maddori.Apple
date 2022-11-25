@@ -187,7 +187,9 @@ final class MyFeedbackEditViewController: AddFeedbackViewController {
                    headers: type.headers
         ).responseDecodable(of: BaseModel<EditFeedBackResponse>.self) { json in
             if let _ = json.value {
-                self.navigationController?.popToRootViewController(animated: true)
+                DispatchQueue.main.async {
+                    self.dismiss(animated: true)
+                }
             }
         }
     }
