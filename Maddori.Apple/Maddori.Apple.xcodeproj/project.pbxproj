@@ -26,6 +26,7 @@
 		39436C132912877D0083D77A /* MyFeedbackHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39436C122912877D0083D77A /* MyFeedbackHeaderView.swift */; };
 		39436C15291287A00083D77A /* MyFeedbackCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39436C14291287A00083D77A /* MyFeedbackCollectionViewCell.swift */; };
 		39436C182912A2E10083D77A /* Feedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39436C172912A2E10083D77A /* Feedback.swift */; };
+		3956EAAA293225BF00A8F711 /* SkeletonView in Frameworks */ = {isa = PBXBuildFile; productRef = 3956EAA9293225BF00A8F711 /* SkeletonView */; };
 		395C7E0328F945B500FC2FCA /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395C7E0228F945B500FC2FCA /* UIFont+Extension.swift */; };
 		395C7E0528F953D200FC2FCA /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395C7E0428F953D200FC2FCA /* UIViewController+Extension.swift */; };
 		395C7E0B28F9550A00FC2FCA /* NSObject+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395C7E0A28F9550A00FC2FCA /* NSObject+Extension.swift */; };
@@ -267,6 +268,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				395C7E1628F984B300FC2FCA /* SnapKit in Frameworks */,
+				3956EAAA293225BF00A8F711 /* SkeletonView in Frameworks */,
 				39F52C772924BB9A00B19A77 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -936,6 +938,7 @@
 			packageProductDependencies = (
 				395C7E1528F984B300FC2FCA /* SnapKit */,
 				39F52C762924BB9A00B19A77 /* Alamofire */,
+				3956EAA9293225BF00A8F711 /* SkeletonView */,
 			);
 			productName = Maddori.Apple;
 			productReference = 39257DC128F8FEBD00201E0B /* Maddori.Apple.app */;
@@ -968,6 +971,7 @@
 			packageReferences = (
 				395C7E1428F984B300FC2FCA /* XCRemoteSwiftPackageReference "SnapKit" */,
 				39F52C752924BB9A00B19A77 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				3956EAA8293225BF00A8F711 /* XCRemoteSwiftPackageReference "SkeletonView" */,
 			);
 			productRefGroup = 39257DC228F8FEBD00201E0B /* Products */;
 			projectDirPath = "";
@@ -1343,6 +1347,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		3956EAA8293225BF00A8F711 /* XCRemoteSwiftPackageReference "SkeletonView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Juanpe/SkeletonView";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		395C7E1428F984B300FC2FCA /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -1362,6 +1374,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		3956EAA9293225BF00A8F711 /* SkeletonView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3956EAA8293225BF00A8F711 /* XCRemoteSwiftPackageReference "SkeletonView" */;
+			productName = SkeletonView;
+		};
 		395C7E1528F984B300FC2FCA /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 395C7E1428F984B300FC2FCA /* XCRemoteSwiftPackageReference "SnapKit" */;
