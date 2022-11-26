@@ -8,6 +8,7 @@
 import UIKit
 
 import Alamofire
+import SkeletonView
 import SnapKit
 
 final class HomeViewController: BaseViewController {
@@ -64,10 +65,11 @@ final class HomeViewController: BaseViewController {
         collectionView.register(KeywordCollectionViewCell.self, forCellWithReuseIdentifier: KeywordCollectionViewCell.className)
         return collectionView
     }()
-    private lazy var teamNameLabel: UILabel = {
+    private let teamNameLabel: UILabel = {
         let label = UILabel()
         label.textColor = .black100
         label.numberOfLines = 0
+        label.isSkeletonable = true
         return label
     }()
     private let invitationCodeButton: UIButton = {
@@ -83,6 +85,7 @@ final class HomeViewController: BaseViewController {
         let label = UILabel()
         label.font = .caption1
         label.textColor = .gray400
+        label.isSkeletonable = true
         return label
     }()
     private let currentReflectionLabel: UILabel = {
@@ -141,14 +144,15 @@ final class HomeViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         // FIXME: - teamId 와 userId는 일단은 UserDefaults에서 -> 추후에 토큰으로
+        setupSkeletonView()
         fetchCertainTeamDetail(type: .fetchCertainTeamDetail)
         fetchCurrentReflectionDetail(type: .fetchCurrentReflectionDetail)
     }
     
     override func configUI() {
         view.backgroundColor = .white200
+        view.isSkeletonable = true
         setGradientToastView()
     }
     
@@ -208,6 +212,11 @@ final class HomeViewController: BaseViewController {
     }
     
     // MARK: - func
+    
+    private func setupSkeletonView() {
+        teamNameLabel.showAnimatedGradientSkeleton()
+        descriptionLabel.showAnimatedGradientSkeleton()
+    }
     
     private func setUpDelegation() {
         keywordCollectionView.delegate = self
@@ -366,6 +375,7 @@ final class HomeViewController: BaseViewController {
                         self.renderPlanLabelButton()
                     }
                 }
+                self.teamNameLabel.hideSkeleton()
             }
         }
     }
@@ -410,6 +420,7 @@ final class HomeViewController: BaseViewController {
                         self.flowLayout.count = reflectionKeywordList.count
                         self.keywordCollectionView.reloadData()
                     }
+                    self.descriptionLabel.hideSkeleton()
                 }
             }
         }
