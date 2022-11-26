@@ -1257,7 +1257,7 @@
 				CODE_SIGN_ENTITLEMENTS = Maddori.Apple/Maddori.Apple.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = HF8GHZB58X;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Maddori.Apple/Global/Supports/Info.plist;
@@ -1292,7 +1292,7 @@
 				CODE_SIGN_ENTITLEMENTS = Maddori.Apple/Maddori.Apple.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = HF8GHZB58X;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Maddori.Apple/Global/Supports/Info.plist;
