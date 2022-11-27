@@ -20,6 +20,6 @@ jobs:
       
     - name: MaddoriApple Build Tests
       run: |
-        xcodebuild clean test -project ./Maddori.Apple/Maddori.Apple.xcodeproj -destination "platform=iOS Simulator,name=iPhone 13,OS=latest"
+        xcodebuild build -project ./Maddori.Apple/Maddori.Apple.xcodeproj -scheme Maddori.Apple -destination "platform=iOS Simulator,name=iPhone 13,OS=latest"
         xcpretty --color --simple
         
