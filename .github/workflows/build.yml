@@ -15,9 +15,11 @@ jobs:
     runs-on: macos-latest
 
     steps:
-    - uses: actions/checkout@v3
+    - name: 👻Checkout Source Code👻
+      uses: actions/checkout@v2
+      
     - name: MaddoriApple Build Tests
       run: |
-        xcodebuild test -project ./Maddori.Apple/Maddori.Apple.xcodeproj -scheme Maddori.Apple -destination "platform=iOS Simulator,name=iPhone 13,OS=15.0"
+        xcodebuild clean test -project ./Maddori.Apple/Maddori.Apple.xcodeproj -scheme Maddori.Apple -destination "platform=iOS Simulator,name=iPhone 13,OS=15.2"
         xcpretty --color --simple
         
