@@ -73,7 +73,6 @@ final class InvitationCodeViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        self.dispatchCreateTeam(type: .dispatchCreateTeam(CreateTeamDTO(team_name: teamName)))
         setupCopyCodeButton()
         setupStartButton()
         setGradientToastView()
