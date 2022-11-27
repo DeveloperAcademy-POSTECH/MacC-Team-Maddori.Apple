@@ -15,10 +15,7 @@ jobs:
     runs-on: macos-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Build
-      run: swift build -v
-          
+    - uses: actions/checkout@v3        
     - name: MaddoriApple Build Tests
       run: |
         xcodebuild test -project ./Maddori.Apple/Maddori.Apple.xcodeproj -scheme Maddori.Apple -destination "platform=iOS Simulator,name=iPhone 14 Pro,OS=16.0"
