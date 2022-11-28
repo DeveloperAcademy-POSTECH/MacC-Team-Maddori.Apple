@@ -91,7 +91,7 @@ final class MyReflectionViewController: BaseViewController {
                 self?.logoutUser()
             }),
             UIAction(title: TextLiteral.myReflectionViewControllerDeleteUser, attributes: .destructive, handler: { [weak self] _ in
-                self?.makeRequestAlert(title: "회원탈퇴 하시겠습니까?", message: "모든 회고와 피드백 정보가 사라지며, \n되돌릴 수 없습니다.", okAction: { [weak self] _ in
+                self?.makeRequestAlert(title: TextLiteral.myReflectionViewControllerDeleteUserAlertTitle, message: TextLiteral.myReflectionViewControllerDeleteUserAlertMessage, okAction: { [weak self] _ in
                     self?.deleteUser(type: .deleteUser)
                 })
             })

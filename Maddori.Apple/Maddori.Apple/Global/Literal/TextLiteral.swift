@@ -173,5 +173,6 @@ enum TextLiteral {
     static let myReflectionViewControllerLogOutTitle: String = "로그아웃"
     static let myReflectionViewControllerLogOutMessage: String = "로그아웃 하시겠습니까?"
     static let myReflectionViewControllerDeleteUser: String = "회원탈퇴"
-    
+    static let myReflectionViewControllerDeleteUserAlertTitle: String = "회원탈퇴 하시겠습니까?"
+    static let myReflectionViewControllerDeleteUserAlertMessage: String = "모든 회고와 피드백 정보가 사라지며, \n되돌릴 수 없습니다."
 }
