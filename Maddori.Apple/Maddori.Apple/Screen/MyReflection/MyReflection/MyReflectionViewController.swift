@@ -90,8 +90,10 @@ final class MyReflectionViewController: BaseViewController {
             UIAction(title: TextLiteral.myReflectionViewControllerLogOutTitle, handler: { [weak self] _ in
                 self?.logoutUser()
             }),
-            UIAction(title: TextLiteral.myReflectionViewControllerDeleteUser, attributes: .destructive, handler: { _ in
-                
+            UIAction(title: TextLiteral.myReflectionViewControllerDeleteUser, attributes: .destructive, handler: { [weak self] _ in
+                self?.makeRequestAlert(title: "회원탈퇴 하시겠습니까?", message: "모든 회고와 피드백 정보가 사라지며, \n되돌릴 수 없습니다.", okAction: { [weak self] _ in
+                    self?.deleteUser(type: .deleteUser)
+                })
             })
         ])
         ellipsisButton.showsMenuAsPrimaryAction = true
@@ -99,11 +101,26 @@ final class MyReflectionViewController: BaseViewController {
     }
     
     private func logoutUser() {
-        makeRequestAlert(title: TextLiteral.myReflectionViewControllerLogOutMessage, message: "", okTitle: "확인", cancelTitle: "취소") { _ in  
+        makeRequestAlert(title: TextLiteral.myReflectionViewControllerLogOutMessage, message: "", okTitle: "확인", cancelTitle: "취소") { _ in
             UserDefaultHandler.clearAllData()
             guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate
                     as? SceneDelegate else { return }
             sceneDelegate.logout()
+        }
+    }
+    
+    private func deleteUser(type: MyReflectionEndPoint<VoidModel>) {
+        AF.request(type.address,
+                   method: type.method,
+                   headers: type.headers
+        )
+        .responseDecodable(of: BaseModel<VoidModel>.self) { json in
+            if let _ = json.value {
+                UserDefaultHandler.clearAllData()
+                guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate
+                        as? SceneDelegate else { return }
+                sceneDelegate.logout()
+            }
         }
     }
     
