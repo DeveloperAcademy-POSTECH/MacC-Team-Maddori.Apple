@@ -15,6 +15,8 @@ final class MyReflectionDetailViewController: BaseViewController {
     private var reflectionName: String
     private let reflectionId: Int
     private var contentArray: [FeedBackResponse] = []
+    private var continueArray: [FeedBackResponse] = []
+    private var stopArray: [FeedBackResponse] = []
     
     // MARK: - property
     
@@ -40,6 +42,7 @@ final class MyReflectionDetailViewController: BaseViewController {
         tableView.dataSource = self
         tableView.register(MyReflectionDetailTableViewCell.self, forCellReuseIdentifier: MyReflectionDetailTableViewCell.className)
         tableView.register(EmptyTableFeedbackView.self, forCellReuseIdentifier: EmptyTableFeedbackView.className)
+        tableView.register(MyReflectionDetailViewLastCell.self, forCellReuseIdentifier: MyReflectionDetailViewLastCell.className)
         return tableView
     }()
     private lazy var segmentControl: CustomSegmentControl = {
@@ -109,7 +112,6 @@ final class MyReflectionDetailViewController: BaseViewController {
         else {
             fetchCertainTypeFeedbackAll(type: .fetchCertainTypeFeedbackAllID(reflectionId: reflectionId, cssType: .stopType))
         }
-        tableView.reloadData()
     }
     
     // MARK: - api
@@ -153,14 +155,13 @@ extension MyReflectionDetailViewController: UITableViewDataSource {
             tableView.isScrollEnabled = false
             return emptyCell
         } else {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: MyReflectionDetailTableViewCell.className, for: indexPath) as? MyReflectionDetailTableViewCell else { return UITableViewCell() }
             if indexPath.row == contentArray.count {
-                cell.rightImage.isHidden = true
-                cell.fromLabelBackView.isHidden = true
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: MyReflectionDetailViewLastCell.className, for: indexPath) as? MyReflectionDetailViewLastCell else { return UITableViewCell() }
                 cell.isUserInteractionEnabled = false
                 return cell
             }
             else {
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: MyReflectionDetailTableViewCell.className, for: indexPath) as? MyReflectionDetailTableViewCell else { return UITableViewCell() }
                 guard let keyword = contentArray[indexPath.row].keyword,
                       let fromLabelText = contentArray[indexPath.row].fromUser?.userName,
                       let content = contentArray[indexPath.row].content else { return UITableViewCell() }
