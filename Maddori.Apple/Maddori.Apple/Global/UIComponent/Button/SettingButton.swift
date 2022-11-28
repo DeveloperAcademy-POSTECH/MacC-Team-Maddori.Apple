@@ -1,5 +1,5 @@
 //
-//  LogOutButton.swift
+//  SettingButton.swift
 //  Maddori.Apple
 //
 //  Created by LeeSungHo on 2022/11/23.
