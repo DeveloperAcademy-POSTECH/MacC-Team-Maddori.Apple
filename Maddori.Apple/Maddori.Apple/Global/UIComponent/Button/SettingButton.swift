@@ -22,7 +22,7 @@ final class SettingButton: UIButton {
     required init?(coder: NSCoder) { nil }
     
     private func configUI() {
-        self.setImage(.load(systemName: "ellipsis"), for: .normal)
+        self.setImage(ImageLiterals.icEllipsis, for: .normal)
         self.tintColor = .black100
     }
     
