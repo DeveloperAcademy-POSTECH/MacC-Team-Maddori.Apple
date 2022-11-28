@@ -13,7 +13,7 @@ import SnapKit
 class AddFeedbackViewController: BaseViewController {
     enum Length {
         static let keywordMinLength: Int = 0
-        static let keywordMaxLength: Int = 15
+        static let keywordMaxLength: Int = 10
         static let textViewMaxLength: Int = 200
     }
     var type: FeedBackDTO = .continueType
@@ -386,7 +386,6 @@ class AddFeedbackViewController: BaseViewController {
               let content = feedbackContentTextView.text
         else { return }
         let dto = FeedBackContentDTO(type: type, keyword: keyword, content: content, start_content: startContent, to_id: toUserId)
-        // FIXME: - 각 id들 UserDefault에 저장되어 있는 값을 불러와야 함.
         dispatchAddFeedBack(type: .dispatchAddFeedBack(reflectionId: currentReflectionId, dto))
     }
     

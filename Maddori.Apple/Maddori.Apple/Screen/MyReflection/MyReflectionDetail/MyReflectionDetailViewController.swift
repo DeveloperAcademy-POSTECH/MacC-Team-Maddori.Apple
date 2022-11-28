@@ -80,7 +80,6 @@ final class MyReflectionDetailViewController: BaseViewController {
         tableView.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(22)
             $0.leading.trailing.equalToSuperview()
-            // FIXME
             $0.bottom.equalTo(view.safeAreaLayoutGuide)
         }
         
@@ -142,7 +141,6 @@ final class MyReflectionDetailViewController: BaseViewController {
 
 extension MyReflectionDetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // FIXME
         return contentArray.isEmpty ? 1 : contentArray.count
     }
     
@@ -160,6 +158,7 @@ extension MyReflectionDetailViewController: UITableViewDataSource {
                   let fromLabelText = contentArray[indexPath.row].fromUser?.userName,
                   let content = contentArray[indexPath.row].content else { return UITableViewCell() }
             cell.configLabel(title: keyword, fromLabel: fromLabelText, content: content)
+            tableView.isScrollEnabled = true
             return cell
         }
     }

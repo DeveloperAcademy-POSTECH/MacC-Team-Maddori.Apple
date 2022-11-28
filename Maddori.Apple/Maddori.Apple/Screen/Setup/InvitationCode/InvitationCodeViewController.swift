@@ -13,9 +13,11 @@ import SnapKit
 final class InvitationCodeViewController: BaseViewController {
     
     let teamName: String
+    let invitationCode: String
     
-    init(teamName: String) {
+    init(teamName: String, invitationCode: String) {
         self.teamName = teamName
+        self.invitationCode = invitationCode
         super.init()
     }
     
@@ -28,8 +30,9 @@ final class InvitationCodeViewController: BaseViewController {
         label.setTitleFont(text: TextLiteral.invitationCodeViewControllerTitleLabel)
         return label
     }()
-    private let invitedCodeLabel: UILabel = {
+    private lazy var invitedCodeLabel: UILabel = {
         let label = UILabel()
+        label.text = invitationCode
         label.font = UIFont.font(.bold, ofSize: 32)
         return label
     }()
@@ -70,7 +73,6 @@ final class InvitationCodeViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.dispatchCreateTeam(type: .dispatchCreateTeam(CreateTeamDTO(team_name: teamName)))
         setupCopyCodeButton()
         setupStartButton()
         setGradientToastView()
@@ -168,30 +170,5 @@ final class InvitationCodeViewController: BaseViewController {
     private func pushHomeViewController() {
         let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
         sceneDelegate?.changeRootViewCustomTabBarView()
-    }
-    
-    // MARK: - api
-    
-    private func dispatchCreateTeam(type: SetupEndPoint<CreateTeamDTO>) {
-        AF.request(type.address,
-                   method: type.method,
-                   parameters: type.body,
-                   encoder: JSONParameterEncoder.default,
-                   headers: type.headers
-        ).responseDecodable(of: BaseModel<CreateTeamResponse>.self) { json in
-            if let json = json.value {
-                dump(json)
-                guard let teamId = json.detail?.id else { return }
-                UserDefaultHandler.setTeamId(teamId: teamId)
-                DispatchQueue.main.async {
-                    self.invitedCodeLabel.text = json.detail?.invitationCode
-                }
-            } else {
-                DispatchQueue.main.async {
-                    // FIXME: - UXWriting 필요
-                    self.makeAlert(title: "에러", message: "중복된 팀 이름입니다")
-                }
-            }
-        }
     }
 }

@@ -19,7 +19,7 @@ final class MyReflectionDetailTableViewCell: BaseTableViewCell {
         label.textColor = .black100
         return label
     }()
-    private let fromLabelBackView: UIView = {
+    let fromLabelBackView: UIView = {
         let view = UIView()
         view.backgroundColor = .gray100
         view.layer.cornerRadius = 4
@@ -39,7 +39,7 @@ final class MyReflectionDetailTableViewCell: BaseTableViewCell {
         label.setLineSpacing(to: 4)
         return label
     }()
-    private let rightImage: UIImageView = {
+    let rightImage: UIImageView = {
         let imageView = UIImageView()
         imageView.image = ImageLiterals.icRight
         imageView.tintColor = .gray400

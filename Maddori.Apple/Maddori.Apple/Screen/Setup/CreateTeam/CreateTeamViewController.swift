@@ -84,41 +84,44 @@ final class CreateTeamViewController: BaseTextFieldViewController {
     
     private func setupDoneButton() {
         let action = UIAction { [weak self] _ in
+            guard let teamName = self?.kigoTextField.text else { return }
             // FIXME: - header에는 user defaults에 있는 내 유저 id 값 넣기 -> 나중에는 로그인 토큰으로 변환 예정
-            self?.dispatchUserLogin(type: .dispatchLogin(LoginDTO(username: UserDefaultStorage.nickname)))
+            self?.dispatchCreateTeam(type: .dispatchCreateTeam(CreateTeamDTO(team_name: teamName)))
         }
         super.doneButton.addAction(action, for: .touchUpInside)
     }
     
     // MARK: - func
     
-    private func pushInvitationViewController() {
+    private func pushInvitationViewController(invitationCode: String) {
         if let teamName = super.kigoTextField.text {
-            let viewController = InvitationCodeViewController(teamName: teamName)
+            let viewController = InvitationCodeViewController(teamName: teamName, invitationCode: invitationCode)
             self.navigationController?.pushViewController(viewController, animated: true)
         }
     }
     
     // MARK: - api
     
-    private func dispatchUserLogin(type: SetupEndPoint<LoginDTO>) {
+    private func dispatchCreateTeam(type: SetupEndPoint<CreateTeamDTO>) {
         AF.request(type.address,
                    method: type.method,
                    parameters: type.body,
-                   encoder: JSONParameterEncoder.default
-        ).responseDecodable(of: BaseModel<MemberResponse>.self) { json in
+                   encoder: JSONParameterEncoder.default,
+                   headers: type.headers
+        ).responseDecodable(of: BaseModel<CreateTeamResponse>.self) { json in
             if let json = json.value {
                 dump(json)
-                guard let userId = json.detail?.userId
-                else { return }
-                UserDefaultHandler.setUserId(userId : userId)
+                guard let teamId = json.detail?.id else { return }
+                UserDefaultHandler.setTeamId(teamId: teamId)
                 DispatchQueue.main.async {
-                    self.pushInvitationViewController()
+                    if let invitationCode = json.detail?.invitationCode {
+                        self.pushInvitationViewController(invitationCode: invitationCode)
+                    }
                 }
             } else {
                 DispatchQueue.main.async {
                     // FIXME: - UXWriting 필요
-                    self.makeAlert(title: "에러", message: "중복된 닉네임입니다")
+                    self.makeAlert(title: "에러", message: "중복된 팀 이름입니다")
                 }
             }
         }

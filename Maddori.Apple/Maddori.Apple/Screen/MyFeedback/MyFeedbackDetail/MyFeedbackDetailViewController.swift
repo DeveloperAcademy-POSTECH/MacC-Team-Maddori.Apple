@@ -281,7 +281,9 @@ final class MyFeedbackDetailViewController: BaseViewController {
     private func setupMainButton() {
         let action = UIAction { [weak self ] _ in
             if let feedbackDetail = self?.feedbackDetail {
-                self?.navigationController?.pushViewController(MyFeedbackEditViewController(feedbackDetail: feedbackDetail), animated: true)
+                let viewController = UINavigationController(rootViewController: MyFeedbackEditViewController(feedbackDetail: feedbackDetail, parentNavigationViewController: self?.navigationController ?? UINavigationController()))
+                viewController.modalPresentationStyle = .fullScreen
+                self?.present(viewController, animated: true)
             }
         }
         feedbackEditButton.addAction(action, for: .touchUpInside)

@@ -15,7 +15,9 @@ final class MyFeedbackViewController: BaseViewController {
     private var memberList: [MemberResponse] = [] {
         didSet {
             memberCollectionView.reloadData()
-            fetchCertainMemberFeedBack(type: .fetchCertainMemberFeedBack(memberId: memberList[selectedIndex].userId ?? 0))
+            if !memberList.isEmpty {            
+                fetchCertainMemberFeedBack(type: .fetchCertainMemberFeedBack(memberId: memberList[selectedIndex].userId ?? 0))
+            }
         }
     }
     
