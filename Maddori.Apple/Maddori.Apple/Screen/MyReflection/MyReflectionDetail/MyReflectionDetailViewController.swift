@@ -40,6 +40,7 @@ final class MyReflectionDetailViewController: BaseViewController {
         tableView.dataSource = self
         tableView.register(MyReflectionDetailTableViewCell.self, forCellReuseIdentifier: MyReflectionDetailTableViewCell.className)
         tableView.register(EmptyTableFeedbackView.self, forCellReuseIdentifier: EmptyTableFeedbackView.className)
+        tableView.register(MyReflectionDetailViewLastCell.self, forCellReuseIdentifier: MyReflectionDetailViewLastCell.className)
         return tableView
     }()
     private lazy var segmentControl: CustomSegmentControl = {
@@ -109,7 +110,6 @@ final class MyReflectionDetailViewController: BaseViewController {
         else {
             fetchCertainTypeFeedbackAll(type: .fetchCertainTypeFeedbackAllID(reflectionId: reflectionId, cssType: .stopType))
         }
-        tableView.reloadData()
     }
     
     // MARK: - api
@@ -141,7 +141,7 @@ final class MyReflectionDetailViewController: BaseViewController {
 
 extension MyReflectionDetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return contentArray.isEmpty ? 1 : contentArray.count
+        return contentArray.isEmpty ? 1 : contentArray.count + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -153,13 +153,20 @@ extension MyReflectionDetailViewController: UITableViewDataSource {
             tableView.isScrollEnabled = false
             return emptyCell
         } else {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: MyReflectionDetailTableViewCell.className, for: indexPath) as? MyReflectionDetailTableViewCell else { return UITableViewCell() }
-            guard let keyword = contentArray[indexPath.row].keyword,
-                  let fromLabelText = contentArray[indexPath.row].fromUser?.userName,
-                  let content = contentArray[indexPath.row].content else { return UITableViewCell() }
-            cell.configLabel(title: keyword, fromLabel: fromLabelText, content: content)
-            tableView.isScrollEnabled = true
-            return cell
+            if indexPath.row == contentArray.count {
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: MyReflectionDetailViewLastCell.className, for: indexPath) as? MyReflectionDetailViewLastCell else { return UITableViewCell() }
+                cell.isUserInteractionEnabled = false
+                return cell
+            }
+            else {
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: MyReflectionDetailTableViewCell.className, for: indexPath) as? MyReflectionDetailTableViewCell else { return UITableViewCell() }
+                guard let keyword = contentArray[indexPath.row].keyword,
+                      let fromLabelText = contentArray[indexPath.row].fromUser?.userName,
+                      let content = contentArray[indexPath.row].content else { return UITableViewCell() }
+                cell.configLabel(title: keyword, fromLabel: fromLabelText, content: content)
+                tableView.isScrollEnabled = true
+                return cell
+            }
         }
     }
 }
@@ -168,6 +175,8 @@ extension MyReflectionDetailViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if contentArray.isEmpty {
             return tableView.frame.height - 90
+        } else if indexPath.row == contentArray.count {
+            return 44
         } else {
             return 100
         }
