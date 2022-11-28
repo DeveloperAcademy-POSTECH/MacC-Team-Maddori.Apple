@@ -15,8 +15,6 @@ final class MyReflectionDetailViewController: BaseViewController {
     private var reflectionName: String
     private let reflectionId: Int
     private var contentArray: [FeedBackResponse] = []
-    private var continueArray: [FeedBackResponse] = []
-    private var stopArray: [FeedBackResponse] = []
     
     // MARK: - property
     
