@@ -27,7 +27,7 @@ final class MyReflectionViewController: BaseViewController {
     
     // MARK: - property
     
-    private let logOutButton = LogOut(type: .system)
+    private let ellipsisButton = SettingButton(type: .system)
     private lazy var myReflectionTitleLabel: UILabel = {
         let label = UILabel()
         label.setTitleFont(text: user + "님의 회고")
@@ -48,14 +48,14 @@ final class MyReflectionViewController: BaseViewController {
     
     override func setupNavigationBar() {
         super.setupNavigationBar()
-        let logOutButton = makeBarButtonItem(with: logOutButton)
-        navigationItem.rightBarButtonItem = logOutButton
+        let rightItemButton = makeBarButtonItem(with: ellipsisButton)
+        navigationItem.rightBarButtonItem = rightItemButton
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpDelegation()
-        setUpLogOutButtonAction()               
+        setUpEllipsisButtonMenu()               
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -85,16 +85,26 @@ final class MyReflectionViewController: BaseViewController {
         reflectionCollectionView.dataSource = self
     }
     
-    private func setUpLogOutButtonAction() {
-        let action = UIAction { [weak self] _ in
-            self?.makeRequestAlert(title: "로그아웃 하시겠습니까?", message: "", okTitle: "확인", cancelTitle: "취소") { _ in
-                UserDefaultHandler.clearAllData()
-                guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate
-                        as? SceneDelegate else { return }
-                sceneDelegate.logout()
-            }
+    private func setUpEllipsisButtonMenu() {
+        let menu = UIMenu(options: .displayInline, children: [
+            UIAction(title: TextLiteral.myReflectionViewControllerLogOutTitle, handler: { [weak self] _ in
+                self?.logoutUser()
+            }),
+            UIAction(title: TextLiteral.myReflectionViewControllerDeleteUser, attributes: .destructive, handler: { _ in
+                
+            })
+        ])
+        ellipsisButton.showsMenuAsPrimaryAction = true
+        ellipsisButton.menu = menu
+    }
+    
+    private func logoutUser() {
+        makeRequestAlert(title: TextLiteral.myReflectionViewControllerLogOutMessage, message: "", okTitle: "확인", cancelTitle: "취소") { _ in  
+            UserDefaultHandler.clearAllData()
+            guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate
+                    as? SceneDelegate else { return }
+            sceneDelegate.logout()
         }
-        logOutButton.addAction(action, for: .touchUpInside)
     }
     
     // MARK: - api

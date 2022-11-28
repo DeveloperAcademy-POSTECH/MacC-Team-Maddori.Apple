@@ -9,7 +9,7 @@ import UIKit
 
 import SnapKit
 
-final class LogOut: UIButton {
+final class SettingButton: UIButton {
     
     // MARK: - life cycle
     
@@ -22,7 +22,7 @@ final class LogOut: UIButton {
     required init?(coder: NSCoder) { nil }
     
     private func configUI() {
-        self.setImage(ImageLiterals.icLogOut, for: .normal)
+        self.setImage(.load(systemName: "ellipsis"), for: .normal)
         self.tintColor = .black100
     }
     
