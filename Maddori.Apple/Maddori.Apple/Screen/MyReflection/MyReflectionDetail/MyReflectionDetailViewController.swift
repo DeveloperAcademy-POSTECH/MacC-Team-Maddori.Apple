@@ -103,10 +103,14 @@ final class MyReflectionDetailViewController: BaseViewController {
     private func didChangeValue(segment: UISegmentedControl) {
         if segment.selectedSegmentIndex == 0 {
             contentArray = continueArray
-            tableView.reloadData()
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
         } else {
             contentArray = stopArray
-            tableView.reloadData()
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
         }
     }
     
