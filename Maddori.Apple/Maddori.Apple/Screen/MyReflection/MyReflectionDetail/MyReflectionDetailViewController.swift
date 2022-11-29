@@ -135,10 +135,7 @@ final class MyReflectionDetailViewController: BaseViewController {
                 self.continueArray = self.contentArray.filter { $0.type == "Continue" }
                 self.stopArray = self.contentArray.filter{ $0.type == "Stop" }
                 
-                self.contentArray = self.continueArray
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
+                self.reloadTableView(type: FeedBackDTO.continueType.rawValue)
             }
         }
     }
