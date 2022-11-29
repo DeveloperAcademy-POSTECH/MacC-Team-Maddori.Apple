@@ -50,6 +50,9 @@ final class CreateReflectionViewController: BaseViewController {
         let action = UIAction { [weak self] _ in
             picker.subviews.first?.subviews.first?.subviews.first?.backgroundColor = .white300
         }
+        let hideKeyboardAction = UIAction { [weak self] _ in
+            self?.view.endEditing(true)
+        }
         picker.datePickerMode = .date
         picker.locale = Locale(identifier: "ko_KR")
         picker.preferredDatePickerStyle = .compact
@@ -57,12 +60,16 @@ final class CreateReflectionViewController: BaseViewController {
         picker.subviews.first?.subviews.first?.subviews.first?.layer.borderWidth = 1
         picker.subviews.first?.subviews.first?.subviews.first?.layer.borderColor = UIColor.gray100.cgColor
         picker.addAction(action, for: .valueChanged)
+        picker.addAction(hideKeyboardAction, for: .editingDidBegin)
         return picker
     }()
     private lazy var timePicker: UIDatePicker = {
         let picker = UIDatePicker()
         let action = UIAction { [weak self] _ in
             picker.subviews.first?.subviews.first?.subviews.first?.backgroundColor = .white300
+        }
+        let hideKeyboardAction = UIAction { [weak self] _ in
+            self?.view.endEditing(true)
         }
         picker.datePickerMode = .time
         picker.locale = Locale(identifier: "ko_KR")
@@ -71,6 +78,7 @@ final class CreateReflectionViewController: BaseViewController {
         picker.subviews.first?.subviews.first?.layer.borderWidth = 1
         picker.subviews.first?.subviews.first?.layer.borderColor = UIColor.gray100.cgColor
         picker.addAction(action, for: .valueChanged)
+        picker.addAction(hideKeyboardAction, for: .editingDidBegin)
         return picker
     }()
     private let mainButton: MainButton = {
