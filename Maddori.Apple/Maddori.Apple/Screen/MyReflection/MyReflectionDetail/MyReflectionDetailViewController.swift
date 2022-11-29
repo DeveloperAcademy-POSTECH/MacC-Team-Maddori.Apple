@@ -15,6 +15,8 @@ final class MyReflectionDetailViewController: BaseViewController {
     private var reflectionName: String
     private let reflectionId: Int
     private var contentArray: [FeedBackResponse] = []
+    private var continueArray: [FeedBackResponse] = []
+    private var stopArray: [FeedBackResponse] = []
     
     // MARK: - property
     
@@ -61,6 +63,7 @@ final class MyReflectionDetailViewController: BaseViewController {
         super.viewDidLoad()
         setupBackButton()
         fetchCertainTypeFeedbackAll(type: .fetchCertainTypeFeedbackAllID(reflectionId: reflectionId, cssType: .continueType))
+        fetchCertainTypeFeedbackAll(type: .fetchCertainTypeFeedbackAllID(reflectionId: reflectionId, cssType: .stopType))
     }
     
     override func render() {
@@ -87,6 +90,7 @@ final class MyReflectionDetailViewController: BaseViewController {
     }
     
     // MARK: - func
+    
     override func setupNavigationBar() {
         super.setupNavigationBar()
         
@@ -98,10 +102,11 @@ final class MyReflectionDetailViewController: BaseViewController {
     
     private func didChangeValue(segment: UISegmentedControl) {
         if segment.selectedSegmentIndex == 0 {
-            fetchCertainTypeFeedbackAll(type: .fetchCertainTypeFeedbackAllID(reflectionId: reflectionId, cssType: .continueType))
-        }
-        else {
-            fetchCertainTypeFeedbackAll(type: .fetchCertainTypeFeedbackAllID(reflectionId: reflectionId, cssType: .stopType))
+            contentArray = continueArray
+            tableView.reloadData()
+        } else {
+            contentArray = stopArray
+            tableView.reloadData()
         }
     }
     
@@ -114,7 +119,11 @@ final class MyReflectionDetailViewController: BaseViewController {
         ).responseDecodable(of: BaseModel<AllCertainTypeFeedBackResponse>.self) { json in
             if let json = json.value {
                 guard let jsonDetail = json.detail else { return }
-                self.contentArray = jsonDetail.feedback
+                self.contentArray.append(contentsOf: jsonDetail.feedback)
+                self.continueArray = self.contentArray.filter { $0.type == "Continue" }
+                self.stopArray = self.contentArray.filter{ $0.type == "Stop" }
+                
+                self.contentArray = self.continueArray
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
