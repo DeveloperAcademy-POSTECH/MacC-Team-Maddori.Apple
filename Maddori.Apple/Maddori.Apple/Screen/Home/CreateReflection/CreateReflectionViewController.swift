@@ -189,6 +189,10 @@ final class CreateReflectionViewController: BaseViewController {
         return combinedDate
     }
     
+    override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
+    
     // MARK: - selector
     
     @objc private func keyboardWillShow(notification:NSNotification) {
