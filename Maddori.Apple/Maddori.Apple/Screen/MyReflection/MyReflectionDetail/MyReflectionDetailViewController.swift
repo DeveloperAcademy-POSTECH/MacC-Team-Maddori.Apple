@@ -18,14 +18,7 @@ final class MyReflectionDetailViewController: BaseViewController {
     
     // MARK: - property
     
-    private lazy var backButton: BackButton = {
-        let button = BackButton(type: .system)
-        let action = UIAction { [weak self] _ in
-            // FIXME
-        }
-        button.addAction(action, for: .touchUpInside)
-        return button
-    }()
+    private lazy var backButton = BackButton(type: .system)
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.textColor = .black100
