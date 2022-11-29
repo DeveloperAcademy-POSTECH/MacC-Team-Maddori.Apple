@@ -130,7 +130,7 @@ extension MyFeedbackCollectionView: UICollectionViewDelegate {
                                                reflectionStatus: reflectionStatus ?? .Before
                 )
                 didTappedCell?(data)
-            } else {s
+            } else {
                 let continueArray = data.continueArray
                 let stopArray = data.stopArray
                 let reflectionStatus = ReflectionStatus.init(rawValue: data.reflectionStatus ?? "Before")
