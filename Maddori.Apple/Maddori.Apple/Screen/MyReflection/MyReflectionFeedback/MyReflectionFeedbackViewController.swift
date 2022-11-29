@@ -56,7 +56,7 @@ final class MyReflectionFeedbackViewController: BaseViewController {
     }()
     private lazy var feedbackFromText: UILabel = {
         let label = UILabel()
-        label.setTextWithLineHeight(text: model.fromUser?.userName, lineHeight: 24)
+        label.setTextWithLineHeight(text: model.fromUser?.userName ?? TextLiteral.myReflectionViewControllerDeleteUserTitle, lineHeight: 24)
         label.textColor = .gray400
         label.font = .body1
         return label
