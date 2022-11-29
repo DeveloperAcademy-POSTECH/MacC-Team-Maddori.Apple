@@ -116,6 +116,7 @@ extension MyFeedbackCollectionView: UICollectionViewDelegate {
                 let start = indexPath.section == 0
                 ? feedbackInfo?.continueArray[indexPath.item].startContent
                 : feedbackInfo?.stopArray[indexPath.item].startContent
+                let reflectionStatus = ReflectionStatus.init(rawValue: feedbackInfo?.reflectionStatus ?? "Before")
                 
                 let data = FeedbackFromMeModel(reflectionId: reflectionId,
                                                feedbackId: feedbackId,
@@ -123,11 +124,14 @@ extension MyFeedbackCollectionView: UICollectionViewDelegate {
                                                feedbackType: indexPath.section == 0 ? .continueType : .stopType,
                                                keyword: keyword,
                                                info: info,
-                                               start: start)
+                                               start: start,
+                                               reflectionStatus: reflectionStatus ?? .Before
+                )
                 didTappedCell?(data)
             } else {
                 if let continueArray = feedbackInfo?.continueArray,
                    let stopArray = feedbackInfo?.stopArray {
+                    let reflectionStatus = ReflectionStatus.init(rawValue: feedbackInfo?.reflectionStatus ?? "Before")
                     if !continueArray.isEmpty {
                         let data = FeedbackFromMeModel(reflectionId: feedbackInfo?.reflectionId ?? 0,
                                                        feedbackId: continueArray[indexPath.item].id ?? 0,
@@ -135,7 +139,9 @@ extension MyFeedbackCollectionView: UICollectionViewDelegate {
                                                        feedbackType: .continueType,
                                                        keyword: continueArray[indexPath.item].keyword ?? "",
                                                        info: continueArray[indexPath.item].content ?? "",
-                                                       start: continueArray[indexPath.item].startContent)
+                                                       start: continueArray[indexPath.item].startContent,
+                                                       reflectionStatus: reflectionStatus ?? .Before
+                        )
                         didTappedCell?(data)
                     } else {
                         let data = FeedbackFromMeModel(reflectionId: feedbackInfo?.reflectionId ?? 0,
@@ -144,7 +150,9 @@ extension MyFeedbackCollectionView: UICollectionViewDelegate {
                                                        feedbackType: .stopType,
                                                        keyword: stopArray[indexPath.item].keyword ?? "",
                                                        info: stopArray[indexPath.item].content ?? "",
-                                                       start: stopArray[indexPath.item].startContent)
+                                                       start: stopArray[indexPath.item].startContent,
+                                                       reflectionStatus: reflectionStatus ?? .Before
+                        )
                         didTappedCell?(data)
                     }
                 }
