@@ -60,7 +60,7 @@ final class MyReflectionViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        dispatchAllReflection(type: .fetchPastReflectionList(teamId: UserDefaultStorage.teamId))
+        fetchAllReflection(type: .fetchPastReflectionList(teamId: UserDefaultStorage.teamId))
     }
     
     override func render() {
@@ -126,7 +126,7 @@ final class MyReflectionViewController: BaseViewController {
     
     // MARK: - api
     
-    private func dispatchAllReflection(type: MyReflectionEndPoint<EncodeDTO>) {
+    private func fetchAllReflection(type: MyReflectionEndPoint<EncodeDTO>) {
         AF.request(type.address,
                    method: type.method,
                    headers: type.headers
