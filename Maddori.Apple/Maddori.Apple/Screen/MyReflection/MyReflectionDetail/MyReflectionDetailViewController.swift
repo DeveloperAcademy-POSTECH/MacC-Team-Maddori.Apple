@@ -91,6 +91,20 @@ final class MyReflectionDetailViewController: BaseViewController {
     
     // MARK: - func
     
+    private func reloadTableView(type: String) {
+        if type == FeedBackDTO.continueType.rawValue {
+            contentArray = continueArray
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        } else {
+            contentArray = stopArray
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+    }
+    
     override func setupNavigationBar() {
         super.setupNavigationBar()
         
@@ -102,15 +116,9 @@ final class MyReflectionDetailViewController: BaseViewController {
     
     private func didChangeValue(segment: UISegmentedControl) {
         if segment.selectedSegmentIndex == 0 {
-            contentArray = continueArray
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
+            reloadTableView(type: FeedBackDTO.continueType.rawValue)
         } else {
-            contentArray = stopArray
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
+            reloadTableView(type: FeedBackDTO.stopType.rawValue)
         }
     }
     
