@@ -1,5 +1,5 @@
 //
-//  LogOutButton.swift
+//  SettingButton.swift
 //  Maddori.Apple
 //
 //  Created by LeeSungHo on 2022/11/23.
@@ -9,7 +9,7 @@ import UIKit
 
 import SnapKit
 
-final class LogOut: UIButton {
+final class SettingButton: UIButton {
     
     // MARK: - life cycle
     
@@ -22,7 +22,7 @@ final class LogOut: UIButton {
     required init?(coder: NSCoder) { nil }
     
     private func configUI() {
-        self.setImage(ImageLiterals.icLogOut, for: .normal)
+        self.setImage(ImageLiterals.icEllipsis, for: .normal)
         self.tintColor = .black100
     }
     

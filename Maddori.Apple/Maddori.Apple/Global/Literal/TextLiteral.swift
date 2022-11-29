@@ -167,4 +167,12 @@ enum TextLiteral {
     
     static let joinReflectionButtonStatusText: String = "회고가 시작되었습니다!"
     static let joinReflectionTouchToEnterLabel: String = "터치하여 회고에 참여해주세요"
+    
+    // MARK: - MyReflectionViewController
+    
+    static let myReflectionViewControllerLogOutTitle: String = "로그아웃"
+    static let myReflectionViewControllerLogOutMessage: String = "로그아웃 하시겠습니까?"
+    static let myReflectionViewControllerDeleteUser: String = "회원탈퇴"
+    static let myReflectionViewControllerDeleteUserAlertTitle: String = "회원탈퇴 하시겠습니까?"
+    static let myReflectionViewControllerDeleteUserAlertMessage: String = "모든 회고와 피드백 정보가 사라지며, \n되돌릴 수 없습니다."
 }

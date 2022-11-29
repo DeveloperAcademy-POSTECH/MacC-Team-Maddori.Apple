@@ -10,6 +10,7 @@ import Alamofire
 enum MyReflectionEndPoint<T: Encodable>: EndPointable {
     case fetchPastReflectionList(teamId: Int)
     case fetchCertainTypeFeedbackAllID(reflectionId: Int, cssType: FeedBackDTO)
+    case deleteUser
     
     var address: String {
         switch self {
@@ -17,6 +18,8 @@ enum MyReflectionEndPoint<T: Encodable>: EndPointable {
             return "\(UrlLiteral.baseUrl)/teams/\(teamId)/reflections"
         case .fetchCertainTypeFeedbackAllID(let reflectionId, let cssType):
             return "\(UrlLiteral.baseUrl)/teams/\(UserDefaultStorage.teamId)/reflections/\(reflectionId)/feedbacks?type=\(cssType.rawValue)"
+        case .deleteUser:
+            return "\(UrlLiteral.baseUrl)/login/signout"
         }
     }
     
@@ -26,6 +29,8 @@ enum MyReflectionEndPoint<T: Encodable>: EndPointable {
             return .get
         case .fetchCertainTypeFeedbackAllID:
             return .get
+        case .deleteUser:
+            return .delete
         }
     }
     
@@ -34,6 +39,8 @@ enum MyReflectionEndPoint<T: Encodable>: EndPointable {
         case .fetchPastReflectionList:
             return nil
         case .fetchCertainTypeFeedbackAllID:
+            return nil
+        case .deleteUser:
             return nil
         }
     }
@@ -47,6 +54,12 @@ enum MyReflectionEndPoint<T: Encodable>: EndPointable {
             ]
             return HTTPHeaders(headers)
         case .fetchCertainTypeFeedbackAllID(_, _):
+            let headers = [
+                "access_token": "\(UserDefaultStorage.accessToken)",
+                "refresh_token": "\(UserDefaultStorage.refreshToken)"
+            ]
+            return HTTPHeaders(headers)
+        case .deleteUser:
             let headers = [
                 "access_token": "\(UserDefaultStorage.accessToken)",
                 "refresh_token": "\(UserDefaultStorage.refreshToken)"
