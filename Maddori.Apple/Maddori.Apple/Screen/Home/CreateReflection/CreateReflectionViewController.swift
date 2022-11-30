@@ -50,6 +50,9 @@ final class CreateReflectionViewController: BaseViewController {
         let action = UIAction { [weak self] _ in
             picker.subviews.first?.subviews.first?.subviews.first?.backgroundColor = .white300
         }
+        let hideKeyboardAction = UIAction { [weak self] _ in
+            self?.view.endEditing(true)
+        }
         picker.datePickerMode = .date
         picker.locale = Locale(identifier: "ko_KR")
         picker.preferredDatePickerStyle = .compact
@@ -57,12 +60,16 @@ final class CreateReflectionViewController: BaseViewController {
         picker.subviews.first?.subviews.first?.subviews.first?.layer.borderWidth = 1
         picker.subviews.first?.subviews.first?.subviews.first?.layer.borderColor = UIColor.gray100.cgColor
         picker.addAction(action, for: .valueChanged)
+        picker.addAction(hideKeyboardAction, for: .editingDidBegin)
         return picker
     }()
     private lazy var timePicker: UIDatePicker = {
         let picker = UIDatePicker()
         let action = UIAction { [weak self] _ in
             picker.subviews.first?.subviews.first?.subviews.first?.backgroundColor = .white300
+        }
+        let hideKeyboardAction = UIAction { [weak self] _ in
+            self?.view.endEditing(true)
         }
         picker.datePickerMode = .time
         picker.locale = Locale(identifier: "ko_KR")
@@ -71,6 +78,7 @@ final class CreateReflectionViewController: BaseViewController {
         picker.subviews.first?.subviews.first?.layer.borderWidth = 1
         picker.subviews.first?.subviews.first?.layer.borderColor = UIColor.gray100.cgColor
         picker.addAction(action, for: .valueChanged)
+        picker.addAction(hideKeyboardAction, for: .editingDidBegin)
         return picker
     }()
     private let mainButton: MainButton = {
@@ -84,6 +92,7 @@ final class CreateReflectionViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupAddReflection()
+        setupNotificationCenter()
     }
     
     override func render() {
@@ -131,6 +140,11 @@ final class CreateReflectionViewController: BaseViewController {
     }
     
     // MARK: - setup
+    
+    private func setupNotificationCenter() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
     
     private func setupAddReflection() {
         let action = UIAction { [weak self] _ in
@@ -181,6 +195,26 @@ final class CreateReflectionViewController: BaseViewController {
         guard let combinedDate = calendar.date(from: combinedDateComponents) else { return Date() }
         
         return combinedDate
+    }
+    
+    override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
+    
+    // MARK: - selector
+    
+    @objc private func keyboardWillShow(notification:NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            UIView.animate(withDuration: 0.2, animations: {
+                self.mainButton.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height + 10)
+            })
+        }
+    }
+    
+    @objc private func keyboardWillHide(notification:NSNotification) {
+        UIView.animate(withDuration: 0.2, animations: {
+            self.mainButton.transform = .identity
+        })
     }
     
     // MARK: - api
