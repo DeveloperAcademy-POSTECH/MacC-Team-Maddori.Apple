@@ -131,6 +131,7 @@ enum TextLiteral {
     static let myFeedbackDetailViewControllerEditButtonText: String = "수정하러 가기"
     static let myFeedbackDetailViewControllerReflectionIsStartedLabel: String = "회고가 시작되었습니다"
     static let myFeedbackDetailViewControllerBeforeReflectionLabel: String = "담아둔 피드백은 회고 시간 전까지 수정 가능합니다"
+    static let myFeedbackDetailViewControllerBeforeReflectionLabelNotBefore: String = "회고가 시작되어 수정할 수 없습니다"
     
     // MARK: - AlertViewController
     
