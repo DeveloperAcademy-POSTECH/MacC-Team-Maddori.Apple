@@ -105,7 +105,6 @@ final class MyFeedbackDetailViewController: BaseViewController {
     private lazy var editFeedbackUntilLabel: UILabel = {
         let label = UILabel()
         label.setTextWithLineHeight(text: TextLiteral.myFeedbackDetailViewControllerBeforeReflectionLabel, lineHeight: 22)
-        label.text = TextLiteral.myFeedbackDetailViewControllerBeforeReflectionLabel
         label.textColor = .gray400
         label.font = .body2
         return label
@@ -130,6 +129,7 @@ final class MyFeedbackDetailViewController: BaseViewController {
         super.viewDidLoad()
         setupCloseButton()
         setupMainButton()
+        setupIsProgressingStatus()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -265,6 +265,15 @@ final class MyFeedbackDetailViewController: BaseViewController {
         if feedbackDetail.start == nil || feedbackDetail.start == "" {
             feedbackStartLabel.isHidden = true
             feedbackStartText.isHidden = true
+        }
+    }
+    
+    private func setupIsProgressingStatus() {
+        if feedbackDetail.reflectionStatus != .Before {
+            navigationItem.setRightBarButton(nil, animated: false)
+            
+            editFeedbackUntilLabel.setTextWithLineHeight(text: TextLiteral.myFeedbackDetailViewControllerBeforeReflectionLabelNotBefore, lineHeight: 22)
+            feedbackEditButton.isDisabled = true
         }
     }
     
