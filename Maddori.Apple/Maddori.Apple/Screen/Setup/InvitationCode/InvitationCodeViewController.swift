@@ -43,7 +43,7 @@ final class InvitationCodeViewController: BaseViewController {
         button.setTitleColor(UIColor.blue200, for: .normal)
         button.titleLabel?.font = .label2
         button.backgroundColor = .gray100
-        button.layer.cornerRadius = 4
+        button.layer.cornerRadius = 7
         return button
     }()
     private lazy var startButton: MainButton = {
