@@ -14,6 +14,7 @@ final class InvitationCodeViewController: BaseViewController {
     
     let teamName: String
     let invitationCode: String
+    private var isTappedCopyButton: Bool = false
     
     init(teamName: String, invitationCode: String) {
         self.teamName = teamName
@@ -138,13 +139,18 @@ final class InvitationCodeViewController: BaseViewController {
     // MARK: - func
     
     private func showToastPopUp() {
+        if !isTappedCopyButton {
+            isTappedCopyButton = true
             UIView.animate(withDuration: 0.5, delay: 0, animations: {
                 self.toastView.transform = CGAffineTransform(translationX: 0, y: 115)
-            }, completion: {_ in
+            }, completion: { _ in
                 UIView.animate(withDuration: 1, delay: 0.8, animations: {
                     self.toastView.transform = .identity
+                }, completion: { _ in
+                    self.isTappedCopyButton = false
                 })
             })
+        }
     }
     
     private func setGradientToastView() {
