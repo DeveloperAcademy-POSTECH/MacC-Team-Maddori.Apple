@@ -174,9 +174,9 @@ final class InProgressViewController: BaseViewController {
     }
     
     private func presentDetailView(feedbackInfo: ReflectionInfoModel) {
-         let viewController = InProgressDetailViewController(feedbackInfo: feedbackInfo)
-         self.present(viewController, animated: true)
-     }
+        let viewController = InProgressDetailViewController(feedbackInfo: feedbackInfo)
+        self.present(viewController, animated: true)
+    }
     
     // MARK: - api
     
