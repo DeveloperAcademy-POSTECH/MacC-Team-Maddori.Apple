@@ -45,6 +45,12 @@ final class InProgressDetailViewController: BaseViewController {
         label.textColor = .black100
         return label
     }()
+    private let feedbackScrollView = UIScrollView()
+    private let feedbackStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        return stackView
+    }()
     private lazy var infoLabel: UILabel = {
         let label = UILabel()
         label.text = feedbackInfo.info
@@ -64,7 +70,7 @@ final class InProgressDetailViewController: BaseViewController {
     }()
     
     // MARK: - life cycle
-        
+    
     override func render() {
         view.addSubview(closeButton)
         closeButton.snp.makeConstraints {
@@ -84,17 +90,33 @@ final class InProgressDetailViewController: BaseViewController {
             $0.top.equalTo(sendFromLabel.snp.bottom).offset(10)
         }
         
-        view.addSubview(infoLabel)
+        view.addSubview(feedbackScrollView)
+        feedbackScrollView.snp.makeConstraints {
+            $0.leading.trailing.bottom.equalToSuperview()
+            $0.top.equalTo(keywordLabel.snp.bottom).offset(20)
+        }
+        
+        feedbackScrollView.addSubview(feedbackStackView)
+        feedbackStackView.snp.makeConstraints {
+            $0.edges.width.equalToSuperview()
+        }
+        
+        feedbackStackView.addSubview(infoLabel)
         infoLabel.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-            $0.top.equalTo(keywordLabel.snp.bottom).offset(32)
+            $0.top.equalToSuperview().inset(32)
         }
         
         if !feedbackInfo.start.isEmpty {
-            view.addSubview(startView)
+            feedbackStackView.addSubview(startView)
             startView.snp.makeConstraints {
                 $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
                 $0.top.equalTo(infoLabel.snp.bottom).offset(28)
+                $0.bottom.equalToSuperview()
+            }
+        } else {
+            infoLabel.snp.makeConstraints {
+                $0.bottom.equalToSuperview()
             }
         }
     }
