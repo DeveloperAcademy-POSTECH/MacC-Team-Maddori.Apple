@@ -69,7 +69,8 @@ final class MyFeedbackViewController: BaseViewController {
                                            feedbackType: data.feedbackType,
                                            keyword: data.keyword,
                                            info: data.info,
-                                           start: data.start
+                                           start: data.start,
+                                           reflectionStatus: data.reflectionStatus
             )
             self?.navigationController?.pushViewController(MyFeedbackDetailViewController(feedbackDetail: data), animated: true)
         }

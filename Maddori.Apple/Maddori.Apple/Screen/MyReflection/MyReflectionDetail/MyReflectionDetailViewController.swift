@@ -161,8 +161,8 @@ extension MyReflectionDetailViewController: UITableViewDataSource {
             else {
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: MyReflectionDetailTableViewCell.className, for: indexPath) as? MyReflectionDetailTableViewCell else { return UITableViewCell() }
                 guard let keyword = contentArray[indexPath.row].keyword,
-                      let fromLabelText = contentArray[indexPath.row].fromUser?.userName,
                       let content = contentArray[indexPath.row].content else { return UITableViewCell() }
+                let fromLabelText = contentArray[indexPath.row].fromUser?.userName ?? TextLiteral.myReflectionViewControllerDeleteUserTitle
                 cell.configLabel(title: keyword, fromLabel: fromLabelText, content: content)
                 tableView.isScrollEnabled = true
                 return cell
