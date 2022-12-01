@@ -119,8 +119,8 @@
 		7E6B662F28FE887300C3BEEF /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6B662E28FE887300C3BEEF /* UILabel+Extension.swift */; };
 		7E7F160B2921CC4800C6BE96 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7F160A2921CC4800C6BE96 /* CustomTabBarController.swift */; };
 		7E7F160F2921CD4A00C6BE96 /* UITabBar+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7F160E2921CD4A00C6BE96 /* UITabBar+Extension.swift */; };
-		7E8CDC67292E19B000984742 /* SettingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8CDC66292E19B000984742 /* SettingButton.swift */; };
 		7E8753E129348BB000FBBF83 /* MyReflectionDetailViewLastCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8753E029348BB000FBBF83 /* MyReflectionDetailViewLastCell.swift */; };
+		7E8CDC67292E19B000984742 /* SettingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8CDC66292E19B000984742 /* SettingButton.swift */; };
 		7EB4D58229011EF7001FC396 /* JoinTeamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB4D58129011EF7001FC396 /* JoinTeamViewController.swift */; };
 		7EE38BAD2925DDD200FD738D /* EncodeDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE38BAC2925DDD200FD738D /* EncodeDTO.swift */; };
 		7EE38BB3292623F500FD738D /* MyReflectionEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE38BB2292623F500FD738D /* MyReflectionEndPoint.swift */; };
@@ -248,8 +248,8 @@
 		7E6B662E28FE887300C3BEEF /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
 		7E7F160A2921CC4800C6BE96 /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 		7E7F160E2921CD4A00C6BE96 /* UITabBar+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITabBar+Extension.swift"; sourceTree = "<group>"; };
-		7E8CDC66292E19B000984742 /* SettingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingButton.swift; sourceTree = "<group>"; };
 		7E8753E029348BB000FBBF83 /* MyReflectionDetailViewLastCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReflectionDetailViewLastCell.swift; sourceTree = "<group>"; };
+		7E8CDC66292E19B000984742 /* SettingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingButton.swift; sourceTree = "<group>"; };
 		7EB4D58129011EF7001FC396 /* JoinTeamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinTeamViewController.swift; sourceTree = "<group>"; };
 		7EE38BAC2925DDD200FD738D /* EncodeDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncodeDTO.swift; sourceTree = "<group>"; };
 		7EE38BB2292623F500FD738D /* MyReflectionEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReflectionEndPoint.swift; sourceTree = "<group>"; };
@@ -1275,7 +1275,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.2.2;
 				PRODUCT_BUNDLE_IDENTIFIER = mingwan.Maddori.Apple.keygo;
 				PRODUCT_NAME = Maddori.Apple;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1310,7 +1310,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.2.2;
 				PRODUCT_BUNDLE_IDENTIFIER = mingwan.Maddori.Apple.keygo;
 				PRODUCT_NAME = Maddori.Apple;
 				PROVISIONING_PROFILE_SPECIFIER = "";
