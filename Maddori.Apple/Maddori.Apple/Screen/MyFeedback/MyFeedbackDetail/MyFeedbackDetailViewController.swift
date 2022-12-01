@@ -10,9 +10,6 @@ import UIKit
 import SnapKit
 
 final class MyFeedbackDetailViewController: BaseViewController {
-    
-    // FIXME: - 추후 API 연결 (현재는 mock data)
-    
     private let feedbackDetail: FeedbackFromMeModel
     private let reflectionDate: Date? = nil
     

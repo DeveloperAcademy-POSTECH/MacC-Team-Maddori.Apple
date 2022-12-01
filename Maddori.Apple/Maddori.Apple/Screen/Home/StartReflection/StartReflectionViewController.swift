@@ -74,7 +74,6 @@ final class StartReflectionViewController: BaseViewController {
     private lazy var startButton: UIButton = {
         let button = UIButton(type: .system)
         let action = UIAction { [weak self] _ in
-            // FIXME: - dismisschildview를 해서 blur를 내린 뒤 present?
             self?.dismiss(animated: false) {
                 self?.presentSelectReflectionMemberViewController()
             }

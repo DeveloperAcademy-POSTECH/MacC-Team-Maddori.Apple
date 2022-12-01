@@ -15,7 +15,6 @@ final class MemberCollectionView: UIView {
         case addFeedback
         case progressReflection
     }
-    // FIXME: - 목업 데이터 추후 데이터 연결한 후 삭제할 내용
     
     var type: CollectionType
     var currentToUserId = 0

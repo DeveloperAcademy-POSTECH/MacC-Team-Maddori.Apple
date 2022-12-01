@@ -142,7 +142,6 @@ final class HomeViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        // FIXME: - teamId 와 userId는 일단은 UserDefaults에서 -> 추후에 토큰으로
         fetchCertainTeamDetail(type: .fetchCertainTeamDetail)
         fetchCurrentReflectionDetail(type: .fetchCurrentReflectionDetail)
     }

@@ -33,7 +33,6 @@ final class ReflectionNameView: UIView {
         textField.setLeftPadding()
         textField.placeholder = TextLiteral.createReflectionViewControllerTextFieldPlaceHolder
         textField.font = .body1
-        // FIXME: - 텍스트필드의 글자색이 피그마에 없음
         textField.textColor = .black100
         return textField
     }()
