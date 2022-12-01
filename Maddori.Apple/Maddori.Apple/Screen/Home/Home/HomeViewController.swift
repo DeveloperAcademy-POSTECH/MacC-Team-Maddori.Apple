@@ -403,7 +403,6 @@ final class HomeViewController: BaseViewController {
                             self.addFeedbackButton.isHidden = false
                             self.showPlanLabelButton()
                             self.restoreView()
-                            self.resetKeywordList()
                         case .Before:
                             let reflectionDate = reflectionDetail?.reflectionDate?.formatDateString(to: "M월 d일 a h시 m분")
                             self.descriptionLabel.text = "다음 회고는 \(reflectionDate ?? String(describing: Date()))입니다"
