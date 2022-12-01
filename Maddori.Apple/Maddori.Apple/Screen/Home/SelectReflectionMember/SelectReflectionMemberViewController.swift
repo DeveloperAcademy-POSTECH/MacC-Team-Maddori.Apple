@@ -57,7 +57,6 @@ final class SelectReflectionMemberViewController: BaseViewController {
             guard let reflectionId = self?.reflectionId else { return }
             UserDefaultHandler.setHasSeenAlert(to: false)
             self?.patchEndReflection(type: .patchEndReflection(reflectionId: reflectionId))
-            self?.dismiss(animated: true)
         }
         button.addAction(action, for: .touchUpInside)
         button.isDisabled = true
@@ -134,8 +133,10 @@ final class SelectReflectionMemberViewController: BaseViewController {
         AF.request(type.address,
                    method: type.method,
                    headers: type.headers
-        ).responseDecodable(of: BaseModel<ReflectionInfoResponse>.self) { json in
-            dump(json)
+        ).responseDecodable(of: BaseModel<ReflectionInfoResponse>.self) { [weak self] json in
+            if let _ = json.value {
+                self?.dismiss(animated: true)
+            }
         }
     }
 }
