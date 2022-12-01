@@ -276,14 +276,14 @@ final class HomeViewController: BaseViewController {
     }
     
     private func presentSelectReflectionMemberViewController() {
-        let viewController = UINavigationController(rootViewController: SelectReflectionMemberViewController(reflectionId: currentReflectionId))
+        let viewController = UINavigationController(rootViewController: SelectReflectionMemberViewController(reflectionId: currentReflectionId, isAdmin: self.isAdmin))
         viewController.modalPresentationStyle = .fullScreen
         present(viewController, animated: true)
     }
     
     private func showStartReflectionView() {
         guard let navigationController = self.navigationController else { return }
-        let viewController = StartReflectionViewController(reflectionId: currentReflectionId, navigationViewController: navigationController)
+        let viewController = StartReflectionViewController(reflectionId: currentReflectionId, navigationViewController: navigationController, isAdmin: self.isAdmin)
         viewController.modalPresentationStyle = .overFullScreen
         present(viewController, animated: true)
         hasSeenReflectionAlert = true
@@ -367,6 +367,7 @@ final class HomeViewController: BaseViewController {
                       let teamName = json.detail?.teamName,
                       let invitationCode = json.detail?.invitationCode
                 else { return }
+                self.isAdmin = isAdmin
                 DispatchQueue.main.async {
                     self.teamNameLabel.setTitleFont(text: teamName)
                     self.setupCopyCodeButton(code: invitationCode)
