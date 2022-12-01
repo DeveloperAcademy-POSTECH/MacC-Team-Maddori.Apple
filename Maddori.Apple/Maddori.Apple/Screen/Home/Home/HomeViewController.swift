@@ -283,7 +283,8 @@ final class HomeViewController: BaseViewController {
     }
     
     private func showStartReflectionView() {
-        let viewController = StartReflectionViewController(reflectionId: currentReflectionId)
+        guard let navigationController = self.navigationController else { return }
+        let viewController = StartReflectionViewController(reflectionId: currentReflectionId, navigationViewController: navigationController)
         viewController.modalPresentationStyle = .overFullScreen
         present(viewController, animated: true)
         hasSeenReflectionAlert = true
@@ -347,6 +348,14 @@ final class HomeViewController: BaseViewController {
         }
     }
     
+    private func resetKeywordList() {
+        keywordList = [TextLiteral.homeViewControllerCollectionViewEmtpyText0,
+                       TextLiteral.homeViewControllerCollectionViewEmtpyText1,
+                       TextLiteral.homeViewControllerCollectionViewEmtpyText2,
+                       TextLiteral.homeViewControllerCollectionViewEmtpyText3,
+                       TextLiteral.homeViewControllerCollectionViewEmtpyText4]
+    }
+    
     // MARK: - api
     
     private func fetchCertainTeamDetail(type: HomeEndPoint<VoidModel>) {
@@ -383,6 +392,9 @@ final class HomeViewController: BaseViewController {
                 
                 self.currentReflectionId = reflectionId
                 if let reflectionKeywordList = reflectionDetail?.reflectionKeywords {
+                    if reflectionKeywordList.isEmpty {
+                        self.resetKeywordList()
+                    }
                     self.convertFetchedKeywordList(of: reflectionKeywordList)
                     DispatchQueue.main.async {
                         switch reflectionStatus {
@@ -392,6 +404,7 @@ final class HomeViewController: BaseViewController {
                             self.addFeedbackButton.isHidden = false
                             self.showPlanLabelButton()
                             self.restoreView()
+                            self.resetKeywordList()
                         case .Before:
                             let reflectionDate = reflectionDetail?.reflectionDate?.formatDateString(to: "M월 d일 a h시 m분")
                             self.descriptionLabel.text = "다음 회고는 \(reflectionDate ?? String(describing: Date()))입니다"

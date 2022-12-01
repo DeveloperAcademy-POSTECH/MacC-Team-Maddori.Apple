@@ -12,9 +12,11 @@ import SnapKit
 final class StartReflectionViewController: BaseViewController {
     
     let reflectionId: Int
+    let navigationViewController: UINavigationController
     
-    init(reflectionId: Int) {
+    init(reflectionId: Int, navigationViewController: UINavigationController) {
         self.reflectionId = reflectionId
+        self.navigationViewController = navigationViewController
         super.init()
     }
     
@@ -73,7 +75,9 @@ final class StartReflectionViewController: BaseViewController {
         let button = UIButton(type: .system)
         let action = UIAction { [weak self] _ in
             // FIXME: - dismisschildview를 해서 blur를 내린 뒤 present?
-            self?.presentSelectReflectionMemberViewController()
+            self?.dismiss(animated: false) {
+                self?.presentSelectReflectionMemberViewController()
+            }
         }
         button.setTitle(TextLiteral.startReflectionViewControllerStartText, for: .normal)
         button.titleLabel?.font = .label2
@@ -159,9 +163,9 @@ final class StartReflectionViewController: BaseViewController {
     // MARK: - func
     
     private func presentSelectReflectionMemberViewController() {
-        let viewController = UINavigationController(rootViewController: SelectReflectionMemberViewController(reflectionId: reflectionId))
+        let viewController = UINavigationController(rootViewController: SelectReflectionMemberViewController(reflectionId: self.reflectionId))
         viewController.modalPresentationStyle = .fullScreen
-        present(viewController, animated: true)
+        self.navigationViewController.present(viewController, animated: true)
     }
     
     // MARK: - selector
