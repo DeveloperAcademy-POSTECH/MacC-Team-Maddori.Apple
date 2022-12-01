@@ -165,17 +165,6 @@ final class CreateReflectionViewController: BaseViewController {
     
     // MARK: - func
     
-    private func showStartReflectionView() {
-        let childView = StartReflectionViewController(reflectionId: reflectionId)
-        childView.view.alpha = 0
-        self.addChild(childView)
-        self.view.addSubview(childView.view)
-        self.didMove(toParent: childView)
-        UIView.animate(withDuration: 1, animations: {
-            childView.view.alpha = 1
-        })
-    }
-    
     private func combineDateAndTime() -> Date {
         let date = datePicker.date
         let time = timePicker.date
