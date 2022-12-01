@@ -15,17 +15,12 @@ final class MyReflectionDetailViewController: BaseViewController {
     private var reflectionName: String
     private let reflectionId: Int
     private var contentArray: [FeedBackResponse] = []
+    private var continueArray: [FeedBackResponse] = []
+    private var stopArray: [FeedBackResponse] = []
     
     // MARK: - property
     
-    private lazy var backButton: BackButton = {
-        let button = BackButton(type: .system)
-        let action = UIAction { [weak self] _ in
-            // FIXME
-        }
-        button.addAction(action, for: .touchUpInside)
-        return button
-    }()
+    private lazy var backButton = BackButton(type: .system)
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.textColor = .black100
@@ -68,6 +63,7 @@ final class MyReflectionDetailViewController: BaseViewController {
         super.viewDidLoad()
         setupBackButton()
         fetchCertainTypeFeedbackAll(type: .fetchCertainTypeFeedbackAllID(reflectionId: reflectionId, cssType: .continueType))
+        fetchCertainTypeFeedbackAll(type: .fetchCertainTypeFeedbackAllID(reflectionId: reflectionId, cssType: .stopType))
     }
     
     override func render() {
@@ -94,6 +90,21 @@ final class MyReflectionDetailViewController: BaseViewController {
     }
     
     // MARK: - func
+    
+    private func reloadTableView(type: String) {
+        if type == FeedBackDTO.continueType.rawValue {
+            contentArray = continueArray
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        } else {
+            contentArray = stopArray
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+    }
+    
     override func setupNavigationBar() {
         super.setupNavigationBar()
         
@@ -105,10 +116,9 @@ final class MyReflectionDetailViewController: BaseViewController {
     
     private func didChangeValue(segment: UISegmentedControl) {
         if segment.selectedSegmentIndex == 0 {
-            fetchCertainTypeFeedbackAll(type: .fetchCertainTypeFeedbackAllID(reflectionId: reflectionId, cssType: .continueType))
-        }
-        else {
-            fetchCertainTypeFeedbackAll(type: .fetchCertainTypeFeedbackAllID(reflectionId: reflectionId, cssType: .stopType))
+            reloadTableView(type: FeedBackDTO.continueType.rawValue)
+        } else {
+            reloadTableView(type: FeedBackDTO.stopType.rawValue)
         }
     }
     
@@ -121,10 +131,11 @@ final class MyReflectionDetailViewController: BaseViewController {
         ).responseDecodable(of: BaseModel<AllCertainTypeFeedBackResponse>.self) { json in
             if let json = json.value {
                 guard let jsonDetail = json.detail else { return }
-                self.contentArray = jsonDetail.feedback
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
+                self.contentArray.append(contentsOf: jsonDetail.feedback)
+                self.continueArray = self.contentArray.filter { $0.type == "Continue" }
+                self.stopArray = self.contentArray.filter{ $0.type == "Stop" }
+                
+                self.reloadTableView(type: FeedBackDTO.continueType.rawValue)
             }
         }
     }
