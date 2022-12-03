@@ -215,7 +215,7 @@ class SendFeedbackViewController: BaseViewController {
     func didTappedDoneButton() {
         currentStepString = feedbackContentTextView.text
         
-        if contentString.isEmpty || contentString == currentStepString {
+        if contentString.isEmpty {
             contentString = currentStepString
         } else {
             contentString = contentString + "\n\n" + currentStepString
