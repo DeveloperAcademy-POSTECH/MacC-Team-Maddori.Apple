@@ -21,6 +21,8 @@ class SendFeedbackViewController: BaseViewController {
     var step: Int
     var contentString: String?
     
+    var keyboardSize: CGRect = .zero
+    
     init(step: Int, content: String?) {
         self.step = step
         self.contentString = content
@@ -104,6 +106,7 @@ class SendFeedbackViewController: BaseViewController {
         let view = UITextView()
         // FIXME: 추가해야할게 있다면 여기에~
         view.backgroundColor = .white200
+        view.font = .body1
         return view
     }()
     private let doneButtonView: UIView = {
@@ -161,16 +164,9 @@ class SendFeedbackViewController: BaseViewController {
             $0.height.equalTo(1)
         }
         
-        view.addSubview(doneButtonView)
-        doneButtonView.snp.makeConstraints {
-            $0.horizontalEdges.equalToSuperview()
-            $0.bottom.equalTo(view.safeAreaLayoutGuide)
-            $0.height.equalTo(Size.buttonViewHeight)
-        }
-        
-        doneButtonView.addSubview(doneButton)
+        view.addSubview(doneButton)
         doneButton.snp.makeConstraints {
-            $0.top.equalToSuperview()
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-2)
             $0.centerX.equalToSuperview()
         }
         
@@ -178,7 +174,7 @@ class SendFeedbackViewController: BaseViewController {
         feedbackContentTextView.snp.makeConstraints {
             $0.top.equalTo(dividerView.snp.bottom).offset(16)
             $0.horizontalEdges.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-            $0.bottom.equalTo(doneButtonView.snp.top).inset(8)
+            $0.bottom.equalTo(doneButton.snp.top)
         }
     }
     
@@ -220,29 +216,25 @@ class SendFeedbackViewController: BaseViewController {
     // MARK: - selector
     
     @objc private func willShowKeyboard(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            UIView.animate(withDuration: 0.2, animations: {
-                self.doneButtonView.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height + 25)
-                self.doneButton.transform = CGAffineTransform(translationX: 0, y: 14)
-            })
-        }
+        guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
         
-        doneButtonView.snp.updateConstraints {
-            $0.height.equalTo(Size.buttonViewHeight + 14)
-        }
-        
-        feedbackContentTextView.snp.updateConstraints {
-            $0.bottom.equalTo(doneButtonView.snp.top)
-        }
+        UIView.animate(withDuration: 0.2, animations: {
+            self.doneButton.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height + 25)
+
+            self.feedbackContentTextView.snp.updateConstraints {
+                $0.bottom.equalTo(self.doneButton.snp.top).offset(-keyboardSize.height + 15)
+            }
+        })
     }
     
     @objc func willHideKeyboard(notification: NSNotification) {
         UIView.animate(withDuration: 0.2, animations: {
-            self.doneButtonView.transform = .identity
+            self.doneButton.transform = .identity
+            
+            self.feedbackContentTextView.snp.updateConstraints {
+                $0.bottom.equalTo(self.doneButton.snp.top).offset(-10)
+            }
         })
-        doneButtonView.snp.updateConstraints {
-            $0.height.equalTo(Size.buttonViewHeight)
-        }
     }
 }
 
