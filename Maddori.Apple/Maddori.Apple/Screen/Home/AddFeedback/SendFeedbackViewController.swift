@@ -139,13 +139,6 @@ class SendFeedbackViewController: BaseViewController {
         
         contentString = contentString.replacingOccurrences(of: "\(currentStepString)|\n\n\(currentStepString)", with: "", options: .regularExpression)
     }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-//        if !feedbackContentTextView.isFirstResponder {
-//            feedbackContentTextView.becomeFirstResponder()
-//        }
-    }
     
     override func render() {
         view.addSubview(progressImageView)
@@ -188,6 +181,7 @@ class SendFeedbackViewController: BaseViewController {
     }
     
     // MARK: - func
+    
     override func setupNavigationBar() {
         super.setupNavigationBar()
         
@@ -270,6 +264,8 @@ class SendFeedbackViewController: BaseViewController {
         })
     }
 }
+
+// MARK: - extension
 
 extension SendFeedbackViewController: UITextViewDelegate {
     func textViewDidChangeSelection(_ textView: UITextView) {
