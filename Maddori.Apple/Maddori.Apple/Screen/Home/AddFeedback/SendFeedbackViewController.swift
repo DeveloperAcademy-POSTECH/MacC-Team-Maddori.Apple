@@ -19,11 +19,12 @@ class SendFeedbackViewController: BaseViewController {
         static let buttonViewHeight: Int = 72
     }
     var step: Int
-    var contentString: String?
+    var currentStepString: String = ""
+    var contentString: String
     
-    var keyboardSize: CGRect = .zero
+    var textViewHasText: Bool = false
     
-    init(step: Int, content: String?) {
+    init(step: Int, content: String) {
         self.step = step
         self.contentString = content
         super.init()
@@ -104,7 +105,6 @@ class SendFeedbackViewController: BaseViewController {
     }()
     private let feedbackContentTextView: UITextView = {
         let view = UITextView()
-        // FIXME: 추가해야할게 있다면 여기에~
         view.backgroundColor = .white200
         view.font = .body1
         return view
@@ -129,13 +129,22 @@ class SendFeedbackViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupNotificationCenter()
         setupDelegate()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupNotificationCenter()
+        feedbackContentTextView.becomeFirstResponder()
+        
+        contentString = contentString.replacingOccurrences(of: "\(currentStepString)|\n\n\(currentStepString)", with: "", options: .regularExpression)
+    }
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        feedbackContentTextView.becomeFirstResponder()
+//        if !feedbackContentTextView.isFirstResponder {
+//            feedbackContentTextView.becomeFirstResponder()
+//        }
     }
     
     override func render() {
@@ -210,7 +219,31 @@ class SendFeedbackViewController: BaseViewController {
     }
     
     func didTappedDoneButton() {
-        // FIXME: 다음 view로 연결
+        currentStepString = feedbackContentTextView.text
+        
+        if contentString.isEmpty || contentString == currentStepString {
+            contentString = currentStepString
+        } else {
+            contentString = contentString + "\n\n" + currentStepString
+        }
+        
+        NotificationCenter.default.removeObserver(self)
+        DispatchQueue.main.async {
+            switch self.step {
+            case 2:
+                self.navigationController?.pushViewController(SendFeedbackViewController(step: 3, content: self.contentString), animated: true)
+            case 3:
+                self.navigationController?.pushViewController(SendFeedbackViewController(step: 4, content: self.contentString), animated: true)
+            case 4:
+                self.navigationController?.pushViewController(SendFeedbackViewController(step: 5, content: self.contentString), animated: true)
+                // FIXME: 키워드 작성하는 마지막 단계 VC가 생기면 그 VC로 연결
+            default:
+                return
+            }
+        }
+        // FIXME: currentStepString과 쌓여가는 contentString 볼 수 있도록 해 둔 코드 -> 머지 전에 지우기
+        print("currentStepString: \(currentStepString)")
+        print("contentString: \(contentString)")
     }
     
     // MARK: - selector
@@ -218,26 +251,29 @@ class SendFeedbackViewController: BaseViewController {
     @objc private func willShowKeyboard(notification: NSNotification) {
         guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
         
+        feedbackContentTextView.snp.updateConstraints {
+            $0.bottom.equalTo(doneButton.snp.top).offset(-keyboardSize.height + 15)
+        }
         UIView.animate(withDuration: 0.2, animations: {
             self.doneButton.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height + 25)
-
-            self.feedbackContentTextView.snp.updateConstraints {
-                $0.bottom.equalTo(self.doneButton.snp.top).offset(-keyboardSize.height + 15)
-            }
+            self.view.layoutIfNeeded()
         })
     }
     
     @objc func willHideKeyboard(notification: NSNotification) {
+        feedbackContentTextView.snp.updateConstraints {
+            $0.bottom.equalTo(doneButton.snp.top).offset(-10)
+        }
         UIView.animate(withDuration: 0.2, animations: {
             self.doneButton.transform = .identity
-            
-            self.feedbackContentTextView.snp.updateConstraints {
-                $0.bottom.equalTo(self.doneButton.snp.top).offset(-10)
-            }
+            self.view.layoutIfNeeded()
         })
     }
 }
 
 extension SendFeedbackViewController: UITextViewDelegate {
-    
+    func textViewDidChangeSelection(_ textView: UITextView) {
+        textViewHasText = feedbackContentTextView.hasText
+        doneButton.isDisabled = !textViewHasText
+    }
 }
