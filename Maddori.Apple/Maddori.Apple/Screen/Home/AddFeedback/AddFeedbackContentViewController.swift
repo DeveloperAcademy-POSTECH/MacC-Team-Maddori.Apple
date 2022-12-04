@@ -16,7 +16,7 @@ enum Step {
     case fourth
 }
 
-class AddFeedbackContentViewController: BaseViewController {
+final class AddFeedbackContentViewController: BaseViewController {
     
     private enum Size {
         static let topPadding: Int = 8
