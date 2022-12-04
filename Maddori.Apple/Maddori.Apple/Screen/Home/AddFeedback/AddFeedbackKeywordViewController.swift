@@ -15,22 +15,22 @@ final class AddFeedbackKeywordViewController: BaseViewController {
     enum Size {
         static let topPadding: Int = 8
         static let stepTopPadding: Int = 24
-        static let descriptionTopPadding: Int = 12
-        static let buttonViewHeight: Int = 72
+        static let keywordTextFieldHeight: CGFloat = 50
+        static let initialTextFieldWidth: CGFloat = 32
     }
-    var step: Int
-    var currentStepString: String = ""
-    var contentString: String
+//    var currentStepString: String = ""
+//    var contentString: String
     
     var textViewHasText: Bool = false
+    var textFieldWidth: CGFloat = 0
     
-    init(step: Int, content: String) {
-        self.step = step
-        self.contentString = content
-        super.init()
-    }
+//    init(step: Int, content: String) {
+//        self.step = step
+//        self.contentString = content
+//        super.init()
+//    }
     
-    required init?(coder: NSCoder) { nil }
+//    required init?(coder: NSCoder) { nil }
     
     // MARK: - property
     lazy var backButton: BackButton = {
@@ -59,9 +59,22 @@ final class AddFeedbackKeywordViewController: BaseViewController {
         label.numberOfLines = 2
         return label
     }()
-    private let keywordTextField: UITextField = {
+    private lazy var textFieldContainerView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .blue
+        return view
+    }()
+    private lazy var keywordTextField: UITextField = {
         let textField = UITextField()
-        
+//        textField.backgroundColor = .gray300
+        textField.attributedPlaceholder = NSAttributedString(
+            string: "키워드를 입력하세요",
+            attributes: [
+                NSAttributedString.Key.foregroundColor: UIColor.gray300,
+                NSAttributedString.Key.font: UIFont.main
+            ]
+        )
+        textFieldWidth = textField.intrinsicContentSize.width
         return textField
     }()
     private lazy var doneButton: MainButton = {
@@ -82,6 +95,9 @@ final class AddFeedbackKeywordViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
+        setupNotificationCenter()
+        setupDelegate()
+        setTextFieldObserver()
     }
     
     override func render() {
@@ -95,6 +111,20 @@ final class AddFeedbackKeywordViewController: BaseViewController {
         currentStepLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.top.equalTo(progressImageView.snp.bottom).offset(Size.stepTopPadding)
+        }
+        
+        view.addSubview(textFieldContainerView)
+        textFieldContainerView.snp.makeConstraints {
+            $0.top.equalTo(currentStepLabel.snp.bottom).offset(28)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.width.equalTo(100)
+            $0.height.equalTo(Size.keywordTextFieldHeight)
+        }
+        
+        textFieldContainerView.addSubview(keywordTextField)
+        keywordTextField.snp.makeConstraints {
+            $0.horizontalEdges.equalToSuperview().inset(16)
+            $0.verticalEdges.equalToSuperview().inset(13)
         }
         
         view.addSubview(doneButton)
@@ -119,6 +149,19 @@ final class AddFeedbackKeywordViewController: BaseViewController {
         navigationItem.rightBarButtonItem = closeButton
     }
     
+    private func setupNotificationCenter() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    private func setupDelegate() {
+        keywordTextField.delegate = self
+    }
+    
+    private func setTextFieldObserver() {
+        keywordTextField.addTarget(self, action: #selector(textFieldDidChange), for: .allEditingEvents)
+    }
+    
     private func didTappedBackButton() {
         navigationController?.popViewController(animated: true)
     }
@@ -132,5 +175,31 @@ final class AddFeedbackKeywordViewController: BaseViewController {
             // FIXME: done button 눌렀을 때 action -> API, View 내리기
         }
     }
+    
+    // MARK: - selector
+    
+    @objc private func keyboardWillShow(notification:NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            UIView.animate(withDuration: 0.2, animations: {
+                self.doneButton.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height + 10)
+            })
+        }
+    }
+    
+    @objc private func keyboardWillHide(notification:NSNotification) {
+        UIView.animate(withDuration: 0.2, animations: {
+            self.doneButton.transform = .identity
+        })
+    }
+    
+    @objc private func textFieldDidChange() {
+        textFieldWidth = keywordTextField.intrinsicContentSize.width
+        textFieldContainerView.snp.updateConstraints {
+            $0.width.equalTo(textFieldWidth + Size.initialTextFieldWidth)
+        }
+    }
 }
 
+extension AddFeedbackKeywordViewController: UITextFieldDelegate {
+    
+}
