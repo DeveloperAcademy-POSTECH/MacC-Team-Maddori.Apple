@@ -66,11 +66,11 @@ class AddFeedbackContentViewController: BaseViewController {
         let label = UILabel()
         switch step {
         case 2:
-            label.text = TextLiteral.sendFeedbackViewControllerCurrentStepLabel2
+            label.text = TextLiteral.addFeedbackContentViewControllerCurrentStepLabel2
         case 3:
-            label.text = TextLiteral.sendFeedbackViewControllerCurrentStepLabel3
+            label.text = TextLiteral.addFeedbackContentViewControllerCurrentStepLabel3
         case 4:
-            label.text = TextLiteral.sendFeedbackViewControllerCurrentStepLabel4
+            label.text = TextLiteral.addFeedbackContentViewControllerCurrentStepLabel4
         default:
             label.text = ""
         }
@@ -84,11 +84,11 @@ class AddFeedbackContentViewController: BaseViewController {
         let label = UILabel()
         switch step {
         case 2:
-            label.text = TextLiteral.sendFeedbackViewControllerCurrentStepDescriptionLabel2
+            label.text = TextLiteral.addFeedbackContentViewControllerCurrentStepDescriptionLabel2
         case 3:
-            label.text = TextLiteral.sendFeedbackViewControllerCurrentStepDescriptionLabel3
+            label.text = TextLiteral.addFeedbackContentViewControllerCurrentStepDescriptionLabel3
         case 4:
-            label.text = TextLiteral.sendFeedbackViewControllerCurrentStepDescriptionLabel4
+            label.text = TextLiteral.addFeedbackContentViewControllerCurrentStepDescriptionLabel4
         default:
             label.text = ""
         }
@@ -116,7 +116,7 @@ class AddFeedbackContentViewController: BaseViewController {
     }()
     private lazy var doneButton: MainButton = {
         let button = MainButton()
-        button.title = TextLiteral.sendFeedbackViewControllerButtonNext
+        button.title = TextLiteral.addFeedbackContentViewControllerButtonNext
         button.isDisabled = true
         let action = UIAction { [weak self] _ in
             self?.didTappedDoneButton()
