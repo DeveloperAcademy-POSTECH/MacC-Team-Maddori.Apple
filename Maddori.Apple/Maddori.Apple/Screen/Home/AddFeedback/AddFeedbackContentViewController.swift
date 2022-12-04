@@ -10,7 +10,7 @@ import UIKit
 import Alamofire
 import SnapKit
 
-class SendFeedbackViewController: BaseViewController {
+class AddFeedbackContentViewController: BaseViewController {
     
     enum Size {
         static let topPadding: Int = 8
@@ -267,7 +267,7 @@ class SendFeedbackViewController: BaseViewController {
 
 // MARK: - extension
 
-extension SendFeedbackViewController: UITextViewDelegate {
+extension AddFeedbackContentViewController: UITextViewDelegate {
     func textViewDidChangeSelection(_ textView: UITextView) {
         textViewHasText = feedbackContentTextView.hasText
         doneButton.isDisabled = !textViewHasText
