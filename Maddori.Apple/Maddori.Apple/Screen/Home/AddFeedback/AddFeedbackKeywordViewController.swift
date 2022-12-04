@@ -54,7 +54,7 @@ final class AddFeedbackKeywordViewController: BaseViewController {
     }()
     private lazy var currentStepLabel: UILabel = {
         let label = UILabel()
-        label.text = TextLiteral.sendFeedbackViewControllerCurrentStepLabel5
+        label.text = TextLiteral.addFeedbackContentViewControllerCurrentStepLabel5
         label.textColor = .black100
         label.font = .title2
         label.setLineSpacing(to: 4)

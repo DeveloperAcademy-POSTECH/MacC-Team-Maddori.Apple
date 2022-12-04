@@ -30,6 +30,7 @@ enum ImageLiterals {
     static var imgHomeTab: UIImage { .load(name: "Home") }
     static var imgDocsTab: UIImage { .load(name: "Docs") }
     static var imgPersonTab: UIImage { .load(name: "Person") }
+    static var imgProgress5: UIImage { .load(name: "ProgressBar5") }
 }
 
 extension UIImage {
