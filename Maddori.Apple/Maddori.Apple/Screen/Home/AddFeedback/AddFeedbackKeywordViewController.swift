@@ -49,9 +49,7 @@ final class AddFeedbackKeywordViewController: BaseViewController {
         button.addAction(action, for: .touchUpInside)
         return button
     }()
-    private lazy var progressImageView: UIImageView = {
-        let imageView = UIImageView()
-    }()
+    private lazy var progressImageView = UIImageView(image: ImageLiterals.imgProgress5)
     private lazy var currentStepLabel: UILabel = {
         let label = UILabel()
         label.text = TextLiteral.addFeedbackContentViewControllerCurrentStepLabel5
@@ -61,9 +59,50 @@ final class AddFeedbackKeywordViewController: BaseViewController {
         label.numberOfLines = 2
         return label
     }()
+    private let keywordTextField: UITextField = {
+        let textField = UITextField()
+        
+        return textField
+    }()
+    private lazy var doneButton: MainButton = {
+        let button = MainButton()
+        button.title = "다음"
+        // FIXME: 이전 PR 머지되면 아래 코드로 바꾸기
+//        button.title = TextLiteral.addFeedbackContentViewControllerButtonNext
+        button.isDisabled = true
+        let action = UIAction { [weak self] _ in
+            self?.didTappedDoneButton()
+        }
+        button.addAction(action, for: .touchUpInside)
+        return button
+    }()
     
     // MARK: - life cycle
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupNavigationBar()
+    }
+    
+    override func render() {
+        view.addSubview(progressImageView)
+        progressImageView.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(8)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+        
+        view.addSubview(currentStepLabel)
+        currentStepLabel.snp.makeConstraints {
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.top.equalTo(progressImageView.snp.bottom).offset(Size.stepTopPadding)
+        }
+        
+        view.addSubview(doneButton)
+        doneButton.snp.makeConstraints {
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-2)
+            $0.centerX.equalToSuperview()
+        }
+    }
     
     // MARK: - func
     
