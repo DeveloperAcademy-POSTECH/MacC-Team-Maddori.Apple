@@ -225,11 +225,11 @@ class AddFeedbackContentViewController: BaseViewController {
         DispatchQueue.main.async {
             switch self.step {
             case 2:
-                self.navigationController?.pushViewController(SendFeedbackViewController(step: 3, content: self.contentString), animated: true)
+                self.navigationController?.pushViewController(AddFeedbackContentViewController(step: 3, content: self.contentString), animated: true)
             case 3:
-                self.navigationController?.pushViewController(SendFeedbackViewController(step: 4, content: self.contentString), animated: true)
+                self.navigationController?.pushViewController(AddFeedbackContentViewController(step: 4, content: self.contentString), animated: true)
             case 4:
-                self.navigationController?.pushViewController(SendFeedbackViewController(step: 5, content: self.contentString), animated: true)
+                self.navigationController?.pushViewController(AddFeedbackContentViewController(step: 5, content: self.contentString), animated: true)
                 // FIXME: 키워드 작성하는 마지막 단계 VC가 생기면 그 VC로 연결
             default:
                 return
