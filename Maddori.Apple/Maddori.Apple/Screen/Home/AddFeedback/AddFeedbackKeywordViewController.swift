@@ -16,13 +16,20 @@ final class AddFeedbackKeywordViewController: BaseViewController {
         static let topPadding: Int = 8
         static let stepTopPadding: Int = 24
         static let keywordTextFieldHeight: CGFloat = 50
-        static let initialTextFieldWidth: CGFloat = 32
+        static let textFieldXPadding: CGFloat = 16
     }
 //    var currentStepString: String = ""
 //    var contentString: String
     
+    var placeholder = TextLiteral.addFeedbackKeywordViewControllerPlaceholder
     var textViewHasText: Bool = false
     var textFieldWidth: CGFloat = 0
+    var placeholderWidth: CGFloat {
+        let placeholder = "키워드를 입력하세요"
+        let fontAttributes = [NSAttributedString.Key.font: UIFont.main]
+        let width = (placeholder as NSString).size(withAttributes: fontAttributes).width
+        return width
+    }
     
 //    init(step: Int, content: String) {
 //        self.step = step
@@ -61,14 +68,16 @@ final class AddFeedbackKeywordViewController: BaseViewController {
     }()
     private lazy var textFieldContainerView: UIView = {
         let view = UIView()
-        view.backgroundColor = .blue
+        view.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMaxXMinYCorner, .layerMinXMinYCorner]
+        view.layer.cornerRadius = Size.keywordTextFieldHeight / 2
+        view.layer.borderColor = UIColor.black.cgColor
+        view.layer.borderWidth = 1
         return view
     }()
     private lazy var keywordTextField: UITextField = {
         let textField = UITextField()
-//        textField.backgroundColor = .gray300
         textField.attributedPlaceholder = NSAttributedString(
-            string: "키워드를 입력하세요",
+            string: placeholder,
             attributes: [
                 NSAttributedString.Key.foregroundColor: UIColor.gray300,
                 NSAttributedString.Key.font: UIFont.main
@@ -79,9 +88,7 @@ final class AddFeedbackKeywordViewController: BaseViewController {
     }()
     private lazy var doneButton: MainButton = {
         let button = MainButton()
-        button.title = "다음"
-        // FIXME: 이전 PR 머지되면 아래 코드로 바꾸기
-//        button.title = TextLiteral.addFeedbackContentViewControllerButtonNext
+        button.title = TextLiteral.addFeedbackContentViewControllerButtonNext
         button.isDisabled = true
         let action = UIAction { [weak self] _ in
             self?.didTappedDoneButton()
@@ -117,7 +124,7 @@ final class AddFeedbackKeywordViewController: BaseViewController {
         textFieldContainerView.snp.makeConstraints {
             $0.top.equalTo(currentStepLabel.snp.bottom).offset(28)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-            $0.width.equalTo(100)
+            $0.width.equalTo(placeholderWidth + 2 * Size.textFieldXPadding)
             $0.height.equalTo(Size.keywordTextFieldHeight)
         }
         
@@ -159,7 +166,9 @@ final class AddFeedbackKeywordViewController: BaseViewController {
     }
     
     private func setTextFieldObserver() {
-        keywordTextField.addTarget(self, action: #selector(textFieldDidChange), for: .allEditingEvents)
+        keywordTextField.addTarget(self, action: #selector(textFieldChangeBegin), for: .editingDidBegin)
+        keywordTextField.addTarget(self, action: #selector(textFieldChanging), for: .allEditingEvents)
+        keywordTextField.addTarget(self, action: #selector(textFieldChangeEnd), for: .editingDidEnd)
     }
     
     private func didTappedBackButton() {
@@ -192,10 +201,27 @@ final class AddFeedbackKeywordViewController: BaseViewController {
         })
     }
     
-    @objc private func textFieldDidChange() {
+    @objc private func textFieldChangeBegin() {
+        keywordTextField.placeholder = ""
+    }
+    
+    @objc private func textFieldChanging() {
         textFieldWidth = keywordTextField.intrinsicContentSize.width
-        textFieldContainerView.snp.updateConstraints {
-            $0.width.equalTo(textFieldWidth + Size.initialTextFieldWidth)
+        DispatchQueue.main.async {
+            self.textFieldContainerView.snp.updateConstraints {
+                $0.width.equalTo(self.textFieldWidth + 2 * Size.textFieldXPadding)
+            }
+        }
+    }
+    
+    @objc private func textFieldChangeEnd() {
+        if keywordTextField.text == "" {
+            keywordTextField.placeholder = placeholder
+            DispatchQueue.main.async {
+                self.textFieldContainerView.snp.updateConstraints {
+                    $0.width.equalTo(self.placeholderWidth + 2 * Size.textFieldXPadding)
+                }
+            }
         }
     }
 }
