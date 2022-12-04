@@ -10,21 +10,28 @@ import UIKit
 import Alamofire
 import SnapKit
 
+enum Step {
+    case second
+    case third
+    case fourth
+}
+
 class AddFeedbackContentViewController: BaseViewController {
     
-    enum Size {
+    private enum Size {
         static let topPadding: Int = 8
         static let stepTopPadding: Int = 24
         static let descriptionTopPadding: Int = 12
         static let buttonViewHeight: Int = 72
     }
-    var step: Int
+    
+    var step: Step
     var currentStepString: String = ""
     var contentString: String
     
     var textViewHasText: Bool = false
     
-    init(step: Int, content: String) {
+    init(step: Step, content: String) {
         self.step = step
         self.contentString = content
         super.init()
@@ -33,7 +40,7 @@ class AddFeedbackContentViewController: BaseViewController {
     required init?(coder: NSCoder) { nil }
     
     // MARK: - property
-    lazy var backButton: BackButton = {
+    private lazy var backButton: BackButton = {
         let button = BackButton(type: .system)
         let action = UIAction { [weak self] _ in
             self?.didTappedBackButton()
@@ -52,27 +59,23 @@ class AddFeedbackContentViewController: BaseViewController {
     private lazy var progressImageView: UIImageView = {
         let imageView = UIImageView()
         switch step {
-        case 2:
+        case .second:
             return UIImageView(image: ImageLiterals.imgProgress2)
-        case 3:
+        case .third:
             return UIImageView(image: ImageLiterals.imgProgress3)
-        case 4:
+        case .fourth:
             return UIImageView(image: ImageLiterals.imgProgress4)
-        default:
-            return UIImageView(image: ImageLiterals.imgProgressEmpty)
         }
     }()
     private lazy var currentStepLabel: UILabel = {
         let label = UILabel()
         switch step {
-        case 2:
+        case .second:
             label.text = TextLiteral.addFeedbackContentViewControllerCurrentStepLabel2
-        case 3:
+        case .third:
             label.text = TextLiteral.addFeedbackContentViewControllerCurrentStepLabel3
-        case 4:
+        case .fourth:
             label.text = TextLiteral.addFeedbackContentViewControllerCurrentStepLabel4
-        default:
-            label.text = ""
         }
         label.textColor = .black100
         label.font = .title2
@@ -83,11 +86,11 @@ class AddFeedbackContentViewController: BaseViewController {
     private lazy var currentStepDescriptionLabel: UILabel = {
         let label = UILabel()
         switch step {
-        case 2:
+        case .second:
             label.text = TextLiteral.addFeedbackContentViewControllerCurrentStepDescriptionLabel2
-        case 3:
+        case .third:
             label.text = TextLiteral.addFeedbackContentViewControllerCurrentStepDescriptionLabel3
-        case 4:
+        case .fourth:
             label.text = TextLiteral.addFeedbackContentViewControllerCurrentStepDescriptionLabel4
         default:
             label.text = ""
@@ -224,15 +227,13 @@ class AddFeedbackContentViewController: BaseViewController {
         NotificationCenter.default.removeObserver(self)
         DispatchQueue.main.async {
             switch self.step {
-            case 2:
-                self.navigationController?.pushViewController(AddFeedbackContentViewController(step: 3, content: self.contentString), animated: true)
-            case 3:
-                self.navigationController?.pushViewController(AddFeedbackContentViewController(step: 4, content: self.contentString), animated: true)
-            case 4:
-                self.navigationController?.pushViewController(AddFeedbackContentViewController(step: 5, content: self.contentString), animated: true)
+            case .second:
+                self.navigationController?.pushViewController(AddFeedbackContentViewController(step: Step.third, content: self.contentString), animated: true)
+            case .third:
+                self.navigationController?.pushViewController(AddFeedbackContentViewController(step: Step.fourth, content: self.contentString), animated: true)
+            case .fourth:
+                print(self.contentString)
                 // FIXME: 키워드 작성하는 마지막 단계 VC가 생기면 그 VC로 연결
-            default:
-                return
             }
         }
         // FIXME: currentStepString과 쌓여가는 contentString 볼 수 있도록 해 둔 코드 -> 머지 전에 지우기
