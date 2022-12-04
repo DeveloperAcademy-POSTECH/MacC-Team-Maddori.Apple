@@ -60,6 +60,10 @@ enum TextLiteral {
     static let addFeedbackViewControllerStartTextViewPlaceholder = "제안하고 싶은 Start를 작성해주세요"
     static let addFeedbackViewControllerFeedbackSendTimeLabel = "작성한 피드백은 회고 시간 전까지 수정 가능합니다"
     
+    // MARK: - SendFeedbackViewController
+    
+    static let sendFeedbackViewControllerCurrentStepLabel5 = "피드백을 대표하는\n키워드를 정해주세요"
+    
     // MARK: - JoinTeamViewController
     
     static let joinTeamViewControllerTitleLabel = "님 반가워요!\n이제 팀에 합류해주세요"
