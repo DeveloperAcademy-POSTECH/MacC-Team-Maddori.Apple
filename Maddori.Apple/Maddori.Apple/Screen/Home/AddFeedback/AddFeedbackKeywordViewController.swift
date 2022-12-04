@@ -12,10 +12,13 @@ import SnapKit
 
 final class AddFeedbackKeywordViewController: BaseViewController {
     
-    enum Size {
+    private enum Size {
         static let topPadding: Int = 8
         static let stepTopPadding: Int = 24
-        static let keywordTextFieldHeight: CGFloat = 50
+        static let textFieldMaxCornerRadius: CGFloat = 25
+        static let textFieldMinCornerRadius: CGFloat = 16
+        static let textFieldHeight: CGFloat = 50
+        static let textFieldMinWidth: CGFloat = 32
         static let textFieldXPadding: CGFloat = 16
     }
 //    var currentStepString: String = ""
@@ -66,12 +69,15 @@ final class AddFeedbackKeywordViewController: BaseViewController {
         label.numberOfLines = 2
         return label
     }()
-    private lazy var textFieldContainerView: UIView = {
+    private let textFieldContainerView: UIView = {
         let view = UIView()
+        view.backgroundColor = .white100
         view.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMaxXMinYCorner, .layerMinXMinYCorner]
-        view.layer.cornerRadius = Size.keywordTextFieldHeight / 2
-        view.layer.borderColor = UIColor.black.cgColor
-        view.layer.borderWidth = 1
+        // FIXME: TextField가 줄어들었을 경우 cornerRadius 때문에 깨짐
+        view.layer.cornerRadius = Size.textFieldMaxCornerRadius
+        view.layer.shadowOffset = CGSize(width: 0, height: 1)
+        view.layer.shadowOpacity = 0.13
+        view.layer.shadowRadius = 4
         return view
     }()
     private lazy var keywordTextField: UITextField = {
@@ -125,13 +131,13 @@ final class AddFeedbackKeywordViewController: BaseViewController {
             $0.top.equalTo(currentStepLabel.snp.bottom).offset(28)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.width.equalTo(placeholderWidth + 2 * Size.textFieldXPadding)
-            $0.height.equalTo(Size.keywordTextFieldHeight)
+            $0.height.equalTo(Size.textFieldHeight)
         }
-        
-        textFieldContainerView.addSubview(keywordTextField)
+
+        view.addSubview(keywordTextField)
         keywordTextField.snp.makeConstraints {
-            $0.horizontalEdges.equalToSuperview().inset(16)
-            $0.verticalEdges.equalToSuperview().inset(13)
+            $0.leading.equalTo(textFieldContainerView).offset(16)
+            $0.top.equalTo(textFieldContainerView).offset(13)
         }
         
         view.addSubview(doneButton)
@@ -203,11 +209,22 @@ final class AddFeedbackKeywordViewController: BaseViewController {
     
     @objc private func textFieldChangeBegin() {
         keywordTextField.placeholder = ""
+        DispatchQueue.main.async {
+            self.textFieldContainerView.layer.cornerRadius = Size.textFieldMinCornerRadius
+        }
     }
     
     @objc private func textFieldChanging() {
         textFieldWidth = keywordTextField.intrinsicContentSize.width
+        var textFieldContainerWidth: CGFloat = textFieldWidth + 2 * Size.textFieldXPadding
+        var newCornerRadius: CGFloat = Size.textFieldMinCornerRadius
+        if textFieldContainerWidth <= Size.textFieldHeight {
+            newCornerRadius = textFieldContainerWidth / 2
+        } else {
+            newCornerRadius = Size.textFieldMaxCornerRadius
+        }
         DispatchQueue.main.async {
+            self.textFieldContainerView.layer.cornerRadius = newCornerRadius
             self.textFieldContainerView.snp.updateConstraints {
                 $0.width.equalTo(self.textFieldWidth + 2 * Size.textFieldXPadding)
             }
@@ -221,6 +238,7 @@ final class AddFeedbackKeywordViewController: BaseViewController {
                 self.textFieldContainerView.snp.updateConstraints {
                     $0.width.equalTo(self.placeholderWidth + 2 * Size.textFieldXPadding)
                 }
+                self.textFieldContainerView.layer.cornerRadius = Size.textFieldMaxCornerRadius
             }
         }
     }
