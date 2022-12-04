@@ -8,7 +8,7 @@
   </a>
   <p3>&nbsp;&nbsp;&nbsp;</p3>
   <a href="https://github.com/hwiwonK/MacC-Team-Maddori.Apple-Server">
-    <img src="https://user-images.githubusercontent.com/81340603/204950025-e1fb934e-8d48-4fb3-a7f3-55dd465ed2f7.png" width=60px/>
+    <img src="https://user-images.githubusercontent.com/81340603/205491490-1ec07066-5b90-4277-9907-42b1ef47fe45.png" width=60px/>
   </a>
 </div>
 
