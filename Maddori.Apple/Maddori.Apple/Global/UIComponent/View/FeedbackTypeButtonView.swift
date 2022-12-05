@@ -14,8 +14,8 @@ final class FeedbackTypeButtonView: UIView {
     var feedbackType: FeedBackType? {
         didSet {
             guard let type = feedbackType else { return }
-            setupFeedbackButtonStyle(type)
-            setupButtonLabelStyle(type)
+            applyFeedbackButtonStyle(type)
+            applyButtonLabelStyle(type)
         }
     }
     
@@ -145,28 +145,27 @@ final class FeedbackTypeButtonView: UIView {
     
     // MARK: - func
     
-    private func setupFeedbackButtonStyle(_ type: FeedBackType) {
+    private func applyFeedbackButtonStyle(_ type: FeedBackType) {
         switch type {
         case .continueType:
-            continueButton.layer.borderWidth = 2
-            continueButton.layer.cornerRadius = SizeLiteral.componentCornerRadius
-            continueButton.layer.borderColor = UIColor.blue200.cgColor
-            stopButton.layer.borderWidth = 0
-            stopButton.layer.borderColor = UIColor.clear.cgColor
-            stopButton.makeShadow(color: .black, opacity: 0.15, offset: .zero, radius: 3)
+            applyBorderStyle(selectedButton: continueButton, unselectedButton: stopButton)
         case .stopType:
-            stopButton.layer.borderWidth = 2
-            stopButton.layer.cornerRadius = SizeLiteral.componentCornerRadius
-            stopButton.layer.borderColor = UIColor.blue200.cgColor
-            continueButton.layer.borderWidth = 0
-            continueButton.layer.borderColor = UIColor.clear.cgColor
-            continueButton.makeShadow(color: .black, opacity: 0.15, offset: .zero, radius: 1)
+            applyBorderStyle(selectedButton: stopButton, unselectedButton: continueButton)
         default:
             break
         }
     }
     
-    private func setupButtonLabelStyle(_ type: FeedBackType) {
+    private func applyBorderStyle(selectedButton: UIButton, unselectedButton: UIButton) {
+        selectedButton.layer.borderWidth = 2
+        selectedButton.layer.cornerRadius = SizeLiteral.componentCornerRadius
+        selectedButton.layer.borderColor = UIColor.blue200.cgColor
+        unselectedButton.layer.borderWidth = 0
+        unselectedButton.layer.borderColor = UIColor.clear.cgColor
+        unselectedButton.makeShadow(color: .black, opacity: 0.15, offset: .zero, radius: 1)
+    }
+    
+    private func applyButtonLabelStyle(_ type: FeedBackType) {
         switch type {
         case .continueType:
             continueTitleLabel.textColor = .blue200
