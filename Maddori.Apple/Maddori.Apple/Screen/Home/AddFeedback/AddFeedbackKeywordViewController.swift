@@ -22,6 +22,8 @@ final class AddFeedbackKeywordViewController: BaseViewController {
         static let textFieldXPadding: CGFloat = 16
     }
 
+    var toString: String
+    var feedbackType: FeedBackType
     var contentString: String
     
     var placeholder = TextLiteral.addFeedbackKeywordViewControllerPlaceholder
@@ -34,8 +36,9 @@ final class AddFeedbackKeywordViewController: BaseViewController {
         return width
     }
     
-    init(to:String, type: String, content: String) {
-        
+    init(to:String, type: FeedBackType, content: String) {
+        self.toString = to
+        self.feedbackType = type
         self.contentString = content
         super.init()
     }
@@ -92,11 +95,61 @@ final class AddFeedbackKeywordViewController: BaseViewController {
         textFieldWidth = textField.intrinsicContentSize.width
         return textField
     }()
-    private let contentContainer: UIView = {
+    private let scrollViewContainer: UIView = {
         let view = UIView()
         view.backgroundColor = .blue300
         view.layer.cornerRadius = 10
         return view
+    }()
+    private let containerScrollView: UIScrollView = {
+        let view = UIScrollView()
+        view.backgroundColor = .black
+        return view
+    }()
+    private let toLabel: UILabel = {
+        let label = UILabel()
+        label.font = .label2
+        label.textColor = .gray600
+        label.text = TextLiteral.addFeedbackContentViewControllerToLabel
+        return label
+    }()
+    private let contentContainer = UIView()
+    private lazy var toDescriptionLabel: UILabel = {
+        let label = UILabel()
+        label.font = .body1
+        label.textColor = .gray400
+        label.text = toString
+        return label
+    }()
+    private let typeLabel: UILabel = {
+        let label = UILabel()
+        label.font = .label2
+        label.textColor = .gray600
+        label.text = TextLiteral.addFeedbackContentViewControllerTypeLabel
+        return label
+    }()
+    private lazy var typeDescriptionLabel: UILabel = {
+        let label = UILabel()
+        label.font = .body1
+        label.textColor = .gray400
+        label.text = feedbackType.rawValue
+        return label
+    }()
+    private let feedbackLabel: UILabel = {
+        let label = UILabel()
+        label.font = .label2
+        label.textColor = .gray600
+        label.text = TextLiteral.addFeedbackContentViewControllerContentLabel
+        label.numberOfLines = 0
+        return label
+    }()
+    private lazy var feeedbackDescriptionLabel: UILabel = {
+        let label = UILabel()
+        label.font = .body1
+        label.textColor = .gray400
+        label.numberOfLines = 0
+        label.text = contentString
+        return label
     }()
     private lazy var doneButton: MainButton = {
         let button = MainButton()
@@ -124,7 +177,6 @@ final class AddFeedbackKeywordViewController: BaseViewController {
         progressImageView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(8)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-//            $0.height.equalTo(14)
         }
         
         view.addSubview(currentStepLabel)
@@ -147,17 +199,61 @@ final class AddFeedbackKeywordViewController: BaseViewController {
             $0.top.equalTo(textFieldContainerView).offset(13)
         }
         
-        view.addSubview(contentContainer)
-        contentContainer.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-            $0.top.equalTo(textFieldContainerView.snp.bottom).offset(28)
-        }
-        
         view.addSubview(doneButton)
         doneButton.snp.makeConstraints {
-            $0.top.equalTo(contentContainer.snp.bottom).offset(10)
             $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-2)
             $0.centerX.equalToSuperview()
+        }
+        
+        view.addSubview(scrollViewContainer)
+        scrollViewContainer.snp.makeConstraints {
+            $0.horizontalEdges.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.top.equalTo(textFieldContainerView.snp.bottom).offset(28)
+            $0.bottom.equalTo(doneButton.snp.top).offset(-12)
+        }
+        
+        scrollViewContainer.addSubview(containerScrollView)
+        containerScrollView.snp.makeConstraints {
+            $0.verticalEdges.equalToSuperview().inset(20)
+            $0.horizontalEdges.equalToSuperview().inset(4)
+        }
+        
+        containerScrollView.addSubview(toLabel)
+        toLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(4)
+            $0.leading.equalToSuperview().inset(16)
+        }
+        
+        containerScrollView.addSubview(toDescriptionLabel)
+        toDescriptionLabel.snp.makeConstraints {
+            $0.top.equalTo(toLabel.snp.bottom).offset(8)
+            $0.horizontalEdges.equalToSuperview().inset(16)
+        }
+        
+        containerScrollView.addSubview(typeLabel)
+        typeLabel.snp.makeConstraints {
+            $0.top.equalTo(toDescriptionLabel.snp.bottom).offset(24)
+            $0.leading.equalToSuperview().inset(16)
+        }
+        
+        containerScrollView.addSubview(typeDescriptionLabel)
+        typeDescriptionLabel.snp.makeConstraints {
+            $0.top.equalTo(typeLabel.snp.bottom).offset(8)
+            $0.horizontalEdges.equalToSuperview().inset(16)
+        }
+        
+        containerScrollView.addSubview(feedbackLabel)
+        feedbackLabel.snp.makeConstraints {
+            $0.top.equalTo(typeDescriptionLabel.snp.bottom).offset(24)
+            $0.leading.equalToSuperview().inset(16)
+        }
+        
+        containerScrollView.addSubview(feeedbackDescriptionLabel)
+        feeedbackDescriptionLabel.snp.makeConstraints {
+            $0.top.equalTo(feedbackLabel.snp.bottom).offset(8)
+            $0.horizontalEdges.equalToSuperview().inset(16)
+            $0.bottom.equalToSuperview().inset(4)
+//            $0.bottom.equalTo(contentContainer).offset(<#T##amount: ConstraintOffsetTarget##ConstraintOffsetTarget#>)
         }
     }
     
@@ -230,7 +326,7 @@ final class AddFeedbackKeywordViewController: BaseViewController {
     
     @objc private func textFieldChanging() {
         textFieldWidth = keywordTextField.intrinsicContentSize.width
-        var textFieldContainerWidth: CGFloat = textFieldWidth + 2 * Size.textFieldXPadding
+        let textFieldContainerWidth: CGFloat = textFieldWidth + 2 * Size.textFieldXPadding
         var newCornerRadius: CGFloat = Size.textFieldMinCornerRadius
         if textFieldContainerWidth <= Size.textFieldHeight {
             newCornerRadius = textFieldContainerWidth / 2

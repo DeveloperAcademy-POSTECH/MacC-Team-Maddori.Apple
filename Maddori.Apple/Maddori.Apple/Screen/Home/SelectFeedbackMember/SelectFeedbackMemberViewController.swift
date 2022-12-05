@@ -26,7 +26,7 @@ final class SelectFeedbackMemberViewController: BaseViewController {
     private lazy var memberCollectionView: MemberCollectionView = {
         let collectionView = MemberCollectionView(type: .addFeedback)
         collectionView.didTappedFeedBackMember = { [weak self] user in
-            self?.navigationController?.pushViewController(AddFeedbackKeywordViewController(to: "진저", type: "Continue", content: "testestsets"), animated: true)
+            self?.navigationController?.pushViewController(AddFeedbackKeywordViewController(to: "진저", type: FeedBackType.continueType, content: "t\nt\nt---------------------------------------------------------------\nt\nt\nt\nt\nt\nt\nt\nt\nt\n"), animated: true)
         }
         return collectionView
     }()

@@ -63,6 +63,9 @@ enum TextLiteral {
     // MARK: - AddFeedbackContentViewController
     
     static let addFeedbackContentViewControllerCurrentStepLabel5 = "피드백을 대표하는\n키워드를 정해주세요"
+    static let addFeedbackContentViewControllerToLabel = "피드백 줄 사람"
+    static let addFeedbackContentViewControllerTypeLabel = "피드백 종류"
+    static let addFeedbackContentViewControllerContentLabel = "피드백"
     
     // MARK: - AddFeedbackKeywordViewController
     
