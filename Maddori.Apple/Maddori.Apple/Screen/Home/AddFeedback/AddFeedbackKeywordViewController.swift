@@ -21,8 +21,8 @@ final class AddFeedbackKeywordViewController: BaseViewController {
         static let textFieldMinWidth: CGFloat = 32
         static let textFieldXPadding: CGFloat = 16
     }
-//    var currentStepString: String = ""
-//    var contentString: String
+
+    var contentString: String
     
     var placeholder = TextLiteral.addFeedbackKeywordViewControllerPlaceholder
     var textViewHasText: Bool = false
@@ -34,13 +34,13 @@ final class AddFeedbackKeywordViewController: BaseViewController {
         return width
     }
     
-//    init(step: Int, content: String) {
-//        self.step = step
-//        self.contentString = content
-//        super.init()
-//    }
+    init(to:String, type: String, content: String) {
+        
+        self.contentString = content
+        super.init()
+    }
     
-//    required init?(coder: NSCoder) { nil }
+    required init?(coder: NSCoder) { nil }
     
     // MARK: - property
     lazy var backButton: BackButton = {
@@ -92,6 +92,12 @@ final class AddFeedbackKeywordViewController: BaseViewController {
         textFieldWidth = textField.intrinsicContentSize.width
         return textField
     }()
+    private let contentContainer: UIView = {
+        let view = UIView()
+        view.backgroundColor = .blue300
+        view.layer.cornerRadius = 10
+        return view
+    }()
     private lazy var doneButton: MainButton = {
         let button = MainButton()
         button.title = TextLiteral.addFeedbackContentViewControllerButtonNext
@@ -118,6 +124,7 @@ final class AddFeedbackKeywordViewController: BaseViewController {
         progressImageView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(8)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+//            $0.height.equalTo(14)
         }
         
         view.addSubview(currentStepLabel)
@@ -140,8 +147,15 @@ final class AddFeedbackKeywordViewController: BaseViewController {
             $0.top.equalTo(textFieldContainerView).offset(13)
         }
         
+        view.addSubview(contentContainer)
+        contentContainer.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.top.equalTo(textFieldContainerView.snp.bottom).offset(28)
+        }
+        
         view.addSubview(doneButton)
         doneButton.snp.makeConstraints {
+            $0.top.equalTo(contentContainer.snp.bottom).offset(10)
             $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-2)
             $0.centerX.equalToSuperview()
         }
@@ -245,5 +259,5 @@ final class AddFeedbackKeywordViewController: BaseViewController {
 }
 
 extension AddFeedbackKeywordViewController: UITextFieldDelegate {
-    
+    // FIXME: 키워드 글자 수 제한
 }
