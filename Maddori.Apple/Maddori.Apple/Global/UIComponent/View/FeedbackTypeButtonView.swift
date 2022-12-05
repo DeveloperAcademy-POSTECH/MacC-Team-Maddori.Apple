@@ -17,11 +17,6 @@ final class FeedbackTypeButtonView: UIView {
             setupButtonLabelStyle(feedbackType ?? .continueType)
         }
     }
-    private enum Size {
-        static let width: CGFloat = 158
-        static let height: CGFloat = 46
-        static let buttonPadding: CGFloat = UIScreen.main.bounds.width - SizeLiteral.leadingTrailingPadding * 2 - Size.width * 2
-    }
     
     // MARK: - property
     
@@ -120,7 +115,7 @@ final class FeedbackTypeButtonView: UIView {
         continueButton.addSubview(continueTitleLabel)
         continueTitleLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalToSuperview().inset(24)
+            $0.top.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
         continueButton.addSubview(continueSubTitleLabel)
@@ -137,7 +132,7 @@ final class FeedbackTypeButtonView: UIView {
         stopButton.addSubview(stopTitleLabel)
         stopTitleLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalToSuperview().inset(24)
+            $0.top.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
         stopButton.addSubview(stopSubTitleLabel)
@@ -153,14 +148,14 @@ final class FeedbackTypeButtonView: UIView {
         switch type {
         case .continueType:
             continueButton.layer.borderWidth = 2
-            continueButton.layer.cornerRadius = 10
+            continueButton.layer.cornerRadius = SizeLiteral.componentCornerRadius
             continueButton.layer.borderColor = UIColor.blue200.cgColor
             stopButton.layer.borderWidth = 0
             stopButton.layer.borderColor = UIColor.clear.cgColor
             stopButton.makeShadow(color: .black, opacity: 0.15, offset: .zero, radius: 3)
         case .stopType:
             stopButton.layer.borderWidth = 2
-            stopButton.layer.cornerRadius = 10
+            stopButton.layer.cornerRadius = SizeLiteral.componentCornerRadius
             stopButton.layer.borderColor = UIColor.blue200.cgColor
             continueButton.layer.borderWidth = 0
             continueButton.layer.borderColor = UIColor.clear.cgColor
