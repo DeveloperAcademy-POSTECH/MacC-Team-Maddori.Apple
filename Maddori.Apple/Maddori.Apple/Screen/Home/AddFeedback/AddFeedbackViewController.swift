@@ -196,7 +196,6 @@ class AddFeedbackViewController: BaseViewController {
         feedbackTypeButtonView.snp.makeConstraints {
             $0.top.equalTo(feedbackTypeLabel.snp.bottom).offset(SizeLiteral.labelComponentPadding)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-            $0.height.equalTo(46)
         }
         
         addFeedbackContentView.addSubview(feedbackKeywordLabel)
