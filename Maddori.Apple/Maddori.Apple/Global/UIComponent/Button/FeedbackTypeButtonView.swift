@@ -2,16 +2,20 @@
 //  FeedbackTypeButtonView.swift
 //  Maddori.Apple
 //
-//  Created by 김유나 on 2022/10/19.
+//  Created by Mingwan Choi on 2022/12/04.
 //
 
 import UIKit
 
 import SnapKit
 
-final class FeedbackTypeButtonView: UIButton {
+final class FeedbackTypeButtonView: UIView {
     var changeFeedbackType: ((FeedbackButtonType) -> ())?
-    
+    var feedbackType: FeedBackType? {
+        didSet {
+            setupFeedbackButtonStyle(feedbackType ?? .continueType)
+        }
+    }
     private enum Size {
         static let width: CGFloat = 158
         static let height: CGFloat = 46
@@ -25,45 +29,33 @@ final class FeedbackTypeButtonView: UIButton {
         view.backgroundColor = .white100
         view.layer.shadowOpacity = 0.2
         view.layer.shadowRadius = 2
-        view.layer.shadowOffset = CGSize(width: 0, height: 0)
+        view.layer.shadowOffset = .zero
         view.layer.cornerRadius = SizeLiteral.componentCornerRadius
         return view
+    }()
+    private lazy var continueButton: UIButton = {
+        let button = UIButton()
+        let action = UIAction { [weak self] _ in
+            self?.changeFeedbackType?(.continueType)
+            self?.setupFeedbackButtonStyle(.continueType)
+        }
+        button.addAction(action, for: .touchUpInside)
+        return button
     }()
     private let stopShadowView: UIView = {
         let view = UIView()
         view.backgroundColor = .white100
         view.layer.shadowOpacity = 0.2
         view.layer.shadowRadius = 2
-        view.layer.shadowOffset = CGSize(width: 0, height: 0)
+        view.layer.shadowOffset = .zero
         view.layer.cornerRadius = SizeLiteral.componentCornerRadius
         return view
     }()
-    private lazy var continueButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Continue", for: .normal)
-        button.setTitleColor(.white100, for: .normal)
-        button.titleLabel?.font = .main
-        button.backgroundColor = .blue200
-        button.clipsToBounds = true
-        button.layer.cornerRadius = SizeLiteral.componentCornerRadius
-        let action = UIAction { [weak self] _ in
-            self?.touchUpToSelectType(FeedbackButtonType.continueType)
-            self?.changeFeedbackType?(FeedbackButtonType.continueType)
-        }
-        button.addAction(action, for: .touchUpInside)
-        return button
-    }()
     private lazy var stopButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Stop", for: .normal)
-        button.setTitleColor(.gray600, for: .normal)
-        button.titleLabel?.font = .main
-        button.backgroundColor = .white100
-        button.clipsToBounds = true
-        button.layer.cornerRadius = SizeLiteral.componentCornerRadius
         let action = UIAction { [weak self] _ in
-            self?.touchUpToSelectType(FeedbackButtonType.stopType)
-            self?.changeFeedbackType?(FeedbackButtonType.stopType)
+            self?.changeFeedbackType?(.stopType)
+            self?.setupFeedbackButtonStyle(.stopType)
         }
         button.addAction(action, for: .touchUpInside)
         return button
@@ -81,52 +73,49 @@ final class FeedbackTypeButtonView: UIButton {
     private func render() {
         self.addSubview(continueShadowView)
         continueShadowView.snp.makeConstraints {
-            $0.width.equalTo(Size.width)
-            $0.height.equalTo(Size.height)
-            $0.leading.top.equalToSuperview()
+            $0.leading.top.bottom.equalToSuperview()
+            $0.trailing.equalTo(self.snp.centerX).offset(-10)
+            $0.height.equalTo(97)
+        }
+        
+        self.addSubview(stopShadowView)
+        stopShadowView.snp.makeConstraints {
+            $0.trailing.top.bottom.equalToSuperview()
+            $0.leading.equalTo(self.snp.centerX).offset(10)
+            $0.height.equalTo(97)
         }
         
         continueShadowView.addSubview(continueButton)
         continueButton.snp.makeConstraints {
-            $0.width.equalTo(Size.width)
-            $0.height.equalTo(Size.height)
-            $0.leading.equalTo(continueShadowView.snp.leading)
-            $0.top.equalTo(continueShadowView.snp.top)
-        }
-
-        self.addSubview(stopShadowView)
-        stopShadowView.snp.makeConstraints {
-            $0.width.equalTo(Size.width)
-            $0.height.equalTo(Size.height)
-            $0.leading.equalTo(continueShadowView.snp.trailing).offset(Size.buttonPadding)
-            $0.centerY.equalTo(continueShadowView)
+            $0.edges.equalToSuperview()
         }
         
         stopShadowView.addSubview(stopButton)
         stopButton.snp.makeConstraints {
-            $0.width.equalTo(Size.width)
-            $0.height.equalTo(Size.height)
-            $0.leading.equalTo(continueButton.snp.trailing).offset(Size.buttonPadding)
-            $0.centerY.equalTo(continueButton)
+            $0.edges.equalToSuperview()
         }
     }
     
     // MARK: - func
     
-    func touchUpToSelectType(_ type: FeedbackButtonType) {
+    private func setupFeedbackButtonStyle(_ type: FeedBackType) {
         switch type {
         case .continueType:
-            continueButton.setTitleColor(.white100, for: .normal)
-            continueButton.backgroundColor = .blue200
-            stopButton.setTitleColor(.gray600, for: .normal)
-            stopButton.backgroundColor = .white100
-            // FIXME: - 선택된 feedback 타입 전달
+            continueButton.layer.borderWidth = 2
+            continueButton.layer.cornerRadius = 10
+            continueButton.layer.borderColor = UIColor.blue200.cgColor
+            stopButton.layer.borderWidth = 0
+            stopButton.layer.borderColor = UIColor.clear.cgColor
+            stopButton.makeShadow(color: .black, opacity: 0.15, offset: .zero, radius: 3)
         case .stopType:
-            stopButton.setTitleColor(.white100, for: .normal)
-            stopButton.backgroundColor = .blue200
-            continueButton.setTitleColor(.gray600, for: .normal)
-            continueButton.backgroundColor = .white100
-            // FIXME: - 선택된 feedback 타입 전달
+            stopButton.layer.borderWidth = 2
+            stopButton.layer.cornerRadius = 10
+            stopButton.layer.borderColor = UIColor.blue200.cgColor
+            continueButton.layer.borderWidth = 0
+            continueButton.layer.borderColor = UIColor.clear.cgColor
+            continueButton.makeShadow(color: .black, opacity: 0.15, offset: .zero, radius: 1)
+        default:
+            break
         }
     }
 }
