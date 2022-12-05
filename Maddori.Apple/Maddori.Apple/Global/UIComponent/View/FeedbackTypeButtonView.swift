@@ -13,8 +13,9 @@ final class FeedbackTypeButtonView: UIView {
     var changeFeedbackType: ((FeedbackButtonType) -> ())?
     var feedbackType: FeedBackType? {
         didSet {
-            setupFeedbackButtonStyle(feedbackType ?? .continueType)
-            setupButtonLabelStyle(feedbackType ?? .continueType)
+            guard let type = feedbackType else { return }
+            setupFeedbackButtonStyle(type)
+            setupButtonLabelStyle(type)
         }
     }
     
