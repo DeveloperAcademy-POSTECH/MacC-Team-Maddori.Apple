@@ -31,6 +31,12 @@ final class AddDetailFeedbackViewController: BaseViewController {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: UITableViewCell.className)
         return tableView
     }()
+    private let nextButton: MainButton = {
+        let button = MainButton()
+        // FIXME: 텍스트 리터럴 처리하기
+        button.title = "다음"
+        return button
+    }()
     
     
     // MARK: - life cycle
@@ -67,12 +73,19 @@ final class AddDetailFeedbackViewController: BaseViewController {
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
+        view.addSubview(nextButton)
+        nextButton.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(2)
+        }
+        
         view.addSubview(tableView)
         tableView.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.top.equalTo(titleLabel.snp.bottom).offset(24)
-            $0.height.equalTo(1000)
+            $0.bottom.equalTo(nextButton.snp.top).offset(-47)
         }
+        
     }
     
     // MARK: - func
