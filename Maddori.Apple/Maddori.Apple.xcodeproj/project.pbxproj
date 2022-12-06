@@ -41,6 +41,7 @@
 		396334D7292DADBE00E74B77 /* AppleLoginDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396334D6292DADBE00E74B77 /* AppleLoginDTO.swift */; };
 		396334D9292DAE0000E74B77 /* AppleLoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396334D8292DAE0000E74B77 /* AppleLoginResponse.swift */; };
 		396334DB292DAE8300E74B77 /* UserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396334DA292DAE8300E74B77 /* UserResponse.swift */; };
+		3975CEAF293EEDD6002D4F1A /* KeywordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3975CEAE293EEDD6002D4F1A /* KeywordView.swift */; };
 		397E49572924D93F004220D6 /* UrlLiteral.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397E49562924D93F004220D6 /* UrlLiteral.swift */; };
 		397E495A2924F871004220D6 /* UserDefaultStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397E49592924F871004220D6 /* UserDefaultStorage.swift */; };
 		397E495C2924F8A2004220D6 /* UserDefaultHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397E495B2924F8A2004220D6 /* UserDefaultHandler.swift */; };
@@ -171,6 +172,7 @@
 		396334D8292DAE0000E74B77 /* AppleLoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginResponse.swift; sourceTree = "<group>"; };
 		396334DA292DAE8300E74B77 /* UserResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserResponse.swift; sourceTree = "<group>"; };
 		396334DC292DB07100E74B77 /* Maddori.Apple.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Maddori.Apple.entitlements; sourceTree = "<group>"; };
+		3975CEAE293EEDD6002D4F1A /* KeywordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordView.swift; sourceTree = "<group>"; };
 		397E49562924D93F004220D6 /* UrlLiteral.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlLiteral.swift; sourceTree = "<group>"; };
 		397E49592924F871004220D6 /* UserDefaultStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultStorage.swift; sourceTree = "<group>"; };
 		397E495B2924F8A2004220D6 /* UserDefaultHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultHandler.swift; sourceTree = "<group>"; };
@@ -553,6 +555,7 @@
 				3E557FC428FE854600714E46 /* KeywordLabel.swift */,
 				52F0CB5129178C2700E39C50 /* AlertViewController.swift */,
 				3EA341C029221998005CBD1C /* ToastContentView.swift */,
+				3975CEAE293EEDD6002D4F1A /* KeywordView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1078,6 +1081,7 @@
 				39F52C53292330D200B19A77 /* MemberResponse.swift in Sources */,
 				39F52C6A292473A800B19A77 /* ReflectionInfoResponse.swift in Sources */,
 				39F52C68292472EB00B19A77 /* AllFeedBackResponse.swift in Sources */,
+				3975CEAF293EEDD6002D4F1A /* KeywordView.swift in Sources */,
 				39257DF128F93C2A00201E0B /* ImageLiteral.swift in Sources */,
 				395C7E252900E74700FC2FCA /* StartReflectionViewController.swift in Sources */,
 				3E557FF82901CD3400714E46 /* KeywordCollectionViewFlowLayout.swift in Sources */,
