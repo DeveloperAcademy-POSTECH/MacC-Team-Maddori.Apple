@@ -125,6 +125,7 @@
 		7EDEF6BF293F0C7B00EA972E /* AddDetailFeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EDEF6BE293F0C7B00EA972E /* AddDetailFeedbackViewController.swift */; };
 		7EDEF6C3293F1CC200EA972E /* AddDetailTableViewSectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EDEF6C2293F1CC200EA972E /* AddDetailTableViewSectionCell.swift */; };
 		7EDEF6C5293F216700EA972E /* CALayer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EDEF6C4293F216700EA972E /* CALayer+Extension.swift */; };
+		7EDEF6C7293F2F8800EA972E /* AddDetailTableViewSelectMemberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EDEF6C6293F2F8800EA972E /* AddDetailTableViewSelectMemberCell.swift */; };
 		7EE38BAD2925DDD200FD738D /* EncodeDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE38BAC2925DDD200FD738D /* EncodeDTO.swift */; };
 		7EE38BB3292623F500FD738D /* MyReflectionEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE38BB2292623F500FD738D /* MyReflectionEndPoint.swift */; };
 		D724790C28FEC8C900D67B50 /* BaseTextFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D724790B28FEC8C900D67B50 /* BaseTextFieldViewController.swift */; };
@@ -257,6 +258,7 @@
 		7EDEF6BE293F0C7B00EA972E /* AddDetailFeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDetailFeedbackViewController.swift; sourceTree = "<group>"; };
 		7EDEF6C2293F1CC200EA972E /* AddDetailTableViewSectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDetailTableViewSectionCell.swift; sourceTree = "<group>"; };
 		7EDEF6C4293F216700EA972E /* CALayer+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+Extension.swift"; sourceTree = "<group>"; };
+		7EDEF6C6293F2F8800EA972E /* AddDetailTableViewSelectMemberCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDetailTableViewSelectMemberCell.swift; sourceTree = "<group>"; };
 		7EE38BAC2925DDD200FD738D /* EncodeDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncodeDTO.swift; sourceTree = "<group>"; };
 		7EE38BB2292623F500FD738D /* MyReflectionEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReflectionEndPoint.swift; sourceTree = "<group>"; };
 		D724790B28FEC8C900D67B50 /* BaseTextFieldViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTextFieldViewController.swift; sourceTree = "<group>"; };
@@ -927,6 +929,7 @@
 			isa = PBXGroup;
 			children = (
 				7EDEF6C2293F1CC200EA972E /* AddDetailTableViewSectionCell.swift */,
+				7EDEF6C6293F2F8800EA972E /* AddDetailTableViewSelectMemberCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1073,6 +1076,7 @@
 				395C7E1328F9841A00FC2FCA /* SizeLiteral.swift in Sources */,
 				3EB508902917525600FB77CB /* EmptyReflectionView.swift in Sources */,
 				3EB5088E2916D05F00FB77CB /* EmptyFeedbackView.swift in Sources */,
+				7EDEF6C7293F2F8800EA972E /* AddDetailTableViewSelectMemberCell.swift in Sources */,
 				391596622904176500A432D9 /* UIView+Extension.swift in Sources */,
 				3EB508922917585600FB77CB /* UICollectionView + Extension.swift in Sources */,
 				39257DC528F8FEBD00201E0B /* AppDelegate.swift in Sources */,

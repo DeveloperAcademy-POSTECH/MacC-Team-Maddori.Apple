@@ -29,7 +29,7 @@ final class AddDetailFeedbackViewController: BaseViewController {
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.separatorStyle = .none
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: UITableViewCell.className)
+        tableView.register(AddDetailTableViewSelectMemberCell.self, forCellReuseIdentifier: AddDetailTableViewSelectMemberCell.className)
         tableView.register(AddDetailTableViewSectionCell.self, forCellReuseIdentifier: AddDetailTableViewSectionCell.className)
         return tableView
     }()
@@ -100,8 +100,8 @@ final class AddDetailFeedbackViewController: BaseViewController {
     }
     
     private func setupTableViewData() {
-        tableViewData = [cellData(opened: true, title: "피드백 줄 맴버", sectionData: ["cell1", "cell2"]),
-                         cellData(opened: false, title: "피드백 종류", sectionData: ["cell3", "cell4"])
+        tableViewData = [cellData(opened: true, title: "피드백 줄 맴버"),
+                         cellData(opened: false, title: "피드백 종류")
         ]
     }
     
@@ -119,7 +119,7 @@ extension AddDetailFeedbackViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableViewData[section].opened == true {
-            return tableViewData[section].sectionData.count + 1
+            return 2
         } else {
             return 1
         }
@@ -131,9 +131,14 @@ extension AddDetailFeedbackViewController: UITableViewDataSource {
             cell.cellTitle.text = tableViewData[indexPath.section].title
             return cell
         }
+        else if indexPath.section == 0 && indexPath.row == 1 {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: AddDetailTableViewSelectMemberCell.className, for: indexPath) as? AddDetailTableViewSelectMemberCell else { return UITableViewCell() }
+            
+            return cell
+        }
         else {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: UITableViewCell.className, for: indexPath) as? UITableViewCell else { return UITableViewCell() }
-            cell.textLabel?.text = tableViewData[indexPath.section].sectionData[indexPath.row - 1]
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: AddDetailTableViewSelectMemberCell.className, for: indexPath) as? AddDetailTableViewSelectMemberCell else { return UITableViewCell() }
+            
             return cell
         }
     }
@@ -145,6 +150,7 @@ extension AddDetailFeedbackViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         if indexPath.row == 0 {
             tableViewData[indexPath.section].opened = !tableViewData[indexPath.section].opened
+            
             tableView.reloadSections([indexPath.section], with: .none)
         } else {
             print("이건 sectionData 선택한 거야")
@@ -155,8 +161,11 @@ extension AddDetailFeedbackViewController: UITableViewDelegate {
         if indexPath.row == 0 {
             return 58
         }
+        else if indexPath.section == 0 && indexPath.row == 1 {
+            return 207
+        }
         else {
-            return 44
+            return 121
         }
     }
 }
@@ -166,5 +175,4 @@ extension AddDetailFeedbackViewController: UITableViewDelegate {
 struct cellData {
     var opened = Bool()
     var title = String()
-    var sectionData = [String]()
 }
