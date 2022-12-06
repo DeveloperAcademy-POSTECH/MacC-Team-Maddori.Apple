@@ -113,7 +113,7 @@ final class AddFeedbackContentViewController: BaseViewController {
     }()
     private lazy var doneButton: MainButton = {
         let button = MainButton()
-        button.title = TextLiteral.addFeedbackContentViewControllerButtonNext
+        button.title = TextLiteral.doneButtonNext
         button.isDisabled = true
         let action = UIAction { [weak self] _ in
             self?.didTappedDoneButton()
@@ -210,7 +210,6 @@ final class AddFeedbackContentViewController: BaseViewController {
     }
     
     private func didTappedDoneButton() {
-        
         if contentString.isEmpty {
             contentString = currentStepString
         } else {
