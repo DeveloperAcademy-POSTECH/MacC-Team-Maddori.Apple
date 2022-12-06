@@ -10,12 +10,15 @@ import UIKit
 import SnapKit
 
 final class FeedbackKeyword: UIView {
+    let keywordType: KeywordType = .previewKeyword
     let title: String
+    
+    // MARK: - property
     
     private lazy var feedbackLabel: UILabel = {
         let label = UILabel()
         label.text = title
-        label.textColor = .gray200
+        label.textColor = keywordType.textColor
         label.font = .main
         return label
     }()
@@ -32,9 +35,13 @@ final class FeedbackKeyword: UIView {
     required init?(coder: NSCoder) { nil }
     
     private func configUI() {
-        self.backgroundColor = .blue200
+        self.backgroundColor = keywordType.labelColor[0]
         self.layer.cornerRadius = 24
-        self.makeShadow(color: .black, opacity: 0.25, offset: .zero, radius: 4)
+        self.layer.maskedCorners = keywordType.maskedCorners
+        self.makeShadow(color: .black,
+                        opacity: keywordType.shadowOpacity,
+                        offset: .zero,
+                        radius: keywordType.shadowRadius)
     }
     
     private func render() {
