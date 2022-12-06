@@ -28,7 +28,9 @@ final class AddDetailFeedbackViewController: BaseViewController {
     }()
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
+        tableView.separatorStyle = .none
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: UITableViewCell.className)
+        tableView.register(AddDetailTableViewSectionCell.self, forCellReuseIdentifier: AddDetailTableViewSectionCell.className)
         return tableView
     }()
     private let nextButton: MainButton = {
@@ -98,7 +100,7 @@ final class AddDetailFeedbackViewController: BaseViewController {
     }
     
     private func setupTableViewData() {
-        tableViewData = [cellData(opened: false, title: "피드백 줄 맴버", sectionData: ["cell1", "cell2"]),
+        tableViewData = [cellData(opened: true, title: "피드백 줄 맴버", sectionData: ["cell1", "cell2"]),
                          cellData(opened: false, title: "피드백 종류", sectionData: ["cell3", "cell4"])
         ]
     }
@@ -125,8 +127,8 @@ extension AddDetailFeedbackViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: UITableViewCell.className, for: indexPath) as? UITableViewCell else { return UITableViewCell() }
-            cell.textLabel?.text = tableViewData[indexPath.section].title
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: AddDetailTableViewSectionCell.className, for: indexPath) as? AddDetailTableViewSectionCell else { return UITableViewCell() }
+            cell.cellTitle.text = tableViewData[indexPath.section].title
             return cell
         }
         else {
@@ -148,7 +150,17 @@ extension AddDetailFeedbackViewController: UITableViewDelegate {
             print("이건 sectionData 선택한 거야")
         }
     }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == 0 {
+            return 58
+        }
+        else {
+            return 44
+        }
+    }
 }
+
 
 // FIXME: 모델로 뺄것
 struct cellData {
