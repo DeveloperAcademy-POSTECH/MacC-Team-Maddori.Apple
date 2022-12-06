@@ -11,7 +11,7 @@ import SnapKit
 
 final class AddDetailFeedbackViewController: BaseViewController {
     
-    private var tableViewData: [cellData] = []
+//    private var tableViewData: [cellData] = []
     
     // MARK: - property
     
@@ -26,16 +26,16 @@ final class AddDetailFeedbackViewController: BaseViewController {
         label.font = .font(.bold, ofSize: 24)
         return label
     }()
-    private lazy var tableView: UITableView = {
-        let tableView = UITableView(frame: .zero, style: .insetGrouped)
-        tableView.separatorStyle = .none
-        tableView.backgroundView = nil
-        tableView.backgroundColor = .clear
-        tableView.isScrollEnabled = false
-        tableView.register(AddDetailTableViewSelectMemberCell.self, forCellReuseIdentifier: AddDetailTableViewSelectMemberCell.className)
-        tableView.register(AddDetailTableViewSectionCell.self, forCellReuseIdentifier: AddDetailTableViewSectionCell.className)
-        return tableView
-    }()
+//    private lazy var tableView: UITableView = {
+//        let tableView = UITableView(frame: .zero, style: .insetGrouped)
+//        tableView.separatorStyle = .none
+//        tableView.backgroundView = nil
+//        tableView.backgroundColor = .clear
+//        tableView.isScrollEnabled = false
+//        tableView.register(AddDetailTableViewSelectMemberCell.self, forCellReuseIdentifier: AddDetailTableViewSelectMemberCell.className)
+//        tableView.register(AddDetailTableViewSectionCell.self, forCellReuseIdentifier: AddDetailTableViewSectionCell.className)
+//        return tableView
+//    }()
     private let nextButton: MainButton = {
         let button = MainButton()
         // FIXME: 텍스트 리터럴 처리하기
@@ -48,8 +48,8 @@ final class AddDetailFeedbackViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCloseButton()
-        setupTableViewData()
-        setupDelegation()
+//        setupTableViewData()
+//        setupDelegation()
     }
     
     override func setupNavigationBar() {
@@ -84,12 +84,12 @@ final class AddDetailFeedbackViewController: BaseViewController {
             $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(2)
         }
         
-        view.addSubview(tableView)
-        tableView.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview()
-            $0.top.equalTo(titleLabel.snp.bottom)
-            $0.bottom.equalTo(nextButton.snp.top)
-        }
+//        view.addSubview(tableView)
+//        tableView.snp.makeConstraints {
+//            $0.leading.trailing.equalToSuperview()
+//            $0.top.equalTo(titleLabel.snp.bottom)
+//            $0.bottom.equalTo(nextButton.snp.top)
+//        }
         
     }
     
@@ -102,89 +102,89 @@ final class AddDetailFeedbackViewController: BaseViewController {
         closeButton.addAction(action, for: .touchUpInside)
     }
     
-    private func setupTableViewData() {
-        tableViewData = [cellData(opened: true, title: "피드백 줄 맴버"),
-                         cellData(opened: false, title: "피드백 종류")
-        ]
-    }
+//    private func setupTableViewData() {
+//        tableViewData = [cellData(opened: true, title: "피드백 줄 맴버"),
+//                         cellData(opened: false, title: "피드백 종류")
+//        ]
+//    }
     
-    private func setupDelegation() {
-        tableView.dataSource = self
-        tableView.delegate = self
-    }
+//    private func setupDelegation() {
+//        tableView.dataSource = self
+//        tableView.delegate = self
+//    }
 }
 
-extension AddDetailFeedbackViewController: UITableViewDataSource {
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return tableViewData.count
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if tableViewData[section].opened == true {
-            return 2
-        } else {
-            return 1
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row == 0 {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: AddDetailTableViewSectionCell.className, for: indexPath) as? AddDetailTableViewSectionCell else { return UITableViewCell() }
-            cell.selectionStyle = .none
-            cell.cellTitle.text = tableViewData[indexPath.section].title
-            return cell
-        }
-        else if indexPath.section == 0 && indexPath.row == 1 {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: AddDetailTableViewSelectMemberCell.className, for: indexPath) as? AddDetailTableViewSelectMemberCell else { return UITableViewCell() }
-            
-            return cell
-        }
-        else {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: AddDetailTableViewSelectMemberCell.className, for: indexPath) as? AddDetailTableViewSelectMemberCell else { return UITableViewCell() }
-            
-            return cell
-        }
-    }
-}
-
-extension AddDetailFeedbackViewController: UITableViewDelegate {
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        if indexPath.row == 0 {
-            tableViewData[indexPath.section].opened = !tableViewData[indexPath.section].opened
-            
-            tableView.reloadSections([indexPath.section], with: .none)
-        } else {
-            print("이건 sectionData 선택한 거야")
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.row == 0 {
-            return 58
-        }
-        else if indexPath.section == 0 && indexPath.row == 1 {
-            return 207
-        }
-        else {
-            return 121
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 20
-    }
-    
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return UIView()
-    }
-}
+//extension AddDetailFeedbackViewController: UITableViewDataSource {
+//
+//    func numberOfSections(in tableView: UITableView) -> Int {
+//        return tableViewData.count
+//    }
+//
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        if tableViewData[section].opened == true {
+//            return 2
+//        } else {
+//            return 1
+//        }
+//    }
+//
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        if indexPath.row == 0 {
+//            guard let cell = tableView.dequeueReusableCell(withIdentifier: AddDetailTableViewSectionCell.className, for: indexPath) as? AddDetailTableViewSectionCell else { return UITableViewCell() }
+//            cell.selectionStyle = .none
+//            cell.cellTitle.text = tableViewData[indexPath.section].title
+//            return cell
+//        }
+//        else if indexPath.section == 0 && indexPath.row == 1 {
+//            guard let cell = tableView.dequeueReusableCell(withIdentifier: AddDetailTableViewSelectMemberCell.className, for: indexPath) as? AddDetailTableViewSelectMemberCell else { return UITableViewCell() }
+//
+//            return cell
+//        }
+//        else {
+//            guard let cell = tableView.dequeueReusableCell(withIdentifier: AddDetailTableViewSelectMemberCell.className, for: indexPath) as? AddDetailTableViewSelectMemberCell else { return UITableViewCell() }
+//
+//            return cell
+//        }
+//    }
+//}
+//
+//extension AddDetailFeedbackViewController: UITableViewDelegate {
+//
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        tableView.deselectRow(at: indexPath, animated: true)
+//        if indexPath.row == 0 {
+//            tableViewData[indexPath.section].opened = !tableViewData[indexPath.section].opened
+//
+//            tableView.reloadSections([indexPath.section], with: .none)
+//        } else {
+//            print("이건 sectionData 선택한 거야")
+//        }
+//    }
+//
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        if indexPath.row == 0 {
+//            return 58
+//        }
+//        else if indexPath.section == 0 && indexPath.row == 1 {
+//            return 207
+//        }
+//        else {
+//            return 121
+//        }
+//    }
+//
+//    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+//        return 20
+//    }
+//
+//    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+//        return UIView()
+//    }
+//}
 
 
 // FIXME: 모델로 뺄것
-struct cellData {
-    var opened = Bool()
-    var title = String()
-}
+//struct cellData {
+//    var opened = Bool()
+//    var title = String()
+//}
