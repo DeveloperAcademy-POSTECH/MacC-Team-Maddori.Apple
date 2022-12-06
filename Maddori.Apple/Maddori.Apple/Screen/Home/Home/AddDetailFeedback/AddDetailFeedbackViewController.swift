@@ -16,6 +16,14 @@ final class AddDetailFeedbackViewController: BaseViewController {
     private let closeButton = CloseButton()
     // FIXME(이드 PR 합쳐지면 이미지 변경 예정)
     private let progressImageView = UIImageView(image: UIImage(systemName: "heart"))
+    private let titleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "피드백 줄 멤버와 종류를\n선택해주세요"
+        label.numberOfLines = 0
+        // FIXME: 이드꺼 머지되면 .title2 로 변경 예정
+        label.font = .font(.bold, ofSize: 24)
+        return label
+    }()
     
     // MARK: - life cycle
     override func viewDidLoad() {
@@ -34,12 +42,19 @@ final class AddDetailFeedbackViewController: BaseViewController {
     }
     
     override func render() {
+        
         view.addSubview(progressImageView)
         progressImageView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).inset(8)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.width.equalTo(110)
             $0.height.equalTo(14)
+        }
+        
+        view.addSubview(titleLabel)
+        titleLabel.snp.makeConstraints {
+            $0.top.equalTo(progressImageView.snp.bottom).offset(24)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
     }
     
