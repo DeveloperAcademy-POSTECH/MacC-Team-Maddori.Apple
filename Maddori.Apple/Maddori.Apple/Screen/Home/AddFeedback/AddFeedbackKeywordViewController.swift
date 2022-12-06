@@ -317,10 +317,10 @@ final class AddFeedbackKeywordViewController: BaseViewController {
     @objc private func keyboardWillShow(notification:NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             containerScrollView.snp.updateConstraints {
-                 $0.bottom.equalTo(doneButton.snp.top).offset(-keyboardSize.height)
+                 $0.bottom.equalTo(doneButton.snp.top).offset(-keyboardSize.height + 12)
              }
             UIView.animate(withDuration: 0.2, animations: {
-                self.doneButton.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height + 10)
+                self.doneButton.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height + 25)
                 self.view.layoutIfNeeded()
             })
         }
