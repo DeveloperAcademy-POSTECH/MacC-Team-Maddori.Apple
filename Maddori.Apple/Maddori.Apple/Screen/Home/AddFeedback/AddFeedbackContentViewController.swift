@@ -193,8 +193,8 @@ final class AddFeedbackContentViewController: BaseViewController {
     }
     
     private func setupNotificationCenter() {
-        NotificationCenter.default.addObserver(self, selector: #selector(willShowKeyboard), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(willHideKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     private func setupDelegate() {
@@ -235,7 +235,7 @@ final class AddFeedbackContentViewController: BaseViewController {
     
     // MARK: - selector
     
-    @objc private func willShowKeyboard(notification: NSNotification) {
+    @objc private func keyboardWillShow(notification: NSNotification) {
         guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
         
         feedbackContentTextView.snp.updateConstraints {
@@ -247,7 +247,7 @@ final class AddFeedbackContentViewController: BaseViewController {
         })
     }
     
-    @objc func willHideKeyboard(notification: NSNotification) {
+    @objc func keyboardWillHide(notification: NSNotification) {
         feedbackContentTextView.snp.updateConstraints {
             $0.bottom.equalTo(doneButton.snp.top).offset(-10)
         }
