@@ -12,40 +12,48 @@ import SnapKit
 
 final class AddFeedbackKeywordViewController: BaseViewController {
     
+    private enum Length {
+        static let keywordMaxLength: Int = 10
+    }
     private enum Size {
         static let topPadding: Int = 8
         static let stepTopPadding: Int = 24
         static let textFieldMaxCornerRadius: CGFloat = 25
         static let textFieldMinCornerRadius: CGFloat = 16
         static let textFieldHeight: CGFloat = 50
-        static let textFieldMinWidth: CGFloat = 32
         static let textFieldXPadding: CGFloat = 16
+        static let textFieldYPadding: CGFloat = 13
     }
 
-    var toString: String
-    var feedbackType: FeedBackType
-    var contentString: String
-    
     var placeholder = TextLiteral.addFeedbackKeywordViewControllerPlaceholder
     var textViewHasText: Bool = false
     var textFieldWidth: CGFloat = 0
     var placeholderWidth: CGFloat {
-        let placeholder = "키워드를 입력하세요"
+        let placeholder = TextLiteral.addFeedbackKeywordViewControllerPlaceholder
         let fontAttributes = [NSAttributedString.Key.font: UIFont.main]
         let width = (placeholder as NSString).size(withAttributes: fontAttributes).width
         return width
     }
     
-    init(to:String, type: FeedBackType, content: String) {
+    let toString: String
+    let toUserId: Int
+    let feedbackType: FeedBackDTO
+    let contentString: String
+    let reflectionId: Int
+    
+    init(to: String, toUserId: Int, type: FeedBackDTO, content: String, reflectionId: Int) {
         self.toString = to
+        self.toUserId = toUserId
         self.feedbackType = type
         self.contentString = content
+        self.reflectionId = reflectionId
         super.init()
     }
     
     required init?(coder: NSCoder) { nil }
     
     // MARK: - property
+    
     lazy var backButton: BackButton = {
         let button = BackButton(type: .system)
         let action = UIAction { [weak self] _ in
@@ -62,8 +70,8 @@ final class AddFeedbackKeywordViewController: BaseViewController {
         button.addAction(action, for: .touchUpInside)
         return button
     }()
-    private lazy var progressImageView = UIImageView(image: ImageLiterals.imgProgress5)
-    private lazy var currentStepLabel: UILabel = {
+    private let progressImageView = UIImageView(image: ImageLiterals.imgProgress5)
+    private let currentStepLabel: UILabel = {
         let label = UILabel()
         label.text = TextLiteral.addFeedbackContentViewControllerCurrentStepLabel5
         label.textColor = .black100
@@ -92,7 +100,6 @@ final class AddFeedbackKeywordViewController: BaseViewController {
                 NSAttributedString.Key.font: UIFont.main
             ]
         )
-        textFieldWidth = textField.intrinsicContentSize.width
         return textField
     }()
     private let containerScrollView: UIScrollView = {
@@ -100,6 +107,7 @@ final class AddFeedbackKeywordViewController: BaseViewController {
         view.backgroundColor = .blue300
         view.layer.cornerRadius = 10
         view.contentInset.top = 20
+        view.scrollIndicatorInsets = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 6)
         return view
     }()
     private lazy var scrollContentStackView: UIStackView = {
@@ -179,7 +187,7 @@ final class AddFeedbackKeywordViewController: BaseViewController {
         setupNavigationBar()
         setupNotificationCenter()
         setupDelegate()
-        setTextFieldObserver()
+        setupTextFieldObserver()
     }
     
     override func render() {
@@ -205,8 +213,8 @@ final class AddFeedbackKeywordViewController: BaseViewController {
 
         view.addSubview(keywordTextField)
         keywordTextField.snp.makeConstraints {
-            $0.leading.equalTo(textFieldContainerView).offset(16)
-            $0.top.equalTo(textFieldContainerView).offset(13)
+            $0.leading.equalTo(textFieldContainerView).offset(Size.textFieldXPadding)
+            $0.top.equalTo(textFieldContainerView).offset(Size.textFieldYPadding)
         }
         
         view.addSubview(doneButton)
@@ -224,7 +232,7 @@ final class AddFeedbackKeywordViewController: BaseViewController {
         
         containerScrollView.addSubview(scrollContentStackView)
         scrollContentStackView.snp.makeConstraints {
-            $0.verticalEdges.equalToSuperview().inset(20)
+            $0.verticalEdges.equalToSuperview().inset(8)
             $0.horizontalEdges.equalToSuperview().inset(24)
             $0.width.equalToSuperview().offset(-2 * SizeLiteral.leadingTrailingPadding)
         }
@@ -254,7 +262,7 @@ final class AddFeedbackKeywordViewController: BaseViewController {
         keywordTextField.delegate = self
     }
     
-    private func setTextFieldObserver() {
+    private func setupTextFieldObserver() {
         keywordTextField.addTarget(self, action: #selector(textFieldChangeBegin), for: .editingDidBegin)
         keywordTextField.addTarget(self, action: #selector(textFieldChanging), for: .allEditingEvents)
         keywordTextField.addTarget(self, action: #selector(textFieldChangeEnd), for: .editingDidEnd)
@@ -264,13 +272,43 @@ final class AddFeedbackKeywordViewController: BaseViewController {
         navigationController?.popViewController(animated: true)
     }
     
-    func didTappedCloseButton() {
+    private func didTappedCloseButton() {
         self.dismiss(animated: true)
     }
     
-    func didTappedDoneButton() {
-        DispatchQueue.main.async {
-            // FIXME: done button 눌렀을 때 action -> API, View 내리기
+    private func didTappedDoneButton() {
+        guard let keyword = keywordTextField.text else { return }
+        let dto = FeedBackContentDTO(type: feedbackType, keyword: keyword, content: contentString, start_content: nil, to_id: toUserId)
+        dispatchAddFeedBack(type: .dispatchAddFeedBack(reflectionId: reflectionId, dto))
+    }
+    
+    private func checkMaxLength(textField: UITextField, maxLength: Int) {
+        if let text = textField.text {
+            if text.count > maxLength {
+                let endIndex = text.index(text.startIndex, offsetBy: maxLength)
+                let fixedText = text[text.startIndex..<endIndex]
+                textField.text = fixedText + ""
+                
+                DispatchQueue.main.async {
+                    self.keywordTextField.text = String(fixedText)
+                }
+            }
+        }
+    }
+    
+    // MARK: - api
+    
+    private func dispatchAddFeedBack(type: AddFeedBackEndPoint<FeedBackContentDTO>) {
+        AF.request(type.address,
+                   method: type.method,
+                   parameters: type.body,
+                   encoder: JSONParameterEncoder.default,
+                   headers: type.headers
+        ).responseDecodable(of: BaseModel<FeedBackContentResponse>.self) { json in
+            dump(json.value)
+            DispatchQueue.main.async {
+                self.dismiss(animated: true)
+            }
         }
     }
     
@@ -337,4 +375,10 @@ final class AddFeedbackKeywordViewController: BaseViewController {
 
 extension AddFeedbackKeywordViewController: UITextFieldDelegate {
     // FIXME: 키워드 글자 수 제한
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        checkMaxLength(textField: keywordTextField, maxLength: Length.keywordMaxLength)
+
+        textViewHasText = keywordTextField.hasText
+        doneButton.isDisabled = !textViewHasText
+    }
 }
