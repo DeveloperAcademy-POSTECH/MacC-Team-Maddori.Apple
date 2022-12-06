@@ -100,7 +100,16 @@ final class AddFeedbackKeywordViewController: BaseViewController {
                 NSAttributedString.Key.font: UIFont.main
             ]
         )
+        textField.textColor = .gray600
         return textField
+    }()
+    private let keywordLimitLabel: UILabel = {
+        let label = UILabel()
+        label.font = .caption3
+        label.textColor = .red100
+        label.text = "키워드는 10글자 이내로 작성해주세요"
+        label.isHidden = true
+        return label
     }()
     private let containerScrollView: UIScrollView = {
         let view = UIScrollView()
@@ -217,6 +226,12 @@ final class AddFeedbackKeywordViewController: BaseViewController {
             $0.top.equalTo(textFieldContainerView).offset(Size.textFieldYPadding)
         }
         
+        view.addSubview(keywordLimitLabel)
+        keywordLimitLabel.snp.makeConstraints {
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.top.equalTo(textFieldContainerView.snp.bottom).offset(8)
+        }
+        
         view.addSubview(doneButton)
         doneButton.snp.makeConstraints {
             $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-2)
@@ -226,7 +241,7 @@ final class AddFeedbackKeywordViewController: BaseViewController {
         view.addSubview(containerScrollView)
         containerScrollView.snp.makeConstraints {
             $0.horizontalEdges.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-            $0.top.equalTo(textFieldContainerView.snp.bottom).offset(28)
+            $0.top.equalTo(textFieldContainerView.snp.bottom).offset(32)
             $0.bottom.equalTo(doneButton.snp.top).offset(-12)
         }
         
@@ -290,7 +305,12 @@ final class AddFeedbackKeywordViewController: BaseViewController {
                 textField.text = fixedText + ""
                 
                 DispatchQueue.main.async {
+                    self.keywordLimitLabel.isHidden = false
                     self.keywordTextField.text = String(fixedText)
+                }
+            } else {
+                DispatchQueue.main.async {
+                    self.keywordLimitLabel.isHidden = true
                 }
             }
         }
