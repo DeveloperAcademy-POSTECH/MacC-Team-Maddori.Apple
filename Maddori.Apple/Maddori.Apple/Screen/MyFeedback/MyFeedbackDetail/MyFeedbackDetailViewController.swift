@@ -57,13 +57,7 @@ final class MyFeedbackDetailViewController: BaseViewController {
         label.font = .label2
         return label
     }()
-    private lazy var feedbackKeywordText: UILabel = {
-        let label = UILabel()
-        label.setTextWithLineHeight(text: feedbackDetail.keyword, lineHeight: 24)
-        label.textColor = .gray400
-        label.font = .body1
-        return label
-    }()
+    private lazy var feedbackKeyword = FeedbackKeyword(title: feedbackDetail.keyword)
     private let feedbackContentLabel: UILabel = {
         let label = UILabel()
         label.text = TextLiteral.feedbackContentLabel
@@ -176,15 +170,15 @@ final class MyFeedbackDetailViewController: BaseViewController {
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
-        feedbackFromMeDetailContentView.addSubview(feedbackKeywordText)
-        feedbackKeywordText.snp.makeConstraints {
+        feedbackFromMeDetailContentView.addSubview(feedbackKeyword)
+        feedbackKeyword.snp.makeConstraints {
             $0.top.equalTo(feedbackKeywordLabel.snp.bottom).offset(SizeLiteral.labelComponentPadding)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
         feedbackFromMeDetailContentView.addSubview(feedbackContentLabel)
         feedbackContentLabel.snp.makeConstraints {
-            $0.top.equalTo(feedbackKeywordText.snp.bottom).offset(SizeLiteral.componentIntervalPadding)
+            $0.top.equalTo(feedbackKeyword.snp.bottom).offset(SizeLiteral.componentIntervalPadding)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
