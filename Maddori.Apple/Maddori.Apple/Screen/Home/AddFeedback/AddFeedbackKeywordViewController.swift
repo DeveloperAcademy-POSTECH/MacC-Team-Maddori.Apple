@@ -95,16 +95,27 @@ final class AddFeedbackKeywordViewController: BaseViewController {
         textFieldWidth = textField.intrinsicContentSize.width
         return textField
     }()
-    private let scrollViewContainer: UIView = {
-        let view = UIView()
-        view.backgroundColor = .blue300
-        view.layer.cornerRadius = 10
-        return view
-    }()
     private let containerScrollView: UIScrollView = {
         let view = UIScrollView()
-        view.backgroundColor = .black
+        view.backgroundColor = .blue300
+        view.layer.cornerRadius = 10
+        view.contentInset.top = 20
         return view
+    }()
+    private lazy var scrollContentStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [
+            self.toLabel,
+            self.toDescriptionLabel,
+            self.typeLabel,
+            self.typeDescriptionLabel,
+            self.feedbackLabel,
+            self.feedbackDescriptionLabel
+        ])
+        for i in 0..<stackView.arrangedSubviews.count {
+            stackView.setCustomSpacing(i % 2 == 0 ? 8 : 24, after: stackView.subviews[i])
+        }
+        stackView.axis = .vertical
+        return stackView
     }()
     private let toLabel: UILabel = {
         let label = UILabel()
@@ -113,7 +124,6 @@ final class AddFeedbackKeywordViewController: BaseViewController {
         label.text = TextLiteral.addFeedbackContentViewControllerToLabel
         return label
     }()
-    private let contentContainer = UIView()
     private lazy var toDescriptionLabel: UILabel = {
         let label = UILabel()
         label.font = .body1
@@ -143,7 +153,7 @@ final class AddFeedbackKeywordViewController: BaseViewController {
         label.numberOfLines = 0
         return label
     }()
-    private lazy var feeedbackDescriptionLabel: UILabel = {
+    private lazy var feedbackDescriptionLabel: UILabel = {
         let label = UILabel()
         label.font = .body1
         label.textColor = .gray400
@@ -205,55 +215,18 @@ final class AddFeedbackKeywordViewController: BaseViewController {
             $0.centerX.equalToSuperview()
         }
         
-        view.addSubview(scrollViewContainer)
-        scrollViewContainer.snp.makeConstraints {
+        view.addSubview(containerScrollView)
+        containerScrollView.snp.makeConstraints {
             $0.horizontalEdges.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.top.equalTo(textFieldContainerView.snp.bottom).offset(28)
             $0.bottom.equalTo(doneButton.snp.top).offset(-12)
         }
         
-        scrollViewContainer.addSubview(containerScrollView)
-        containerScrollView.snp.makeConstraints {
+        containerScrollView.addSubview(scrollContentStackView)
+        scrollContentStackView.snp.makeConstraints {
             $0.verticalEdges.equalToSuperview().inset(20)
-            $0.horizontalEdges.equalToSuperview().inset(4)
-        }
-        
-        containerScrollView.addSubview(toLabel)
-        toLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(4)
-            $0.leading.equalToSuperview().inset(16)
-        }
-        
-        containerScrollView.addSubview(toDescriptionLabel)
-        toDescriptionLabel.snp.makeConstraints {
-            $0.top.equalTo(toLabel.snp.bottom).offset(8)
-            $0.horizontalEdges.equalToSuperview().inset(16)
-        }
-        
-        containerScrollView.addSubview(typeLabel)
-        typeLabel.snp.makeConstraints {
-            $0.top.equalTo(toDescriptionLabel.snp.bottom).offset(24)
-            $0.leading.equalToSuperview().inset(16)
-        }
-        
-        containerScrollView.addSubview(typeDescriptionLabel)
-        typeDescriptionLabel.snp.makeConstraints {
-            $0.top.equalTo(typeLabel.snp.bottom).offset(8)
-            $0.horizontalEdges.equalToSuperview().inset(16)
-        }
-        
-        containerScrollView.addSubview(feedbackLabel)
-        feedbackLabel.snp.makeConstraints {
-            $0.top.equalTo(typeDescriptionLabel.snp.bottom).offset(24)
-            $0.leading.equalToSuperview().inset(16)
-        }
-        
-        containerScrollView.addSubview(feeedbackDescriptionLabel)
-        feeedbackDescriptionLabel.snp.makeConstraints {
-            $0.top.equalTo(feedbackLabel.snp.bottom).offset(8)
-            $0.horizontalEdges.equalToSuperview().inset(16)
-            $0.bottom.equalToSuperview().inset(4)
-//            $0.bottom.equalTo(contentContainer).offset(<#T##amount: ConstraintOffsetTarget##ConstraintOffsetTarget#>)
+            $0.horizontalEdges.equalToSuperview().inset(24)
+            $0.width.equalToSuperview().offset(-2 * SizeLiteral.leadingTrailingPadding)
         }
     }
     
