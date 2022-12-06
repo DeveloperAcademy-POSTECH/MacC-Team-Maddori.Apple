@@ -11,6 +11,8 @@ import SnapKit
 
 final class AddDetailFeedbackViewController: BaseViewController {
     
+    private var tableViewData: [cellData] = []
+    
     // MARK: - property
     
     private let closeButton = CloseButton()
@@ -24,11 +26,19 @@ final class AddDetailFeedbackViewController: BaseViewController {
         label.font = .font(.bold, ofSize: 24)
         return label
     }()
+    private lazy var tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: UITableViewCell.className)
+        return tableView
+    }()
+    
     
     // MARK: - life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCloseButton()
+        setupTableViewData()
+        setupDelegation()
     }
     
     override func setupNavigationBar() {
@@ -56,13 +66,80 @@ final class AddDetailFeedbackViewController: BaseViewController {
             $0.top.equalTo(progressImageView.snp.bottom).offset(24)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
+        
+        view.addSubview(tableView)
+        tableView.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.top.equalTo(titleLabel.snp.bottom).offset(24)
+            $0.height.equalTo(1000)
+        }
     }
     
     // MARK: - func
+    
     private func setupCloseButton() {
         let action = UIAction { [weak self] _ in
             self?.dismiss(animated: true)
         }
         closeButton.addAction(action, for: .touchUpInside)
     }
+    
+    private func setupTableViewData() {
+        tableViewData = [cellData(opened: false, title: "피드백 줄 맴버", sectionData: ["cell1", "cell2"]),
+                         cellData(opened: false, title: "피드백 종류", sectionData: ["cell3", "cell4"])
+        ]
+    }
+    
+    private func setupDelegation() {
+        tableView.dataSource = self
+        tableView.delegate = self
+    }
+}
+
+extension AddDetailFeedbackViewController: UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return tableViewData.count
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if tableViewData[section].opened == true {
+            return tableViewData[section].sectionData.count + 1
+        } else {
+            return 1
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.row == 0 {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: UITableViewCell.className, for: indexPath) as? UITableViewCell else { return UITableViewCell() }
+            cell.textLabel?.text = tableViewData[indexPath.section].title
+            return cell
+        }
+        else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: UITableViewCell.className, for: indexPath) as? UITableViewCell else { return UITableViewCell() }
+            cell.textLabel?.text = tableViewData[indexPath.section].sectionData[indexPath.row - 1]
+            return cell
+        }
+    }
+}
+
+extension AddDetailFeedbackViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        if indexPath.row == 0 {
+            tableViewData[indexPath.section].opened = !tableViewData[indexPath.section].opened
+            tableView.reloadSections([indexPath.section], with: .none)
+        } else {
+            print("이건 sectionData 선택한 거야")
+        }
+    }
+}
+
+// FIXME: 모델로 뺄것
+struct cellData {
+    var opened = Bool()
+    var title = String()
+    var sectionData = [String]()
 }
