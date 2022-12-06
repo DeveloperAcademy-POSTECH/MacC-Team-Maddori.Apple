@@ -11,9 +11,9 @@ import Alamofire
 import SnapKit
 
 enum Step {
-    case second
-    case third
-    case fourth
+    case writeSituation
+    case writeFeeling
+    case writeSuggestions
 }
 
 final class AddFeedbackContentViewController: BaseViewController {
@@ -59,22 +59,22 @@ final class AddFeedbackContentViewController: BaseViewController {
     private lazy var progressImageView: UIImageView = {
         let imageView = UIImageView()
         switch step {
-        case .second:
+        case .writeSituation:
             return UIImageView(image: ImageLiterals.imgProgress2)
-        case .third:
+        case .writeFeeling:
             return UIImageView(image: ImageLiterals.imgProgress3)
-        case .fourth:
+        case .writeSuggestions:
             return UIImageView(image: ImageLiterals.imgProgress4)
         }
     }()
     private lazy var currentStepLabel: UILabel = {
         let label = UILabel()
         switch step {
-        case .second:
+        case .writeSituation:
             label.text = TextLiteral.addFeedbackContentViewControllerCurrentStepLabel2
-        case .third:
+        case .writeFeeling:
             label.text = TextLiteral.addFeedbackContentViewControllerCurrentStepLabel3
-        case .fourth:
+        case .writeSuggestions:
             label.text = TextLiteral.addFeedbackContentViewControllerCurrentStepLabel4
         }
         label.textColor = .black100
@@ -86,14 +86,12 @@ final class AddFeedbackContentViewController: BaseViewController {
     private lazy var currentStepDescriptionLabel: UILabel = {
         let label = UILabel()
         switch step {
-        case .second:
+        case .writeSituation:
             label.text = TextLiteral.addFeedbackContentViewControllerCurrentStepDescriptionLabel2
-        case .third:
+        case .writeFeeling:
             label.text = TextLiteral.addFeedbackContentViewControllerCurrentStepDescriptionLabel3
-        case .fourth:
+        case .writeSuggestions:
             label.text = TextLiteral.addFeedbackContentViewControllerCurrentStepDescriptionLabel4
-        default:
-            label.text = ""
         }
         label.textColor = .gray400
         label.font = .body2
@@ -211,11 +209,11 @@ final class AddFeedbackContentViewController: BaseViewController {
         navigationController?.popViewController(animated: true)
     }
     
-    func didTappedCloseButton() {
+    private func didTappedCloseButton() {
         self.dismiss(animated: true)
     }
     
-    func didTappedDoneButton() {
+    private func didTappedDoneButton() {
         currentStepString = feedbackContentTextView.text
         
         if contentString.isEmpty {
@@ -224,14 +222,13 @@ final class AddFeedbackContentViewController: BaseViewController {
             contentString = contentString + "\n\n" + currentStepString
         }
         
-        NotificationCenter.default.removeObserver(self)
         DispatchQueue.main.async {
             switch self.step {
-            case .second:
-                self.navigationController?.pushViewController(AddFeedbackContentViewController(step: Step.third, content: self.contentString), animated: true)
-            case .third:
-                self.navigationController?.pushViewController(AddFeedbackContentViewController(step: Step.fourth, content: self.contentString), animated: true)
-            case .fourth:
+            case .writeSituation:
+                self.navigationController?.pushViewController(AddFeedbackContentViewController(step: Step.writeFeeling, content: self.contentString), animated: true)
+            case .writeFeeling:
+                self.navigationController?.pushViewController(AddFeedbackContentViewController(step: Step.writeSuggestions, content: self.contentString), animated: true)
+            case .writeSuggestions:
                 print(self.contentString)
                 // FIXME: 키워드 작성하는 마지막 단계 VC가 생기면 그 VC로 연결
             }
