@@ -22,7 +22,6 @@ final class AddFeedbackContentViewController: BaseViewController {
         static let topPadding: Int = 8
         static let stepTopPadding: Int = 24
         static let descriptionTopPadding: Int = 12
-        static let buttonViewHeight: Int = 72
     }
     
     var step: Step
@@ -40,6 +39,7 @@ final class AddFeedbackContentViewController: BaseViewController {
     required init?(coder: NSCoder) { nil }
     
     // MARK: - property
+    
     private lazy var backButton: BackButton = {
         let button = BackButton(type: .system)
         let action = UIAction { [weak self] _ in
@@ -79,23 +79,24 @@ final class AddFeedbackContentViewController: BaseViewController {
         }
         label.textColor = .black100
         label.font = .title2
-        label.setLineSpacing(to: 4)
+        label.setLineSpacing(to: 8)
         label.numberOfLines = 2
         return label
     }()
     private lazy var currentStepDescriptionLabel: UILabel = {
         let label = UILabel()
+        let text: String
         switch step {
         case .writeSituation:
-            label.text = TextLiteral.addFeedbackContentViewControllerCurrentStepDescriptionLabel2
+            text = TextLiteral.addFeedbackContentViewControllerCurrentStepDescriptionLabel2
         case .writeFeeling:
-            label.text = TextLiteral.addFeedbackContentViewControllerCurrentStepDescriptionLabel3
+            text = TextLiteral.addFeedbackContentViewControllerCurrentStepDescriptionLabel3
         case .writeSuggestions:
-            label.text = TextLiteral.addFeedbackContentViewControllerCurrentStepDescriptionLabel4
+            text = TextLiteral.addFeedbackContentViewControllerCurrentStepDescriptionLabel4
         }
         label.textColor = .gray400
         label.font = .body2
-        label.setLineSpacing(to: 4)
+        label.setTextWithLineHeight(text: text, lineHeight: 20)
         label.numberOfLines = 0
         return label
     }()
@@ -108,11 +109,6 @@ final class AddFeedbackContentViewController: BaseViewController {
         let view = UITextView()
         view.backgroundColor = .white200
         view.font = .body1
-        return view
-    }()
-    private let doneButtonView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .white200
         return view
     }()
     private lazy var doneButton: MainButton = {
@@ -144,7 +140,7 @@ final class AddFeedbackContentViewController: BaseViewController {
     override func render() {
         view.addSubview(progressImageView)
         progressImageView.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(8)
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(Size.topPadding)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
@@ -246,7 +242,7 @@ final class AddFeedbackContentViewController: BaseViewController {
         feedbackContentTextView.snp.updateConstraints {
             $0.bottom.equalTo(doneButton.snp.top).offset(-keyboardSize.height + 15)
         }
-        UIView.animate(withDuration: 0.2, animations: {
+        UIView.animate(withDuration: 0, animations: {
             self.doneButton.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height + 25)
             self.view.layoutIfNeeded()
         })

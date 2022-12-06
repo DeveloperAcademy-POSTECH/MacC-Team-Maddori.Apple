@@ -53,9 +53,5 @@ extension UIImage {
         image.accessibilityIdentifier = systemName
         return image
     }
-    
-    static func loadProgressImage(step: Int) -> UIImage {
-        return UIImage.load(name: "ProgressBar\(step)")
-    }
 }
 
