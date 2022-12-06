@@ -168,6 +168,14 @@ extension AddDetailFeedbackViewController: UITableViewDelegate {
             return 121
         }
     }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 20
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView()
+    }
 }
 
 
