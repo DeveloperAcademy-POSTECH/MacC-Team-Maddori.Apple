@@ -14,6 +14,8 @@ final class AddDetailFeedbackViewController: BaseViewController {
     // MARK: - property
     
     private let closeButton = CloseButton()
+    // FIXME(이드 PR 합쳐지면 이미지 변경 예정)
+    private let progressImageView = UIImageView(image: UIImage(systemName: "heart"))
     
     // MARK: - life cycle
     override func viewDidLoad() {
@@ -29,6 +31,16 @@ final class AddDetailFeedbackViewController: BaseViewController {
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.largeTitleDisplayMode = .never
         navigationItem.rightBarButtonItem = closeButton
+    }
+    
+    override func render() {
+        view.addSubview(progressImageView)
+        progressImageView.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide).inset(8)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.width.equalTo(110)
+            $0.height.equalTo(14)
+        }
     }
     
     // MARK: - func
