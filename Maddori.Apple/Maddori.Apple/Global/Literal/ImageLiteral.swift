@@ -20,6 +20,7 @@ enum ImageLiterals {
     static var icBox: UIImage { .load(systemName: "archivebox.circle.fill") }
     static var icRight: UIImage { .load(systemName: "chevron.right") }
     static var icEllipsis: UIImage { .load(systemName: "ellipsis") }
+    static var icBottom: UIImage { .load(systemName: "chevron.down") }
     
     // MARK: - image
     

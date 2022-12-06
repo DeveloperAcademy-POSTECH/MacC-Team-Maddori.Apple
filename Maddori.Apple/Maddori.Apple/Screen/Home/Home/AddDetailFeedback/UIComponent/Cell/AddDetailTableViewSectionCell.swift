@@ -19,6 +19,12 @@ final class AddDetailTableViewSectionCell: BaseTableViewCell {
         return label
     }()
     
+    let cellToggleImageView: UIImageView = {
+        let imageView = UIImageView(image: ImageLiterals.icBottom)
+        imageView.tintColor = .black100
+        return imageView
+    }()
+    
     // MARK: - life cycle
     
     override func configUI() {
@@ -36,7 +42,13 @@ final class AddDetailTableViewSectionCell: BaseTableViewCell {
         self.addSubview(cellTitle)
         cellTitle.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.leading.equalToSuperview().inset(19)
+            $0.leading.equalToSuperview().inset(20)
+        }
+        
+        self.addSubview(cellToggleImageView)
+        cellToggleImageView.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.trailing.equalToSuperview().inset(20)
         }
     }
 }
