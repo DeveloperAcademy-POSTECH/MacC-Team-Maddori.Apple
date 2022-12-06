@@ -54,7 +54,7 @@ final class AddFeedbackKeywordViewController: BaseViewController {
     
     // MARK: - property
     
-    lazy var backButton: BackButton = {
+    private lazy var backButton: BackButton = {
         let button = BackButton(type: .system)
         let action = UIAction { [weak self] _ in
             self?.didTappedBackButton()
@@ -84,7 +84,6 @@ final class AddFeedbackKeywordViewController: BaseViewController {
         let view = UIView()
         view.backgroundColor = .white100
         view.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMaxXMinYCorner, .layerMinXMinYCorner]
-        // FIXME: TextField가 줄어들었을 경우 cornerRadius 때문에 깨짐
         view.layer.cornerRadius = Size.textFieldMaxCornerRadius
         view.layer.shadowOffset = CGSize(width: 0, height: 1)
         view.layer.shadowOpacity = 0.13
@@ -394,7 +393,6 @@ final class AddFeedbackKeywordViewController: BaseViewController {
 }
 
 extension AddFeedbackKeywordViewController: UITextFieldDelegate {
-    // FIXME: 키워드 글자 수 제한
     func textFieldDidChangeSelection(_ textField: UITextField) {
         checkMaxLength(textField: keywordTextField, maxLength: Length.keywordMaxLength)
 
