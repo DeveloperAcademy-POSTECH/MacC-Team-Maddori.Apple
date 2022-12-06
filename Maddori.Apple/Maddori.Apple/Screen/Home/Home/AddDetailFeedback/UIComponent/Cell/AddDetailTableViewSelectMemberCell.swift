@@ -15,4 +15,10 @@ final class AddDetailTableViewSelectMemberCell: BaseTableViewCell {
     
     // MARK: - life cycle
     
+    override func configUI() {
+        self.layer.borderWidth = 0.2
+        self.layer.borderColor = UIColor.black100.cgColor
+        self.layer.cornerRadius = 10
+    }
+    
 }

@@ -28,17 +28,13 @@ final class AddDetailTableViewSectionCell: BaseTableViewCell {
     // MARK: - life cycle
     
     override func configUI() {
-        // FIXME: 색 변경할것
-//        self.backgroundColor = .red
-        self.layer.cornerRadius = 8
-        self.layer.borderWidth = 0.5
+        self.layer.borderWidth = 0.2
         self.layer.borderColor = UIColor.black100.cgColor
-//        self.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-//        self.layer.addBorder([.top, .left, .right], color: .black100, width: 0.5)
-        
+        self.layer.cornerRadius = 10
     }
     
     override func render() {
+        
         self.addSubview(cellTitle)
         cellTitle.snp.makeConstraints {
             $0.centerY.equalToSuperview()

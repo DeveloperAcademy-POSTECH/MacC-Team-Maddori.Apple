@@ -27,8 +27,11 @@ final class AddDetailFeedbackViewController: BaseViewController {
         return label
     }()
     private lazy var tableView: UITableView = {
-        let tableView = UITableView()
+        let tableView = UITableView(frame: .zero, style: .insetGrouped)
         tableView.separatorStyle = .none
+        tableView.backgroundView = nil
+        tableView.backgroundColor = .clear
+        tableView.isScrollEnabled = false
         tableView.register(AddDetailTableViewSelectMemberCell.self, forCellReuseIdentifier: AddDetailTableViewSelectMemberCell.className)
         tableView.register(AddDetailTableViewSectionCell.self, forCellReuseIdentifier: AddDetailTableViewSectionCell.className)
         return tableView
@@ -83,9 +86,9 @@ final class AddDetailFeedbackViewController: BaseViewController {
         
         view.addSubview(tableView)
         tableView.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-            $0.top.equalTo(titleLabel.snp.bottom).offset(24)
-            $0.bottom.equalTo(nextButton.snp.top).offset(-47)
+            $0.leading.trailing.equalToSuperview()
+            $0.top.equalTo(titleLabel.snp.bottom)
+            $0.bottom.equalTo(nextButton.snp.top)
         }
         
     }
@@ -128,6 +131,7 @@ extension AddDetailFeedbackViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: AddDetailTableViewSectionCell.className, for: indexPath) as? AddDetailTableViewSectionCell else { return UITableViewCell() }
+            cell.selectionStyle = .none
             cell.cellTitle.text = tableViewData[indexPath.section].title
             return cell
         }
