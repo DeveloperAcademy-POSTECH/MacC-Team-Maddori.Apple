@@ -210,7 +210,6 @@ final class AddFeedbackContentViewController: BaseViewController {
     }
     
     private func didTappedDoneButton() {
-        currentStepString = feedbackContentTextView.text
         
         if contentString.isEmpty {
             contentString = currentStepString
@@ -265,5 +264,8 @@ extension AddFeedbackContentViewController: UITextViewDelegate {
     func textViewDidChangeSelection(_ textView: UITextView) {
         textViewHasText = feedbackContentTextView.hasText
         doneButton.isDisabled = !textViewHasText
+        
+        guard let text = textView.text else { return }
+        currentStepString = text
     }
 }
