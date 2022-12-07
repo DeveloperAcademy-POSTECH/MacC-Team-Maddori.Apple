@@ -88,6 +88,10 @@ final class FeedbackTypeButtonView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        if feedbackType == nil {
+            applyFeedbackButtonStyle(.continueType)
+            applyButtonLabelStyle(.continueType)
+        }
         render()
     }
     
