@@ -35,6 +35,7 @@ final class AddDetailFeedbackViewController: BaseViewController {
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.separatorStyle = .none
+        tableView.isScrollEnabled = false
         tableView.register(AddDetailTableViewSectionCell.self, forCellReuseIdentifier: AddDetailTableViewSectionCell.className)
         tableView.register(AddDetailTableViewSelectMemberCell.self, forCellReuseIdentifier: AddDetailTableViewSelectMemberCell.className)
         tableView.register(AddDetailTableViewSelectFeedbackTypeCell.self, forCellReuseIdentifier: AddDetailTableViewSelectFeedbackTypeCell.className)

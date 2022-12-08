@@ -29,7 +29,7 @@ final class AddDetailTableViewSectionCell: BaseTableViewCell {
                 self.layer.borderWidth = 0.2
                 self.layer.borderColor = UIColor.black100.cgColor
                 self.layer.cornerRadius = 10
-                
+                self.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner, .layerMaxXMaxYCorner, .layerMinXMaxYCorner]
                 UIView.animate(withDuration: 0.2) {
                     self.cellToggleImageView.transform = .identity
                 }
