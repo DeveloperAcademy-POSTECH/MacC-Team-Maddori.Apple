@@ -19,7 +19,7 @@ final class SelectKeywordTypeView: UIView {
         label.text = "피드백 종류"
         return label
     }()
-    private var upDownImageView: UIImageView = {
+    let upDownImageView: UIImageView = {
         let imageView = UIImageView(image: ImageLiterals.icBottom)
         imageView.tintColor = .black100
         return imageView
@@ -40,13 +40,13 @@ final class SelectKeywordTypeView: UIView {
         
         self.addSubview(titleLabel)
         titleLabel.snp.makeConstraints {
-            $0.centerY.equalToSuperview()
+            $0.top.equalToSuperview().inset(20)
             $0.leading.equalToSuperview().inset(20)
         }
         
         self.addSubview(upDownImageView)
         upDownImageView.snp.makeConstraints {
-            $0.centerY.equalToSuperview()
+            $0.top.equalToSuperview().inset(20)
             $0.trailing.equalToSuperview().inset(20)
             
         }

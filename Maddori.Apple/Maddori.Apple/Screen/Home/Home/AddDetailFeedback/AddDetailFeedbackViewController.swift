@@ -11,6 +11,9 @@ import SnapKit
 
 final class AddDetailFeedbackViewController: BaseViewController {
     
+    private var isOpenedMemberView: Bool = true
+    private var isOpenedTypeView: Bool = false
+    
     // MARK: - property
     
     private let closeButton = CloseButton()
@@ -29,13 +32,17 @@ final class AddDetailFeedbackViewController: BaseViewController {
     }()
     private lazy var selectMemberView: SelectMemberView = {
         let view = SelectMemberView()
+        view.upDownImageView.transform = CGAffineTransform(rotationAngle: .pi)
         view.isUserInteractionEnabled = true
         let tap = UITapGestureRecognizer(target: self, action: #selector(didTapSelectMemeberView))
         view.addGestureRecognizer(tap)
         return view
     }()
-    private let selectKeywordTypeView: SelectKeywordTypeView = {
+    private lazy var selectKeywordTypeView: SelectKeywordTypeView = {
         let view = SelectKeywordTypeView()
+        view.isUserInteractionEnabled = true
+        let tap = UITapGestureRecognizer(target: self, action: #selector(didTapSelectKeywordTypeView))
+        view.addGestureRecognizer(tap)
         return view
     }()
     
@@ -82,7 +89,7 @@ final class AddDetailFeedbackViewController: BaseViewController {
         selectMemberView.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(24)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-            $0.height.equalTo(58)
+            $0.height.equalTo(264)
         }
         
         view.addSubview(selectKeywordTypeView)
@@ -91,13 +98,51 @@ final class AddDetailFeedbackViewController: BaseViewController {
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.height.equalTo(58)
         }
-
+        
     }
     
     // MARK: - selector
     
     @objc private func didTapSelectMemeberView() {
-        print("didTapSelectMemeberView")
+        if isOpenedMemberView {
+            UIView.animate(withDuration: 0.2) {
+                self.selectMemberView.upDownImageView.transform = .identity
+                self.selectMemberView.snp.updateConstraints {
+                    $0.height.equalTo(58)
+                }
+            }
+            isOpenedMemberView.toggle()
+        }
+        else {
+            UIView.animate(withDuration: 0.2) {
+                self.selectMemberView.upDownImageView.transform = CGAffineTransform(rotationAngle: .pi)
+                self.selectMemberView.snp.updateConstraints {
+                    $0.height.equalTo(264)
+                }
+            }
+            isOpenedMemberView.toggle()
+        }
+    }
+    
+    @objc private func didTapSelectKeywordTypeView() {
+        if isOpenedTypeView {
+            UIView.animate(withDuration: 0.2) {
+                self.selectKeywordTypeView.upDownImageView.transform = .identity
+                self.selectKeywordTypeView.snp.updateConstraints {
+                    $0.height.equalTo(58)
+                }
+            }
+            isOpenedTypeView.toggle()
+        }
+        else {
+            UIView.animate(withDuration: 0.2) {
+                self.selectKeywordTypeView.upDownImageView.transform = CGAffineTransform(rotationAngle: .pi)
+                self.selectKeywordTypeView.snp.updateConstraints {
+                    $0.height.equalTo(178)
+                }
+            }
+            isOpenedTypeView.toggle()
+        }
     }
     
     // MARK: - func
