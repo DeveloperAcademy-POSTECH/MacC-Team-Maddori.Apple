@@ -13,10 +13,12 @@ final class StartReflectionViewController: BaseViewController {
     
     let reflectionId: Int
     let navigationViewController: UINavigationController
+    let isAdmin: Bool
     
-    init(reflectionId: Int, navigationViewController: UINavigationController) {
+    init(reflectionId: Int, navigationViewController: UINavigationController, isAdmin: Bool) {
         self.reflectionId = reflectionId
         self.navigationViewController = navigationViewController
+        self.isAdmin = isAdmin
         super.init()
     }
     
@@ -162,7 +164,7 @@ final class StartReflectionViewController: BaseViewController {
     // MARK: - func
     
     private func presentSelectReflectionMemberViewController() {
-        let viewController = UINavigationController(rootViewController: SelectReflectionMemberViewController(reflectionId: self.reflectionId))
+        let viewController = UINavigationController(rootViewController: SelectReflectionMemberViewController(reflectionId: self.reflectionId, isAdmin: self.isAdmin))
         viewController.modalPresentationStyle = .fullScreen
         self.navigationViewController.present(viewController, animated: true)
     }
