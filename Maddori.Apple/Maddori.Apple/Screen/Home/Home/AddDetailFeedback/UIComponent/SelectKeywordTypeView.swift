@@ -9,7 +9,22 @@ import UIKit
 
 final class SelectKeywordTypeView: UIView {
     
-    var isOpened: Bool = true
+    var isOpened: Bool = false {
+        didSet {
+            if isOpened {
+                self.addSubview(self.feedbackTypeButtonView)
+                self.feedbackTypeButtonView.snp.makeConstraints {
+                    $0.top.equalTo(self.titleLabel.snp.bottom).offset(20)
+                    $0.leading.trailing.equalToSuperview().inset(20)
+                    $0.bottom.equalToSuperview().inset(20)
+                }
+                self.feedbackTypeButtonView.isHidden = false
+            }
+            else {
+                self.feedbackTypeButtonView.removeFromSuperview()
+            }
+        }
+    }
     
     // MARK: - property
     
@@ -23,6 +38,11 @@ final class SelectKeywordTypeView: UIView {
         let imageView = UIImageView(image: ImageLiterals.icBottom)
         imageView.tintColor = .black100
         return imageView
+    }()
+    private let feedbackTypeButtonView: FeedbackTypeButtonView = {
+        let view = FeedbackTypeButtonView()
+        view.isHidden = true
+        return view
     }()
     
     // MARK: - life cycle
@@ -48,7 +68,6 @@ final class SelectKeywordTypeView: UIView {
         upDownImageView.snp.makeConstraints {
             $0.top.equalToSuperview().inset(20)
             $0.trailing.equalToSuperview().inset(20)
-            
         }
     }
     

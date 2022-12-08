@@ -98,7 +98,6 @@ final class AddDetailFeedbackViewController: BaseViewController {
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.height.equalTo(58)
         }
-        
     }
     
     // MARK: - selector
@@ -133,9 +132,11 @@ final class AddDetailFeedbackViewController: BaseViewController {
                 self.selectKeywordTypeView.snp.updateConstraints {
                     $0.height.equalTo(58)
                 }
+                self.isOpenedTypeView.toggle()
+                self.selectKeywordTypeView.isOpened = self.isOpenedTypeView
                 self.view.layoutIfNeeded()
             }
-            isOpenedTypeView.toggle()
+            
         }
         else {
             UIView.animate(withDuration: 0.2) {
@@ -143,10 +144,12 @@ final class AddDetailFeedbackViewController: BaseViewController {
                 self.selectKeywordTypeView.snp.updateConstraints {
                     $0.height.equalTo(178)
                 }
+                self.isOpenedTypeView.toggle()
+                self.selectKeywordTypeView.isOpened = self.isOpenedTypeView
                 self.view.layoutIfNeeded()
             }
-            isOpenedTypeView.toggle()
         }
+        
     }
     
     // MARK: - func
