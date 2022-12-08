@@ -27,9 +27,11 @@ final class AddDetailFeedbackViewController: BaseViewController {
         button.title = TextLiteral.doneButtonNext
         return button
     }()
-    private let selectMemberView: SelectMemberView = {
+    private lazy var selectMemberView: SelectMemberView = {
         let view = SelectMemberView()
         view.isUserInteractionEnabled = true
+        let tap = UITapGestureRecognizer(target: self, action: #selector(didTapSelectMemeberView))
+        view.addGestureRecognizer(tap)
         return view
     }()
     private let selectKeywordTypeView: SelectKeywordTypeView = {
@@ -90,6 +92,12 @@ final class AddDetailFeedbackViewController: BaseViewController {
             $0.height.equalTo(58)
         }
 
+    }
+    
+    // MARK: - selector
+    
+    @objc private func didTapSelectMemeberView() {
+        print("didTapSelectMemeberView")
     }
     
     // MARK: - func
