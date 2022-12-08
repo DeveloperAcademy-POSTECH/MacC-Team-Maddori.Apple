@@ -179,7 +179,7 @@ final class AddFeedbackKeywordViewController: BaseViewController {
     }()
     private lazy var doneButton: MainButton = {
         let button = MainButton()
-        button.title = TextLiteral.addFeedbackContentViewControllerButtonNext
+        button.title = TextLiteral.doneButtonComplete
         button.isDisabled = true
         let action = UIAction { [weak self] _ in
             self?.didTappedDoneButton()
