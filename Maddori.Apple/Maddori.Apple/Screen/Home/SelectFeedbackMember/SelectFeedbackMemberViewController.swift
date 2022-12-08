@@ -26,7 +26,7 @@ final class SelectFeedbackMemberViewController: BaseViewController {
     private lazy var memberCollectionView: MemberCollectionView = {
         let collectionView = MemberCollectionView(type: .addFeedback)
         collectionView.didTappedFeedBackMember = { [weak self] user in
-            self?.navigationController?.pushViewController(AddFeedbackViewController(to: user.userName ?? "", toUserId: user.userId ?? 0, reflectionId: self?.currentReflectionId ?? 0), animated: true)
+            self?.navigationController?.pushViewController(AddFeedbackContentViewController(to: "진저", toUserId: 61, type: FeedBackDTO.continueType, content: "", reflectionId: 58, step: Step.writeSituation), animated: true)
         }
         return collectionView
     }()
