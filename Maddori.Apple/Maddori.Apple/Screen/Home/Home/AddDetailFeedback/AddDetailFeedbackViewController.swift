@@ -110,6 +110,7 @@ final class AddDetailFeedbackViewController: BaseViewController {
                 self.selectMemberView.snp.updateConstraints {
                     $0.height.equalTo(58)
                 }
+                self.view.layoutIfNeeded()
             }
             isOpenedMemberView.toggle()
         }
@@ -119,6 +120,7 @@ final class AddDetailFeedbackViewController: BaseViewController {
                 self.selectMemberView.snp.updateConstraints {
                     $0.height.equalTo(264)
                 }
+                self.view.layoutIfNeeded()
             }
             isOpenedMemberView.toggle()
         }
@@ -131,6 +133,7 @@ final class AddDetailFeedbackViewController: BaseViewController {
                 self.selectKeywordTypeView.snp.updateConstraints {
                     $0.height.equalTo(58)
                 }
+                self.view.layoutIfNeeded()
             }
             isOpenedTypeView.toggle()
         }
@@ -140,6 +143,7 @@ final class AddDetailFeedbackViewController: BaseViewController {
                 self.selectKeywordTypeView.snp.updateConstraints {
                     $0.height.equalTo(178)
                 }
+                self.view.layoutIfNeeded()
             }
             isOpenedTypeView.toggle()
         }
