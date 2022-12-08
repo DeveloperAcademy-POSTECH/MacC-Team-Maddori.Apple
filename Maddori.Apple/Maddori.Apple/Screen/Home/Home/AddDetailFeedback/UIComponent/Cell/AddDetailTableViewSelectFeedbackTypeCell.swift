@@ -1,15 +1,15 @@
 //
-//  AddDetailTableViewSelectMemberCell.swift
+//  AddDetailTableViewSelectFeedbackTypeCell.swift
 //  Maddori.Apple
 //
-//  Created by LeeSungHo on 2022/12/06.
+//  Created by 이성호 on 2022/12/08.
 //
 
 import UIKit
 
 import SnapKit
 
-final class AddDetailTableViewSelectMemberCell: BaseTableViewCell {
+final class AddDetailTableViewSelectFeedbackTypeCell: BaseTableViewCell {
     
     // MARK: - property
     

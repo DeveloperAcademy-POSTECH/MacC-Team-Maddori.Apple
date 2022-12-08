@@ -136,6 +136,7 @@
 		D7AFB7C32916EAB100E998B7 /* MyReflectionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7AFB7C22916EAB100E998B7 /* MyReflectionDetailViewController.swift */; };
 		D7AFB7C52916EDC300E998B7 /* MyReflectionDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7AFB7C42916EDC300E998B7 /* MyReflectionDetailTableViewCell.swift */; };
 		D7AFB7C72916FF9400E998B7 /* CustomSegmentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7AFB7C62916FF9400E998B7 /* CustomSegmentControl.swift */; };
+		D7E101372941F5A300CEC7F0 /* AddDetailTableViewSelectFeedbackTypeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E101362941F5A300CEC7F0 /* AddDetailTableViewSelectFeedbackTypeCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -269,6 +270,7 @@
 		D7AFB7C22916EAB100E998B7 /* MyReflectionDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReflectionDetailViewController.swift; sourceTree = "<group>"; };
 		D7AFB7C42916EDC300E998B7 /* MyReflectionDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReflectionDetailTableViewCell.swift; sourceTree = "<group>"; };
 		D7AFB7C62916FF9400E998B7 /* CustomSegmentControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegmentControl.swift; sourceTree = "<group>"; };
+		D7E101362941F5A300CEC7F0 /* AddDetailTableViewSelectFeedbackTypeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDetailTableViewSelectFeedbackTypeCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -930,6 +932,7 @@
 			children = (
 				7EDEF6C2293F1CC200EA972E /* AddDetailTableViewSectionCell.swift */,
 				7EDEF6C6293F2F8800EA972E /* AddDetailTableViewSelectMemberCell.swift */,
+				D7E101362941F5A300CEC7F0 /* AddDetailTableViewSelectFeedbackTypeCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1130,6 +1133,7 @@
 				D724790E28FEEEC300D67B50 /* CustomTextField.swift in Sources */,
 				7EB4D58229011EF7001FC396 /* JoinTeamViewController.swift in Sources */,
 				39F52C4929232DFB00B19A77 /* JoinTeamDTO.swift in Sources */,
+				D7E101372941F5A300CEC7F0 /* AddDetailTableViewSelectFeedbackTypeCell.swift in Sources */,
 				7EDEF6C3293F1CC200EA972E /* AddDetailTableViewSectionCell.swift in Sources */,
 				39F52C552923311200B19A77 /* JoinTeamResponse.swift in Sources */,
 				39257DED28F9378D00201E0B /* BaseCollectionViewCell.swift in Sources */,

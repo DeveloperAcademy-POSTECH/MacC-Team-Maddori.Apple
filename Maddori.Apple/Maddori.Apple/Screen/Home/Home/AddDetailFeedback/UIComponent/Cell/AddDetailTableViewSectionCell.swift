@@ -13,6 +13,22 @@ final class AddDetailTableViewSectionCell: BaseTableViewCell {
     
     // MARK: - property
     
+    var isOpened: Bool = false {
+        didSet {
+            if isOpened {
+                self.layer.borderWidth = 0.2
+                self.layer.borderColor = UIColor.black100.cgColor
+                self.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+                self.layer.cornerRadius = 10
+            }
+            else {
+                self.layer.borderWidth = 0.2
+                self.layer.borderColor = UIColor.black100.cgColor
+                self.layer.cornerRadius = 10
+            }
+        }
+    }
+    
     let cellTitle: UILabel = {
         let label = UILabel()
         label.font = .main
@@ -28,9 +44,8 @@ final class AddDetailTableViewSectionCell: BaseTableViewCell {
     // MARK: - life cycle
     
     override func configUI() {
-        self.layer.borderWidth = 0.2
-        self.layer.borderColor = UIColor.black100.cgColor
-        self.layer.cornerRadius = 10
+
+        self.layer.masksToBounds = true
     }
     
     override func render() {
