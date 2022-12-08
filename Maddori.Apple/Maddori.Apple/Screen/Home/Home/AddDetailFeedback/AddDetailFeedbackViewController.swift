@@ -128,7 +128,7 @@ extension AddDetailFeedbackViewController: UITableViewDataSource {
         
         if indexPath.row == 0 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: AddDetailTableViewSectionCell.className, for: indexPath) as? AddDetailTableViewSectionCell else { return UITableViewCell() }
-            cell.textLabel?.text = sections[indexPath.section].title
+            cell.cellTitle.text = sections[indexPath.section].title
             cell.isOpened = sections[indexPath.section].isOpened
             return cell
         }
