@@ -21,8 +21,7 @@ final class AddDetailFeedbackViewController: BaseViewController {
         let label = UILabel()
         label.text = "피드백 줄 멤버와 종류를\n선택해주세요"
         label.numberOfLines = 0
-        // FIXME: 이드꺼 머지되면 .title2 로 변경 예정
-        label.font = .font(.bold, ofSize: 24)
+        label.font = .title2
         return label
     }()
     private let nextButton: MainButton = {
