@@ -60,9 +60,9 @@ final class MyFeedbackEditViewController: AddFeedbackViewController {
     private func setupFeedbackType() {
         switch feedbackDetail.feedbackType {
         case .continueType:
-            super.feedbackTypeButtonView.touchUpToSelectType(.continueType)
+            super.feedbackTypeButtonView.feedbackType = .continueType
         case .stopType:
-            super.feedbackTypeButtonView.touchUpToSelectType(.stopType)
+            super.feedbackTypeButtonView.feedbackType = .stopType
         }
     }
     

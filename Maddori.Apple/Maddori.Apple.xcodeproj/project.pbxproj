@@ -520,7 +520,6 @@
 		3977E12629121863000E9761 /* Button */ = {
 			isa = PBXGroup;
 			children = (
-				525E722428FFCFA600EF3FCB /* FeedbackTypeButtonView.swift */,
 				525E722028FFC9A800EF3FCB /* BackButton.swift */,
 				395C7E1C28FEC8C400FC2FCA /* CloseButton.swift */,
 				395C7E0C28F959A500FC2FCA /* MainButton.swift */,
@@ -551,6 +550,7 @@
 			isa = PBXGroup;
 			children = (
 				528D53BE292492E900C537D5 /* EmptyView */,
+				525E722428FFCFA600EF3FCB /* FeedbackTypeButtonView.swift */,
 				D79D908B2903B6B1004DDC4A /* LabelButtonView.swift */,
 				3E557FC428FE854600714E46 /* KeywordLabel.swift */,
 				52F0CB5129178C2700E39C50 /* AlertViewController.swift */,
