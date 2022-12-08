@@ -123,10 +123,7 @@
 		7E8753E129348BB000FBBF83 /* MyReflectionDetailViewLastCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8753E029348BB000FBBF83 /* MyReflectionDetailViewLastCell.swift */; };
 		7E8CDC67292E19B000984742 /* SettingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8CDC66292E19B000984742 /* SettingButton.swift */; };
 		7EB4D58229011EF7001FC396 /* JoinTeamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB4D58129011EF7001FC396 /* JoinTeamViewController.swift */; };
-		7EDEF6BF293F0C7B00EA972E /* AddDetailFeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EDEF6BE293F0C7B00EA972E /* AddDetailFeedbackViewController.swift */; };
-		7EDEF6C3293F1CC200EA972E /* AddDetailTableViewSectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EDEF6C2293F1CC200EA972E /* AddDetailTableViewSectionCell.swift */; };
 		7EDEF6C5293F216700EA972E /* CALayer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EDEF6C4293F216700EA972E /* CALayer+Extension.swift */; };
-		7EDEF6C7293F2F8800EA972E /* AddDetailTableViewSelectMemberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EDEF6C6293F2F8800EA972E /* AddDetailTableViewSelectMemberCell.swift */; };
 		7EE38BAD2925DDD200FD738D /* EncodeDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE38BAC2925DDD200FD738D /* EncodeDTO.swift */; };
 		7EE38BB3292623F500FD738D /* MyReflectionEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE38BB2292623F500FD738D /* MyReflectionEndPoint.swift */; };
 		D724790C28FEC8C900D67B50 /* BaseTextFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D724790B28FEC8C900D67B50 /* BaseTextFieldViewController.swift */; };
@@ -138,8 +135,7 @@
 		D7AFB7C32916EAB100E998B7 /* MyReflectionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7AFB7C22916EAB100E998B7 /* MyReflectionDetailViewController.swift */; };
 		D7AFB7C52916EDC300E998B7 /* MyReflectionDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7AFB7C42916EDC300E998B7 /* MyReflectionDetailTableViewCell.swift */; };
 		D7AFB7C72916FF9400E998B7 /* CustomSegmentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7AFB7C62916FF9400E998B7 /* CustomSegmentControl.swift */; };
-		D7E101372941F5A300CEC7F0 /* AddDetailTableViewSelectFeedbackTypeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E101362941F5A300CEC7F0 /* AddDetailTableViewSelectFeedbackTypeCell.swift */; };
-		D7E101392942380900CEC7F0 /* AddDetailFeedbackViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E101382942380900CEC7F0 /* AddDetailFeedbackViewController2.swift */; };
+		D7E101392942380900CEC7F0 /* AddDetailFeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E101382942380900CEC7F0 /* AddDetailFeedbackViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -260,10 +256,7 @@
 		7E8753E029348BB000FBBF83 /* MyReflectionDetailViewLastCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReflectionDetailViewLastCell.swift; sourceTree = "<group>"; };
 		7E8CDC66292E19B000984742 /* SettingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingButton.swift; sourceTree = "<group>"; };
 		7EB4D58129011EF7001FC396 /* JoinTeamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinTeamViewController.swift; sourceTree = "<group>"; };
-		7EDEF6BE293F0C7B00EA972E /* AddDetailFeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDetailFeedbackViewController.swift; sourceTree = "<group>"; };
-		7EDEF6C2293F1CC200EA972E /* AddDetailTableViewSectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDetailTableViewSectionCell.swift; sourceTree = "<group>"; };
 		7EDEF6C4293F216700EA972E /* CALayer+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+Extension.swift"; sourceTree = "<group>"; };
-		7EDEF6C6293F2F8800EA972E /* AddDetailTableViewSelectMemberCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDetailTableViewSelectMemberCell.swift; sourceTree = "<group>"; };
 		7EE38BAC2925DDD200FD738D /* EncodeDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncodeDTO.swift; sourceTree = "<group>"; };
 		7EE38BB2292623F500FD738D /* MyReflectionEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReflectionEndPoint.swift; sourceTree = "<group>"; };
 		D724790B28FEC8C900D67B50 /* BaseTextFieldViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTextFieldViewController.swift; sourceTree = "<group>"; };
@@ -275,8 +268,7 @@
 		D7AFB7C22916EAB100E998B7 /* MyReflectionDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReflectionDetailViewController.swift; sourceTree = "<group>"; };
 		D7AFB7C42916EDC300E998B7 /* MyReflectionDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReflectionDetailTableViewCell.swift; sourceTree = "<group>"; };
 		D7AFB7C62916FF9400E998B7 /* CustomSegmentControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegmentControl.swift; sourceTree = "<group>"; };
-		D7E101362941F5A300CEC7F0 /* AddDetailTableViewSelectFeedbackTypeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDetailTableViewSelectFeedbackTypeCell.swift; sourceTree = "<group>"; };
-		D7E101382942380900CEC7F0 /* AddDetailFeedbackViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDetailFeedbackViewController2.swift; sourceTree = "<group>"; };
+		D7E101382942380900CEC7F0 /* AddDetailFeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDetailFeedbackViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -921,8 +913,7 @@
 			isa = PBXGroup;
 			children = (
 				7EDEF6C0293F1C9300EA972E /* UIComponent */,
-				7EDEF6BE293F0C7B00EA972E /* AddDetailFeedbackViewController.swift */,
-				D7E101382942380900CEC7F0 /* AddDetailFeedbackViewController2.swift */,
+				D7E101382942380900CEC7F0 /* AddDetailFeedbackViewController.swift */,
 			);
 			path = AddDetailFeedback;
 			sourceTree = "<group>";
@@ -930,20 +921,9 @@
 		7EDEF6C0293F1C9300EA972E /* UIComponent */ = {
 			isa = PBXGroup;
 			children = (
-				7EDEF6C1293F1CA400EA972E /* Cell */,
 				D7505118294239A5001BDA34 /* SelectMemberView.swift */,
 			);
 			path = UIComponent;
-			sourceTree = "<group>";
-		};
-		7EDEF6C1293F1CA400EA972E /* Cell */ = {
-			isa = PBXGroup;
-			children = (
-				7EDEF6C2293F1CC200EA972E /* AddDetailTableViewSectionCell.swift */,
-				7EDEF6C6293F2F8800EA972E /* AddDetailTableViewSelectMemberCell.swift */,
-				D7E101362941F5A300CEC7F0 /* AddDetailTableViewSelectFeedbackTypeCell.swift */,
-			);
-			path = Cell;
 			sourceTree = "<group>";
 		};
 		D724790A28FEC8A800D67B50 /* Setup */ = {
@@ -1088,7 +1068,6 @@
 				395C7E1328F9841A00FC2FCA /* SizeLiteral.swift in Sources */,
 				3EB508902917525600FB77CB /* EmptyReflectionView.swift in Sources */,
 				3EB5088E2916D05F00FB77CB /* EmptyFeedbackView.swift in Sources */,
-				7EDEF6C7293F2F8800EA972E /* AddDetailTableViewSelectMemberCell.swift in Sources */,
 				391596622904176500A432D9 /* UIView+Extension.swift in Sources */,
 				3EB508922917585600FB77CB /* UICollectionView + Extension.swift in Sources */,
 				39257DC528F8FEBD00201E0B /* AppDelegate.swift in Sources */,
@@ -1111,7 +1090,7 @@
 				396334D9292DAE0000E74B77 /* AppleLoginResponse.swift in Sources */,
 				397E495C2924F8A2004220D6 /* UserDefaultHandler.swift in Sources */,
 				395C7E0B28F9550A00FC2FCA /* NSObject+Extension.swift in Sources */,
-				D7E101392942380900CEC7F0 /* AddDetailFeedbackViewController2.swift in Sources */,
+				D7E101392942380900CEC7F0 /* AddDetailFeedbackViewController.swift in Sources */,
 				D7505119294239A5001BDA34 /* SelectMemberView.swift in Sources */,
 				39F909D7292679C400DAD0A3 /* EditFeedBackDTO.swift in Sources */,
 				D79D908E29041F42004DDC4A /* CreateTeamViewController.swift in Sources */,
@@ -1144,8 +1123,6 @@
 				D724790E28FEEEC300D67B50 /* CustomTextField.swift in Sources */,
 				7EB4D58229011EF7001FC396 /* JoinTeamViewController.swift in Sources */,
 				39F52C4929232DFB00B19A77 /* JoinTeamDTO.swift in Sources */,
-				D7E101372941F5A300CEC7F0 /* AddDetailTableViewSelectFeedbackTypeCell.swift in Sources */,
-				7EDEF6C3293F1CC200EA972E /* AddDetailTableViewSectionCell.swift in Sources */,
 				39F52C552923311200B19A77 /* JoinTeamResponse.swift in Sources */,
 				39257DED28F9378D00201E0B /* BaseCollectionViewCell.swift in Sources */,
 				391CBA19290580460044CA30 /* InProgressDetailViewController.swift in Sources */,
@@ -1154,7 +1131,6 @@
 				525E721A28FF0F1900EF3FCB /* MemberCollectionViewCell.swift in Sources */,
 				395C7E2228FEDB6500FC2FCA /* UITextField+Extension.swift in Sources */,
 				D7AFB7C32916EAB100E998B7 /* MyReflectionDetailViewController.swift in Sources */,
-				7EDEF6BF293F0C7B00EA972E /* AddDetailFeedbackViewController.swift in Sources */,
 				39F52C632923357700B19A77 /* FeedBackInfoResponse.swift in Sources */,
 				39F52C5D292332EA00B19A77 /* AddReflectionResponse.swift in Sources */,
 				D72CF1B0290552960067A118 /* InvitationCodeViewController.swift in Sources */,

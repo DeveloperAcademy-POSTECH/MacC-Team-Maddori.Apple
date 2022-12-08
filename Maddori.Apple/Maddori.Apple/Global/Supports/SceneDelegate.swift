@@ -23,7 +23,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         var rootViewController: UIViewController
         if isLogined {
 //            rootViewController = CustomTabBarController()
-            rootViewController = UINavigationController(rootViewController: AddDetailFeedbackViewController2())
+            rootViewController = UINavigationController(rootViewController: AddDetailFeedbackViewController())
         } else {
             rootViewController = UINavigationController(rootViewController: LoginViewController())
         }
