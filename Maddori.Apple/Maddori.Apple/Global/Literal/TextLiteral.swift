@@ -15,6 +15,8 @@ enum TextLiteral {
     static let feedbackTypeLabel = "피드백 종류"
     static let feedbackKeywordLabel = "키워드"
     static let feedbackContentLabel = "내용"
+    static let doneButtonNext = "다음"
+    static let doneButtonComplete = "완료"
     
     // MARK: - MainViewController
     
@@ -59,6 +61,16 @@ enum TextLiteral {
     static let addFeedbackViewControllerFeedbackStartLabel = "Start 제안하기"
     static let addFeedbackViewControllerStartTextViewPlaceholder = "제안하고 싶은 Start를 작성해주세요"
     static let addFeedbackViewControllerFeedbackSendTimeLabel = "작성한 피드백은 회고 시간 전까지 수정 가능합니다"
+    
+    // MARK: - AddFeedbackContentViewController
+    
+    static let addFeedbackContentViewControllerCurrentStepLabel2 = "상황에 대한 설명과\n그 영향을 적어주세요"
+    static let addFeedbackContentViewControllerCurrentStepLabel3 = "상황에 대해 느낀 점과\n그 이유를 적어주세요"
+    static let addFeedbackContentViewControllerCurrentStepLabel4 = "상대방을 위한\n요청 또는 격려를 적어주세요"
+    static let addFeedbackContentViewControllerCurrentStepLabel5 = "피드백을 대표하는\n키워드를 정해주세요"
+    static let addFeedbackContentViewControllerCurrentStepDescriptionLabel2 = "ex. 청구서에 거래내역을 자세히 써주셔서 비용을 정확하게 파악하고 한결 쉽게 지급 승인을 받을 수 있게 되었어요."
+    static let addFeedbackContentViewControllerCurrentStepDescriptionLabel3 = "ex. 감사했습니다. 덕분에 시간도 절약했고, 안 그랬으면 지루했을 뻔한 작업을 즐겁게 끝낼 수 있었어요."
+    static let addFeedbackContentViewControllerCurrentStepDescriptionLabel4 = "ex. 앞으로도 확실한 청구서 작성해 주시면 좋을 것 같습니다. 항상 화이팅 하세요."
     
     // MARK: - JoinTeamViewController
     
