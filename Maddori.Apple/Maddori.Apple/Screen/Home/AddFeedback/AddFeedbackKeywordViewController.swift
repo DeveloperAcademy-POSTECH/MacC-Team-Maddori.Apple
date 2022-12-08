@@ -159,6 +159,7 @@ final class AddFeedbackKeywordViewController: BaseViewController {
         super.viewDidLoad()
         setupNavigationBar()
         setupNotificationCenter()
+        setupTextFieldObserver()
     }
     
     override func render() {
@@ -229,6 +230,10 @@ final class AddFeedbackKeywordViewController: BaseViewController {
         self.dismiss(animated: true)
     }
     
+    private func setupTextFieldObserver() {
+        keywordTextField.keywordTextField.addTarget(self, action: #selector(changeDoneButtonStatus), for: .editingChanged)
+    }
+    
     private func didTappedDoneButton() {
         guard let keyword = keywordTextField.keywordTextField.text else { return }
         let dto = FeedBackContentDTO(type: feedbackType, keyword: keyword, content: contentString, start_content: nil, to_id: toUserId)
@@ -253,7 +258,7 @@ final class AddFeedbackKeywordViewController: BaseViewController {
     
     // MARK: - selector
     
-    @objc private func keyboardWillShow(notification:NSNotification) {
+    @objc private func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             containerScrollView.snp.updateConstraints {
                  $0.bottom.equalTo(doneButton.snp.top).offset(-keyboardSize.height + 12)
@@ -265,7 +270,7 @@ final class AddFeedbackKeywordViewController: BaseViewController {
         }
     }
     
-    @objc private func keyboardWillHide(notification:NSNotification) {
+    @objc private func keyboardWillHide(notification: NSNotification) {
         containerScrollView.snp.updateConstraints {
             $0.bottom.equalTo(doneButton.snp.top).offset(-12)
         }
@@ -273,5 +278,13 @@ final class AddFeedbackKeywordViewController: BaseViewController {
             self.doneButton.transform = .identity
             self.view.layoutIfNeeded()
         })
+    }
+    
+    @objc private func changeDoneButtonStatus() {
+        if keywordTextField.keywordTextField.hasText {
+            doneButton.isDisabled = false
+        } else {
+            doneButton.isDisabled = true
+        }
     }
 }

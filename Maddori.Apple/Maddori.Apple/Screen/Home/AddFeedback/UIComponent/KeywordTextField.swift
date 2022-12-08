@@ -23,7 +23,6 @@ final class KeywordTextField: UIView {
         static let textFieldYPadding: CGFloat = 13
     }
     
-    var textViewHasText: Bool = false
     var textFieldWidth: CGFloat = 0
     var placeholder = TextLiteral.addFeedbackKeywordViewControllerPlaceholder
     var placeholderWidth: CGFloat {
@@ -171,8 +170,5 @@ final class KeywordTextField: UIView {
 extension KeywordTextField: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
         checkMaxLength(textField: keywordTextField, maxLength: Length.keywordMaxLength)
-
-        textViewHasText = keywordTextField.hasText
-//        doneButton.isDisabled = !textViewHasText
     }
 }
