@@ -72,6 +72,14 @@ class AddFeedbackViewController: BaseViewController {
         view.changeFeedbackType = { [weak self] type in
             if let typeValue = FeedBackDTO.init(rawValue: type.rawValue) {
                 self?.type = typeValue
+                guard let keyword = self?.feedbackKeywordTextField.text,
+                      let content = self?.feedbackContentTextView.text
+                else { return }
+                let hasKeyword = keyword.isEmpty,
+                    hasContent = content == TextLiteral.addFeedbackViewControllerFeedbackContentTextViewPlaceholder
+                if !hasKeyword && !hasContent {
+                    self?.feedbackDoneButton.isDisabled = false
+                }
             }
         }
         return view
@@ -437,7 +445,7 @@ extension AddFeedbackViewController: UITextFieldDelegate {
         checkMaxLength(textField: feedbackKeywordTextField, maxLength: Length.keywordMaxLength)
         
         keywordHasText = feedbackKeywordTextField.hasText
-        feedbackDoneButton.isDisabled = !(keywordHasText && contentHasText)
+        feedbackDoneButton.isDisabled = !(keywordHasText && contentHasText && feedbackTypeButtonView.feedbackType != nil)
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -459,7 +467,7 @@ extension AddFeedbackViewController: UITextFieldDelegate {
 extension AddFeedbackViewController: UITextViewDelegate {
     func textViewDidChangeSelection(_ textView: UITextView) {
         contentHasText = feedbackContentTextView.hasText && feedbackContentTextView.text != TextLiteral.addFeedbackViewControllerFeedbackContentTextViewPlaceholder
-        feedbackDoneButton.isDisabled = !(keywordHasText && contentHasText)
+        feedbackDoneButton.isDisabled = !(keywordHasText && contentHasText && feedbackTypeButtonView.feedbackType != nil)
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
