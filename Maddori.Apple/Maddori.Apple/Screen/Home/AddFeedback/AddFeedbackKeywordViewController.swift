@@ -16,16 +16,10 @@ final class AddFeedbackKeywordViewController: BaseViewController {
         static let keywordMaxLength: Int = 10
     }
     private enum Size {
-        static let topPadding: Int = 8
         static let stepTopPadding: Int = 24
-        static let textFieldMaxCornerRadius: CGFloat = 25
-        static let textFieldMinCornerRadius: CGFloat = 16
-        static let textFieldHeight: CGFloat = 50
-        static let textFieldXPadding: CGFloat = 16
-        static let textFieldYPadding: CGFloat = 13
     }
 
-    var placeholder = TextLiteral.addFeedbackKeywordViewControllerPlaceholder
+    let placeholder = TextLiteral.addFeedbackKeywordViewControllerPlaceholder
     var textViewHasText: Bool = false
     var textFieldWidth: CGFloat = 0
     var placeholderWidth: CGFloat {
@@ -80,36 +74,7 @@ final class AddFeedbackKeywordViewController: BaseViewController {
         label.numberOfLines = 2
         return label
     }()
-    private let textFieldContainerView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .white100
-        view.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMaxXMinYCorner, .layerMinXMinYCorner]
-        view.layer.cornerRadius = Size.textFieldMaxCornerRadius
-        view.layer.shadowOffset = CGSize(width: 0, height: 1)
-        view.layer.shadowOpacity = 0.13
-        view.layer.shadowRadius = 4
-        return view
-    }()
-    private lazy var keywordTextField: UITextField = {
-        let textField = UITextField()
-        textField.attributedPlaceholder = NSAttributedString(
-            string: placeholder,
-            attributes: [
-                NSAttributedString.Key.foregroundColor: UIColor.gray300,
-                NSAttributedString.Key.font: UIFont.main
-            ]
-        )
-        textField.textColor = .gray600
-        return textField
-    }()
-    private let keywordLimitLabel: UILabel = {
-        let label = UILabel()
-        label.font = .caption3
-        label.textColor = .red100
-        label.text = "키워드는 10글자 이내로 작성해주세요"
-        label.isHidden = true
-        return label
-    }()
+    private let keywordTextField = KeywordTextField()
     private let containerScrollView: UIScrollView = {
         let view = UIScrollView()
         view.backgroundColor = .blue300
@@ -194,8 +159,6 @@ final class AddFeedbackKeywordViewController: BaseViewController {
         super.viewDidLoad()
         setupNavigationBar()
         setupNotificationCenter()
-        setupDelegate()
-        setupTextFieldObserver()
     }
     
     override func render() {
@@ -211,24 +174,10 @@ final class AddFeedbackKeywordViewController: BaseViewController {
             $0.top.equalTo(progressImageView.snp.bottom).offset(Size.stepTopPadding)
         }
         
-        view.addSubview(textFieldContainerView)
-        textFieldContainerView.snp.makeConstraints {
-            $0.top.equalTo(currentStepLabel.snp.bottom).offset(28)
-            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-            $0.width.equalTo(placeholderWidth + 2 * Size.textFieldXPadding)
-            $0.height.equalTo(Size.textFieldHeight)
-        }
-
         view.addSubview(keywordTextField)
         keywordTextField.snp.makeConstraints {
-            $0.leading.equalTo(textFieldContainerView).offset(Size.textFieldXPadding)
-            $0.top.equalTo(textFieldContainerView).offset(Size.textFieldYPadding)
-        }
-        
-        view.addSubview(keywordLimitLabel)
-        keywordLimitLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-            $0.top.equalTo(textFieldContainerView.snp.bottom).offset(8)
+            $0.top.equalTo(currentStepLabel.snp.bottom).offset(28)
         }
         
         view.addSubview(doneButton)
@@ -240,7 +189,7 @@ final class AddFeedbackKeywordViewController: BaseViewController {
         view.addSubview(containerScrollView)
         containerScrollView.snp.makeConstraints {
             $0.horizontalEdges.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-            $0.top.equalTo(textFieldContainerView.snp.bottom).offset(32)
+            $0.top.equalTo(keywordTextField.textFieldContainerView.snp.bottom).offset(32)
             $0.bottom.equalTo(doneButton.snp.top).offset(-12)
         }
         
@@ -272,16 +221,6 @@ final class AddFeedbackKeywordViewController: BaseViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
-    private func setupDelegate() {
-        keywordTextField.delegate = self
-    }
-    
-    private func setupTextFieldObserver() {
-        keywordTextField.addTarget(self, action: #selector(textFieldChangeBegin), for: .editingDidBegin)
-        keywordTextField.addTarget(self, action: #selector(textFieldChanging), for: .allEditingEvents)
-        keywordTextField.addTarget(self, action: #selector(textFieldChangeEnd), for: .editingDidEnd)
-    }
-    
     private func didTappedBackButton() {
         navigationController?.popViewController(animated: true)
     }
@@ -291,28 +230,9 @@ final class AddFeedbackKeywordViewController: BaseViewController {
     }
     
     private func didTappedDoneButton() {
-        guard let keyword = keywordTextField.text else { return }
+        guard let keyword = keywordTextField.keywordTextField.text else { return }
         let dto = FeedBackContentDTO(type: feedbackType, keyword: keyword, content: contentString, start_content: nil, to_id: toUserId)
         dispatchAddFeedBack(type: .dispatchAddFeedBack(reflectionId: reflectionId, dto))
-    }
-    
-    private func checkMaxLength(textField: UITextField, maxLength: Int) {
-        if let text = textField.text {
-            if text.count > maxLength {
-                let endIndex = text.index(text.startIndex, offsetBy: maxLength)
-                let fixedText = text[text.startIndex..<endIndex]
-                textField.text = fixedText + ""
-                
-                DispatchQueue.main.async {
-                    self.keywordLimitLabel.isHidden = false
-                    self.keywordTextField.text = String(fixedText)
-                }
-            } else {
-                DispatchQueue.main.async {
-                    self.keywordLimitLabel.isHidden = true
-                }
-            }
-        }
     }
     
     // MARK: - api
@@ -353,50 +273,5 @@ final class AddFeedbackKeywordViewController: BaseViewController {
             self.doneButton.transform = .identity
             self.view.layoutIfNeeded()
         })
-    }
-    
-    @objc private func textFieldChangeBegin() {
-        keywordTextField.placeholder = ""
-        DispatchQueue.main.async {
-            self.textFieldContainerView.layer.cornerRadius = Size.textFieldMinCornerRadius
-        }
-    }
-    
-    @objc private func textFieldChanging() {
-        textFieldWidth = keywordTextField.intrinsicContentSize.width
-        let textFieldContainerWidth: CGFloat = textFieldWidth + 2 * Size.textFieldXPadding
-        var newCornerRadius: CGFloat = Size.textFieldMinCornerRadius
-        if textFieldContainerWidth <= Size.textFieldHeight {
-            newCornerRadius = textFieldContainerWidth / 2
-        } else {
-            newCornerRadius = Size.textFieldMaxCornerRadius
-        }
-        DispatchQueue.main.async {
-            self.textFieldContainerView.layer.cornerRadius = newCornerRadius
-            self.textFieldContainerView.snp.updateConstraints {
-                $0.width.equalTo(self.textFieldWidth + 2 * Size.textFieldXPadding)
-            }
-        }
-    }
-    
-    @objc private func textFieldChangeEnd() {
-        if keywordTextField.text == "" {
-            keywordTextField.placeholder = placeholder
-            DispatchQueue.main.async {
-                self.textFieldContainerView.snp.updateConstraints {
-                    $0.width.equalTo(self.placeholderWidth + 2 * Size.textFieldXPadding)
-                }
-                self.textFieldContainerView.layer.cornerRadius = Size.textFieldMaxCornerRadius
-            }
-        }
-    }
-}
-
-extension AddFeedbackKeywordViewController: UITextFieldDelegate {
-    func textFieldDidChangeSelection(_ textField: UITextField) {
-        checkMaxLength(textField: keywordTextField, maxLength: Length.keywordMaxLength)
-
-        textViewHasText = keywordTextField.hasText
-        doneButton.isDisabled = !textViewHasText
     }
 }

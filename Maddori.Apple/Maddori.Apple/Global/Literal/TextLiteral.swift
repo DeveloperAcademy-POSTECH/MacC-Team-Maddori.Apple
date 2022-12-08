@@ -196,4 +196,8 @@ enum TextLiteral {
     static let myReflectionViewControllerDeleteUserAlertTitle: String = "회원탈퇴 하시겠습니까?"
     static let myReflectionViewControllerDeleteUserAlertMessage: String = "모든 회고와 피드백 정보가 사라지며, \n되돌릴 수 없습니다."
     static let myReflectionViewControllerDeleteUserTitle: String = "탈퇴한 멤버"
+    
+    // MARK: - KeywordTextfield
+    
+    static let keywordLimitLabel: String = "키워드는 10글자 이내로 작성해주세요"
 }
