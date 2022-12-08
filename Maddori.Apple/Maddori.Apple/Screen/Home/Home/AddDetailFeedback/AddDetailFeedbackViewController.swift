@@ -16,7 +16,6 @@ final class AddDetailFeedbackViewController: BaseViewController {
     // MARK: - property
     
     private let closeButton = CloseButton()
-    // FIXME(이드 PR 합쳐지면 이미지 변경 예정)
     private let progressImageView = UIImageView(image: ImageLiterals.imgProgress1)
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -28,8 +27,7 @@ final class AddDetailFeedbackViewController: BaseViewController {
     }()
     private let nextButton: MainButton = {
         let button = MainButton()
-        // FIXME: 텍스트 리터럴 처리하기
-        button.title = "다음"
+        button.title = TextLiteral.doneButtonNext
         return button
     }()
     private lazy var tableView: UITableView = {
