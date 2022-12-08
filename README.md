@@ -8,7 +8,7 @@
   </a>
   <p3>&nbsp;&nbsp;&nbsp;</p3>
   <a href="https://github.com/hwiwonK/MacC-Team-Maddori.Apple-Server">
-    <img src="https://user-images.githubusercontent.com/81340603/204950025-e1fb934e-8d48-4fb3-a7f3-55dd465ed2f7.png" width=60px/>
+    <img src="https://user-images.githubusercontent.com/81340603/205491490-1ec07066-5b90-4277-9907-42b1ef47fe45.png" width=60px/>
   </a>
 </div>
 
@@ -60,7 +60,7 @@
 
 <h2>👨‍🎨 Authors</h2>
 
-|[Ginger / 김유나](https://github.com/Guel-git)|[Hoya / 이성호](https://github.com/Guel-git)|[Id / 이성민](https://github.com/Guel-git)|[Mary / 김휘원](https://github.com/Guel-git)|[Chemi / 최민관](https://github.com/Guel-git)|
+|[Chemi / 최민관](https://github.com/MMMIIIN)|[Ginger / 김유나](https://github.com/Guel-git)|[Hoya / 이성호](https://github.com/dangsal)|[Id / 이성민](https://github.com/seongmin221)|[Mary / 김휘원](https://github.com/hwiwonK)|
 |:---:|:---:|:---:|:---:|:---:|
-| <img width=200px src="https://github.com/Guel-git.png"/> | <img width=200px src="https://github.com/dangsal.png"/> | <img width=200px src="https://github.com/seongmin221.png"/> | <img width=200px src="https://github.com/hwiwonK.png"/> | <img width=200px src="https://github.com/MMMIIIN.png"/> 
-|<center>Project Manager<br>iOS Developer<br>UI/UX Designer</center>|<center>iOS Developer<br>Team Manager</center>|<center>iOS Developer<br>UI/UX Lead Designer</center>|<center>Backend Developer<br>UI/UX Designer</center>|<center>iOS Lead Developer</center>|
+| <img width=200px src="https://github.com/MMMIIIN.png"/> | <img width=200px src="https://github.com/Guel-git.png"/> | <img width=200px src="https://github.com/dangsal.png"/> | <img width=200px src="https://github.com/seongmin221.png"/> | <img width=200px src="https://github.com/hwiwonK.png"/> | 
+|<center>iOS Lead Developer</center>|<center>Project Manager<br>iOS Developer<br>UI/UX Designer</center>|<center>iOS Developer<br>Team Manager</center>|<center>iOS Developer<br>UI/UX Lead Designer</center>|<center>Backend Developer<br>UI/UX Designer</center>|

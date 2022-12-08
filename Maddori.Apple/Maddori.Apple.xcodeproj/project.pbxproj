@@ -102,6 +102,7 @@
 		3EB508902917525600FB77CB /* EmptyReflectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB5088F2917525600FB77CB /* EmptyReflectionView.swift */; };
 		3EB508922917585600FB77CB /* UICollectionView + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB508912917585600FB77CB /* UICollectionView + Extension.swift */; };
 		3EDED995293C81EC0000B4DC /* AddFeedbackKeywordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EDED994293C81EC0000B4DC /* AddFeedbackKeywordViewController.swift */; };
+		3EDED991293B8CE00000B4DC /* AddFeedbackContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EDED990293B8CE00000B4DC /* AddFeedbackContentViewController.swift */; };
 		520FEC44292234C0009FC1F2 /* FeedbackToMeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520FEC43292234C0009FC1F2 /* FeedbackToMeModel.swift */; };
 		522D99BF29041B51009CBD95 /* CustomTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522D99BE29041B51009CBD95 /* CustomTextView.swift */; };
 		525E721528FEEE8500EF3FCB /* SelectFeedbackMemberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525E721428FEEE8500EF3FCB /* SelectFeedbackMemberViewController.swift */; };
@@ -232,6 +233,7 @@
 		3EB5088F2917525600FB77CB /* EmptyReflectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyReflectionView.swift; sourceTree = "<group>"; };
 		3EB508912917585600FB77CB /* UICollectionView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView + Extension.swift"; sourceTree = "<group>"; };
 		3EDED994293C81EC0000B4DC /* AddFeedbackKeywordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFeedbackKeywordViewController.swift; sourceTree = "<group>"; };
+		3EDED990293B8CE00000B4DC /* AddFeedbackContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFeedbackContentViewController.swift; sourceTree = "<group>"; };
 		520FEC43292234C0009FC1F2 /* FeedbackToMeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackToMeModel.swift; sourceTree = "<group>"; };
 		522D99BE29041B51009CBD95 /* CustomTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextView.swift; sourceTree = "<group>"; };
 		525E721428FEEE8500EF3FCB /* SelectFeedbackMemberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectFeedbackMemberViewController.swift; sourceTree = "<group>"; };
@@ -762,6 +764,7 @@
 			children = (
 				525E721E28FFC89800EF3FCB /* AddFeedbackViewController.swift */,
 				3EDED994293C81EC0000B4DC /* AddFeedbackKeywordViewController.swift */,
+				3EDED990293B8CE00000B4DC /* AddFeedbackContentViewController.swift */,
 			);
 			path = AddFeedback;
 			sourceTree = "<group>";
@@ -1120,6 +1123,7 @@
 				52F2D1C12906F172009CBF89 /* SelectReflectionMemberViewController.swift in Sources */,
 				395C7E0328F945B500FC2FCA /* UIFont+Extension.swift in Sources */,
 				3E8052DF2906E09100A6449D /* KeywordSectionHeaderView.swift in Sources */,
+				3EDED991293B8CE00000B4DC /* AddFeedbackContentViewController.swift in Sources */,
 				39436C182912A2E10083D77A /* Feedback.swift in Sources */,
 				7E2ECA102901136700A4D65C /* SetNicknameViewController.swift in Sources */,
 				3984742629264ACE00EDC139 /* MyFeedBackEndPoint.swift in Sources */,
