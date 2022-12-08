@@ -20,11 +20,19 @@ final class AddDetailTableViewSectionCell: BaseTableViewCell {
                 self.layer.borderColor = UIColor.black100.cgColor
                 self.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
                 self.layer.cornerRadius = 10
+                
+                UIView.animate(withDuration: 0.2) {
+                    self.cellToggleImageView.transform = CGAffineTransform(rotationAngle: .pi)
+                }
             }
             else {
                 self.layer.borderWidth = 0.2
                 self.layer.borderColor = UIColor.black100.cgColor
                 self.layer.cornerRadius = 10
+                
+                UIView.animate(withDuration: 0.2) {
+                    self.cellToggleImageView.transform = .identity
+                }
             }
         }
     }
