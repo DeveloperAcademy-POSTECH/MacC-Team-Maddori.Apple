@@ -109,9 +109,10 @@ final class AddDetailFeedbackViewController: BaseViewController {
                 self.selectMemberView.snp.updateConstraints {
                     $0.height.equalTo(58)
                 }
+                self.isOpenedMemberView.toggle()
+                self.selectMemberView.isOpened = self.isOpenedMemberView
                 self.view.layoutIfNeeded()
             }
-            isOpenedMemberView.toggle()
         }
         else {
             UIView.animate(withDuration: 0.2) {
@@ -119,9 +120,10 @@ final class AddDetailFeedbackViewController: BaseViewController {
                 self.selectMemberView.snp.updateConstraints {
                     $0.height.equalTo(264)
                 }
+                self.isOpenedMemberView.toggle()
+                self.selectMemberView.isOpened = self.isOpenedMemberView
                 self.view.layoutIfNeeded()
             }
-            isOpenedMemberView.toggle()
         }
     }
     

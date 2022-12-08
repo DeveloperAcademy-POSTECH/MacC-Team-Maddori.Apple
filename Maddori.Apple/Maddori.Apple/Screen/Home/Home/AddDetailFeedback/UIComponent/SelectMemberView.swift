@@ -9,7 +9,31 @@ import UIKit
 
 final class SelectMemberView: UIView {
     
-    var isOpened: Bool = true
+    let mockData: [MemberResponse] = [
+        MemberResponse(userId: 0, userName: "이드"),
+        MemberResponse(userId: 0, userName: "호야"),
+        MemberResponse(userId: 0, userName: "케미"),
+        MemberResponse(userId: 0, userName: "진저"),
+        MemberResponse(userId: 0, userName: "메리"),
+        MemberResponse(userId: 0, userName: "곰민"),
+    ]
+    
+    var isOpened: Bool = false {
+        didSet {
+            if isOpened {
+                self.addSubview(self.memberCollectionView)
+                self.memberCollectionView.snp.makeConstraints {
+                    $0.top.equalTo(self.titleLabel.snp.bottom).offset(20)
+                    $0.leading.trailing.equalToSuperview().inset(20)
+                    $0.bottom.equalToSuperview().inset(20)
+                }
+                self.memberCollectionView.isHidden = false
+            }
+            else {
+                self.memberCollectionView.removeFromSuperview()
+            }
+        }
+    }
     
     // MARK: - property
     
@@ -24,6 +48,10 @@ final class SelectMemberView: UIView {
         imageView.tintColor = .black100
         return imageView
     }()
+    private lazy var memberCollectionView: MemberCollectionView = {
+        let collectionView = MemberCollectionView(type: .addFeedback)
+        return collectionView
+    }()
     
     // MARK: - life cycle
     
@@ -31,6 +59,7 @@ final class SelectMemberView: UIView {
         super.init(frame: frame)
         render()
         configUI()
+        memberCollectionView.memberList = mockData
     }
     
     required init?(coder: NSCoder) { nil }
@@ -49,6 +78,13 @@ final class SelectMemberView: UIView {
             $0.top.equalTo(20)
             $0.trailing.equalToSuperview().inset(20)
             
+        }
+        
+        self.addSubview(memberCollectionView)
+        memberCollectionView.snp.makeConstraints {
+            $0.top.equalTo(titleLabel.snp.bottom).offset(20)
+            $0.leading.trailing.equalToSuperview().inset(20)
+            $0.bottom.equalToSuperview().inset(20)
         }
     }
     
