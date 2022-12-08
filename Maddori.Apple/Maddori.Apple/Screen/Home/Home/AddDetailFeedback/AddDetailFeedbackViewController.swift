@@ -17,7 +17,7 @@ final class AddDetailFeedbackViewController: BaseViewController {
     
     private let closeButton = CloseButton()
     // FIXME(이드 PR 합쳐지면 이미지 변경 예정)
-    private let progressImageView = UIImageView(image: UIImage(systemName: "heart"))
+    private let progressImageView = UIImageView(image: ImageLiterals.imgProgress1)
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "피드백 줄 멤버와 종류를\n선택해주세요"
