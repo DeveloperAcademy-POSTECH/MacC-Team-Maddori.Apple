@@ -29,12 +29,11 @@ final class AddDetailFeedbackViewController: BaseViewController {
     }()
     private let selectMemberView: SelectMemberView = {
         let view = SelectMemberView()
-        
+        view.isUserInteractionEnabled = true
         return view
     }()
-    private let selectKeywordTypeView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .green
+    private let selectKeywordTypeView: SelectKeywordTypeView = {
+        let view = SelectKeywordTypeView()
         return view
     }()
     
@@ -83,6 +82,13 @@ final class AddDetailFeedbackViewController: BaseViewController {
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.height.equalTo(58)
         }
+        
+        view.addSubview(selectKeywordTypeView)
+        selectKeywordTypeView.snp.makeConstraints {
+            $0.top.equalTo(selectMemberView.snp.bottom).offset(20)
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.height.equalTo(58)
+        }
 
     }
     
@@ -94,6 +100,12 @@ final class AddDetailFeedbackViewController: BaseViewController {
         // FIXME: 쉐도우 처리 어떻게해?
         selectMemberView.layer.shadowOpacity = 0.05
         selectMemberView.layer.shadowOffset = CGSize.zero
+        
+        selectKeywordTypeView.layer.shadowColor = UIColor.black100.cgColor
+        selectKeywordTypeView.layer.shadowRadius = 10
+        // FIXME: 쉐도우 처리 어떻게해?
+        selectKeywordTypeView.layer.shadowOpacity = 0.05
+        selectKeywordTypeView.layer.shadowOffset = CGSize.zero
     }
     
     private func setupCloseButton() {
