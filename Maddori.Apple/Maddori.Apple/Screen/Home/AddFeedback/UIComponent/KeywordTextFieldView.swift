@@ -110,7 +110,7 @@ final class KeywordTextFieldView: UIView {
         keywordTextField.addTarget(self, action: #selector(textFieldChangeEnd), for: .editingDidEnd)
     }
     
-    private func checkMaxLength(textField: UITextField, maxLength: Int) {
+    func checkMaxLength(textField: UITextField, maxLength: Int) {
         if let text = textField.text {
             if text.count > maxLength {
                 let endIndex = text.index(text.startIndex, offsetBy: maxLength)

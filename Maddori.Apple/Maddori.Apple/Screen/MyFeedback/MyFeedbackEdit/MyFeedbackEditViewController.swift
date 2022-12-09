@@ -12,9 +12,7 @@ import SnapKit
 
 final class MyFeedbackEditViewController: BaseViewController {
     private enum Length {
-        static let keywordMinLength: Int = 0
         static let keywordMaxLength: Int = 10
-        static let textViewMaxLength: Int = 200
     }
     private var type: FeedBackDTO = .continueType
     private let toNickname: String
@@ -337,7 +335,7 @@ final class MyFeedbackEditViewController: BaseViewController {
 
 extension MyFeedbackEditViewController: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
-        checkMaxLength(textField: keywordTextFieldView.keywordTextField, maxLength: Length.keywordMaxLength)
+        keywordTextFieldView.checkMaxLength(textField: keywordTextFieldView.keywordTextField, maxLength: Length.keywordMaxLength)
         feedbackDoneButton.isDisabled = !isTextInputChanged()
     }
 }
