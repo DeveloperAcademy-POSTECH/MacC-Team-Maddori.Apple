@@ -23,8 +23,10 @@ final class MyFeedbackEditViewController: BaseViewController {
         didSet {
             if !isFeedbackChanged() {
                 feedbackDoneButton.isDisabled = true
+                isEmptyKeywordOrContent()
             } else {
                 feedbackDoneButton.isDisabled = false
+                isEmptyKeywordOrContent()
             }
         }
     }
@@ -241,6 +243,16 @@ final class MyFeedbackEditViewController: BaseViewController {
         }
     }
     
+    private func isEmptyKeywordOrContent() {
+        if let keyword = keywordTextFieldView.keywordTextField.text {
+            if keyword.isEmpty || feedbackContentTextView.text.isEmpty {
+                feedbackDoneButton.isDisabled = true
+            }
+        } else {
+            feedbackDoneButton.isDisabled = true
+        }
+    }
+    
     private func detectChangeOfFeedbackType() {
         feedbackTypeButtonView.changeFeedbackType = { [weak self] type in
             guard let feedbackType = FeedBackDTO.init(rawValue: type.rawValue) else { return }
@@ -320,12 +332,16 @@ extension MyFeedbackEditViewController: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
         keywordTextFieldView.checkMaxLength(textField: keywordTextFieldView.keywordTextField, maxLength: Length.keywordMaxLength)
         feedbackDoneButton.isDisabled = !isFeedbackChanged()
+        isEmptyKeywordOrContent()
+//        feedbackDoneButton.isDisabled = isEmptyKeywordOrContent()
     }
 }
 
 extension MyFeedbackEditViewController: UITextViewDelegate {
     func textViewDidChangeSelection(_ textView: UITextView) {
         feedbackDoneButton.isDisabled = !isFeedbackChanged()
+        isEmptyKeywordOrContent()
+//        feedbackDoneButton.isDisabled = isEmptyKeywordOrContent()
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
