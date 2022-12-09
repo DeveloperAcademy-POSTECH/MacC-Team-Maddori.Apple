@@ -56,7 +56,6 @@ final class MemberCollectionView: UIView {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .vertical
         flowLayout.sectionInset = type == CollectionType.progressReflection ? ProgessSize.collectionInsets : AddFeedbackSize.collectionInsets
-//        flowLayout.itemSize = CGSize(width: ProgessSize.cellWidth, height: ProgessSize.cellHeight)
         flowLayout.itemSize = CGSize(width: type == CollectionType.progressReflection ? ProgessSize.cellWidth : AddFeedbackSize.cellWidth ,
                                      height: type == CollectionType.progressReflection ? ProgessSize.cellHeight : AddFeedbackSize.cellHeight)
         flowLayout.minimumLineSpacing = 29
@@ -64,7 +63,7 @@ final class MemberCollectionView: UIView {
     }()
     private lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewFlowLayout)
-        collectionView.backgroundColor = .clear
+        collectionView.backgroundColor = .white100
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.showsVerticalScrollIndicator = false
@@ -99,6 +98,10 @@ extension MemberCollectionView: UICollectionViewDelegate {
             selectedMember = memberList[indexPath.item]
             guard let member = selectedMember else { return }
             didTappedFeedBackMember?(member)
+
+            guard let cell = collectionView.cellForItem(at: indexPath) as? MemberCollectionViewCell else { return }
+            cell.applyAttribute()
+            
         case .progressReflection:
             if !selectedMemberList.contains(where: { $0.userName == memberList[indexPath.item].userName} ) {
                 selectedMemberList.append(memberList[indexPath.item])

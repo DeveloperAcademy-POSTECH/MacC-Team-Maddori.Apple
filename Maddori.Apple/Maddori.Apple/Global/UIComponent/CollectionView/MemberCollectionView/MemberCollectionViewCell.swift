@@ -17,6 +17,18 @@ final class MemberCollectionViewCell: BaseCollectionViewCell {
         static let frame = CGRect(x: 0, y: 0, width: Size.width, height: Size.height)
     }
     
+    // FIXME: 수정해야해.......
+    override var isSelected: Bool {
+        didSet {
+            if isSelected {
+                applyAttribute()
+            }
+            else {
+                resetAttribute()
+            }
+        }
+    }
+    
     // MARK: - property
     
     let memberLabel: UILabel = {
@@ -63,5 +75,19 @@ final class MemberCollectionViewCell: BaseCollectionViewCell {
             memberLabel.backgroundColor = .white100
             memberShadow.layer.shadowRadius = 1
         }
+    }
+    
+    func applyAttribute() {
+        if isSelected {
+            memberLabel.layer.borderWidth = 2
+            memberLabel.layer.cornerRadius = SizeLiteral.componentCornerRadius
+            memberLabel.layer.borderColor = UIColor.blue200.cgColor
+            memberLabel.textColor = .blue200
+        }
+    }
+    
+    func resetAttribute() {
+        memberLabel.layer.borderWidth = 0
+        memberLabel.textColor = .black100
     }
 }
