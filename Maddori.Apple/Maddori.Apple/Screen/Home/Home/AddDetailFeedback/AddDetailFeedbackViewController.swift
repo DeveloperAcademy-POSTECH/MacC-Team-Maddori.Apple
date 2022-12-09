@@ -33,6 +33,10 @@ final class AddDetailFeedbackViewController: BaseViewController {
     private lazy var selectMemberView: SelectMemberView = {
         let view = SelectMemberView()
         view.upDownImageView.transform = CGAffineTransform(rotationAngle: .pi)
+        return view
+    }()
+    private lazy var touchView: UIView = {
+        let view = UIView()
         view.isUserInteractionEnabled = true
         let tap = UITapGestureRecognizer(target: self, action: #selector(didTapSelectMemeberView))
         view.addGestureRecognizer(tap)
@@ -90,6 +94,13 @@ final class AddDetailFeedbackViewController: BaseViewController {
             $0.top.equalTo(titleLabel.snp.bottom).offset(24)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.height.equalTo(264)
+        }
+        
+        selectMemberView.addSubview(touchView)
+        touchView.snp.makeConstraints {
+            $0.top.equalTo(titleLabel.snp.bottom).offset(24)
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.height.equalTo(58)
         }
         
         view.addSubview(selectKeywordTypeView)
