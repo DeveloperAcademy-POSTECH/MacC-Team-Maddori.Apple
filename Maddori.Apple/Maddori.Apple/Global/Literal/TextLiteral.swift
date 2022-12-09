@@ -67,9 +67,15 @@ enum TextLiteral {
     static let addFeedbackContentViewControllerCurrentStepLabel2 = "상황에 대한 설명과\n그 영향을 적어주세요"
     static let addFeedbackContentViewControllerCurrentStepLabel3 = "상황에 대해 느낀 점과\n그 이유를 적어주세요"
     static let addFeedbackContentViewControllerCurrentStepLabel4 = "상대방을 위한\n요청 또는 격려를 적어주세요"
-    static let addFeedbackContentViewControllerCurrentStepDescriptionLabel2 = "ex. 청구서에 거래내역을 자세히 써주셔서 비용을 정확하게 파악하고 한결 쉽게 지급 승인을 받을 수 있게 되었어요."
-    static let addFeedbackContentViewControllerCurrentStepDescriptionLabel3 = "ex. 감사했습니다. 덕분에 시간도 절약했고, 안 그랬으면 지루했을 뻔한 작업을 즐겁게 끝낼 수 있었어요."
-    static let addFeedbackContentViewControllerCurrentStepDescriptionLabel4 = "ex. 앞으로도 확실한 청구서 작성해 주시면 좋을 것 같습니다. 항상 화이팅 하세요."
+    static let addFeedbackContentViewControllerCurrentStepDescriptionLabel2 = "ex. 제가 분위기를 파악 못하거나 눈치 채지 못해 잘못된 일을 했을 때 조용히 불러내서 알려줘서 고맙습니다."
+    static let addFeedbackContentViewControllerCurrentStepDescriptionLabel3 = "ex. 정말로 몰랐던 일인데 덕분에 제 잘못을 알게 되고 고치게 되었어요. 다른 사람 앞에서 그런 얘기를 해주지 않아서 민망하지도 않았습니다."
+    static let addFeedbackContentViewControllerCurrentStepDescriptionLabel4 = "ex. 앞으로도 이런 지적이라면 계속해주세요! 덕분에 항상 성장합니다"
+    
+//    제가 분위기를 파악 못하거나 눈치 채지 못해 잘못된 일을 했을 때 조용히 불러내서 알려줘서 고맙습니다.
+//
+//    정말로 몰랐던 일인데 덕분에 제 잘못을 알게 되고 고치게 되었어요. 다른 사람 앞에서 그런 얘기를 해주지 않아서 민망하지도 않았습니다.
+//
+//    앞으로도 이런 지적이라면 계속해주세요! 덕분에 항상 성장합니다
     
     // MARK: - AddFeedbackKeywordViewController
     
@@ -109,8 +115,8 @@ enum TextLiteral {
     
     // MARK: - SelectReflectionMemberViewController
     
-    static let selectReflectionMemberViewControllerTitleLabel = "피드백을 듣고 싶은\n팀원을 선택해주세요"
-    static let selectReflectionMemberViewControllerDoneButtonText = "모든 회고 끝내기 "
+    static let selectReflectionMemberViewControllerTitleLabel = "각 멤버가 받은 피드백을\n확인해보세요"
+    static let selectReflectionMemberViewControllerDoneButtonText = "모든 회고 끝내기"
     
     // MARK: - InProgressViewController
     
