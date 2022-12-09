@@ -94,7 +94,7 @@ final class MyFeedbackEditViewController: BaseViewController {
         label.font = .label2
         return label
     }()
-    private lazy var keywordTextFieldView = KeywordTextField(placeHolder: feedbackDetail.keyword)
+    private lazy var keywordTextFieldView = KeywordTextFieldView(placeHolder: feedbackDetail.keyword)
     private lazy var textLimitLabel: UILabel = {
         let label = UILabel()
         label.setTextWithLineHeight(text: "\(Length.keywordMinLength)/\(Length.keywordMaxLength)", lineHeight: 22)
