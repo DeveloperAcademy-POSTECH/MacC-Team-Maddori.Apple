@@ -21,7 +21,7 @@ final class MyFeedbackEditViewController: BaseViewController {
     private let feedbackDetail: FeedbackFromMeModel
     private var isFeedbackTypeChanged: Bool = false {
         didSet {
-            if !isTextInputChanged() {
+            if !isFeedbackChanged() {
                 feedbackDoneButton.isDisabled = true
             } else {
                 feedbackDoneButton.isDisabled = false
@@ -231,7 +231,7 @@ final class MyFeedbackEditViewController: BaseViewController {
         feedbackContentTextView.textColor = .black100
     }
     
-    private func isTextInputChanged() -> Bool {
+    private func isFeedbackChanged() -> Bool {
         if feedbackContentTextView.text == feedbackDetail.info &&
             keywordTextFieldView.keywordTextField.text == feedbackDetail.keyword &&
             !isFeedbackTypeChanged {
@@ -319,13 +319,13 @@ final class MyFeedbackEditViewController: BaseViewController {
 extension MyFeedbackEditViewController: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
         keywordTextFieldView.checkMaxLength(textField: keywordTextFieldView.keywordTextField, maxLength: Length.keywordMaxLength)
-        feedbackDoneButton.isDisabled = !isTextInputChanged()
+        feedbackDoneButton.isDisabled = !isFeedbackChanged()
     }
 }
 
 extension MyFeedbackEditViewController: UITextViewDelegate {
     func textViewDidChangeSelection(_ textView: UITextView) {
-        feedbackDoneButton.isDisabled = !isTextInputChanged()
+        feedbackDoneButton.isDisabled = !isFeedbackChanged()
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
