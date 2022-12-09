@@ -457,7 +457,7 @@ extension HomeViewController: UICollectionViewDataSource {
         case .Before, .SettingRequired, .Done:
             showToastPopUp(of: .warning)
         case .Progressing:
-            presentSelectReflectionMemberViewController()
+            showStartReflectionView()
         }
         
     }
