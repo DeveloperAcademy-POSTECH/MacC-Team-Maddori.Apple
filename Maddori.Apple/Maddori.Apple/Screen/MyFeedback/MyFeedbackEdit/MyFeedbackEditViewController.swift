@@ -74,11 +74,11 @@ final class MyFeedbackEditViewController: BaseViewController {
         return label
     }()
     private let feedbackContentTextView = CustomTextView()
-    private let feedbackDoneButtonView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .white200
-        return view
-    }()
+//    private let feedbackDoneButtonView: UIView = {
+//        let view = UIView()
+//        view.backgroundColor = .white200
+//        return view
+//    }()
     private lazy var feedbackDoneButton: MainButton = {
         let button = MainButton()
         button.title = TextLiteral.addFeedbackViewControllerDoneButtonTitle
@@ -171,16 +171,16 @@ final class MyFeedbackEditViewController: BaseViewController {
             $0.bottom.equalToSuperview()
         }
         
-        view.addSubview(feedbackDoneButtonView)
-        feedbackDoneButtonView.snp.makeConstraints {
-            $0.bottom.equalTo(view.snp.bottom)
-            $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(134)
-        }
+//        view.addSubview(feedbackDoneButtonView)
+//        feedbackDoneButtonView.snp.makeConstraints {
+//            $0.bottom.equalTo(view.snp.bottom)
+//            $0.leading.trailing.equalToSuperview()
+//            $0.height.equalTo(134)
+//        }
         
-        feedbackDoneButtonView.addSubview(feedbackDoneButton)
+        view.addSubview(feedbackDoneButton)
         feedbackDoneButton.snp.makeConstraints {
-            $0.bottom.equalTo(feedbackDoneButtonView.snp.bottom).inset(36)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
     }
@@ -288,7 +288,7 @@ final class MyFeedbackEditViewController: BaseViewController {
     @objc private func willShowKeyboard(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             UIView.animate(withDuration: 0.2, animations: {
-                self.feedbackDoneButtonView.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height + 25)
+                self.feedbackDoneButton.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height + 25)
             })
             feedbackContentTextView.snp.updateConstraints {
                 $0.bottom.equalToSuperview().inset(keyboardSize.height + 150)
@@ -299,7 +299,7 @@ final class MyFeedbackEditViewController: BaseViewController {
     
     @objc private func willHideKeyboard(notification: NSNotification) {
         UIView.animate(withDuration: 0.2, animations: {
-            self.feedbackDoneButtonView.transform = .identity
+            self.feedbackDoneButton.transform = .identity
         })
         feedbackContentTextView.snp.updateConstraints {
             $0.bottom.equalToSuperview()
