@@ -157,16 +157,16 @@ extension MemberCollectionView: UICollectionViewDataSource {
         
         switch type {
         case .addFeedback:
-            cell.index = FromCellIndex.fromAddFeedback.rawValue
+            cell.index = FromCellIndex.fromAddFeedback
         case .progressReflection:
-            cell.index = FromCellIndex.fromSelectMember.rawValue
+            cell.index = FromCellIndex.fromSelectMember
         }
         return cell
     }
 }
 
 
-enum FromCellIndex: Int {
-    case fromAddFeedback = 1
-    case fromSelectMember = 0
+enum FromCellIndex {
+    case fromAddFeedback
+    case fromSelectMember
 }

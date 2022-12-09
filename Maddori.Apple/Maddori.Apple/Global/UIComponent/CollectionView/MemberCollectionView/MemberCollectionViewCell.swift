@@ -11,7 +11,7 @@ import SnapKit
 
 final class MemberCollectionViewCell: BaseCollectionViewCell {
     
-    var index = 0
+    var index: FromCellIndex = .fromSelectMember
     
     private enum Size {
         static let width = 135
@@ -22,7 +22,7 @@ final class MemberCollectionViewCell: BaseCollectionViewCell {
 
     override var isSelected: Bool {
         didSet {
-            if index == FromCellIndex.fromAddFeedback.rawValue {
+            if index == FromCellIndex.fromAddFeedback {
                 if isSelected {
                     applyAttribute()
                 }
