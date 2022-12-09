@@ -55,23 +55,7 @@ final class MyFeedbackEditViewController: BaseViewController {
         label.font = .label2
         return label
     }()
-    private lazy var feedbackTypeButtonView: FeedbackTypeButtonView = {
-        let view = FeedbackTypeButtonView()
-        view.changeFeedbackType = { [weak self] type in
-            if let typeValue = FeedBackDTO.init(rawValue: type.rawValue) {
-                self?.type = typeValue
-                guard let keyword = self?.keywordTextFieldView.keywordTextField.text,
-                      let content = self?.feedbackContentTextView.text
-                else { return }
-                let hasKeyword = keyword.isEmpty,
-                    hasContent = content == TextLiteral.addFeedbackViewControllerFeedbackContentTextViewPlaceholder
-                if !hasKeyword && !hasContent {
-                    self?.feedbackDoneButton.isDisabled = false
-                }
-            }
-        }
-        return view
-    }()
+    private let feedbackTypeButtonView = FeedbackTypeButtonView()
     private let feedbackKeywordLabel: UILabel = {
         let label = UILabel()
         label.text = TextLiteral.feedbackKeywordLabel
