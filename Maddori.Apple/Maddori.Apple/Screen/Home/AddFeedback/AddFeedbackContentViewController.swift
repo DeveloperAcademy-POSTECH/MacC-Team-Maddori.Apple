@@ -134,10 +134,6 @@ final class AddFeedbackContentViewController: BaseViewController {
         super.viewWillAppear(animated)
         setupNotificationCenter()
         feedbackContentTextView.becomeFirstResponder()
-            
-        if let contentString = feedbackContent.contentString {
-            feedbackContent.contentString = contentString.replacingOccurrences(of: "\(currentStepString)|\n\n\(currentStepString)", with: "", options: .regularExpression)
-        }
     }
     
     override func render() {
@@ -213,16 +209,14 @@ final class AddFeedbackContentViewController: BaseViewController {
     }
     
     private func didTappedDoneButton() {
-        if step != .writeSituation {
-            if let contentString = feedbackContent.contentString {
-                if contentString.isEmpty {
-                    feedbackContent.contentString = currentStepString
-                } else {
-                    feedbackContent.contentString = contentString + "\n\n" + currentStepString
-                }
-            }
+        switch step {
+        case .writeSituation:
+            feedbackContent.situation = currentStepString
+        case .writeFeeling:
+            feedbackContent.feeling = currentStepString
+        case .writeSuggestions:
+            feedbackContent.suggestion = currentStepString
         }
-        
         DispatchQueue.main.async {
             switch self.step {
             case .writeSituation:
@@ -231,12 +225,8 @@ final class AddFeedbackContentViewController: BaseViewController {
                 self.navigationController?.pushViewController(AddFeedbackContentViewController(feedbackContent: self.feedbackContent, step: Step.writeSuggestions), animated: true)
             case .writeSuggestions:
                 self.navigationController?.pushViewController(AddFeedbackKeywordViewController(feedbackContent: self.feedbackContent), animated: true)
-                // FIXME: 키워드 작성하는 마지막 단계 VC가 생기면 그 VC로 연결
             }
         }
-        // FIXME: currentStepString과 쌓여가는 contentString 볼 수 있도록 해 둔 코드 -> 머지 전에 지우기
-//        print("currentStepString: \(currentStepString)")
-//        print("contentString: \(contentString)")
     }
     
     // MARK: - selector

@@ -28,20 +28,7 @@ final class AddFeedbackKeywordViewController: BaseViewController {
         let width = (placeholder as NSString).size(withAttributes: fontAttributes).width
         return width
     }
-    
-//    let toString: String
-//    let toUserId: Int
-//    let feedbackType: FeedBackDTO
-//    let contentString: String
-//    let reflectionId: Int
     var feedbackContent: FeedbackContent
-    
-    init(feedbackContent: FeedbackContent) {
-        self.feedbackContent = feedbackContent
-        super.init()
-    }
-    
-    required init?(coder: NSCoder) { nil }
     
     // MARK: - property
     
@@ -136,7 +123,7 @@ final class AddFeedbackKeywordViewController: BaseViewController {
         label.font = .body1
         label.textColor = .gray400
         label.numberOfLines = 0
-        label.text = feedbackContent.contentString
+        label.text = feedbackContent.content
         return label
     }()
     private lazy var doneButton: MainButton = {
@@ -151,6 +138,13 @@ final class AddFeedbackKeywordViewController: BaseViewController {
     }()
     
     // MARK: - life cycle
+    
+    init(feedbackContent: FeedbackContent) {
+        self.feedbackContent = feedbackContent
+        super.init()
+    }
+    
+    required init?(coder: NSCoder) { nil }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -234,9 +228,9 @@ final class AddFeedbackKeywordViewController: BaseViewController {
     private func didTappedDoneButton() {
         guard let keyword = keywordTextField.keywordTextField.text,
               let type = feedbackContent.feedbackType,
-              let contentString = feedbackContent.contentString,
               let userId = feedbackContent.toUserId
         else { return }
+        let contentString = feedbackContent.content
         let dto = FeedBackContentDTO(type: type, keyword: keyword, content: contentString, start_content: nil, to_id: userId)
         dispatchAddFeedBack(type: .dispatchAddFeedBack(reflectionId: feedbackContent.reflectionId, dto))
     }
