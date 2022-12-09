@@ -111,6 +111,7 @@ final class MyFeedbackEditViewController: BaseViewController {
         setupFeedbackContent()
         setupDelegate()
         detectChangeOfFeedbackType()
+        addTapGestureContentView()
     }
     
     override func render() {
@@ -121,7 +122,7 @@ final class MyFeedbackEditViewController: BaseViewController {
         
         addFeedbackScrollView.addSubview(addFeedbackContentView)
         addFeedbackContentView.snp.makeConstraints {
-            $0.width.top.bottom.equalToSuperview()
+            $0.width.edges.equalToSuperview()
         }
         
         addFeedbackContentView.addSubview(addFeedbackTitleLabel)
@@ -259,6 +260,15 @@ final class MyFeedbackEditViewController: BaseViewController {
                                   content: feedbackContentTextView.text ?? "",
                                   start_content: nil)
         putEditFeedBack(type: .putEditFeedBack(reflectionId: feedbackDetail.reflectionId, feedBackId: feedbackDetail.feedbackId, dto))
+    }
+    
+    private func addTapGestureContentView() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(endEditingView))
+        addFeedbackContentView.addGestureRecognizer(tap)
+    }
+    
+    @objc override func endEditingView() {
+        view.endEditing(true)
     }
     
     // MARK: - selector
