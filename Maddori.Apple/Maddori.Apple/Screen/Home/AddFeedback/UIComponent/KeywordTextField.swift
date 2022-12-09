@@ -46,6 +46,7 @@ final class KeywordTextField: UIView {
     }()
     lazy var keywordTextField: UITextField = {
         let textField = UITextField()
+        textField.font = .main
         textField.attributedPlaceholder = NSAttributedString(
             string: placeholder,
             attributes: [

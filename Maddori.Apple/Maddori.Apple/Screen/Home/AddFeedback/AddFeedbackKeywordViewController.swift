@@ -249,9 +249,11 @@ final class AddFeedbackKeywordViewController: BaseViewController {
                    encoder: JSONParameterEncoder.default,
                    headers: type.headers
         ).responseDecodable(of: BaseModel<FeedBackContentResponse>.self) { json in
-            dump(json.value)
-            DispatchQueue.main.async {
-                self.dismiss(animated: true)
+            if let data = json.value {
+                dump(data)
+                DispatchQueue.main.async {
+                    self.dismiss(animated: true)
+                }
             }
         }
     }

@@ -87,7 +87,7 @@ final class AddFeedbackContentViewController: BaseViewController {
         }
         label.textColor = .black100
         label.font = .title2
-        label.setLineSpacing(to: 8)
+        label.setLineSpacing(to: 4)
         label.numberOfLines = 2
         return label
     }()
