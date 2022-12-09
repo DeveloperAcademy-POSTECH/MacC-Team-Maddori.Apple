@@ -27,7 +27,7 @@ final class MemberCollectionView: UIView {
     var didTappedFeedBackMember: ((MemberResponse) -> ())?
     var selectedMember: MemberResponse?
     private var selectedMemberList: [MemberResponse] = []
-    private enum Size {
+    private enum ProgessSize {
         static let collectionHorizontalSpacing: CGFloat = 14
         static let collectionTopSpacing: CGFloat = 40
         static let cellWidth: CGFloat = 135
@@ -38,14 +38,27 @@ final class MemberCollectionView: UIView {
             bottom: 0,
             right: collectionHorizontalSpacing)
     }
+    private enum AddFeedbackSize {
+        static let collectionHorizontalSpacing: CGFloat = 20
+        static let collectionTopSpacing: CGFloat = 10
+        static let cellWidth: CGFloat = 133
+        static let cellHeight: CGFloat = 52
+        static let collectionInsets = UIEdgeInsets(
+            top: collectionTopSpacing,
+            left: collectionHorizontalSpacing,
+            bottom: collectionTopSpacing * 4,
+            right: collectionHorizontalSpacing)
+    }
     
     // MARK: - property
     
-    private let collectionViewFlowLayout: UICollectionViewFlowLayout = {
+    private lazy var collectionViewFlowLayout: UICollectionViewFlowLayout = {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .vertical
-        flowLayout.sectionInset = Size.collectionInsets
-        flowLayout.itemSize = CGSize(width: Size.cellWidth, height: Size.cellHeight)
+        flowLayout.sectionInset = type == CollectionType.progressReflection ? ProgessSize.collectionInsets : AddFeedbackSize.collectionInsets
+//        flowLayout.itemSize = CGSize(width: ProgessSize.cellWidth, height: ProgessSize.cellHeight)
+        flowLayout.itemSize = CGSize(width: type == CollectionType.progressReflection ? ProgessSize.cellWidth : AddFeedbackSize.cellWidth ,
+                                     height: type == CollectionType.progressReflection ? ProgessSize.cellHeight : AddFeedbackSize.cellHeight)
         flowLayout.minimumLineSpacing = 29
         return flowLayout
     }()

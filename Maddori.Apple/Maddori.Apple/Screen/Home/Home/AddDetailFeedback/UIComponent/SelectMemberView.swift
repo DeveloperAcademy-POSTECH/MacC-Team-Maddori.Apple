@@ -104,8 +104,8 @@ final class SelectMemberView: UIStackView {
         self.addSubview(memberCollectionView)
         memberCollectionView.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(20)
-            $0.leading.trailing.equalToSuperview().inset(20)
-            $0.height.equalTo(216)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(190)
         }
     }
     
