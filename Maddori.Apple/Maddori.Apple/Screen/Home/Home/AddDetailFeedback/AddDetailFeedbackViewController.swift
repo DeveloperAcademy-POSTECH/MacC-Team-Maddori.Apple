@@ -17,8 +17,10 @@ final class AddDetailFeedbackViewController: BaseViewController {
     private var isOpenedMemberView: Bool = true {
         didSet {
             if !isOpenedMemberView {
-                selectMemberView.titleLabel.text = toName
-                selectMemberView.titleLabel.textColor = .blue200
+                if toName != "" {
+                    selectMemberView.titleLabel.text = toName
+                    selectMemberView.titleLabel.textColor = .blue200
+                }
             }
             else {
                 selectMemberView.titleLabel.text = "피드백 줄 멤버"
@@ -238,9 +240,4 @@ final class AddDetailFeedbackViewController: BaseViewController {
             }
         }
     }
-}
-
-struct FeedbackContent {
-    var toName: String?
-    var keywordType: FeedBackDTO?
 }
