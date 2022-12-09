@@ -12,6 +12,8 @@ import SnapKit
 
 final class SelectMemberView: UIStackView {
     
+    var didSelectMemeber: ((String) -> ())?
+    
     var isOpened: Bool = false {
         didSet {
             if isOpened {
@@ -43,7 +45,7 @@ final class SelectMemberView: UIStackView {
         view.layer.cornerRadius = 10
         return view
     }()
-    private var titleLabel: UILabel = {
+    let titleLabel: UILabel = {
         let label = UILabel()
         label.font = .main
         label.text = "피드백 줄 맴버"
@@ -58,7 +60,8 @@ final class SelectMemberView: UIStackView {
         let collectionView = MemberCollectionView(type: .addFeedback)
         collectionView.didTappedFeedBackMember = { [weak self] user in
             //FIXME: 네네 바꿔야해요
-            print(user.userName)
+            guard let userName = user.userName else { return }
+            self?.didSelectMemeber?(userName)
         }
         return collectionView
     }()

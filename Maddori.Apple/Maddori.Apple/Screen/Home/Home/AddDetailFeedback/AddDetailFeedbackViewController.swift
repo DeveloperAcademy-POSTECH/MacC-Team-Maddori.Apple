@@ -12,8 +12,20 @@ import SnapKit
 
 final class AddDetailFeedbackViewController: BaseViewController {
     
-    private var isOpenedMemberView: Bool = true
+    private var isOpenedMemberView: Bool = true {
+        didSet {
+            if !isOpenedMemberView {
+                selectMemberView.titleLabel.text = toName
+                selectMemberView.titleLabel.textColor = .blue200
+            }
+            else {
+                selectMemberView.titleLabel.text = "피드백 줄 멤버"
+                selectMemberView.titleLabel.textColor = .black100
+            }
+        }
+    }
     private var isOpenedTypeView: Bool = false
+    private var toName: String = ""
     
     // MARK: - property
     
@@ -34,6 +46,9 @@ final class AddDetailFeedbackViewController: BaseViewController {
     private lazy var selectMemberView: SelectMemberView = {
         let view = SelectMemberView()
         view.upDownImageView.transform = CGAffineTransform(rotationAngle: .pi)
+        view.didSelectMemeber = { [weak self] userName in
+            self?.toName = userName
+        }
         return view
     }()
     private lazy var touchView: UIView = {
