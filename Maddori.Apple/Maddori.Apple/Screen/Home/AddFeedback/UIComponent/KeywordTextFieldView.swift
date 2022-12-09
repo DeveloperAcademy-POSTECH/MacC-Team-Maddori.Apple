@@ -27,7 +27,7 @@ final class KeywordTextFieldView: UIView {
     var placeholderWidth: CGFloat {
         let placeholder = placeholder
         let fontAttributes = [NSAttributedString.Key.font: UIFont.main]
-        let width = (placeholder as NSString).size(withAttributes: fontAttributes).width
+        let width = (placeholder as NSString).size(withAttributes: fontAttributes).width + 1
         return width
     }
     
