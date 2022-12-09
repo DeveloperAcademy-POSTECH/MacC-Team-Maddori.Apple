@@ -30,6 +30,7 @@ final class AddDetailFeedbackViewController: BaseViewController {
     }
     private var isOpenedTypeView: Bool = false
     private var toName: String = ""
+    private var toId: Int?
     
     // MARK: - property
     
@@ -50,9 +51,12 @@ final class AddDetailFeedbackViewController: BaseViewController {
     private lazy var selectMemberView: SelectMemberView = {
         let view = SelectMemberView()
         view.upDownImageView.transform = CGAffineTransform(rotationAngle: .pi)
-        view.didSelectedMemeber = { [weak self] userName in
+        view.didSelectedMemeber = { [weak self] user in
+            guard let userName = user.userName,
+                  let userId = user.userId   else { return }
             self?.toName = userName
-            self?.feedbackContent = FeedbackContent(toName: self?.toName)
+            self?.toId = userId
+            self?.feedbackContent = FeedbackContent(toId: userId)
         }
         return view
     }()
@@ -208,8 +212,9 @@ final class AddDetailFeedbackViewController: BaseViewController {
     private func setupNextButton() {
         let action = UIAction { [weak self] _ in
             guard let type = self?.selectKeywordTypeView.feedbackTypeButtonView.feedbackType else { return }
-            let feedback = FeedBackDTO.init(rawValue: type.rawValue)
-            self?.feedbackContent = FeedbackContent(keywordType: feedback)
+            guard let feedback = FeedBackDTO.init(rawValue: type.rawValue) else { return }
+            self?.feedbackContent = FeedbackContent(toId: self?.toId, type: feedback)
+            
         }
         nextButton.addAction(action, for: .touchUpInside)
     }
