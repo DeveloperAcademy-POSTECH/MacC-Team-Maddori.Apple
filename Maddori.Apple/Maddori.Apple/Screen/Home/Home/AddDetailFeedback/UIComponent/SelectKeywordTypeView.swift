@@ -7,28 +7,29 @@
 
 import UIKit
 
-final class SelectKeywordTypeView: UIView {
+import SnapKit
+
+final class SelectKeywordTypeView: UIStackView {
     
     var isOpened: Bool = false {
         didSet {
             if isOpened {
-                self.addSubview(self.feedbackTypeButtonView)
-                self.feedbackTypeButtonView.snp.makeConstraints {
-                    $0.top.equalTo(self.titleLabel.snp.bottom).offset(20)
-                    $0.leading.trailing.equalToSuperview().inset(20)
-                    $0.bottom.equalToSuperview().inset(20)
-                }
                 self.feedbackTypeButtonView.isHidden = false
+                setupFeedbackTypeButtonViewLayOut()
             }
             else {
-                self.feedbackTypeButtonView.removeFromSuperview()
+                feedbackTypeButtonView.removeFromSuperview()
+                
+                self.feedbackTypeButtonView.snp.updateConstraints {
+                    $0.bottom.equalTo(self.snp.bottom)
+                }
             }
         }
     }
     
     // MARK: - property
     
-    private var titleLabel: UILabel = {
+    private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = .main
         label.text = "피드백 종류"
@@ -38,6 +39,10 @@ final class SelectKeywordTypeView: UIView {
         let imageView = UIImageView(image: ImageLiterals.icBottom)
         imageView.tintColor = .black100
         return imageView
+    }()
+    private lazy var titleView: UIView = {
+        let view = UIView()
+        return view
     }()
     private let feedbackTypeButtonView: FeedbackTypeButtonView = {
         let view = FeedbackTypeButtonView()
@@ -53,21 +58,40 @@ final class SelectKeywordTypeView: UIView {
         configUI()
     }
     
-    required init?(coder: NSCoder) { nil }
+    required init(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     // MARK: - func
+    
+    private func setupFeedbackTypeButtonViewLayOut() {
+        self.addSubview(feedbackTypeButtonView)
+        feedbackTypeButtonView.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.top.equalTo(titleView.snp.bottom)
+            $0.bottom.equalTo(self.snp.bottom).inset(20)
+        }
+    }
+        
     private func render() {
         
-        self.addSubview(titleLabel)
-        titleLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(20)
-            $0.leading.equalToSuperview().inset(20)
+        self.addSubview(titleView)
+        titleView.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.width.equalToSuperview()
+            $0.height.equalTo(58)
         }
         
-        self.addSubview(upDownImageView)
+        titleView.addSubview(titleLabel)
+        titleLabel.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+
+        titleView.addSubview(upDownImageView)
         upDownImageView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(20)
-            $0.trailing.equalToSuperview().inset(20)
+            $0.centerY.equalToSuperview()
+            $0.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
     }
     
