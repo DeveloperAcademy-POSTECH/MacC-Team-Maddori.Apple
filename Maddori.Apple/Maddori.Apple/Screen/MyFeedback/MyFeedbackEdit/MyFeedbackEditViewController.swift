@@ -71,11 +71,7 @@ final class MyFeedbackEditViewController: BaseViewController {
         label.font = .label2
         return label
     }()
-    private let feedbackContentTextView: CustomTextView = {
-        let textView = CustomTextView()
-        textView.placeholder = TextLiteral.addFeedbackViewControllerFeedbackContentTextViewPlaceholder
-        return textView
-    }()
+    private let feedbackContentTextView = CustomTextView()
     private let feedbackDoneButtonView: UIView = {
         let view = UIView()
         view.backgroundColor = .white200
@@ -251,26 +247,12 @@ final class MyFeedbackEditViewController: BaseViewController {
         }
     }
     
-    func didTappedDoneButton() {
+    private func didTappedDoneButton() {
         let dto = EditFeedBackDTO(type: feedbackType,
                                   keyword: keywordTextFieldView.keywordTextField.text ?? "",
                                   content: feedbackContentTextView.text ?? "",
                                   start_content: nil)
         putEditFeedBack(type: .putEditFeedBack(reflectionId: feedbackDetail.reflectionId, feedBackId: feedbackDetail.feedbackId, dto))
-    }
-    
-    func checkMaxLength(textField: UITextField, maxLength: Int) {
-        if let text = textField.text {
-            if text.count > maxLength {
-                let endIndex = text.index(text.startIndex, offsetBy: maxLength)
-                let fixedText = text[text.startIndex..<endIndex]
-                textField.text = fixedText + " "
-                
-                DispatchQueue.main.async {
-                    self.keywordTextFieldView.keywordTextField.text = String(fixedText)
-                }
-            }
-        }
     }
     
     // MARK: - selector
@@ -286,7 +268,7 @@ final class MyFeedbackEditViewController: BaseViewController {
         }
     }
     
-    @objc func willHideKeyboard(notification: NSNotification) {
+    @objc private func willHideKeyboard(notification: NSNotification) {
         UIView.animate(withDuration: 0.2, animations: {
             self.feedbackDoneButtonView.transform = .identity
         })
