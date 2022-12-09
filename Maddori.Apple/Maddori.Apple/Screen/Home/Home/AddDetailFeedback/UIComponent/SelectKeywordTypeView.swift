@@ -25,7 +25,7 @@ final class SelectKeywordTypeView: UIStackView {
             }
             else {
                 self.feedbackTypeButtonView.snp.updateConstraints {
-                    $0.height.equalTo(0)    
+                    $0.height.equalTo(0)
                 }
                 UIView.animate(withDuration: 0.2) {
                     self.layoutIfNeeded()
