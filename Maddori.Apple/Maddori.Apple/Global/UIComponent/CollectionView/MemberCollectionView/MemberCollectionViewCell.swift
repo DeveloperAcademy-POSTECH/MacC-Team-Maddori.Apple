@@ -84,7 +84,7 @@ final class MemberCollectionViewCell: BaseCollectionViewCell {
         }
     }
     
-    func applyAttribute() {
+    private func applyAttribute() {
         if isSelected {
             memberLabel.layer.borderWidth = 2
             memberLabel.layer.cornerRadius = SizeLiteral.componentCornerRadius
@@ -93,7 +93,7 @@ final class MemberCollectionViewCell: BaseCollectionViewCell {
         }
     }
     
-    func resetAttribute() {
+    private func resetAttribute() {
         memberLabel.layer.borderWidth = 0
         memberLabel.textColor = .black100
     }
