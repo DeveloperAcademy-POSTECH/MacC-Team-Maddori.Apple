@@ -54,6 +54,7 @@ final class AddDetailFeedbackViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCloseButton()
+        setupNextButton()
         setupShadowView()
     }
     
@@ -181,6 +182,13 @@ final class AddDetailFeedbackViewController: BaseViewController {
         // FIXME: 쉐도우 처리 어떻게해?
         selectKeywordTypeView.layer.shadowOpacity = 0.05
         selectKeywordTypeView.layer.shadowOffset = CGSize.zero
+    }
+    
+    private func setupNextButton() {
+        let action = UIAction { [weak self] _ in
+            
+        }
+        nextButton.addAction(action, for: .touchUpInside)
     }
     
     private func setupCloseButton() {

@@ -11,6 +11,11 @@ import SnapKit
 
 final class MemberCollectionView: UIView {
     
+    enum FromCellIndex: Int {
+        case fromAddFeedback = 1
+        case fromSelectMember = 0
+    }
+    
     enum CollectionType {
         case addFeedback
         case progressReflection
@@ -100,7 +105,7 @@ extension MemberCollectionView: UICollectionViewDelegate {
             didTappedFeedBackMember?(member)
 
             guard let cell = collectionView.cellForItem(at: indexPath) as? MemberCollectionViewCell else { return }
-            cell.applyAttribute()
+            
             
         case .progressReflection:
             if !selectedMemberList.contains(where: { $0.userName == memberList[indexPath.item].userName} ) {
@@ -127,6 +132,13 @@ extension MemberCollectionView: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         cell.memberLabel.text = memberList[indexPath.item].userName
+        
+        switch type {
+        case .addFeedback:
+            cell.index = FromCellIndex.fromAddFeedback.rawValue
+        case .progressReflection:
+            cell.index = FromCellIndex.fromSelectMember.rawValue
+        }
         return cell
     }
 }

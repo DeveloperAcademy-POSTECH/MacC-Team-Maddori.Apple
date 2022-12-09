@@ -228,7 +228,7 @@ final class HomeViewController: BaseViewController {
     }
     
     private func didTapAddFeedbackButton() {
-        let viewController = UINavigationController(rootViewController: SelectFeedbackMemberViewController(currentReflectionId: self.currentReflectionId))
+        let viewController = UINavigationController(rootViewController: AddDetailFeedbackViewController())
         viewController.modalPresentationStyle = .fullScreen
         present(viewController, animated: true)
     }

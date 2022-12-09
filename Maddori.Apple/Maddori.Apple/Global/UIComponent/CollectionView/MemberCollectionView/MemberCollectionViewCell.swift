@@ -11,20 +11,27 @@ import SnapKit
 
 final class MemberCollectionViewCell: BaseCollectionViewCell {
     
+    var index = 0
+    
     private enum Size {
         static let width = 135
         static let height = 60
         static let frame = CGRect(x: 0, y: 0, width: Size.width, height: Size.height)
     }
     
-    // FIXME: 수정해야해.......
+//     FIXME: 수정해야해.......
     override var isSelected: Bool {
         didSet {
-            if isSelected {
-                applyAttribute()
+            if index == 1 {
+                if isSelected {
+                    applyAttribute()
+                }
+                else {
+                    resetAttribute()
+                }
             }
             else {
-                resetAttribute()
+                setupAttribute()
             }
         }
     }
@@ -78,12 +85,16 @@ final class MemberCollectionViewCell: BaseCollectionViewCell {
     }
     
     func applyAttribute() {
+        print("isSelected", isSelected)
         if isSelected {
             memberLabel.layer.borderWidth = 2
             memberLabel.layer.cornerRadius = SizeLiteral.componentCornerRadius
             memberLabel.layer.borderColor = UIColor.blue200.cgColor
             memberLabel.textColor = .blue200
         }
+//        else {
+//            resetAttribute()
+//        }
     }
     
     func resetAttribute() {
