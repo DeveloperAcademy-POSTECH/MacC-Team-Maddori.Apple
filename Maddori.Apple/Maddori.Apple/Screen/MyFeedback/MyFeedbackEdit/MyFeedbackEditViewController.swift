@@ -82,13 +82,6 @@ final class MyFeedbackEditViewController: BaseViewController {
         return label
     }()
     private lazy var keywordTextFieldView = KeywordTextFieldView(placeHolder: feedbackDetail.keyword)
-    private lazy var textLimitLabel: UILabel = {
-        let label = UILabel()
-        label.setTextWithLineHeight(text: "\(Length.keywordMinLength)/\(Length.keywordMaxLength)", lineHeight: 22)
-        label.font = .body2
-        label.textColor = .gray500
-        return label
-    }()
     private let feedbackContentLabel: UILabel = {
         let label = UILabel()
         label.text = TextLiteral.feedbackContentLabel
@@ -182,12 +175,6 @@ final class MyFeedbackEditViewController: BaseViewController {
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
-        addFeedbackContentView.addSubview(textLimitLabel)
-        textLimitLabel.snp.makeConstraints {
-            $0.top.equalTo(keywordTextFieldView.snp.bottom).offset(4)
-            $0.trailing.equalToSuperview().inset(27)
-        }
-        
         addFeedbackContentView.addSubview(feedbackContentLabel)
         feedbackContentLabel.snp.makeConstraints {
             $0.top.equalTo(keywordTextFieldView.snp.bottom).offset(SizeLiteral.componentIntervalPadding)
@@ -252,7 +239,6 @@ final class MyFeedbackEditViewController: BaseViewController {
     
     private func setupFeedbackKeyword() {
         keywordTextFieldView.keywordTextField.text = feedbackDetail.keyword
-        setCounter(count: feedbackDetail.keyword.count)
     }
     
     private func setupFeedbackContent() {
@@ -289,15 +275,6 @@ final class MyFeedbackEditViewController: BaseViewController {
                                   content: feedbackContentTextView.text ?? "",
                                   start_content: nil)
         putEditFeedBack(type: .putEditFeedBack(reflectionId: feedbackDetail.reflectionId, feedBackId: feedbackDetail.feedbackId, dto))
-    }
-    
-    func setCounter(count: Int) {
-        if count <= Length.keywordMaxLength {
-            textLimitLabel.text = "\(count)/\(Length.keywordMaxLength)"
-        }
-        else {
-            textLimitLabel.text = "\(Length.keywordMaxLength)/\(Length.keywordMaxLength)"
-        }
     }
     
     func checkMaxLength(textField: UITextField, maxLength: Int) {
@@ -360,7 +337,6 @@ final class MyFeedbackEditViewController: BaseViewController {
 
 extension MyFeedbackEditViewController: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
-        setCounter(count: textField.text?.count ?? 0)
         checkMaxLength(textField: keywordTextFieldView.keywordTextField, maxLength: Length.keywordMaxLength)
         feedbackDoneButton.isDisabled = !isTextInputChanged()
     }
