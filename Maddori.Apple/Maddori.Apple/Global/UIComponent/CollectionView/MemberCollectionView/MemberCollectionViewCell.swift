@@ -19,10 +19,10 @@ final class MemberCollectionViewCell: BaseCollectionViewCell {
         static let frame = CGRect(x: 0, y: 0, width: Size.width, height: Size.height)
     }
     
-//     FIXME: 수정해야해.......
+
     override var isSelected: Bool {
         didSet {
-            if index == 1 {
+            if index == FromCellIndex.fromAddFeedback.rawValue {
                 if isSelected {
                     applyAttribute()
                 }
@@ -85,16 +85,12 @@ final class MemberCollectionViewCell: BaseCollectionViewCell {
     }
     
     func applyAttribute() {
-        print("isSelected", isSelected)
         if isSelected {
             memberLabel.layer.borderWidth = 2
             memberLabel.layer.cornerRadius = SizeLiteral.componentCornerRadius
             memberLabel.layer.borderColor = UIColor.blue200.cgColor
             memberLabel.textColor = .blue200
         }
-//        else {
-//            resetAttribute()
-//        }
     }
     
     func resetAttribute() {
