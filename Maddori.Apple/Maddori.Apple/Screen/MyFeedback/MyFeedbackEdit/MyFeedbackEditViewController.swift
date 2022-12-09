@@ -18,25 +18,12 @@ final class MyFeedbackEditViewController: BaseViewController {
     }
     private var type: FeedBackDTO = .continueType
     private let toNickname: String
-    private let toUserId: Int
-    private let currentReflectionId: Int
-    private var keywordHasText: Bool = false
-    private var contentHasText: Bool = false
     private let parentNavigationViewController: UINavigationController
     private var feedbackType: FeedBackDTO
     private let feedbackDetail: FeedbackFromMeModel
-    private var isStartSwitchToggleChanged: Bool = false {
-        didSet {
-            if !(isTextInputChanged() || isFeedbackTypeChanged || isStartSwitchToggleChanged) {
-                feedbackDoneButton.isDisabled = true
-            } else {
-                feedbackDoneButton.isDisabled = false
-            }
-        }
-    }
     private var isFeedbackTypeChanged: Bool = false {
         didSet {
-            if !(isTextInputChanged() || isFeedbackTypeChanged || isStartSwitchToggleChanged) {
+            if !isTextInputChanged() {
                 feedbackDoneButton.isDisabled = true
             } else {
                 feedbackDoneButton.isDisabled = false
@@ -134,16 +121,12 @@ final class MyFeedbackEditViewController: BaseViewController {
     
     init(feedbackDetail: FeedbackFromMeModel,
          parentNavigationViewController: UINavigationController,
-         to: String,
-         toUserId: Int,
-         reflectionId: Int
+         to: String
     ) {
         self.feedbackDetail = feedbackDetail
         self.feedbackType = FeedBackDTO.init(rawValue: feedbackDetail.feedbackType.rawValue) ?? .continueType
         self.parentNavigationViewController = parentNavigationViewController
         self.toNickname = to
-        self.toUserId = toUserId
-        self.currentReflectionId = reflectionId
         super.init()
     }
     
@@ -154,7 +137,7 @@ final class MyFeedbackEditViewController: BaseViewController {
         setupFeedbackType()
         setupFeedbackKeyword()
         setupFeedbackContent()
-        hideEditFeedbackUntilLabel()
+        setupDelegate()
         detectChangeOfFeedbackType()
     }
     
@@ -276,18 +259,11 @@ final class MyFeedbackEditViewController: BaseViewController {
         feedbackContentTextView.text = feedbackDetail.info
         feedbackContentTextView.textColor = .black100
     }
-        
-    private func hideEditFeedbackUntilLabel() {
-        feedbackDoneButtonView.snp.remakeConstraints {
-            $0.bottom.equalToSuperview()
-            $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(95)
-        }
-    }
     
     private func isTextInputChanged() -> Bool {
         if feedbackContentTextView.text == feedbackDetail.info &&
-            keywordTextFieldView.keywordTextField.text == feedbackDetail.keyword {
+            keywordTextFieldView.keywordTextField.text == feedbackDetail.keyword &&
+            !isFeedbackTypeChanged {
             return false
         } else {
             return true
@@ -386,16 +362,13 @@ extension MyFeedbackEditViewController: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
         setCounter(count: textField.text?.count ?? 0)
         checkMaxLength(textField: keywordTextFieldView.keywordTextField, maxLength: Length.keywordMaxLength)
-        
-        keywordHasText = keywordTextFieldView.keywordTextField.hasText
-        feedbackDoneButton.isDisabled = !(keywordHasText && contentHasText && feedbackTypeButtonView.feedbackType != nil)
+        feedbackDoneButton.isDisabled = !isTextInputChanged()
     }
 }
 
 extension MyFeedbackEditViewController: UITextViewDelegate {
     func textViewDidChangeSelection(_ textView: UITextView) {
-        contentHasText = feedbackContentTextView.hasText && feedbackContentTextView.text != TextLiteral.addFeedbackViewControllerFeedbackContentTextViewPlaceholder
-        feedbackDoneButton.isDisabled = !(keywordHasText && contentHasText && feedbackTypeButtonView.feedbackType != nil)
+        feedbackDoneButton.isDisabled = !isTextInputChanged()
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
