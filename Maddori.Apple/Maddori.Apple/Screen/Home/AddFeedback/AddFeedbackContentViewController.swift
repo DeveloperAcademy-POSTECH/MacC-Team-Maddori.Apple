@@ -24,7 +24,7 @@ final class AddFeedbackContentViewController: BaseViewController {
         static let descriptionTopPadding: Int = 12
     }
     
-    let toString: String
+    let toNickName: String
     let toUserId: Int
     let feedbackType: FeedBackDTO
     var contentString: String
@@ -35,7 +35,7 @@ final class AddFeedbackContentViewController: BaseViewController {
     var textViewHasText: Bool = false
     
     init(to: String, toUserId: Int, type: FeedBackDTO, content: String, reflectionId: Int, step: Step) {
-        self.toString = to
+        self.toNickName = to
         self.toUserId = toUserId
         self.feedbackType = type
         self.contentString = content
@@ -227,11 +227,11 @@ final class AddFeedbackContentViewController: BaseViewController {
         DispatchQueue.main.async {
             switch self.step {
             case .writeSituation:
-                self.navigationController?.pushViewController(AddFeedbackContentViewController(to: self.toString, toUserId: self.toUserId, type: self.feedbackType, content: self.contentString, reflectionId: self.reflectionId, step: Step.writeFeeling), animated: true)
+                self.navigationController?.pushViewController(AddFeedbackContentViewController(to: self.toNickName, toUserId: self.toUserId, type: self.feedbackType, content: self.contentString, reflectionId: self.reflectionId, step: Step.writeFeeling), animated: true)
             case .writeFeeling:
-                self.navigationController?.pushViewController(AddFeedbackContentViewController(to: self.toString, toUserId: self.toUserId, type: self.feedbackType, content: self.contentString, reflectionId: self.reflectionId, step: Step.writeSuggestions), animated: true)
+                self.navigationController?.pushViewController(AddFeedbackContentViewController(to: self.toNickName, toUserId: self.toUserId, type: self.feedbackType, content: self.contentString, reflectionId: self.reflectionId, step: Step.writeSuggestions), animated: true)
             case .writeSuggestions:
-                self.navigationController?.pushViewController(AddFeedbackKeywordViewController(to: self.toString, toUserId: self.toUserId, type: self.feedbackType, content: self.contentString, reflectionId: self.reflectionId), animated: true)
+                self.navigationController?.pushViewController(AddFeedbackKeywordViewController(to: self.toNickName, toUserId: self.toUserId, type: self.feedbackType, content: self.contentString, reflectionId: self.reflectionId), animated: true)
                 // FIXME: 키워드 작성하는 마지막 단계 VC가 생기면 그 VC로 연결
             }
         }
