@@ -24,15 +24,23 @@ final class AddFeedbackContentViewController: BaseViewController {
         static let descriptionTopPadding: Int = 12
     }
     
+    let toNickName: String
+    let toUserId: Int
+    let feedbackType: FeedBackDTO
+    var contentString: String
+    let reflectionId: Int
     var step: Step
     var currentStepString: String = ""
-    var contentString: String
     
     var textViewHasText: Bool = false
     
-    init(step: Step, content: String) {
-        self.step = step
+    init(to: String, toUserId: Int, type: FeedBackDTO, content: String, reflectionId: Int, step: Step) {
+        self.toNickName = to
+        self.toUserId = toUserId
+        self.feedbackType = type
         self.contentString = content
+        self.reflectionId = reflectionId
+        self.step = step
         super.init()
     }
     
@@ -79,7 +87,7 @@ final class AddFeedbackContentViewController: BaseViewController {
         }
         label.textColor = .black100
         label.font = .title2
-        label.setLineSpacing(to: 8)
+        label.setLineSpacing(to: 4)
         label.numberOfLines = 2
         return label
     }()
@@ -219,11 +227,11 @@ final class AddFeedbackContentViewController: BaseViewController {
         DispatchQueue.main.async {
             switch self.step {
             case .writeSituation:
-                self.navigationController?.pushViewController(AddFeedbackContentViewController(step: Step.writeFeeling, content: self.contentString), animated: true)
+                self.navigationController?.pushViewController(AddFeedbackContentViewController(to: self.toNickName, toUserId: self.toUserId, type: self.feedbackType, content: self.contentString, reflectionId: self.reflectionId, step: Step.writeFeeling), animated: true)
             case .writeFeeling:
-                self.navigationController?.pushViewController(AddFeedbackContentViewController(step: Step.writeSuggestions, content: self.contentString), animated: true)
+                self.navigationController?.pushViewController(AddFeedbackContentViewController(to: self.toNickName, toUserId: self.toUserId, type: self.feedbackType, content: self.contentString, reflectionId: self.reflectionId, step: Step.writeSuggestions), animated: true)
             case .writeSuggestions:
-                print(self.contentString)
+                self.navigationController?.pushViewController(AddFeedbackKeywordViewController(to: self.toNickName, toUserId: self.toUserId, type: self.feedbackType, content: self.contentString, reflectionId: self.reflectionId), animated: true)
                 // FIXME: 키워드 작성하는 마지막 단계 VC가 생기면 그 VC로 연결
             }
         }
