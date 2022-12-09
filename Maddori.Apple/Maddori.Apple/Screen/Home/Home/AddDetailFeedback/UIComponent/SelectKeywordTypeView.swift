@@ -14,15 +14,23 @@ final class SelectKeywordTypeView: UIStackView {
     var isOpened: Bool = false {
         didSet {
             if isOpened {
+                self.feedbackTypeButtonView.snp.updateConstraints {
+                    $0.height.equalTo(100)
+                }
+                UIView.animate(withDuration: 0.2) {
+                    self.layoutIfNeeded()
+                }
                 self.feedbackTypeButtonView.isHidden = false
-                setupFeedbackTypeButtonViewLayOut()
+                
             }
             else {
-                feedbackTypeButtonView.removeFromSuperview()
-                
                 self.feedbackTypeButtonView.snp.updateConstraints {
-                    $0.bottom.equalTo(self.snp.bottom)
+                    $0.height.equalTo(0)    
                 }
+                UIView.animate(withDuration: 0.2) {
+                    self.layoutIfNeeded()
+                }
+                self.feedbackTypeButtonView.isHidden = true
             }
         }
     }
@@ -40,7 +48,7 @@ final class SelectKeywordTypeView: UIStackView {
         imageView.tintColor = .black100
         return imageView
     }()
-    private lazy var titleView: UIView = {
+    private let titleView: UIView = {
         let view = UIView()
         return view
     }()
@@ -69,7 +77,7 @@ final class SelectKeywordTypeView: UIStackView {
         feedbackTypeButtonView.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.top.equalTo(titleView.snp.bottom)
-            $0.bottom.equalTo(self.snp.bottom).inset(20)
+            $0.bottom.equalToSuperview().inset(20)
         }
     }
         
@@ -78,7 +86,7 @@ final class SelectKeywordTypeView: UIStackView {
         self.addSubview(titleView)
         titleView.snp.makeConstraints {
             $0.top.equalToSuperview()
-            $0.width.equalToSuperview()
+            $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(58)
         }
         
@@ -92,6 +100,13 @@ final class SelectKeywordTypeView: UIStackView {
         upDownImageView.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+        
+        self.addSubview(feedbackTypeButtonView)
+        feedbackTypeButtonView.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.top.equalTo(titleView.snp.bottom)
+            $0.height.equalTo(0)
         }
     }
     

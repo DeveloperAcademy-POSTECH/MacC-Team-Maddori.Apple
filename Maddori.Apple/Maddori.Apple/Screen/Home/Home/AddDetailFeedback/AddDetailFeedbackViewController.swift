@@ -104,24 +104,24 @@ final class AddDetailFeedbackViewController: BaseViewController {
     
     @objc private func didTapSelectMemeberView() {
         if isOpenedMemberView {
+            self.selectMemberView.upDownImageView.transform = .identity
+            self.selectMemberView.snp.updateConstraints {
+                $0.height.equalTo(58)
+            }
+            self.isOpenedMemberView.toggle()
+            self.selectMemberView.isOpened = self.isOpenedMemberView
             UIView.animate(withDuration: 0.2) {
-                self.selectMemberView.upDownImageView.transform = .identity
-                self.selectMemberView.snp.updateConstraints {
-                    $0.height.equalTo(58)
-                }
-                self.isOpenedMemberView.toggle()
-                self.selectMemberView.isOpened = self.isOpenedMemberView
                 self.view.layoutIfNeeded()
             }
         }
         else {
+            self.selectMemberView.upDownImageView.transform = CGAffineTransform(rotationAngle: .pi)
+            self.selectMemberView.snp.updateConstraints {
+                $0.height.equalTo(264)
+            }
+            self.isOpenedMemberView.toggle()
+            self.selectMemberView.isOpened = self.isOpenedMemberView
             UIView.animate(withDuration: 0.2) {
-                self.selectMemberView.upDownImageView.transform = CGAffineTransform(rotationAngle: .pi)
-                self.selectMemberView.snp.updateConstraints {
-                    $0.height.equalTo(264)
-                }
-                self.isOpenedMemberView.toggle()
-                self.selectMemberView.isOpened = self.isOpenedMemberView
                 self.view.layoutIfNeeded()
             }
         }

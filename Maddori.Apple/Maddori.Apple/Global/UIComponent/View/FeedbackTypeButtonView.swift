@@ -113,13 +113,13 @@ final class FeedbackTypeButtonView: UIView {
             $0.edges.equalToSuperview()
         }
         
-        continueButton.addSubview(continueTitleLabel)
+        continueShadowView.addSubview(continueTitleLabel)
         continueTitleLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
-        continueButton.addSubview(continueSubTitleLabel)
+        continueShadowView.addSubview(continueSubTitleLabel)
         continueSubTitleLabel.snp.makeConstraints {
             $0.top.equalTo(continueTitleLabel.snp.bottom).offset(12)
             $0.centerX.equalToSuperview()
@@ -130,13 +130,13 @@ final class FeedbackTypeButtonView: UIView {
             $0.edges.equalToSuperview()
         }
         
-        stopButton.addSubview(stopTitleLabel)
+        stopShadowView.addSubview(stopTitleLabel)
         stopTitleLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
-        stopButton.addSubview(stopSubTitleLabel)
+        stopShadowView.addSubview(stopSubTitleLabel)
         stopSubTitleLabel.snp.makeConstraints {
             $0.top.equalTo(continueTitleLabel.snp.bottom).offset(12)
             $0.centerX.equalToSuperview()
