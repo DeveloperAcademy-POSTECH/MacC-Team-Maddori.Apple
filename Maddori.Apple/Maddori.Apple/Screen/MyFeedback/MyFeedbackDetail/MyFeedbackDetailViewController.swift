@@ -246,7 +246,11 @@ final class MyFeedbackDetailViewController: BaseViewController {
     private func setupMainButton() {
         let action = UIAction { [weak self ] _ in
             if let feedbackDetail = self?.feedbackDetail {
-                let viewController = UINavigationController(rootViewController: MyFeedbackEditViewController(feedbackDetail: feedbackDetail, parentNavigationViewController: self?.navigationController ?? UINavigationController()))
+                let viewController = UINavigationController(rootViewController: MyFeedbackEditViewController(
+                    feedbackDetail: feedbackDetail,
+                    parentNavigationViewController: self?.navigationController ?? UINavigationController(),
+                    to: feedbackDetail.nickname
+                ))
                 viewController.modalPresentationStyle = .fullScreen
                 self?.present(viewController, animated: true)
             }
