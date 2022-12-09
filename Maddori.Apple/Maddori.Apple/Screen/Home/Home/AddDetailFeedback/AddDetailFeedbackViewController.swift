@@ -74,6 +74,7 @@ final class AddDetailFeedbackViewController: BaseViewController {
         setupCloseButton()
         setupNextButton()
         setupShadowView()
+        fetchCurrentTeamMember(type: .fetchCurrentTeamMember)
     }
     
     override func setupNavigationBar() {
@@ -214,5 +215,24 @@ final class AddDetailFeedbackViewController: BaseViewController {
             self?.dismiss(animated: true)
         }
         closeButton.addAction(action, for: .touchUpInside)
+    }
+    
+    // MARK: - api
+    
+    private func fetchCurrentTeamMember(type: AddFeedBackEndPoint<AddReflectionDTO>) {
+        AF.request(
+            type.address,
+            method: type.method,
+            headers: type.headers
+        ).responseDecodable(of: BaseModel<TeamMembersResponse>.self) { json in
+            dump(json.value)
+            if let data = json.value {
+                guard let allMemberList = data.detail?.members else { return }
+                let memberList = allMemberList.filter { $0.userName != UserDefaultStorage.nickname }
+                DispatchQueue.main.async {
+                    self.selectMemberView.memberCollectionView.memberList = memberList
+                }
+            }
+        }
     }
 }

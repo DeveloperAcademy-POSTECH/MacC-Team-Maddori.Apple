@@ -48,7 +48,7 @@ final class SelectMemberView: UIStackView {
     let titleLabel: UILabel = {
         let label = UILabel()
         label.font = .main
-        label.text = "피드백 줄 맴버"
+        label.text = "피드백 줄 멤버"
         return label
     }()
     let upDownImageView: UIImageView = {
@@ -56,7 +56,7 @@ final class SelectMemberView: UIStackView {
         imageView.tintColor = .black100
         return imageView
     }()
-    private lazy var memberCollectionView: MemberCollectionView = {
+    lazy var memberCollectionView: MemberCollectionView = {
         let collectionView = MemberCollectionView(type: .addFeedback)
         collectionView.didTappedFeedBackMember = { [weak self] user in
             //FIXME: 네네 바꿔야해요
@@ -72,7 +72,6 @@ final class SelectMemberView: UIStackView {
         super.init(frame: frame)
         render()
         configUI()
-        fetchCurrentTeamMember(type: .fetchCurrentTeamMember)
     }
     
     required init(coder: NSCoder) {
@@ -113,24 +112,5 @@ final class SelectMemberView: UIStackView {
     private func configUI() {
         self.backgroundColor = .white100
         self.layer.cornerRadius = 10
-    }
-    
-    // MARK: - api
-    
-    private func fetchCurrentTeamMember(type: AddFeedBackEndPoint<AddReflectionDTO>) {
-        AF.request(
-            type.address,
-            method: type.method,
-            headers: type.headers
-        ).responseDecodable(of: BaseModel<TeamMembersResponse>.self) { json in
-            dump(json.value)
-            if let data = json.value {
-                guard let allMemberList = data.detail?.members else { return }
-                let memberList = allMemberList.filter { $0.userName != UserDefaultStorage.nickname }
-                DispatchQueue.main.async {
-                    self.memberCollectionView.memberList = memberList
-                }
-            }
-        }
     }
 }
