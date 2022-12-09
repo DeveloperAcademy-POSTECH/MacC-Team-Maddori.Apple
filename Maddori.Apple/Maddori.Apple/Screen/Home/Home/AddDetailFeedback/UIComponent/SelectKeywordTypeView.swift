@@ -71,15 +71,6 @@ final class SelectKeywordTypeView: UIStackView {
     }
     
     // MARK: - func
-    
-    private func setupFeedbackTypeButtonViewLayOut() {
-        self.addSubview(feedbackTypeButtonView)
-        feedbackTypeButtonView.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-            $0.top.equalTo(titleView.snp.bottom)
-            $0.bottom.equalToSuperview().inset(20)
-        }
-    }
         
     private func render() {
         

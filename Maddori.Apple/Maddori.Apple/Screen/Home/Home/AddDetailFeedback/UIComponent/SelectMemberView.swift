@@ -7,7 +7,9 @@
 
 import UIKit
 
-final class SelectMemberView: UIView {
+import SnapKit
+
+final class SelectMemberView: UIStackView {
     
     let mockData: [MemberResponse] = [
         MemberResponse(userId: 0, userName: "이드"),
@@ -21,22 +23,32 @@ final class SelectMemberView: UIView {
     var isOpened: Bool = false {
         didSet {
             if isOpened {
-                self.addSubview(self.memberCollectionView)
-                self.memberCollectionView.snp.makeConstraints {
-                    $0.top.equalTo(self.titleLabel.snp.bottom).offset(20)
-                    $0.leading.trailing.equalToSuperview().inset(20)
-                    $0.bottom.equalToSuperview().inset(20)
+                self.memberCollectionView.snp.updateConstraints {
+                    $0.height.equalTo(216)
+                }
+                UIView.animate(withDuration: 0.2) {
+                    self.layoutIfNeeded()
                 }
                 self.memberCollectionView.isHidden = false
             }
             else {
-                self.memberCollectionView.removeFromSuperview()
+                self.memberCollectionView.snp.updateConstraints {
+                    $0.height.equalTo(0)
+                }
+                UIView.animate(withDuration: 0.2) {
+                    self.layoutIfNeeded()
+                }
+                self.memberCollectionView.isHidden = false
             }
         }
     }
     
     // MARK: - property
     
+    private let titleView: UIView = {
+        let view = UIView()
+        return view
+    }()
     private var titleLabel: UILabel = {
         let label = UILabel()
         label.font = .main
@@ -62,29 +74,38 @@ final class SelectMemberView: UIView {
         memberCollectionView.memberList = mockData
     }
     
-    required init?(coder: NSCoder) { nil }
+    required init(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     
     // MARK: - func
     private func render() {
         
-        self.addSubview(titleLabel)
-        titleLabel.snp.makeConstraints {
-            $0.top.equalTo(20)
-            $0.leading.equalToSuperview().inset(20)
+        self.addSubview(titleView)
+        titleView.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(58)
         }
         
-        self.addSubview(upDownImageView)
+        titleView.addSubview(titleLabel)
+        titleLabel.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+
+        titleView.addSubview(upDownImageView)
         upDownImageView.snp.makeConstraints {
-            $0.top.equalTo(20)
-            $0.trailing.equalToSuperview().inset(20)
-            
+            $0.centerY.equalToSuperview()
+            $0.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
         self.addSubview(memberCollectionView)
         memberCollectionView.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(20)
             $0.leading.trailing.equalToSuperview().inset(20)
-            $0.bottom.equalToSuperview().inset(20)
+            $0.height.equalTo(216)
         }
     }
     
