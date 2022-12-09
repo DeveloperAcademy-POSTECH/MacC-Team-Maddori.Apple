@@ -120,7 +120,7 @@
 		52F0CB5229178C2700E39C50 /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F0CB5129178C2700E39C50 /* AlertViewController.swift */; };
 		52F2D1C12906F172009CBF89 /* SelectReflectionMemberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F2D1C02906F172009CBF89 /* SelectReflectionMemberViewController.swift */; };
 		7E2ECA102901136700A4D65C /* SetNicknameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2ECA0F2901136700A4D65C /* SetNicknameViewController.swift */; };
-		7E3907012943545A003E9743 /* FeedbackContent .swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3907002943545A003E9743 /* FeedbackContent .swift */; };
+		7E3907012943545A003E9743 /* FeedbackContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3907002943545A003E9743 /* FeedbackContent.swift */; };
 		7E6B662F28FE887300C3BEEF /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6B662E28FE887300C3BEEF /* UILabel+Extension.swift */; };
 		7E7F160B2921CC4800C6BE96 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7F160A2921CC4800C6BE96 /* CustomTabBarController.swift */; };
 		7E7F160F2921CD4A00C6BE96 /* UITabBar+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7F160E2921CD4A00C6BE96 /* UITabBar+Extension.swift */; };
@@ -257,7 +257,7 @@
 		52F0CB5129178C2700E39C50 /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
 		52F2D1C02906F172009CBF89 /* SelectReflectionMemberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectReflectionMemberViewController.swift; sourceTree = "<group>"; };
 		7E2ECA0F2901136700A4D65C /* SetNicknameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetNicknameViewController.swift; sourceTree = "<group>"; };
-		7E3907002943545A003E9743 /* FeedbackContent .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FeedbackContent .swift"; sourceTree = "<group>"; };
+		7E3907002943545A003E9743 /* FeedbackContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackContent.swift; sourceTree = "<group>"; };
 		7E6B662E28FE887300C3BEEF /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
 		7E7F160A2921CC4800C6BE96 /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 		7E7F160E2921CD4A00C6BE96 /* UITabBar+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITabBar+Extension.swift"; sourceTree = "<group>"; };
@@ -922,7 +922,7 @@
 		7E3906FF29435446003E9743 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				7E3907002943545A003E9743 /* FeedbackContent .swift */,
+				7E3907002943545A003E9743 /* FeedbackContent.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1183,7 +1183,7 @@
 				7E2ECA102901136700A4D65C /* SetNicknameViewController.swift in Sources */,
 				3984742629264ACE00EDC139 /* MyFeedBackEndPoint.swift in Sources */,
 				39F52C4D29232E5D00B19A77 /* AddReflectionDTO.swift in Sources */,
-				7E3907012943545A003E9743 /* FeedbackContent .swift in Sources */,
+				7E3907012943545A003E9743 /* FeedbackContent.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
