@@ -47,6 +47,7 @@ final class SelectMemberView: UIStackView {
     
     private let titleView: UIView = {
         let view = UIView()
+        view.backgroundColor = .white100
         return view
     }()
     private var titleLabel: UILabel = {
