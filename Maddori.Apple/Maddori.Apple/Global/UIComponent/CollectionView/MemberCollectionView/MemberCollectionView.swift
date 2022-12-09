@@ -14,6 +14,59 @@ final class MemberCollectionView: UIView {
     enum CollectionType {
         case addFeedback
         case progressReflection
+        
+        var collectionHorizontalSpacing: CGFloat {
+            switch self {
+            case .addFeedback:
+                return 20
+            case .progressReflection:
+                return 14
+            }
+        }
+        
+        var collectionTopSpacing: CGFloat {
+            switch self {
+            case .addFeedback:
+                return 10
+            case .progressReflection:
+                return 40
+            }
+        }
+        
+        var cellWidth: CGFloat {
+            switch self {
+            case .addFeedback:
+                return 133
+            case .progressReflection:
+                return 135
+            }
+        }
+        
+        var cellHeight: CGFloat {
+            switch self {
+            case .addFeedback:
+                return 52
+            case .progressReflection:
+                return 60
+            }
+        }
+        
+        var collectionInsets: UIEdgeInsets {
+            switch self {
+            case .addFeedback:
+                return UIEdgeInsets(
+                    top: collectionTopSpacing,
+                    left: collectionHorizontalSpacing,
+                    bottom: 0,
+                    right: collectionHorizontalSpacing)
+            case .progressReflection:
+                return UIEdgeInsets(
+                    top: collectionTopSpacing,
+                    left: collectionHorizontalSpacing,
+                    bottom: 20,
+                    right: collectionHorizontalSpacing)
+            }
+        }
     }
     
     var type: CollectionType
@@ -27,37 +80,14 @@ final class MemberCollectionView: UIView {
     var didTappedFeedBackMember: ((MemberResponse) -> ())?
     var selectedMember: MemberResponse?
     private var selectedMemberList: [MemberResponse] = []
-    private enum ProgessSize {
-        static let collectionHorizontalSpacing: CGFloat = 14
-        static let collectionTopSpacing: CGFloat = 40
-        static let cellWidth: CGFloat = 135
-        static let cellHeight: CGFloat = 60
-        static let collectionInsets = UIEdgeInsets(
-            top: collectionTopSpacing,
-            left: collectionHorizontalSpacing,
-            bottom: 0,
-            right: collectionHorizontalSpacing)
-    }
-    private enum AddFeedbackSize {
-        static let collectionHorizontalSpacing: CGFloat = 20
-        static let collectionTopSpacing: CGFloat = 10
-        static let cellWidth: CGFloat = 133
-        static let cellHeight: CGFloat = 52
-        static let collectionInsets = UIEdgeInsets(
-            top: collectionTopSpacing,
-            left: collectionHorizontalSpacing,
-            bottom: 20,
-            right: collectionHorizontalSpacing)
-    }
     
     // MARK: - property
     
     private lazy var collectionViewFlowLayout: UICollectionViewFlowLayout = {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .vertical
-        flowLayout.sectionInset = type == CollectionType.progressReflection ? ProgessSize.collectionInsets : AddFeedbackSize.collectionInsets
-        flowLayout.itemSize = CGSize(width: type == CollectionType.progressReflection ? ProgessSize.cellWidth : AddFeedbackSize.cellWidth ,
-                                     height: type == CollectionType.progressReflection ? ProgessSize.cellHeight : AddFeedbackSize.cellHeight)
+        flowLayout.sectionInset = type.collectionInsets
+        flowLayout.itemSize = CGSize(width: type.cellWidth, height: type.cellHeight)
         flowLayout.minimumLineSpacing = 29
         return flowLayout
     }()
