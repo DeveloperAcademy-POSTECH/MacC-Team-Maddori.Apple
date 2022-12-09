@@ -225,7 +225,7 @@ final class MyFeedbackDetailViewController: BaseViewController {
     }
     
     private func setupIsProgressingStatus() {
-        if feedbackDetail.reflectionStatus != .Before {
+        if feedbackDetail.reflectionStatus == .Progressing {
             navigationItem.setRightBarButton(nil, animated: false)
             
             editFeedbackUntilLabel.setTextWithLineHeight(text: TextLiteral.myFeedbackDetailViewControllerBeforeReflectionLabelNotBefore, lineHeight: 22)
