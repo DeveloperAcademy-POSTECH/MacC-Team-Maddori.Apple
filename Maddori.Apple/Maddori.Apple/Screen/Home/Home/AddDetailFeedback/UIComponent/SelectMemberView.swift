@@ -48,7 +48,7 @@ final class SelectMemberView: UIStackView {
     let titleLabel: UILabel = {
         let label = UILabel()
         label.font = .main
-        label.text = "피드백 줄 멤버"
+        label.text = TextLiteral.toNameTitleLabel
         return label
     }()
     let upDownImageView: UIImageView = {

@@ -23,7 +23,7 @@ final class AddDetailFeedbackViewController: BaseViewController {
                 }
             }
             else {
-                selectMemberView.titleLabel.text = "피드백 줄 멤버"
+                selectMemberView.titleLabel.text = TextLiteral.toNameTitleLabel
                 selectMemberView.titleLabel.textColor = .black100
             }
         }
@@ -37,7 +37,7 @@ final class AddDetailFeedbackViewController: BaseViewController {
     private let progressImageView = UIImageView(image: ImageLiterals.imgProgress1)
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "피드백 줄 멤버와 종류를\n선택해주세요"
+        label.text = TextLiteral.DetailTitleLabel
         label.numberOfLines = 0
         label.font = .title2
         return label

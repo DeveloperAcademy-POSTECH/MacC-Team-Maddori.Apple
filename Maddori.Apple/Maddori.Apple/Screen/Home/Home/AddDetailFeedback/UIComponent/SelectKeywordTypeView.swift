@@ -40,7 +40,7 @@ final class SelectKeywordTypeView: UIStackView {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = .main
-        label.text = "피드백 종류"
+        label.text = TextLiteral.feedbackTypeLabel
         return label
     }()
     let upDownImageView: UIImageView = {
