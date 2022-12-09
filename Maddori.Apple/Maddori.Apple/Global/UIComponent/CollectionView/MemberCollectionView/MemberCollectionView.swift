@@ -46,7 +46,7 @@ final class MemberCollectionView: UIView {
         static let collectionInsets = UIEdgeInsets(
             top: collectionTopSpacing,
             left: collectionHorizontalSpacing,
-            bottom: collectionTopSpacing * 4,
+            bottom: 20,
             right: collectionHorizontalSpacing)
     }
     
@@ -96,7 +96,9 @@ extension MemberCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch type {
         case .addFeedback:
-            didTappedFeedBackMember?(memberList[indexPath.item])
+            selectedMember = memberList[indexPath.item]
+            guard let member = selectedMember else { return }
+            didTappedFeedBackMember?(member)
         case .progressReflection:
             if !selectedMemberList.contains(where: { $0.userName == memberList[indexPath.item].userName} ) {
                 selectedMemberList.append(memberList[indexPath.item])

@@ -24,7 +24,7 @@ final class SelectMemberView: UIStackView {
         didSet {
             if isOpened {
                 self.memberCollectionView.snp.updateConstraints {
-                    $0.height.equalTo(216)
+                    $0.height.equalTo(190)
                 }
                 UIView.animate(withDuration: 0.2) {
                     self.layoutIfNeeded()
@@ -62,6 +62,10 @@ final class SelectMemberView: UIStackView {
     }()
     private lazy var memberCollectionView: MemberCollectionView = {
         let collectionView = MemberCollectionView(type: .addFeedback)
+        collectionView.didTappedFeedBackMember = { [weak self] user in
+            //FIXME: 네네 바꿔야해요
+            print(user.userName)
+        }
         return collectionView
     }()
     
@@ -103,7 +107,7 @@ final class SelectMemberView: UIStackView {
         
         self.addSubview(memberCollectionView)
         memberCollectionView.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.bottom).offset(20)
+            $0.top.equalTo(titleLabel.snp.bottom).offset(10)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(190)
         }
