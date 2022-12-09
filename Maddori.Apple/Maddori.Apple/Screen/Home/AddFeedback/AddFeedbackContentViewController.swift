@@ -24,22 +24,15 @@ final class AddFeedbackContentViewController: BaseViewController {
         static let descriptionTopPadding: Int = 12
     }
     
-    let toNickName: String
-    let toUserId: Int
-    let feedbackType: FeedBackDTO
-    var contentString: String
-    let reflectionId: Int
+    var feedbackContent: FeedbackContent
+    
     var step: Step
     var currentStepString: String = ""
     
     var textViewHasText: Bool = false
     
-    init(to: String, toUserId: Int, type: FeedBackDTO, content: String, reflectionId: Int, step: Step) {
-        self.toNickName = to
-        self.toUserId = toUserId
-        self.feedbackType = type
-        self.contentString = content
-        self.reflectionId = reflectionId
+    init(feedbackContent: FeedbackContent, step: Step) {
+        self.feedbackContent = feedbackContent
         self.step = step
         super.init()
     }
@@ -141,8 +134,10 @@ final class AddFeedbackContentViewController: BaseViewController {
         super.viewWillAppear(animated)
         setupNotificationCenter()
         feedbackContentTextView.becomeFirstResponder()
-        
-        contentString = contentString.replacingOccurrences(of: "\(currentStepString)|\n\n\(currentStepString)", with: "", options: .regularExpression)
+            
+        if let contentString = feedbackContent.contentString {
+            feedbackContent.contentString = contentString.replacingOccurrences(of: "\(currentStepString)|\n\n\(currentStepString)", with: "", options: .regularExpression)
+        }
     }
     
     override func render() {
@@ -218,26 +213,30 @@ final class AddFeedbackContentViewController: BaseViewController {
     }
     
     private func didTappedDoneButton() {
-        if contentString.isEmpty {
-            contentString = currentStepString
-        } else {
-            contentString = contentString + "\n\n" + currentStepString
+        if step != .writeSituation {
+            if let contentString = feedbackContent.contentString {
+                if contentString.isEmpty {
+                    feedbackContent.contentString = currentStepString
+                } else {
+                    feedbackContent.contentString = contentString + "\n\n" + currentStepString
+                }
+            }
         }
         
         DispatchQueue.main.async {
             switch self.step {
             case .writeSituation:
-                self.navigationController?.pushViewController(AddFeedbackContentViewController(to: self.toNickName, toUserId: self.toUserId, type: self.feedbackType, content: self.contentString, reflectionId: self.reflectionId, step: Step.writeFeeling), animated: true)
+                self.navigationController?.pushViewController(AddFeedbackContentViewController(feedbackContent: self.feedbackContent, step: Step.writeFeeling), animated: true)
             case .writeFeeling:
-                self.navigationController?.pushViewController(AddFeedbackContentViewController(to: self.toNickName, toUserId: self.toUserId, type: self.feedbackType, content: self.contentString, reflectionId: self.reflectionId, step: Step.writeSuggestions), animated: true)
+                self.navigationController?.pushViewController(AddFeedbackContentViewController(feedbackContent: self.feedbackContent, step: Step.writeSuggestions), animated: true)
             case .writeSuggestions:
-                self.navigationController?.pushViewController(AddFeedbackKeywordViewController(to: self.toNickName, toUserId: self.toUserId, type: self.feedbackType, content: self.contentString, reflectionId: self.reflectionId), animated: true)
+                self.navigationController?.pushViewController(AddFeedbackKeywordViewController(feedbackContent: self.feedbackContent), animated: true)
                 // FIXME: 키워드 작성하는 마지막 단계 VC가 생기면 그 VC로 연결
             }
         }
         // FIXME: currentStepString과 쌓여가는 contentString 볼 수 있도록 해 둔 코드 -> 머지 전에 지우기
-        print("currentStepString: \(currentStepString)")
-        print("contentString: \(contentString)")
+//        print("currentStepString: \(currentStepString)")
+//        print("contentString: \(contentString)")
     }
     
     // MARK: - selector

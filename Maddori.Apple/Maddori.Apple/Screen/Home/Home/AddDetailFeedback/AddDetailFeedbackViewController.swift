@@ -12,7 +12,7 @@ import SnapKit
 
 final class AddDetailFeedbackViewController: BaseViewController {
     
-    private var feedbackContent: FeedbackContent?
+    private var feedbackContent: FeedbackContent
     
     private var isOpenedMemberView: Bool = true {
         didSet {
@@ -56,7 +56,6 @@ final class AddDetailFeedbackViewController: BaseViewController {
                   let userId = user.userId   else { return }
             self?.toName = userName
             self?.toId = userId
-            self?.feedbackContent = FeedbackContent(toId: userId)
         }
         return view
     }()
@@ -78,6 +77,13 @@ final class AddDetailFeedbackViewController: BaseViewController {
     }()
     
     // MARK: - life cycle
+    
+    init(feedbackContent: FeedbackContent) {
+        self.feedbackContent = feedbackContent
+        super.init()
+    }
+    
+    required init?(coder: NSCoder) { nil }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -213,8 +219,9 @@ final class AddDetailFeedbackViewController: BaseViewController {
         let action = UIAction { [weak self] _ in
             guard let type = self?.selectKeywordTypeView.feedbackTypeButtonView.feedbackType else { return }
             guard let feedback = FeedBackDTO.init(rawValue: type.rawValue) else { return }
-            self?.feedbackContent = FeedbackContent(toId: self?.toId, type: feedback)
             
+            self?.feedbackContent = FeedbackContent(toNickName: self?.toName, toUserId: self?.toId, feedbackType: feedback, reflectionId: self?.feedbackContent.reflectionId ?? 1)
+            self?.pushAddFeedbackViewController()
         }
         nextButton.addAction(action, for: .touchUpInside)
     }
@@ -224,6 +231,11 @@ final class AddDetailFeedbackViewController: BaseViewController {
             self?.dismiss(animated: true)
         }
         closeButton.addAction(action, for: .touchUpInside)
+    }
+    
+    private func pushAddFeedbackViewController () {
+        let viewController = AddFeedbackContentViewController(feedbackContent: feedbackContent, step: .writeSituation)
+        navigationController?.pushViewController(viewController, animated: true)
     }
     
     // MARK: - api

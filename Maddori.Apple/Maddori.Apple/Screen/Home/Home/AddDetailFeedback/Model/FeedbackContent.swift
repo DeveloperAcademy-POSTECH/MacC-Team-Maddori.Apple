@@ -8,9 +8,9 @@
 import Foundation
 
 struct FeedbackContent {
-    var toId: Int?
-    var type: FeedBackDTO?
-    var keyword: String?
-    var content: String?
-    var start_content: String?
+    let toNickName: String?
+    let toUserId: Int?
+    let feedbackType: FeedBackDTO?
+    var contentString: String?
+    let reflectionId: Int
 }

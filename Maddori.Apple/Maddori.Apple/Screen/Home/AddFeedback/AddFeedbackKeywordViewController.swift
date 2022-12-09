@@ -29,18 +29,15 @@ final class AddFeedbackKeywordViewController: BaseViewController {
         return width
     }
     
-    let toString: String
-    let toUserId: Int
-    let feedbackType: FeedBackDTO
-    let contentString: String
-    let reflectionId: Int
+//    let toString: String
+//    let toUserId: Int
+//    let feedbackType: FeedBackDTO
+//    let contentString: String
+//    let reflectionId: Int
+    var feedbackContent: FeedbackContent
     
-    init(to: String, toUserId: Int, type: FeedBackDTO, content: String, reflectionId: Int) {
-        self.toString = to
-        self.toUserId = toUserId
-        self.feedbackType = type
-        self.contentString = content
-        self.reflectionId = reflectionId
+    init(feedbackContent: FeedbackContent) {
+        self.feedbackContent = feedbackContent
         super.init()
     }
     
@@ -109,7 +106,7 @@ final class AddFeedbackKeywordViewController: BaseViewController {
         let label = UILabel()
         label.font = .body1
         label.textColor = .gray400
-        label.text = toString
+        label.text = feedbackContent.toNickName
         return label
     }()
     private let typeLabel: UILabel = {
@@ -123,7 +120,7 @@ final class AddFeedbackKeywordViewController: BaseViewController {
         let label = UILabel()
         label.font = .body1
         label.textColor = .gray400
-        label.text = feedbackType.rawValue
+        label.text = feedbackContent.feedbackType?.rawValue
         return label
     }()
     private let feedbackLabel: UILabel = {
@@ -139,7 +136,7 @@ final class AddFeedbackKeywordViewController: BaseViewController {
         label.font = .body1
         label.textColor = .gray400
         label.numberOfLines = 0
-        label.text = contentString
+        label.text = feedbackContent.contentString
         return label
     }()
     private lazy var doneButton: MainButton = {
@@ -235,9 +232,13 @@ final class AddFeedbackKeywordViewController: BaseViewController {
     }
     
     private func didTappedDoneButton() {
-        guard let keyword = keywordTextField.keywordTextField.text else { return }
-        let dto = FeedBackContentDTO(type: feedbackType, keyword: keyword, content: contentString, start_content: nil, to_id: toUserId)
-        dispatchAddFeedBack(type: .dispatchAddFeedBack(reflectionId: reflectionId, dto))
+        guard let keyword = keywordTextField.keywordTextField.text,
+              let type = feedbackContent.feedbackType,
+              let contentString = feedbackContent.contentString,
+              let userId = feedbackContent.toUserId
+        else { return }
+        let dto = FeedBackContentDTO(type: type, keyword: keyword, content: contentString, start_content: nil, to_id: userId)
+        dispatchAddFeedBack(type: .dispatchAddFeedBack(reflectionId: feedbackContent.reflectionId, dto))
     }
     
     // MARK: - api
