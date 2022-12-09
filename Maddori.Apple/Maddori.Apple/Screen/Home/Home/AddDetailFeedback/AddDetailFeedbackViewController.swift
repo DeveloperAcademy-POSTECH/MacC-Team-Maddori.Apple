@@ -41,6 +41,8 @@ final class AddDetailFeedbackViewController: BaseViewController {
         view.isUserInteractionEnabled = true
         let tap = UITapGestureRecognizer(target: self, action: #selector(didTapSelectMemeberView))
         view.addGestureRecognizer(tap)
+        view.layer.cornerRadius = 10
+        view.layer.masksToBounds = true
         return view
     }()
     private lazy var selectKeywordTypeView: SelectKeywordTypeView = {
@@ -101,7 +103,7 @@ final class AddDetailFeedbackViewController: BaseViewController {
         selectMemberView.addSubview(touchView)
         touchView.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(24)
-            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(58)
         }
         
