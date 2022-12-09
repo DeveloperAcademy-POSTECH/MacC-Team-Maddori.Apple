@@ -7,18 +7,10 @@
 
 import UIKit
 
+import Alamofire
 import SnapKit
 
 final class SelectMemberView: UIStackView {
-    
-    let mockData: [MemberResponse] = [
-        MemberResponse(userId: 0, userName: "이드"),
-        MemberResponse(userId: 0, userName: "호야"),
-        MemberResponse(userId: 0, userName: "케미"),
-        MemberResponse(userId: 0, userName: "진저"),
-        MemberResponse(userId: 0, userName: "메리"),
-        MemberResponse(userId: 0, userName: "곰민"),
-    ]
     
     var isOpened: Bool = false {
         didSet {
@@ -76,7 +68,7 @@ final class SelectMemberView: UIStackView {
         super.init(frame: frame)
         render()
         configUI()
-        memberCollectionView.memberList = mockData
+        fetchCurrentTeamMember(type: .fetchCurrentTeamMember)
     }
     
     required init(coder: NSCoder) {
@@ -117,5 +109,24 @@ final class SelectMemberView: UIStackView {
     private func configUI() {
         self.backgroundColor = .white100
         self.layer.cornerRadius = 10
+    }
+    
+    // MARK: - api
+    
+    private func fetchCurrentTeamMember(type: AddFeedBackEndPoint<AddReflectionDTO>) {
+        AF.request(
+            type.address,
+            method: type.method,
+            headers: type.headers
+        ).responseDecodable(of: BaseModel<TeamMembersResponse>.self) { json in
+            dump(json.value)
+            if let data = json.value {
+                guard let allMemberList = data.detail?.members else { return }
+                let memberList = allMemberList.filter { $0.userName != UserDefaultStorage.nickname }
+                DispatchQueue.main.async {
+                    self.memberCollectionView.memberList = memberList
+                }
+            }
+        }
     }
 }

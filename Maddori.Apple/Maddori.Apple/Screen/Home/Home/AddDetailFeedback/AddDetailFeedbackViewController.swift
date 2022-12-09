@@ -7,6 +7,7 @@
 
 import UIKit
 
+import Alamofire
 import SnapKit
 
 final class AddDetailFeedbackViewController: BaseViewController {
