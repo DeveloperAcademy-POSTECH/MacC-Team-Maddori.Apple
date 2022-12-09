@@ -105,6 +105,7 @@ final class MyFeedbackEditViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupNotificationCenter()
         setupFeedbackType()
         setupFeedbackKeyword()
         setupFeedbackContent()
@@ -193,6 +194,11 @@ final class MyFeedbackEditViewController: BaseViewController {
     
     // MARK: - func
     
+    private func setupNotificationCenter() {
+        NotificationCenter.default.addObserver(self, selector: #selector(willShowKeyboard), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(willHideKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
     private func setupDelegate() {
         feedbackContentTextView.delegate = self
         keywordTextFieldView.keywordTextField.delegate = self
@@ -262,9 +268,10 @@ final class MyFeedbackEditViewController: BaseViewController {
             UIView.animate(withDuration: 0.2, animations: {
                 self.feedbackDoneButtonView.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height + 25)
             })
-        }
-        feedbackDoneButtonView.snp.updateConstraints {
-            $0.height.equalTo(100)
+            feedbackContentTextView.snp.updateConstraints {
+                $0.bottom.equalToSuperview().inset(keyboardSize.height + 150)
+            }
+            addFeedbackScrollView.setContentOffset(CGPoint(x: 0, y: 100), animated: true)
         }
     }
     
@@ -272,8 +279,8 @@ final class MyFeedbackEditViewController: BaseViewController {
         UIView.animate(withDuration: 0.2, animations: {
             self.feedbackDoneButtonView.transform = .identity
         })
-        feedbackDoneButtonView.snp.updateConstraints {
-            $0.height.equalTo(134)
+        feedbackContentTextView.snp.updateConstraints {
+            $0.bottom.equalToSuperview()
         }
     }
     
