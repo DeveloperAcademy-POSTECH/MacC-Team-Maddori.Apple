@@ -46,7 +46,7 @@ final class AddDetailFeedbackViewController: BaseViewController {
     private lazy var selectMemberView: SelectMemberView = {
         let view = SelectMemberView()
         view.upDownImageView.transform = CGAffineTransform(rotationAngle: .pi)
-        view.didSelectMemeber = { [weak self] userName in
+        view.didSelectedMemeber = { [weak self] userName in
             self?.toName = userName
         }
         return view

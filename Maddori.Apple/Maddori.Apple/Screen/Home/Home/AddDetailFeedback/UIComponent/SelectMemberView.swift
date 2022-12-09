@@ -12,7 +12,7 @@ import SnapKit
 
 final class SelectMemberView: UIStackView {
     
-    var didSelectMemeber: ((String) -> ())?
+    var didSelectedMemeber: ((String) -> ())?
     
     var isOpened: Bool = false {
         didSet {
@@ -61,7 +61,7 @@ final class SelectMemberView: UIStackView {
         collectionView.didTappedFeedBackMember = { [weak self] user in
             //FIXME: 네네 바꿔야해요
             guard let userName = user.userName else { return }
-            self?.didSelectMemeber?(userName)
+            self?.didSelectedMemeber?(userName)
         }
         return collectionView
     }()
