@@ -25,6 +25,10 @@ extension UIColor {
         return UIColor(hex: "#4776FB")
     }
     
+    static var blue300: UIColor {
+        return UIColor(hex: "#F8F9FD")
+    }
+    
     // MARK: - yellow
     
     static var yellow100: UIColor {

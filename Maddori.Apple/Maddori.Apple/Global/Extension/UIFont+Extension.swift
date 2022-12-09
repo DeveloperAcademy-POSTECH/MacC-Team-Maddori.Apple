@@ -26,7 +26,7 @@ extension UIFont {
     static var title2: UIFont {
         return font(.bold, ofSize: 24)
     }
-    
+
     static var main: UIFont {
         return font(.bold, ofSize: 18)
     }

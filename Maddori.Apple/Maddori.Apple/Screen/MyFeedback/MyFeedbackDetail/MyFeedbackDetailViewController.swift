@@ -57,13 +57,7 @@ final class MyFeedbackDetailViewController: BaseViewController {
         label.font = .label2
         return label
     }()
-    private lazy var feedbackKeywordText: UILabel = {
-        let label = UILabel()
-        label.setTextWithLineHeight(text: feedbackDetail.keyword, lineHeight: 24)
-        label.textColor = .gray400
-        label.font = .body1
-        return label
-    }()
+    private lazy var feedbackKeyword = FeedbackKeyword(title: feedbackDetail.keyword)
     private let feedbackContentLabel: UILabel = {
         let label = UILabel()
         label.text = TextLiteral.feedbackContentLabel
@@ -73,22 +67,8 @@ final class MyFeedbackDetailViewController: BaseViewController {
     }()
     private lazy var feedbackContentText: UILabel = {
         let label = UILabel()
-        label.setTextWithLineHeight(text: feedbackDetail.info, lineHeight: 24)
-        label.textColor = .gray400
-        label.font = .body1
-        label.numberOfLines = 0
-        return label
-    }()
-    private let feedbackStartLabel: UILabel = {
-        let label = UILabel()
-        label.text = TextLiteral.myFeedbackDetailViewControllerFeedbackStartLabel
-        label.textColor = .black100
-        label.font = .label2
-        return label
-    }()
-    private lazy var feedbackStartText: UILabel = {
-        let label = UILabel()
-        label.setTextWithLineHeight(text: feedbackDetail.start, lineHeight: 24)
+        let text = feedbackDetail.info + "\n\n" + (feedbackDetail.start ?? "")
+        label.setTextWithLineHeight(text: text, lineHeight: 24)
         label.textColor = .gray400
         label.font = .body1
         label.numberOfLines = 0
@@ -137,7 +117,6 @@ final class MyFeedbackDetailViewController: BaseViewController {
     override func configUI() {
         super.configUI()
         setupFeedbackSendTimeLabel()
-        setupOptionalComponents()
     }
     
     override func render() {
@@ -176,15 +155,15 @@ final class MyFeedbackDetailViewController: BaseViewController {
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
-        feedbackFromMeDetailContentView.addSubview(feedbackKeywordText)
-        feedbackKeywordText.snp.makeConstraints {
+        feedbackFromMeDetailContentView.addSubview(feedbackKeyword)
+        feedbackKeyword.snp.makeConstraints {
             $0.top.equalTo(feedbackKeywordLabel.snp.bottom).offset(SizeLiteral.labelComponentPadding)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
         feedbackFromMeDetailContentView.addSubview(feedbackContentLabel)
         feedbackContentLabel.snp.makeConstraints {
-            $0.top.equalTo(feedbackKeywordText.snp.bottom).offset(SizeLiteral.componentIntervalPadding)
+            $0.top.equalTo(feedbackKeyword.snp.bottom).offset(SizeLiteral.componentIntervalPadding)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
@@ -192,19 +171,6 @@ final class MyFeedbackDetailViewController: BaseViewController {
         feedbackContentText.snp.makeConstraints {
             $0.top.equalTo(feedbackContentLabel.snp.bottom).offset(SizeLiteral.labelComponentPadding)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-        }
-        
-        feedbackFromMeDetailContentView.addSubview(feedbackStartLabel)
-        feedbackStartLabel.snp.makeConstraints {
-            $0.top.equalTo(feedbackContentText.snp.bottom).offset(SizeLiteral.componentIntervalPadding)
-            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-        }
-        
-        feedbackFromMeDetailContentView.addSubview(feedbackStartText)
-        feedbackStartText.snp.makeConstraints {
-            $0.top.equalTo(feedbackStartLabel.snp.bottom).offset(SizeLiteral.labelComponentPadding)
-            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-            $0.bottom.equalToSuperview().inset(20)
         }
         
         view.addSubview(feedbackEditButtonView)
@@ -255,13 +221,6 @@ final class MyFeedbackDetailViewController: BaseViewController {
             } else {
                 editFeedbackUntilLabel.setTextWithLineHeight(text: TextLiteral.myFeedbackDetailViewControllerBeforeReflectionLabel, lineHeight: 22)
             }
-        }
-    }
-
-    private func setupOptionalComponents() {
-        if feedbackDetail.start == nil || feedbackDetail.start == "" {
-            feedbackStartLabel.isHidden = true
-            feedbackStartText.isHidden = true
         }
     }
     
