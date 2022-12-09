@@ -74,6 +74,7 @@ final class AddDetailFeedbackViewController: BaseViewController {
     }()
     
     // MARK: - life cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCloseButton()
@@ -93,7 +94,6 @@ final class AddDetailFeedbackViewController: BaseViewController {
     }
     
     override func render() {
-        
         view.addSubview(progressImageView)
         progressImageView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).inset(8)
@@ -177,7 +177,6 @@ final class AddDetailFeedbackViewController: BaseViewController {
             }
         }
         else {
-            
             self.selectKeywordTypeView.snp.updateConstraints {
                 $0.height.equalTo(178)
             }
