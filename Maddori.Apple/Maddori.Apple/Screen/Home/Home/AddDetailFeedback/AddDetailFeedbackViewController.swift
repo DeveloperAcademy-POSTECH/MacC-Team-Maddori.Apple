@@ -104,24 +104,24 @@ final class AddDetailFeedbackViewController: BaseViewController {
     
     @objc private func didTapSelectMemeberView() {
         if isOpenedMemberView {
-            self.selectMemberView.upDownImageView.transform = .identity
             self.selectMemberView.snp.updateConstraints {
                 $0.height.equalTo(58)
             }
             self.isOpenedMemberView.toggle()
             self.selectMemberView.isOpened = self.isOpenedMemberView
             UIView.animate(withDuration: 0.2) {
+                self.selectMemberView.upDownImageView.transform = .identity
                 self.view.layoutIfNeeded()
             }
         }
         else {
-            self.selectMemberView.upDownImageView.transform = CGAffineTransform(rotationAngle: .pi)
             self.selectMemberView.snp.updateConstraints {
                 $0.height.equalTo(264)
             }
             self.isOpenedMemberView.toggle()
             self.selectMemberView.isOpened = self.isOpenedMemberView
             UIView.animate(withDuration: 0.2) {
+                self.selectMemberView.upDownImageView.transform = CGAffineTransform(rotationAngle: .pi)
                 self.view.layoutIfNeeded()
             }
         }
@@ -129,25 +129,27 @@ final class AddDetailFeedbackViewController: BaseViewController {
     
     @objc private func didTapSelectKeywordTypeView() {
         if isOpenedTypeView {
+            self.selectKeywordTypeView.snp.updateConstraints {
+                $0.height.equalTo(58)
+            }
+            self.isOpenedTypeView.toggle()
+            self.selectKeywordTypeView.isOpened = self.isOpenedTypeView
+            
             UIView.animate(withDuration: 0.2) {
                 self.selectKeywordTypeView.upDownImageView.transform = .identity
-                self.selectKeywordTypeView.snp.updateConstraints {
-                    $0.height.equalTo(58)
-                }
-                self.isOpenedTypeView.toggle()
-                self.selectKeywordTypeView.isOpened = self.isOpenedTypeView
                 self.view.layoutIfNeeded()
             }
-            
         }
         else {
+            
+            self.selectKeywordTypeView.snp.updateConstraints {
+                $0.height.equalTo(178)
+            }
+            self.isOpenedTypeView.toggle()
+            self.selectKeywordTypeView.isOpened = self.isOpenedTypeView
+            
             UIView.animate(withDuration: 0.2) {
                 self.selectKeywordTypeView.upDownImageView.transform = CGAffineTransform(rotationAngle: .pi)
-                self.selectKeywordTypeView.snp.updateConstraints {
-                    $0.height.equalTo(178)
-                }
-                self.isOpenedTypeView.toggle()
-                self.selectKeywordTypeView.isOpened = self.isOpenedTypeView
                 self.view.layoutIfNeeded()
             }
         }
