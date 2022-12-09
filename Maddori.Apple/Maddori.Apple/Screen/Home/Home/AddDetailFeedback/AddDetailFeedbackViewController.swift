@@ -12,6 +12,8 @@ import SnapKit
 
 final class AddDetailFeedbackViewController: BaseViewController {
     
+    private var feedbackContent: FeedbackContent?
+    
     private var isOpenedMemberView: Bool = true {
         didSet {
             if !isOpenedMemberView {
@@ -48,6 +50,7 @@ final class AddDetailFeedbackViewController: BaseViewController {
         view.upDownImageView.transform = CGAffineTransform(rotationAngle: .pi)
         view.didSelectedMemeber = { [weak self] userName in
             self?.toName = userName
+            self?.feedbackContent = FeedbackContent(toName: self?.toName)
         }
         return view
     }()
@@ -205,7 +208,9 @@ final class AddDetailFeedbackViewController: BaseViewController {
     
     private func setupNextButton() {
         let action = UIAction { [weak self] _ in
-            
+            guard let type = self?.selectKeywordTypeView.feedbackTypeButtonView.feedbackType else { return }
+            let feedback = FeedBackDTO.init(rawValue: type.rawValue)
+            self?.feedbackContent = FeedbackContent(keywordType: feedback)
         }
         nextButton.addAction(action, for: .touchUpInside)
     }
@@ -235,4 +240,9 @@ final class AddDetailFeedbackViewController: BaseViewController {
             }
         }
     }
+}
+
+struct FeedbackContent {
+    var toName: String?
+    var keywordType: FeedBackDTO?
 }

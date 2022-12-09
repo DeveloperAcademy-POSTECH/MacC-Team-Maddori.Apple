@@ -52,7 +52,7 @@ final class SelectKeywordTypeView: UIStackView {
         let view = UIView()
         return view
     }()
-    private let feedbackTypeButtonView: FeedbackTypeButtonView = {
+    let feedbackTypeButtonView: FeedbackTypeButtonView = {
         let view = FeedbackTypeButtonView()
         view.isHidden = true
         return view
