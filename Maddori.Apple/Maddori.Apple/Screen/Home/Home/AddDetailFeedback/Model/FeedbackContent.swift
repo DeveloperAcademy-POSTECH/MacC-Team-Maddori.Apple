@@ -11,6 +11,12 @@ struct FeedbackContent {
     let toNickName: String?
     let toUserId: Int?
     let feedbackType: FeedBackDTO?
-    var contentString: String?
+    var situation: String?
+    var feeling: String?
+    var suggestion: String?
     let reflectionId: Int
+    
+    var content: String {
+        (situation ?? "") + "\n\n" + (feeling ?? "") + "\n\n" + (suggestion ?? "")
+    }
 }
