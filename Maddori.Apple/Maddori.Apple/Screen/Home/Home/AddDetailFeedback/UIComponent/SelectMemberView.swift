@@ -59,7 +59,6 @@ final class SelectMemberView: UIStackView {
     lazy var memberCollectionView: MemberCollectionView = {
         let collectionView = MemberCollectionView(type: .addFeedback)
         collectionView.didTappedFeedBackMember = { [weak self] user in
-            //FIXME: 네네 바꿔야해요
             guard let userName = user.userName else { return }
             self?.didSelectedMemeber?(userName)
         }

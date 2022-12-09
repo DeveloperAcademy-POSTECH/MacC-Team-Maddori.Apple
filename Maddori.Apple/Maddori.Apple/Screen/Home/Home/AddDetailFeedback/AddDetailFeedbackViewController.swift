@@ -195,13 +195,11 @@ final class AddDetailFeedbackViewController: BaseViewController {
     private func setupShadowView() {
         selectMemberView.layer.shadowColor = UIColor.black100.cgColor
         selectMemberView.layer.shadowRadius = 10
-        // FIXME: 쉐도우 처리 어떻게해?
         selectMemberView.layer.shadowOpacity = 0.05
         selectMemberView.layer.shadowOffset = CGSize.zero
         
         selectKeywordTypeView.layer.shadowColor = UIColor.black100.cgColor
         selectKeywordTypeView.layer.shadowRadius = 10
-        // FIXME: 쉐도우 처리 어떻게해?
         selectKeywordTypeView.layer.shadowOpacity = 0.05
         selectKeywordTypeView.layer.shadowOffset = CGSize.zero
     }
