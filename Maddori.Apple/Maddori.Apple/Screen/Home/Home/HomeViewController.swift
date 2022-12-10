@@ -33,6 +33,7 @@ final class HomeViewController: BaseViewController {
     }
     
     var currentReflectionId: Int = 0
+    var reflectionStatus: ReflectionStatus = .Before
     var isAdmin: Bool = false
     var hasSeenReflectionAlert: Bool = UserDefaultStorage.hasSeenReflectionAlert {
         willSet {
@@ -228,7 +229,7 @@ final class HomeViewController: BaseViewController {
     }
     
     private func didTapAddFeedbackButton() {
-        let viewController = UINavigationController(rootViewController: SelectFeedbackMemberViewController(currentReflectionId: self.currentReflectionId))
+        let viewController = UINavigationController(rootViewController: AddDetailFeedbackViewController(feedbackContent: FeedbackContent(toNickName: nil, toUserId: nil, feedbackType: nil, reflectionId: currentReflectionId)))
         viewController.modalPresentationStyle = .fullScreen
         present(viewController, animated: true)
     }
@@ -391,6 +392,7 @@ final class HomeViewController: BaseViewController {
                 else { return }
                 
                 self.currentReflectionId = reflectionId
+                self.reflectionStatus = reflectionStatus
                 if let reflectionKeywordList = reflectionDetail?.reflectionKeywords {
                     if reflectionKeywordList.isEmpty {
                         self.resetKeywordList()
@@ -451,7 +453,13 @@ extension HomeViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         UIDevice.vibrate()
-        showToastPopUp(of: .warning)
+        switch reflectionStatus {
+        case .Before, .SettingRequired, .Done:
+            showToastPopUp(of: .warning)
+        case .Progressing:
+            showStartReflectionView()
+        }
+        
     }
 }
 

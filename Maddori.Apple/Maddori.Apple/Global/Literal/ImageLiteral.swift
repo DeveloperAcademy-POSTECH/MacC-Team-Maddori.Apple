@@ -20,6 +20,7 @@ enum ImageLiterals {
     static var icBox: UIImage { .load(systemName: "archivebox.circle.fill") }
     static var icRight: UIImage { .load(systemName: "chevron.right") }
     static var icEllipsis: UIImage { .load(systemName: "ellipsis") }
+    static var icBottom: UIImage { .load(systemName: "chevron.down") }
     
     // MARK: - image
     
@@ -30,6 +31,8 @@ enum ImageLiterals {
     static var imgHomeTab: UIImage { .load(name: "Home") }
     static var imgDocsTab: UIImage { .load(name: "Docs") }
     static var imgPersonTab: UIImage { .load(name: "Person") }
+    static var imgProgressEmpty: UIImage { .load(name: "ProgressBarEmpty") }
+    static var imgProgress1: UIImage { .load(name: "ProgressBar1") }
     static var imgProgress2: UIImage { .load(name: "ProgressBar2") }
     static var imgProgress3: UIImage { .load(name: "ProgressBar3") }
     static var imgProgress4: UIImage { .load(name: "ProgressBar4") }

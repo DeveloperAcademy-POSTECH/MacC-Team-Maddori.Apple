@@ -205,4 +205,9 @@ enum TextLiteral {
     // MARK: - KeywordTextfield
     
     static let keywordLimitLabel: String = "키워드는 10글자 이내로 작성해주세요"
+    
+    // MARK: - AddDetailFeedback
+    
+    static let DetailTitleLabel: String = "피드백 줄 멤버와 종류를\n선택해주세요"
+    static let toNameTitleLabel: String = "피드백 줄 멤버"
 }
