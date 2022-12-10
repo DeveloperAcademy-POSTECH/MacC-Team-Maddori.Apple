@@ -120,6 +120,7 @@
 		52F0CB5229178C2700E39C50 /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F0CB5129178C2700E39C50 /* AlertViewController.swift */; };
 		52F2D1C12906F172009CBF89 /* SelectReflectionMemberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F2D1C02906F172009CBF89 /* SelectReflectionMemberViewController.swift */; };
 		7E2ECA102901136700A4D65C /* SetNicknameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2ECA0F2901136700A4D65C /* SetNicknameViewController.swift */; };
+		7E3907012943545A003E9743 /* FeedbackContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3907002943545A003E9743 /* FeedbackContent.swift */; };
 		7E6B662F28FE887300C3BEEF /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6B662E28FE887300C3BEEF /* UILabel+Extension.swift */; };
 		7E7F160B2921CC4800C6BE96 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7F160A2921CC4800C6BE96 /* CustomTabBarController.swift */; };
 		7E7F160F2921CD4A00C6BE96 /* UITabBar+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7F160E2921CD4A00C6BE96 /* UITabBar+Extension.swift */; };
@@ -131,11 +132,14 @@
 		D724790C28FEC8C900D67B50 /* BaseTextFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D724790B28FEC8C900D67B50 /* BaseTextFieldViewController.swift */; };
 		D724790E28FEEEC300D67B50 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D724790D28FEEEC300D67B50 /* CustomTextField.swift */; };
 		D72CF1B0290552960067A118 /* InvitationCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72CF1AF290552960067A118 /* InvitationCodeViewController.swift */; };
+		D7505119294239A5001BDA34 /* SelectMemberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7505118294239A5001BDA34 /* SelectMemberView.swift */; };
+		D750511B29423CB6001BDA34 /* SelectKeywordTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D750511A29423CB6001BDA34 /* SelectKeywordTypeView.swift */; };
 		D79D908C2903B6B1004DDC4A /* LabelButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D79D908B2903B6B1004DDC4A /* LabelButtonView.swift */; };
 		D79D908E29041F42004DDC4A /* CreateTeamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D79D908D29041F42004DDC4A /* CreateTeamViewController.swift */; };
 		D7AFB7C32916EAB100E998B7 /* MyReflectionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7AFB7C22916EAB100E998B7 /* MyReflectionDetailViewController.swift */; };
 		D7AFB7C52916EDC300E998B7 /* MyReflectionDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7AFB7C42916EDC300E998B7 /* MyReflectionDetailTableViewCell.swift */; };
 		D7AFB7C72916FF9400E998B7 /* CustomSegmentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7AFB7C62916FF9400E998B7 /* CustomSegmentControl.swift */; };
+		D7E101392942380900CEC7F0 /* AddDetailFeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E101382942380900CEC7F0 /* AddDetailFeedbackViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -253,6 +257,7 @@
 		52F0CB5129178C2700E39C50 /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
 		52F2D1C02906F172009CBF89 /* SelectReflectionMemberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectReflectionMemberViewController.swift; sourceTree = "<group>"; };
 		7E2ECA0F2901136700A4D65C /* SetNicknameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetNicknameViewController.swift; sourceTree = "<group>"; };
+		7E3907002943545A003E9743 /* FeedbackContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackContent.swift; sourceTree = "<group>"; };
 		7E6B662E28FE887300C3BEEF /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
 		7E7F160A2921CC4800C6BE96 /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 		7E7F160E2921CD4A00C6BE96 /* UITabBar+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITabBar+Extension.swift"; sourceTree = "<group>"; };
@@ -264,11 +269,14 @@
 		D724790B28FEC8C900D67B50 /* BaseTextFieldViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTextFieldViewController.swift; sourceTree = "<group>"; };
 		D724790D28FEEEC300D67B50 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		D72CF1AF290552960067A118 /* InvitationCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationCodeViewController.swift; sourceTree = "<group>"; };
+		D7505118294239A5001BDA34 /* SelectMemberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectMemberView.swift; sourceTree = "<group>"; };
+		D750511A29423CB6001BDA34 /* SelectKeywordTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectKeywordTypeView.swift; sourceTree = "<group>"; };
 		D79D908B2903B6B1004DDC4A /* LabelButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelButtonView.swift; sourceTree = "<group>"; };
 		D79D908D29041F42004DDC4A /* CreateTeamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTeamViewController.swift; sourceTree = "<group>"; };
 		D7AFB7C22916EAB100E998B7 /* MyReflectionDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReflectionDetailViewController.swift; sourceTree = "<group>"; };
 		D7AFB7C42916EDC300E998B7 /* MyReflectionDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReflectionDetailTableViewCell.swift; sourceTree = "<group>"; };
 		D7AFB7C62916FF9400E998B7 /* CustomSegmentControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegmentControl.swift; sourceTree = "<group>"; };
+		D7E101382942380900CEC7F0 /* AddDetailFeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDetailFeedbackViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -699,6 +707,7 @@
 		3E557FC128FE7B9200714E46 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				7EDEF6BD293F0C2E00EA972E /* AddDetailFeedback */,
 				3E5195A9292B05B000710A01 /* UIComponent */,
 				3E557FC228FE7BBC00714E46 /* HomeViewController.swift */,
 			);
@@ -910,12 +919,39 @@
 			path = SelectReflectionMember;
 			sourceTree = "<group>";
 		};
+		7E3906FF29435446003E9743 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				7E3907002943545A003E9743 /* FeedbackContent.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		7E7F16092921CC3200C6BE96 /* TabBar */ = {
 			isa = PBXGroup;
 			children = (
 				7E7F160A2921CC4800C6BE96 /* CustomTabBarController.swift */,
 			);
 			path = TabBar;
+			sourceTree = "<group>";
+		};
+		7EDEF6BD293F0C2E00EA972E /* AddDetailFeedback */ = {
+			isa = PBXGroup;
+			children = (
+				7E3906FF29435446003E9743 /* Model */,
+				7EDEF6C0293F1C9300EA972E /* UIComponent */,
+				D7E101382942380900CEC7F0 /* AddDetailFeedbackViewController.swift */,
+			);
+			path = AddDetailFeedback;
+			sourceTree = "<group>";
+		};
+		7EDEF6C0293F1C9300EA972E /* UIComponent */ = {
+			isa = PBXGroup;
+			children = (
+				D7505118294239A5001BDA34 /* SelectMemberView.swift */,
+				D750511A29423CB6001BDA34 /* SelectKeywordTypeView.swift */,
+			);
+			path = UIComponent;
 			sourceTree = "<group>";
 		};
 		D724790A28FEC8A800D67B50 /* Setup */ = {
@@ -1042,6 +1078,7 @@
 				39F52C4F29232E8B00B19A77 /* FeedBackContentDTO.swift in Sources */,
 				39436C132912877D0083D77A /* MyFeedbackHeaderView.swift in Sources */,
 				7EE38BB3292623F500FD738D /* MyReflectionEndPoint.swift in Sources */,
+				D750511B29423CB6001BDA34 /* SelectKeywordTypeView.swift in Sources */,
 				39F52C6E2924742E00B19A77 /* ReflectionResponse.swift in Sources */,
 				52988B742921EAD50044A77F /* MyReflectionFeedbackViewController.swift in Sources */,
 				7E8753E129348BB000FBBF83 /* MyReflectionDetailViewLastCell.swift in Sources */,
@@ -1083,6 +1120,8 @@
 				396334D9292DAE0000E74B77 /* AppleLoginResponse.swift in Sources */,
 				397E495C2924F8A2004220D6 /* UserDefaultHandler.swift in Sources */,
 				395C7E0B28F9550A00FC2FCA /* NSObject+Extension.swift in Sources */,
+				D7E101392942380900CEC7F0 /* AddDetailFeedbackViewController.swift in Sources */,
+				D7505119294239A5001BDA34 /* SelectMemberView.swift in Sources */,
 				39F909D7292679C400DAD0A3 /* EditFeedBackDTO.swift in Sources */,
 				D79D908E29041F42004DDC4A /* CreateTeamViewController.swift in Sources */,
 				3E557FFD2901CD7400714E46 /* Keyword.swift in Sources */,
@@ -1144,6 +1183,7 @@
 				7E2ECA102901136700A4D65C /* SetNicknameViewController.swift in Sources */,
 				3984742629264ACE00EDC139 /* MyFeedBackEndPoint.swift in Sources */,
 				39F52C4D29232E5D00B19A77 /* AddReflectionDTO.swift in Sources */,
+				7E3907012943545A003E9743 /* FeedbackContent.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
