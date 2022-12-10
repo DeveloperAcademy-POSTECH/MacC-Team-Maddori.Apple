@@ -71,12 +71,6 @@ enum TextLiteral {
     static let addFeedbackContentViewControllerCurrentStepDescriptionLabel3 = "ex. 정말로 몰랐던 일인데 덕분에 제 잘못을 알게 되고 고치게 되었어요. 다른 사람 앞에서 그런 얘기를 해주지 않아서 민망하지도 않았습니다."
     static let addFeedbackContentViewControllerCurrentStepDescriptionLabel4 = "ex. 앞으로도 이런 지적이라면 계속해주세요! 덕분에 항상 성장합니다"
     
-//    제가 분위기를 파악 못하거나 눈치 채지 못해 잘못된 일을 했을 때 조용히 불러내서 알려줘서 고맙습니다.
-//
-//    정말로 몰랐던 일인데 덕분에 제 잘못을 알게 되고 고치게 되었어요. 다른 사람 앞에서 그런 얘기를 해주지 않아서 민망하지도 않았습니다.
-//
-//    앞으로도 이런 지적이라면 계속해주세요! 덕분에 항상 성장합니다
-    
     // MARK: - AddFeedbackKeywordViewController
     
     static let addFeedbackContentViewControllerCurrentStepLabel5 = "피드백을 대표하는\n키워드를 정해주세요"
@@ -115,7 +109,7 @@ enum TextLiteral {
     
     // MARK: - SelectReflectionMemberViewController
     
-    static let selectReflectionMemberViewControllerTitleLabel = "각 멤버가 받은 피드백을\n확인해보세요"
+    static let selectReflectionMemberViewControllerTitleLabel = "각 팀원이 받은 피드백을\n공유해보세요"
     static let selectReflectionMemberViewControllerDoneButtonText = "모든 회고 끝내기"
     
     // MARK: - InProgressViewController
