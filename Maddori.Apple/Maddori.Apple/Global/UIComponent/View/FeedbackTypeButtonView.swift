@@ -11,7 +11,7 @@ import SnapKit
 
 final class FeedbackTypeButtonView: UIView {
     var changeFeedbackType: ((FeedbackButtonType) -> ())?
-    var feedbackType: FeedBackType? {
+    var feedbackType: FeedbackButtonType? {
         didSet {
             guard let type = feedbackType else { return }
             applyFeedbackButtonStyle(type)
@@ -145,14 +145,12 @@ final class FeedbackTypeButtonView: UIView {
     
     // MARK: - func
     
-    private func applyFeedbackButtonStyle(_ type: FeedBackType) {
+    private func applyFeedbackButtonStyle(_ type: FeedbackButtonType) {
         switch type {
         case .continueType:
             applyBorderStyle(selectedButton: continueButton, unselectedButton: stopButton)
         case .stopType:
             applyBorderStyle(selectedButton: stopButton, unselectedButton: continueButton)
-        default:
-            break
         }
     }
     
@@ -165,7 +163,7 @@ final class FeedbackTypeButtonView: UIView {
         unselectedButton.makeShadow(color: .black, opacity: 0.15, offset: .zero, radius: 1)
     }
     
-    private func applyButtonLabelStyle(_ type: FeedBackType) {
+    private func applyButtonLabelStyle(_ type: FeedbackButtonType) {
         switch type {
         case .continueType:
             continueTitleLabel.textColor = .blue200
@@ -177,8 +175,6 @@ final class FeedbackTypeButtonView: UIView {
             stopSubTitleLabel.textColor = .blue200
             continueTitleLabel.textColor = .black100
             continueSubTitleLabel.textColor = .gray500
-        default:
-            break
         }
     }
 }
