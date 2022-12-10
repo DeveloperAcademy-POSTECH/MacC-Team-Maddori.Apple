@@ -12,7 +12,7 @@ import SnapKit
 
 final class AddDetailFeedbackViewController: BaseViewController {
     
-    private var feedbackContent: FeedbackContent?
+    private var feedbackContent: FeedbackContent
     
     private var isOpenedMemberView: Bool = true {
         didSet {
@@ -30,6 +30,7 @@ final class AddDetailFeedbackViewController: BaseViewController {
     }
     private var isOpenedTypeView: Bool = false
     private var toName: String = ""
+    private var toId: Int?
     
     // MARK: - property
     
@@ -50,9 +51,11 @@ final class AddDetailFeedbackViewController: BaseViewController {
     private lazy var selectMemberView: SelectMemberView = {
         let view = SelectMemberView()
         view.upDownImageView.transform = CGAffineTransform(rotationAngle: .pi)
-        view.didSelectedMemeber = { [weak self] userName in
+        view.didSelectedMemeber = { [weak self] user in
+            guard let userName = user.userName,
+                  let userId = user.userId   else { return }
             self?.toName = userName
-            self?.feedbackContent = FeedbackContent(toName: self?.toName)
+            self?.toId = userId
         }
         return view
     }()
@@ -74,6 +77,13 @@ final class AddDetailFeedbackViewController: BaseViewController {
     }()
     
     // MARK: - life cycle
+    
+    init(feedbackContent: FeedbackContent) {
+        self.feedbackContent = feedbackContent
+        super.init()
+    }
+    
+    required init?(coder: NSCoder) { nil }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -208,8 +218,10 @@ final class AddDetailFeedbackViewController: BaseViewController {
     private func setupNextButton() {
         let action = UIAction { [weak self] _ in
             guard let type = self?.selectKeywordTypeView.feedbackTypeButtonView.feedbackType else { return }
-            let feedback = FeedBackDTO.init(rawValue: type.rawValue)
-            self?.feedbackContent = FeedbackContent(keywordType: feedback)
+            guard let feedback = FeedBackDTO.init(rawValue: type.rawValue) else { return }
+            
+            self?.feedbackContent = FeedbackContent(toNickName: self?.toName, toUserId: self?.toId, feedbackType: feedback, reflectionId: self?.feedbackContent.reflectionId ?? 1)
+            self?.pushAddFeedbackViewController()
         }
         nextButton.addAction(action, for: .touchUpInside)
     }
@@ -219,6 +231,11 @@ final class AddDetailFeedbackViewController: BaseViewController {
             self?.dismiss(animated: true)
         }
         closeButton.addAction(action, for: .touchUpInside)
+    }
+    
+    private func pushAddFeedbackViewController () {
+        let viewController = AddFeedbackContentViewController(feedbackContent: feedbackContent, step: .writeSituation)
+        navigationController?.pushViewController(viewController, animated: true)
     }
     
     // MARK: - api

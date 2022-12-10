@@ -8,6 +8,15 @@
 import Foundation
 
 struct FeedbackContent {
-    var toName: String?
-    var keywordType: FeedBackDTO?
+    let toNickName: String?
+    let toUserId: Int?
+    let feedbackType: FeedBackDTO?
+    var situation: String?
+    var feeling: String?
+    var suggestion: String?
+    let reflectionId: Int
+    
+    var content: String {
+        (situation ?? "") + "\n\n" + (feeling ?? "") + "\n\n" + (suggestion ?? "")
+    }
 }
