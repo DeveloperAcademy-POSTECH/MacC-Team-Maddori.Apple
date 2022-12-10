@@ -58,7 +58,7 @@ final class AddFeedbackKeywordViewController: BaseViewController {
         label.numberOfLines = 2
         return label
     }()
-    private let keywordTextField = KeywordTextField()
+    private let keywordTextField = KeywordTextFieldView(placeHolder: TextLiteral.addFeedbackKeywordViewControllerPlaceholder)
     private let containerScrollView: UIScrollView = {
         let view = UIScrollView()
         view.backgroundColor = .blue300

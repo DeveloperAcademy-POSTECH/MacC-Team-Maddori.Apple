@@ -89,7 +89,7 @@
 		3E557FFA2901CD4200714E46 /* KeywordCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E557FF92901CD4200714E46 /* KeywordCollectionViewCell.swift */; };
 		3E557FFD2901CD7400714E46 /* Keyword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E557FFC2901CD7400714E46 /* Keyword.swift */; };
 		3E5580072906A7B200714E46 /* InProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5580062906A7B200714E46 /* InProgressViewController.swift */; };
-		3E66777529419C8300BB5670 /* KeywordTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E66777429419C8300BB5670 /* KeywordTextField.swift */; };
+		3E66777529419C8300BB5670 /* KeywordTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E66777429419C8300BB5670 /* KeywordTextFieldView.swift */; };
 		3E8052DF2906E09100A6449D /* KeywordSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8052DE2906E09100A6449D /* KeywordSectionHeaderView.swift */; };
 		3EA341C129221998005CBD1C /* ToastContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA341C029221998005CBD1C /* ToastContentView.swift */; };
 		3EA341E62924E2AD005CBD1C /* HomeEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA341E52924E2AD005CBD1C /* HomeEndPoint.swift */; };
@@ -225,7 +225,7 @@
 		3E557FF92901CD4200714E46 /* KeywordCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordCollectionViewCell.swift; sourceTree = "<group>"; };
 		3E557FFC2901CD7400714E46 /* Keyword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keyword.swift; sourceTree = "<group>"; };
 		3E5580062906A7B200714E46 /* InProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InProgressViewController.swift; sourceTree = "<group>"; };
-		3E66777429419C8300BB5670 /* KeywordTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordTextField.swift; sourceTree = "<group>"; };
+		3E66777429419C8300BB5670 /* KeywordTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordTextFieldView.swift; sourceTree = "<group>"; };
 		3E8052DE2906E09100A6449D /* KeywordSectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordSectionHeaderView.swift; sourceTree = "<group>"; };
 		3EA341C029221998005CBD1C /* ToastContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastContentView.swift; sourceTree = "<group>"; };
 		3EA341E52924E2AD005CBD1C /* HomeEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeEndPoint.swift; sourceTree = "<group>"; };
@@ -730,7 +730,7 @@
 		3E66777329419C7500BB5670 /* UIComponent */ = {
 			isa = PBXGroup;
 			children = (
-				3E66777429419C8300BB5670 /* KeywordTextField.swift */,
+				3E66777429419C8300BB5670 /* KeywordTextFieldView.swift */,
 			);
 			path = UIComponent;
 			sourceTree = "<group>";
@@ -1079,7 +1079,7 @@
 				D7AFB7C72916FF9400E998B7 /* CustomSegmentControl.swift in Sources */,
 				3EB508692913560A00FB77CB /* Reflection.swift in Sources */,
 				52DC9091291A98CC00904739 /* MyFeedbackEditViewController.swift in Sources */,
-				3E66777529419C8300BB5670 /* KeywordTextField.swift in Sources */,
+				3E66777529419C8300BB5670 /* KeywordTextFieldView.swift in Sources */,
 				3EA341E82925E5EA005CBD1C /* String+Extension.swift in Sources */,
 				D7AFB7C72916FF9400E998B7 /* CustomSegmentControl.swift in Sources */,
 				7E8CDC67292E19B000984742 /* SettingButton.swift in Sources */,

@@ -7,10 +7,9 @@
 
 import UIKit
 
-import Alamofire
 import SnapKit
 
-final class KeywordTextField: UIView {
+final class KeywordTextFieldView: UIView {
     
     private enum Length {
         static let keywordMaxLength: Int = 10
@@ -24,11 +23,11 @@ final class KeywordTextField: UIView {
     }
     
     var textFieldWidth: CGFloat = 0
-    var placeholder = TextLiteral.addFeedbackKeywordViewControllerPlaceholder
+    var placeholder: String
     var placeholderWidth: CGFloat {
-        let placeholder = TextLiteral.addFeedbackKeywordViewControllerPlaceholder
+        let placeholder = placeholder
         let fontAttributes = [NSAttributedString.Key.font: UIFont.main]
-        let width = (placeholder as NSString).size(withAttributes: fontAttributes).width
+        let width = (placeholder as NSString).size(withAttributes: fontAttributes).width + 1
         return width
     }
     
@@ -68,8 +67,9 @@ final class KeywordTextField: UIView {
     
     // MARK: - life cycle
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init(placeHolder: String) {
+        self.placeholder = placeHolder
+        super.init(frame: .zero)
         render()
         setupDelegate()
         setupTextFieldObserver()
@@ -110,7 +110,7 @@ final class KeywordTextField: UIView {
         keywordTextField.addTarget(self, action: #selector(textFieldChangeEnd), for: .editingDidEnd)
     }
     
-    private func checkMaxLength(textField: UITextField, maxLength: Int) {
+    func checkMaxLength(textField: UITextField, maxLength: Int) {
         if let text = textField.text {
             if text.count > maxLength {
                 let endIndex = text.index(text.startIndex, offsetBy: maxLength)
@@ -168,7 +168,7 @@ final class KeywordTextField: UIView {
     }
 }
 
-extension KeywordTextField: UITextFieldDelegate {
+extension KeywordTextFieldView: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
         checkMaxLength(textField: keywordTextField, maxLength: Length.keywordMaxLength)
     }
