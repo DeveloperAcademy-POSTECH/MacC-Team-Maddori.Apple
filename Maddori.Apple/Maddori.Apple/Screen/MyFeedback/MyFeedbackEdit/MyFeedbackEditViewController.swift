@@ -74,11 +74,6 @@ final class MyFeedbackEditViewController: BaseViewController {
         return label
     }()
     private let feedbackContentTextView = CustomTextView()
-//    private let feedbackDoneButtonView: UIView = {
-//        let view = UIView()
-//        view.backgroundColor = .white200
-//        return view
-//    }()
     private lazy var feedbackDoneButton: MainButton = {
         let button = MainButton()
         button.title = TextLiteral.addFeedbackViewControllerDoneButtonTitle
@@ -170,13 +165,6 @@ final class MyFeedbackEditViewController: BaseViewController {
             $0.height.equalTo(150)
             $0.bottom.equalToSuperview()
         }
-        
-//        view.addSubview(feedbackDoneButtonView)
-//        feedbackDoneButtonView.snp.makeConstraints {
-//            $0.bottom.equalTo(view.snp.bottom)
-//            $0.leading.trailing.equalToSuperview()
-//            $0.height.equalTo(134)
-//        }
         
         view.addSubview(feedbackDoneButton)
         feedbackDoneButton.snp.makeConstraints {
@@ -333,7 +321,6 @@ extension MyFeedbackEditViewController: UITextFieldDelegate {
         keywordTextFieldView.checkMaxLength(textField: keywordTextFieldView.keywordTextField, maxLength: Length.keywordMaxLength)
         feedbackDoneButton.isDisabled = !isFeedbackChanged()
         isEmptyKeywordOrContent()
-//        feedbackDoneButton.isDisabled = isEmptyKeywordOrContent()
     }
 }
 
@@ -341,7 +328,6 @@ extension MyFeedbackEditViewController: UITextViewDelegate {
     func textViewDidChangeSelection(_ textView: UITextView) {
         feedbackDoneButton.isDisabled = !isFeedbackChanged()
         isEmptyKeywordOrContent()
-//        feedbackDoneButton.isDisabled = isEmptyKeywordOrContent()
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
