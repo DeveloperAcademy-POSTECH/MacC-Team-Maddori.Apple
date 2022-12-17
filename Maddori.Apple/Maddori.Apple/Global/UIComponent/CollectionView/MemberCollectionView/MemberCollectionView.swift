@@ -14,6 +14,59 @@ final class MemberCollectionView: UIView {
     enum CollectionType {
         case addFeedback
         case progressReflection
+        
+        var collectionHorizontalSpacing: CGFloat {
+            switch self {
+            case .addFeedback:
+                return 20
+            case .progressReflection:
+                return 14
+            }
+        }
+        
+        var collectionTopSpacing: CGFloat {
+            switch self {
+            case .addFeedback:
+                return 10
+            case .progressReflection:
+                return 40
+            }
+        }
+        
+        var cellWidth: CGFloat {
+            switch self {
+            case .addFeedback:
+                return 133
+            case .progressReflection:
+                return 135
+            }
+        }
+        
+        var cellHeight: CGFloat {
+            switch self {
+            case .addFeedback:
+                return 52
+            case .progressReflection:
+                return 60
+            }
+        }
+        
+        var collectionInsets: UIEdgeInsets {
+            switch self {
+            case .addFeedback:
+                return UIEdgeInsets(
+                    top: collectionTopSpacing,
+                    left: collectionHorizontalSpacing,
+                    bottom: 0,
+                    right: collectionHorizontalSpacing)
+            case .progressReflection:
+                return UIEdgeInsets(
+                    top: collectionTopSpacing,
+                    left: collectionHorizontalSpacing,
+                    bottom: 20,
+                    right: collectionHorizontalSpacing)
+            }
+        }
     }
     
     var type: CollectionType
@@ -27,31 +80,20 @@ final class MemberCollectionView: UIView {
     var didTappedFeedBackMember: ((MemberResponse) -> ())?
     var selectedMember: MemberResponse?
     private var selectedMemberList: [MemberResponse] = []
-    private enum Size {
-        static let collectionHorizontalSpacing: CGFloat = 14
-        static let collectionTopSpacing: CGFloat = 40
-        static let cellWidth: CGFloat = 135
-        static let cellHeight: CGFloat = 60
-        static let collectionInsets = UIEdgeInsets(
-            top: collectionTopSpacing,
-            left: collectionHorizontalSpacing,
-            bottom: 0,
-            right: collectionHorizontalSpacing)
-    }
     
     // MARK: - property
     
-    private let collectionViewFlowLayout: UICollectionViewFlowLayout = {
+    private lazy var collectionViewFlowLayout: UICollectionViewFlowLayout = {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .vertical
-        flowLayout.sectionInset = Size.collectionInsets
-        flowLayout.itemSize = CGSize(width: Size.cellWidth, height: Size.cellHeight)
+        flowLayout.sectionInset = type.collectionInsets
+        flowLayout.itemSize = CGSize(width: type.cellWidth, height: type.cellHeight)
         flowLayout.minimumLineSpacing = 29
         return flowLayout
     }()
     private lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewFlowLayout)
-        collectionView.backgroundColor = .clear
+        collectionView.backgroundColor = .white100
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.showsVerticalScrollIndicator = false
@@ -83,7 +125,10 @@ extension MemberCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch type {
         case .addFeedback:
-            didTappedFeedBackMember?(memberList[indexPath.item])
+            selectedMember = memberList[indexPath.item]
+            guard let member = selectedMember else { return }
+            didTappedFeedBackMember?(member)
+            
         case .progressReflection:
             if !selectedMemberList.contains(where: { $0.userName == memberList[indexPath.item].userName} ) {
                 selectedMemberList.append(memberList[indexPath.item])
@@ -109,6 +154,19 @@ extension MemberCollectionView: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         cell.memberLabel.text = memberList[indexPath.item].userName
+        
+        switch type {
+        case .addFeedback:
+            cell.index = FromCellIndex.fromAddFeedback
+        case .progressReflection:
+            cell.index = FromCellIndex.fromSelectMember
+        }
         return cell
     }
+}
+
+
+enum FromCellIndex {
+    case fromAddFeedback
+    case fromSelectMember
 }

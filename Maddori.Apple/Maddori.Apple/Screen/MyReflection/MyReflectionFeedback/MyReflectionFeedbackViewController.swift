@@ -11,7 +11,7 @@ import SnapKit
 
 final class MyReflectionFeedbackViewController: BaseViewController {
     
-    var model: FeedBackResponse
+    let model: FeedBackResponse
     
     // MARK: - property
     
@@ -76,21 +76,6 @@ final class MyReflectionFeedbackViewController: BaseViewController {
         label.numberOfLines = 0
         return label
     }()
-    private let feedbackStartLabel: UILabel = {
-        let label = UILabel()
-        label.text = TextLiteral.myReflectionFeedbackViewControllerFeedbackStartLabel
-        label.textColor = .black100
-        label.font = .label2
-        return label
-    }()
-    private lazy var feedbackStartText: UILabel = {
-        let label = UILabel()
-        label.setTextWithLineHeight(text: model.startContent, lineHeight: 24)
-        label.textColor = .gray400
-        label.font = .body1
-        label.numberOfLines = 0
-        return label
-    }()
     
     // MARK: - life cycle
     
@@ -100,11 +85,6 @@ final class MyReflectionFeedbackViewController: BaseViewController {
     }
     
     required init?(coder: NSCoder) { nil }
-    
-    override func configUI() {
-        super.configUI()
-        setupStartLabel()
-    }
     
     override func render() {
         view.addSubview(myReflectionScrollView)
@@ -158,19 +138,6 @@ final class MyReflectionFeedbackViewController: BaseViewController {
             $0.top.equalTo(feedbackContentLabel.snp.bottom).offset(SizeLiteral.labelComponentPadding)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
-        
-        myReflectionContentView.addSubview(feedbackStartLabel)
-        feedbackStartLabel.snp.makeConstraints {
-            $0.top.equalTo(feedbackContentText.snp.bottom).offset(SizeLiteral.componentIntervalPadding)
-            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-        }
-        
-        myReflectionContentView.addSubview(feedbackStartText)
-        feedbackStartText.snp.makeConstraints {
-            $0.top.equalTo(feedbackStartLabel.snp.bottom).offset(SizeLiteral.labelComponentPadding)
-            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-            $0.bottom.equalToSuperview().inset(20)
-        }
     }
     
     // MARK: - func
@@ -184,11 +151,5 @@ final class MyReflectionFeedbackViewController: BaseViewController {
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.largeTitleDisplayMode = .never
         navigationItem.leftBarButtonItem = backButton
-    }
-    
-    private func setupStartLabel() {
-        if model.startContent == nil || model.startContent == "" {
-            feedbackStartLabel.isHidden = true
-        }
     }
 }

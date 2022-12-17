@@ -11,10 +11,29 @@ import SnapKit
 
 final class MemberCollectionViewCell: BaseCollectionViewCell {
     
+    var index: FromCellIndex = .fromSelectMember
+    
     private enum Size {
         static let width = 135
         static let height = 60
         static let frame = CGRect(x: 0, y: 0, width: Size.width, height: Size.height)
+    }
+    
+
+    override var isSelected: Bool {
+        didSet {
+            if index == FromCellIndex.fromAddFeedback {
+                if isSelected {
+                    applyAttribute()
+                }
+                else {
+                    resetAttribute()
+                }
+            }
+            else {
+                setupAttribute()
+            }
+        }
     }
     
     // MARK: - property
@@ -63,5 +82,19 @@ final class MemberCollectionViewCell: BaseCollectionViewCell {
             memberLabel.backgroundColor = .white100
             memberShadow.layer.shadowRadius = 1
         }
+    }
+    
+    private func applyAttribute() {
+        if isSelected {
+            memberLabel.layer.borderWidth = 2
+            memberLabel.layer.cornerRadius = SizeLiteral.componentCornerRadius
+            memberLabel.layer.borderColor = UIColor.blue200.cgColor
+            memberLabel.textColor = .blue200
+        }
+    }
+    
+    private func resetAttribute() {
+        memberLabel.layer.borderWidth = 0
+        memberLabel.textColor = .black100
     }
 }

@@ -10,122 +10,239 @@ import UIKit
 import Alamofire
 import SnapKit
 
-final class MyFeedbackEditViewController: AddFeedbackViewController {
-    var parentNavigationViewController: UINavigationController
+final class MyFeedbackEditViewController: BaseViewController {
+    private enum Length {
+        static let keywordMaxLength: Int = 10
+    }
+    private var type: FeedBackDTO = .continueType
+    private let toNickname: String
+    private let parentNavigationViewController: UINavigationController
     private var feedbackType: FeedBackDTO
     private let feedbackDetail: FeedbackFromMeModel
-    private var isStartSwitchToggleChanged: Bool = false {
-        didSet {
-            if !(isTextInputChanged() || isFeedbackTypeChanged || isStartSwitchToggleChanged) {
-                super.feedbackDoneButton.isDisabled = true
-            } else {
-                super.feedbackDoneButton.isDisabled = false
-            }
-        }
-    }
     private var isFeedbackTypeChanged: Bool = false {
         didSet {
-            if !(isTextInputChanged() || isFeedbackTypeChanged || isStartSwitchToggleChanged) {
-                super.feedbackDoneButton.isDisabled = true
+            if !isFeedbackChanged() {
+                feedbackDoneButton.isDisabled = true
+                isEmptyKeywordOrContent()
             } else {
-                super.feedbackDoneButton.isDisabled = false
+                feedbackDoneButton.isDisabled = false
+                isEmptyKeywordOrContent()
             }
         }
     }
+    
+    // MARK: - property
+    
+    private lazy var closeButton: CloseButton = {
+        let button = CloseButton(type: .system)
+        let action = UIAction { [weak self] _ in
+            self?.didTappedCloseButton()
+        }
+        button.addAction(action, for: .touchUpInside)
+        return button
+    }()
+    private let addFeedbackScrollView = UIScrollView()
+    private let addFeedbackContentView = UIView()
+    private lazy var addFeedbackTitleLabel: UILabel = {
+        let label = UILabel()
+        label.text = toNickname + TextLiteral.addFeedbackViewControllerTitleLabel
+        label.textColor = .black100
+        label.font = .title
+        return label
+    }()
+    private let feedbackTypeLabel: UILabel = {
+        let label = UILabel()
+        label.text = TextLiteral.feedbackTypeLabel
+        label.textColor = .black100
+        label.font = .label2
+        return label
+    }()
+    private let feedbackTypeButtonView = FeedbackTypeButtonView()
+    private let feedbackKeywordLabel: UILabel = {
+        let label = UILabel()
+        label.text = TextLiteral.feedbackKeywordLabel
+        label.textColor = .black100
+        label.font = .label2
+        return label
+    }()
+    private lazy var keywordTextFieldView = KeywordTextFieldView(placeHolder: feedbackDetail.keyword)
+    private let feedbackContentLabel: UILabel = {
+        let label = UILabel()
+        label.text = TextLiteral.feedbackContentLabel
+        label.textColor = .black100
+        label.font = .label2
+        return label
+    }()
+    private let feedbackContentTextView = CustomTextView()
+    private lazy var feedbackDoneButton: MainButton = {
+        let button = MainButton()
+        button.title = TextLiteral.addFeedbackViewControllerDoneButtonTitle
+        button.isDisabled = true
+        let action = UIAction { [weak self] _ in
+            self?.didTappedDoneButton()
+        }
+        button.addAction(action, for: .touchUpInside)
+        return button
+    }()
     
     // MARK: - life cycle
     
-    init(feedbackDetail: FeedbackFromMeModel, parentNavigationViewController: UINavigationController) {
+    init(feedbackDetail: FeedbackFromMeModel,
+         parentNavigationViewController: UINavigationController,
+         to: String
+    ) {
         self.feedbackDetail = feedbackDetail
         self.feedbackType = FeedBackDTO.init(rawValue: feedbackDetail.feedbackType.rawValue) ?? .continueType
         self.parentNavigationViewController = parentNavigationViewController
-        super.init(to: feedbackDetail.nickname, toUserId: 0, reflectionId: feedbackDetail.reflectionId)
+        self.toNickname = to
+        super.init()
     }
     
     required init?(coder: NSCoder) { nil }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupNotificationCenter()
         setupFeedbackType()
         setupFeedbackKeyword()
         setupFeedbackContent()
-        setupFeedbackStart()
-        hideEditFeedbackUntilLabel()
+        setupDelegate()
         detectChangeOfFeedbackType()
-        setupNavigationLeftItem()
+        addTapGestureContentView()
+    }
+    
+    override func render() {
+        view.addSubview(addFeedbackScrollView)
+        addFeedbackScrollView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+        
+        addFeedbackScrollView.addSubview(addFeedbackContentView)
+        addFeedbackContentView.snp.makeConstraints {
+            $0.width.edges.equalToSuperview()
+        }
+        
+        addFeedbackContentView.addSubview(addFeedbackTitleLabel)
+        addFeedbackTitleLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(SizeLiteral.topPadding)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+        
+        addFeedbackContentView.addSubview(feedbackTypeLabel)
+        feedbackTypeLabel.snp.makeConstraints {
+            $0.top.equalTo(addFeedbackTitleLabel.snp.bottom).offset(SizeLiteral.topComponentPadding)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+        
+        addFeedbackContentView.addSubview(feedbackTypeButtonView)
+        feedbackTypeButtonView.snp.makeConstraints {
+            $0.top.equalTo(feedbackTypeLabel.snp.bottom).offset(SizeLiteral.labelComponentPadding)
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+        
+        addFeedbackContentView.addSubview(feedbackKeywordLabel)
+        feedbackKeywordLabel.snp.makeConstraints {
+            $0.top.equalTo(feedbackTypeButtonView.snp.bottom).offset(SizeLiteral.componentIntervalPadding)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+        
+        addFeedbackContentView.addSubview(keywordTextFieldView)
+        keywordTextFieldView.snp.makeConstraints {
+            $0.top.equalTo(feedbackKeywordLabel.snp.bottom).offset(SizeLiteral.labelComponentPadding)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+        
+        addFeedbackContentView.addSubview(feedbackContentLabel)
+        feedbackContentLabel.snp.makeConstraints {
+            $0.top.equalTo(keywordTextFieldView.snp.bottom).offset(SizeLiteral.componentIntervalPadding)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+        
+        addFeedbackContentView.addSubview(feedbackContentTextView)
+        feedbackContentTextView.snp.makeConstraints {
+            $0.top.equalTo(feedbackContentLabel.snp.bottom).offset(SizeLiteral.labelComponentPadding)
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.height.equalTo(150)
+            $0.bottom.equalToSuperview()
+        }
+        
+        view.addSubview(feedbackDoneButton)
+        feedbackDoneButton.snp.makeConstraints {
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+    }
+    
+    override func setupNavigationBar() {
+        super.setupNavigationBar()
+        
+        let closeButton = makeBarButtonItem(with: closeButton)
+        
+        navigationController?.navigationBar.prefersLargeTitles = false
+        navigationItem.largeTitleDisplayMode = .never
+        navigationItem.rightBarButtonItem = closeButton
     }
     
     // MARK: - func
     
+    private func setupNotificationCenter() {
+        NotificationCenter.default.addObserver(self, selector: #selector(willShowKeyboard), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(willHideKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    private func setupDelegate() {
+        feedbackContentTextView.delegate = self
+        keywordTextFieldView.keywordTextField.delegate = self
+    }
+    
+    private func didTappedBackButton() {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    func didTappedCloseButton() {
+        self.dismiss(animated: true)
+    }
+    
     private func setupFeedbackType() {
         switch feedbackDetail.feedbackType {
         case .continueType:
-            super.feedbackTypeButtonView.touchUpToSelectType(.continueType)
+            feedbackTypeButtonView.feedbackType = .continueType
         case .stopType:
-            super.feedbackTypeButtonView.touchUpToSelectType(.stopType)
+            feedbackTypeButtonView.feedbackType = .stopType
         }
     }
     
     private func setupFeedbackKeyword() {
-        super.feedbackKeywordTextField.text = feedbackDetail.keyword
-        super.setCounter(count: feedbackDetail.keyword.count)
+        keywordTextFieldView.keywordTextField.text = feedbackDetail.keyword
     }
     
     private func setupFeedbackContent() {
-        super.feedbackContentTextView.text = feedbackDetail.info
-        super.feedbackContentTextView.textColor = .black100
+        feedbackContentTextView.text = feedbackDetail.info
+        feedbackContentTextView.textColor = .black100
     }
     
-    private func setupFeedbackStart() {
-        if let start = feedbackDetail.start {
-            if !start.isEmpty {
-                super.feedbackStartSwitch.isOn = true
-                super.feedbackStartTextViewLabel.isHidden = false
-                super.feedbackStartTextView.isHidden = false
-                super.feedbackStartTextView.text = start
-                super.feedbackStartTextView.textColor = .black100
-            }
-        }
-        super.feedbackStartSwitchBottomEqualToSuperView?.constraint.deactivate()
-        super.feedbackStartTextView.snp.remakeConstraints {
-            $0.top.equalTo(feedbackStartTextViewLabel.snp.bottom).offset(SizeLiteral.labelComponentPadding)
-            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-            $0.height.equalTo(150)
-            $0.bottom.equalToSuperview().inset(80)
-        }
-    }
-    
-    private func hideEditFeedbackUntilLabel() {
-        super.editFeedbackUntilLabel.isHidden = true
-        super.feedbackDoneButtonView.snp.remakeConstraints {
-            $0.bottom.equalToSuperview()
-            $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(95)
-        }
-    }
-    
-    private func notChangedStartContent() -> Bool {
-        if let start = self.feedbackDetail.start {
-            return super.feedbackStartTextView.text == TextLiteral.addFeedbackViewControllerStartTextViewPlaceholder || super.feedbackStartTextView.text == start ?
-            true : false
-        } else {
-            return super.feedbackStartTextView.text == TextLiteral.addFeedbackViewControllerStartTextViewPlaceholder ||
-            super.feedbackStartTextView.text.isEmpty ? true : false
-        }
-    }
-    
-    private func isTextInputChanged() -> Bool {
-        if super.feedbackContentTextView.text == feedbackDetail.info &&
-            notChangedStartContent() &&
-            super.feedbackKeywordTextField.text == feedbackDetail.keyword {
+    private func isFeedbackChanged() -> Bool {
+        if feedbackContentTextView.text == feedbackDetail.info &&
+            keywordTextFieldView.keywordTextField.text == feedbackDetail.keyword &&
+            !isFeedbackTypeChanged {
             return false
         } else {
             return true
         }
     }
     
+    private func isEmptyKeywordOrContent() {
+        if let keyword = keywordTextFieldView.keywordTextField.text {
+            if keyword.isEmpty || feedbackContentTextView.text.isEmpty {
+                feedbackDoneButton.isDisabled = true
+            }
+        } else {
+            feedbackDoneButton.isDisabled = true
+        }
+    }
+    
     private func detectChangeOfFeedbackType() {
-        super.feedbackTypeButtonView.changeFeedbackType = { [weak self] type in
+        feedbackTypeButtonView.changeFeedbackType = { [weak self] type in
             guard let feedbackType = FeedBackDTO.init(rawValue: type.rawValue) else { return }
             if type == self?.feedbackDetail.feedbackType {
                 self?.isFeedbackTypeChanged = false
@@ -137,45 +254,44 @@ final class MyFeedbackEditViewController: AddFeedbackViewController {
         }
     }
     
-    private func setupNavigationLeftItem() {
-        super.backButton.isHidden = true
-    }
-    
-    override func didTappedDoneButton() {
+    private func didTappedDoneButton() {
         let dto = EditFeedBackDTO(type: feedbackType,
-                                  keyword: super.feedbackKeywordTextField.text ?? "",
-                                  content: super.feedbackContentTextView.text ?? "",
-                                  start_content: !super.feedbackStartSwitch.isOn || super.feedbackStartTextView.text == TextLiteral.addFeedbackViewControllerStartTextViewPlaceholder ? "" : super.feedbackStartTextView.text)
+                                  keyword: keywordTextFieldView.keywordTextField.text ?? "",
+                                  content: feedbackContentTextView.text ?? "",
+                                  start_content: nil)
         putEditFeedBack(type: .putEditFeedBack(reflectionId: feedbackDetail.reflectionId, feedBackId: feedbackDetail.feedbackId, dto))
     }
     
-    override func didTappedCloseButton() {
-        self.dismiss(animated: true)
+    private func addTapGestureContentView() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(endEditingView))
+        addFeedbackContentView.addGestureRecognizer(tap)
     }
     
-    override func didTappedSwitch() {
-        super.didTappedSwitch()
-        if let start = self.feedbackDetail.start {
-            let hasStart = !start.isEmpty
-            if hasStart != super.feedbackStartSwitch.isOn {
-                isStartSwitchToggleChanged = true
-            } else {
-                isStartSwitchToggleChanged = false
-            }
-        } else {
-            if super.feedbackStartSwitch.isOn {
-                isStartSwitchToggleChanged = true
-            }
-        }
+    @objc override func endEditingView() {
+        view.endEditing(true)
     }
     
     // MARK: - selector
     
-    @objc override func willHideKeyboard(notification: NSNotification) {
+    @objc private func willShowKeyboard(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            UIView.animate(withDuration: 0.2, animations: {
+                self.feedbackDoneButton.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height + 25)
+            })
+            feedbackContentTextView.snp.updateConstraints {
+                $0.bottom.equalToSuperview().inset(keyboardSize.height + 150)
+            }
+            addFeedbackScrollView.setContentOffset(CGPoint(x: 0, y: 100), animated: true)
+        }
+    }
+    
+    @objc private func willHideKeyboard(notification: NSNotification) {
         UIView.animate(withDuration: 0.2, animations: {
-            super.feedbackDoneButtonView.transform = .identity
+            self.feedbackDoneButton.transform = .identity
         })
-        super.editFeedbackUntilLabel.isHidden = true
+        feedbackContentTextView.snp.updateConstraints {
+            $0.bottom.equalToSuperview()
+        }
     }
     
     // MARK: - api
@@ -196,20 +312,28 @@ final class MyFeedbackEditViewController: AddFeedbackViewController {
             }
         }
     }
-    
-    // MARK: - extension
-    
-    override func textFieldDidChangeSelection(_ textField: UITextField) {
-        super.setCounter(count: textField.text?.count ?? 0)
-        super.checkMaxLength(textField: super.feedbackKeywordTextField, maxLength: Length.keywordMaxLength)
-        super.feedbackDoneButton.isDisabled = !(isTextInputChanged() || isFeedbackTypeChanged)
+}
+
+// MARK: - extension
+
+extension MyFeedbackEditViewController: UITextFieldDelegate {
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        keywordTextFieldView.checkMaxLength(textField: keywordTextFieldView.keywordTextField, maxLength: Length.keywordMaxLength)
+        feedbackDoneButton.isDisabled = !isFeedbackChanged()
+        isEmptyKeywordOrContent()
+    }
+}
+
+extension MyFeedbackEditViewController: UITextViewDelegate {
+    func textViewDidChangeSelection(_ textView: UITextView) {
+        feedbackDoneButton.isDisabled = !isFeedbackChanged()
+        isEmptyKeywordOrContent()
     }
     
-    override func textViewDidChangeSelection(_ textView: UITextView) {
-        super.feedbackDoneButton.isDisabled = !(isTextInputChanged() || isFeedbackTypeChanged)
-    }
-    
-    override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-        return true
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.text == TextLiteral.addFeedbackViewControllerFeedbackContentTextViewPlaceholder || textView.text == TextLiteral.addFeedbackViewControllerStartTextViewPlaceholder {
+            textView.text = nil
+            textView.textColor = .black100
+        }
     }
 }

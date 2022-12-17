@@ -15,6 +15,8 @@ enum TextLiteral {
     static let feedbackTypeLabel = "피드백 종류"
     static let feedbackKeywordLabel = "키워드"
     static let feedbackContentLabel = "내용"
+    static let doneButtonNext = "다음"
+    static let doneButtonComplete = "완료"
     
     // MARK: - MainViewController
     
@@ -60,6 +62,23 @@ enum TextLiteral {
     static let addFeedbackViewControllerStartTextViewPlaceholder = "제안하고 싶은 Start를 작성해주세요"
     static let addFeedbackViewControllerFeedbackSendTimeLabel = "작성한 피드백은 회고 시간 전까지 수정 가능합니다"
     
+    // MARK: - AddFeedbackContentViewController
+    
+    static let addFeedbackContentViewControllerCurrentStepLabel2 = "상황에 대한 설명과\n그 영향을 적어주세요"
+    static let addFeedbackContentViewControllerCurrentStepLabel3 = "상황에 대해 느낀 점과\n그 이유를 적어주세요"
+    static let addFeedbackContentViewControllerCurrentStepLabel4 = "상대방을 위한\n요청 또는 격려를 적어주세요"
+    static let addFeedbackContentViewControllerCurrentStepDescriptionLabel2 = "ex. 제가 분위기를 파악 못하거나 눈치채지 못해 잘못된 일을 했을 때 조용히 불러내서 알려줘서 고맙습니다."
+    static let addFeedbackContentViewControllerCurrentStepDescriptionLabel3 = "ex. 덕분에 제 잘못을 알게 되고 고치게 되었어요. 다른 사람 앞에서 그런 얘기를 해주지 않아 민망하지 않았습니다."
+    static let addFeedbackContentViewControllerCurrentStepDescriptionLabel4 = "ex. 앞으로도 이런 지적이라면 계속해 주세요! 덕분에 항상 성장합니다"
+    
+    // MARK: - AddFeedbackKeywordViewController
+    
+    static let addFeedbackContentViewControllerCurrentStepLabel5 = "피드백을 대표하는\n키워드를 정해주세요"
+    static let addFeedbackKeywordViewControllerPlaceholder = "키워드를 입력하세요"
+    static let addFeedbackContentViewControllerToLabel = "피드백 줄 사람"
+    static let addFeedbackContentViewControllerTypeLabel = "피드백 종류"
+    static let addFeedbackContentViewControllerContentLabel = "피드백"
+    
     // MARK: - JoinTeamViewController
     
     static let joinTeamViewControllerTitleLabel = "님 반가워요!\n이제 팀에 합류해주세요"
@@ -90,8 +109,8 @@ enum TextLiteral {
     
     // MARK: - SelectReflectionMemberViewController
     
-    static let selectReflectionMemberViewControllerTitleLabel = "피드백을 듣고 싶은\n팀원을 선택해주세요"
-    static let selectReflectionMemberViewControllerDoneButtonText = "모든 회고 끝내기 "
+    static let selectReflectionMemberViewControllerTitleLabel = "각 팀원이 받은 피드백을\n공유해 보세요"
+    static let selectReflectionMemberViewControllerDoneButtonText = "모든 회고 끝내기"
     
     // MARK: - InProgressViewController
     
@@ -177,4 +196,18 @@ enum TextLiteral {
     static let myReflectionViewControllerDeleteUserAlertTitle: String = "회원탈퇴 하시겠습니까?"
     static let myReflectionViewControllerDeleteUserAlertMessage: String = "모든 회고와 피드백 정보가 사라지며, \n되돌릴 수 없습니다."
     static let myReflectionViewControllerDeleteUserTitle: String = "탈퇴한 멤버"
+    
+    // MARK: - FeedbackTypeButtonView
+    
+    static let feedbackTypeButtonViewContinueSubTitle: String = "지속해 주세요!"
+    static let feedbackTypeButtonViewStopSubTitle: String = "그만해 주세요!"
+    
+    // MARK: - KeywordTextfield
+    
+    static let keywordLimitLabel: String = "키워드는 10글자 이내로 작성해주세요"
+    
+    // MARK: - AddDetailFeedback
+    
+    static let DetailTitleLabel: String = "피드백 줄 멤버와 종류를\n선택해주세요"
+    static let toNameTitleLabel: String = "피드백 줄 멤버"
 }
