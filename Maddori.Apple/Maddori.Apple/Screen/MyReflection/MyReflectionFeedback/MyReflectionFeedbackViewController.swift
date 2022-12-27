@@ -36,29 +36,29 @@ final class MyReflectionFeedbackViewController: BaseViewController {
     private let feedbackTypeLabel: UILabel = {
         let label = UILabel()
         label.text = TextLiteral.myReflectionFeedbackViewControllerFeedbackTypeLabel
-        label.textColor = .black100
-        label.font = .label2
+        label.textColor = .gray400
+        label.font = .body1
         return label
     }()
     private lazy var feedbackTypeText: UILabel = {
         let label = UILabel()
-        label.setTextWithLineHeight(text: model.type, lineHeight: 24)
-        label.textColor = .gray400
-        label.font = .body1
+        label.text = model.type
+        label.textColor = .black100
+        label.font = .label3
         return label
     }()
     private let feedbackFromLabel: UILabel = {
         let label = UILabel()
         label.text = TextLiteral.myReflectionFeedbackViewControllerFeedbackFromLabel
-        label.textColor = .black100
-        label.font = .label2
+        label.textColor = .gray400
+        label.font = .body1
         return label
     }()
     private lazy var feedbackFromText: UILabel = {
         let label = UILabel()
-        label.setTextWithLineHeight(text: model.fromUser?.userName ?? TextLiteral.myReflectionViewControllerDeleteUserTitle, lineHeight: 24)
-        label.textColor = .gray400
-        label.font = .body1
+        label.text = model.fromUser?.userName ?? TextLiteral.myReflectionViewControllerDeleteUserTitle
+        label.textColor = .black100
+        label.font = .label3
         return label
     }()
     private let feedbackContentLabel: UILabel = {
@@ -111,20 +111,20 @@ final class MyReflectionFeedbackViewController: BaseViewController {
         
         myReflectionContentView.addSubview(feedbackTypeText)
         feedbackTypeText.snp.makeConstraints {
-            $0.top.equalTo(feedbackTypeLabel.snp.bottom).offset(SizeLiteral.labelComponentPadding)
-            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.centerY.equalTo(feedbackTypeLabel.snp.centerY)
+            $0.leading.equalTo(feedbackTypeLabel.snp.trailing).offset(54)
         }
         
         myReflectionContentView.addSubview(feedbackFromLabel)
         feedbackFromLabel.snp.makeConstraints {
-            $0.top.equalTo(feedbackTypeText.snp.bottom).offset(SizeLiteral.componentIntervalPadding)
+            $0.top.equalTo(feedbackTypeText.snp.bottom).offset(20)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
         myReflectionContentView.addSubview(feedbackFromText)
         feedbackFromText.snp.makeConstraints {
-            $0.top.equalTo(feedbackFromLabel.snp.bottom).offset(SizeLiteral.labelComponentPadding)
-            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.centerY.equalTo(feedbackFromLabel.snp.centerY)
+            $0.leading.equalTo(feedbackFromLabel.snp.trailing).offset(86)
         }
         
         myReflectionContentView.addSubview(feedbackContentLabel)
