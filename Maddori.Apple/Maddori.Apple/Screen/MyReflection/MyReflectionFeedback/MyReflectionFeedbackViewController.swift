@@ -61,12 +61,10 @@ final class MyReflectionFeedbackViewController: BaseViewController {
         label.font = .label3
         return label
     }()
-    private let feedbackContentLabel: UILabel = {
-        let label = UILabel()
-        label.text = TextLiteral.myReflectionFeedbackViewControllerFeedbackContentLabel
-        label.textColor = .black100
-        label.font = .label2
-        return label
+    private let divider: UIView = {
+        let view = UIView()
+        view.backgroundColor = .gray300
+        return view
     }()
     private lazy var feedbackContentText: UILabel = {
         let label = UILabel()
@@ -127,15 +125,16 @@ final class MyReflectionFeedbackViewController: BaseViewController {
             $0.leading.equalTo(feedbackFromLabel.snp.trailing).offset(86)
         }
         
-        myReflectionContentView.addSubview(feedbackContentLabel)
-        feedbackContentLabel.snp.makeConstraints {
-            $0.top.equalTo(feedbackFromText.snp.bottom).offset(SizeLiteral.componentIntervalPadding)
-            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        myReflectionContentView.addSubview(divider)
+        divider.snp.makeConstraints {
+            $0.top.equalTo(feedbackFromLabel.snp.bottom).offset(24)
+            $0.horizontalEdges.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.height.equalTo(1)
         }
         
         myReflectionContentView.addSubview(feedbackContentText)
         feedbackContentText.snp.makeConstraints {
-            $0.top.equalTo(feedbackContentLabel.snp.bottom).offset(SizeLiteral.labelComponentPadding)
+            $0.top.equalTo(divider.snp.bottom).offset(20)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
     }
