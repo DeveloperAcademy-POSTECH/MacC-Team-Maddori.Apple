@@ -49,6 +49,7 @@
 		39847424292603B000EDC139 /* AddFeedBackEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39847423292603B000EDC139 /* AddFeedBackEndPoint.swift */; };
 		3984742629264ACE00EDC139 /* MyFeedBackEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3984742529264ACE00EDC139 /* MyFeedBackEndPoint.swift */; };
 		39847428292656EB00EDC139 /* VoidModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39847427292656EB00EDC139 /* VoidModel.swift */; };
+		3998E86F295C308100541752 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3998E86E295C308100541752 /* Settings.bundle */; };
 		39A64ACE2905885F001DB020 /* StartSuggestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A64ACD2905885F001DB020 /* StartSuggestionView.swift */; };
 		39AC287F29269BC6006CFEE6 /* Endpointable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39AC287E29269BC6006CFEE6 /* Endpointable.swift */; };
 		39F1A13529125762005E3456 /* MyFeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F1A13429125762005E3456 /* MyFeedbackViewController.swift */; };
@@ -186,6 +187,7 @@
 		39847423292603B000EDC139 /* AddFeedBackEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFeedBackEndPoint.swift; sourceTree = "<group>"; };
 		3984742529264ACE00EDC139 /* MyFeedBackEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFeedBackEndPoint.swift; sourceTree = "<group>"; };
 		39847427292656EB00EDC139 /* VoidModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoidModel.swift; sourceTree = "<group>"; };
+		3998E86E295C308100541752 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		39A64ACD2905885F001DB020 /* StartSuggestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartSuggestionView.swift; sourceTree = "<group>"; };
 		39AC287E29269BC6006CFEE6 /* Endpointable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpointable.swift; sourceTree = "<group>"; };
 		39F1A13429125762005E3456 /* MyFeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFeedbackViewController.swift; sourceTree = "<group>"; };
@@ -318,6 +320,7 @@
 		39257DB828F8FEBD00201E0B = {
 			isa = PBXGroup;
 			children = (
+				3998E86E295C308100541752 /* Settings.bundle */,
 				39257DC328F8FEBD00201E0B /* Maddori.Apple */,
 				39257DC228F8FEBD00201E0B /* Products */,
 			);
@@ -1032,6 +1035,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				39257DD128F8FEBE00201E0B /* LaunchScreen.storyboard in Resources */,
+				3998E86F295C308100541752 /* Settings.bundle in Resources */,
 				39257DCE28F8FEBE00201E0B /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
