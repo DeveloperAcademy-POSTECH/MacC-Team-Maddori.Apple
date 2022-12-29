@@ -23,8 +23,6 @@ final class MyReflectionFeedbackViewController: BaseViewController {
         button.addAction(action, for: .touchUpInside)
         return button
     }()
-    private let myReflectionScrollView = UIScrollView()
-    private let myReflectionContentView = UIView()
     private lazy var keywordTitleLabel: UILabel = {
         let label = UILabel()
         if let keyword = model.keyword {
@@ -66,11 +64,13 @@ final class MyReflectionFeedbackViewController: BaseViewController {
         view.backgroundColor = .gray300
         return view
     }()
+    private let myReflectionScrollView = UIScrollView()
+    private let myReflectionContentView = UIView()
     private lazy var feedbackContentText: UILabel = {
         let label = UILabel()
         label.setTextWithLineHeight(text: model.content, lineHeight: 24)
-        label.textColor = .gray400
-        label.font = .body1
+        label.textColor = .black100
+        label.font = .body3
         label.numberOfLines = 0
         return label
     }()
@@ -85,57 +85,58 @@ final class MyReflectionFeedbackViewController: BaseViewController {
     required init?(coder: NSCoder) { nil }
     
     override func render() {
-        view.addSubview(myReflectionScrollView)
-        myReflectionScrollView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-        }
-        
-        myReflectionScrollView.addSubview(myReflectionContentView)
-        myReflectionContentView.snp.makeConstraints {
-            $0.width.top.bottom.equalToSuperview()
-        }
-        
-        myReflectionContentView.addSubview(keywordTitleLabel)
+        view.addSubview(keywordTitleLabel)
         keywordTitleLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(SizeLiteral.topPadding)
+            $0.top.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.topPadding)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
-        myReflectionContentView.addSubview(feedbackTypeLabel)
+        view.addSubview(feedbackTypeLabel)
         feedbackTypeLabel.snp.makeConstraints {
             $0.top.equalTo(keywordTitleLabel.snp.bottom).offset(SizeLiteral.topComponentPadding)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
-        myReflectionContentView.addSubview(feedbackTypeText)
+        view.addSubview(feedbackTypeText)
         feedbackTypeText.snp.makeConstraints {
             $0.centerY.equalTo(feedbackTypeLabel.snp.centerY)
             $0.leading.equalTo(feedbackTypeLabel.snp.trailing).offset(54)
         }
         
-        myReflectionContentView.addSubview(feedbackFromLabel)
+        view.addSubview(feedbackFromLabel)
         feedbackFromLabel.snp.makeConstraints {
             $0.top.equalTo(feedbackTypeText.snp.bottom).offset(20)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
-        myReflectionContentView.addSubview(feedbackFromText)
+        view.addSubview(feedbackFromText)
         feedbackFromText.snp.makeConstraints {
             $0.centerY.equalTo(feedbackFromLabel.snp.centerY)
             $0.leading.equalTo(feedbackFromLabel.snp.trailing).offset(86)
         }
         
-        myReflectionContentView.addSubview(divider)
+        view.addSubview(divider)
         divider.snp.makeConstraints {
             $0.top.equalTo(feedbackFromLabel.snp.bottom).offset(24)
             $0.horizontalEdges.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.height.equalTo(1)
         }
         
+        view.addSubview(myReflectionScrollView)
+        myReflectionScrollView.snp.makeConstraints {
+            $0.top.equalTo(divider.snp.bottom)
+            $0.horizontalEdges.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
+
+        myReflectionScrollView.addSubview(myReflectionContentView)
+        myReflectionContentView.snp.makeConstraints {
+            $0.width.top.bottom.equalToSuperview()
+        }
+
         myReflectionContentView.addSubview(feedbackContentText)
         feedbackContentText.snp.makeConstraints {
-            $0.top.equalTo(divider.snp.bottom).offset(20)
-            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.top.bottom.equalToSuperview().inset(20)
+            $0.horizontalEdges.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
     }
     
