@@ -1,0 +1,7 @@
+name: Alamofire, nameSpecified: Alamofire, owner: Alamofire, version: 5.6.2, source: https://github.com/Alamofire/Alamofire
+
+name: SnapKit, nameSpecified: SnapKit, owner: SnapKit, version: 5.6.0, source: https://github.com/SnapKit/SnapKit
+
+add-version-numbers: false
+
+LicensePlist Version: 3.23.4
