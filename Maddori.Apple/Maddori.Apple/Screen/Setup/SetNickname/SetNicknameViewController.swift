@@ -90,9 +90,7 @@ final class SetNicknameViewController: BaseTextFieldViewController {
             guard let self else { return }
             switch response.result {
             case .success:
-                DispatchQueue.main.async {
-                    self.navigationController?.pushViewController(JoinTeamViewController(), animated: true)
-                }
+                self.navigationController?.pushViewController(JoinTeamViewController(), animated: true)
             case .failure:
                 self.makeAlert(title: "이모티콘 사용 불가능", message: "닉네임을 다시 입력해주세요.")
             }
