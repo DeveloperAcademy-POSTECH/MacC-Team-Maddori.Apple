@@ -130,7 +130,7 @@ final class MyReflectionFeedbackViewController: BaseViewController {
 
         myReflectionScrollView.addSubview(myReflectionContentView)
         myReflectionContentView.snp.makeConstraints {
-            $0.width.top.bottom.equalToSuperview()
+            $0.width.edges.equalToSuperview()
         }
 
         myReflectionContentView.addSubview(feedbackContentText)
