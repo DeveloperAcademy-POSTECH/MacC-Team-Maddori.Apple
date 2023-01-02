@@ -138,8 +138,7 @@ final class JoinTeamViewController: BaseTextFieldViewController {
                 self.presentCertainTeamViewController(teamName: teamName, teamId: UserDefaultStorage.teamId)
             } else {
                 DispatchQueue.main.async {
-                    // FIXME: - UXWriting 필요
-                    self.makeAlert(title: "에러", message: "존재하지 않는 팀입니다.")
+                    self.makeAlert(title: "잘못된 초대코드", message: "초대코드를 다시 입력해주세요.")
                 }
             }
         }
