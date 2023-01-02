@@ -77,6 +77,7 @@ final class JoinTeamViewController: BaseTextFieldViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupDoneButton()
+        setupKeyboard()
     }
     
     override func render() {
@@ -108,6 +109,11 @@ final class JoinTeamViewController: BaseTextFieldViewController {
             self?.fetchCertainTeam(type: .fetchCertainTeam(invitationCode: invitationCode))
         }
         super.doneButton.addAction(action, for: .touchUpInside)
+    }
+    
+    private func setupKeyboard() {
+        super.kigoTextField.keyboardType = .asciiCapable
+        super.kigoTextField.autocapitalizationType = .allCharacters
     }
     
     // MARK: - func
