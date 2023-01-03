@@ -71,7 +71,6 @@ final class SetNicknameViewController: BaseTextFieldViewController {
     private func setupDoneButton() {
         let action = UIAction { [weak self] _ in
             guard let nickname = self?.kigoTextField.text else { return }
-            UserDefaultHandler.setNickname(nickname: nickname)
             self?.dispatchUserLogin(type: .dispatchLogin(LoginDTO(username: UserDefaultStorage.nickname)))
             self?.kigoTextField.resignFirstResponder()
         }
@@ -90,9 +89,11 @@ final class SetNicknameViewController: BaseTextFieldViewController {
             guard let self else { return }
             switch response.result {
             case .success:
+                guard let nickname = self.kigoTextField.text else { return }
+                UserDefaultHandler.setNickname(nickname: nickname)
                 self.navigationController?.pushViewController(JoinTeamViewController(), animated: true)
             case .failure:
-                self.makeAlert(title: "이모티콘 사용 불가능", message: "닉네임을 다시 입력해주세요.")
+                self.makeAlert(title: TextLiteral.setNicknameViewControllerAlertTitle, message: TextLiteral.setNicknameControllerAlertMessage)
             }
         }
     }

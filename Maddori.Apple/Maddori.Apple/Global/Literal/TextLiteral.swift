@@ -42,6 +42,8 @@ enum TextLiteral {
     
     static let setNicknameViewControllerTitleLabel = "키고에서 사용할 \n닉네임을 입력해주세요"
     static let setNicknameViewControllerNicknameTextFieldPlaceHolder = "예) 진저, 호야, 성민"
+    static let setNicknameViewControllerAlertTitle = "이모티콘 사용 불가능"
+    static let setNicknameControllerAlertMessage = "닉네임을 다시 입력해주세요."
     
     // MARK: - HomeViewController
     
