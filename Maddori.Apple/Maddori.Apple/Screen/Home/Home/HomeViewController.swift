@@ -34,6 +34,7 @@ final class HomeViewController: BaseViewController {
     
     var currentReflectionId: Int = 0
     var reflectionStatus: ReflectionStatus = .Before
+    var hasKeyword: Bool = false
     var isAdmin: Bool = false
     var hasSeenReflectionAlert: Bool = UserDefaultStorage.hasSeenReflectionAlert {
         willSet {
@@ -394,8 +395,10 @@ final class HomeViewController: BaseViewController {
                 self.currentReflectionId = reflectionId
                 self.reflectionStatus = reflectionStatus
                 if let reflectionKeywordList = reflectionDetail?.reflectionKeywords {
+                    self.hasKeyword = true
                     if reflectionKeywordList.isEmpty {
                         self.resetKeywordList()
+                        self.hasKeyword = false
                     }
                     self.convertFetchedKeywordList(of: reflectionKeywordList)
                     DispatchQueue.main.async {
@@ -455,7 +458,12 @@ extension HomeViewController: UICollectionViewDataSource {
         UIDevice.vibrate()
         switch reflectionStatus {
         case .Before, .SettingRequired, .Done:
-            showToastPopUp(of: .warning)
+            if hasKeyword {
+                showToastPopUp(of: .warning)
+            } else {
+                didTapAddFeedbackButton()
+            }
+            
         case .Progressing:
             showStartReflectionView()
         }
