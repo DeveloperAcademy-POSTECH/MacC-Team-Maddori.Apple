@@ -144,7 +144,7 @@ final class JoinTeamViewController: BaseTextFieldViewController {
                 self.presentCertainTeamViewController(teamName: teamName, teamId: UserDefaultStorage.teamId)
             } else {
                 DispatchQueue.main.async {
-                    self.makeAlert(title: "잘못된 초대코드", message: "초대코드를 다시 입력해주세요.")
+                    self.makeAlert(title: TextLiteral.joinTeamViewControllerAlertTitle, message: TextLiteral.joinTeamViewControllerAlertMessage)
                 }
             }
         }

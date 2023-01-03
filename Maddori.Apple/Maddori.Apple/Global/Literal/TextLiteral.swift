@@ -85,6 +85,8 @@ enum TextLiteral {
     static let joinTeamViewControllerNicknameTextFieldPlaceHolder = "초대코드"
     static let joinTeamViewControllerSubText = "팀이 없나요?"
     static let joinTeamViewControllerSubButtonText = "팀 생성하기"
+    static let joinTeamViewControllerAlertTitle = "잘못된 초대코드"
+    static let joinTeamViewControllerAlertMessage = "초대코드를 다시 입력해주세요."
     
     // MARK: - StartReflectionViewController
     
