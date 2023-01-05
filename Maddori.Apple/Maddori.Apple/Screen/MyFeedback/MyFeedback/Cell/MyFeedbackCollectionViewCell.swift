@@ -48,13 +48,6 @@ final class MyFeedbackCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - life cycle
     
-    override func prepareForReuse() {
-        titleLabel.text = nil
-        contentLabel.text = nil
-        rightImage.image = ImageLiterals.icRight
-        
-    }
-    
     override func configUI() {
         backgroundColor = .backgroundWhite
     }
