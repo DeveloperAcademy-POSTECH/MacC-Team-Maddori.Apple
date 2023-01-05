@@ -14,8 +14,10 @@ final class MyFeedbackViewController: BaseViewController {
     var selectedIndex: Int = 0
     private var memberList: [MemberResponse] = [] {
         didSet {
-            memberCollectionView.reloadData()
-            if !memberList.isEmpty {            
+            if memberList.isEmpty {
+                setEmptyView()
+            } else {
+                memberCollectionView.reloadData()
                 fetchCertainMemberFeedBack(type: .fetchCertainMemberFeedBack(memberId: memberList[selectedIndex].userId ?? 0))
             }
         }
@@ -76,6 +78,25 @@ final class MyFeedbackViewController: BaseViewController {
         }
         return collectionView
     }()
+    private lazy var emptyView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .backgroundWhite
+        return view
+    }()
+    private lazy var emptyIcon: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = ImageLiterals.icPersonCircle
+        imageView.tintColor = .gray700
+        return imageView
+    }()
+    private lazy var emptyLabel: UILabel = {
+        let label = UILabel()
+        label.text = TextLiteral.myFeedbackViewControllerEmptyViewLabel
+        label.numberOfLines = 2
+        label.textColor = .gray700
+        label.font = .body3
+        return label
+    }()
     
     // MARK: - life cycle
     
@@ -110,6 +131,29 @@ final class MyFeedbackViewController: BaseViewController {
         feedbackCollectionView.snp.makeConstraints {
             $0.leading.trailing.bottom.equalToSuperview()
             $0.top.equalTo(dividerView.snp.bottom)
+        }
+    }
+    
+    // MARK: - func
+    
+    private func setEmptyView() {
+        view.addSubview(emptyView)
+        emptyView.snp.makeConstraints {
+            $0.top.equalTo(myFeedbackLabel.snp.bottom)
+            $0.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
+        
+        emptyView.addSubview(emptyIcon)
+        emptyIcon.snp.makeConstraints {
+            $0.centerY.equalToSuperview().offset(-40)
+            $0.centerX.equalToSuperview()
+            $0.width.height.equalTo(60)
+        }
+        
+        emptyView.addSubview(emptyLabel)
+        emptyLabel.snp.makeConstraints {
+            $0.top.equalTo(emptyIcon.snp.bottom).offset(21)
+            $0.centerX.equalToSuperview()
         }
     }
     
