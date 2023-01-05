@@ -74,6 +74,7 @@ final class InProgressViewController: BaseViewController {
             label.text = currentReflectionMemberName + TextLiteral.inProgressViewControllerOthersSubTitleLabel
         }
         label.numberOfLines = 0
+        label.setLineSpacing(to: 2)
         return label
     }()
     private let flowLayout = KeywordCollectionViewFlowLayout()
