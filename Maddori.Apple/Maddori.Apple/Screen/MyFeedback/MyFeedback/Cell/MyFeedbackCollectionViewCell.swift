@@ -11,6 +11,14 @@ import SnapKit
 
 final class MyFeedbackCollectionViewCell: BaseCollectionViewCell {
     
+    var isDividerHidden: Bool? {
+        didSet {
+            if let isDividerHidden {            
+                setDividerHidden(isDividerHidden)
+            }
+        }
+    }
+    
     // MARK: - property
     
     private let titleLabel: UILabel = {
@@ -39,6 +47,13 @@ final class MyFeedbackCollectionViewCell: BaseCollectionViewCell {
     }()
     
     // MARK: - life cycle
+    
+    override func prepareForReuse() {
+        titleLabel.text = nil
+        contentLabel.text = nil
+        rightImage.image = ImageLiterals.icRight
+        
+    }
     
     override func configUI() {
         backgroundColor = .backgroundWhite
