@@ -348,10 +348,12 @@ final class HomeViewController: BaseViewController {
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
-        keywordCollectionView.snp.remakeConstraints {
-            $0.top.equalTo(currentReflectionLabel.snp.bottom).offset(SizeLiteral.titleSubtitleSpacing)
-            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-            $0.bottom.equalTo(planLabelButtonBackgroundView.snp.top).offset(-10)
+        if isAdmin {
+            keywordCollectionView.snp.remakeConstraints {
+                $0.top.equalTo(currentReflectionLabel.snp.bottom).offset(SizeLiteral.titleSubtitleSpacing)
+                $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+                $0.bottom.equalTo(planLabelButtonBackgroundView.snp.top).offset(-10)
+            }
         }
     }
     
