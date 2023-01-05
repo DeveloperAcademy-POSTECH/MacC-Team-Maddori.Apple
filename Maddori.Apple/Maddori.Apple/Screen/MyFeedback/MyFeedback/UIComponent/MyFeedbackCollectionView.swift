@@ -195,9 +195,11 @@ extension MyFeedbackCollectionView: UICollectionViewDataSource {
             switch indexPath.section {
             case 0:
                 if hasContinue {
-                    cell.setCellLabel(title: data.continueArray[indexPath.item].keyword ?? "", content: data.continueArray[indexPath.item].content ?? "")
+                    cell.setCellLabel(title: data.continueArray[indexPath.item].keyword ?? "",
+                                      content: data.continueArray[indexPath.item].content ?? "")
                 } else {
-                    cell.setCellLabel(title: data.stopArray[indexPath.item].keyword ?? "", content: data.stopArray[indexPath.item].content ?? "")
+                    cell.setCellLabel(title: data.stopArray[indexPath.item].keyword ?? "",
+                                      content: data.stopArray[indexPath.item].content ?? "")
                 }
                 if indexPath.item == data.continueArray.count - 1 {
                     cell.isDividerHidden = true
@@ -205,7 +207,8 @@ extension MyFeedbackCollectionView: UICollectionViewDataSource {
                     cell.isDividerHidden = false
                 }
             case 1:
-                cell.setCellLabel(title: data.stopArray[indexPath.item].keyword ?? "", content: data.stopArray[indexPath.item].content ?? "")
+                cell.setCellLabel(title: data.stopArray[indexPath.item].keyword ?? "",
+                                  content: data.stopArray[indexPath.item].content ?? "")
                 if indexPath.item == data.stopArray.count - 1 {
                     cell.isDividerHidden = true
                 } else {
