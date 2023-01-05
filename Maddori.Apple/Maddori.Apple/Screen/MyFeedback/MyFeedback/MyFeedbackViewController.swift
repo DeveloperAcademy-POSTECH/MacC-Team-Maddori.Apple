@@ -38,7 +38,7 @@ final class MyFeedbackViewController: BaseViewController {
         label.setTitleFont(text: TextLiteral.myFeedbackViewControllerTitleLabel)
         return label
     }()
-    private let collectionViewFlowLayout: UICollectionViewFlowLayout = {
+    private lazy var collectionViewFlowLayout: UICollectionViewFlowLayout = {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .horizontal
         flowLayout.sectionInset = UIEdgeInsets(top: Size.verticalPadding,
@@ -58,7 +58,7 @@ final class MyFeedbackViewController: BaseViewController {
         collectionView.register(MyFeedbackMemberCollectionViewCell.self, forCellWithReuseIdentifier: MyFeedbackMemberCollectionViewCell.className)
         return collectionView
     }()
-    private let dividerView: UIView = {
+    private lazy var dividerView: UIView = {
         let view = UIView()
         view.backgroundColor = .gray300
         return view
