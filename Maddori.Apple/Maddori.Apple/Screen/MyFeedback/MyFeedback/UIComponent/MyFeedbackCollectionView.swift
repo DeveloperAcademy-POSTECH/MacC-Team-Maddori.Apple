@@ -22,11 +22,11 @@ final class MyFeedbackCollectionView: UIView {
         static let cellContentWidth: CGFloat = UIScreen.main.bounds.size.width - SizeLiteral.leadingTrailingPadding - 66
         static let resizingTextLineOneHeight: CGFloat = 65
         static let resizingTextLineTwoHeight: CGFloat = 87
-        static let cellWidth: CGFloat = UIScreen.main.bounds.size.width - (SizeLiteral.leadingTrailingPadding * 2)
+        static let cellWidth: CGFloat = UIScreen.main.bounds.size.width - (SizeLiteral.leadingTrailingPadding)
         static let collectionViewInset = UIEdgeInsets.init(top: Size.topSpacing,
                                                            left: Size.horizontalPadding,
                                                            bottom: 20,
-                                                           right: Size.horizontalPadding)
+                                                           right: 0)
     }
     
     // MARK: - property

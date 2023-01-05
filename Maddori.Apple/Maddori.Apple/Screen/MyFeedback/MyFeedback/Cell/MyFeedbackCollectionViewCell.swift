@@ -67,7 +67,8 @@ final class MyFeedbackCollectionViewCell: BaseCollectionViewCell {
         
         self.addSubview(rightImage)
         rightImage.snp.makeConstraints {
-            $0.centerY.trailing.equalToSuperview()
+            $0.centerY.equalToSuperview()
+            $0.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.width.equalTo(12)
             $0.height.equalTo(20)
         }
