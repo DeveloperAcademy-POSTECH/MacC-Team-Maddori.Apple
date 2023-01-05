@@ -15,8 +15,9 @@ final class MyFeedbackViewController: BaseViewController {
     private var memberList: [MemberResponse] = [] {
         didSet {
             if memberList.isEmpty {
-                setEmptyView()
+                setLayoutEmptyView()
             } else {
+                setLayoutMyFeedbackView()
                 memberCollectionView.reloadData()
                 fetchCertainMemberFeedBack(type: .fetchCertainMemberFeedBack(memberId: memberList[selectedIndex].userId ?? 0))
             }
@@ -112,6 +113,16 @@ final class MyFeedbackViewController: BaseViewController {
             $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(SizeLiteral.topPadding)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
+    }
+    
+    // MARK: - func
+    
+    private func setLayoutMyFeedbackView() {
+        view.addSubview(myFeedbackLabel)
+        myFeedbackLabel.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(SizeLiteral.topPadding)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
         
         view.addSubview(memberCollectionView)
         memberCollectionView.snp.makeConstraints {
@@ -134,9 +145,7 @@ final class MyFeedbackViewController: BaseViewController {
         }
     }
     
-    // MARK: - func
-    
-    private func setEmptyView() {
+    private func setLayoutEmptyView() {
         view.addSubview(emptyView)
         emptyView.snp.makeConstraints {
             $0.top.equalTo(myFeedbackLabel.snp.bottom)
