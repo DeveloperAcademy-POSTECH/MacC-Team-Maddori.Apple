@@ -426,6 +426,7 @@ final class HomeViewController: BaseViewController {
                         }
                         self.flowLayout.count = reflectionKeywordList.count
                         self.keywordCollectionView.reloadData()
+//                        self.keywordCollectionView.setBlurGradient(in: .negativeY, by: 1)
                     }
                 }
             }

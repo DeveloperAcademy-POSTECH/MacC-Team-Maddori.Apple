@@ -8,6 +8,14 @@
 import UIKit
 
 extension UIView {
+    
+    enum GradientDirection {
+        case positiveX
+        case negativeX
+        case positiveY
+        case negativeY
+    }
+    
     func setGradient(colorTop: UIColor, colorBottom: UIColor) {
         let gradient: CAGradientLayer = CAGradientLayer()
         gradient.colors = [colorTop.cgColor, colorBottom.cgColor]
@@ -16,6 +24,42 @@ extension UIView {
         gradient.endPoint = CGPoint(x: 0.0, y: 1.0)
         gradient.frame = bounds
         layer.addSublayer(gradient)
+    }
+    
+    func setBlurGradient(in direction: GradientDirection, by portion: CGFloat) {
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.colors = [
+            UIColor.backgroundWhite.withAlphaComponent(0).cgColor,
+            UIColor.backgroundWhite.withAlphaComponent(1).cgColor
+        ]
+        let viewEffect = UIBlurEffect(style: .light)
+        let effectView = UIVisualEffectView(effect: viewEffect)
+        switch direction {
+        case .positiveX:
+            effectView.frame = CGRect(x: self.bounds.origin.x, y: self.bounds.origin.y, width: self.bounds.size.width * portion, height: self.bounds.size.height)
+            effectView.autoresizingMask = [.flexibleWidth]
+            gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
+            gradientLayer.endPoint = CGPoint(x: 1.0, y: 0.0)
+        case .negativeX:
+            effectView.frame = CGRect(x: self.bounds.origin.x, y: self.bounds.origin.y, width: self.bounds.size.width * portion, height: self.bounds.size.height)
+            effectView.autoresizingMask = [.flexibleWidth]
+            gradientLayer.startPoint = CGPoint(x: 1.0, y: 0.0)
+            gradientLayer.endPoint = CGPoint(x: 0.0, y: 0.0)
+        case .positiveY:
+            effectView.frame = CGRect(x: self.bounds.origin.x, y: self.bounds.origin.y, width: self.bounds.size.width, height: self.bounds.size.height * portion)
+            effectView.autoresizingMask = [.flexibleHeight]
+            gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
+            gradientLayer.endPoint = CGPoint(x: 0.0, y: 1.0)
+        case .negativeY:
+            effectView.frame = CGRect(x: self.bounds.origin.x, y: self.bounds.origin.y, width: self.bounds.size.width, height: self.bounds.size.height * portion)
+            effectView.autoresizingMask = [.flexibleHeight]
+            gradientLayer.startPoint = CGPoint(x: 0.0, y: 1.0)
+            gradientLayer.endPoint = CGPoint(x: 0.0, y: 0.0)
+        }
+        gradientLayer.frame = effectView.frame
+        effectView.layer.mask = gradientLayer
+        effectView.isUserInteractionEnabled = false
+        addSubview(effectView)
     }
     
     @discardableResult
