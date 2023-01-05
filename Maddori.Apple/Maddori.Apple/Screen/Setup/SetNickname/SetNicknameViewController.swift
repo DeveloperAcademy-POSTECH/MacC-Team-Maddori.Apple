@@ -71,7 +71,7 @@ final class SetNicknameViewController: BaseTextFieldViewController {
     private func setupDoneButton() {
         let action = UIAction { [weak self] _ in
             guard let nickname = self?.kigoTextField.text else { return }
-            self?.dispatchUserLogin(type: .dispatchLogin(LoginDTO(username: UserDefaultStorage.nickname)))
+            self?.dispatchUserLogin(type: .dispatchLogin(LoginDTO(username: nickname)))
             self?.kigoTextField.resignFirstResponder()
         }
         super.doneButton.addAction(action, for: .touchUpInside)
