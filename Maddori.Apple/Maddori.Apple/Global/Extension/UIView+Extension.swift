@@ -62,6 +62,16 @@ extension UIView {
         addSubview(effectView)
     }
     
+    func setFadingMask() {
+        let gradientMaskLayer = CAGradientLayer()
+        gradientMaskLayer.frame = self.bounds
+        gradientMaskLayer.colors = [
+            UIColor.black.cgColor,
+            UIColor.clear.cgColor,
+        ]
+        self.layer.mask = gradientMaskLayer
+    }
+    
     @discardableResult
     func makeShadow(color: UIColor,
                     opacity: Float,
