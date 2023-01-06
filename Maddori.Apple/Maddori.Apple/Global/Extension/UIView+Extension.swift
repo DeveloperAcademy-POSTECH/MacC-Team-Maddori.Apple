@@ -63,13 +63,25 @@ extension UIView {
     }
     
     func setFadingMask() {
+        let maskedView = UIView(frame: CGRect(
+            x: 0,
+            y: 0,
+            width: self.bounds.width,
+            height: self.bounds.height
+        ))
+        maskedView.backgroundColor = .backgroundWhite
+        maskedView.isUserInteractionEnabled = false
         let gradientMaskLayer = CAGradientLayer()
-        gradientMaskLayer.frame = self.bounds
+        gradientMaskLayer.frame = maskedView.bounds
         gradientMaskLayer.colors = [
-            UIColor.black.cgColor,
+            UIColor.backgroundWhite.cgColor,
             UIColor.clear.cgColor,
+            UIColor.clear.cgColor,
+            UIColor.backgroundWhite.cgColor
         ]
-        self.layer.mask = gradientMaskLayer
+        gradientMaskLayer.locations = [0.01, 0.1, 0.9, 0.99]
+        maskedView.layer.mask = gradientMaskLayer
+        self.addSubview(maskedView)
     }
     
     @discardableResult

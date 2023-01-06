@@ -66,22 +66,11 @@ final class HomeViewController: BaseViewController {
         collectionView.register(KeywordCollectionViewCell.self, forCellWithReuseIdentifier: KeywordCollectionViewCell.className)
         return collectionView
     }()
-    
-    
-//    private lazy var keywordCollectionTopBlurView: UIView = {
-//        let view = UIView()
-//        view.setFadingMask()
-//        view.isUserInteractionEnabled = false
-//        return view
-//    }()
-//    private lazy var keywordCollectionBottomBlurView: UIView = {
-//        let view = UIView()
-//        view.setFadingMask()
-//        view.isUserInteractionEnabled = false
-//        return view
-//    }()
-    
-    
+    private let keywordCollectionBlurView: UIView = {
+        let view = UIView()
+        view.isUserInteractionEnabled = false
+        return view
+    }()
     private lazy var teamNameLabel: UILabel = {
         let label = UILabel()
         label.textColor = .black100
@@ -222,44 +211,17 @@ final class HomeViewController: BaseViewController {
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             $0.bottom.equalTo(addFeedbackButton.snp.top).offset(-10)
         }
+        
+        view.addSubview(keywordCollectionBlurView)
+        keywordCollectionBlurView.snp.makeConstraints {
+            $0.top.equalTo(currentReflectionLabel.snp.bottom).offset(SizeLiteral.titleSubtitleSpacing)
+            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            // FIXME: #253 PR 머지되면 addSubview 하는 부분 옮기기
+            $0.bottom.equalTo(addFeedbackButton.snp.top).offset(-10)
+        }
     }
     
     // MARK: - func
-    
-    private func setKeywordCollectionFadingMask() {
-        let maskedView = UIView(frame: CGRect(
-            x: 0,
-            y: currentReflectionLabel.frame.origin.y,
-            width: view.bounds.width,
-            height: 400
-        ))
-        maskedView.backgroundColor = .backgroundWhite
-        maskedView.isUserInteractionEnabled = false
-        let gradientMaskLayer = CAGradientLayer()
-        gradientMaskLayer.frame = maskedView.bounds
-        gradientMaskLayer.colors = [
-            UIColor.backgroundWhite.cgColor,
-            UIColor.clear.cgColor,
-            UIColor.clear.cgColor,
-            UIColor.backgroundWhite.cgColor
-        ]
-        gradientMaskLayer.locations = [0, 0.1, 0.9, 1]
-        maskedView.layer.mask = gradientMaskLayer
-        view.addSubview(maskedView)
-        
-//        maskedView.snp.makeConstraints {
-//            $0.top.equalTo(currentReflectionLabel.snp.bottom).offset(SizeLiteral.titleSubtitleSpacing)
-//            $0.horizontalEdges.equalToSuperview()
-//            $0.bottom.equalTo(addFeedbackButton.snp.top)
-//        }
-        
-//        view.addSubview(keywordCollectionBottomBlurView)
-//        keywordCollectionBottomBlurView.snp.makeConstraints {
-//            $0.bottom.equalTo(addFeedbackButton.snp.top).offset(-200)
-//            $0.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
-//            $0.height.equalTo(30)
-//        }
-    }
     
     private func setUpDelegation() {
         keywordCollectionView.delegate = self
@@ -477,7 +439,7 @@ final class HomeViewController: BaseViewController {
                         }
                         self.flowLayout.count = reflectionKeywordList.count
                         self.keywordCollectionView.reloadData()
-                        self.setKeywordCollectionFadingMask()
+                        self.keywordCollectionBlurView.setFadingMask()
                     }
                 }
             }
