@@ -19,7 +19,7 @@ final class KeywordCollectionViewFlowLayout: UICollectionViewFlowLayout {
     
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         self.minimumLineSpacing = Size.keywordLabelRowSpacing
-        self.sectionInset = UIEdgeInsets(top: 15, left: SizeLiteral.leadingTrailingPadding, bottom: 0, right: SizeLiteral.leadingTrailingPadding)
+        self.sectionInset = UIEdgeInsets(top: 15, left: SizeLiteral.leadingTrailingPadding, bottom: 15, right: SizeLiteral.leadingTrailingPadding)
         let attributes = super.layoutAttributesForElements(in: rect)
         var leftMargin = sectionInset.left
         var maxY: CGFloat = -1.0
