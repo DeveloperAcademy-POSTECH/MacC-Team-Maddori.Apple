@@ -12,13 +12,7 @@ import SnapKit
 
 final class HomeViewController: BaseViewController {
     
-    var keywordList: [String] = [
-        TextLiteral.homeViewControllerCollectionViewEmtpyText0,
-        TextLiteral.homeViewControllerCollectionViewEmtpyText1,
-        TextLiteral.homeViewControllerCollectionViewEmtpyText2,
-        TextLiteral.homeViewControllerCollectionViewEmtpyText3,
-        TextLiteral.homeViewControllerCollectionViewEmtpyText4
-    ]
+    var keywordList: [String] = TextLiteral.homeViewControllerEmptyCollectionViewList
     var isTouched = false
     
     private enum Size {
@@ -371,13 +365,7 @@ final class HomeViewController: BaseViewController {
     }
     
     private func resetKeywordList() {
-        keywordList = [
-            TextLiteral.homeViewControllerCollectionViewEmtpyText0,
-            TextLiteral.homeViewControllerCollectionViewEmtpyText1,
-            TextLiteral.homeViewControllerCollectionViewEmtpyText2,
-            TextLiteral.homeViewControllerCollectionViewEmtpyText3,
-            TextLiteral.homeViewControllerCollectionViewEmtpyText4,
-        ]
+        keywordList = TextLiteral.homeViewControllerEmptyCollectionViewList
     }
     
     // MARK: - api
