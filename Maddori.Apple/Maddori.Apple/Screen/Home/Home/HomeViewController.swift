@@ -210,7 +210,6 @@ final class HomeViewController: BaseViewController {
         keywordCollectionBlurView.snp.makeConstraints {
             $0.top.equalTo(currentReflectionLabel.snp.bottom).offset(SizeLiteral.titleSubtitleSpacing)
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-            // FIXME: #253 PR 머지되면 addSubview 하는 부분 옮기기
             $0.bottom.equalTo(addFeedbackButton.snp.top).offset(-10)
         }
     }
@@ -290,6 +289,12 @@ final class HomeViewController: BaseViewController {
         present(viewController, animated: true)
     }
     
+    private func setupBlurView() {
+        keywordCollectionBlurView.snp.remakeConstraints {
+            $0.edges.equalTo(keywordCollectionView.snp.edges)
+        }
+        keywordCollectionBlurView.setFadingMask()
+    }
     
     // 회고 상태: Setting Required
     private func showPlanLabelButton() {
@@ -307,6 +312,8 @@ final class HomeViewController: BaseViewController {
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             $0.bottom.equalTo(addFeedbackButton.snp.top).offset(-10)
         }
+        
+        setupBlurView()
     }
     
     // 회고 상태: Progressing
@@ -336,6 +343,8 @@ final class HomeViewController: BaseViewController {
             $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-SizeLiteral.bottomTabBarPadding)
         }
         
+        setupBlurView()
+        
         setGradientJoinReflectionView()
         joinReflectionButton.render()
     }
@@ -345,11 +354,14 @@ final class HomeViewController: BaseViewController {
         keywordCollectionView.snp.remakeConstraints {
             $0.top.equalTo(currentReflectionLabel.snp.bottom).offset(SizeLiteral.titleSubtitleSpacing)
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(SizeLiteral.bottomTabBarPadding)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.bottomTabBarPadding)
         }
+        
+        setupBlurView()
     }
     
     // 회고 상태: Done
+    // FIXME: 디자인 바뀌면 아예 없어질 함수
     private func restoreView() {
         currentReflectionLabel.snp.remakeConstraints {
             $0.top.equalTo(descriptionLabel.snp.bottom).offset(Size.propertyPadding)
@@ -363,6 +375,7 @@ final class HomeViewController: BaseViewController {
                 $0.bottom.equalTo(planLabelButtonBackgroundView.snp.top).offset(-10)
             }
         }
+        setupBlurView()
     }
     
     private func hideJoinReflectionButton() {
@@ -450,7 +463,6 @@ final class HomeViewController: BaseViewController {
                         }
                         self.flowLayout.count = reflectionKeywordList.count
                         self.keywordCollectionView.reloadData()
-                        self.keywordCollectionBlurView.setFadingMask()
                     }
                 }
             }

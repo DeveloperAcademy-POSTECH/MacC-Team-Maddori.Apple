@@ -79,7 +79,7 @@ extension UIView {
             UIColor.clear.cgColor,
             UIColor.backgroundWhite.cgColor
         ]
-        gradientMaskLayer.locations = [0.01, 0.1, 0.9, 0.99]
+        gradientMaskLayer.locations = [0.01, 0.07, 0.93, 0.99]
         maskedView.layer.mask = gradientMaskLayer
         self.addSubview(maskedView)
     }
