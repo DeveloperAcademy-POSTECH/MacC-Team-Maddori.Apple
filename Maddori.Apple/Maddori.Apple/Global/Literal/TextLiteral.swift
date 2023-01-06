@@ -99,6 +99,8 @@ enum TextLiteral {
     
     static let createTeamViewControllerTitleLabel = "팀 이름을 입력해주세요"
     static let createTeamViewControllerTextFieldPlaceHolder = "예) 맛쟁이 사과처럼"
+    static let createTeamViewControllerAlertTitle = "특수문자를 사용할 수 없습니다."
+    static let createTeamViewControllerAlertMessage = "팀 이름을 다시 입력해주세요."
     
     // MARK: - InvitationCodeViewController
     
