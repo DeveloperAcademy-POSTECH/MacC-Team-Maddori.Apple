@@ -12,13 +12,7 @@ import SnapKit
 
 final class HomeViewController: BaseViewController {
     
-    var keywordList: [String] = [
-        TextLiteral.homeViewControllerCollectionViewEmtpyText0,
-        TextLiteral.homeViewControllerCollectionViewEmtpyText1,
-        TextLiteral.homeViewControllerCollectionViewEmtpyText2,
-        TextLiteral.homeViewControllerCollectionViewEmtpyText3,
-        TextLiteral.homeViewControllerCollectionViewEmtpyText4
-    ]
+    var keywordList: [String] = TextLiteral.homeViewControllerEmptyCollectionViewList
     var isTouched = false
     
     private enum Size {
@@ -296,17 +290,32 @@ final class HomeViewController: BaseViewController {
         present(viewController, animated: true)
     }
     
+    
+    // 회고 상태: Setting Required
+    private func showPlanLabelButton() {
+        planLabelButtonView.isHidden = false
+        planLabelButtonBackgroundView.isHidden = false
+    }
+    
+    // 회고 상태: Before
+    private func hidePlanLabelButton() {
+        planLabelButtonView.isHidden = true
+        planLabelButtonBackgroundView.isHidden = true
+        
+        keywordCollectionView.snp.remakeConstraints {
+            $0.top.equalTo(currentReflectionLabel.snp.bottom).offset(SizeLiteral.titleSubtitleSpacing)
+            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            $0.bottom.equalTo(addFeedbackButton.snp.top).offset(-10)
+        }
+    }
+    
+    // 회고 상태: Progressing
     private func showStartReflectionView() {
         guard let navigationController = self.navigationController else { return }
         let viewController = StartReflectionViewController(reflectionId: currentReflectionId, navigationViewController: navigationController, isAdmin: self.isAdmin)
         viewController.modalPresentationStyle = .overFullScreen
         present(viewController, animated: true)
         hasSeenReflectionAlert = true
-    }
-    
-    private func showPlanLabelButton() {
-        planLabelButtonView.isHidden = false
-        planLabelButtonBackgroundView.isHidden = false
     }
     
     private func showJoinReflectionButton() {
@@ -331,22 +340,29 @@ final class HomeViewController: BaseViewController {
         joinReflectionButton.render()
     }
     
+    private func hideAddFeedbackButton() {
+        self.addFeedbackButton.isHidden = true
+        keywordCollectionView.snp.remakeConstraints {
+            $0.top.equalTo(currentReflectionLabel.snp.bottom).offset(SizeLiteral.titleSubtitleSpacing)
+            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(SizeLiteral.bottomTabBarPadding)
+        }
+    }
+    
+    // 회고 상태: Done
     private func restoreView() {
         currentReflectionLabel.snp.remakeConstraints {
             $0.top.equalTo(descriptionLabel.snp.bottom).offset(Size.propertyPadding)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
-        keywordCollectionView.snp.remakeConstraints {
-            $0.top.equalTo(currentReflectionLabel.snp.bottom).offset(SizeLiteral.titleSubtitleSpacing)
-            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-            $0.bottom.equalTo(addFeedbackButton.snp.top).offset(-10)
+        if isAdmin {
+            keywordCollectionView.snp.remakeConstraints {
+                $0.top.equalTo(currentReflectionLabel.snp.bottom).offset(SizeLiteral.titleSubtitleSpacing)
+                $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+                $0.bottom.equalTo(planLabelButtonBackgroundView.snp.top).offset(-10)
+            }
         }
-    }
-    
-    private func hidePlanLabelButton() {
-        planLabelButtonView.isHidden = true
-        planLabelButtonBackgroundView.isHidden = true
     }
     
     private func hideJoinReflectionButton() {
@@ -363,11 +379,7 @@ final class HomeViewController: BaseViewController {
     }
     
     private func resetKeywordList() {
-        keywordList = [TextLiteral.homeViewControllerCollectionViewEmtpyText0,
-                       TextLiteral.homeViewControllerCollectionViewEmtpyText1,
-                       TextLiteral.homeViewControllerCollectionViewEmtpyText2,
-                       TextLiteral.homeViewControllerCollectionViewEmtpyText3,
-                       TextLiteral.homeViewControllerCollectionViewEmtpyText4]
+        keywordList = TextLiteral.homeViewControllerEmptyCollectionViewList
     }
     
     // MARK: - api
@@ -418,8 +430,8 @@ final class HomeViewController: BaseViewController {
                         switch reflectionStatus {
                         case .SettingRequired, .Done:
                             self.descriptionLabel.text = TextLiteral.homeViewControllerEmptyDescriptionLabel
-                            self.hideJoinReflectionButton()
                             self.addFeedbackButton.isHidden = false
+                            self.hideJoinReflectionButton()
                             self.showPlanLabelButton()
                             self.restoreView()
                         case .Before:
@@ -429,10 +441,9 @@ final class HomeViewController: BaseViewController {
                         case .Progressing:
                             let reflectionDate = reflectionDetail?.reflectionDate?.formatDateString(to: "M월 d일 a h시 m분")
                             self.descriptionLabel.text = "다음 회고는 \(reflectionDate ?? String(describing: Date()))입니다"
-                            self.addFeedbackButton.isHidden = true
-                            self.hidePlanLabelButton()
                             self.showJoinReflectionButton()
                             self.hidePlanLabelButton()
+                            self.hideAddFeedbackButton()
                             if !self.hasSeenReflectionAlert {
                                 self.showStartReflectionView()
                             }

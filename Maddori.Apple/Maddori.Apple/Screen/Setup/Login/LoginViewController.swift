@@ -44,6 +44,11 @@ final class LoginViewController: BaseViewController {
     
     // MARK: - life cycle
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        navigateToLastView()
+    }
+    
     override func configUI() {
         super.configUI()
         setGradientText()
@@ -105,6 +110,20 @@ final class LoginViewController: BaseViewController {
         UserDefaultHandler.setIsLogin(isLogin: true)
     }
     
+    private func navigateToLastView() {
+        let hasNickname = UserDefaultStorage.nickname != ""
+        let hasTeamId = UserDefaultStorage.teamId != 0
+        if hasNickname && hasTeamId {
+            let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
+            sceneDelegate?.changeRootViewCustomTabBarView()
+            self.setLoginUserDefaults()
+        } else if hasNickname {
+            self.presentViewController(viewController: JoinTeamViewController())
+        } else {
+            return
+        }
+    }
+    
     // MARK: - api
     
     private func dispatchAppleLogin(type: SetupEndPoint<AppleLoginDTO>) {
@@ -133,20 +152,15 @@ final class LoginViewController: BaseViewController {
                     UserDefaultHandler.setTeamId(teamId: teamId)
                     let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
                     sceneDelegate?.changeRootViewCustomTabBarView()
-                } else if hasNickName {
-                    guard let nickName = data.detail?.user?.userName else { return }
-                    UserDefaultHandler.setNickname(nickname: nickName)
-                    self?.presentViewController(viewController: JoinTeamViewController())
                 } else {
                     self?.presentViewController(viewController: SetNicknameViewController())
                 }
-                self?.setLoginUserDefaults()
             }
         }
     }
 }
 
-    // MARK: - extension
+// MARK: - extension
 
 extension LoginViewController: ASAuthorizationControllerDelegate {
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
@@ -178,7 +192,7 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
             }
         }
     }
-
+    
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
         print(error)
     }
