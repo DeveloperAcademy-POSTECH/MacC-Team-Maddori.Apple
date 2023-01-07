@@ -76,6 +76,15 @@ final class MemberCollectionView: UIView {
                 return .white300
             }
         }
+        
+        var collectionViewBackgroudColor: UIColor {
+            switch self {
+            case .addFeedback:
+                return .white200
+            case .progressReflection:
+                return .white100
+            }
+        }
     }
     
     var type: CollectionType
@@ -102,7 +111,7 @@ final class MemberCollectionView: UIView {
     }()
     private lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewFlowLayout)
-        collectionView.backgroundColor = .white100
+        collectionView.backgroundColor = type.collectionViewBackgroudColor
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.showsVerticalScrollIndicator = false
