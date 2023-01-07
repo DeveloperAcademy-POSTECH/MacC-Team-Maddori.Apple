@@ -37,11 +37,10 @@ final class MemberCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - property
     
-    lazy var memberLabel: UILabel = {
+    let memberLabel: UILabel = {
         let label = UILabel()
         label.font = .label1
         label.textColor = .black100
-        label.backgroundColor = self.cellColor
         label.layer.masksToBounds = true
         label.layer.cornerRadius = 8
         label.textAlignment = .center
