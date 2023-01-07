@@ -67,6 +67,15 @@ final class MemberCollectionView: UIView {
                     right: collectionHorizontalSpacing)
             }
         }
+        
+        var cellColor: UIColor {
+            switch self {
+            case .addFeedback:
+                return .white100
+            case .progressReflection:
+                return .white300
+            }
+        }
     }
     
     var type: CollectionType
@@ -161,6 +170,9 @@ extension MemberCollectionView: UICollectionViewDataSource {
         case .progressReflection:
             cell.index = FromCellIndex.fromSelectMember
         }
+        
+        cell.cellColor = type.cellColor
+        
         return cell
     }
 }

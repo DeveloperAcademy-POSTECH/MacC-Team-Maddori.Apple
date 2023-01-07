@@ -13,6 +13,12 @@ final class MemberCollectionViewCell: BaseCollectionViewCell {
     
     var index: FromCellIndex = .fromSelectMember
     
+    var cellColor: UIColor = .white300 {
+        didSet {
+            memberLabel.backgroundColor = cellColor
+        }
+    }
+    
     private enum Size {
         static let width = 135
         static let height = 60
@@ -38,11 +44,11 @@ final class MemberCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - property
     
-    let memberLabel: UILabel = {
+    lazy var memberLabel: UILabel = {
         let label = UILabel()
         label.font = .label1
         label.textColor = .black100
-        label.backgroundColor = .white300
+        label.backgroundColor = self.cellColor
         label.layer.masksToBounds = true
         label.layer.cornerRadius = 8
         label.textAlignment = .center
