@@ -107,7 +107,7 @@ final class SelectMemberView: UIStackView {
     }
     
     private func configUI() {
-        self.backgroundColor = .white100
+        self.backgroundColor = .white200
         self.layer.cornerRadius = 10
     }
 }
