@@ -27,7 +27,7 @@ final class MemberCollectionView: UIView {
         var collectionTopSpacing: CGFloat {
             switch self {
             case .addFeedback:
-                return 10
+                return 4
             case .progressReflection:
                 return 40
             }
@@ -57,7 +57,7 @@ final class MemberCollectionView: UIView {
                 return UIEdgeInsets(
                     top: collectionTopSpacing,
                     left: collectionHorizontalSpacing,
-                    bottom: 0,
+                    bottom: 12,
                     right: collectionHorizontalSpacing)
             case .progressReflection:
                 return UIEdgeInsets(
