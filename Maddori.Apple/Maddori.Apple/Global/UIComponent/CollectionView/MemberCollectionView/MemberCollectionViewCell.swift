@@ -19,13 +19,6 @@ final class MemberCollectionViewCell: BaseCollectionViewCell {
         }
     }
     
-    private enum Size {
-        static let width = 135
-        static let height = 60
-        static let frame = CGRect(x: 0, y: 0, width: Size.width, height: Size.height)
-    }
-    
-
     override var isSelected: Bool {
         didSet {
             if index == FromCellIndex.fromAddFeedback {
@@ -54,9 +47,9 @@ final class MemberCollectionViewCell: BaseCollectionViewCell {
         label.textAlignment = .center
         return label
     }()
-    private let memberShadow: UIView = {
+    private lazy var memberShadow: UIView = {
         let view = UIView()
-        view.frame = Size.frame
+        view.frame = self.frame
         view.layer.cornerRadius = 8
         view.layer.shadowRadius = 2
         view.layer.shadowOffset = CGSize(width: 0, height: 0)
@@ -69,14 +62,12 @@ final class MemberCollectionViewCell: BaseCollectionViewCell {
     override func render() {
         self.addSubview(memberShadow)
         memberShadow.snp.makeConstraints {
-            $0.width.equalTo(Size.width)
-            $0.height.equalTo(Size.height)
+            $0.edges.equalToSuperview()
         }
                 
         memberShadow.addSubview(memberLabel)
         memberLabel.snp.makeConstraints {
-            $0.width.equalTo(Size.width)
-            $0.height.equalTo(Size.height)
+            $0.edges.equalToSuperview()
         }
     }
     

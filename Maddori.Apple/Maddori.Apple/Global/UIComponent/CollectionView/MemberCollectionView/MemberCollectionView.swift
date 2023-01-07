@@ -57,7 +57,7 @@ final class MemberCollectionView: UIView {
                 return UIEdgeInsets(
                     top: collectionTopSpacing,
                     left: collectionHorizontalSpacing,
-                    bottom: 12,
+                    bottom: 4,
                     right: collectionHorizontalSpacing)
             case .progressReflection:
                 return UIEdgeInsets(
@@ -85,6 +85,15 @@ final class MemberCollectionView: UIView {
                 return .white100
             }
         }
+        
+        var cellSpacing: CGFloat {
+            switch self {
+            case .addFeedback:
+                return 20
+            case .progressReflection:
+                return 30
+            }
+        }
     }
     
     var type: CollectionType
@@ -106,7 +115,7 @@ final class MemberCollectionView: UIView {
         flowLayout.scrollDirection = .vertical
         flowLayout.sectionInset = type.collectionInsets
         flowLayout.itemSize = CGSize(width: type.cellWidth, height: type.cellHeight)
-        flowLayout.minimumLineSpacing = 29
+        flowLayout.minimumLineSpacing = type.cellSpacing
         return flowLayout
     }()
     private lazy var collectionView: UICollectionView = {
