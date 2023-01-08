@@ -56,6 +56,8 @@ final class AddDetailFeedbackViewController: BaseViewController {
                   let userId = user.userId   else { return }
             self?.toName = userName
             self?.toId = userId
+            
+            self?.openSelectTypeView()
         }
         return view
     }()
@@ -236,6 +238,18 @@ final class AddDetailFeedbackViewController: BaseViewController {
     private func pushAddFeedbackViewController () {
         let viewController = AddFeedbackContentViewController(feedbackContent: feedbackContent, step: .writeSituation)
         navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    private func openSelectTypeView() {
+        self.selectKeywordTypeView.snp.updateConstraints {
+            $0.height.equalTo(178)
+        }
+        self.isOpenedTypeView = true
+        self.selectKeywordTypeView.isOpened = true
+        UIView.animate(withDuration: 0.2) {
+            self.selectKeywordTypeView.upDownImageView.transform = CGAffineTransform(rotationAngle: .pi)
+            self.view.layoutIfNeeded()
+        }
     }
     
     // MARK: - api
