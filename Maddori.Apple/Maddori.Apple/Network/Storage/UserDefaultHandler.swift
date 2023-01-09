@@ -39,4 +39,8 @@ struct UserDefaultHandler {
     static func setHasSeenAlert(to value: Bool) {
         UserData.setValue(value, forKey: .hasSeenAlert)
     }
+    
+    static func setSeenKeywordIdList(to keywordIdList: [Int]) {
+        UserData.setValue(keywordIdList, forKey: .seenKeywordList)
+    }
 }

@@ -15,6 +15,7 @@ enum DataKeys: String, CaseIterable {
     case accessToken = "accessToken"
     case refreshToken = "refreshToken"
     case hasSeenAlert = "hasSeenAlert"
+    case seenKeywordList = "seenKeywordList"
 }
 
 struct UserDefaultStorage {
@@ -44,6 +45,10 @@ struct UserDefaultStorage {
     
     static var hasSeenReflectionAlert: Bool {
         return UserData<Bool>.getValue(forKey: .hasSeenAlert) ?? false
+    }
+    
+    static var seenKeywordList: [Int] {
+        return UserData<[Int]>.getValue(forKey: .seenKeywordList) ?? []
     }
 }
 
