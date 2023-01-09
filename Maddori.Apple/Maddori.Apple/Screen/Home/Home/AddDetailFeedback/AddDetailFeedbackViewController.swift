@@ -46,6 +46,7 @@ final class AddDetailFeedbackViewController: BaseViewController {
     private let nextButton: MainButton = {
         let button = MainButton()
         button.title = TextLiteral.doneButtonNext
+        //        button.isDisabled = true
         return button
     }()
     private lazy var selectMemberView: SelectMemberView = {
@@ -221,7 +222,9 @@ final class AddDetailFeedbackViewController: BaseViewController {
             guard let feedback = FeedBackDTO.init(rawValue: type.rawValue) else { return }
             
             self?.feedbackContent = FeedbackContent(toNickName: self?.toName, toUserId: self?.toId, feedbackType: feedback, reflectionId: self?.feedbackContent.reflectionId ?? 1)
-            self?.pushAddFeedbackViewController()
+            if self?.toName != "" {
+                self?.pushAddFeedbackViewController()
+            }
         }
         nextButton.addAction(action, for: .touchUpInside)
     }
