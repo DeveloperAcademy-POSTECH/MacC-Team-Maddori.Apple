@@ -59,7 +59,6 @@ final class AddDetailFeedbackViewController: BaseViewController {
                   let userId = user.userId   else { return }
             self?.toName = userName
             self?.toId = userId
-            self?.isSelectedMember = true
         }
         return view
     }()
