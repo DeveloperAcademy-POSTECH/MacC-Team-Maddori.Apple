@@ -30,43 +30,56 @@ final class InProgressDetailViewController: BaseViewController {
         button.addAction(action, for: .touchUpInside)
         return button
     }()
-    private lazy var sendFromLabel: UILabel = {
+    private lazy var keywordTitleLabel: UILabel = {
         let label = UILabel()
-        label.text = "\(feedbackInfo.nickname)님이 보낸 \(feedbackInfo.feedbackType.rawValue)"
-        label.textColor = .gray400
-        label.applyColor(to: "\(feedbackInfo.feedbackType.rawValue)", with: .blue200)
-        label.font = .caption1
-        return label
-    }()
-    private lazy var keywordLabel: UILabel = {
-        let label = UILabel()
-        label.text = feedbackInfo.keyword
-        label.font = .title
+        let keyword = feedbackInfo.keyword
+        label.setTitleFont(text: keyword)
         label.textColor = .black100
         return label
     }()
-    private let feedbackScrollView = UIScrollView()
-    private let feedbackStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        return stackView
-    }()
-    private lazy var infoLabel: UILabel = {
+    private let feedbackTypeLabel: UILabel = {
         let label = UILabel()
-        label.text = feedbackInfo.info
-        label.font = .body1
+        label.text = TextLiteral.myReflectionFeedbackViewControllerFeedbackTypeLabel
         label.textColor = .gray400
-        label.numberOfLines = 0
-        label.setTextWithLineHeight(text: label.text, lineHeight: 24)
+        label.font = .body1
         return label
     }()
-    private lazy var startView: StartSuggestionView = {
-        let view = StartSuggestionView()
-        view.backgroundColor = .blue100
-        view.clipsToBounds = true
-        view.layer.cornerRadius = 10
-        view.setStartInfoLabel(info: feedbackInfo.start)
+    private lazy var feedbackTypeText: UILabel = {
+        let label = UILabel()
+        let feedbackType = feedbackInfo.feedbackType
+        label.text = feedbackType.rawValue
+        label.textColor = .black100
+        label.font = .label3
+        return label
+    }()
+    private let feedbackFromLabel: UILabel = {
+        let label = UILabel()
+        label.text = TextLiteral.myReflectionFeedbackViewControllerFeedbackFromLabel
+        label.textColor = .gray400
+        label.font = .body1
+        return label
+    }()
+    private lazy var feedbackFromText: UILabel = {
+        let label = UILabel()
+        label.text = feedbackInfo.nickname
+        label.textColor = .black100
+        label.font = .label3
+        return label
+    }()
+    private let divider: UIView = {
+        let view = UIView()
+        view.backgroundColor = .gray300
         return view
+    }()
+    private let feedbackScrollView = UIScrollView()
+    private let feedbackContentView = UIView()
+    private lazy var feedbackContentText: UILabel = {
+        let label = UILabel()
+        label.setTextWithLineHeight(text: feedbackInfo.info, lineHeight: 24)
+        label.textColor = .black100
+        label.font = .body3
+        label.numberOfLines = 0
+        return label
     }()
     
     // MARK: - life cycle
@@ -78,46 +91,58 @@ final class InProgressDetailViewController: BaseViewController {
             $0.top.equalToSuperview().inset(6)
         }
         
-        view.addSubview(sendFromLabel)
-        sendFromLabel.snp.makeConstraints {
+        view.addSubview(keywordTitleLabel)
+        keywordTitleLabel.snp.makeConstraints {
+            $0.top.equalTo(closeButton.snp.bottom).offset(SizeLiteral.topPadding)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(55)
         }
         
-        view.addSubview(keywordLabel)
-        keywordLabel.snp.makeConstraints {
+        view.addSubview(feedbackTypeLabel)
+        feedbackTypeLabel.snp.makeConstraints {
+            $0.top.equalTo(keywordTitleLabel.snp.bottom).offset(SizeLiteral.topComponentPadding)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-            $0.top.equalTo(sendFromLabel.snp.bottom).offset(10)
+        }
+        
+        view.addSubview(feedbackTypeText)
+        feedbackTypeText.snp.makeConstraints {
+            $0.centerY.equalTo(feedbackTypeLabel.snp.centerY)
+            $0.leading.equalTo(feedbackTypeLabel.snp.trailing).offset(54)
+        }
+        
+        view.addSubview(feedbackFromLabel)
+        feedbackFromLabel.snp.makeConstraints {
+            $0.top.equalTo(feedbackTypeText.snp.bottom).offset(20)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+        
+        view.addSubview(feedbackFromText)
+        feedbackFromText.snp.makeConstraints {
+            $0.centerY.equalTo(feedbackFromLabel.snp.centerY)
+            $0.leading.equalTo(feedbackFromLabel.snp.trailing).offset(86)
+        }
+        
+        view.addSubview(divider)
+        divider.snp.makeConstraints {
+            $0.top.equalTo(feedbackFromLabel.snp.bottom).offset(24)
+            $0.horizontalEdges.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.height.equalTo(1)
         }
         
         view.addSubview(feedbackScrollView)
         feedbackScrollView.snp.makeConstraints {
-            $0.leading.trailing.bottom.equalToSuperview()
-            $0.top.equalTo(keywordLabel.snp.bottom).offset(20)
+            $0.top.equalTo(divider.snp.bottom)
+            $0.horizontalEdges.bottom.equalTo(view.safeAreaLayoutGuide)
         }
-        
-        feedbackScrollView.addSubview(feedbackStackView)
-        feedbackStackView.snp.makeConstraints {
-            $0.edges.width.equalToSuperview()
+
+        feedbackScrollView.addSubview(feedbackContentView)
+        feedbackContentView.snp.makeConstraints {
+            $0.width.edges.equalToSuperview()
         }
-        
-        feedbackStackView.addSubview(infoLabel)
-        infoLabel.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-            $0.top.equalToSuperview().inset(32)
-        }
-        
-        if !feedbackInfo.start.isEmpty {
-            feedbackStackView.addSubview(startView)
-            startView.snp.makeConstraints {
-                $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-                $0.top.equalTo(infoLabel.snp.bottom).offset(28)
-                $0.bottom.equalToSuperview()
-            }
-        } else {
-            infoLabel.snp.makeConstraints {
-                $0.bottom.equalToSuperview()
-            }
+
+        feedbackContentView.addSubview(feedbackContentText)
+        feedbackContentText.snp.makeConstraints {
+            $0.top.bottom.equalToSuperview().inset(20)
+            $0.horizontalEdges.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
     }
 }
