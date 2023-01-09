@@ -143,14 +143,14 @@ final class InProgressViewController: BaseViewController {
     private func setUpKeywordType() {
         if isUserRetrospective {
             for i in 0..<teamKeywordData.count {
-                teamKeywordData[i].style = UserDefaultStorage.seenKeywordList.contains(teamKeywordData[i].id) ? .disabledKeyword : .defaultKeyword
+                teamKeywordData[i].style = UserDefaultStorage.seenKeywordIdList.contains(teamKeywordData[i].id) ? .disabledKeyword : .defaultKeyword
             }
         } else {
             for i in 0..<userKeywordData.count {
-                userKeywordData[i].style = UserDefaultStorage.seenKeywordList.contains(userKeywordData[i].id) ? .disabledKeyword : .defaultKeyword
+                userKeywordData[i].style = UserDefaultStorage.seenKeywordIdList.contains(userKeywordData[i].id) ? .disabledKeyword : .defaultKeyword
             }
             for j in 0..<teamKeywordData.count {
-                teamKeywordData[j].style = UserDefaultStorage.seenKeywordList.contains(teamKeywordData[j].id) ? .disabledKeyword : .subKeyword
+                teamKeywordData[j].style = UserDefaultStorage.seenKeywordIdList.contains(teamKeywordData[j].id) ? .disabledKeyword : .subKeyword
             }
         }
     }

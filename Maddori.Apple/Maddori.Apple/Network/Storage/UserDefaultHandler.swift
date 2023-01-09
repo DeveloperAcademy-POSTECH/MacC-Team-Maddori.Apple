@@ -41,12 +41,12 @@ struct UserDefaultHandler {
     }
     
     static func appendSeenKeywordIdList(keywordId: Int) {
-        var newSeenKeywordList = UserDefaultStorage.seenKeywordList
+        var newSeenKeywordList = UserDefaultStorage.seenKeywordIdList
         newSeenKeywordList.append(keywordId)
-        UserData.setValue(newSeenKeywordList, forKey: .seenKeywordList)
+        UserData.setValue(newSeenKeywordList, forKey: .seenKeywordIdList)
     }
     
     static func clearSeenKeywordIdList() {
-        UserData<Any>.clear(forKey: .seenKeywordList)
+        UserData<Any>.clear(forKey: .seenKeywordIdList)
     }
 }
