@@ -64,6 +64,7 @@ final class SelectReflectionMemberViewController: BaseViewController {
             } else {
                 self?.dismiss(animated: true)
             }
+            UserDefaultHandler.clearSeenKeywordIdList()
         }
         button.addAction(action, for: .touchUpInside)
         button.isDisabled = true
