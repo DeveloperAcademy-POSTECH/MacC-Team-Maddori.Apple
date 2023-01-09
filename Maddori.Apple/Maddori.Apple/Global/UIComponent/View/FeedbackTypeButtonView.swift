@@ -11,6 +11,7 @@ import SnapKit
 
 final class FeedbackTypeButtonView: UIView {
     var changeFeedbackType: ((FeedbackButtonType) -> ())?
+    var isSelectedFeedbackType: ((Bool) -> ())?
     var feedbackType: FeedbackButtonType? {
         didSet {
             guard let type = feedbackType else { return }
@@ -35,6 +36,7 @@ final class FeedbackTypeButtonView: UIView {
         let action = UIAction { [weak self] _ in
             self?.changeFeedbackType?(.continueType)
             self?.feedbackType = .continueType
+            self?.isSelectedFeedbackType?(true)
         }
         button.addAction(action, for: .touchUpInside)
         return button
@@ -66,6 +68,7 @@ final class FeedbackTypeButtonView: UIView {
         let action = UIAction { [weak self] _ in
             self?.changeFeedbackType?(.stopType)
             self?.feedbackType = .stopType
+            self?.isSelectedFeedbackType?(true)
         }
         button.addAction(action, for: .touchUpInside)
         return button
