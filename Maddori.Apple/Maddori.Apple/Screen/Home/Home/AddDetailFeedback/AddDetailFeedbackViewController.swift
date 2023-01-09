@@ -94,8 +94,8 @@ final class AddDetailFeedbackViewController: BaseViewController {
         setupCloseButton()
         setupNextButton()
         setupShadowView()
-        detectFeedbackTypeIsSelected()
         detectMemberIsSelected()
+        detectFeedbackTypeIsSelected()
         fetchCurrentTeamMember(type: .fetchCurrentTeamMember)
     }
     
@@ -227,9 +227,7 @@ final class AddDetailFeedbackViewController: BaseViewController {
             guard let feedback = FeedBackDTO.init(rawValue: type.rawValue) else { return }
             
             self?.feedbackContent = FeedbackContent(toNickName: self?.toName, toUserId: self?.toId, feedbackType: feedback, reflectionId: self?.feedbackContent.reflectionId ?? 1)
-            if self?.toName != "" {
-                self?.pushAddFeedbackViewController()
-            }
+            self?.pushAddFeedbackViewController()
         }
         nextButton.addAction(action, for: .touchUpInside)
     }
