@@ -8,6 +8,7 @@
 import UIKit
 
 struct Keyword {
+    let id: Int
     var style: KeywordType?
     let type: FeedBackType
     let keyword: String
