@@ -73,12 +73,9 @@ final class MemberCollectionView: UIView {
     var currentToUserId = 0
     var memberList: [MemberResponse] = [] {
         didSet {
-            if memberList.isEmpty {
-                setLayoutEmptyView()
-            }
-            else {
-                collectionView.reloadData()                
-            }
+            collectionViewFlowLayout.sectionInset = memberList.isEmpty ? UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0) : type.collectionInsets
+            collectionViewFlowLayout.itemSize = memberList.isEmpty ? CGSize(width: UIScreen.main.bounds.width - SizeLiteral.leadingTrailingPadding * 2, height: 190) : CGSize(width: type.cellWidth, height: type.cellHeight)
+            collectionView.reloadData()
         }
     }
     var didTappedMember: (([MemberResponse]) -> ())?
@@ -91,8 +88,6 @@ final class MemberCollectionView: UIView {
     private lazy var collectionViewFlowLayout: UICollectionViewFlowLayout = {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .vertical
-        flowLayout.sectionInset = type.collectionInsets
-        flowLayout.itemSize = CGSize(width: type.cellWidth, height: type.cellHeight)
         flowLayout.minimumLineSpacing = 29
         return flowLayout
     }()
@@ -103,13 +98,10 @@ final class MemberCollectionView: UIView {
         collectionView.delegate = self
         collectionView.showsVerticalScrollIndicator = false
         collectionView.register(MemberCollectionViewCell.self, forCellWithReuseIdentifier: MemberCollectionViewCell.className)
+        collectionView.register(MemberCollectionEmptyViewCell.self, forCellWithReuseIdentifier: MemberCollectionEmptyViewCell.className)
         return collectionView
     }()
-    private lazy var tempEmptyView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .red
-        return view
-    }()
+    
     // MARK: - life cycle
     
     init(type: CollectionType) {
@@ -126,62 +118,67 @@ final class MemberCollectionView: UIView {
             $0.edges.equalToSuperview()
         }
     }
-    
-    // MARK: - func
-    
-    private func setLayoutEmptyView() {
-        self.addSubview(tempEmptyView)
-        tempEmptyView.snp.makeConstraints {
-            $0.center.equalToSuperview()
-            $0.width.equalTo(179)
-            $0.height.equalTo(121)
-        }
-    }
 }
 
 // MARK: - extension
 
 extension MemberCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        switch type {
-        case .addFeedback:
-            selectedMember = memberList[indexPath.item]
-            guard let member = selectedMember else { return }
-            didTappedFeedBackMember?(member)
-            
-        case .progressReflection:
-            if !selectedMemberList.contains(where: { $0.userName == memberList[indexPath.item].userName} ) {
-                selectedMemberList.append(memberList[indexPath.item])
-            }
-            guard let cell = collectionView.cellForItem(at: indexPath) as? MemberCollectionViewCell else { return }
-            selectedMember = memberList[indexPath.item]
-            guard let member = selectedMember else { return }
-            cell.setupAttribute()
-            didTappedMember?(selectedMemberList)
-            didTappedFeedBackMember?(member)
+        if !memberList.isEmpty {
+            switch type {
+            case .addFeedback:
+                selectedMember = memberList[indexPath.item]
+                guard let member = selectedMember else { return }
+                didTappedFeedBackMember?(member)
+                
+            case .progressReflection:
+                if !selectedMemberList.contains(where: { $0.userName == memberList[indexPath.item].userName} ) {
+                    selectedMemberList.append(memberList[indexPath.item])
+                }
+                guard let cell = collectionView.cellForItem(at: indexPath) as? MemberCollectionViewCell else { return }
+                selectedMember = memberList[indexPath.item]
+                guard let member = selectedMember else { return }
+                cell.setupAttribute()
+                didTappedMember?(selectedMemberList)
+                didTappedFeedBackMember?(member)
+            }            
         }
     }
 }
 
 extension MemberCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return memberList.count
+        if memberList.isEmpty {
+            return 1
+        }
+        else {
+            return memberList.count
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MemberCollectionViewCell.className, for: indexPath) as? MemberCollectionViewCell else {
-            assert(false, "Wrong Cell")
-            return UICollectionViewCell()
+        if memberList.isEmpty {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MemberCollectionEmptyViewCell.className, for: indexPath) as? MemberCollectionEmptyViewCell else {
+                return UICollectionViewCell()
+            }
+            
+            return cell
         }
-        cell.memberLabel.text = memberList[indexPath.item].userName
-        
-        switch type {
-        case .addFeedback:
-            cell.index = FromCellIndex.fromAddFeedback
-        case .progressReflection:
-            cell.index = FromCellIndex.fromSelectMember
+        else {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MemberCollectionViewCell.className, for: indexPath) as? MemberCollectionViewCell else {
+                assert(false, "Wrong Cell")
+                return UICollectionViewCell()
+            }
+            cell.memberLabel.text = memberList[indexPath.item].userName
+            
+            switch type {
+            case .addFeedback:
+                cell.index = FromCellIndex.fromAddFeedback
+            case .progressReflection:
+                cell.index = FromCellIndex.fromSelectMember
+            }
+            return cell
         }
-        return cell
     }
 }
 

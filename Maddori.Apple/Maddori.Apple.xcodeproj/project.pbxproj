@@ -139,6 +139,7 @@
 		D7AFB7C52916EDC300E998B7 /* MyReflectionDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7AFB7C42916EDC300E998B7 /* MyReflectionDetailTableViewCell.swift */; };
 		D7AFB7C72916FF9400E998B7 /* CustomSegmentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7AFB7C62916FF9400E998B7 /* CustomSegmentControl.swift */; };
 		D7E101392942380900CEC7F0 /* AddDetailFeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E101382942380900CEC7F0 /* AddDetailFeedbackViewController.swift */; };
+		D7E9092B296BD450004D6297 /* MemberCollectionEmptyViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E9092A296BD450004D6297 /* MemberCollectionEmptyViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -275,6 +276,7 @@
 		D7AFB7C42916EDC300E998B7 /* MyReflectionDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReflectionDetailTableViewCell.swift; sourceTree = "<group>"; };
 		D7AFB7C62916FF9400E998B7 /* CustomSegmentControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegmentControl.swift; sourceTree = "<group>"; };
 		D7E101382942380900CEC7F0 /* AddDetailFeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDetailFeedbackViewController.swift; sourceTree = "<group>"; };
+		D7E9092A296BD450004D6297 /* MemberCollectionEmptyViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberCollectionEmptyViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -832,6 +834,7 @@
 			children = (
 				525E721B28FF0F5B00EF3FCB /* MemberCollectionView.swift */,
 				525E721928FF0F1900EF3FCB /* MemberCollectionViewCell.swift */,
+				D7E9092A296BD450004D6297 /* MemberCollectionEmptyViewCell.swift */,
 			);
 			path = MemberCollectionView;
 			sourceTree = "<group>";
@@ -1129,6 +1132,7 @@
 				39F52C6A292473A800B19A77 /* ReflectionInfoResponse.swift in Sources */,
 				39F52C68292472EB00B19A77 /* AllFeedBackResponse.swift in Sources */,
 				3975CEAF293EEDD6002D4F1A /* KeywordView.swift in Sources */,
+				D7E9092B296BD450004D6297 /* MemberCollectionEmptyViewCell.swift in Sources */,
 				39257DF128F93C2A00201E0B /* ImageLiteral.swift in Sources */,
 				395C7E252900E74700FC2FCA /* StartReflectionViewController.swift in Sources */,
 				3E557FF82901CD3400714E46 /* KeywordCollectionViewFlowLayout.swift in Sources */,
