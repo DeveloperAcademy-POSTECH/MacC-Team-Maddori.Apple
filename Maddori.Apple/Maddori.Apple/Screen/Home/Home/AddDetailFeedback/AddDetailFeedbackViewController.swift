@@ -262,9 +262,6 @@ final class AddDetailFeedbackViewController: BaseViewController {
         if isSelectedMember, isSelectedType {
             nextButton.isDisabled = false
         }
-        else {
-            nextButton.isDisabled = true
-        }
     }
     
     // MARK: - api
