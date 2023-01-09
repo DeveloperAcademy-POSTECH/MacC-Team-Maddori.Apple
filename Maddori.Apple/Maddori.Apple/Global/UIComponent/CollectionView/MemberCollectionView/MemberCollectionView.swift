@@ -73,7 +73,12 @@ final class MemberCollectionView: UIView {
     var currentToUserId = 0
     var memberList: [MemberResponse] = [] {
         didSet {
-            collectionView.reloadData()
+            if memberList.isEmpty {
+                setLayoutEmptyView()
+            }
+            else {
+                collectionView.reloadData()                
+            }
         }
     }
     var didTappedMember: (([MemberResponse]) -> ())?
@@ -100,7 +105,11 @@ final class MemberCollectionView: UIView {
         collectionView.register(MemberCollectionViewCell.self, forCellWithReuseIdentifier: MemberCollectionViewCell.className)
         return collectionView
     }()
-    
+    private lazy var tempEmptyView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .red
+        return view
+    }()
     // MARK: - life cycle
     
     init(type: CollectionType) {
@@ -115,6 +124,17 @@ final class MemberCollectionView: UIView {
         self.addSubview(collectionView)
         collectionView.snp.makeConstraints {
             $0.edges.equalToSuperview()
+        }
+    }
+    
+    // MARK: - func
+    
+    private func setLayoutEmptyView() {
+        self.addSubview(tempEmptyView)
+        tempEmptyView.snp.makeConstraints {
+            $0.center.equalToSuperview()
+            $0.width.equalTo(179)
+            $0.height.equalTo(121)
         }
     }
 }
