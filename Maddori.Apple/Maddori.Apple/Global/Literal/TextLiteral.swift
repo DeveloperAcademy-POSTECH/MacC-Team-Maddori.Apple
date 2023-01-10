@@ -42,15 +42,13 @@ enum TextLiteral {
     
     static let setNicknameViewControllerTitleLabel = "키고에서 사용할 \n닉네임을 입력해주세요"
     static let setNicknameViewControllerNicknameTextFieldPlaceHolder = "예) 진저, 호야, 성민"
+    static let setNicknameViewControllerAlertTitle = "특수문자를 사용할 수 없습니다."
+    static let setNicknameControllerAlertMessage = "닉네임을 다시 입력해주세요."
     
     // MARK: - HomeViewController
     
     static let homeViewControllerEmptyDescriptionLabel = "아직 회고 일정이 정해지지 않았습니다"
-    static let homeViewControllerCollectionViewEmtpyText0 = "첫 번째"
-    static let homeViewControllerCollectionViewEmtpyText1 = "키워드를"
-    static let homeViewControllerCollectionViewEmtpyText2 = "📝"
-    static let homeViewControllerCollectionViewEmtpyText3 = "작성해보세요"
-    static let homeViewControllerCollectionViewEmtpyText4 = "✚"
+    static let homeViewControllerEmptyCollectionViewList = ["첫 번째", "키워드를", "📝", "작성해보세요", "✚"]
     
     // MARK: - AddFeedbackViewController
     
@@ -97,6 +95,8 @@ enum TextLiteral {
     
     static let createTeamViewControllerTitleLabel = "팀 이름을 입력해주세요"
     static let createTeamViewControllerTextFieldPlaceHolder = "예) 맛쟁이 사과처럼"
+    static let createTeamViewControllerAlertTitle = "특수문자를 사용할 수 없습니다."
+    static let createTeamViewControllerAlertMessage = "팀 이름을 다시 입력해주세요."
     
     // MARK: - InvitationCodeViewController
     

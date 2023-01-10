@@ -31,7 +31,7 @@ struct UserDefaultStorage {
     }
     
     static var teamId: Int {
-        return UserData<Int>.getValue(forKey: .teamId) ?? 1
+        return UserData<Int>.getValue(forKey: .teamId) ?? 0
     }
     
     static var accessToken: String {

@@ -24,7 +24,6 @@ final class EmptyCollectionFeedbackView: BaseCollectionViewCell {
     lazy var emptyFeedbackLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 2
-        label.textAlignment = .center
         label.font = .body3
         label.textColor = .gray700
         return label

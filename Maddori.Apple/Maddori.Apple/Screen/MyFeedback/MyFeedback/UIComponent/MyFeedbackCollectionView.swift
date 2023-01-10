@@ -187,6 +187,8 @@ extension MyFeedbackCollectionView: UICollectionViewDataSource {
         if data.continueArray.isEmpty && data.stopArray.isEmpty {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EmptyCollectionFeedbackView.className, for: indexPath) as? EmptyCollectionFeedbackView else { return UICollectionViewCell() }
             cell.emptyFeedbackLabel.text = TextLiteral.emptyViewMyBox
+            cell.emptyFeedbackLabel.setLineSpacing(to: 4)
+            cell.emptyFeedbackLabel.textAlignment = .center
             return cell
         } else {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyFeedbackCollectionViewCell.className, for: indexPath) as? MyFeedbackCollectionViewCell else { return UICollectionViewCell() }

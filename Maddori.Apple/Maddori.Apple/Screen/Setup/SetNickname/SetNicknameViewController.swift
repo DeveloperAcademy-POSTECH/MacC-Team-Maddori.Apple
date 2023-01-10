@@ -71,12 +71,8 @@ final class SetNicknameViewController: BaseTextFieldViewController {
     private func setupDoneButton() {
         let action = UIAction { [weak self] _ in
             guard let nickname = self?.kigoTextField.text else { return }
-            UserDefaultHandler.setNickname(nickname: nickname)
-            self?.dispatchUserLogin(type: .dispatchLogin(LoginDTO(username: UserDefaultStorage.nickname)))
+            self?.dispatchUserLogin(type: .dispatchLogin(LoginDTO(username: nickname)))
             self?.kigoTextField.resignFirstResponder()
-            DispatchQueue.main.async {
-                self?.navigationController?.pushViewController(JoinTeamViewController(), animated: true)
-            }
         }
         super.doneButton.addAction(action, for: .touchUpInside)
     }
@@ -89,16 +85,15 @@ final class SetNicknameViewController: BaseTextFieldViewController {
                    parameters: type.body,
                    encoder: JSONParameterEncoder.default,
                    headers: type.headers
-        ).responseDecodable(of: BaseModel<JoinMemberResponse>.self) { [weak self] json in
+        ).responseDecodable(of: BaseModel<JoinMemberResponse>.self) { [weak self] response in
             guard let self else { return }
-            if let json = json.value {
-                guard let userId = json.detail?.id else { return }
-                UserDefaultHandler.setUserId(userId: userId)
-            } else {
-                DispatchQueue.main.async {
-                    // FIXME: - UXWriting 필요
-                    self.makeAlert(title: "에러", message: "중복된 닉네임입니다.")
-                }
+            switch response.result {
+            case .success:
+                guard let nickname = self.kigoTextField.text else { return }
+                UserDefaultHandler.setNickname(nickname: nickname)
+                self.navigationController?.pushViewController(JoinTeamViewController(), animated: true)
+            case .failure:
+                self.makeAlert(title: TextLiteral.setNicknameViewControllerAlertTitle, message: TextLiteral.setNicknameControllerAlertMessage)
             }
         }
     }
