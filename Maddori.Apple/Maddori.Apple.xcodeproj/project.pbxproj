@@ -52,6 +52,7 @@
 		3998E86F295C308100541752 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3998E86E295C308100541752 /* Settings.bundle */; };
 		39A64ACE2905885F001DB020 /* StartSuggestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A64ACD2905885F001DB020 /* StartSuggestionView.swift */; };
 		39AC287F29269BC6006CFEE6 /* Endpointable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39AC287E29269BC6006CFEE6 /* Endpointable.swift */; };
+		39F15C0C296D371500952D02 /* EmptyPersonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F15C0B296D371500952D02 /* EmptyPersonView.swift */; };
 		39F1A13529125762005E3456 /* MyFeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F1A13429125762005E3456 /* MyFeedbackViewController.swift */; };
 		39F1A13C2912637E005E3456 /* MyFeedbackMemberCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F1A13B2912637E005E3456 /* MyFeedbackMemberCollectionViewCell.swift */; };
 		39F52C44292329BA00B19A77 /* BaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F52C43292329BA00B19A77 /* BaseModel.swift */; };
@@ -190,6 +191,7 @@
 		3998E86E295C308100541752 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		39A64ACD2905885F001DB020 /* StartSuggestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartSuggestionView.swift; sourceTree = "<group>"; };
 		39AC287E29269BC6006CFEE6 /* Endpointable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpointable.swift; sourceTree = "<group>"; };
+		39F15C0B296D371500952D02 /* EmptyPersonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyPersonView.swift; sourceTree = "<group>"; };
 		39F1A13429125762005E3456 /* MyFeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFeedbackViewController.swift; sourceTree = "<group>"; };
 		39F1A13B2912637E005E3456 /* MyFeedbackMemberCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFeedbackMemberCollectionViewCell.swift; sourceTree = "<group>"; };
 		39F52C43292329BA00B19A77 /* BaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseModel.swift; sourceTree = "<group>"; };
@@ -816,6 +818,7 @@
 				3EB5088D2916D05F00FB77CB /* EmptyFeedbackView.swift */,
 				3EB5088F2917525600FB77CB /* EmptyReflectionView.swift */,
 				3EB5088B2916C64800FB77CB /* EmptyFeedbackKeyword.swift */,
+				39F15C0B296D371500952D02 /* EmptyPersonView.swift */,
 			);
 			path = EmptyView;
 			sourceTree = "<group>";
@@ -1082,6 +1085,7 @@
 				39847428292656EB00EDC139 /* VoidModel.swift in Sources */,
 				D7AFB7C72916FF9400E998B7 /* CustomSegmentControl.swift in Sources */,
 				3EB508692913560A00FB77CB /* Reflection.swift in Sources */,
+				39F15C0C296D371500952D02 /* EmptyPersonView.swift in Sources */,
 				52DC9091291A98CC00904739 /* MyFeedbackEditViewController.swift in Sources */,
 				3E66777529419C8300BB5670 /* KeywordTextFieldView.swift in Sources */,
 				3EA341E82925E5EA005CBD1C /* String+Extension.swift in Sources */,
