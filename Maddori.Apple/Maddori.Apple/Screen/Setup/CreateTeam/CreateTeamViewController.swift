@@ -119,8 +119,7 @@ final class CreateTeamViewController: BaseTextFieldViewController {
                 }
             } else {
                 DispatchQueue.main.async {
-                    // FIXME: - UXWriting 필요
-                    self.makeAlert(title: "에러", message: "중복된 팀 이름입니다")
+                    self.makeAlert(title: TextLiteral.createTeamViewControllerAlertTitle, message: TextLiteral.createTeamViewControllerAlertMessage)
                 }
             }
         }

@@ -13,37 +13,41 @@ final class MyReflectionDetailTableViewCell: BaseTableViewCell {
     
     // MARK: - property
     
-    let titleLabel: UILabel = {
+    private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = .label1
         label.textColor = .black100
         return label
     }()
-    let fromLabelBackView: UIView = {
+    private let fromLabelBackView: UIView = {
         let view = UIView()
         view.backgroundColor = .gray100
         view.layer.cornerRadius = 4
         return view
     }()
-    let fromLabel: UILabel = {
+    private let fromLabel: UILabel = {
         let label = UILabel()
         label.font = .caption2
         label.textColor = .gray400
         return label
     }()
-    let contentLabel: UILabel = {
+    private let contentLabel: UILabel = {
         let label = UILabel()
         label.font = .body2
         label.numberOfLines = 2
         label.textColor = .gray400
-        label.setLineSpacing(to: 4)
         return label
     }()
-    let rightImage: UIImageView = {
+    private let rightImage: UIImageView = {
         let imageView = UIImageView()
         imageView.image = ImageLiterals.icRight
         imageView.tintColor = .gray400
         return imageView
+    }()
+    private let cellDivider: UIView = {
+        let view = UIView()
+        view.backgroundColor = .gray300
+        return view
     }()
     
     // MARK: - life cycle
@@ -80,11 +84,19 @@ final class MyReflectionDetailTableViewCell: BaseTableViewCell {
         }
         
         contentView.addSubview(rightImage)
-         rightImage.snp.makeConstraints {
-             $0.centerY.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-             $0.width.equalTo(12)
-             $0.height.equalTo(20)
-         }
+        rightImage.snp.makeConstraints {
+            $0.centerY.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.width.equalTo(12)
+            $0.height.equalTo(20)
+        }
+        
+        contentView.addSubview(cellDivider)
+        cellDivider.snp.makeConstraints {
+            $0.bottom.equalToSuperview()
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.trailing.equalToSuperview()
+            $0.height.equalTo(0.5)
+        }
     }
     
     // MARK: - func
@@ -93,7 +105,7 @@ final class MyReflectionDetailTableViewCell: BaseTableViewCell {
         DispatchQueue.main.async {
             self.titleLabel.text = title
             self.fromLabel.text = fromLabel
-            self.contentLabel.text = content
+            self.contentLabel.setTextWithLineHeight(text: content, lineHeight: 22)
         }
     }
 }
