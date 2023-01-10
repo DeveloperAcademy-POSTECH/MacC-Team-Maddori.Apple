@@ -95,6 +95,8 @@ final class MyFeedbackViewController: BaseViewController {
     private lazy var emptyLabel: UILabel = {
         let label = UILabel()
         label.text = TextLiteral.myFeedbackViewControllerEmptyViewLabel
+        label.setLineSpacing(to: 4)
+        label.textAlignment = .center
         label.numberOfLines = 2
         label.textColor = .gray700
         label.font = .body3
