@@ -88,6 +88,8 @@ final class MyFeedbackViewController: BaseViewController {
         let imageView = UIImageView()
         imageView.image = ImageLiterals.icPersonCircle
         imageView.tintColor = .gray700
+        let config = UIImage.SymbolConfiguration(font: .systemFont(ofSize: 50, weight: .thin))
+        imageView.preferredSymbolConfiguration = config
         return imageView
     }()
     private lazy var emptyLabel: UILabel = {
