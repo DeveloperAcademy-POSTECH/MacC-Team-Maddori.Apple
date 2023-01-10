@@ -143,7 +143,7 @@ enum TextLiteral {
     // MARK: - MyFeedbackViewController
     
     static let myFeedbackViewControllerTitleLabel = "내가 작성한 피드백"
-    static let myFeedbackViewControllerEmptyViewLabel = "팀에 합류한 팀원이 없습니다\n초대코드를 공유해 주세요"
+    static let myFeedbackViewControllerEmptyViewLabel = "아직 팀에 합류한 팀원이 없습니다\n초대코드를 공유하여 팀원을 초대해주세요"
     
     // MARK: - MyFeedbackDetailViewController
     
