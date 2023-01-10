@@ -11,14 +11,6 @@ import SnapKit
 
 final class MyFeedbackCollectionViewCell: BaseCollectionViewCell {
     
-    var isDividerHidden: Bool? {
-        didSet {
-            if let isDividerHidden {            
-                setDividerHidden(isDividerHidden)
-            }
-        }
-    }
-    
     // MARK: - property
     
     private let titleLabel: UILabel = {

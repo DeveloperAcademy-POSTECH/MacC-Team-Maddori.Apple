@@ -201,19 +201,11 @@ extension MyFeedbackCollectionView: UICollectionViewDataSource {
                     cell.setCellLabel(title: data.stopArray[indexPath.item].keyword ?? "",
                                       content: data.stopArray[indexPath.item].content ?? "")
                 }
-                if indexPath.item == data.continueArray.count - 1 {
-                    cell.isDividerHidden = true
-                } else {
-                    cell.isDividerHidden = false
-                }
+                cell.setDividerHidden(indexPath.item == data.continueArray.count - 1)
             case 1:
                 cell.setCellLabel(title: data.stopArray[indexPath.item].keyword ?? "",
                                   content: data.stopArray[indexPath.item].content ?? "")
-                if indexPath.item == data.stopArray.count - 1 {
-                    cell.isDividerHidden = true
-                } else {
-                    cell.isDividerHidden = false
-                }
+                cell.setDividerHidden(indexPath.item == data.stopArray.count - 1)
             default:
                 break
             }
