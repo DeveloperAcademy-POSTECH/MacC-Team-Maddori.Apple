@@ -94,6 +94,15 @@ final class MemberCollectionView: UIView {
                 return 30
             }
         }
+        
+        var cellFont: UIFont {
+            switch self {
+            case .addFeedback:
+                return .main
+            case .progressReflection:
+                return .label1
+            }
+        }
     }
     
     var type: CollectionType
@@ -190,6 +199,7 @@ extension MemberCollectionView: UICollectionViewDataSource {
         }
         
         cell.cellColor = type.cellColor
+        cell.memberLabel.font = type.cellFont
         
         return cell
     }
