@@ -37,7 +37,7 @@ final class SelectKeywordTypeView: UIStackView {
     
     // MARK: - property
     
-    private let titleLabel: UILabel = {
+    let titleLabel: UILabel = {
         let label = UILabel()
         label.font = .main
         label.text = TextLiteral.feedbackTypeLabel

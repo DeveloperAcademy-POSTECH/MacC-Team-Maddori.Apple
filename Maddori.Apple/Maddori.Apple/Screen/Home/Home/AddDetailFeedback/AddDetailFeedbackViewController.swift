@@ -28,7 +28,20 @@ final class AddDetailFeedbackViewController: BaseViewController {
             }
         }
     }
-    private var isOpenedTypeView: Bool = false
+    private var isOpenedTypeView: Bool = false {
+        didSet {
+            if !isOpenedTypeView {
+                if selectKeywordTypeView.feedbackTypeButtonView.feedbackType != nil {
+                    selectKeywordTypeView.titleLabel.text = selectKeywordTypeView.feedbackTypeButtonView.feedbackType?.rawValue
+                    selectKeywordTypeView.titleLabel.textColor = .blue200
+                }
+            }
+            else {
+                selectKeywordTypeView.titleLabel.text = TextLiteral.feedbackTypeLabel
+                selectKeywordTypeView.titleLabel.textColor = .black100
+            }
+        }
+    }
     private var toName: String = ""
     private var toId: Int?
     
