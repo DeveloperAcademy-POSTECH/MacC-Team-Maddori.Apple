@@ -48,6 +48,7 @@ final class SelectMemberView: UIStackView {
     let titleLabel: UILabel = {
         let label = UILabel()
         label.font = .main
+        label.textColor = .black100
         label.text = TextLiteral.toNameTitleLabel
         return label
     }()
@@ -100,7 +101,7 @@ final class SelectMemberView: UIStackView {
         
         self.addSubview(memberCollectionView)
         memberCollectionView.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.bottom).offset(10)
+            $0.top.equalTo(titleView.snp.bottom)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(190)
         }
