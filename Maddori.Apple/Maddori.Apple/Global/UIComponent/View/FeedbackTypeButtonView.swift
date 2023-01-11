@@ -43,6 +43,7 @@ final class FeedbackTypeButtonView: UIView {
         let label = UILabel()
         label.text = FeedBackType.continueType.rawValue
         label.font = .main
+        label.textColor = .black100
         return label
     }()
     private let continueSubTitleLabel: UILabel = {
@@ -74,6 +75,7 @@ final class FeedbackTypeButtonView: UIView {
         let label = UILabel()
         label.text = FeedBackType.stopType.rawValue
         label.font = .main
+        label.textColor = .black100
         return label
     }()
     private let stopSubTitleLabel: UILabel = {
