@@ -244,7 +244,7 @@ final class AddDetailFeedbackViewController: BaseViewController {
     }
     
     private func detectFeedbackTypeIsSelected() {
-        selectKeywordTypeView.feedbackTypeButtonView.isSelectedFeedbackType = { [weak self] isSelected in
+        selectKeywordTypeView.feedbackTypeButtonView.detectSelectedFeedbackType = { [weak self] isSelected in
             self?.isSelectedType = isSelected
             self?.changeNextButtonStatus()
         }
