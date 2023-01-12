@@ -14,8 +14,11 @@ final class MyFeedbackViewController: BaseViewController {
     var selectedIndex: Int = 0
     private var memberList: [MemberResponse] = [] {
         didSet {
-            memberCollectionView.reloadData()
-            if !memberList.isEmpty {            
+            if memberList.isEmpty {
+                setLayoutEmptyView()
+            } else {
+                setLayoutMyFeedbackView()
+                memberCollectionView.reloadData()
                 fetchCertainMemberFeedBack(type: .fetchCertainMemberFeedBack(memberId: memberList[selectedIndex].userId ?? 0))
             }
         }
@@ -35,7 +38,7 @@ final class MyFeedbackViewController: BaseViewController {
         label.setTitleFont(text: TextLiteral.myFeedbackViewControllerTitleLabel)
         return label
     }()
-    private let collectionViewFlowLayout: UICollectionViewFlowLayout = {
+    private lazy var collectionViewFlowLayout: UICollectionViewFlowLayout = {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .horizontal
         flowLayout.sectionInset = UIEdgeInsets(top: Size.verticalPadding,
@@ -55,7 +58,7 @@ final class MyFeedbackViewController: BaseViewController {
         collectionView.register(MyFeedbackMemberCollectionViewCell.self, forCellWithReuseIdentifier: MyFeedbackMemberCollectionViewCell.className)
         return collectionView
     }()
-    private let dividerView: UIView = {
+    private lazy var dividerView: UIView = {
         let view = UIView()
         view.backgroundColor = .gray300
         return view
@@ -76,6 +79,7 @@ final class MyFeedbackViewController: BaseViewController {
         }
         return collectionView
     }()
+    private lazy var emptyView = EmptyPersonView()
     
     // MARK: - life cycle
     
@@ -86,6 +90,16 @@ final class MyFeedbackViewController: BaseViewController {
     }
     
     override func render() {
+        view.addSubview(myFeedbackLabel)
+        myFeedbackLabel.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(SizeLiteral.topPadding)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+    }
+    
+    // MARK: - func
+    
+    private func setLayoutMyFeedbackView() {
         view.addSubview(myFeedbackLabel)
         myFeedbackLabel.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(SizeLiteral.topPadding)
@@ -110,6 +124,14 @@ final class MyFeedbackViewController: BaseViewController {
         feedbackCollectionView.snp.makeConstraints {
             $0.leading.trailing.bottom.equalToSuperview()
             $0.top.equalTo(dividerView.snp.bottom)
+        }
+    }
+    
+    private func setLayoutEmptyView() {
+        view.addSubview(emptyView)
+        emptyView.snp.makeConstraints {
+            $0.top.equalTo(myFeedbackLabel.snp.bottom)
+            $0.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
         }
     }
     
