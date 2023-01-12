@@ -31,6 +31,8 @@ final class AddDetailFeedbackViewController: BaseViewController {
     private var isOpenedTypeView: Bool = false
     private var toName: String = ""
     private var toId: Int?
+    private var isSelectedMember: Bool = false
+    private var isSelectedType: Bool = false
     
     // MARK: - property
     
@@ -48,6 +50,7 @@ final class AddDetailFeedbackViewController: BaseViewController {
     private let nextButton: MainButton = {
         let button = MainButton()
         button.title = TextLiteral.doneButtonNext
+        button.isDisabled = true
         return button
     }()
     private lazy var selectMemberView: SelectMemberView = {
@@ -92,6 +95,8 @@ final class AddDetailFeedbackViewController: BaseViewController {
         setupCloseButton()
         setupNextButton()
         setupShadowView()
+        detectMemberIsSelected()
+        detectFeedbackTypeIsSelected()
         fetchCurrentTeamMember(type: .fetchCurrentTeamMember)
     }
     
@@ -238,6 +243,26 @@ final class AddDetailFeedbackViewController: BaseViewController {
     private func pushAddFeedbackViewController () {
         let viewController = AddFeedbackContentViewController(feedbackContent: feedbackContent, step: .writeSituation)
         navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    private func detectFeedbackTypeIsSelected() {
+        selectKeywordTypeView.feedbackTypeButtonView.detectSelectedFeedbackType = { [weak self] isSelected in
+            self?.isSelectedType = isSelected
+            self?.changeNextButtonStatus()
+        }
+    }
+    
+    private func detectMemberIsSelected() {
+        selectMemberView.isSelectedMember = { [weak self] isSelected in
+            self?.isSelectedMember = isSelected
+            self?.changeNextButtonStatus()
+        }
+    }
+    
+    private func changeNextButtonStatus() {
+        if isSelectedMember, isSelectedType {
+            nextButton.isDisabled = false
+        }
     }
     
     // MARK: - api
