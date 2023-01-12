@@ -54,6 +54,8 @@ final class AddDetailFeedbackViewController: BaseViewController {
         label.text = TextLiteral.DetailTitleLabel
         label.numberOfLines = 0
         label.font = .title2
+        label.setLineSpacing(to: 4)
+        label.textColor = .black100
         return label
     }()
     private let nextButton: MainButton = {
