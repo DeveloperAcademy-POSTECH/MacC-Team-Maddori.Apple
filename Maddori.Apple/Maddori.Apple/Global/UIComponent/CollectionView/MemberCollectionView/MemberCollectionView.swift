@@ -116,6 +116,11 @@ final class MemberCollectionView: UIView {
     var didTappedFeedBackMember: ((MemberResponse) -> ())?
     var selectedMember: MemberResponse?
     private var selectedMemberList: [MemberResponse] = []
+    var selectedMemberIdList: [Int] = UserDefaultStorage.seenMemberIdList {
+        willSet {
+            UserDefaultHandler.appendSeenMemberIdList(memberIdList: newValue)
+        }
+    }
     
     // MARK: - property
     
@@ -166,8 +171,15 @@ extension MemberCollectionView: UICollectionViewDelegate {
             didTappedFeedBackMember?(member)
             
         case .progressReflection:
-            if !selectedMemberList.contains(where: { $0.userName == memberList[indexPath.item].userName} ) {
-                selectedMemberList.append(memberList[indexPath.item])
+            let selectedItem: MemberResponse = memberList[indexPath.item]
+            if !selectedMemberList.contains(where: { $0.userName == selectedItem.userName } ) {
+                selectedMemberList.append(selectedItem)
+            }
+            if !selectedMemberIdList.contains(where: { $0 == selectedItem.userId }) {
+                selectedMemberIdList.append(selectedItem.userId ?? 0)
+            }
+            if selectedMemberIdList.count == memberList.count {
+                UserDefaultHandler.isCurrentReflectionFinished(true)
             }
             guard let cell = collectionView.cellForItem(at: indexPath) as? MemberCollectionViewCell else { return }
             selectedMember = memberList[indexPath.item]
@@ -190,7 +202,11 @@ extension MemberCollectionView: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         cell.memberLabel.text = memberList[indexPath.item].userName
-        
+        if let userId = memberList[indexPath.item].userId {
+            if type == .progressReflection &&  selectedMemberIdList.contains(userId) {
+                cell.setupAttribute()
+            }
+        }
         switch type {
         case .addFeedback:
             cell.index = FromCellIndex.fromAddFeedback

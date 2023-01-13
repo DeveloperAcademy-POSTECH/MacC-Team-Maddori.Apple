@@ -73,11 +73,9 @@ final class MemberCollectionViewCell: BaseCollectionViewCell {
     // MARK: - func
     
     func setupAttribute() {
-        if isSelected {
-            memberLabel.textColor = .gray300
-            memberLabel.backgroundColor = .white100
-            memberShadow.layer.shadowRadius = 1
-        }
+        memberLabel.textColor = .gray300
+        memberLabel.backgroundColor = .white100
+        memberShadow.layer.shadowRadius = 1
     }
     
     private func applyAttribute() {
