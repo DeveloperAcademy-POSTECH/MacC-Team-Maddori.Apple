@@ -137,7 +137,7 @@ final class HomeViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if reflectionStatus == .Progressing &&  !hasSeenReflectionAlert {
+        if reflectionStatus == .Progressing && !hasSeenReflectionAlert {
             showStartReflectionView()
         }
         fetchCertainTeamDetail(type: .fetchCertainTeamDetail)
