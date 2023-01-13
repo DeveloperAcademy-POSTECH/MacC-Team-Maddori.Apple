@@ -37,7 +37,7 @@ struct UserDefaultHandler {
     }
     
     static func setHasSeenAlert(to value: Bool) {
-        UserData.setValue(value, forKey: .hasSeenAlert)
+        UserData.setValue(value, forKey: .hasSeenReflectionAlert)
     }
     
     static func appendSeenKeywordIdList(keywordId: Int) {
@@ -46,7 +46,15 @@ struct UserDefaultHandler {
         UserData.setValue(newSeenKeywordIdList, forKey: .seenKeywordIdList)
     }
     
-    static func clearSeenKeywordIdList() {
-        UserData<Any>.clear(forKey: .seenKeywordIdList)
+    static func appendSeenMemberIdList(memberIdList: [Int]) {
+        UserData.setValue(memberIdList, forKey: .seenMemberIdList)
+    }
+    
+    static func isCurrentReflectionFinished(_ value: Bool) {
+        UserData.setValue(value, forKey: .completedCurrentReflection)
+    }
+    
+    static func clearUserDefaults(of type: DataKeys) {
+        UserData<Any>.clear(forKey: type)
     }
 }
