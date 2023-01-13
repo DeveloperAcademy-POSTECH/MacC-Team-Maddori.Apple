@@ -28,8 +28,6 @@ final class MyFeedbackDetailViewController: BaseViewController {
         button.addAction(action, for: .touchUpInside)
         return button
     }()
-    private let feedbackFromMeDetailScrollView = UIScrollView()
-    private let feedbackFromMeDetailContentView = UIView()
     private lazy var feedbackFromMeDetailTitleLabel: UILabel = {
         let label = UILabel()
         label.setTitleFont(text: feedbackDetail.nickname + TextLiteral.myFeedbackDetailViewControllerTitleLabel)
@@ -65,6 +63,7 @@ final class MyFeedbackDetailViewController: BaseViewController {
         label.font = .label2
         return label
     }()
+    private let feedbackContentScrollView = UIScrollView()
     private lazy var feedbackContentText: UILabel = {
         let label = UILabel()
         let text = feedbackDetail.info + "\n\n" + (feedbackDetail.start ?? "")
@@ -120,57 +119,52 @@ final class MyFeedbackDetailViewController: BaseViewController {
     }
     
     override func render() {
-        view.addSubview(feedbackFromMeDetailScrollView)
-        feedbackFromMeDetailScrollView.snp.makeConstraints {
-            $0.leading.trailing.top.equalToSuperview()
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(100)
-        }
-        
-        feedbackFromMeDetailScrollView.addSubview(feedbackFromMeDetailContentView)
-        feedbackFromMeDetailContentView.snp.makeConstraints {
-            $0.width.top.bottom.equalToSuperview()
-        }
-        
-        feedbackFromMeDetailContentView.addSubview(feedbackFromMeDetailTitleLabel)
+        view.addSubview(feedbackFromMeDetailTitleLabel)
         feedbackFromMeDetailTitleLabel.snp.makeConstraints {
-            $0.top.equalTo(feedbackFromMeDetailContentView).inset(SizeLiteral.topPadding)
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(SizeLiteral.topPadding)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
-        feedbackFromMeDetailContentView.addSubview(feedbackTypeLabel)
+        view.addSubview(feedbackTypeLabel)
         feedbackTypeLabel.snp.makeConstraints {
             $0.top.equalTo(feedbackFromMeDetailTitleLabel.snp.bottom).offset(SizeLiteral.topComponentPadding)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
-        feedbackFromMeDetailContentView.addSubview(feedbackTypeText)
+        view.addSubview(feedbackTypeText)
         feedbackTypeText.snp.makeConstraints {
             $0.top.equalTo(feedbackTypeLabel.snp.bottom).offset(SizeLiteral.labelComponentPadding)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
-        feedbackFromMeDetailContentView.addSubview(feedbackKeywordLabel)
+        view.addSubview(feedbackKeywordLabel)
         feedbackKeywordLabel.snp.makeConstraints {
             $0.top.equalTo(feedbackTypeText.snp.bottom).offset(SizeLiteral.componentIntervalPadding)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
-        feedbackFromMeDetailContentView.addSubview(feedbackKeyword)
+        view.addSubview(feedbackKeyword)
         feedbackKeyword.snp.makeConstraints {
             $0.top.equalTo(feedbackKeywordLabel.snp.bottom).offset(SizeLiteral.labelComponentPadding)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
-        feedbackFromMeDetailContentView.addSubview(feedbackContentLabel)
+        view.addSubview(feedbackContentLabel)
         feedbackContentLabel.snp.makeConstraints {
             $0.top.equalTo(feedbackKeyword.snp.bottom).offset(SizeLiteral.componentIntervalPadding)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
-        feedbackFromMeDetailContentView.addSubview(feedbackContentText)
-        feedbackContentText.snp.makeConstraints {
+        view.addSubview(feedbackContentScrollView)
+        feedbackContentScrollView.snp.makeConstraints {
             $0.top.equalTo(feedbackContentLabel.snp.bottom).offset(SizeLiteral.labelComponentPadding)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(100)
+        }
+        
+        feedbackContentScrollView.addSubview(feedbackContentText)
+        feedbackContentText.snp.makeConstraints {
+            $0.width.top.bottom.equalToSuperview()
         }
         
         view.addSubview(feedbackEditButtonView)

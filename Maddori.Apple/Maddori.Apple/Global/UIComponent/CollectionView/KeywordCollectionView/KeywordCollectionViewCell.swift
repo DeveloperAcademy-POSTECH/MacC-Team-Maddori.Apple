@@ -62,10 +62,8 @@ final class KeywordCollectionViewCell: BaseCollectionViewCell {
     }
     
     func setupAttribute(to style: KeywordType) {
-        if isSelected {
-            configLabel(type: style)
-            configShadow(type: style)
-        }
+        configLabel(type: style)
+        configShadow(type: style)
     }
     
     static func fittingSize(availableHeight: CGFloat, keyword: String?) -> CGSize {

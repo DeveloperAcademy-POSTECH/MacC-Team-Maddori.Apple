@@ -137,7 +137,9 @@ final class HomeViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        if reflectionStatus == .Progressing && !hasSeenReflectionAlert {
+            showStartReflectionView()
+        }
         fetchCertainTeamDetail(type: .fetchCertainTeamDetail)
         fetchCurrentReflectionDetail(type: .fetchCurrentReflectionDetail)
     }
@@ -303,6 +305,9 @@ final class HomeViewController: BaseViewController {
         viewController.modalPresentationStyle = .overFullScreen
         present(viewController, animated: true)
         hasSeenReflectionAlert = true
+        UserDefaultHandler.clearUserDefaults(of: .seenKeywordIdList)
+        UserDefaultHandler.clearUserDefaults(of: .seenMemberIdList)
+        UserDefaultHandler.clearUserDefaults(of: .completedCurrentReflection)
     }
     
     private func showJoinReflectionButton() {
@@ -474,9 +479,11 @@ extension HomeViewController: UICollectionViewDataSource {
             } else {
                 didTapAddFeedbackButton()
             }
-            
         case .Progressing:
-            showStartReflectionView()
+            guard let navigationController = self.navigationController else { return }
+            let viewController = UINavigationController(rootViewController: SelectReflectionMemberViewController(reflectionId: currentReflectionId, isAdmin: isAdmin))
+            viewController.modalPresentationStyle = .fullScreen
+            navigationController.present(viewController, animated: true)
         }
         
     }

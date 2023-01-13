@@ -37,7 +37,7 @@ final class SelectKeywordTypeView: UIStackView {
     
     // MARK: - property
     
-    private let titleLabel: UILabel = {
+    let titleLabel: UILabel = {
         let label = UILabel()
         label.font = .main
         label.text = TextLiteral.feedbackTypeLabel
@@ -102,7 +102,7 @@ final class SelectKeywordTypeView: UIStackView {
     }
     
     private func configUI() {
-        self.backgroundColor = .white100
+        self.backgroundColor = .white200
         self.layer.cornerRadius = 10
     }
 }
