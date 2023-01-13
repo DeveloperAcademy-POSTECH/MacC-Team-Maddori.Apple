@@ -707,7 +707,6 @@
 		3E557FC128FE7B9200714E46 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				7EDEF6BD293F0C2E00EA972E /* AddDetailFeedback */,
 				3E5195A9292B05B000710A01 /* UIComponent */,
 				3E557FC228FE7BBC00714E46 /* HomeViewController.swift */,
 			);
@@ -776,6 +775,7 @@
 		525E721D28FFC85200EF3FCB /* AddFeedback */ = {
 			isa = PBXGroup;
 			children = (
+				7EDEF6BD293F0C2E00EA972E /* AddDetailFeedback */,
 				3E66777329419C7500BB5670 /* UIComponent */,
 				3EDED994293C81EC0000B4DC /* AddFeedbackKeywordViewController.swift */,
 				3EDED990293B8CE00000B4DC /* AddFeedbackContentViewController.swift */,
