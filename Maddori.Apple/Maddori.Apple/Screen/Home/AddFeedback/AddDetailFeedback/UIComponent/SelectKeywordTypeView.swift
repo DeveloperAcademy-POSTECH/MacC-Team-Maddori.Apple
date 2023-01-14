@@ -1,5 +1,5 @@
 //
-//  SelectMemberView.swift
+//  SelectKeywordTypeView.swift
 //  Maddori.Apple
 //
 //  Created by 이성호 on 2022/12/09.
@@ -7,48 +7,40 @@
 
 import UIKit
 
-import Alamofire
 import SnapKit
 
-final class SelectMemberView: UIStackView {
-    
-    var didSelectedMemeber: ((MemberResponse) -> ())?
+final class SelectKeywordTypeView: UIStackView {
     
     var isOpened: Bool = false {
         didSet {
             if isOpened {
-                self.memberCollectionView.snp.updateConstraints {
-                    $0.height.equalTo(190)
+                self.feedbackTypeButtonView.snp.updateConstraints {
+                    $0.height.equalTo(100)
                 }
                 UIView.animate(withDuration: 0.2) {
                     self.layoutIfNeeded()
                 }
-                self.memberCollectionView.isHidden = false
+                self.feedbackTypeButtonView.isHidden = false
+                
             }
             else {
-                self.memberCollectionView.snp.updateConstraints {
+                self.feedbackTypeButtonView.snp.updateConstraints {
                     $0.height.equalTo(0)
                 }
                 UIView.animate(withDuration: 0.2) {
                     self.layoutIfNeeded()
                 }
-                self.memberCollectionView.isHidden = false
+                self.feedbackTypeButtonView.isHidden = true
             }
         }
     }
     
     // MARK: - property
     
-    private let titleView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .white100
-        view.layer.cornerRadius = 10
-        return view
-    }()
     let titleLabel: UILabel = {
         let label = UILabel()
         label.font = .main
-        label.text = TextLiteral.toNameTitleLabel
+        label.text = TextLiteral.feedbackTypeLabel
         return label
     }()
     let upDownImageView: UIImageView = {
@@ -56,12 +48,14 @@ final class SelectMemberView: UIStackView {
         imageView.tintColor = .black100
         return imageView
     }()
-    lazy var memberCollectionView: MemberCollectionView = {
-        let collectionView = MemberCollectionView(type: .addFeedback)
-        collectionView.didTappedFeedBackMember = { [weak self] user in
-            self?.didSelectedMemeber?(user)
-        }
-        return collectionView
+    private let titleView: UIView = {
+        let view = UIView()
+        return view
+    }()
+    let feedbackTypeButtonView: FeedbackTypeButtonView = {
+        let view = FeedbackTypeButtonView()
+        view.isHidden = true
+        return view
     }()
     
     // MARK: - life cycle
@@ -77,6 +71,7 @@ final class SelectMemberView: UIStackView {
     }
     
     // MARK: - func
+        
     private func render() {
         
         self.addSubview(titleView)
@@ -98,16 +93,17 @@ final class SelectMemberView: UIStackView {
             $0.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
-        self.addSubview(memberCollectionView)
-        memberCollectionView.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.bottom).offset(10)
-            $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(190)
+        self.addSubview(feedbackTypeButtonView)
+        feedbackTypeButtonView.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.top.equalTo(titleView.snp.bottom)
+            $0.height.equalTo(0)
         }
     }
     
     private func configUI() {
-        self.backgroundColor = .white100
+        self.backgroundColor = .white200
         self.layer.cornerRadius = 10
     }
 }
+

@@ -27,7 +27,7 @@ final class MemberCollectionView: UIView {
         var collectionTopSpacing: CGFloat {
             switch self {
             case .addFeedback:
-                return 10
+                return 4
             case .progressReflection:
                 return 40
             }
@@ -57,7 +57,7 @@ final class MemberCollectionView: UIView {
                 return UIEdgeInsets(
                     top: collectionTopSpacing,
                     left: collectionHorizontalSpacing,
-                    bottom: 0,
+                    bottom: 4,
                     right: collectionHorizontalSpacing)
             case .progressReflection:
                 return UIEdgeInsets(
@@ -65,6 +65,42 @@ final class MemberCollectionView: UIView {
                     left: collectionHorizontalSpacing,
                     bottom: 20,
                     right: collectionHorizontalSpacing)
+            }
+        }
+        
+        var cellColor: UIColor {
+            switch self {
+            case .addFeedback:
+                return .white100
+            case .progressReflection:
+                return .white300
+            }
+        }
+        
+        var collectionViewBackgroudColor: UIColor {
+            switch self {
+            case .addFeedback:
+                return .white200
+            case .progressReflection:
+                return .white100
+            }
+        }
+        
+        var cellSpacing: CGFloat {
+            switch self {
+            case .addFeedback:
+                return 20
+            case .progressReflection:
+                return 30
+            }
+        }
+        
+        var cellFont: UIFont {
+            switch self {
+            case .addFeedback:
+                return .main
+            case .progressReflection:
+                return .label1
             }
         }
     }
@@ -80,6 +116,11 @@ final class MemberCollectionView: UIView {
     var didTappedFeedBackMember: ((MemberResponse) -> ())?
     var selectedMember: MemberResponse?
     private var selectedMemberList: [MemberResponse] = []
+    var selectedMemberIdList: [Int] = UserDefaultStorage.seenMemberIdList {
+        willSet {
+            UserDefaultHandler.appendSeenMemberIdList(memberIdList: newValue)
+        }
+    }
     
     // MARK: - property
     
@@ -88,12 +129,12 @@ final class MemberCollectionView: UIView {
         flowLayout.scrollDirection = .vertical
         flowLayout.sectionInset = type.collectionInsets
         flowLayout.itemSize = CGSize(width: type.cellWidth, height: type.cellHeight)
-        flowLayout.minimumLineSpacing = 29
+        flowLayout.minimumLineSpacing = type.cellSpacing
         return flowLayout
     }()
     private lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewFlowLayout)
-        collectionView.backgroundColor = .white100
+        collectionView.backgroundColor = type.collectionViewBackgroudColor
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.showsVerticalScrollIndicator = false
@@ -130,8 +171,15 @@ extension MemberCollectionView: UICollectionViewDelegate {
             didTappedFeedBackMember?(member)
             
         case .progressReflection:
-            if !selectedMemberList.contains(where: { $0.userName == memberList[indexPath.item].userName} ) {
-                selectedMemberList.append(memberList[indexPath.item])
+            let selectedItem: MemberResponse = memberList[indexPath.item]
+            if !selectedMemberList.contains(where: { $0.userName == selectedItem.userName } ) {
+                selectedMemberList.append(selectedItem)
+            }
+            if !selectedMemberIdList.contains(where: { $0 == selectedItem.userId }) {
+                selectedMemberIdList.append(selectedItem.userId ?? 0)
+            }
+            if selectedMemberIdList.count == memberList.count {
+                UserDefaultHandler.isCurrentReflectionFinished(true)
             }
             guard let cell = collectionView.cellForItem(at: indexPath) as? MemberCollectionViewCell else { return }
             selectedMember = memberList[indexPath.item]
@@ -154,13 +202,21 @@ extension MemberCollectionView: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         cell.memberLabel.text = memberList[indexPath.item].userName
-        
+        if let userId = memberList[indexPath.item].userId {
+            if type == .progressReflection &&  selectedMemberIdList.contains(userId) {
+                cell.setupAttribute()
+            }
+        }
         switch type {
         case .addFeedback:
             cell.index = FromCellIndex.fromAddFeedback
         case .progressReflection:
             cell.index = FromCellIndex.fromSelectMember
         }
+        
+        cell.cellColor = type.cellColor
+        cell.memberLabel.font = type.cellFont
+        
         return cell
     }
 }

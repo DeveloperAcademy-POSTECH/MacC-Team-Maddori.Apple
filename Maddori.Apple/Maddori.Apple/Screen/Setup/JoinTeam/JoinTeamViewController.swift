@@ -77,6 +77,7 @@ final class JoinTeamViewController: BaseTextFieldViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupDoneButton()
+        setupKeyboard()
     }
     
     override func render() {
@@ -110,6 +111,11 @@ final class JoinTeamViewController: BaseTextFieldViewController {
         super.doneButton.addAction(action, for: .touchUpInside)
     }
     
+    private func setupKeyboard() {
+        super.kigoTextField.keyboardType = .asciiCapable
+        super.kigoTextField.autocapitalizationType = .allCharacters
+    }
+    
     // MARK: - func
     
     private func presentCreateTeamViewController() {
@@ -138,8 +144,7 @@ final class JoinTeamViewController: BaseTextFieldViewController {
                 self.presentCertainTeamViewController(teamName: teamName, teamId: UserDefaultStorage.teamId)
             } else {
                 DispatchQueue.main.async {
-                    // FIXME: - UXWriting 필요
-                    self.makeAlert(title: "에러", message: "존재하지 않는 팀입니다.")
+                    self.makeAlert(title: TextLiteral.joinTeamViewControllerAlertTitle, message: TextLiteral.joinTeamViewControllerAlertMessage)
                 }
             }
         }

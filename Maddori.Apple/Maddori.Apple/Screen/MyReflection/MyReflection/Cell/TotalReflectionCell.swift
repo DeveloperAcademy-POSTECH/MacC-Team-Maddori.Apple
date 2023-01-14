@@ -37,16 +37,14 @@ final class TotalReflectionCell: BaseCollectionViewCell {
         contentView.addSubview(cellLabel)
         cellLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-            $0.top.equalToSuperview().inset(10)
-            $0.height.equalTo(16)
+            $0.top.equalToSuperview().inset(18)
         }
         
         contentView.addSubview(cellDateLabel)
         cellDateLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-            $0.top.equalTo(cellLabel.snp.bottom)
+            $0.top.equalTo(cellLabel.snp.bottom).offset(7)
             $0.bottom.equalToSuperview().inset(10)
-            $0.height.equalTo(14)
         }
         
         contentView.addSubview(cellArrow)

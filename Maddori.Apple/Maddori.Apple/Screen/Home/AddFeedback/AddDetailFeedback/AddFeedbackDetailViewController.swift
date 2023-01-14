@@ -10,7 +10,7 @@ import UIKit
 import Alamofire
 import SnapKit
 
-final class AddDetailFeedbackViewController: BaseViewController {
+final class AddFeedbackDetailViewController: BaseViewController {
     
     private var feedbackContent: FeedbackContent
     
@@ -28,9 +28,24 @@ final class AddDetailFeedbackViewController: BaseViewController {
             }
         }
     }
-    private var isOpenedTypeView: Bool = false
+    private var isOpenedTypeView: Bool = false {
+        didSet {
+            if !isOpenedTypeView {
+                if selectKeywordTypeView.feedbackTypeButtonView.feedbackType != nil {
+                    selectKeywordTypeView.titleLabel.text = selectKeywordTypeView.feedbackTypeButtonView.feedbackType?.rawValue
+                    selectKeywordTypeView.titleLabel.textColor = .blue200
+                }
+            }
+            else {
+                selectKeywordTypeView.titleLabel.text = TextLiteral.feedbackTypeLabel
+                selectKeywordTypeView.titleLabel.textColor = .black100
+            }
+        }
+    }
     private var toName: String = ""
     private var toId: Int?
+    private var isSelectedMember: Bool = false
+    private var isSelectedType: Bool = false
     
     // MARK: - property
     
@@ -41,11 +56,14 @@ final class AddDetailFeedbackViewController: BaseViewController {
         label.text = TextLiteral.DetailTitleLabel
         label.numberOfLines = 0
         label.font = .title2
+        label.setLineSpacing(to: 4)
+        label.textColor = .black100
         return label
     }()
     private let nextButton: MainButton = {
         let button = MainButton()
         button.title = TextLiteral.doneButtonNext
+        button.isDisabled = true
         return button
     }()
     private lazy var selectMemberView: SelectMemberView = {
@@ -56,6 +74,8 @@ final class AddDetailFeedbackViewController: BaseViewController {
                   let userId = user.userId   else { return }
             self?.toName = userName
             self?.toId = userId
+            
+            self?.openSelectTypeView()
         }
         return view
     }()
@@ -90,6 +110,8 @@ final class AddDetailFeedbackViewController: BaseViewController {
         setupCloseButton()
         setupNextButton()
         setupShadowView()
+        detectMemberIsSelected()
+        detectFeedbackTypeIsSelected()
         fetchCurrentTeamMember(type: .fetchCurrentTeamMember)
     }
     
@@ -236,6 +258,38 @@ final class AddDetailFeedbackViewController: BaseViewController {
     private func pushAddFeedbackViewController () {
         let viewController = AddFeedbackContentViewController(feedbackContent: feedbackContent, step: .writeSituation)
         navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    private func detectFeedbackTypeIsSelected() {
+        selectKeywordTypeView.feedbackTypeButtonView.detectSelectedFeedbackType = { [weak self] isSelected in
+            self?.isSelectedType = isSelected
+            self?.changeNextButtonStatus()
+        }
+    }
+    
+    private func detectMemberIsSelected() {
+        selectMemberView.isSelectedMember = { [weak self] isSelected in
+            self?.isSelectedMember = isSelected
+            self?.changeNextButtonStatus()
+        }
+    }
+    
+    private func changeNextButtonStatus() {
+        if isSelectedMember, isSelectedType {
+            nextButton.isDisabled = false
+        }
+    }
+    
+    private func openSelectTypeView() {
+        self.selectKeywordTypeView.snp.updateConstraints {
+            $0.height.equalTo(178)
+        }
+        self.isOpenedTypeView = true
+        self.selectKeywordTypeView.isOpened = true
+        UIView.animate(withDuration: 0.2) {
+            self.selectKeywordTypeView.upDownImageView.transform = CGAffineTransform(rotationAngle: .pi)
+            self.view.layoutIfNeeded()
+        }
     }
     
     // MARK: - api

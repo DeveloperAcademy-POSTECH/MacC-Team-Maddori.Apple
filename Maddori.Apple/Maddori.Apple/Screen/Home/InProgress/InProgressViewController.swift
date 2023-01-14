@@ -74,6 +74,7 @@ final class InProgressViewController: BaseViewController {
             label.text = currentReflectionMemberName + TextLiteral.inProgressViewControllerOthersSubTitleLabel
         }
         label.numberOfLines = 0
+        label.setLineSpacing(to: 2)
         return label
     }()
     private let flowLayout = KeywordCollectionViewFlowLayout()
@@ -99,7 +100,6 @@ final class InProgressViewController: BaseViewController {
             )
         )
         setUpDelegation()
-        setUpKeywordType()
     }
     
     override func render() {
@@ -143,14 +143,14 @@ final class InProgressViewController: BaseViewController {
     private func setUpKeywordType() {
         if isUserRetrospective {
             for i in 0..<teamKeywordData.count {
-                teamKeywordData[i].style = .defaultKeyword
+                teamKeywordData[i].style = UserDefaultStorage.seenKeywordIdList.contains(teamKeywordData[i].id) ? .disabledKeyword : .defaultKeyword
             }
         } else {
             for i in 0..<userKeywordData.count {
-                userKeywordData[i].style = .defaultKeyword
+                userKeywordData[i].style = UserDefaultStorage.seenKeywordIdList.contains(userKeywordData[i].id) ? .disabledKeyword : .defaultKeyword
             }
             for j in 0..<teamKeywordData.count {
-                teamKeywordData[j].style = .subKeyword
+                teamKeywordData[j].style = UserDefaultStorage.seenKeywordIdList.contains(teamKeywordData[j].id) ? .disabledKeyword : .subKeyword
             }
         }
     }
@@ -161,6 +161,7 @@ final class InProgressViewController: BaseViewController {
         var keywordList: [Keyword] = []
         for feedback in response {
             let keyword = Keyword(
+                id: feedback.id ?? 0,
                 type: feedback.type ?? .continueType,
                 keyword: feedback.keyword ?? "키워드",
                 content: feedback.content ?? "",
@@ -193,6 +194,7 @@ final class InProgressViewController: BaseViewController {
                 self.userKeywordData = self.convert(userFeedbackList)
                 self.teamKeywordData = self.convert(teamFeedbackList)
                 
+                self.setUpKeywordType()
                 if self.isUserRetrospective {
                     self.keywordsSectionList[0] = self.teamKeywordData
                 } else {
@@ -218,6 +220,7 @@ extension InProgressViewController: UICollectionViewDelegate {
             keyword: keyword.keyword,
             info: keyword.content, start: startContent
         )
+        UserDefaultHandler.appendSeenKeywordIdList(keywordId: keyword.id)
         DispatchQueue.main.async {
             cell.setupAttribute(to: .disabledKeyword)
             self.presentDetailView(feedbackInfo: feedbackInfo)
@@ -294,11 +297,9 @@ extension InProgressViewController: UICollectionViewDataSource {
             emptyCell.emptyFeedbackLabel.text = TextLiteral.emptyViewInProgressMyRetrospective
             return emptyCell
         }
-        
         let keyword = keywordsSectionList[section][item]
         cell.keywordLabel.text = keyword.keyword
-        cell.configLabel(type: keyword.style ?? .defaultKeyword)
-        cell.configShadow(type: keyword.style ?? .defaultKeyword)
+        cell.setupAttribute(to: keyword.style ?? .defaultKeyword)
         return cell
     }
 }

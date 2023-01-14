@@ -34,7 +34,7 @@ final class CustomTextField: UITextField {
         self.font = .body1
         self.layer.masksToBounds = true
         self.layer.borderWidth = 1
-        self.layer.borderColor = UIColor.white300.cgColor
+        self.layer.borderColor = UIColor.gray100.cgColor
         self.layer.cornerRadius = 10
         self.textAlignment = .left
         self.returnKeyType = .done

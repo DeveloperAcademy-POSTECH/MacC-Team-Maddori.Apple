@@ -14,7 +14,10 @@ enum DataKeys: String, CaseIterable {
     case teamId = "teamId"
     case accessToken = "accessToken"
     case refreshToken = "refreshToken"
-    case hasSeenAlert = "hasSeenAlert"
+    case hasSeenReflectionAlert = "hasSeenReflectionAlert"
+    case seenKeywordIdList = "seenKeywordIdList"
+    case seenMemberIdList = "seenMemberIdList"
+    case completedCurrentReflection = "completedCurrentReflection"
 }
 
 struct UserDefaultStorage {
@@ -31,7 +34,7 @@ struct UserDefaultStorage {
     }
     
     static var teamId: Int {
-        return UserData<Int>.getValue(forKey: .teamId) ?? 1
+        return UserData<Int>.getValue(forKey: .teamId) ?? 0
     }
     
     static var accessToken: String {
@@ -43,7 +46,19 @@ struct UserDefaultStorage {
     }
     
     static var hasSeenReflectionAlert: Bool {
-        return UserData<Bool>.getValue(forKey: .hasSeenAlert) ?? false
+        return UserData<Bool>.getValue(forKey: .hasSeenReflectionAlert) ?? false
+    }
+    
+    static var seenKeywordIdList: [Int] {
+        return UserData<[Int]>.getValue(forKey: .seenKeywordIdList) ?? []
+    }
+    
+    static var seenMemberIdList: [Int] {
+        return UserData<[Int]>.getValue(forKey: .seenMemberIdList) ?? []
+    }
+    
+    static var completedCurrentReflection: Bool {
+        return UserData<Bool>.getValue(forKey: .completedCurrentReflection) ?? false
     }
 }
 
