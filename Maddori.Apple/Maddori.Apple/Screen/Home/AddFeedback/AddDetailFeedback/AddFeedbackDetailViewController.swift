@@ -10,7 +10,7 @@ import UIKit
 import Alamofire
 import SnapKit
 
-final class AddDetailFeedbackViewController: BaseViewController {
+final class AddFeedbackDetailViewController: BaseViewController {
     
     private var feedbackContent: FeedbackContent
     
