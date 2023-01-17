@@ -38,17 +38,17 @@ final class HomeViewController: BaseViewController {
     
     // MARK: - property
     
-    private let toastView: UIView = {
-        let view = UIView()
-        view.layer.cornerRadius = 10
-        view.clipsToBounds = true
-        return view
-    }()
-    private let toastContentView: ToastContentView = {
-        let view = ToastContentView()
-        view.toastType = .complete
-        return view
-    }()
+//    private let toastView: UIView = {
+//        let view = UIView()
+//        view.layer.cornerRadius = 10
+//        view.clipsToBounds = true
+//        return view
+//    }()
+//    private let toastContentView: ToastContentView = {
+//        let view = ToastContentView()
+//        view.toastType = .complete
+//        return view
+//    }()
     private lazy var flowLayout: KeywordCollectionViewFlowLayout = {
         let layout = KeywordCollectionViewFlowLayout()
         layout.count = keywordList.count
@@ -60,21 +60,35 @@ final class HomeViewController: BaseViewController {
         collectionView.register(KeywordCollectionViewCell.self, forCellWithReuseIdentifier: KeywordCollectionViewCell.className)
         return collectionView
     }()
+    private lazy var teamButton: UIButton = {
+        let button = UIButton()
+        let action = UIAction { _ in
+            // FIXME: 버튼 눌렀을 때 action 추가
+        }
+        button.addAction(action, for: .touchUpInside)
+        return button
+    }()
     private lazy var teamNameLabel: UILabel = {
         let label = UILabel()
         label.textColor = .black100
+        label.font = .main
         label.numberOfLines = 0
         return label
     }()
-    private let invitationCodeButton: UIButton = {
-         let button = UIButton()
-         button.setTitle(TextLiteral.mainViewControllerInvitationButtonText, for: .normal)
-         button.setTitleColor(UIColor.blue200, for: .normal)
-         button.titleLabel?.font = .caption2
-         button.backgroundColor = .gray100
-         button.layer.cornerRadius = 4
-         return button
-     }()
+    private let arrowDownImageView: UIImageView = {
+        let image = UIImageView(image: ImageLiterals.icChevronDown)
+        image.tintColor = .black100
+        return image
+    }()
+//    private let invitationCodeButton: UIButton = {
+//         let button = UIButton()
+//         button.setTitle(TextLiteral.mainViewControllerInvitationButtonText, for: .normal)
+//         button.setTitleColor(UIColor.blue200, for: .normal)
+//         button.titleLabel?.font = .caption2
+//         button.backgroundColor = .gray100
+//         button.layer.cornerRadius = 4
+//         return button
+//     }()
     private let descriptionLabel: UILabel = {
         let label = UILabel()
         label.font = .caption1
@@ -133,6 +147,7 @@ final class HomeViewController: BaseViewController {
         super.viewDidLoad()
         setUpDelegation()
         render()
+        self.navigationController?.isNavigationBarHidden = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -146,36 +161,48 @@ final class HomeViewController: BaseViewController {
     
     override func configUI() {
         view.backgroundColor = .white200
-        setGradientToastView()
+//        setGradientToastView()
     }
     
     override func render() {
-        navigationController?.view.addSubview(toastView)
-        toastView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(-60)
-            $0.centerX.equalToSuperview()
-            $0.height.equalTo(46)
-        }
+//        navigationController?.view.addSubview(toastView)
+//        toastView.snp.makeConstraints {
+//            $0.top.equalToSuperview().inset(-60)
+//            $0.centerX.equalToSuperview()
+//            $0.height.equalTo(46)
+//        }
         
-        toastView.addSubview(toastContentView)
-        toastContentView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-        }
-        toastContentView.render()
+//        toastView.addSubview(toastContentView)
+//        toastContentView.snp.makeConstraints {
+//            $0.edges.equalToSuperview()
+//        }
+//        toastContentView.render()
         
-        view.addSubview(teamNameLabel)
-        teamNameLabel.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(SizeLiteral.topPadding)
+        view.addSubview(teamButton)
+        teamButton.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.topPadding)
+            $0.height.equalTo(SizeLiteral.minimumTouchArea)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
-        view.addSubview(invitationCodeButton)
-        invitationCodeButton.snp.makeConstraints {
-           $0.leading.equalTo(teamNameLabel.snp.trailing).offset(Size.labelButtonPadding)
-           $0.width.equalTo(Size.subButtonWidth)
-           $0.height.equalTo(Size.subButtonHeight)
-           $0.bottom.equalTo(teamNameLabel.snp.bottom).offset(-5)
+        teamButton.addSubview(teamNameLabel)
+        teamNameLabel.snp.makeConstraints {
+            $0.centerY.leading.equalToSuperview()
         }
+        
+        teamButton.addSubview(arrowDownImageView)
+        arrowDownImageView.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.leading.equalTo(teamNameLabel.snp.trailing).offset(4)
+//            $0.width.equalTo(14)
+        }
+//        view.addSubview(invitationCodeButton)
+//        invitationCodeButton.snp.makeConstraints {
+//           $0.leading.equalTo(teamNameLabel.snp.trailing).offset(Size.labelButtonPadding)
+//           $0.width.equalTo(Size.subButtonWidth)
+//           $0.height.equalTo(Size.subButtonHeight)
+//           $0.bottom.equalTo(teamNameLabel.snp.bottom).offset(-5)
+//        }
         
         view.addSubview(descriptionLabel)
         descriptionLabel.snp.makeConstraints {
@@ -231,41 +258,41 @@ final class HomeViewController: BaseViewController {
         present(viewController, animated: true)
     }
     
-    private func setGradientToastView() {
-        toastView.layoutIfNeeded()
-        toastView.setGradient(colorTop: .gradientGrayTop, colorBottom: .gradientGrayBottom)
-    }
+//    private func setGradientToastView() {
+//        toastView.layoutIfNeeded()
+//        toastView.setGradient(colorTop: .gradientGrayTop, colorBottom: .gradientGrayBottom)
+//    }
     
     private func setGradientJoinReflectionView() {
         joinReflectionButton.layoutIfNeeded()
         joinReflectionButton.setGradient(colorTop: .gradientBlueTop, colorBottom: .gradientBlueBottom)
     }
     
-    private func showToastPopUp(of type: ToastType) {
-        if !isTouched {
-            isTouched = true
-            DispatchQueue.main.async {
-                self.toastContentView.toastType = type
-            }
-            UIView.animate(withDuration: 0.5, delay: 0, animations: {
-                self.toastView.transform = CGAffineTransform(translationX: 0, y: 115)
-            }, completion: {_ in
-                UIView.animate(withDuration: 1, delay: 0.8, animations: {
-                    self.toastView.transform = .identity
-                }, completion: {_ in
-                    self.isTouched = false
-                })
-            })
-        }
-    }
+//    private func showToastPopUp(of type: ToastType) {
+//        if !isTouched {
+//            isTouched = true
+//            DispatchQueue.main.async {
+//                self.toastContentView.toastType = type
+//            }
+//            UIView.animate(withDuration: 0.5, delay: 0, animations: {
+//                self.toastView.transform = CGAffineTransform(translationX: 0, y: 115)
+//            }, completion: {_ in
+//                UIView.animate(withDuration: 1, delay: 0.8, animations: {
+//                    self.toastView.transform = .identity
+//                }, completion: {_ in
+//                    self.isTouched = false
+//                })
+//            })
+//        }
+//    }
     
-    private func setupCopyCodeButton(code: String) {
-        let action = UIAction { [weak self] _ in
-            UIPasteboard.general.string = code
-            self?.showToastPopUp(of: .complete)
-        }
-        invitationCodeButton.addAction(action, for: .touchUpInside)
-    }
+//    private func setupCopyCodeButton(code: String) {
+//        let action = UIAction { [weak self] _ in
+//            UIPasteboard.general.string = code
+//            self?.showToastPopUp(of: .complete)
+//        }
+//        invitationCodeButton.addAction(action, for: .touchUpInside)
+//    }
     
     private func presentCreateReflectionViewController() {
         let viewController = UINavigationController(rootViewController: CreateReflectionViewController(reflectionId: currentReflectionId))
@@ -388,8 +415,9 @@ final class HomeViewController: BaseViewController {
                 else { return }
                 self.isAdmin = isAdmin
                 DispatchQueue.main.async {
-                    self.teamNameLabel.setTitleFont(text: teamName)
-                    self.setupCopyCodeButton(code: invitationCode)
+                    self.teamNameLabel.text = teamName
+//                    self.teamNameLabel.setTitleFont(text: teamName)
+//                    self.setupCopyCodeButton(code: invitationCode)
                     if isAdmin {
                         self.renderPlanLabelButton()
                     }
@@ -475,7 +503,7 @@ extension HomeViewController: UICollectionViewDataSource {
         switch reflectionStatus {
         case .Before, .SettingRequired, .Done:
             if hasKeyword {
-                showToastPopUp(of: .warning)
+//                showToastPopUp(of: .warning)
             } else {
                 didTapAddFeedbackButton()
             }
