@@ -188,8 +188,10 @@ enum TextLiteral {
     
     // MARK: - JoinReflectionButton
     
-    static let joinReflectionButtonStatusText: String = "회고가 시작되었습니다!"
-    static let joinReflectionTouchToEnterLabel: String = "터치하여 회고에 참여해주세요"
+    static let reflectionTitleLabelSettingRequired: String = "아직 회고 일정이 정해지지 않았습니다"
+    static let reflectionTitleLabelProgressing: String = "회고가 시작되었습니다!"
+    static let reflectionDescriptionLabelSettingRequired: String = "회고 일정을 정해주세요"
+    static let reflectionDescriptionLabelProgressing: String = "터치하여 회고에 참여해주세요"
     
     // MARK: - MyReflectionViewController
     

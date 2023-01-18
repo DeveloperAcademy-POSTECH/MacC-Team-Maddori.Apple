@@ -11,35 +11,71 @@ import SnapKit
 
 final class JoinReflectionButton: UIView {
     
+    var reflectionStatus: ReflectionStatus
+    var reflectionTitle: String
+    var reflectionDate: Date
+    
     var buttonAction: (() -> ())?
     
     // MARK: - property
     
     private let joinButton = UIButton()
-    private let reflectionStatusLabel: UILabel = {
+    private lazy var reflectionTitleLabel: UILabel = {
         let label = UILabel()
+        switch reflectionStatus {
+        case .SettingRequired, .Done:
+            label.text = TextLiteral.reflectionTitleLabelSettingRequired
+            label.textColor = .gray600
+        case .Before:
+            label.text = reflectionTitle
+            label.textColor = .gray600
+        case .Progressing:
+            label.text = TextLiteral.reflectionTitleLabelProgressing
+            label.textColor = .white100
+        }
         label.font = .label2
-        label.text = TextLiteral.joinReflectionButtonStatusText
-        label.textColor = .white100
         return label
     }()
-    private let touchToEnterLabel: UILabel = {
+    private lazy var reflectionDescriptionLabel: UILabel = {
         let label = UILabel()
+        switch reflectionStatus {
+        case .SettingRequired, .Done:
+            label.text = TextLiteral.reflectionDescriptionLabelSettingRequired
+            label.textColor = .gray500
+        case .Before:
+            label.text = reflectionDate.description.formatDateString(to: "M월 d일 (EEE) HH:mm")
+            label.textColor = .gray500
+        case .Progressing:
+            label.text = TextLiteral.reflectionDescriptionLabelProgressing
+            label.textColor = .white100
+        }
         label.font = .caption3
-        label.text = TextLiteral.joinReflectionTouchToEnterLabel
-        label.textColor = .white100
         return label
     }()
-    private let calendarImageView = UIImageView(image: ImageLiterals.imgYellowCalendar)
+    private lazy var calendarImageView: UIImageView = {
+        let imageView = UIImageView()
+        switch reflectionStatus {
+        case .SettingRequired, .Done:
+            imageView.image = ImageLiterals.imgEmptyCalendar
+        case .Before:
+            imageView.image = ImageLiterals.imgCalendar
+        case .Progressing:
+            imageView.image = ImageLiterals.imgYellowCalendar
+        }
+        return imageView
+    }()
     
     // MARK: - life cycle
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init(reflectionStatus: ReflectionStatus, title: String, date: Date) {
+        self.reflectionStatus = reflectionStatus
+        self.reflectionTitle = title
+        self.reflectionDate = date
+        super.init(frame: .zero)
         render()
         setupJoinButtonAction()
     }
-
+    
     required init?(coder: NSCoder) { nil }
     
     func render() {
@@ -48,16 +84,16 @@ final class JoinReflectionButton: UIView {
             $0.edges.equalToSuperview()
         }
         
-        joinButton.addSubview(reflectionStatusLabel)
-        reflectionStatusLabel.snp.makeConstraints {
+        joinButton.addSubview(reflectionTitleLabel)
+        reflectionTitleLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(18)
             $0.top.equalToSuperview().inset(18)
         }
         
-        joinButton.addSubview(touchToEnterLabel)
-        touchToEnterLabel.snp.makeConstraints {
+        joinButton.addSubview(reflectionDescriptionLabel)
+        reflectionDescriptionLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(18)
-            $0.top.equalTo(reflectionStatusLabel.snp.bottom).offset(6)
+            $0.top.equalTo(reflectionTitleLabel.snp.bottom).offset(6)
         }
         
         joinButton.addSubview(calendarImageView)
