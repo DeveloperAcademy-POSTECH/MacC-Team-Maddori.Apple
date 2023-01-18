@@ -373,7 +373,6 @@ final class HomeViewController: BaseViewController {
                         switch reflectionStatus {
                         case .SettingRequired, .Done:
                             self.addFeedbackButton.isHidden = false
-                            self.hideJoinReflectionButton()
                             self.showPlanLabelButton()
                             self.restoreView()
                         case .Before:
