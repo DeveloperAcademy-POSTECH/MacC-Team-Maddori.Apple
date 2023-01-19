@@ -128,8 +128,6 @@ final class HomeViewController: BaseViewController {
         super.viewDidLoad()
         setUpDelegation()
         render()
-        setGradientJoinReflectionView()
-        self.navigationController?.isNavigationBarHidden = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -142,6 +140,8 @@ final class HomeViewController: BaseViewController {
     }
     
     override func configUI() {
+        setGradientJoinReflectionView()
+        navigationController?.isNavigationBarHidden = true
         view.backgroundColor = .white200
     }
     
