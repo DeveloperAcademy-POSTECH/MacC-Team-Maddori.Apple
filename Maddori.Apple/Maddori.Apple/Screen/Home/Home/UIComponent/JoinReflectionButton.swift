@@ -13,7 +13,7 @@ final class JoinReflectionButton: UIView {
     
     var reflectionStatus: ReflectionStatus
     var reflectionTitle: String
-    var reflectionDate: Date
+    var reflectionDate: String
     
     var buttonAction: (() -> ())?
     
@@ -43,7 +43,7 @@ final class JoinReflectionButton: UIView {
             label.text = TextLiteral.reflectionDescriptionLabelSettingRequired
             label.textColor = .gray500
         case .Before:
-            label.text = reflectionDate.description.formatDateString(to: "M월 d일 (EEE) HH:mm")
+            label.text = reflectionDate.formatDateString(to: "M월 d일 (EEE) HH:mm")
             label.textColor = .gray500
         case .Progressing:
             label.text = TextLiteral.reflectionDescriptionLabelProgressing
@@ -67,7 +67,7 @@ final class JoinReflectionButton: UIView {
     
     // MARK: - life cycle
     
-    init(reflectionStatus: ReflectionStatus, title: String, date: Date) {
+    init(reflectionStatus: ReflectionStatus, title: String, date: String) {
         self.reflectionStatus = reflectionStatus
         self.reflectionTitle = title
         self.reflectionDate = date

@@ -28,6 +28,9 @@ final class HomeViewController: BaseViewController {
     
     var currentReflectionId: Int = 0
     var reflectionStatus: ReflectionStatus = .Before
+    var reflectionTitle: String = ""
+    var reflectionDate: String = ""
+    
     var hasKeyword: Bool = false
     var isAdmin: Bool = false
     var hasSeenReflectionAlert: Bool = UserDefaultStorage.hasSeenReflectionAlert {
@@ -89,7 +92,11 @@ final class HomeViewController: BaseViewController {
         return label
     }()
     private lazy var joinReflectionButton: JoinReflectionButton = {
-        let joinButton = JoinReflectionButton()
+        let joinButton = JoinReflectionButton(
+            reflectionStatus: reflectionStatus,
+            title: reflectionTitle,
+            date: reflectionDate
+        )
         joinButton.layer.cornerRadius = 10
         joinButton.clipsToBounds = true
         joinButton.buttonAction = { [weak self] in
@@ -406,11 +413,15 @@ final class HomeViewController: BaseViewController {
             if let json = json.value {
                 let reflectionDetail = json.detail
                 guard let reflectionStatus = reflectionDetail?.reflectionStatus,
-                      let reflectionId = reflectionDetail?.currentReflectionId
+                      let reflectionId = reflectionDetail?.currentReflectionId,
+                      let reflectionTitle = reflectionDetail?.reflectionName,
+                      let reflectionDate = reflectionDetail?.reflectionDate
                 else { return }
                 
                 self.currentReflectionId = reflectionId
                 self.reflectionStatus = reflectionStatus
+                self.reflectionTitle = reflectionTitle
+                self.reflectionDate = reflectionDate
                 if let reflectionKeywordList = reflectionDetail?.reflectionKeywords {
                     self.hasKeyword = true
                     if reflectionKeywordList.isEmpty {
