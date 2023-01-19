@@ -50,39 +50,31 @@ final class HomeViewController: BaseViewController {
         return collectionView
     }()
     private lazy var teamButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
+        button.titleLabel?.font = .main
+        button.setImage(ImageLiterals.icChevronDown, for: .normal)
+        button.semanticContentAttribute = .forceRightToLeft
+        button.setPreferredSymbolConfiguration(UIImage.SymbolConfiguration(pointSize: 13, weight: .semibold), forImageIn: .normal)
+        button.tintColor = .black100
         let action = UIAction { _ in
             // FIXME: 버튼 눌렀을 때 action 추가
             print("touched")
         }
         button.addAction(action, for: .touchUpInside)
         return button
-    }()
-    private lazy var teamNameLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .black100
-        label.font = .main
-        label.numberOfLines = 0
-        return label
-    }()
-    private let arrowDownImageView: UIImageView = {
-        let image = UIImageView(image: ImageLiterals.icChevronDown)
-        image.tintColor = .black100
-        return image
     }()
     private lazy var teamManageButton: UIButton = {
         let button = UIButton()
+        button.setImage(ImageLiterals.icTeamMananage, for: .normal)
+        button.semanticContentAttribute = .forceRightToLeft
+        button.setPreferredSymbolConfiguration(UIImage.SymbolConfiguration(pointSize: 20), forImageIn: .normal)
+        button.tintColor = .gray600
         let action = UIAction { _ in
             // FIXME: 버튼 눌렀을 때 action 추가
             print("touched")
         }
         button.addAction(action, for: .touchUpInside)
         return button
-    }()
-    private let teamManageImageView: UIImageView = {
-        let image = UIImageView(image: ImageLiterals.icTeamMananage)
-        image.tintColor = .gray600
-        return image
     }()
     private let currentReflectionLabel: UILabel = {
         let label = UILabel()
@@ -161,30 +153,11 @@ final class HomeViewController: BaseViewController {
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
-        teamButton.addSubview(teamNameLabel)
-        teamNameLabel.snp.makeConstraints {
-            $0.centerY.leading.equalToSuperview()
-        }
-        
-        teamButton.addSubview(arrowDownImageView)
-        arrowDownImageView.snp.makeConstraints {
-            $0.centerY.equalToSuperview()
-            $0.leading.equalTo(teamNameLabel.snp.trailing).offset(4)
-            $0.trailing.equalTo(teamButton)
-        }
-        
         view.addSubview(teamManageButton)
         teamManageButton.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.topPadding)
             $0.width.height.equalTo(SizeLiteral.minimumTouchArea)
             $0.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-        }
-        
-        teamManageButton.addSubview(teamManageImageView)
-        teamManageImageView.snp.makeConstraints {
-            $0.centerY.equalToSuperview()
-            $0.trailing.equalToSuperview()
-            $0.width.height.equalTo(30)
         }
         
         view.addSubview(joinReflectionButton)
@@ -340,7 +313,7 @@ final class HomeViewController: BaseViewController {
                 else { return }
                 self.isAdmin = isAdmin
                 DispatchQueue.main.async {
-                    self.teamNameLabel.text = teamName
+                    self.teamButton.setTitle(teamName, for: .normal)
                     if isAdmin {
                         self.renderPlanLabelButton()
                     }
