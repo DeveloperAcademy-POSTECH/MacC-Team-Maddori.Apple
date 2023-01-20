@@ -87,11 +87,7 @@ final class HomeViewController: BaseViewController {
         return label
     }()
     private lazy var joinReflectionButton: JoinReflectionButton = {
-        let joinButton = JoinReflectionButton(
-            reflectionStatus: reflectionStatus,
-            title: reflectionTitle,
-            date: reflectionDate
-        )
+        let joinButton = JoinReflectionButton()
         joinButton.layer.cornerRadius = 10
         joinButton.clipsToBounds = true
         joinButton.buttonAction = { [weak self] in
@@ -147,7 +143,7 @@ final class HomeViewController: BaseViewController {
     }
     
     override func configUI() {
-        setGradientJoinReflectionView()
+        setJoinReflectionButtonBackground()
         navigationController?.isNavigationBarHidden = true
         view.backgroundColor = .white200
     }
@@ -221,10 +217,15 @@ final class HomeViewController: BaseViewController {
         present(viewController, animated: true)
     }
     
-    private func setGradientJoinReflectionView() {
-        joinReflectionButton.layoutIfNeeded()
-        joinReflectionButton.setGradient(colorTop: .gradientBlueTop, colorBottom: .gradientBlueBottom)
-        joinReflectionButton.render()
+    private func setJoinReflectionButtonBackground() {
+        switch reflectionStatus {
+        case .SettingRequired, .Before, .Done:
+            joinReflectionButton.backgroundColor = .white100
+        case .Progressing:
+            joinReflectionButton.layoutIfNeeded()
+            joinReflectionButton.setGradient(colorTop: .gradientBlueTop, colorBottom: .gradientBlueBottom)
+            joinReflectionButton.render()
+        }
     }
     
     private func presentCreateReflectionViewController() {
@@ -343,9 +344,10 @@ final class HomeViewController: BaseViewController {
                 else { return }
                 
                 self.currentReflectionId = reflectionId
-                self.reflectionStatus = reflectionStatus
-                self.reflectionTitle = reflectionTitle
-                self.reflectionDate = reflectionDate
+//                self.reflectionStatus = reflectionStatus
+//                self.reflectionTitle = reflectionTitle
+//                self.reflectionDate = reflectionDate
+                self.joinReflectionButton.setupAttribute(reflectionStatus: reflectionStatus, title: reflectionTitle, date: reflectionDate)
                 if let reflectionKeywordList = reflectionDetail?.reflectionKeywords {
                     self.hasKeyword = true
                     if reflectionKeywordList.isEmpty {
