@@ -30,6 +30,13 @@ final class SetNicknameViewController: BaseViewController {
         button.addAction(action, for: .touchUpInside)
         return button
     }()
+    private let navigationTitleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "프로필 생성"
+        label.textColor = .black100
+        label.font = .label2
+        return label
+    }()
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.text = teamName + "에서\n사용할 프로필을 작성해 주세요"
@@ -116,6 +123,7 @@ final class SetNicknameViewController: BaseViewController {
         titleLabel.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.topPadding)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.height.equalTo(66.5)
         }
         
         view.addSubview(profileImageButton)
@@ -176,6 +184,10 @@ final class SetNicknameViewController: BaseViewController {
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.largeTitleDisplayMode = .never
         navigationItem.leftBarButtonItem = backButton
+        
+        
+        navigationItem.titleView = navigationTitleLabel
+        navigationItem.titleView?.isHidden = true
     }
     
     override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
@@ -239,12 +251,37 @@ final class SetNicknameViewController: BaseViewController {
                 self.doneButton.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height + 24)
             })
         }
+        
+        titleLabel.snp.updateConstraints {
+            $0.height.equalTo(0)
+        }
+        profileImageButton.snp.updateConstraints {
+            $0.top.equalTo(self.titleLabel.snp.bottom).offset(-4)
+        }
+        navigationItem.titleView?.isHidden = false
+        
+        UIView.animate(withDuration: 0.3, delay: 0, options: .allowAnimatedContent, animations: {
+            self.view.layoutIfNeeded()
+        }, completion: nil)
+        
     }
     
     @objc private func keyboardWillHide(notification:NSNotification) {
         UIView.animate(withDuration: 0.2, animations: {
             self.doneButton.transform = .identity
         })
+        
+        titleLabel.snp.updateConstraints {
+            $0.height.equalTo(66.5)
+        }
+        profileImageButton.snp.updateConstraints {
+            $0.top.equalTo(titleLabel.snp.bottom).offset(44)
+        }
+        navigationItem.titleView?.isHidden = true
+        
+        UIView.animate(withDuration: 0.3, delay: 0, options: .allowAnimatedContent, animations: {
+            self.view.layoutIfNeeded()
+        }, completion: nil)
     }
     
     // MARK: - api
