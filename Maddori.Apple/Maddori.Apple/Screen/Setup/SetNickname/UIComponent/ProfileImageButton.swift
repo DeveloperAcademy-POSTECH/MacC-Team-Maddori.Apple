@@ -14,7 +14,12 @@ final class ProfileImageButton: UIButton {
     // MARK: - property
     
     var profileImage = UIImageView(image: ImageLiterals.imgProfileNone)
-    let profilePlus = UIImageView(image: ImageLiterals.icPlus)
+    private let profilePlus: UIImageView = {
+       let imageView = UIImageView()
+        imageView.image = ImageLiterals.icPlus
+        imageView.tintColor = .blue200
+        return imageView
+    }()
     
     // MARK: - life cycle
     
@@ -34,7 +39,8 @@ final class ProfileImageButton: UIButton {
         self.addSubview(profilePlus)
         profilePlus.snp.makeConstraints {
             $0.top.trailing.equalTo(profileImage)
-            $0.width.height.equalTo(22)
+            $0.width.equalTo(20)
+            $0.height.equalTo(22)
         }
     }
 }
