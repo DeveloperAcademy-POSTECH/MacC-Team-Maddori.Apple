@@ -289,7 +289,8 @@ final class SetNicknameViewController: BaseViewController {
         
         didTappedBackground()
     }
-
+}
+    
 // MARK: - Extension
 
 extension SetNicknameViewController: UITextFieldDelegate {
