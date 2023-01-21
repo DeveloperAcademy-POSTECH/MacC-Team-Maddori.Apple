@@ -13,6 +13,9 @@ import SnapKit
 final class SetNicknameViewController: BaseViewController {
     
     var teamName = "맛쟁이사과처럼세글자"
+    private let minLength: Int = 0
+    var nicknameMaxLength: Int = 15
+    var roleMaxLength: Int = 20
     
     // MARK: - property
     
@@ -41,6 +44,26 @@ final class SetNicknameViewController: BaseViewController {
         button.addAction(action, for: .touchUpInside)
         return button
     }()
+    private let nicknameLabel: UILabel = {
+        let label = UILabel()
+        label.text = "닉네임 *"
+        label.textColor = .black100
+        label.font = .label2
+        label.applyColor(to: "*", with: .red100)
+        return label
+    }()
+    private let nicknameTextField: CustomTextField = {
+        let textField = CustomTextField()
+        textField.placeHolderText = "ex) 진저"
+        return textField
+    }()
+    private lazy var nicknameTextLimitLabel: UILabel = {
+        let label = UILabel()
+        label.setTextWithLineHeight(text: "\(minLength)/\(nicknameMaxLength)", lineHeight: 22)
+        label.font = .body2
+        label.textColor = .gray500
+        return label
+    }()
     
     // MARK: - life cycle
     
@@ -56,6 +79,24 @@ final class SetNicknameViewController: BaseViewController {
             $0.top.equalTo(titleLabel.snp.bottom).offset(44)
             $0.centerX.equalToSuperview()
             $0.width.height.equalTo(68)
+        }
+        
+        view.addSubview(nicknameLabel)
+        nicknameLabel.snp.makeConstraints {
+            $0.top.equalTo(profileImageButton.snp.bottom).offset(40)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+        
+        view.addSubview(nicknameTextField)
+        nicknameTextField.snp.makeConstraints {
+            $0.top.equalTo(nicknameLabel.snp.bottom).offset(10)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+        
+        view.addSubview(nicknameTextLimitLabel)
+        nicknameTextLimitLabel.snp.makeConstraints {
+            $0.top.equalTo(nicknameTextField.snp.bottom).offset(8)
+            $0.trailing.equalToSuperview().inset(27)
         }
     }
     
