@@ -64,13 +64,32 @@ final class SetNicknameViewController: BaseViewController {
         label.textColor = .gray500
         return label
     }()
+    private let roleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "역할"
+        label.textColor = .black100
+        label.font = .label2
+        return label
+    }()
+    private let roleTextField: CustomTextField = {
+        let textField = CustomTextField()
+        textField.placeHolderText = "ex) iOS 개발자"
+        return textField
+    }()
+    private lazy var roleTextLimitLabel: UILabel = {
+        let label = UILabel()
+        label.setTextWithLineHeight(text: "\(minLength)/\(roleMaxLength)", lineHeight: 22)
+        label.font = .body2
+        label.textColor = .gray500
+        return label
+    }()
     
     // MARK: - life cycle
     
     override func render() {
         view.addSubview(titleLabel)
         titleLabel.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).inset(20)
+            $0.top.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.topPadding)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
@@ -89,13 +108,31 @@ final class SetNicknameViewController: BaseViewController {
         
         view.addSubview(nicknameTextField)
         nicknameTextField.snp.makeConstraints {
-            $0.top.equalTo(nicknameLabel.snp.bottom).offset(10)
-            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.top.equalTo(nicknameLabel.snp.bottom).offset(SizeLiteral.labelComponentPadding)
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
         view.addSubview(nicknameTextLimitLabel)
         nicknameTextLimitLabel.snp.makeConstraints {
-            $0.top.equalTo(nicknameTextField.snp.bottom).offset(8)
+            $0.top.equalTo(nicknameTextField.snp.bottom).offset(4)
+            $0.trailing.equalToSuperview().inset(27)
+        }
+        
+        view.addSubview(roleLabel)
+        roleLabel.snp.makeConstraints {
+            $0.top.equalTo(nicknameTextField.snp.bottom).offset(SizeLiteral.componentIntervalPadding)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+        
+        view.addSubview(roleTextField)
+        roleTextField.snp.makeConstraints {
+            $0.top.equalTo(roleLabel.snp.bottom).offset(SizeLiteral.labelComponentPadding)
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+        
+        view.addSubview(roleTextLimitLabel)
+        roleTextLimitLabel.snp.makeConstraints {
+            $0.top.equalTo(roleTextField.snp.bottom).offset(4)
             $0.trailing.equalToSuperview().inset(27)
         }
     }
