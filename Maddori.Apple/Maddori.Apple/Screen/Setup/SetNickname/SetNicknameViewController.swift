@@ -33,9 +33,8 @@ final class SetNicknameViewController: BaseViewController {
         label.setLineSpacingWithColorApplied(amount: 4, colorTo: teamName, with: .blue200)
         return label
     }()
-    private lazy var profileImageButton: UIButton = {
-       let button = UIButton()
-        button.setBackgroundImage(ImageLiterals.imgProfileNone, for: .normal)
+    private lazy var profileImageButton: ProfileImageButton = {
+        let button = ProfileImageButton()
         let action = UIAction { [weak self] _ in
             self?.didTappedProfile()
         }
