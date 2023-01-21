@@ -12,13 +12,11 @@ import SnapKit
 
 final class SetNicknameViewController: BaseViewController {
     
+    // FIXME: - 합류한 팀 이름 받아오기
     var teamName = "맛쟁이사과처럼세글자"
     private let minLength: Int = 0
-    
-    enum maxTextLength: Int {
-        case nickname = 15
-        case role = 20
-    }
+    private let nicknameMaxLength: Int = 15
+    private let roleMaxLength: Int = 20
     
     // MARK: - property
     
@@ -32,14 +30,14 @@ final class SetNicknameViewController: BaseViewController {
     }()
     private let navigationTitleLabel: UILabel = {
         let label = UILabel()
-        label.text = "프로필 생성"
+        label.text = TextLiteral.setNicknameControllerNavigationTitleLabel
         label.textColor = .black100
         label.font = .label2
         return label
     }()
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.text = teamName + "에서\n사용할 프로필을 작성해 주세요"
+        label.text = teamName + TextLiteral.setNicknameControllerTitleLabel
         label.font = .title
         label.textColor = .black100
         label.numberOfLines = 0
@@ -56,7 +54,7 @@ final class SetNicknameViewController: BaseViewController {
     }()
     private let nicknameLabel: UILabel = {
         let label = UILabel()
-        label.text = "닉네임 *"
+        label.text = TextLiteral.setNicknameControllerNicknameLabel
         label.textColor = .black100
         label.font = .label2
         label.applyColor(to: "*", with: .red100)
@@ -64,43 +62,46 @@ final class SetNicknameViewController: BaseViewController {
     }()
     private let nicknameTextField: CustomTextField = {
         let textField = CustomTextField()
-        textField.placeHolderText = "ex) 진저"
+        textField.placeHolderText = TextLiteral.setNicknameControllerNicknameTextFieldPlaceHolderText
         return textField
     }()
     private lazy var nicknameTextLimitLabel: UILabel = {
         let label = UILabel()
-        label.setTextWithLineHeight(text: "\(minLength)/\(maxTextLength.nickname.rawValue)", lineHeight: 22)
+        label.setTextWithLineHeight(text: "\(minLength)/\(nicknameMaxLength)", lineHeight: 22)
         label.font = .body2
         label.textColor = .gray500
         return label
     }()
     private let roleLabel: UILabel = {
         let label = UILabel()
-        label.text = "역할"
+        label.text = TextLiteral.setNicknameControllerRoleLabel
         label.textColor = .black100
         label.font = .label2
         return label
     }()
     private let roleTextField: CustomTextField = {
         let textField = CustomTextField()
-        textField.placeHolderText = "ex) iOS 개발자"
+        textField.placeHolderText = TextLiteral.setNicknameControllerRoleTextFieldPlaceHolderText
         return textField
     }()
     private lazy var roleTextLimitLabel: UILabel = {
         let label = UILabel()
-        label.setTextWithLineHeight(text: "\(minLength)/\(maxTextLength.role.rawValue)", lineHeight: 22)
+        label.setTextWithLineHeight(text: "\(minLength)/\(roleMaxLength)", lineHeight: 22)
         label.font = .body2
         label.textColor = .gray500
         return label
     }()
     private lazy var doneButton: MainButton = {
         let button = MainButton()
-        button.title = "입력 완료"
+        button.title = TextLiteral.setNicknameControllerDoneButtonText
         button.isDisabled = true
         let action = UIAction { [weak self] _ in
-            //            guard let nickname = self?.kigoTextField.text else { return }
-            //            self?.dispatchUserLogin(type: .dispatchLogin(LoginDTO(username: nickname)))
-            //            self?.kigoTextField.resignFirstResponder()
+            guard let nickname = self?.nicknameTextField.text else { return }
+            guard let role = self?.roleTextField.text else { return }
+            // FIXME: - 수정된 api 연결
+            // self?.dispatchUserLogin(type: .dispatchLogin(LoginDTO(username: nickname)))
+            self?.nicknameTextField.resignFirstResponder()
+            self?.roleTextField.resignFirstResponder()
         }
         button.addAction(action, for: .touchUpInside)
         return button
@@ -185,7 +186,6 @@ final class SetNicknameViewController: BaseViewController {
         navigationItem.largeTitleDisplayMode = .never
         navigationItem.leftBarButtonItem = backButton
         
-        
         navigationItem.titleView = navigationTitleLabel
         navigationItem.titleView?.isHidden = true
     }
@@ -218,7 +218,7 @@ final class SetNicknameViewController: BaseViewController {
     }
     
     private func setCounter(textField: UITextField, count: Int) {
-        let maxLength = textField == nicknameTextField ? maxTextLength.nickname.rawValue : maxTextLength.role.rawValue
+        let maxLength = textField == nicknameTextField ? nicknameMaxLength : roleMaxLength
         let textLimitLabel = textField == nicknameTextField ? nicknameTextLimitLabel : roleTextLimitLabel
         if count <= maxLength {
             textLimitLabel.text = "\(count)/\(maxLength)"
@@ -229,7 +229,7 @@ final class SetNicknameViewController: BaseViewController {
     }
     
     private func checkMaxLength(textField: UITextField) {
-        let maxLength = textField == nicknameTextField ? maxTextLength.nickname.rawValue : maxTextLength.role.rawValue
+        let maxLength = textField == nicknameTextField ? nicknameMaxLength : roleMaxLength
         if let text = textField.text {
             if text.count > maxLength {
                 let endIndex = text.index(text.startIndex, offsetBy: maxLength)
@@ -243,15 +243,7 @@ final class SetNicknameViewController: BaseViewController {
         }
     }
     
-    // MARK: - selector
-    
-    @objc private func keyboardWillShow(notification:NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            UIView.animate(withDuration: 0.2, animations: {
-                self.doneButton.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height + 24)
-            })
-        }
-        
+    private func didTappedTextField() {
         titleLabel.snp.updateConstraints {
             $0.height.equalTo(0)
         }
@@ -263,14 +255,9 @@ final class SetNicknameViewController: BaseViewController {
         UIView.animate(withDuration: 0.3, delay: 0, options: .allowAnimatedContent, animations: {
             self.view.layoutIfNeeded()
         }, completion: nil)
-        
     }
     
-    @objc private func keyboardWillHide(notification:NSNotification) {
-        UIView.animate(withDuration: 0.2, animations: {
-            self.doneButton.transform = .identity
-        })
-        
+    private func didTappedBackground() {
         titleLabel.snp.updateConstraints {
             $0.height.equalTo(66.5)
         }
@@ -284,26 +271,47 @@ final class SetNicknameViewController: BaseViewController {
         }, completion: nil)
     }
     
+    // MARK: - selector
+    
+    @objc private func keyboardWillShow(notification:NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            UIView.animate(withDuration: 0.2, animations: {
+                self.doneButton.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height + 24)
+            })
+        }
+        
+        didTappedTextField()
+    }
+    
+    @objc private func keyboardWillHide(notification:NSNotification) {
+        UIView.animate(withDuration: 0.2, animations: {
+            self.doneButton.transform = .identity
+        })
+        
+        didTappedBackground()
+    }
+    
     // MARK: - api
     
-    //    private func dispatchUserLogin(type: SetupEndPoint<LoginDTO>) {
-    //        AF.request(type.address,
-    //                   method: type.method,
-    //                   parameters: type.body,
-    //                   encoder: JSONParameterEncoder.default,
-    //                   headers: type.headers
-    //        ).responseDecodable(of: BaseModel<JoinMemberResponse>.self) { [weak self] response in
-    //            guard let self else { return }
-    //            switch response.result {
-    //            case .success:
-    //                guard let nickname = self.kigoTextField.text else { return }
-    //                UserDefaultHandler.setNickname(nickname: nickname)
-    //                self.navigationController?.pushViewController(JoinTeamViewController(), animated: true)
-    //            case .failure:
-    //                self.makeAlert(title: TextLiteral.setNicknameViewControllerAlertTitle, message: TextLiteral.setNicknameControllerAlertMessage)
-    //            }
-    //        }
-    //    }
+    // FIXME: - 수정 필요
+    private func dispatchUserLogin(type: SetupEndPoint<LoginDTO>) {
+//        AF.request(type.address,
+//                   method: type.method,
+//                   parameters: type.body,
+//                   encoder: JSONParameterEncoder.default,
+//                   headers: type.headers
+//        ).responseDecodable(of: BaseModel<JoinMemberResponse>.self) { [weak self] response in
+//            guard let self else { return }
+//            switch response.result {
+//            case .success:
+//                guard let nickname = self.kigoTextField.text else { return }
+//                UserDefaultHandler.setNickname(nickname: nickname)
+//                self.navigationController?.pushViewController(JoinTeamViewController(), animated: true)
+//            case .failure:
+//                self.makeAlert(title: TextLiteral.setNicknameViewControllerAlertTitle, message: TextLiteral.setNicknameControllerAlertMessage)
+//            }
+//        }
+    }
 }
 
 // MARK: - Extension
@@ -315,7 +323,6 @@ extension SetNicknameViewController: UITextFieldDelegate {
         
         let hasText = textField.hasText
         doneButton.isDisabled = !hasText
-        
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
