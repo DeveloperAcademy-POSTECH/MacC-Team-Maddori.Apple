@@ -15,7 +15,7 @@ final class SetNicknameViewController: BaseViewController {
     // FIXME: - 합류한 팀 이름 받아오기
     var teamName = "맛쟁이사과처럼세글자"
     private let minLength: Int = 0
-    private let nicknameMaxLength: Int = 15
+    private let nicknameMaxLength: Int = 6
     private let roleMaxLength: Int = 20
     
     // MARK: - property
@@ -98,8 +98,7 @@ final class SetNicknameViewController: BaseViewController {
         let action = UIAction { [weak self] _ in
             guard let nickname = self?.nicknameTextField.text else { return }
             guard let role = self?.roleTextField.text else { return }
-            // FIXME: - 수정된 api 연결
-            // self?.dispatchUserLogin(type: .dispatchLogin(LoginDTO(username: nickname)))
+            // FIXME: - 수정된 api 연결 (userJoinTeam)
             self?.nicknameTextField.resignFirstResponder()
             self?.roleTextField.resignFirstResponder()
         }
@@ -290,29 +289,6 @@ final class SetNicknameViewController: BaseViewController {
         
         didTappedBackground()
     }
-    
-    // MARK: - api
-    
-    // FIXME: - 수정 필요
-    private func dispatchUserLogin(type: SetupEndPoint<LoginDTO>) {
-//        AF.request(type.address,
-//                   method: type.method,
-//                   parameters: type.body,
-//                   encoder: JSONParameterEncoder.default,
-//                   headers: type.headers
-//        ).responseDecodable(of: BaseModel<JoinMemberResponse>.self) { [weak self] response in
-//            guard let self else { return }
-//            switch response.result {
-//            case .success:
-//                guard let nickname = self.kigoTextField.text else { return }
-//                UserDefaultHandler.setNickname(nickname: nickname)
-//                self.navigationController?.pushViewController(JoinTeamViewController(), animated: true)
-//            case .failure:
-//                self.makeAlert(title: TextLiteral.setNicknameViewControllerAlertTitle, message: TextLiteral.setNicknameControllerAlertMessage)
-//            }
-//        }
-    }
-}
 
 // MARK: - Extension
 
