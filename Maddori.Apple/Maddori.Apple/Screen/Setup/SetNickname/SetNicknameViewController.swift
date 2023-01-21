@@ -14,8 +14,11 @@ final class SetNicknameViewController: BaseViewController {
     
     var teamName = "맛쟁이사과처럼세글자"
     private let minLength: Int = 0
-    var nicknameMaxLength: Int = 15
-    var roleMaxLength: Int = 20
+    
+    enum maxTextLength: Int {
+        case nickname = 15
+        case role = 20
+    }
     
     // MARK: - property
     
@@ -59,7 +62,7 @@ final class SetNicknameViewController: BaseViewController {
     }()
     private lazy var nicknameTextLimitLabel: UILabel = {
         let label = UILabel()
-        label.setTextWithLineHeight(text: "\(minLength)/\(nicknameMaxLength)", lineHeight: 22)
+        label.setTextWithLineHeight(text: "\(minLength)/\(maxTextLength.nickname.rawValue)", lineHeight: 22)
         label.font = .body2
         label.textColor = .gray500
         return label
@@ -78,7 +81,7 @@ final class SetNicknameViewController: BaseViewController {
     }()
     private lazy var roleTextLimitLabel: UILabel = {
         let label = UILabel()
-        label.setTextWithLineHeight(text: "\(minLength)/\(roleMaxLength)", lineHeight: 22)
+        label.setTextWithLineHeight(text: "\(minLength)/\(maxTextLength.role.rawValue)", lineHeight: 22)
         label.font = .body2
         label.textColor = .gray500
         return label
@@ -87,10 +90,26 @@ final class SetNicknameViewController: BaseViewController {
         let button = MainButton()
         button.title = "입력 완료"
         button.isDisabled = true
+        let action = UIAction { [weak self] _ in
+            //            guard let nickname = self?.kigoTextField.text else { return }
+            //            self?.dispatchUserLogin(type: .dispatchLogin(LoginDTO(username: nickname)))
+            //            self?.kigoTextField.resignFirstResponder()
+        }
+        button.addAction(action, for: .touchUpInside)
         return button
     }()
     
     // MARK: - life cycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupDelegate()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupNotificationCenter()
+    }
     
     override func render() {
         view.addSubview(titleLabel)
@@ -159,9 +178,9 @@ final class SetNicknameViewController: BaseViewController {
         navigationItem.leftBarButtonItem = backButton
     }
     
-    //    override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-    //        return false
-    //    }
+    override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
     
     // MARK: - func
     
@@ -170,19 +189,63 @@ final class SetNicknameViewController: BaseViewController {
         print("프로필 누름")
     }
     
-    //    override func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-    //        textField.resignFirstResponder()
-    //        return true
-    //    }
+    private func setupDelegate() {
+        nicknameTextField.delegate = self
+        roleTextField.delegate = self
+    }
     
-    //    private func setupDoneButton() {
-    //        let action = UIAction { [weak self] _ in
-    //            guard let nickname = self?.kigoTextField.text else { return }
-    //            self?.dispatchUserLogin(type: .dispatchLogin(LoginDTO(username: nickname)))
-    //            self?.kigoTextField.resignFirstResponder()
-    //        }
-    //        super.doneButton.addAction(action, for: .touchUpInside)
-    //    }
+    private func setupNotificationCenter() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    override func endEditingView() {
+        if !doneButton.isTouchInside {
+            view.endEditing(true)
+        }
+    }
+    
+    private func setCounter(textField: UITextField, count: Int) {
+        let maxLength = textField == nicknameTextField ? maxTextLength.nickname.rawValue : maxTextLength.role.rawValue
+        let textLimitLabel = textField == nicknameTextField ? nicknameTextLimitLabel : roleTextLimitLabel
+        if count <= maxLength {
+            textLimitLabel.text = "\(count)/\(maxLength)"
+        }
+        else {
+            textLimitLabel.text = "\(maxLength)/\(maxLength)"
+        }
+    }
+    
+    private func checkMaxLength(textField: UITextField) {
+        let maxLength = textField == nicknameTextField ? maxTextLength.nickname.rawValue : maxTextLength.role.rawValue
+        if let text = textField.text {
+            if text.count > maxLength {
+                let endIndex = text.index(text.startIndex, offsetBy: maxLength)
+                let fixedText = text[text.startIndex..<endIndex]
+                textField.text = fixedText + " "
+                
+                DispatchQueue.main.async {
+                    textField.text = String(fixedText)
+                }
+            }
+        }
+    }
+    
+    // MARK: - selector
+    
+    @objc private func keyboardWillShow(notification:NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            UIView.animate(withDuration: 0.2, animations: {
+                self.doneButton.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height + 24)
+            })
+        }
+    }
+    
+    @objc private func keyboardWillHide(notification:NSNotification) {
+        UIView.animate(withDuration: 0.2, animations: {
+            self.doneButton.transform = .identity
+        })
+    }
     
     // MARK: - api
     
@@ -204,4 +267,22 @@ final class SetNicknameViewController: BaseViewController {
     //            }
     //        }
     //    }
+}
+
+// MARK: - Extension
+
+extension SetNicknameViewController: UITextFieldDelegate {
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        setCounter(textField: textField, count: textField.text?.count ?? 0)
+        checkMaxLength(textField: textField)
+        
+        let hasText = textField.hasText
+        doneButton.isDisabled = !hasText
+        
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 }
