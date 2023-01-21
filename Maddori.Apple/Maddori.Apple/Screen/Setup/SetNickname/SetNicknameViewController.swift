@@ -33,19 +33,30 @@ final class SetNicknameViewController: BaseViewController {
         label.setLineSpacingWithColorApplied(amount: 4, colorTo: teamName, with: .blue200)
         return label
     }()
+    private lazy var profileImageButton: UIButton = {
+       let button = UIButton()
+        button.setBackgroundImage(ImageLiterals.imgProfileNone, for: .normal)
+        let action = UIAction { [weak self] _ in
+            self?.didTappedProfile()
+        }
+        button.addAction(action, for: .touchUpInside)
+        return button
+    }()
     
     // MARK: - life cycle
-    
-    //    override func viewDidLoad() {
-    //        super.viewDidLoad()
-    //        setupDoneButton()
-    //    }
     
     override func render() {
         view.addSubview(titleLabel)
         titleLabel.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).inset(20)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+        
+        view.addSubview(profileImageButton)
+        profileImageButton.snp.makeConstraints {
+            $0.top.equalTo(titleLabel.snp.bottom).offset(44)
+            $0.centerX.equalToSuperview()
+            $0.width.height.equalTo(68)
         }
     }
     
@@ -64,6 +75,11 @@ final class SetNicknameViewController: BaseViewController {
     //    }
     
     // MARK: - func
+    
+    private func didTappedProfile() {
+        // FIXME: - 갤러리로 이동
+        print("프로필 누름")
+    }
     
     //    override func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     //        textField.resignFirstResponder()
