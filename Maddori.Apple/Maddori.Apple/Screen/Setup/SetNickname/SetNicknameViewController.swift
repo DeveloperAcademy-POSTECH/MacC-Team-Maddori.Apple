@@ -83,6 +83,12 @@ final class SetNicknameViewController: BaseViewController {
         label.textColor = .gray500
         return label
     }()
+    private lazy var doneButton: MainButton = {
+        let button = MainButton()
+        button.title = "입력 완료"
+        button.isDisabled = true
+        return button
+    }()
     
     // MARK: - life cycle
     
@@ -134,6 +140,12 @@ final class SetNicknameViewController: BaseViewController {
         roleTextLimitLabel.snp.makeConstraints {
             $0.top.equalTo(roleTextField.snp.bottom).offset(4)
             $0.trailing.equalToSuperview().inset(27)
+        }
+        
+        view.addSubview(doneButton)
+        doneButton.snp.makeConstraints {
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(2)
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
     }
     
