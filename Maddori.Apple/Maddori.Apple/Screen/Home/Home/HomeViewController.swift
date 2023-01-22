@@ -88,26 +88,10 @@ final class HomeViewController: BaseViewController {
     }()
     private lazy var joinReflectionButton: JoinReflectionButton = {
         let joinButton = JoinReflectionButton()
-        joinButton.layer.cornerRadius = 10
-        joinButton.clipsToBounds = true
         joinButton.buttonAction = { [weak self] in
             self?.presentSelectReflectionMemberViewController()
         }
         return joinButton
-    }()
-    private lazy var planLabelButtonView: LabelButtonView = {
-        let labelButton = LabelButtonView()
-        labelButton.buttonAction = { [weak self] in
-            self?.presentCreateReflectionViewController()
-        }
-        labelButton.subText = TextLiteral.mainViewControllerPlanLabelButtonSubText
-        labelButton.subButtonText = TextLiteral.mainViewControllerPlanLabelButtonSubButtonText
-        return labelButton
-    }()
-    private let planLabelButtonBackgroundView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .backgroundWhite
-        return view
     }()
     private lazy var addFeedbackButton: UIButton = {
         let button = UIButton()
@@ -197,20 +181,6 @@ final class HomeViewController: BaseViewController {
         keywordCollectionView.dataSource = self
     }
     
-    private func renderPlanLabelButton() {
-        view.addSubview(planLabelButtonBackgroundView)
-        planLabelButtonBackgroundView.snp.makeConstraints {
-            $0.horizontalEdges.equalToSuperview()
-            $0.bottom.equalTo(addFeedbackButton.snp.top)
-            $0.height.equalTo(SizeLiteral.minimumTouchArea)
-        }
-        
-        planLabelButtonBackgroundView.addSubview(planLabelButtonView)
-        planLabelButtonView.snp.makeConstraints {
-            $0.top.bottom.centerX.equalToSuperview()
-        }
-    }
-    
     private func didTapAddFeedbackButton() {
         let viewController = UINavigationController(rootViewController: AddFeedbackDetailViewController(feedbackContent: FeedbackContent(toNickName: nil, toUserId: nil, feedbackType: nil, reflectionId: currentReflectionId)))
         viewController.modalPresentationStyle = .fullScreen
@@ -220,11 +190,34 @@ final class HomeViewController: BaseViewController {
     private func setJoinReflectionButtonBackground() {
         switch reflectionStatus {
         case .SettingRequired, .Before, .Done:
-            joinReflectionButton.backgroundColor = .white100
+            joinReflectionButton.joinButton.backgroundColor = .blue100
         case .Progressing:
             joinReflectionButton.layoutIfNeeded()
             joinReflectionButton.setGradient(colorTop: .gradientBlueTop, colorBottom: .gradientBlueBottom)
             joinReflectionButton.render()
+        }
+    }
+    
+    private func setupJoinReflectionButtonAction(status: ReflectionStatus) {
+        switch status {
+        case .SettingRequired, .Done:
+            let action = UIAction { [weak self] _ in
+//                self?.presentCreateReflectionViewController()
+                print("Setting required state")
+            }
+            joinReflectionButton.joinButton.addAction(action, for: .touchUpInside)
+        case .Before:
+            // FIXME: action 추가
+            let action = UIAction { [weak self] _ in
+                print("before state")
+            }
+            joinReflectionButton.joinButton.addAction(action, for: .touchUpInside)
+        case .Progressing:
+            let action = UIAction { [weak self] _ in
+//                self?.presentSelectReflectionMemberViewController()
+                print("progressing state")
+            }
+            joinReflectionButton.joinButton.addAction(action, for: .touchUpInside)
         }
     }
     
@@ -238,25 +231,6 @@ final class HomeViewController: BaseViewController {
         let viewController = UINavigationController(rootViewController: SelectReflectionMemberViewController(reflectionId: currentReflectionId, isAdmin: self.isAdmin))
         viewController.modalPresentationStyle = .fullScreen
         present(viewController, animated: true)
-    }
-    
-    
-    // 회고 상태: Setting Required
-    private func showPlanLabelButton() {
-        planLabelButtonView.isHidden = false
-        planLabelButtonBackgroundView.isHidden = false
-    }
-    
-    // 회고 상태: Before
-    private func hidePlanLabelButton() {
-        planLabelButtonView.isHidden = true
-        planLabelButtonBackgroundView.isHidden = true
-        
-        keywordCollectionView.snp.remakeConstraints {
-            $0.top.equalTo(currentReflectionLabel.snp.bottom).offset(SizeLiteral.titleSubtitleSpacing)
-            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-            $0.bottom.equalTo(addFeedbackButton.snp.top).offset(-10)
-        }
     }
     
     // 회고 상태: Progressing
@@ -286,7 +260,7 @@ final class HomeViewController: BaseViewController {
             keywordCollectionView.snp.remakeConstraints {
                 $0.top.equalTo(currentReflectionLabel.snp.bottom).offset(SizeLiteral.titleSubtitleSpacing)
                 $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-                $0.bottom.equalTo(planLabelButtonBackgroundView.snp.top).offset(-10)
+                $0.bottom.equalTo(addFeedbackButton.snp.top).offset(-10)
             }
         }
     }
@@ -322,9 +296,6 @@ final class HomeViewController: BaseViewController {
                 self.isAdmin = isAdmin
                 DispatchQueue.main.async {
                     self.teamButton.setTitle(teamName, for: .normal)
-                    if isAdmin {
-                        self.renderPlanLabelButton()
-                    }
                 }
             }
         }
@@ -337,17 +308,18 @@ final class HomeViewController: BaseViewController {
         ).responseDecodable(of: BaseModel<CurrentReflectionResponse>.self) { json in
             if let json = json.value {
                 let reflectionDetail = json.detail
+                dump(reflectionDetail)
                 guard let reflectionStatus = reflectionDetail?.reflectionStatus,
                       let reflectionId = reflectionDetail?.currentReflectionId,
                       let reflectionTitle = reflectionDetail?.reflectionName,
                       let reflectionDate = reflectionDetail?.reflectionDate
                 else { return }
-                
                 self.currentReflectionId = reflectionId
-//                self.reflectionStatus = reflectionStatus
-//                self.reflectionTitle = reflectionTitle
-//                self.reflectionDate = reflectionDate
+                self.reflectionStatus = reflectionStatus
+                self.reflectionTitle = reflectionTitle
+                self.reflectionDate = reflectionDate
                 self.joinReflectionButton.setupAttribute(reflectionStatus: reflectionStatus, title: reflectionTitle, date: reflectionDate)
+//                self.setupJoinReflectionButtonAction(status: reflectionStatus)
                 if let reflectionKeywordList = reflectionDetail?.reflectionKeywords {
                     self.hasKeyword = true
                     if reflectionKeywordList.isEmpty {
@@ -359,12 +331,10 @@ final class HomeViewController: BaseViewController {
                         switch reflectionStatus {
                         case .SettingRequired, .Done:
                             self.addFeedbackButton.isHidden = false
-                            self.showPlanLabelButton()
                             self.restoreView()
                         case .Before:
-                            self.hidePlanLabelButton()
+                            print("")
                         case .Progressing:
-                            self.hidePlanLabelButton()
                             self.hideAddFeedbackButton()
                             if !self.hasSeenReflectionAlert {
                                 self.showStartReflectionView()

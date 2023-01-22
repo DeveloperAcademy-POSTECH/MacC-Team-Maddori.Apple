@@ -15,7 +15,20 @@ final class JoinReflectionButton: UIView {
     
     // MARK: - property
     
-    private let joinButton = UIButton()
+    private let shadowView: UIView = {
+        let view = UIView()
+        view.layer.shadowColor = UIColor.black100.cgColor
+        view.layer.shadowOffset = .zero
+        view.layer.shadowRadius = 5
+        view.layer.shadowOpacity = 0.1
+        return view
+    }()
+    let joinButton: UIButton = {
+        let button = UIButton()
+        button.layer.cornerRadius = 10
+        button.clipsToBounds = true
+        return button
+    }()
     private lazy var reflectionTitleLabel: UILabel = {
         let label = UILabel()
         label.font = .label2
@@ -26,19 +39,32 @@ final class JoinReflectionButton: UIView {
         label.font = .caption3
         return label
     }()
-    private let calendarImageView = UIImageView()
+    private let calendarImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.layer.shadowColor = UIColor.black100.cgColor
+        imageView.layer.shadowOffset = .zero
+        imageView.layer.shadowRadius = 5
+        imageView.layer.shadowOpacity = 0.1
+        return imageView
+    }()
     
     // MARK: - life cycle
     
     init() {
         super.init(frame: .zero)
         render()
-        setupJoinButtonAction()
+        configUI()
+//        makeShadow(color: .black100, opacity: 0.2, offset: .zero, radius: 3)
     }
     
     required init?(coder: NSCoder) { nil }
     
     func render() {
+        self.addSubview(shadowView)
+        shadowView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+        
         self.addSubview(joinButton)
         joinButton.snp.makeConstraints {
             $0.edges.equalToSuperview()
@@ -67,16 +93,16 @@ final class JoinReflectionButton: UIView {
     
     // MARK: - func
     
+    private func configUI() {
+        shadowView.makeShadow(color: .black100, opacity: 0.2, offset: .zero, radius: 3)
+    }
+    
     private func setupJoinButtonAction() {
         let action = UIAction { [weak self] _ in
             self?.buttonAction?()
         }
         joinButton.addAction(action, for: .touchUpInside)
     }
-    
-//    private func setJoinReflectionShadow() {
-//
-//    }
     
     func setupAttribute(reflectionStatus: ReflectionStatus, title: String, date: String) {
         switch reflectionStatus {
