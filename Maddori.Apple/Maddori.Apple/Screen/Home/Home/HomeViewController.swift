@@ -28,8 +28,8 @@ final class HomeViewController: BaseViewController {
     
     var currentReflectionId: Int = 0
     var reflectionStatus: ReflectionStatus = .Before
-    var reflectionTitle: String = ""
-    var reflectionDate: String = ""
+//    var reflectionTitle: String = ""
+//    var reflectionDate: String = ""
     
     var hasKeyword: Bool = false
     var isAdmin: Bool = false
@@ -88,9 +88,6 @@ final class HomeViewController: BaseViewController {
     }()
     private lazy var joinReflectionButton: JoinReflectionButton = {
         let joinButton = JoinReflectionButton()
-        joinButton.buttonAction = { [weak self] in
-            self?.presentSelectReflectionMemberViewController()
-        }
         return joinButton
     }()
     private lazy var addFeedbackButton: UIButton = {
@@ -127,7 +124,6 @@ final class HomeViewController: BaseViewController {
     }
     
     override func configUI() {
-        setJoinReflectionButtonBackground()
         navigationController?.isNavigationBarHidden = true
         view.backgroundColor = .white200
     }
@@ -187,13 +183,14 @@ final class HomeViewController: BaseViewController {
         present(viewController, animated: true)
     }
     
-    private func setJoinReflectionButtonBackground() {
-        switch reflectionStatus {
+    private func setJoinReflectionButtonBackground(status: ReflectionStatus) {
+        switch status {
         case .SettingRequired, .Before, .Done:
-            joinReflectionButton.joinButton.backgroundColor = .blue100
+            joinReflectionButton.joinButton.removeGradient()
+            joinReflectionButton.joinButton.backgroundColor = .white100
         case .Progressing:
             joinReflectionButton.layoutIfNeeded()
-            joinReflectionButton.setGradient(colorTop: .gradientBlueTop, colorBottom: .gradientBlueBottom)
+            joinReflectionButton.joinButton.setGradient(colorTop: .gradientBlueTop, colorBottom: .gradientBlueBottom)
             joinReflectionButton.render()
         }
     }
@@ -202,7 +199,7 @@ final class HomeViewController: BaseViewController {
         switch status {
         case .SettingRequired, .Done:
             let action = UIAction { [weak self] _ in
-//                self?.presentCreateReflectionViewController()
+                self?.presentCreateReflectionViewController()
                 print("Setting required state")
             }
             joinReflectionButton.joinButton.addAction(action, for: .touchUpInside)
@@ -214,7 +211,7 @@ final class HomeViewController: BaseViewController {
             joinReflectionButton.joinButton.addAction(action, for: .touchUpInside)
         case .Progressing:
             let action = UIAction { [weak self] _ in
-//                self?.presentSelectReflectionMemberViewController()
+                self?.presentSelectReflectionMemberViewController()
                 print("progressing state")
             }
             joinReflectionButton.joinButton.addAction(action, for: .touchUpInside)
@@ -308,18 +305,23 @@ final class HomeViewController: BaseViewController {
         ).responseDecodable(of: BaseModel<CurrentReflectionResponse>.self) { json in
             if let json = json.value {
                 let reflectionDetail = json.detail
-                dump(reflectionDetail)
                 guard let reflectionStatus = reflectionDetail?.reflectionStatus,
-                      let reflectionId = reflectionDetail?.currentReflectionId,
-                      let reflectionTitle = reflectionDetail?.reflectionName,
-                      let reflectionDate = reflectionDetail?.reflectionDate
+                      let reflectionId = reflectionDetail?.currentReflectionId
                 else { return }
-                self.currentReflectionId = reflectionId
+                
                 self.reflectionStatus = reflectionStatus
-                self.reflectionTitle = reflectionTitle
-                self.reflectionDate = reflectionDate
+                let reflectionTitle = reflectionDetail?.reflectionName ?? ""
+                let reflectionDate = reflectionDetail?.reflectionDate ?? ""
+                
+                self.currentReflectionId = reflectionId
                 self.joinReflectionButton.setupAttribute(reflectionStatus: reflectionStatus, title: reflectionTitle, date: reflectionDate)
-//                self.setupJoinReflectionButtonAction(status: reflectionStatus)
+                
+                
+                self.setupJoinReflectionButtonAction(status: self.reflectionStatus)
+                
+                
+                self.setJoinReflectionButtonBackground(status: reflectionStatus)
+                
                 if let reflectionKeywordList = reflectionDetail?.reflectionKeywords {
                     self.hasKeyword = true
                     if reflectionKeywordList.isEmpty {
