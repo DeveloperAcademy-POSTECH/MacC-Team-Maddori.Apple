@@ -12,9 +12,6 @@ import SnapKit
 
 final class HomeViewController: BaseViewController {
     
-    var keywordList: [String] = TextLiteral.homeViewControllerEmptyCollectionViewList
-    var isTouched = false
-    
     private enum Size {
         static let keywordLabelHeight: CGFloat = 50
         static let labelButtonPadding: CGFloat = 6
@@ -26,12 +23,14 @@ final class HomeViewController: BaseViewController {
         static let planReflectionViewHeight: CGFloat = 40
     }
     
+    var keywordList: [String] = TextLiteral.homeViewControllerEmptyCollectionViewList
+    var isTouched = false
+    
+    private var joinReflectionButtonActionIdentifier: UIAction.Identifier = UIAction.Identifier(rawValue: "")
+    
     var currentReflectionId: Int = 0
     var reflectionStatus: ReflectionStatus = .Before
-//    var reflectionTitle: String = ""
-//    var reflectionDate: String = ""
     
-    var hasKeyword: Bool = false
     var isAdmin: Bool = false
     var hasSeenReflectionAlert: Bool = UserDefaultStorage.hasSeenReflectionAlert {
         willSet {
@@ -110,14 +109,14 @@ final class HomeViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUpDelegation()
+        setupDelegation()
         render()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if reflectionStatus == .Progressing && !hasSeenReflectionAlert {
-            showStartReflectionView()
+            presentStartReflectionView()
         }
         fetchCertainTeamDetail(type: .fetchCertainTeamDetail)
         fetchCurrentReflectionDetail(type: .fetchCurrentReflectionDetail)
@@ -172,21 +171,15 @@ final class HomeViewController: BaseViewController {
     
     // MARK: - func
     
-    private func setUpDelegation() {
+    private func setupDelegation() {
         keywordCollectionView.delegate = self
         keywordCollectionView.dataSource = self
     }
     
-    private func didTapAddFeedbackButton() {
-        let viewController = UINavigationController(rootViewController: AddFeedbackDetailViewController(feedbackContent: FeedbackContent(toNickName: nil, toUserId: nil, feedbackType: nil, reflectionId: currentReflectionId)))
-        viewController.modalPresentationStyle = .fullScreen
-        present(viewController, animated: true)
-    }
-    
-    private func setJoinReflectionButtonBackground(status: ReflectionStatus) {
+    private func setupJoinReflectionButtonBackground(status: ReflectionStatus) {
+        joinReflectionButton.joinButton.removeGradient()
         switch status {
         case .SettingRequired, .Before, .Done:
-            joinReflectionButton.joinButton.removeGradient()
             joinReflectionButton.joinButton.backgroundColor = .white100
         case .Progressing:
             joinReflectionButton.layoutIfNeeded()
@@ -196,26 +189,28 @@ final class HomeViewController: BaseViewController {
     }
     
     private func setupJoinReflectionButtonAction(status: ReflectionStatus) {
-        switch status {
-        case .SettingRequired, .Done:
-            let action = UIAction { [weak self] _ in
+        joinReflectionButton.joinButton.removeAction(identifiedBy: joinReflectionButtonActionIdentifier, for: .touchUpInside)
+        let action = UIAction { [weak self] _ in
+            switch status {
+            case .SettingRequired, .Done:
                 self?.presentCreateReflectionViewController()
                 print("Setting required state")
-            }
-            joinReflectionButton.joinButton.addAction(action, for: .touchUpInside)
-        case .Before:
-            // FIXME: action 추가
-            let action = UIAction { [weak self] _ in
-                print("before state")
-            }
-            joinReflectionButton.joinButton.addAction(action, for: .touchUpInside)
-        case .Progressing:
-            let action = UIAction { [weak self] _ in
+            case .Before:
+                // FIXME: toast popup
+                print("Before state")
+            case .Progressing:
                 self?.presentSelectReflectionMemberViewController()
                 print("progressing state")
             }
-            joinReflectionButton.joinButton.addAction(action, for: .touchUpInside)
         }
+        joinReflectionButtonActionIdentifier = action.identifier
+        joinReflectionButton.joinButton.addAction(action, for: .touchUpInside)
+    }
+    
+    private func didTapAddFeedbackButton() {
+        let viewController = UINavigationController(rootViewController: AddFeedbackDetailViewController(feedbackContent: FeedbackContent(toNickName: nil, toUserId: nil, feedbackType: nil, reflectionId: currentReflectionId)))
+        viewController.modalPresentationStyle = .fullScreen
+        present(viewController, animated: true)
     }
     
     private func presentCreateReflectionViewController() {
@@ -230,8 +225,8 @@ final class HomeViewController: BaseViewController {
         present(viewController, animated: true)
     }
     
-    // 회고 상태: Progressing
-    private func showStartReflectionView() {
+    
+    private func presentStartReflectionView() {
         guard let navigationController = self.navigationController else { return }
         let viewController = StartReflectionViewController(reflectionId: currentReflectionId, navigationViewController: navigationController, isAdmin: self.isAdmin)
         viewController.modalPresentationStyle = .overFullScreen
@@ -242,28 +237,22 @@ final class HomeViewController: BaseViewController {
         UserDefaultHandler.clearUserDefaults(of: .completedCurrentReflection)
     }
     
+    private func showAddFeedbackButton() {
+        addFeedbackButton.isHidden = false
+        keywordCollectionView.snp.remakeConstraints {
+            $0.top.equalTo(currentReflectionLabel.snp.bottom).offset(SizeLiteral.titleSubtitleSpacing)
+            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            $0.bottom.equalTo(addFeedbackButton.snp.top).offset(-10)
+        }
+    }
+    
     private func hideAddFeedbackButton() {
-        self.addFeedbackButton.isHidden = true
+        addFeedbackButton.isHidden = true
         keywordCollectionView.snp.remakeConstraints {
             $0.top.equalTo(currentReflectionLabel.snp.bottom).offset(SizeLiteral.titleSubtitleSpacing)
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(SizeLiteral.bottomTabBarPadding)
         }
-    }
-    
-    // 회고 상태: Done
-    private func restoreView() {
-        if isAdmin {
-            keywordCollectionView.snp.remakeConstraints {
-                $0.top.equalTo(currentReflectionLabel.snp.bottom).offset(SizeLiteral.titleSubtitleSpacing)
-                $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-                $0.bottom.equalTo(addFeedbackButton.snp.top).offset(-10)
-            }
-        }
-    }
-    
-    private func hideJoinReflectionButton() {
-        joinReflectionButton.removeFromSuperview()
     }
     
     private func convertFetchedKeywordList(of list: [String]) {
@@ -308,38 +297,29 @@ final class HomeViewController: BaseViewController {
                 guard let reflectionStatus = reflectionDetail?.reflectionStatus,
                       let reflectionId = reflectionDetail?.currentReflectionId
                 else { return }
-                
-                self.reflectionStatus = reflectionStatus
                 let reflectionTitle = reflectionDetail?.reflectionName ?? ""
                 let reflectionDate = reflectionDetail?.reflectionDate ?? ""
                 
+                self.reflectionStatus = reflectionStatus
                 self.currentReflectionId = reflectionId
                 self.joinReflectionButton.setupAttribute(reflectionStatus: reflectionStatus, title: reflectionTitle, date: reflectionDate)
                 
-                
-                self.setupJoinReflectionButtonAction(status: self.reflectionStatus)
-                
-                
-                self.setJoinReflectionButtonBackground(status: reflectionStatus)
+                self.setupJoinReflectionButtonAction(status: reflectionStatus)
+                self.setupJoinReflectionButtonBackground(status: reflectionStatus)
                 
                 if let reflectionKeywordList = reflectionDetail?.reflectionKeywords {
-                    self.hasKeyword = true
                     if reflectionKeywordList.isEmpty {
                         self.resetKeywordList()
-                        self.hasKeyword = false
                     }
                     self.convertFetchedKeywordList(of: reflectionKeywordList)
                     DispatchQueue.main.async {
                         switch reflectionStatus {
-                        case .SettingRequired, .Done:
-                            self.addFeedbackButton.isHidden = false
-                            self.restoreView()
-                        case .Before:
-                            print("")
+                        case .SettingRequired, .Before, .Done:
+                            self.showAddFeedbackButton()
                         case .Progressing:
                             self.hideAddFeedbackButton()
                             if !self.hasSeenReflectionAlert {
-                                self.showStartReflectionView()
+                                self.presentStartReflectionView()
                             }
                         }
                         self.flowLayout.count = reflectionKeywordList.count
