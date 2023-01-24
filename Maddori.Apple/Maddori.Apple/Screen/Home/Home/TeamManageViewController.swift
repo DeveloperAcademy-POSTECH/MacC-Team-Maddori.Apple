@@ -12,7 +12,6 @@ import SnapKit
 final class TeamManageViewController: BaseViewController {
     
     // MARK: - property
-    private let label = UILabel()
     private let manageTableView: UITableView = {
         let tableView = UITableView()
         return tableView
@@ -26,18 +25,11 @@ final class TeamManageViewController: BaseViewController {
     }
     
     override func render() {
-        label.text = "테스트느트트트"
-        view.addSubview(label)
-        label.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(40)
-            $0.left.equalToSuperview().inset(40)
-        }
-        
         view.addSubview(manageTableView)
         manageTableView.snp.makeConstraints {
-            $0.top.equalTo(label.snp.bottom)
-            $0.width.equalTo(200)
-            $0.height.equalTo(600)
+            $0.top.equalTo(self.view.safeAreaLayoutGuide).inset(26)
+            $0.horizontalEdges.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.height.equalToSuperview()
         }
     }
     
@@ -48,7 +40,7 @@ final class TeamManageViewController: BaseViewController {
     
     // MARK: - func
     private func setupTableViewRegisterCell() {
-        manageTableView.register(UITableViewCell.self, forCellReuseIdentifier: UITableViewCell.className)
+        manageTableView.register(ParticipatingTeamCell.self, forCellReuseIdentifier: ParticipatingTeamCell.className)
     }
     
     private func setupTableViewDelegateDataSource() {
@@ -63,7 +55,7 @@ extension TeamManageViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: UITableViewCell.className, for: indexPath) as? UITableViewCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: ParticipatingTeamCell.className, for: indexPath) as? ParticipatingTeamCell else { return UITableViewCell() }
         return cell
     }
 }
