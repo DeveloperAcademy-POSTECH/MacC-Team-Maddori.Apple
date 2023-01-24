@@ -192,6 +192,19 @@ final class HomeViewController: BaseViewController {
     private func setupPresentModel() {
         let teamViewController = TeamManageViewController()
         
+        teamViewController.modalPresentationStyle = .pageSheet
+        
+        if #available(iOS 15.0, *) {
+            if let sheet = teamViewController.sheetPresentationController {
+                sheet.detents = [.medium(), .large()]
+                sheet.delegate = self
+                sheet.prefersGrabberVisible = true
+            }
+        } else {
+            // FIXME: 15 미만일때는 어떻게 해야할지 고민중..
+        }
+        
+        present(teamViewController, animated: true)
     }
     
     private func setUpDelegation() {
@@ -414,3 +427,6 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
+extension HomeViewController: UISheetPresentationControllerDelegate {
+
+}
