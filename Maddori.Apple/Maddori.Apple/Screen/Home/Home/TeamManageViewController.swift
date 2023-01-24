@@ -35,12 +35,12 @@ final class TeamManageViewController: BaseViewController {
     
     override func configUI() {
         super.configUI()
-        view.backgroundColor = .red
     }
     
     // MARK: - func
     private func setupTableViewRegisterCell() {
         manageTableView.register(ParticipatingTeamCell.self, forCellReuseIdentifier: ParticipatingTeamCell.className)
+        manageTableView.register(SettingCell.self, forCellReuseIdentifier: SettingCell.className)
     }
     
     private func setupTableViewDelegateDataSource() {
@@ -55,11 +55,25 @@ extension TeamManageViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: ParticipatingTeamCell.className, for: indexPath) as? ParticipatingTeamCell else { return UITableViewCell() }
-        return cell
+        if indexPath.row == 0 {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: ParticipatingTeamCell.className, for: indexPath) as? ParticipatingTeamCell else { return UITableViewCell() }
+            return cell
+        }
+        else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: SettingCell.className, for: indexPath) as? SettingCell else { return UITableViewCell() }
+            return cell
+        }
     }
 }
 
 extension TeamManageViewController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        //FIXME: 첫번째 그리고 세퍼레이터 변경 예정
+        if indexPath.row == 0 {
+            return 200
+        }
+        else {
+            return 60
+        }
+    }
 }
