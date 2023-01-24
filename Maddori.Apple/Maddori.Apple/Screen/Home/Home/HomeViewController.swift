@@ -14,13 +14,9 @@ final class HomeViewController: BaseViewController {
     
     private enum Size {
         static let keywordLabelHeight: CGFloat = 50
-        static let labelButtonPadding: CGFloat = 6
         static let propertyPadding: CGFloat = 32
         static let buttonCornerRadius: CGFloat = 27
         static let mainButtonHeight: CGFloat = 54
-        static let subButtonWidth: CGFloat = 54
-        static let subButtonHeight: CGFloat = 20
-        static let planReflectionViewHeight: CGFloat = 40
     }
     
     var keywordList: [String] = TextLiteral.homeViewControllerEmptyCollectionViewList
@@ -96,10 +92,7 @@ final class HomeViewController: BaseViewController {
         label.textColor = .black100
         return label
     }()
-    private lazy var joinReflectionButton: JoinReflectionButton = {
-        let joinButton = JoinReflectionButton()
-        return joinButton
-    }()
+    private lazy var joinReflectionButton = JoinReflectionButton()
     private lazy var addFeedbackButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .white100
@@ -110,7 +103,7 @@ final class HomeViewController: BaseViewController {
         button.layer.borderColor = UIColor.blue200.cgColor
         button.layer.cornerRadius = Size.buttonCornerRadius
         let action = UIAction { [weak self] _ in
-            self?.didTapAddFeedbackButton()
+            self?.presentAddFeedbackViewController()
         }
         button.addAction(action, for: .touchUpInside)
         return button
@@ -234,7 +227,7 @@ final class HomeViewController: BaseViewController {
         toastView.setGradient(colorTop: .gradientGrayTop, colorBottom: .gradientGrayBottom)
     }
     
-    private func didTapAddFeedbackButton() {
+    private func presentAddFeedbackViewController() {
         let viewController = UINavigationController(rootViewController: AddFeedbackDetailViewController(feedbackContent: FeedbackContent(toNickName: nil, toUserId: nil, feedbackType: nil, reflectionId: currentReflectionId)))
         viewController.modalPresentationStyle = .fullScreen
         present(viewController, animated: true)
@@ -397,7 +390,7 @@ extension HomeViewController: UICollectionViewDataSource {
         UIDevice.vibrate()
         switch reflectionStatus {
         case .Before, .SettingRequired, .Done:
-            didTapAddFeedbackButton()
+            presentAddFeedbackViewController()
         case .Progressing:
             guard let navigationController = self.navigationController else { return }
             let viewController = UINavigationController(rootViewController: SelectReflectionMemberViewController(reflectionId: currentReflectionId, isAdmin: isAdmin))
