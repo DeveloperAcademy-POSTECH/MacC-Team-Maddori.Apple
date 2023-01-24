@@ -56,9 +56,9 @@ final class HomeViewController: BaseViewController {
         button.semanticContentAttribute = .forceRightToLeft
         button.setPreferredSymbolConfiguration(UIImage.SymbolConfiguration(pointSize: 13, weight: .semibold), forImageIn: .normal)
         button.tintColor = .black100
-        let action = UIAction { _ in
+        let action = UIAction { [weak self] _ in
             // FIXME: 버튼 눌렀을 때 action 추가
-            print("touched")
+            self?.setupPresentModel()
         }
         button.addAction(action, for: .touchUpInside)
         return button
@@ -188,6 +188,11 @@ final class HomeViewController: BaseViewController {
     }
     
     // MARK: - func
+    
+    private func setupPresentModel() {
+        let teamViewController = TeamManageViewController()
+        
+    }
     
     private func setUpDelegation() {
         keywordCollectionView.delegate = self
