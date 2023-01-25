@@ -17,6 +17,7 @@ final class SetNicknameViewController: BaseViewController {
     private let minLength: Int = 0
     private let nicknameMaxLength: Int = 6
     private let roleMaxLength: Int = 20
+    let cameraPicker = UIImagePickerController()
     
     // MARK: - property
     
@@ -210,6 +211,8 @@ final class SetNicknameViewController: BaseViewController {
     private func setupDelegate() {
         nicknameTextField.delegate = self
         roleTextField.delegate = self
+        
+        cameraPicker.delegate = self
     }
     
     private func setupNotificationCenter() {
@@ -289,7 +292,12 @@ final class SetNicknameViewController: BaseViewController {
     }
     
     private func openCamera() {
-        print("카메라 열기")
+        if(UIImagePickerController .isSourceTypeAvailable(.camera)) {
+            cameraPicker.sourceType = .camera
+            self.present(cameraPicker, animated: false, completion: nil)
+        } else {
+            self.makeAlert(title: "카메라를 실행할 수 없습니다", message: "설정에서 카메라 접근 권한을 확인해 주세요.")
+        }
     }
     
     // MARK: - selector
@@ -348,6 +356,18 @@ extension SetNicknameViewController: PHPickerViewControllerDelegate {
             }
         } else {
             self.makeAlert(title: "이미지를 불러올 수 없습니다.", message: "설정에서 이미지 접근 권한을 다시 확인해 주세요")
+        }
+    }
+}
+
+extension SetNicknameViewController: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        cameraPicker.dismiss(animated: true)
+        
+        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            self.profileImageButton.profileImage.image = image
+            print(info)
         }
     }
 }
