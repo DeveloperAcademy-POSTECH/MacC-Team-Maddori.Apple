@@ -196,8 +196,15 @@ final class SetNicknameViewController: BaseViewController {
     // MARK: - func
     
     private func didTappedProfile() {
-        // FIXME: - 갤러리로 이동
-        print("프로필 누름")
+        let actionSheet = UIAlertController(title: "프로필 사진 설정", message: nil, preferredStyle: .actionSheet)
+        let libraryAction = UIAlertAction(title: "앨범에서 사진 선택", style: .default) { _ in print("앨범") }
+        let cameraAction = UIAlertAction(title: "사진 촬영", style: .default) { _ in print("사진 촬영") }
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel)
+        
+        actionSheet.addAction(libraryAction)
+        actionSheet.addAction(cameraAction)
+        actionSheet.addAction(cancelAction)
+        present(actionSheet, animated: true, completion: nil)
     }
     
     private func setupDelegate() {
