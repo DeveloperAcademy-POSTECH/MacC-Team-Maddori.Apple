@@ -17,6 +17,7 @@ final class SetNicknameViewController: BaseViewController {
     private let minLength: Int = 0
     private let nicknameMaxLength: Int = 6
     private let roleMaxLength: Int = 20
+    let imagePicker = UIImagePickerController()
     
     // MARK: - property
     
@@ -197,8 +198,8 @@ final class SetNicknameViewController: BaseViewController {
     
     private func didTappedProfile() {
         let actionSheet = UIAlertController(title: "프로필 사진 설정", message: nil, preferredStyle: .actionSheet)
-        let libraryAction = UIAlertAction(title: "앨범에서 사진 선택", style: .default) { _ in print("앨범") }
-        let cameraAction = UIAlertAction(title: "사진 촬영", style: .default) { _ in print("사진 촬영") }
+        let libraryAction = UIAlertAction(title: "앨범에서 사진 선택", style: .default) { _ in self.openLibrary() }
+        let cameraAction = UIAlertAction(title: "사진 촬영", style: .default) { _ in self.openCamera() }
         let cancelAction = UIAlertAction(title: "취소", style: .cancel)
         
         actionSheet.addAction(libraryAction)
@@ -210,6 +211,8 @@ final class SetNicknameViewController: BaseViewController {
     private func setupDelegate() {
         nicknameTextField.delegate = self
         roleTextField.delegate = self
+        
+        imagePicker.delegate = self
     }
     
     private func setupNotificationCenter() {
@@ -277,6 +280,14 @@ final class SetNicknameViewController: BaseViewController {
         }, completion: nil)
     }
     
+    private func openLibrary() {
+        print("앨범 열기")
+    }
+    
+    private func openCamera() {
+        print("카메라 열기")
+    }
+    
     // MARK: - selector
     
     @objc private func keyboardWillShow(notification:NSNotification) {
@@ -313,4 +324,8 @@ extension SetNicknameViewController: UITextFieldDelegate {
         textField.resignFirstResponder()
         return true
     }
+}
+
+extension SetNicknameViewController: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+    
 }
