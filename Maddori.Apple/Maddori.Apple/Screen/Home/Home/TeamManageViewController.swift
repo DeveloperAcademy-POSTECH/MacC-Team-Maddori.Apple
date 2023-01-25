@@ -27,9 +27,8 @@ final class TeamManageViewController: BaseViewController {
     override func render() {
         view.addSubview(manageTableView)
         manageTableView.snp.makeConstraints {
-            $0.top.equalTo(self.view.safeAreaLayoutGuide).inset(26)
-            $0.horizontalEdges.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-            $0.height.equalToSuperview()
+            $0.top.equalTo(self.view.safeAreaLayoutGuide).inset(38)
+            $0.width.height.equalToSuperview()
         }
     }
     
@@ -57,6 +56,8 @@ extension TeamManageViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: ParticipatingTeamCell.className, for: indexPath) as? ParticipatingTeamCell else { return UITableViewCell() }
+            cell.listTableView.delegate = self
+            cell.listTableView.dataSource = self
             return cell
         }
         else {
