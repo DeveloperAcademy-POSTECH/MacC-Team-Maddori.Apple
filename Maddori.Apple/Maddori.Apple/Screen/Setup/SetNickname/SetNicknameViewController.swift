@@ -6,18 +6,17 @@
 //
 
 import UIKit
+import PhotosUI
 
 import Alamofire
 import SnapKit
 
 final class SetNicknameViewController: BaseViewController {
-    
     // FIXME: - 합류한 팀 이름 받아오기
     var teamName = "맛쟁이사과처럼세글자"
     private let minLength: Int = 0
     private let nicknameMaxLength: Int = 6
     private let roleMaxLength: Int = 20
-    let imagePicker = UIImagePickerController()
     
     // MARK: - property
     
@@ -211,8 +210,6 @@ final class SetNicknameViewController: BaseViewController {
     private func setupDelegate() {
         nicknameTextField.delegate = self
         roleTextField.delegate = self
-        
-        imagePicker.delegate = self
     }
     
     private func setupNotificationCenter() {
@@ -281,7 +278,14 @@ final class SetNicknameViewController: BaseViewController {
     }
     
     private func openLibrary() {
-        print("앨범 열기")
+        var configuration = PHPickerConfiguration()
+        configuration.selectionLimit = 1
+        configuration.filter = .any(of: [.images])
+        
+        let picker = PHPickerViewController(configuration: configuration)
+        picker.delegate = self
+        
+        self.present(picker, animated: true, completion: nil)
     }
     
     private func openCamera() {
@@ -308,7 +312,7 @@ final class SetNicknameViewController: BaseViewController {
         didTappedBackground()
     }
 }
-    
+
 // MARK: - Extension
 
 extension SetNicknameViewController: UITextFieldDelegate {
@@ -326,6 +330,24 @@ extension SetNicknameViewController: UITextFieldDelegate {
     }
 }
 
-extension SetNicknameViewController: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
-    
+extension SetNicknameViewController: PHPickerViewControllerDelegate {
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        picker.dismiss(animated: true, completion: nil)
+        
+        let itemProvider = results.first?.itemProvider
+        
+        if let itemProvider = itemProvider,
+           itemProvider.canLoadObject(ofClass: UIImage.self){
+            itemProvider.loadObject(ofClass: UIImage.self) {
+                (image, error) in
+                DispatchQueue.main.async {
+                    self.profileImageButton.profileImage.image = image as? UIImage
+                    
+                    // FIXME: - 이미지 정보 가져오기
+                }
+            }
+        } else {
+            self.makeAlert(title: "이미지를 불러올 수 없습니다.", message: "설정에서 이미지 접근 권한을 다시 확인해 주세요")
+        }
+    }
 }

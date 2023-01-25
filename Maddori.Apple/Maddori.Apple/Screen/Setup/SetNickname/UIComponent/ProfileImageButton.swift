@@ -13,7 +13,13 @@ final class ProfileImageButton: UIButton {
     
     // MARK: - property
     
-    var profileImage = UIImageView(image: ImageLiterals.imgProfileNone)
+    var profileImage: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = ImageLiterals.imgProfileNone
+        imageView.clipsToBounds = true
+        imageView.layer.cornerRadius = 34
+        return imageView
+    }()
     private let profilePlus: UIImageView = {
        let imageView = UIImageView()
         imageView.image = ImageLiterals.icPlus
