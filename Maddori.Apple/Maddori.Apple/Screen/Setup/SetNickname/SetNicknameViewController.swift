@@ -197,10 +197,10 @@ final class SetNicknameViewController: BaseViewController {
     // MARK: - func
     
     private func didTappedProfile() {
-        let actionSheet = UIAlertController(title: "프로필 사진 설정", message: nil, preferredStyle: .actionSheet)
-        let libraryAction = UIAlertAction(title: "앨범에서 사진 선택", style: .default) { _ in self.openLibrary() }
-        let cameraAction = UIAlertAction(title: "사진 촬영", style: .default) { _ in self.openCamera() }
-        let cancelAction = UIAlertAction(title: "취소", style: .cancel)
+        let actionSheet = UIAlertController(title: TextLiteral.setNicknameControllerProfileActionSheetTitle, message: nil, preferredStyle: .actionSheet)
+        let libraryAction = UIAlertAction(title: TextLiteral.setNicknameControllerProfileActionSheetLibraryTitle, style: .default) { _ in self.openLibrary() }
+        let cameraAction = UIAlertAction(title: TextLiteral.setNicknameControllerProfileActionSheetCameraTitle, style: .default) { _ in self.openCamera() }
+        let cancelAction = UIAlertAction(title: TextLiteral.setNicknameControllerProfileActionSheetCancelTitle, style: .cancel)
         
         actionSheet.addAction(libraryAction)
         actionSheet.addAction(cameraAction)
@@ -296,7 +296,7 @@ final class SetNicknameViewController: BaseViewController {
             cameraPicker.sourceType = .camera
             self.present(cameraPicker, animated: false, completion: nil)
         } else {
-            self.makeAlert(title: "카메라를 실행할 수 없습니다", message: "설정에서 카메라 접근 권한을 확인해 주세요.")
+            self.makeAlert(title: TextLiteral.setNicknameControllerCameraErrorAlertTitle, message: TextLiteral.setNicknameControllerCameraErrorAlertMessage)
         }
     }
     
@@ -355,7 +355,7 @@ extension SetNicknameViewController: PHPickerViewControllerDelegate {
                 }
             }
         } else {
-            self.makeAlert(title: "이미지를 불러올 수 없습니다.", message: "설정에서 이미지 접근 권한을 다시 확인해 주세요")
+            self.makeAlert(title: TextLiteral.setNicknameControllerLibraryErrorAlertTitle, message: TextLiteral.setNicknameControllerLibraryErrorAlertMessage)
         }
     }
 }
