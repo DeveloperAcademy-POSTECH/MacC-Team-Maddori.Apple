@@ -35,12 +35,14 @@ final class TeamDetailViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupBackButton()
         setupEditButton()
     }
     
     override func configUI() {
         super.configUI()
         navigationController?.isNavigationBarHidden = false
+        self.tabBarController?.tabBar.isHidden = true
     }
     
     override func render() {
@@ -67,7 +69,19 @@ final class TeamDetailViewController: BaseViewController {
         navigationItem.leftBarButtonItem = backButton
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        navigationController?.isNavigationBarHidden = true
+        self.tabBarController?.tabBar.isHidden = false
+    }
+    
     // MARK: - func
+    
+    private func setupBackButton() {
+        let action = UIAction { [weak self] _ in
+            self?.navigationController?.popViewController(animated: true)
+        }
+        backButton.addAction(action, for: .touchUpInside)
+    }
     
     private func setupEditButton() {
         let action = UIAction { _ in
