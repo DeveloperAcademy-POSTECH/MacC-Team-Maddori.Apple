@@ -367,7 +367,6 @@ extension SetNicknameViewController: UIImagePickerControllerDelegate & UINavigat
         
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             self.profileImageButton.profileImage.image = image
-            print(info)
         }
     }
 }
