@@ -36,17 +36,6 @@ final class HomeViewController: BaseViewController {
     
     // MARK: - property
     
-    private let toastView: UIView = {
-        let view = UIView()
-        view.layer.cornerRadius = 10
-        view.clipsToBounds = true
-        return view
-    }()
-    private let toastContentView: ToastContentView = {
-        let view = ToastContentView()
-        view.toastType = .warning
-        return view
-    }()
     private lazy var flowLayout: KeywordCollectionViewFlowLayout = {
         let layout = KeywordCollectionViewFlowLayout()
         layout.count = keywordList.count
@@ -129,22 +118,9 @@ final class HomeViewController: BaseViewController {
     override func configUI() {
         navigationController?.isNavigationBarHidden = true
         view.backgroundColor = .white200
-        setupGradientToastView()
     }
     
     override func render() {
-        view.addSubview(toastView)
-        toastView.snp.makeConstraints {
-            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.top).offset(-60)
-            $0.centerX.equalToSuperview()
-            $0.height.equalTo(46)
-        }
-        
-        toastView.addSubview(toastContentView)
-        toastContentView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-        }
-        toastContentView.render()
         
         view.addSubview(teamButton)
         teamButton.snp.makeConstraints {
@@ -213,18 +189,14 @@ final class HomeViewController: BaseViewController {
             case .SettingRequired, .Done:
                 self?.presentCreateReflectionViewController()
             case .Before:
-                self?.popToastView()
+                // FIXME: edit reflection VC
+                print("fixme")
             case .Progressing:
                 self?.presentSelectReflectionMemberViewController()
             }
         }
         joinReflectionButtonActionIdentifier = action.identifier
         joinReflectionButton.joinButton.addAction(action, for: .touchUpInside)
-    }
-    
-    private func setupGradientToastView() {
-        toastView.layoutIfNeeded()
-        toastView.setGradient(colorTop: .gradientGrayTop, colorBottom: .gradientGrayBottom)
     }
     
     private func presentAddFeedbackViewController() {
@@ -254,21 +226,6 @@ final class HomeViewController: BaseViewController {
         UserDefaultHandler.clearUserDefaults(of: .seenKeywordIdList)
         UserDefaultHandler.clearUserDefaults(of: .seenMemberIdList)
         UserDefaultHandler.clearUserDefaults(of: .completedCurrentReflection)
-    }
-    
-    private func popToastView() {
-        if !isTouched {
-            isTouched = true
-            UIView.animate(withDuration: 0.5, delay: 0, animations: {
-                self.toastView.transform = CGAffineTransform(translationX: 0, y: 115)
-            }, completion: {_ in
-                UIView.animate(withDuration: 1, delay: 0.8, animations: {
-                    self.toastView.transform = .identity
-                }, completion: {_ in
-                    self.isTouched = false
-                })
-            })
-        }
     }
     
     private func showAddFeedbackButton() {
