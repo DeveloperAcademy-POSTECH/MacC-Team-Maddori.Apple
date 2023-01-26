@@ -37,6 +37,12 @@ final class TeamDetailViewController: BaseViewController {
         label.font = .label2
         return label
     }()
+    private let profileImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.layer.cornerRadius = 23
+        imageView.image = ImageLiterals.imgPersonTab
+        return imageView
+    }()
     
     // MARK: - life cycle
     
@@ -70,6 +76,13 @@ final class TeamDetailViewController: BaseViewController {
         memberTitleLabel.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(SizeLiteral.topComponentPadding)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+        
+        view.addSubview(profileImageView)
+        profileImageView.snp.makeConstraints {
+            $0.top.equalTo(memberTitleLabel.snp.bottom).offset(20)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.width.height.equalTo(46)
         }
     }
     
