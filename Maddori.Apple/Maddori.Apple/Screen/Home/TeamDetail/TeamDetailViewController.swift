@@ -45,9 +45,17 @@ final class TeamDetailViewController: BaseViewController {
     }()
     private let profileNicknameLabel: UILabel = {
         let label = UILabel()
+        // FIXME: - API 연결 후 삭제
         label.text = "이두"
         label.font = .label2
         label.textColor = .gray600
+        return label
+    }()
+    private let profileRoleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "디자인 리드 / 개발자"
+        label.font = .caption2
+        label.textColor = .gray400
         return label
     }()
     
@@ -96,6 +104,12 @@ final class TeamDetailViewController: BaseViewController {
         profileNicknameLabel.snp.makeConstraints {
             $0.leading.equalTo(profileImageView.snp.trailing).offset(12)
             $0.bottom.equalTo(profileImageView.snp.centerY)
+        }
+        
+        view.addSubview(profileRoleLabel)
+        profileRoleLabel.snp.makeConstraints {
+            $0.leading.equalTo(profileImageView.snp.trailing).offset(12)
+            $0.top.equalTo(profileNicknameLabel.snp.bottom).offset(4)
         }
     }
     
