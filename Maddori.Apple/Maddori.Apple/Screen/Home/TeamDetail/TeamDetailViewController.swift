@@ -58,6 +58,12 @@ final class TeamDetailViewController: BaseViewController {
         label.textColor = .gray400
         return label
     }()
+    private let dividerView: UIView = {
+        let view = UIView()
+        view.layer.borderWidth = 0.5
+        view.layer.borderColor = UIColor.gray300.cgColor
+        return view
+    }()
     
     // MARK: - life cycle
     
@@ -110,6 +116,13 @@ final class TeamDetailViewController: BaseViewController {
         profileRoleLabel.snp.makeConstraints {
             $0.leading.equalTo(profileImageView.snp.trailing).offset(12)
             $0.top.equalTo(profileNicknameLabel.snp.bottom).offset(4)
+        }
+        
+        view.addSubview(dividerView)
+        dividerView.snp.makeConstraints {
+            $0.top.equalTo(profileImageView.snp.bottom).offset(25)
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.height.equalTo(1)
         }
     }
     
