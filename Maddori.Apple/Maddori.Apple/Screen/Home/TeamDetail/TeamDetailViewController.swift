@@ -30,6 +30,13 @@ final class TeamDetailViewController: BaseViewController {
         button.setUnderline()
         return button
     }()
+    private let memberTitleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "멤버"
+        label.textColor = .black100
+        label.font = .label2
+        return label
+    }()
     
     // MARK: - life cycle
     
@@ -57,6 +64,12 @@ final class TeamDetailViewController: BaseViewController {
             $0.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.centerY.equalTo(titleLabel.snp.centerY)
             $0.width.height.equalTo(44)
+        }
+        
+        view.addSubview(memberTitleLabel)
+        memberTitleLabel.snp.makeConstraints {
+            $0.top.equalTo(titleLabel.snp.bottom).offset(SizeLiteral.topComponentPadding)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
     }
     
