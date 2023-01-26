@@ -16,6 +16,7 @@ final class ProfileImageButton: UIButton {
     var profileImage: UIImageView = {
         let imageView = UIImageView()
         imageView.image = ImageLiterals.imgProfileNone
+        imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 34
         return imageView
