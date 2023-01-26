@@ -43,6 +43,13 @@ final class TeamDetailViewController: BaseViewController {
         imageView.image = ImageLiterals.imgPersonTab
         return imageView
     }()
+    private let profileNicknameLabel: UILabel = {
+        let label = UILabel()
+        label.text = "이두"
+        label.font = .label2
+        label.textColor = .gray600
+        return label
+    }()
     
     // MARK: - life cycle
     
@@ -83,6 +90,12 @@ final class TeamDetailViewController: BaseViewController {
             $0.top.equalTo(memberTitleLabel.snp.bottom).offset(20)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.width.height.equalTo(46)
+        }
+        
+        view.addSubview(profileNicknameLabel)
+        profileNicknameLabel.snp.makeConstraints {
+            $0.leading.equalTo(profileImageView.snp.trailing).offset(12)
+            $0.bottom.equalTo(profileImageView.snp.centerY)
         }
     }
     
