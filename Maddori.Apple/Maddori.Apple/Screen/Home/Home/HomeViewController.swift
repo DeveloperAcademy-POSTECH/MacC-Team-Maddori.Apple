@@ -70,7 +70,6 @@ final class HomeViewController: BaseViewController {
         button.setPreferredSymbolConfiguration(UIImage.SymbolConfiguration(pointSize: 20), forImageIn: .normal)
         button.tintColor = .gray600
         let action = UIAction { [weak self] _ in
-            // FIXME: 버튼 눌렀을 때 action 추가
             self?.pushTeamDetailViewController()
         }
         button.addAction(action, for: .touchUpInside)
