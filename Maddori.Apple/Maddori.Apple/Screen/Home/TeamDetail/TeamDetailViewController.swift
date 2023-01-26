@@ -53,6 +53,7 @@ final class TeamDetailViewController: BaseViewController {
     }()
     private let profileRoleLabel: UILabel = {
         let label = UILabel()
+        // FIXME: - API 연결 후 삭제
         label.text = "디자인 리드 / 개발자"
         label.font = .caption2
         label.textColor = .gray400
