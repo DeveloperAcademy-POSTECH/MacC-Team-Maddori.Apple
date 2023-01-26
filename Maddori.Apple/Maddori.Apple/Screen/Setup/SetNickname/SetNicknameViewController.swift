@@ -14,9 +14,7 @@ import SnapKit
 final class SetNicknameViewController: BaseViewController {
     // FIXME: - 합류한 팀 이름 받아오기
     var teamName = "맛쟁이사과처럼세글자"
-    private let minLength: Int = 0
-    private let nicknameMaxLength: Int = 6
-    private let roleMaxLength: Int = 20
+    private enum TextLength {
     let cameraPicker = UIImagePickerController()
     
     // MARK: - property
@@ -68,7 +66,7 @@ final class SetNicknameViewController: BaseViewController {
     }()
     private lazy var nicknameTextLimitLabel: UILabel = {
         let label = UILabel()
-        label.setTextWithLineHeight(text: "\(minLength)/\(nicknameMaxLength)", lineHeight: 22)
+        label.setTextWithLineHeight(text: "\(TextLength.totalMin)/\(TextLength.nicknameMax)", lineHeight: 22)
         label.font = .body2
         label.textColor = .gray500
         return label
@@ -87,7 +85,7 @@ final class SetNicknameViewController: BaseViewController {
     }()
     private lazy var roleTextLimitLabel: UILabel = {
         let label = UILabel()
-        label.setTextWithLineHeight(text: "\(minLength)/\(roleMaxLength)", lineHeight: 22)
+        label.setTextWithLineHeight(text: "\(TextLength.totalMin)/\(TextLength.roleMax)", lineHeight: 22)
         label.font = .body2
         label.textColor = .gray500
         return label
@@ -124,7 +122,6 @@ final class SetNicknameViewController: BaseViewController {
         titleLabel.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.topPadding)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-            $0.height.equalTo(66.5)
         }
         
         view.addSubview(profileImageButton)
@@ -227,18 +224,15 @@ final class SetNicknameViewController: BaseViewController {
     }
     
     private func setCounter(textField: UITextField, count: Int) {
-        let maxLength = textField == nicknameTextField ? nicknameMaxLength : roleMaxLength
+        let maxLength = textField == nicknameTextField ? TextLength.nicknameMax : TextLength.roleMax
         let textLimitLabel = textField == nicknameTextField ? nicknameTextLimitLabel : roleTextLimitLabel
         if count <= maxLength {
             textLimitLabel.text = "\(count)/\(maxLength)"
         }
-        else {
-            textLimitLabel.text = "\(maxLength)/\(maxLength)"
-        }
     }
     
     private func checkMaxLength(textField: UITextField) {
-        let maxLength = textField == nicknameTextField ? nicknameMaxLength : roleMaxLength
+        let maxLength = textField == nicknameTextField ? TextLength.nicknameMax : TextLength.roleMax
         if let text = textField.text {
             if text.count > maxLength {
                 let endIndex = text.index(text.startIndex, offsetBy: maxLength)
@@ -254,28 +248,22 @@ final class SetNicknameViewController: BaseViewController {
     
     private func didTappedTextField() {
         titleLabel.snp.updateConstraints {
-            $0.height.equalTo(0)
-        }
-        profileImageButton.snp.updateConstraints {
-            $0.top.equalTo(self.titleLabel.snp.bottom).offset(-4)
+            $0.top.equalTo(view.safeAreaLayoutGuide).inset(-100)
         }
         navigationItem.titleView?.isHidden = false
         
-        UIView.animate(withDuration: 0.3, delay: 0, options: .allowAnimatedContent, animations: {
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: {
             self.view.layoutIfNeeded()
         }, completion: nil)
     }
     
     private func didTappedBackground() {
         titleLabel.snp.updateConstraints {
-            $0.height.equalTo(66.5)
-        }
-        profileImageButton.snp.updateConstraints {
-            $0.top.equalTo(titleLabel.snp.bottom).offset(44)
+            $0.top.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.topPadding)
         }
         navigationItem.titleView?.isHidden = true
         
-        UIView.animate(withDuration: 0.3, delay: 0, options: .allowAnimatedContent, animations: {
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: {
             self.view.layoutIfNeeded()
         }, completion: nil)
     }
@@ -302,7 +290,7 @@ final class SetNicknameViewController: BaseViewController {
     
     // MARK: - selector
     
-    @objc private func keyboardWillShow(notification:NSNotification) {
+    @objc private func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             UIView.animate(withDuration: 0.2, animations: {
                 self.doneButton.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height + 24)
@@ -312,7 +300,7 @@ final class SetNicknameViewController: BaseViewController {
         didTappedTextField()
     }
     
-    @objc private func keyboardWillHide(notification:NSNotification) {
+    @objc private func keyboardWillHide(notification: NSNotification) {
         UIView.animate(withDuration: 0.2, animations: {
             self.doneButton.transform = .identity
         })
@@ -321,7 +309,7 @@ final class SetNicknameViewController: BaseViewController {
     }
 }
 
-// MARK: - Extension
+// MARK: - extension
 
 extension SetNicknameViewController: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
