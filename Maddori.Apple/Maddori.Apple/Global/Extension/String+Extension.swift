@@ -19,4 +19,11 @@ extension String {
         
         return dateToStringFormatter.string(from: date)
     }
+    
+    func formatStringToDate() -> Date {
+        let stringToDateFormatter = DateFormatter()
+        stringToDateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        stringToDateFormatter.locale = Locale(identifier: "ko_KR")
+        return stringToDateFormatter.date(from: self) ?? Date()
+    }
 }

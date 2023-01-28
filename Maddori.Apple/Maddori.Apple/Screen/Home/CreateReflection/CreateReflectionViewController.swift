@@ -13,9 +13,18 @@ import SnapKit
 final class CreateReflectionViewController: BaseViewController {
     
     var reflectionId: Int
+    var reflectionTitle: String?
+    var reflectionDate: Date?
     
     init(reflectionId: Int) {
         self.reflectionId = reflectionId
+        super.init()
+    }
+    
+    init(reflectionId: Int, reflectionTitle: String?, reflectionDate: String?) {
+        self.reflectionId = reflectionId
+        self.reflectionTitle = reflectionTitle
+        self.reflectionDate = reflectionDate?.formatStringToDate()
         super.init()
     }
     
@@ -37,7 +46,13 @@ final class CreateReflectionViewController: BaseViewController {
         label.textColor = .black100
         return label
     }()
-    private let reflectionNameView = ReflectionNameView()
+    private lazy var reflectionNameView: ReflectionNameView = {
+        let nameView = ReflectionNameView()
+        if let name = reflectionTitle {
+            nameView.nameTextField.text = reflectionTitle
+        }
+        return nameView
+    }()
     private let reflectionDateLabel: UILabel = {
         let label = UILabel()
         label.text = TextLiteral.createReflectionViewControllerDateLabel
@@ -52,6 +67,9 @@ final class CreateReflectionViewController: BaseViewController {
         }
         let hideKeyboardAction = UIAction { [weak self] _ in
             self?.view.endEditing(true)
+        }
+        if let date = reflectionDate {
+            picker.date = date
         }
         picker.datePickerMode = .date
         picker.locale = Locale(identifier: "ko_KR")
@@ -70,6 +88,9 @@ final class CreateReflectionViewController: BaseViewController {
         }
         let hideKeyboardAction = UIAction { [weak self] _ in
             self?.view.endEditing(true)
+        }
+        if let time = reflectionDate {
+            picker.date = time
         }
         picker.datePickerMode = .time
         picker.locale = Locale(identifier: "ko_KR")

@@ -26,6 +26,8 @@ final class HomeViewController: BaseViewController {
     
     var currentReflectionId: Int = 0
     var reflectionStatus: ReflectionStatus = .Before
+    var reflectionTitle: String = ""
+    var reflectionDate: String = ""
     
     var isAdmin: Bool = false
     var hasSeenReflectionAlert: Bool = UserDefaultStorage.hasSeenReflectionAlert {
@@ -189,8 +191,7 @@ final class HomeViewController: BaseViewController {
             case .SettingRequired, .Done:
                 self?.presentCreateReflectionViewController()
             case .Before:
-                // FIXME: edit reflection VC
-                print("fixme")
+                self?.presentEditReflectionViewController()
             case .Progressing:
                 self?.presentSelectReflectionMemberViewController()
             }
@@ -207,6 +208,12 @@ final class HomeViewController: BaseViewController {
     
     private func presentCreateReflectionViewController() {
         let viewController = UINavigationController(rootViewController: CreateReflectionViewController(reflectionId: currentReflectionId))
+        viewController.modalPresentationStyle = .fullScreen
+        present(viewController, animated: true)
+    }
+    
+    private func presentEditReflectionViewController() {
+        let viewController = UINavigationController(rootViewController: CreateReflectionViewController(reflectionId: currentReflectionId, reflectionTitle: reflectionTitle, reflectionDate: reflectionDate))
         viewController.modalPresentationStyle = .fullScreen
         present(viewController, animated: true)
     }
@@ -293,6 +300,8 @@ final class HomeViewController: BaseViewController {
                 
                 self.reflectionStatus = reflectionStatus
                 self.currentReflectionId = reflectionId
+                self.reflectionTitle = reflectionTitle
+                self.reflectionDate = reflectionDate
                 self.joinReflectionButton.setupAttribute(reflectionStatus: reflectionStatus, title: reflectionTitle, date: reflectionDate)
                 
                 self.setupJoinReflectionButtonAction(status: reflectionStatus)
