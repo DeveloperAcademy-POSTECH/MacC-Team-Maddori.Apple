@@ -102,9 +102,13 @@ final class CreateReflectionViewController: BaseViewController {
         picker.addAction(hideKeyboardAction, for: .editingDidBegin)
         return picker
     }()
-    private let mainButton: MainButton = {
+    private lazy var mainButton: MainButton = {
         let button = MainButton()
-        button.title = TextLiteral.createReflectionViewControllerButtonText
+        if reflectionTitle == nil {
+            button.title = TextLiteral.createReflectionViewControllerButtonText
+        } else {
+            button.title = "수정하기"
+        }
         return button
     }()
     
@@ -173,13 +177,18 @@ final class CreateReflectionViewController: BaseViewController {
                   let reflectionName = self?.reflectionNameView.nameTextField.text,
                   let reflectionId = self?.reflectionId
             else { return }
-            self?.patchReflectionDetail(type: .patchReflectionDetail(
-                reflectionId: reflectionId,
-                AddReflectionDTO(
-                    reflection_name: reflectionName,
-                    reflection_date: String(describing: reflectionDate)
-                )
-            ))
+            if reflectionDate >= Date() {
+                self?.patchReflectionDetail(type: .patchReflectionDetail(
+                    reflectionId: reflectionId,
+                    AddReflectionDTO(
+                        reflection_name: reflectionName,
+                        reflection_date: String(describing: reflectionDate)
+                    )
+                ))
+            } else {
+                // FIXME: UX writing 생각
+                self?.makeAlert(title: "회고 일시 오류", message: "회고 일시를 미래로 설정해주세요")
+            }
         }
         mainButton.addAction(action, for: .touchUpInside)
     }
