@@ -40,9 +40,13 @@ final class CreateReflectionViewController: BaseViewController {
         button.addAction(action, for: .touchUpInside)
         return button
     }()
-    private let titleLabel: UILabel = {
+    private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.setTitleFont(text: TextLiteral.createReflectionViewControllerTitle)
+        if reflectionTitle == nil {
+            label.setTitleFont(text: TextLiteral.createReflectionViewControllerTitle)
+        } else {
+            label.setTitleFont(text: TextLiteral.editReflectionViewControllerTitle)
+        }
         label.textColor = .black100
         return label
     }()
@@ -107,7 +111,7 @@ final class CreateReflectionViewController: BaseViewController {
         if reflectionTitle == nil {
             button.title = TextLiteral.createReflectionViewControllerButtonText
         } else {
-            button.title = "수정하기"
+            button.title = TextLiteral.editReflectionViewControllerButtonText
         }
         return button
     }()
