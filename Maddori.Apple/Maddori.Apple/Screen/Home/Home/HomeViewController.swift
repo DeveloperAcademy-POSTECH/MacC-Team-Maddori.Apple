@@ -274,6 +274,11 @@ final class HomeViewController: BaseViewController {
                 DispatchQueue.main.async {
                     self.teamButton.setTitle(teamName, for: .normal)
                 }
+            } else {
+                DispatchQueue.main.async {
+                    self.teamButton.setTitle("팀 없음", for: .normal)
+                    self.teamButton.tintColor = .gray500
+                }
             }
         }
     }
@@ -293,7 +298,7 @@ final class HomeViewController: BaseViewController {
                 
                 self.reflectionStatus = reflectionStatus
                 self.currentReflectionId = reflectionId
-                self.joinReflectionButton.setupAttribute(reflectionStatus: reflectionStatus, title: reflectionTitle, date: reflectionDate)
+                self.joinReflectionButton.setupAttribute(reflectionStatus: reflectionStatus, title: reflectionTitle, date: reflectionDate, isPreview: false)
                 
                 self.setupJoinReflectionButtonAction(status: reflectionStatus)
                 self.setupJoinReflectionButtonBackground(status: reflectionStatus)
@@ -316,6 +321,11 @@ final class HomeViewController: BaseViewController {
                         self.flowLayout.count = reflectionKeywordList.count
                         self.keywordCollectionView.reloadData()
                     }
+                }
+            } else {
+                DispatchQueue.main.async {
+                    self.joinReflectionButton.setupAttribute(reflectionStatus: .Before, title: "", date: "", isPreview: true)
+                    self.setupJoinReflectionButtonBackground(status: .Before)
                 }
             }
         }
@@ -364,4 +374,3 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
         return KeywordCollectionViewCell.fittingSize(availableHeight: size, keyword: keywordList[indexPath.item])
     }
 }
-
