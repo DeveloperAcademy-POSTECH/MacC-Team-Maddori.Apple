@@ -364,7 +364,6 @@ extension HomeViewController: UICollectionViewDataSource {
             viewController.modalPresentationStyle = .fullScreen
             navigationController.present(viewController, animated: true)
         }
-        
     }
 }
 
