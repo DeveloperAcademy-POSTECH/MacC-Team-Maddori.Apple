@@ -40,7 +40,7 @@ final class TeamDetailViewController: BaseViewController {
     private let profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.layer.cornerRadius = 23
-        imageView.image = ImageLiterals.imgPersonTab
+        imageView.image = ImageLiterals.imgDefaultProfile
         return imageView
     }()
     private let profileNicknameLabel: UILabel = {
