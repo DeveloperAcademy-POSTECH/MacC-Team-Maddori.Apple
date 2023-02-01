@@ -80,7 +80,7 @@ final class JoinReflectionButton: UIView {
     // MARK: - func
     
     private func configUI() {
-        self.makeShadow(color: .black100, opacity: 0.2, offset: .zero, radius: 3)
+        self.makeShadow(color: .black100, opacity: 0.2, offset: .zero, radius: 2)
     }
     
     private func setupJoinButtonAction() {
