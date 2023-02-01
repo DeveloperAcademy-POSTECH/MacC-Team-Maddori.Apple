@@ -69,9 +69,8 @@ final class HomeViewController: BaseViewController {
         button.semanticContentAttribute = .forceRightToLeft
         button.setPreferredSymbolConfiguration(UIImage.SymbolConfiguration(pointSize: 20), forImageIn: .normal)
         button.tintColor = .gray600
-        let action = UIAction { _ in
-            // FIXME: 버튼 눌렀을 때 action 추가
-            print("touched")
+        let action = UIAction { [weak self] _ in
+            self?.pushTeamDetailViewController()
         }
         button.addAction(action, for: .touchUpInside)
         return button
@@ -298,6 +297,11 @@ final class HomeViewController: BaseViewController {
     
     private func resetKeywordList() {
         keywordList = TextLiteral.homeViewControllerEmptyCollectionViewList
+    }
+    
+    private func pushTeamDetailViewController() {
+        let viewController = TeamDetailViewController()
+        self.navigationController?.pushViewController(viewController, animated: true)
     }
     
     // MARK: - api

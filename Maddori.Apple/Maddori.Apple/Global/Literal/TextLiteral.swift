@@ -213,4 +213,8 @@ enum TextLiteral {
     
     static let DetailTitleLabel: String = "피드백 줄 멤버와 종류를\n선택해주세요"
     static let toNameTitleLabel: String = "피드백 줄 멤버"
+    
+    // MARK: - TeamDetailViewController
+    
+    static let teamDetailViewControllerEditButteonText: String = "편집"
 }
