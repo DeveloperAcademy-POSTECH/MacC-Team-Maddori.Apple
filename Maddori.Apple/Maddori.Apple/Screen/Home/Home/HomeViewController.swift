@@ -121,7 +121,6 @@ final class HomeViewController: BaseViewController {
     }
     
     override func render() {
-        
         view.addSubview(teamButton)
         teamButton.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.topPadding)
