@@ -20,7 +20,7 @@ extension UIFont {
     }
     
     static var title: UIFont {
-        return font(.bold, ofSize: 28)
+        return font(.bold, ofSize: 26)
     }
     
     static var title2: UIFont {

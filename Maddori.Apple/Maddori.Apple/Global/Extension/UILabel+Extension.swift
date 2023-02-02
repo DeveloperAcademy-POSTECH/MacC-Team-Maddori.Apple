@@ -47,6 +47,21 @@ extension UILabel {
         attributedText = attributeString
     }
     
+    func setLineSpacingWithColorApplied(amount: CGFloat, colorTo targetString: String, with color: UIColor) {
+        guard let text = text else { return }
+        let attributedString = NSMutableAttributedString(string: text)
+        attributedString.addAttribute(.foregroundColor,
+                                      value: color,
+                                      range: (text as NSString).range(of: targetString))
+        
+        let style = NSMutableParagraphStyle()
+        style.lineSpacing = amount
+        attributedString.addAttribute(.paragraphStyle,
+                                      value: style,
+                                      range: NSRange(location: 0, length: attributedString.length))
+        attributedText = attributedString
+    }
+    
     func setTitleFont(text: String) {
         self.text = text
         self.font = .title
