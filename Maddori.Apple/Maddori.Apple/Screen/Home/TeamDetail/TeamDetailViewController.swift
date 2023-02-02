@@ -24,7 +24,7 @@ final class TeamDetailViewController: BaseViewController {
     }()
     private let editButton: UIButton = {
         let button = UIButton()
-        button.setTitle("편집", for: .normal)
+        button.setTitle(TextLiteral.teamDetailViewControllerEditButteonText, for: .normal)
         button.titleLabel?.font = .label2
         button.setTitleColor(.gray500, for: .normal)
         button.setUnderline()
