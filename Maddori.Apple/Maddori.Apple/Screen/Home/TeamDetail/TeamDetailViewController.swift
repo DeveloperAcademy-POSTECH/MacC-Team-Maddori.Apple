@@ -32,7 +32,7 @@ final class TeamDetailViewController: BaseViewController {
     }()
     private let memberTitleLabel: UILabel = {
         let label = UILabel()
-        label.text = "멤버"
+        label.text = TextLiteral.teamDetailViewControllerMemberTitleLabel
         label.textColor = .black100
         label.font = .label2
         return label
