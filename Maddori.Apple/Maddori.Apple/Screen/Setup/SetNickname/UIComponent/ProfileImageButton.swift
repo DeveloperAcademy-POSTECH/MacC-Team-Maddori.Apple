@@ -46,8 +46,7 @@ final class ProfileImageButton: UIButton {
         self.addSubview(profilePlus)
         profilePlus.snp.makeConstraints {
             $0.top.trailing.equalTo(profileImage)
-            $0.width.equalTo(20)
-            $0.height.equalTo(22)
+            $0.width.height.equalTo(18)
         }
     }
 }

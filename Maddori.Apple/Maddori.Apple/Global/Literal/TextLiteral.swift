@@ -17,6 +17,7 @@ enum TextLiteral {
     static let feedbackContentLabel = "내용"
     static let doneButtonNext = "다음"
     static let doneButtonComplete = "완료"
+    static let actionSheetCancelTitle = "취소"
     
     // MARK: - MainViewController
     
@@ -54,7 +55,6 @@ enum TextLiteral {
     static let setNicknameControllerProfileActionSheetTitle = "프로필 사진 설정"
     static let setNicknameControllerProfileActionSheetLibraryTitle = "앨범에서 사진 선택"
     static let setNicknameControllerProfileActionSheetCameraTitle = "사진 촬영"
-    static let setNicknameControllerProfileActionSheetCancelTitle = "취소"
     static let setNicknameControllerCameraErrorAlertTitle = "카메라를 실행할 수 없습니다."
     static let setNicknameControllerCameraErrorAlertMessage = "설정에서 카메라 접근 권한을 확인해 주세요."
     static let setNicknameControllerLibraryErrorAlertTitle = "이미지를 불러올 수 없습니다."

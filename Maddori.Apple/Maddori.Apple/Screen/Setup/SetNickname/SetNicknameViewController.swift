@@ -19,7 +19,7 @@ final class SetNicknameViewController: BaseViewController {
         static let nicknameMax: Int = 6
         static let roleMax: Int = 20
     }
-    let cameraPicker = UIImagePickerController()
+    private let cameraPicker = UIImagePickerController()
     
     // MARK: - property
     
@@ -194,21 +194,21 @@ final class SetNicknameViewController: BaseViewController {
     // MARK: - func
     
     private func didTappedProfile() {
-        let actionSheet = UIAlertController(title: TextLiteral.setNicknameControllerProfileActionSheetTitle, message: nil, preferredStyle: .actionSheet)
-        let libraryAction = UIAlertAction(title: TextLiteral.setNicknameControllerProfileActionSheetLibraryTitle, style: .default) { _ in self.openLibrary() }
-        let cameraAction = UIAlertAction(title: TextLiteral.setNicknameControllerProfileActionSheetCameraTitle, style: .default) { _ in self.openCamera() }
-        let cancelAction = UIAlertAction(title: TextLiteral.setNicknameControllerProfileActionSheetCancelTitle, style: .cancel)
-        
-        actionSheet.addAction(libraryAction)
-        actionSheet.addAction(cameraAction)
-        actionSheet.addAction(cancelAction)
-        present(actionSheet, animated: true, completion: nil)
+        makeActionSheet(
+            title: TextLiteral.setNicknameControllerProfileActionSheetTitle,
+            actionTitles: [
+                TextLiteral.setNicknameControllerProfileActionSheetLibraryTitle,
+                TextLiteral.setNicknameControllerProfileActionSheetCameraTitle,
+                TextLiteral.actionSheetCancelTitle
+            ],
+            actionStyle: [.default, .default, .cancel],
+            actions: [{ _ in self.openLibrary() }, { _ in self.openCamera() }, nil]
+        )
     }
     
     private func setupDelegate() {
         nicknameTextField.delegate = self
         roleTextField.delegate = self
-        
         cameraPicker.delegate = self
     }
     
@@ -280,7 +280,7 @@ final class SetNicknameViewController: BaseViewController {
     }
     
     private func openCamera() {
-        if(UIImagePickerController .isSourceTypeAvailable(.camera)) {
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
             cameraPicker.sourceType = .camera
             self.present(cameraPicker, animated: false, completion: nil)
         } else {
@@ -328,14 +328,10 @@ extension SetNicknameViewController: PHPickerViewControllerDelegate {
         picker.dismiss(animated: true, completion: nil)
         
         let itemProvider = results.first?.itemProvider
-        
-        if let itemProvider = itemProvider,
-           itemProvider.canLoadObject(ofClass: UIImage.self){
-            itemProvider.loadObject(ofClass: UIImage.self) {
-                (image, error) in
+        if let itemProvider = itemProvider, itemProvider.canLoadObject(ofClass: UIImage.self) {
+            itemProvider.loadObject(ofClass: UIImage.self) { (image, error) in
                 DispatchQueue.main.async {
                     self.profileImageButton.profileImage.image = image as? UIImage
-                    
                     // FIXME: - 이미지 정보 가져오기
                 }
             }
@@ -345,7 +341,7 @@ extension SetNicknameViewController: PHPickerViewControllerDelegate {
     }
 }
 
-extension SetNicknameViewController: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+extension SetNicknameViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
         cameraPicker.dismiss(animated: true)
