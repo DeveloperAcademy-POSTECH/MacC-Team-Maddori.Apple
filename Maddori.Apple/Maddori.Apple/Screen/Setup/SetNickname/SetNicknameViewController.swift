@@ -12,13 +12,20 @@ import SnapKit
 
 final class SetNicknameViewController: BaseViewController {
     
-    // FIXME: - 합류한 팀 이름 받아오기
-    var teamName = "맛쟁이사과처럼세글자"
     private enum TextLength {
         static let totalMin: Int = 0
         static let nicknameMax: Int = 6
         static let roleMax: Int = 20
     }
+    
+    let teamName: String
+    
+    init(teamName: String) {
+        self.teamName = teamName
+        super.init()
+    }
+    
+    required init?(coder: NSCoder) { nil }
     
     // MARK: - property
     

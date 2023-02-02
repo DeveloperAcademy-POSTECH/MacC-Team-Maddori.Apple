@@ -153,7 +153,7 @@ final class LoginViewController: BaseViewController {
                     let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
                     sceneDelegate?.changeRootViewCustomTabBarView()
                 } else {
-                    self?.presentViewController(viewController: SetNicknameViewController())
+                    self?.presentViewController(viewController: JoinTeamViewController())
                 }
             }
         }

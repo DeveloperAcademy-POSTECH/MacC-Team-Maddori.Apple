@@ -17,13 +17,13 @@ enum SetupEndPoint<T: Encodable>: EndPointable {
     var address: String {
         switch self {
         case .dispatchLogin:
-            return "\(UrlLiteral.baseUrl)/users/login"
+            return "http://15.165.21.115:3001/api/v2/users/login"
         case .dispatchCreateTeam:
             return "\(UrlLiteral.baseUrl)/teams"
         case .dispatchJoinTeam(let teamId):
             return "\(UrlLiteral.baseUrl)/users/join-team/\(teamId)"
         case .fetchCertainTeam(let invitationCode):
-            return "\(UrlLiteral.baseUrl)/teams?invitation_code=\(invitationCode)"
+            return "http://15.165.21.115:3001/api/v2/teams?invitation_code=\(invitationCode)"
         case .dispatchAppleLogin:
             return "\(UrlLiteral.baseUrl)/login"
         }
