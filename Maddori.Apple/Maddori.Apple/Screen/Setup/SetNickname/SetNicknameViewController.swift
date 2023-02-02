@@ -113,10 +113,6 @@ final class SetNicknameViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupDelegate()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         setupNotificationCenter()
     }
     
@@ -290,12 +286,9 @@ extension SetNicknameViewController: UITextFieldDelegate {
         setCounter(textField: textField, count: textField.text?.count ?? 0)
         checkMaxLength(textField: textField)
         
-        let hasText = textField.hasText
-        doneButton.isDisabled = !hasText
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
+        if textField == nicknameTextField {
+            let hasText = textField.hasText
+            doneButton.isDisabled = !hasText
+        }
     }
 }
