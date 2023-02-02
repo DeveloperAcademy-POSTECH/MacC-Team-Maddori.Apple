@@ -65,6 +65,7 @@ final class TeamDetailViewController: BaseViewController {
         view.layer.borderColor = UIColor.gray300.cgColor
         return view
     }()
+    private let memberCollectionView = TeamDetailMembersView()
     
     // MARK: - life cycle
     
@@ -124,6 +125,14 @@ final class TeamDetailViewController: BaseViewController {
             $0.top.equalTo(profileImageView.snp.bottom).offset(25)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.height.equalTo(1)
+        }
+        
+        view.addSubview(memberCollectionView)
+        memberCollectionView.snp.makeConstraints {
+            $0.top.equalTo(dividerView.snp.bottom).offset(24)
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            // FIXME: - 아래 뷰 만들고 바텀 레이아웃 수정
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
         }
     }
     
