@@ -18,15 +18,8 @@ final class SetNicknameViewController: BaseViewController {
         static let roleMax: Int = 20
     }
     
-    let teamName: String
-    
-    init(teamName: String) {
-        self.teamName = teamName
-        super.init()
-    }
-    
-    required init?(coder: NSCoder) { nil }
-    
+    let teamName: String = UserDefaultStorage.teamName
+
     // MARK: - property
     
     private lazy var backButton: BackButton = {

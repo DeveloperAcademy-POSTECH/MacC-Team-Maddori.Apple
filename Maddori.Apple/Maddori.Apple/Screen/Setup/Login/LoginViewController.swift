@@ -117,8 +117,8 @@ final class LoginViewController: BaseViewController {
             let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
             sceneDelegate?.changeRootViewCustomTabBarView()
             self.setLoginUserDefaults()
-        } else if hasNickname {
-            self.presentViewController(viewController: JoinTeamViewController())
+        } else if hasTeamId {
+            self.presentViewController(viewController: SetNicknameViewController())
         } else {
             return
         }

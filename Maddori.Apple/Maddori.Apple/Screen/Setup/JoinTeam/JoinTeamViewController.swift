@@ -125,8 +125,8 @@ final class JoinTeamViewController: BaseTextFieldViewController {
         present(rootViewController, animated: true)
     }
     
-    private func pushSetNicknameViewController(teamName: String) {
-        let viewController = SetNicknameViewController(teamName: teamName)
+    private func pushSetNicknameViewController() {
+        let viewController = SetNicknameViewController()
         navigationController?.pushViewController(viewController, animated: true)
     }
     
@@ -138,11 +138,13 @@ final class JoinTeamViewController: BaseTextFieldViewController {
                    headers: type.headers
         ).responseDecodable(of: BaseModel<TeamInfoResponse>.self) { json in
             if let json = json.value {
+                dump(json)
                 guard let teamId = json.detail?.id,
                       let teamName = json.detail?.teamName
                 else { return }
                 UserDefaultHandler.setTeamId(teamId: teamId)
-                self.pushSetNicknameViewController(teamName: teamName)
+                UserDefaultHandler.setTeamName(teamName: teamName)
+                self.pushSetNicknameViewController()
             } else {
                 DispatchQueue.main.async {
                     self.makeAlert(title: TextLiteral.joinTeamViewControllerAlertTitle, message: TextLiteral.joinTeamViewControllerAlertMessage)
