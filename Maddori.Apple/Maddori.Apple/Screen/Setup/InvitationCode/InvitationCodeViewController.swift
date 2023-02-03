@@ -12,12 +12,10 @@ import SnapKit
 
 final class InvitationCodeViewController: BaseViewController {
     
-    let teamName: String
     let invitationCode: String
     private var isTappedCopyButton: Bool = false
     
-    init(teamName: String, invitationCode: String) {
-        self.teamName = teamName
+    init(invitationCode: String) {
         self.invitationCode = invitationCode
         super.init()
     }

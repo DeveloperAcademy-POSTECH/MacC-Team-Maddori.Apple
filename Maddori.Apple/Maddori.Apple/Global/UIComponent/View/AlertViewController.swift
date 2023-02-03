@@ -221,7 +221,8 @@ final class AlertViewController: BaseViewController {
         case .delete:
             self.deleteFeedBack(type: .deleteFeedBack(reflectionId: self.reflectionId, feedBackId: self.feedbackId))
         case .join:
-            self.dispatchJoinTeam(type: .dispatchJoinTeam(teamId: UserDefaultStorage.teamId))
+            print("join")
+//            self.dispatchJoinTeam(type: .dispatchJoinTeam(teamId: UserDefaultStorage.teamId))
         }
         self.dismiss(animated: true) {
             self.navigation?.popViewController(animated: true)

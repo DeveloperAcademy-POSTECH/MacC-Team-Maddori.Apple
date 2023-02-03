@@ -94,8 +94,8 @@ final class CreateTeamViewController: BaseTextFieldViewController {
     
     private func pushInvitationViewController(invitationCode: String) {
         if let teamName = super.kigoTextField.text {
-            let viewController = InvitationCodeViewController(teamName: teamName, invitationCode: invitationCode)
-            self.navigationController?.pushViewController(viewController, animated: true)
+//            let viewController = InvitationCodeViewController(teamName: teamName, invitationCode: invitationCode)
+//            self.navigationController?.pushViewController(viewController, animated: true)
         }
     }
     

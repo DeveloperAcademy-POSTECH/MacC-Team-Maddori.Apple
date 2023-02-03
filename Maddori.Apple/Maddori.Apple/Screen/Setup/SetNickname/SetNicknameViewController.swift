@@ -105,11 +105,7 @@ final class SetNicknameViewController: BaseViewController {
         button.title = TextLiteral.setNicknameControllerDoneButtonText
         button.isDisabled = true
         let action = UIAction { [weak self] _ in
-            guard let nickname = self?.nicknameTextField.text else { return }
-            guard let role = self?.roleTextField.text else { return }
-            // FIXME: - 수정된 api 연결 (userJoinTeam)
-            self?.nicknameTextField.resignFirstResponder()
-            self?.roleTextField.resignFirstResponder()
+            self?.didTappedDoneButton()
         }
         button.addAction(action, for: .touchUpInside)
         return button
@@ -265,6 +261,20 @@ final class SetNicknameViewController: BaseViewController {
         }, completion: nil)
     }
     
+    private func didTappedDoneButton() {
+        guard let nickname = nicknameTextField.text else { return }
+        guard let role = roleTextField.text else { return }
+        let dto = JoinTeamDTO(nickname: nickname, role: role, profile_image: nil)
+        dispatchJoinTeam(type: .dispatchJoinTeam(teamId: UserDefaultStorage.teamId, dto))
+        nicknameTextField.resignFirstResponder()
+        roleTextField.resignFirstResponder()
+    }
+    
+    private func pushInvitationCodeViewController(invitationCode: String) {
+        let viewController = InvitationCodeViewController(invitationCode: invitationCode)
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
     // MARK: - selector
     
     @objc private func keyboardWillShow(notification: NSNotification) {
@@ -283,6 +293,26 @@ final class SetNicknameViewController: BaseViewController {
         })
         
         didTappedBackground()
+    }
+    
+    // MARK: - api
+    
+    private func dispatchJoinTeam(type: SetupEndPoint<JoinTeamDTO>) {
+        AF.request(type.address,
+                   method: type.method,
+                   parameters: type.body,
+                   encoder: JSONParameterEncoder.default,
+                   headers: type.headers
+        ).responseDecodable(of: BaseModel<JoinTeamResponse>.self) { json in
+            if let json = json.value {
+                dump(json)
+//                DispatchQueue.main.async {
+//                    if let invitationCode = json.detail?.invitationCode {
+//                        self.pushInvitationCodeViewController(invitationCode: invitationCode)
+//                    }
+//                }
+            }
+        }
     }
 }
 
