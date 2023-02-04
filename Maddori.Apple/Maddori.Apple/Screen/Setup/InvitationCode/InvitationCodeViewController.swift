@@ -122,7 +122,7 @@ final class InvitationCodeViewController: BaseViewController {
         var shareObject = [Any]()
         shareObject.append(shareText)
         
-        let activityViewController = UIActivityViewController(activityItems : shareObject, applicationActivities: nil)
+        let activityViewController = UIActivityViewController(activityItems: shareObject, applicationActivities: nil)
         activityViewController.popoverPresentationController?.sourceView = self.view
         activityViewController.excludedActivityTypes = [UIActivity.ActivityType.airDrop, UIActivity.ActivityType.postToFacebook, UIActivity.ActivityType.postToTwitter, UIActivity.ActivityType.mail]
         

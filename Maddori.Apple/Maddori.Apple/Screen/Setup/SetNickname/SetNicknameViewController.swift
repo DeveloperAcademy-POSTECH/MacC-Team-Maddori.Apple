@@ -257,6 +257,7 @@ final class SetNicknameViewController: BaseViewController {
     private func didTappedDoneButton() {
         guard let nickname = nicknameTextField.text else { return }
         guard let role = roleTextField.text else { return }
+        // FIXME: - 이미지 데이터 추가
         
         if UserDefaultStorage.teamId == 0 {
             let dto = CreateTeamDTO(team_name: UserDefaultStorage.teamName, nickname: nickname, role: role, profile_image: nil)
@@ -315,7 +316,7 @@ final class SetNicknameViewController: BaseViewController {
                 }
             } else {
                 DispatchQueue.main.async {
-                    self.makeAlert(title: "팀 생성 및 팀 합류 실패", message: "다시 시도해 주세요.")
+                    self.makeAlert(title: TextLiteral.setNicknameViewControllerCreateTeamAlertTitle, message: TextLiteral.setNicknameViewControllerAlertMessage)
                 }
             }
         }
@@ -337,7 +338,7 @@ final class SetNicknameViewController: BaseViewController {
                 }
             } else {
                 DispatchQueue.main.async {
-                    self.makeAlert(title: "팀 합류 실패", message: "다시 시도해 주세요.")
+                    self.makeAlert(title: TextLiteral.setNicknameViewControllerJoinTeamAlertTitle, message: TextLiteral.setNicknameViewControllerAlertMessage)
                 }
             }
         }
