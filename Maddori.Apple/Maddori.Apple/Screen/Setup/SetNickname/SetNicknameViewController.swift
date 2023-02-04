@@ -259,8 +259,8 @@ final class SetNicknameViewController: BaseViewController {
         guard let role = roleTextField.text else { return }
         
         if UserDefaultStorage.teamId == 0 {
-            // FIXME: - CreateTeam api 연결
-            print("CreateTeam")
+            let dto = CreateTeamDTO(team_name: UserDefaultStorage.teamName, nickname: nickname, role: role, profile_image: nil)
+            dispatchCreateTeam(type: .dispatchCreateTeam(dto))
         } else {
             let dto = JoinTeamDTO(nickname: nickname, role: role, profile_image: nil)
             dispatchJoinTeam(type: .dispatchJoinTeam(teamId: UserDefaultStorage.teamId, dto))
@@ -296,6 +296,30 @@ final class SetNicknameViewController: BaseViewController {
     }
     
     // MARK: - api
+    
+    private func dispatchCreateTeam(type: SetupEndPoint<CreateTeamDTO>) {
+        AF.request(type.address,
+                   method: type.method,
+                   parameters: type.body,
+                   encoder: JSONParameterEncoder.default,
+                   headers: type.headers
+        ).responseDecodable(of: BaseModel<CreateTeamResponse>.self) { json in
+            if let json = json.value {
+                dump(json)
+                guard let teamId = json.detail?.id else { return }
+                UserDefaultHandler.setTeamId(teamId: teamId)
+                DispatchQueue.main.async {
+//                    if let invitationCode = json.detail?.invitationCode {
+//                        self.pushInvitationViewController(invitationCode: invitationCode)
+//                    }
+                }
+            } else {
+                DispatchQueue.main.async {
+                    self.makeAlert(title: "팀 생성 및 팀 합류 실패", message: "다시 시도해 주세요.")
+                }
+            }
+        }
+    }
     
     private func dispatchJoinTeam(type: SetupEndPoint<JoinTeamDTO>) {
         AF.request(type.address,

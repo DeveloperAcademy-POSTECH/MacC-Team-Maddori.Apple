@@ -104,30 +104,4 @@ final class CreateTeamViewController: BaseTextFieldViewController {
         let viewController = SetNicknameViewController()
         navigationController?.pushViewController(viewController, animated: true)
     }
-    
-    // MARK: - api
-
-    //    private func dispatchCreateTeam(type: SetupEndPoint<CreateTeamDTO>) {
-    //        AF.request(type.address,
-    //                   method: type.method,
-    //                   parameters: type.body,
-    //                   encoder: JSONParameterEncoder.default,
-    //                   headers: type.headers
-    //        ).responseDecodable(of: BaseModel<CreateTeamResponse>.self) { json in
-    //            if let json = json.value {
-    //                dump(json)
-    //                guard let teamId = json.detail?.id else { return }
-    //                UserDefaultHandler.setTeamId(teamId: teamId)
-    //                DispatchQueue.main.async {
-    //                    if let invitationCode = json.detail?.invitationCode {
-    //                        self.pushInvitationViewController(invitationCode: invitationCode)
-    //                    }
-    //                }
-    //            } else {
-    //                DispatchQueue.main.async {
-    //                    self.makeAlert(title: TextLiteral.createTeamViewControllerAlertTitle, message: TextLiteral.createTeamViewControllerAlertMessage)
-    //                }
-    //            }
-    //        }
-    //    }
 }
