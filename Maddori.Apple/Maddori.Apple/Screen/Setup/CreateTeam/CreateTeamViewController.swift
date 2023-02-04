@@ -85,43 +85,49 @@ final class CreateTeamViewController: BaseTextFieldViewController {
     private func setupDoneButton() {
         let action = UIAction { [weak self] _ in
             if let teamName = self?.kigoTextField.text {
-                UserDefaultHandler.setTeamName(teamName: teamName)
-                self?.pushSetNicknameViewController()
+                if teamName.hasSpecialCharacters() {
+                    DispatchQueue.main.async {
+                        self?.makeAlert(title: TextLiteral.createTeamViewControllerAlertTitle, message: TextLiteral.createTeamViewControllerAlertMessage)
+                    }
+                } else {
+                    UserDefaultHandler.setTeamName(teamName: teamName)
+                    self?.pushSetNicknameViewController()
+                }
             }
         }
         super.doneButton.addAction(action, for: .touchUpInside)
     }
     
     // MARK: - func
-    
+
     private func pushSetNicknameViewController() {
         let viewController = SetNicknameViewController()
-        self.navigationController?.pushViewController(viewController, animated: true)
+        navigationController?.pushViewController(viewController, animated: true)
     }
     
     // MARK: - api
-    
-//    private func dispatchCreateTeam(type: SetupEndPoint<CreateTeamDTO>) {
-//        AF.request(type.address,
-//                   method: type.method,
-//                   parameters: type.body,
-//                   encoder: JSONParameterEncoder.default,
-//                   headers: type.headers
-//        ).responseDecodable(of: BaseModel<CreateTeamResponse>.self) { json in
-//            if let json = json.value {
-//                dump(json)
-//                guard let teamId = json.detail?.id else { return }
-//                UserDefaultHandler.setTeamId(teamId: teamId)
-//                DispatchQueue.main.async {
-//                    if let invitationCode = json.detail?.invitationCode {
-//                        self.pushInvitationViewController(invitationCode: invitationCode)
-//                    }
-//                }
-//            } else {
-//                DispatchQueue.main.async {
-//                    self.makeAlert(title: TextLiteral.createTeamViewControllerAlertTitle, message: TextLiteral.createTeamViewControllerAlertMessage)
-//                }
-//            }
-//        }
-//    }
+
+    //    private func dispatchCreateTeam(type: SetupEndPoint<CreateTeamDTO>) {
+    //        AF.request(type.address,
+    //                   method: type.method,
+    //                   parameters: type.body,
+    //                   encoder: JSONParameterEncoder.default,
+    //                   headers: type.headers
+    //        ).responseDecodable(of: BaseModel<CreateTeamResponse>.self) { json in
+    //            if let json = json.value {
+    //                dump(json)
+    //                guard let teamId = json.detail?.id else { return }
+    //                UserDefaultHandler.setTeamId(teamId: teamId)
+    //                DispatchQueue.main.async {
+    //                    if let invitationCode = json.detail?.invitationCode {
+    //                        self.pushInvitationViewController(invitationCode: invitationCode)
+    //                    }
+    //                }
+    //            } else {
+    //                DispatchQueue.main.async {
+    //                    self.makeAlert(title: TextLiteral.createTeamViewControllerAlertTitle, message: TextLiteral.createTeamViewControllerAlertMessage)
+    //                }
+    //            }
+    //        }
+    //    }
 }

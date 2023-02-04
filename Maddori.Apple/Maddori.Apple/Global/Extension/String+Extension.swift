@@ -19,4 +19,16 @@ extension String {
         
         return dateToStringFormatter.string(from: date)
     }
+    
+    func hasSpecialCharacters() -> Bool {
+        if let regex = try? NSRegularExpression(pattern: "[0-9a-zA-Zㄱ-ㅎㅏ-ㅣ가-힣\\s]", options: .caseInsensitive) {
+            let numOfString = regex.numberOfMatches(in: self, options: [], range: NSMakeRange(0, self.count))
+            if numOfString == self.count {
+                return false
+            } else {
+                return true
+            }
+        }
+        return false
+    }
 }
