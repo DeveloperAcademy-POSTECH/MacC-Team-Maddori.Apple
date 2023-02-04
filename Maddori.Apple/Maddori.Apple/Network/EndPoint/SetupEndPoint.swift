@@ -8,7 +8,6 @@
 import Alamofire
 
 enum SetupEndPoint<T: Encodable>: EndPointable {
-    case dispatchLogin(T)
     case dispatchCreateTeam(T)
     case dispatchJoinTeam(teamId: Int, T)
     case fetchCertainTeam(invitationCode: String)
@@ -16,23 +15,19 @@ enum SetupEndPoint<T: Encodable>: EndPointable {
     
     var address: String {
         switch self {
-        case .dispatchLogin:
-            return "http://15.165.21.115:3001/api/v2/users/login"
         case .dispatchCreateTeam:
-            return "\(UrlLiteral.baseUrl)/teams"
+            return "\(UrlLiteral.baseUrl2)/teams"
         case .dispatchJoinTeam(let teamId, _):
-            return "http://15.165.21.115:3001/api/v2/users/join-team/\(teamId)"
+            return "\(UrlLiteral.baseUrl2)/users/join-team/\(teamId)"
         case .fetchCertainTeam(let invitationCode):
-            return "http://15.165.21.115:3001/api/v2/teams?invitation_code=\(invitationCode)"
+            return "\(UrlLiteral.baseUrl2)/teams?invitation_code=\(invitationCode)"
         case .dispatchAppleLogin:
-            return "\(UrlLiteral.baseUrl)/login"
+            return "\(UrlLiteral.baseUrl2)/auth"
         }
     }
 
     var method: HTTPMethod {
         switch self {
-        case .dispatchLogin:
-            return .post
         case .dispatchCreateTeam:
             return .post
         case .dispatchJoinTeam:
@@ -46,8 +41,6 @@ enum SetupEndPoint<T: Encodable>: EndPointable {
     
     var body: T? {
         switch self {
-        case .dispatchLogin(let body):
-            return body
         case .dispatchCreateTeam(let body):
             return body
         case .dispatchJoinTeam(_, let body):
@@ -61,12 +54,6 @@ enum SetupEndPoint<T: Encodable>: EndPointable {
     
     var headers: HTTPHeaders? {
         switch self {
-        case .dispatchLogin:
-            let headers = [
-                "access_token": "\(UserDefaultStorage.accessToken)",
-                "refresh_token": "\(UserDefaultStorage.refreshToken)"
-            ]
-            return HTTPHeaders(headers)
         case .dispatchCreateTeam:
             let headers = [
                 "access_token": "\(UserDefaultStorage.accessToken)",
