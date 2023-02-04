@@ -14,7 +14,7 @@ struct JoinTeamResponse: Decodable {
     let role: String?
     let profileImagePath: String?
     let userId: Int?
-    let team: CreateTeamResponse?
+    let team: TeamInfoResponse?
     
     enum CodingKeys: String, CodingKey {
         case id

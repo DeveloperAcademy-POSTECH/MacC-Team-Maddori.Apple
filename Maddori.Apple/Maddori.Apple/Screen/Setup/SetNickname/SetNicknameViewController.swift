@@ -309,9 +309,9 @@ final class SetNicknameViewController: BaseViewController {
                 guard let teamId = json.detail?.id else { return }
                 UserDefaultHandler.setTeamId(teamId: teamId)
                 DispatchQueue.main.async {
-//                    if let invitationCode = json.detail?.invitationCode {
-//                        self.pushInvitationViewController(invitationCode: invitationCode)
-//                    }
+                    if let invitationCode = json.detail?.team?.invitationCode {
+                        self.pushInvitationCodeViewController(invitationCode: invitationCode)
+                    }
                 }
             } else {
                 DispatchQueue.main.async {
@@ -330,11 +330,15 @@ final class SetNicknameViewController: BaseViewController {
         ).responseDecodable(of: BaseModel<JoinTeamResponse>.self) { json in
             if let json = json.value {
                 dump(json)
-                //                DispatchQueue.main.async {
-                //                    if let invitationCode = json.detail?.invitationCode {
-                //                        self.pushInvitationCodeViewController(invitationCode: invitationCode)
-                //                    }
-                //                }
+                DispatchQueue.main.async {
+                    if let invitationCode = json.detail?.team?.invitationCode {
+                        self.pushInvitationCodeViewController(invitationCode: invitationCode)
+                    }
+                }
+            } else {
+                DispatchQueue.main.async {
+                    self.makeAlert(title: "팀 합류 실패", message: "다시 시도해 주세요.")
+                }
             }
         }
     }
