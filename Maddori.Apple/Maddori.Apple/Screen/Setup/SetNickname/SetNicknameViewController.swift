@@ -19,7 +19,7 @@ final class SetNicknameViewController: BaseViewController {
     }
     
     let teamName: String = UserDefaultStorage.teamName
-
+    
     // MARK: - property
     
     private lazy var backButton: BackButton = {
@@ -257,8 +257,15 @@ final class SetNicknameViewController: BaseViewController {
     private func didTappedDoneButton() {
         guard let nickname = nicknameTextField.text else { return }
         guard let role = roleTextField.text else { return }
-        let dto = JoinTeamDTO(nickname: nickname, role: role, profile_image: nil)
-        dispatchJoinTeam(type: .dispatchJoinTeam(teamId: UserDefaultStorage.teamId, dto))
+        
+        if UserDefaultStorage.teamId == 0 {
+            // FIXME: - CreateTeam api 연결
+            print("CreateTeam")
+        } else {
+            let dto = JoinTeamDTO(nickname: nickname, role: role, profile_image: nil)
+            dispatchJoinTeam(type: .dispatchJoinTeam(teamId: UserDefaultStorage.teamId, dto))
+        }
+        
         nicknameTextField.resignFirstResponder()
         roleTextField.resignFirstResponder()
     }
@@ -299,11 +306,11 @@ final class SetNicknameViewController: BaseViewController {
         ).responseDecodable(of: BaseModel<JoinTeamResponse>.self) { json in
             if let json = json.value {
                 dump(json)
-//                DispatchQueue.main.async {
-//                    if let invitationCode = json.detail?.invitationCode {
-//                        self.pushInvitationCodeViewController(invitationCode: invitationCode)
-//                    }
-//                }
+                //                DispatchQueue.main.async {
+                //                    if let invitationCode = json.detail?.invitationCode {
+                //                        self.pushInvitationCodeViewController(invitationCode: invitationCode)
+                //                    }
+                //                }
             }
         }
     }
