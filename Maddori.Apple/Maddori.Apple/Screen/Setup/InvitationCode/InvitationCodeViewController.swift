@@ -112,21 +112,9 @@ final class InvitationCodeViewController: BaseViewController {
     
     private func setupCopyCodeButton() {
         let action = UIAction { [weak self] _ in
-            self?.presentSharePanel()
+            self?.presentSharePanel(text: self?.invitedCodeLabel.text ?? "")
         }
         copyCodeButton.addAction(action, for: .touchUpInside)
-    }
-    
-    private func presentSharePanel() {
-        let shareText: String = invitedCodeLabel.text ?? ""
-        var shareObject = [Any]()
-        shareObject.append(shareText)
-        
-        let activityViewController = UIActivityViewController(activityItems: shareObject, applicationActivities: nil)
-        activityViewController.popoverPresentationController?.sourceView = self.view
-        activityViewController.excludedActivityTypes = [UIActivity.ActivityType.airDrop, UIActivity.ActivityType.postToFacebook, UIActivity.ActivityType.postToTwitter, UIActivity.ActivityType.mail]
-        
-        self.present(activityViewController, animated: true, completion: nil)
     }
     
     private func setupStartButton() {
