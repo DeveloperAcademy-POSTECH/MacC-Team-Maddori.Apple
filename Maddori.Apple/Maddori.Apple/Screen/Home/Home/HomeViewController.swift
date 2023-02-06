@@ -226,7 +226,7 @@ final class HomeViewController: BaseViewController {
     }
     
     private func presentSelectReflectionMemberViewController() {
-        let viewController = UINavigationController(rootViewController: SelectReflectionMemberViewController(reflectionId: currentReflectionId, isAdmin: isAdmin))
+        let viewController = UINavigationController(rootViewController: SelectReflectionMemberViewController(reflectionId: currentReflectionId, isAdmin: self.isAdmin))
         viewController.modalPresentationStyle = .fullScreen
         present(viewController, animated: true)
     }
