@@ -13,8 +13,53 @@ final class ReflectionMemberCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - property
     
+    private let profileImage: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = ImageLiterals.imgProfileNone
+        imageView.layer.cornerRadius = 23
+        return imageView
+    }()
+    private let nicknameLabel: UILabel = {
+        let label = UILabel()
+        label.text = "진구"
+        label.textColor = .gray600
+        label.font = .label2
+        return label
+    }()
+    private let roleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "PM / 개발자 / 디자이너"
+        label.textColor = .gray400
+        label.font = .caption2
+        return label
+    }()
+    
     // MARK: - life cycle
     
-    // MARK: - func
+    override func render() {
+        self.addSubview(profileImage)
+        profileImage.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(27)
+            $0.centerX.equalToSuperview()
+            $0.width.height.equalTo(46)
+        }
+        
+        self.addSubview(nicknameLabel)
+        nicknameLabel.snp.makeConstraints {
+            $0.top.equalTo(profileImage.snp.bottom).offset(12)
+            $0.centerX.equalToSuperview()
+        }
+        
+        self.addSubview(roleLabel)
+        roleLabel.snp.makeConstraints {
+            $0.top.equalTo(nicknameLabel.snp.bottom).offset(4)
+            $0.centerX.equalToSuperview()
+        }
+    }
     
+    override func configUI() {
+        self.backgroundColor = .white300
+        self.layer.cornerRadius = 8
+        self.makeShadow(color: .black, opacity: 0.2, offset: CGSize.zero, radius: 4)
+    }
 }
