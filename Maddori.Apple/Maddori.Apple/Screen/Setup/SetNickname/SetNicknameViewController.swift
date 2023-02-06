@@ -19,8 +19,7 @@ final class SetNicknameViewController: BaseViewController {
         static let roleMax: Int = 20
     }
     private let cameraPicker = UIImagePickerController()
-    
-    let teamName: String = UserDefaultStorage.teamName
+    private let teamName: String = UserDefaultStorage.teamName
     
     // MARK: - property
     
@@ -291,7 +290,7 @@ final class SetNicknameViewController: BaseViewController {
         // FIXME: - 이미지 데이터 추가
         
         if UserDefaultStorage.teamId == 0 {
-            let dto = CreateTeamDTO(team_name: UserDefaultStorage.teamName, nickname: nickname, role: role, profile_image: nil)
+            let dto = CreateTeamDTO(team_name: teamName, nickname: nickname, role: role, profile_image: nil)
             dispatchCreateTeam(type: .dispatchCreateTeam(dto))
         } else {
             let dto = JoinTeamDTO(nickname: nickname, role: role, profile_image: nil)
