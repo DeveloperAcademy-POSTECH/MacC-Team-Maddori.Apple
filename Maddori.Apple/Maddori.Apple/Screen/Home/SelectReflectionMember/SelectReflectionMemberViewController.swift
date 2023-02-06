@@ -13,11 +13,9 @@ import SnapKit
 final class SelectReflectionMemberViewController: BaseViewController {
     
     let reflectionId: Int
-    let isAdmin: Bool
     
-    init(reflectionId: Int, isAdmin: Bool) {
+    init(reflectionId: Int) {
         self.reflectionId = reflectionId
-        self.isAdmin = isAdmin
         super.init()
     }
     
@@ -57,12 +55,7 @@ final class SelectReflectionMemberViewController: BaseViewController {
         let button = MainButton()
         let action = UIAction { [weak self] _ in
             guard let reflectionId = self?.reflectionId else { return }
-            guard let isAdmin = self?.isAdmin else { return }
-            if isAdmin {
-                self?.patchEndReflection(type: .patchEndReflection(reflectionId: reflectionId))
-            } else {
-                self?.dismiss(animated: true)
-            }
+            self?.patchEndReflection(type: .patchEndReflection(reflectionId: reflectionId))
             self?.resetHasSeenAlert()
         }
         button.addAction(action, for: .touchUpInside)
