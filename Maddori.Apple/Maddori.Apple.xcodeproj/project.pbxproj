@@ -140,6 +140,7 @@
 		D7A585222990C50700E1F4EE /* TeamManageSettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A585212990C50700E1F4EE /* TeamManageSettingCell.swift */; };
 		D7A585272990DAFC00E1F4EE /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A585262990DAFC00E1F4EE /* Section.swift */; };
 		D7A585292990DB0D00E1F4EE /* Option.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A585282990DB0D00E1F4EE /* Option.swift */; };
+		D7A5852B2990DCE700E1F4EE /* ChangeTeamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A5852A2990DCE700E1F4EE /* ChangeTeamView.swift */; };
 		D7AFB7C32916EAB100E998B7 /* MyReflectionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7AFB7C22916EAB100E998B7 /* MyReflectionDetailViewController.swift */; };
 		D7AFB7C52916EDC300E998B7 /* MyReflectionDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7AFB7C42916EDC300E998B7 /* MyReflectionDetailTableViewCell.swift */; };
 		D7AFB7C72916FF9400E998B7 /* CustomSegmentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7AFB7C62916FF9400E998B7 /* CustomSegmentControl.swift */; };
@@ -281,6 +282,7 @@
 		D7A585212990C50700E1F4EE /* TeamManageSettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamManageSettingCell.swift; sourceTree = "<group>"; };
 		D7A585262990DAFC00E1F4EE /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
 		D7A585282990DB0D00E1F4EE /* Option.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Option.swift; sourceTree = "<group>"; };
+		D7A5852A2990DCE700E1F4EE /* ChangeTeamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeTeamView.swift; sourceTree = "<group>"; };
 		D7AFB7C22916EAB100E998B7 /* MyReflectionDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReflectionDetailViewController.swift; sourceTree = "<group>"; };
 		D7AFB7C42916EDC300E998B7 /* MyReflectionDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReflectionDetailTableViewCell.swift; sourceTree = "<group>"; };
 		D7AFB7C62916FF9400E998B7 /* CustomSegmentControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegmentControl.swift; sourceTree = "<group>"; };
@@ -708,6 +710,7 @@
 			isa = PBXGroup;
 			children = (
 				3E5195AA292B05BC00710A01 /* JoinReflectionButton.swift */,
+				D7A5852A2990DCE700E1F4EE /* ChangeTeamView.swift */,
 			);
 			path = UIComponent;
 			sourceTree = "<group>";
@@ -1150,6 +1153,7 @@
 				39F52C72292476AE00B19A77 /* KeywordResponse.swift in Sources */,
 				39F52C5B2923327F00B19A77 /* CurrentReflectionResponse.swift in Sources */,
 				D7A585272990DAFC00E1F4EE /* Section.swift in Sources */,
+				D7A5852B2990DCE700E1F4EE /* ChangeTeamView.swift in Sources */,
 				3E557FC528FE854600714E46 /* KeywordLabel.swift in Sources */,
 				39F52C53292330D200B19A77 /* MemberResponse.swift in Sources */,
 				39F52C6A292473A800B19A77 /* ReflectionInfoResponse.swift in Sources */,

@@ -15,8 +15,8 @@ final class TeamManageViewController: BaseViewController {
     
     // MARK: - property
     
-    private let tempView: UIView = {
-        let view = UIView()
+    private let chageTeamView: ChangeTeamView = {
+        let view = ChangeTeamView()
         return view
     }()
     private let dividerView: UIView = {
@@ -42,8 +42,8 @@ final class TeamManageViewController: BaseViewController {
     }
     
     override func render() {
-        view.addSubview(tempView)
-        tempView.snp.makeConstraints {
+        view.addSubview(chageTeamView)
+        chageTeamView.snp.makeConstraints {
             $0.width.equalToSuperview()
             $0.height.equalTo(275) // FIXME: 수치 바꿀것
             $0.top.equalToSuperview()
@@ -51,7 +51,7 @@ final class TeamManageViewController: BaseViewController {
         
         view.addSubview(dividerView)
         dividerView.snp.makeConstraints {
-            $0.top.equalTo(tempView.snp.bottom)
+            $0.top.equalTo(chageTeamView.snp.bottom)
             $0.width.equalToSuperview()
             $0.height.equalTo(6)
         }
