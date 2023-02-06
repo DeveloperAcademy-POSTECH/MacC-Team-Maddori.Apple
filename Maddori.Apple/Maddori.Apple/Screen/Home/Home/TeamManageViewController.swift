@@ -21,10 +21,17 @@ final class TeamManageViewController: BaseViewController {
         view.backgroundColor = .gray100
         return view
     }()
+    private let settingTableView: UITableView = {
+        let tableView = UITableView()
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.isScrollEnabled = false
+        return tableView
+    }()
     
     // MARK: - life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupDelegate()
     }
     
     override func render() {
@@ -41,6 +48,13 @@ final class TeamManageViewController: BaseViewController {
             $0.width.equalToSuperview()
             $0.height.equalTo(6)
         }
+        
+        view.addSubview(settingTableView)
+        settingTableView.snp.makeConstraints {
+            $0.top.equalTo(dividerView.snp.bottom)
+            $0.width.equalToSuperview()
+            $0.height.equalTo(500) // FIXME: 수치 바꿀것
+        }
     }
     
     override func configUI() {
@@ -48,4 +62,25 @@ final class TeamManageViewController: BaseViewController {
     }
     
     // MARK: - func
+    private func setupDelegate() {
+        settingTableView.delegate = self
+        settingTableView.dataSource = self
+    }
+}
+
+extension TeamManageViewController: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 2
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        cell.textLabel?.text = "테스트"
+        return cell
+    }
+}
+
+extension TeamManageViewController: UITableViewDelegate {
+    
 }
