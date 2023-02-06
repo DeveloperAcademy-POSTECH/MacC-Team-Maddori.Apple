@@ -11,6 +11,8 @@ import SnapKit
 
 final class TeamManageViewController: BaseViewController {
     
+    private var sections: [Section] = []
+    
     // MARK: - property
     private let tempView: UIView = {
         let view = UIView()
@@ -32,6 +34,7 @@ final class TeamManageViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupDelegate()
+        configureSettingModels()
     }
     
     override func render() {
@@ -66,21 +69,52 @@ final class TeamManageViewController: BaseViewController {
         settingTableView.delegate = self
         settingTableView.dataSource = self
     }
+    
+    private func configureSettingModels() {
+        sections.append(Section(title: "위", options: [Option(title: "새로운 팀 합류하기", handler: {
+            print("새로운 팀 합류하기")
+        }),
+                                                      Option(title: "팀 생성하기", handler: {
+            print("팀 생성하기")
+        })]))
+        
+        sections.append(Section(title: "아래", options: [Option(title: "로그아웃", handler: {
+            print("로그아웃")
+        }),
+                                                       Option(title: "회원탈퇴", handler: {
+            print("회원탈퇴")
+        })]))
+    }
 }
 
 extension TeamManageViewController: UITableViewDataSource {
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return sections.count
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return sections[section].options.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let model = sections[indexPath.section].options[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = "테스트"
+        cell.textLabel?.text = model.title
         return cell
     }
 }
 
 extension TeamManageViewController: UITableViewDelegate {
     
+}
+
+struct Section {
+    let title: String
+    let options: [Option]
+}
+
+struct Option {
+    let title: String
+    let handler: () -> Void
 }
