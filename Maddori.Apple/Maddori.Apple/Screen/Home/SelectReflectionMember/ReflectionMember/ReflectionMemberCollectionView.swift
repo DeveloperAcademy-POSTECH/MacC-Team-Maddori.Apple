@@ -29,6 +29,7 @@ final class ReflectionMemberCollectionView: UIView {
             collectionView.reloadData()
         }
     }
+    var didTappedMember: ((MemberResponse) -> ())?
     
     // MARK: - property
     
@@ -73,7 +74,7 @@ final class ReflectionMemberCollectionView: UIView {
 
 extension ReflectionMemberCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        didTappedMember?(memberList[indexPath.item])
     }
 }
 

@@ -11,7 +11,7 @@ import Alamofire
 import SnapKit
 
 final class SelectReflectionMemberViewController: BaseViewController {
-        
+    
     let reflectionId: Int
     let isAdmin: Bool
     
@@ -39,19 +39,19 @@ final class SelectReflectionMemberViewController: BaseViewController {
         label.setTitleFont(text: TextLiteral.selectReflectionMemberViewControllerTitleLabel)
         return label
     }()
-//    private lazy var memberCollectionView: MemberCollectionView = {
-//        let collectionView = MemberCollectionView(type: .progressReflection)
-//        collectionView.didTappedFeedBackMember = { [weak self] _ in
-//            let member = collectionView.selectedMember
-//            guard let id = member?.userId,
-//                  let username = member?.userName,
-//                  let reflectionId = self?.reflectionId
-//            else { return }
-//            let viewController = InProgressViewController(memberId: id, memberUsername: username, reflectionId: reflectionId)
-//            self?.navigationController?.pushViewController(viewController, animated: true)
-//        }
-//        return collectionView
-//    }()
+    //    private lazy var memberCollectionView: MemberCollectionView = {
+    //        let collectionView = MemberCollectionView(type: .progressReflection)
+    //        collectionView.didTappedFeedBackMember = { [weak self] _ in
+    //            let member = collectionView.selectedMember
+    //            guard let id = member?.userId,
+    //                  let username = member?.userName,
+    //                  let reflectionId = self?.reflectionId
+    //            else { return }
+    //            let viewController = InProgressViewController(memberId: id, memberUsername: username, reflectionId: reflectionId)
+    //            self?.navigationController?.pushViewController(viewController, animated: true)
+    //        }
+    //        return collectionView
+    //    }()
     private let memberCollectionView = ReflectionMemberCollectionView()
     private lazy var feedbackDoneButton: MainButton = {
         let button = MainButton()
@@ -74,7 +74,7 @@ final class SelectReflectionMemberViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        didTappedMember()
+        didTappedMember()
         fetchTeamMembers(type: .fetchTeamMembers)
         setupPreviousStatus()
     }
@@ -127,15 +127,24 @@ final class SelectReflectionMemberViewController: BaseViewController {
         UserDefaultHandler.setHasSeenAlert(to: false)
     }
     
-//    private func didTappedMember() {
-//        memberCollectionView.didTappedMember = { [weak self] member in
-//            guard let memberCollectionView = self?.memberCollectionView else { return }
-//            self?.feedbackDoneButton.title = TextLiteral.selectReflectionMemberViewControllerDoneButtonText + "(\( memberCollectionView.selectedMemberIdList.count)/\(memberCollectionView.memberList.count))"
-//            if member.count == self?.memberCollectionView.memberList.count {
-//                self?.feedbackDoneButton.isDisabled = false
-//            }
-//        }
-//    }
+    //    private func didTappedMember() {
+    //        memberCollectionView.didTappedMember = { [weak self] member in
+    //            guard let memberCollectionView = self?.memberCollectionView else { return }
+    //            self?.feedbackDoneButton.title = TextLiteral.selectReflectionMemberViewControllerDoneButtonText + "(\( memberCollectionView.selectedMemberIdList.count)/\(memberCollectionView.memberList.count))"
+    //            if member.count == self?.memberCollectionView.memberList.count {
+    //                self?.feedbackDoneButton.isDisabled = false
+    //            }
+    //        }
+    //    }
+    private func didTappedMember() {
+        memberCollectionView.didTappedMember = { [weak self] member in
+            guard let id = member.userId,
+                  let username = member.userName,
+                  let reflectionId = self?.reflectionId else { return }
+            let viewController = InProgressViewController(memberId: id, memberUsername: username, reflectionId: reflectionId)
+            self?.navigationController?.pushViewController(viewController, animated: true)
+        }
+    }
     
     // MARK: - api
     
