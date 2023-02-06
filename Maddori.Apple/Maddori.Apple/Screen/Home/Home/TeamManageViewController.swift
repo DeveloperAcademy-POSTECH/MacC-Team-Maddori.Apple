@@ -72,14 +72,14 @@ final class TeamManageViewController: BaseViewController {
     }
     
     private func configureSettingModels() {
-        sections.append(Section(title: "위", options: [Option(title: "새로운 팀 합류하기", handler: {
+        sections.append(Section(options: [Option(title: "새로운 팀 합류하기", handler: {
             print("새로운 팀 합류하기")
         }),
                                                       Option(title: "팀 생성하기", handler: {
             print("팀 생성하기")
         })]))
         
-        sections.append(Section(title: "아래", options: [Option(title: "로그아웃", handler: {
+        sections.append(Section(options: [Option(title: "로그아웃", handler: {
             print("로그아웃")
         }),
                                                        Option(title: "회원탈퇴", handler: {
