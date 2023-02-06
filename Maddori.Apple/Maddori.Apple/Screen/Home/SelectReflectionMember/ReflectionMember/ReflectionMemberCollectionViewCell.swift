@@ -19,9 +19,8 @@ final class ReflectionMemberCollectionViewCell: BaseCollectionViewCell {
         imageView.layer.cornerRadius = 23
         return imageView
     }()
-    private let nicknameLabel: UILabel = {
+    let nicknameLabel: UILabel = {
         let label = UILabel()
-        label.text = "진구"
         label.textColor = .gray600
         label.font = .label2
         return label
