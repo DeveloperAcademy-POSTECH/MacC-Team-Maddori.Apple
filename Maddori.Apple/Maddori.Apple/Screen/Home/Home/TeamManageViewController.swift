@@ -103,10 +103,18 @@ extension TeamManageViewController: UITableViewDataSource {
         cell.textLabel?.text = model.title
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60
+    }
 }
 
 extension TeamManageViewController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let model = sections[indexPath.section].options[indexPath.row]
+        model.handler()
+    }
 }
 
 struct Section {
