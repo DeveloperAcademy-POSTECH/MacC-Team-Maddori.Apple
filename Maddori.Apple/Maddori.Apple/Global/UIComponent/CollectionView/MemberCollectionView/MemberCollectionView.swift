@@ -13,14 +13,11 @@ final class MemberCollectionView: UIView {
     
     enum CollectionType {
         case addFeedback
-        case progressReflection
         
         var collectionHorizontalSpacing: CGFloat {
             switch self {
             case .addFeedback:
                 return 20
-            case .progressReflection:
-                return 14
             }
         }
         
@@ -28,8 +25,6 @@ final class MemberCollectionView: UIView {
             switch self {
             case .addFeedback:
                 return 4
-            case .progressReflection:
-                return 40
             }
         }
         
@@ -37,8 +32,6 @@ final class MemberCollectionView: UIView {
             switch self {
             case .addFeedback:
                 return 133
-            case .progressReflection:
-                return 135
             }
         }
         
@@ -46,8 +39,6 @@ final class MemberCollectionView: UIView {
             switch self {
             case .addFeedback:
                 return 52
-            case .progressReflection:
-                return 60
             }
         }
         
@@ -59,12 +50,6 @@ final class MemberCollectionView: UIView {
                     left: collectionHorizontalSpacing,
                     bottom: 4,
                     right: collectionHorizontalSpacing)
-            case .progressReflection:
-                return UIEdgeInsets(
-                    top: collectionTopSpacing,
-                    left: collectionHorizontalSpacing,
-                    bottom: 20,
-                    right: collectionHorizontalSpacing)
             }
         }
         
@@ -72,8 +57,6 @@ final class MemberCollectionView: UIView {
             switch self {
             case .addFeedback:
                 return .white100
-            case .progressReflection:
-                return .white300
             }
         }
         
@@ -81,8 +64,6 @@ final class MemberCollectionView: UIView {
             switch self {
             case .addFeedback:
                 return .white200
-            case .progressReflection:
-                return .white100
             }
         }
         
@@ -90,8 +71,6 @@ final class MemberCollectionView: UIView {
             switch self {
             case .addFeedback:
                 return 20
-            case .progressReflection:
-                return 30
             }
         }
         
@@ -99,28 +78,18 @@ final class MemberCollectionView: UIView {
             switch self {
             case .addFeedback:
                 return .main
-            case .progressReflection:
-                return .label1
             }
         }
     }
     
     var type: CollectionType
-    var currentToUserId = 0
     var memberList: [MemberResponse] = [] {
         didSet {
             collectionView.reloadData()
         }
     }
-    var didTappedMember: (([MemberResponse]) -> ())?
     var didTappedFeedBackMember: ((MemberResponse) -> ())?
     var selectedMember: MemberResponse?
-    private var selectedMemberList: [MemberResponse] = []
-    var selectedMemberIdList: [Int] = UserDefaultStorage.seenMemberIdList {
-        willSet {
-            UserDefaultHandler.appendSeenMemberIdList(memberIdList: newValue)
-        }
-    }
     
     // MARK: - property
     
@@ -169,24 +138,6 @@ extension MemberCollectionView: UICollectionViewDelegate {
             selectedMember = memberList[indexPath.item]
             guard let member = selectedMember else { return }
             didTappedFeedBackMember?(member)
-            
-        case .progressReflection:
-            let selectedItem: MemberResponse = memberList[indexPath.item]
-            if !selectedMemberList.contains(where: { $0.userName == selectedItem.userName } ) {
-                selectedMemberList.append(selectedItem)
-            }
-            if !selectedMemberIdList.contains(where: { $0 == selectedItem.userId }) {
-                selectedMemberIdList.append(selectedItem.userId ?? 0)
-            }
-            if selectedMemberIdList.count == memberList.count {
-                UserDefaultHandler.isCurrentReflectionFinished(true)
-            }
-            guard let cell = collectionView.cellForItem(at: indexPath) as? MemberCollectionViewCell else { return }
-            selectedMember = memberList[indexPath.item]
-            guard let member = selectedMember else { return }
-            cell.setupAttribute()
-            didTappedMember?(selectedMemberList)
-            didTappedFeedBackMember?(member)
         }
     }
 }
@@ -202,16 +153,9 @@ extension MemberCollectionView: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         cell.memberLabel.text = memberList[indexPath.item].userName
-        if let userId = memberList[indexPath.item].userId {
-            if type == .progressReflection &&  selectedMemberIdList.contains(userId) {
-                cell.setupAttribute()
-            }
-        }
         switch type {
         case .addFeedback:
             cell.index = FromCellIndex.fromAddFeedback
-        case .progressReflection:
-            cell.index = FromCellIndex.fromSelectMember
         }
         
         cell.cellColor = type.cellColor
@@ -221,8 +165,6 @@ extension MemberCollectionView: UICollectionViewDataSource {
     }
 }
 
-
 enum FromCellIndex {
     case fromAddFeedback
-    case fromSelectMember
 }
