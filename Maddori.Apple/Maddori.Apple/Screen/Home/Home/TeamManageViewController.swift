@@ -14,6 +14,7 @@ final class TeamManageViewController: BaseViewController {
     private var sections: [Section] = []
     
     // MARK: - property
+    
     private let tempView: UIView = {
         let view = UIView()
         return view
@@ -25,12 +26,16 @@ final class TeamManageViewController: BaseViewController {
     }()
     private let settingTableView: UITableView = {
         let tableView = UITableView()
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(TeamManageSettingCell.self, forCellReuseIdentifier: TeamManageSettingCell.className)
+        tableView.register(TeamManageSettingFooterCell.self, forHeaderFooterViewReuseIdentifier: TeamManageSettingFooterCell.className)
         tableView.isScrollEnabled = false
+        tableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        tableView.separatorColor = .gray200
         return tableView
     }()
     
     // MARK: - life cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupDelegate()
@@ -55,8 +60,8 @@ final class TeamManageViewController: BaseViewController {
         view.addSubview(settingTableView)
         settingTableView.snp.makeConstraints {
             $0.top.equalTo(dividerView.snp.bottom)
-            $0.width.equalToSuperview()
-            $0.height.equalTo(500) // FIXME: 수치 바꿀것
+            $0.directionalHorizontalEdges.equalToSuperview()
+            $0.height.equalTo(1000) // FIXME: 수치 바꿀것
         }
     }
     
@@ -65,6 +70,7 @@ final class TeamManageViewController: BaseViewController {
     }
     
     // MARK: - func
+    
     private func setupDelegate() {
         settingTableView.delegate = self
         settingTableView.dataSource = self
@@ -99,13 +105,35 @@ extension TeamManageViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let model = sections[indexPath.section].options[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = model.title
+        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: TeamManageSettingCell.className, for: indexPath) as? TeamManageSettingCell else { return UITableViewCell() }
+        
+        if indexPath.section == 1 {
+            cell.cellTitleLabel.textColor = .red
+        }
+        
+        cell.cellTitleLabel.text = model.title
+        cell.selectionStyle = .none
+        
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        guard let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: TeamManageSettingFooterCell.className) as? TeamManageSettingFooterCell else { return UITableViewHeaderFooterView()
+        }
+        return view
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
+        view.tintColor = .gray100
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 6
     }
 }
 
@@ -117,6 +145,7 @@ extension TeamManageViewController: UITableViewDelegate {
     }
 }
 
+// FIXME: 모델로 뺄것
 struct Section {
     let title: String
     let options: [Option]
