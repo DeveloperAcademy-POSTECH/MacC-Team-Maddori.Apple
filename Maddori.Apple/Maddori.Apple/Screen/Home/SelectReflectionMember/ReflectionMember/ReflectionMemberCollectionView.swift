@@ -47,6 +47,7 @@ final class ReflectionMemberCollectionView: UIView {
         collectionView.delegate = self
         collectionView.backgroundColor = .white200
         collectionView.showsVerticalScrollIndicator = false
+        collectionView.allowsMultipleSelection = true
         collectionView.register(ReflectionMemberCollectionViewCell.self, forCellWithReuseIdentifier: ReflectionMemberCollectionViewCell.className)
         return collectionView
     }()

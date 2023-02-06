@@ -11,6 +11,16 @@ import SnapKit
 
 final class ReflectionMemberCollectionViewCell: BaseCollectionViewCell {
     
+    override var isSelected: Bool {
+        didSet {
+            if isSelected {
+                applyAttribute()
+            } else {
+                resetAttribute()
+            }
+        }
+    }
+    
     // MARK: - property
     
     private let profileImage: UIImageView = {
@@ -59,6 +69,24 @@ final class ReflectionMemberCollectionViewCell: BaseCollectionViewCell {
     override func configUI() {
         self.backgroundColor = .white300
         self.layer.cornerRadius = 8
+        self.makeShadow(color: .black, opacity: 0.2, offset: CGSize.zero, radius: 2)
+    }
+    
+    // MARK: - func
+    
+    private func applyAttribute() {
+        self.backgroundColor = .white100
+        self.profileImage.layer.opacity = 0.5
+        self.nicknameLabel.textColor = .gray300
+        self.roleLabel.textColor = .gray300
+        self.makeShadow(color: .black, opacity: 0.2, offset: CGSize.zero, radius: 1)
+    }
+    
+    private func resetAttribute() {
+        self.backgroundColor = .white300
+        self.profileImage.layer.opacity = 1
+        self.nicknameLabel.textColor = .gray600
+        self.roleLabel.textColor = .gray400
         self.makeShadow(color: .black, opacity: 0.2, offset: CGSize.zero, radius: 2)
     }
 }
