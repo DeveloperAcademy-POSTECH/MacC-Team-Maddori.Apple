@@ -147,14 +147,3 @@ extension TeamManageViewController: UITableViewDelegate {
         model.handler()
     }
 }
-
-// FIXME: 모델로 뺄것
-struct Section {
-    let title: String
-    let options: [Option]
-}
-
-struct Option {
-    let title: String
-    let handler: () -> Void
-}
