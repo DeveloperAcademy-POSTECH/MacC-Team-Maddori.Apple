@@ -84,7 +84,6 @@ extension ReflectionMemberCollectionView: UICollectionViewDelegate {
             selectedMemberList.append(selectedMember.userId ?? 0)
         }
         didTappedMember?(selectedMember, selectedMemberList)
-        print(selectedMember, selectedMemberList)
     }
 }
 
@@ -100,6 +99,12 @@ extension ReflectionMemberCollectionView: UICollectionViewDataSource {
         }
         
         cell.nicknameLabel.text = memberList[indexPath.item].userName
+        
+        if let userId = memberList[indexPath.item].userId {
+            if selectedMemberList.contains(userId) {
+                cell.applyAttribute()
+            }
+        }
         
         return cell
     }

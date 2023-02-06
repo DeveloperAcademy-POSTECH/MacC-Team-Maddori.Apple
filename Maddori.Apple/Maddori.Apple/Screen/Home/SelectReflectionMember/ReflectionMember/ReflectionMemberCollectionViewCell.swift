@@ -74,7 +74,7 @@ final class ReflectionMemberCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - func
     
-    private func applyAttribute() {
+    func applyAttribute() {
         self.backgroundColor = .white100
         self.profileImage.layer.opacity = 0.5
         self.nicknameLabel.textColor = .gray300
