@@ -29,8 +29,7 @@ final class TeamManageViewController: BaseViewController {
         tableView.register(TeamManageSettingCell.self, forCellReuseIdentifier: TeamManageSettingCell.className)
         tableView.register(TeamManageSettingFooterCell.self, forHeaderFooterViewReuseIdentifier: TeamManageSettingFooterCell.className)
         tableView.isScrollEnabled = false
-        tableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        tableView.separatorColor = .gray200
+        tableView.separatorInset = UIEdgeInsets(top: 0, left: SizeLiteral.leadingTrailingPadding, bottom: 0, right: SizeLiteral.leadingTrailingPadding)
         return tableView
     }()
     
@@ -114,6 +113,10 @@ extension TeamManageViewController: UITableViewDataSource {
         
         cell.cellTitleLabel.text = model.title
         cell.selectionStyle = .none
+        
+        if indexPath.row == sections.count - 1 {
+            cell.separatorInset = UIEdgeInsets(top: 0, left: tableView.bounds.width + 1, bottom: 0, right: 0)
+        }
         
         return cell
     }
