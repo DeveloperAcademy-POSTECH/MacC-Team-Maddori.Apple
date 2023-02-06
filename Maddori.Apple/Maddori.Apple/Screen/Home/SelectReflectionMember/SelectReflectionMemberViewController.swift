@@ -13,6 +13,7 @@ import SnapKit
 final class SelectReflectionMemberViewController: BaseViewController {
     
     let reflectionId: Int
+    let isAdmin: Bool
     
     // MARK: - property
     
@@ -35,7 +36,12 @@ final class SelectReflectionMemberViewController: BaseViewController {
         let button = MainButton()
         let action = UIAction { [weak self] _ in
             guard let reflectionId = self?.reflectionId else { return }
-            self?.patchEndReflection(type: .patchEndReflection(reflectionId: reflectionId))
+            guard let isAdmin = self?.isAdmin else { return }
+            if isAdmin {
+                self?.patchEndReflection(type: .patchEndReflection(reflectionId: reflectionId))
+            } else {
+                self?.dismiss(animated: true)
+            }
             self?.resetHasSeenAlert()
         }
         button.addAction(action, for: .touchUpInside)
@@ -45,8 +51,9 @@ final class SelectReflectionMemberViewController: BaseViewController {
     
     // MARK: - life cycle
     
-    init(reflectionId: Int) {
+    init(reflectionId: Int, isAdmin: Bool) {
         self.reflectionId = reflectionId
+        self.isAdmin = isAdmin
         super.init()
     }
     

@@ -226,7 +226,7 @@ final class HomeViewController: BaseViewController {
     }
     
     private func presentSelectReflectionMemberViewController() {
-        let viewController = UINavigationController(rootViewController: SelectReflectionMemberViewController(reflectionId: currentReflectionId))
+        let viewController = UINavigationController(rootViewController: SelectReflectionMemberViewController(reflectionId: currentReflectionId, isAdmin: isAdmin))
         viewController.modalPresentationStyle = .fullScreen
         present(viewController, animated: true)
     }
@@ -398,7 +398,7 @@ extension HomeViewController: UICollectionViewDataSource {
             didTapAddFeedbackButton()
         case .Progressing:
             guard let navigationController = self.navigationController else { return }
-            let viewController = UINavigationController(rootViewController: SelectReflectionMemberViewController(reflectionId: currentReflectionId))
+            let viewController = UINavigationController(rootViewController: SelectReflectionMemberViewController(reflectionId: currentReflectionId, isAdmin: isAdmin))
             viewController.modalPresentationStyle = .fullScreen
             navigationController.present(viewController, animated: true)
         }
