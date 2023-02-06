@@ -99,6 +99,7 @@ extension ReflectionMemberCollectionView: UICollectionViewDataSource {
         }
         
         cell.nicknameLabel.text = memberList[indexPath.item].userName
+        // FIXME: - profile image, role 추가
         
         if let userId = memberList[indexPath.item].userId {
             if selectedMemberList.contains(userId) {

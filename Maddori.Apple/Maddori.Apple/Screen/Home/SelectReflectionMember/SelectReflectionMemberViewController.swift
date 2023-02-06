@@ -133,6 +133,7 @@ final class SelectReflectionMemberViewController: BaseViewController {
     }
     
     // MARK: - api
+    // FIXME: - fetchTeamMembers, patchEndReflection v2 api 로 변경하기
     
     private func fetchTeamMembers(type: InProgressEndPoint<VoidModel>) {
         AF.request(type.address,
