@@ -332,8 +332,8 @@ extension SetNicknameViewController: PHPickerViewControllerDelegate {
             itemProvider.loadObject(ofClass: UIImage.self) { (image, error) in
                 DispatchQueue.main.async {
                     self.profileImageButton.profileImage.image = image as? UIImage
-                    // FIXME: - 이미지 정보 가져오기
                 }
+                // FIXME: - 이미지 정보 가져오기
             }
         } else {
             self.makeAlert(title: TextLiteral.setNicknameControllerLibraryErrorAlertTitle, message: TextLiteral.setNicknameControllerLibraryErrorAlertMessage)
