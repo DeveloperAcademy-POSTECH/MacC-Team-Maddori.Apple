@@ -13,7 +13,14 @@ final class ProfileImageButton: UIButton {
     
     // MARK: - property
     
-    let profileImage = UIImageView(image: ImageLiterals.imgProfileNone)
+    var profileImage: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = ImageLiterals.imgProfileNone
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        imageView.layer.cornerRadius = 34
+        return imageView
+    }()
     private let profilePlus: UIImageView = {
        let imageView = UIImageView()
         imageView.image = ImageLiterals.icPlus
@@ -39,8 +46,7 @@ final class ProfileImageButton: UIButton {
         self.addSubview(profilePlus)
         profilePlus.snp.makeConstraints {
             $0.top.trailing.equalTo(profileImage)
-            $0.width.equalTo(20)
-            $0.height.equalTo(22)
+            $0.width.height.equalTo(18)
         }
     }
 }

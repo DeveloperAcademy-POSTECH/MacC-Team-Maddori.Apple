@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import PhotosUI
 
 import Alamofire
 import SnapKit
@@ -17,6 +18,7 @@ final class SetNicknameViewController: BaseViewController {
         static let nicknameMax: Int = 6
         static let roleMax: Int = 20
     }
+    private let cameraPicker = UIImagePickerController()
     
     let teamName: String = UserDefaultStorage.teamName
     
@@ -189,13 +191,22 @@ final class SetNicknameViewController: BaseViewController {
     // MARK: - func
     
     private func didTappedProfile() {
-        // FIXME: - 갤러리로 이동
-        print("프로필 누름")
+        makeActionSheet(
+            title: TextLiteral.setNicknameControllerProfileActionSheetTitle,
+            actionTitles: [
+                TextLiteral.setNicknameControllerProfileActionSheetLibraryTitle,
+                TextLiteral.setNicknameControllerProfileActionSheetCameraTitle,
+                TextLiteral.actionSheetCancelTitle
+            ],
+            actionStyle: [.default, .default, .cancel],
+            actions: [{ _ in self.openLibrary() }, { _ in self.openCamera() }, nil]
+        )
     }
     
     private func setupDelegate() {
         nicknameTextField.delegate = self
         roleTextField.delegate = self
+        cameraPicker.delegate = self
     }
     
     private func setupNotificationCenter() {
@@ -252,6 +263,26 @@ final class SetNicknameViewController: BaseViewController {
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: {
             self.view.layoutIfNeeded()
         }, completion: nil)
+    }
+    
+    private func openLibrary() {
+        var configuration = PHPickerConfiguration()
+        configuration.selectionLimit = 1
+        configuration.filter = .any(of: [.images])
+        
+        let picker = PHPickerViewController(configuration: configuration)
+        picker.delegate = self
+        
+        self.present(picker, animated: true, completion: nil)
+    }
+    
+    private func openCamera() {
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            cameraPicker.sourceType = .camera
+            self.present(cameraPicker, animated: false, completion: nil)
+        } else {
+            self.makeAlert(title: TextLiteral.setNicknameControllerCameraErrorAlertTitle, message: TextLiteral.setNicknameControllerCameraErrorAlertMessage)
+        }
     }
     
     private func didTappedDoneButton() {
@@ -355,6 +386,35 @@ extension SetNicknameViewController: UITextFieldDelegate {
         if textField == nicknameTextField {
             let hasText = textField.hasText
             doneButton.isDisabled = !hasText
+        }
+    }
+}
+
+extension SetNicknameViewController: PHPickerViewControllerDelegate {
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        picker.dismiss(animated: true, completion: nil)
+        
+        let itemProvider = results.first?.itemProvider
+        if let itemProvider = itemProvider, itemProvider.canLoadObject(ofClass: UIImage.self) {
+            itemProvider.loadObject(ofClass: UIImage.self) { (image, error) in
+                DispatchQueue.main.async {
+                    self.profileImageButton.profileImage.image = image as? UIImage
+                }
+                // FIXME: - 이미지 정보 가져오기
+            }
+        } else {
+            self.makeAlert(title: TextLiteral.setNicknameControllerLibraryErrorAlertTitle, message: TextLiteral.setNicknameControllerLibraryErrorAlertMessage)
+        }
+    }
+}
+
+extension SetNicknameViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        cameraPicker.dismiss(animated: true)
+        
+        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            self.profileImageButton.profileImage.image = image
         }
     }
 }
