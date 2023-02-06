@@ -29,7 +29,12 @@ final class ReflectionMemberCollectionView: UIView {
             collectionView.reloadData()
         }
     }
-    var didTappedMember: ((MemberResponse) -> ())?
+    var didTappedMember: ((MemberResponse, [Int]) -> ())?
+    var selectedMemberList: [Int] = UserDefaultStorage.seenMemberIdList {
+        willSet {
+            UserDefaultHandler.appendSeenMemberIdList(memberIdList: newValue)
+        }
+    }
     
     // MARK: - property
     
@@ -74,7 +79,12 @@ final class ReflectionMemberCollectionView: UIView {
 
 extension ReflectionMemberCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        didTappedMember?(memberList[indexPath.item])
+        let selectedMember = memberList[indexPath.item]
+        if !selectedMemberList.contains(where: { $0 == selectedMember.userId }) {
+            selectedMemberList.append(selectedMember.userId ?? 0)
+        }
+        didTappedMember?(selectedMember, selectedMemberList)
+        print(selectedMember, selectedMemberList)
     }
 }
 

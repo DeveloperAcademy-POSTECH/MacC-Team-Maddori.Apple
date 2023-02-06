@@ -130,12 +130,19 @@ final class SelectReflectionMemberViewController: BaseViewController {
     //        }
     //    }
     private func didTappedMember() {
-        memberCollectionView.didTappedMember = { [weak self] member in
+        memberCollectionView.didTappedMember = { [weak self] member, members in
             guard let id = member.userId,
                   let username = member.userName,
                   let reflectionId = self?.reflectionId else { return }
             let viewController = InProgressViewController(memberId: id, memberUsername: username, reflectionId: reflectionId)
             self?.navigationController?.pushViewController(viewController, animated: true)
+            
+            guard let memberCollectionView = self?.memberCollectionView else { return }
+            self?.feedbackDoneButton.title = TextLiteral.selectReflectionMemberViewControllerDoneButtonText + "(\( members.count)/\(memberCollectionView.memberList.count))"
+            
+            if members.count == memberCollectionView.memberList.count {
+                self?.feedbackDoneButton.isDisabled = false
+            }
         }
     }
     
@@ -150,8 +157,7 @@ final class SelectReflectionMemberViewController: BaseViewController {
                 guard let fetchedMemberList = json.detail?.members else { return }
                 DispatchQueue.main.async {
                     self.memberCollectionView.memberList = fetchedMemberList
-//                    self.feedbackDoneButton.title = TextLiteral.selectReflectionMemberViewControllerDoneButtonText + "(\(self.memberCollectionView.selectedMemberIdList.count)/\(self.memberCollectionView.memberList.count))"
-                    print(fetchedMemberList)
+                    self.feedbackDoneButton.title = TextLiteral.selectReflectionMemberViewControllerDoneButtonText + "(\(self.memberCollectionView.selectedMemberList.count)/\(self.memberCollectionView.memberList.count))"
                 }
             }
         }

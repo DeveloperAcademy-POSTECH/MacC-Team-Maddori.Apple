@@ -164,7 +164,7 @@ final class StartReflectionViewController: BaseViewController {
     // MARK: - func
     
     private func presentSelectReflectionMemberViewController() {
-        let viewController = UINavigationController(rootViewController: SelectReflectionMemberViewController(reflectionId: self.reflectionId, isAdmin: self.isAdmin))
+        let viewController = UINavigationController(rootViewController: SelectReflectionMemberViewController(reflectionId: self.reflectionId))
         viewController.modalPresentationStyle = .fullScreen
         self.navigationViewController.present(viewController, animated: true)
     }
