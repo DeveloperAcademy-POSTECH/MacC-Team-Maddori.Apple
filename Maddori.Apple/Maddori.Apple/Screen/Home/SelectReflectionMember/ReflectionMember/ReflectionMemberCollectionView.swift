@@ -15,7 +15,8 @@ final class ReflectionMemberCollectionView: UIView {
         static let collectionHorizontalSpacing: CGFloat = 34
         static let collectionVerticalSpacing: CGFloat = 20
         static let cellLength: CGFloat = 140
-        static let cellSpacing: CGFloat = 28
+        static let cellInteritemSpacingSpacing: CGFloat = 27
+        static let cellLineSpacing: CGFloat = 20
         static let collectionInsets = UIEdgeInsets(
             top: collectionVerticalSpacing,
             left: collectionHorizontalSpacing,
@@ -36,19 +37,28 @@ final class ReflectionMemberCollectionView: UIView {
         flowLayout.scrollDirection = .vertical
         flowLayout.sectionInset = Size.collectionInsets
         flowLayout.itemSize = CGSize(width: Size.cellLength, height: Size.cellLength)
-        flowLayout.minimumInteritemSpacing = Size.cellSpacing
+        flowLayout.minimumInteritemSpacing = Size.cellInteritemSpacingSpacing
+        flowLayout.minimumLineSpacing = Size.cellLineSpacing
         return flowLayout
     }()
     private lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewFlowLayout)
         collectionView.dataSource = self
         collectionView.delegate = self
+        collectionView.backgroundColor = .white200
         collectionView.showsVerticalScrollIndicator = false
         collectionView.register(ReflectionMemberCollectionViewCell.self, forCellWithReuseIdentifier: ReflectionMemberCollectionViewCell.className)
         return collectionView
     }()
     
     // MARK: - life cycle
+    
+    init() {
+        super.init(frame: .zero)
+        render()
+    }
+    
+    required init?(coder: NSCoder) { nil }
     
     private func render() {
         self.addSubview(collectionView)

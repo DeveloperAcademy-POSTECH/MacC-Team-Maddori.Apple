@@ -59,6 +59,6 @@ final class ReflectionMemberCollectionViewCell: BaseCollectionViewCell {
     override func configUI() {
         self.backgroundColor = .white300
         self.layer.cornerRadius = 8
-        self.makeShadow(color: .black, opacity: 0.2, offset: CGSize.zero, radius: 4)
+        self.makeShadow(color: .black, opacity: 0.2, offset: CGSize.zero, radius: 2)
     }
 }
