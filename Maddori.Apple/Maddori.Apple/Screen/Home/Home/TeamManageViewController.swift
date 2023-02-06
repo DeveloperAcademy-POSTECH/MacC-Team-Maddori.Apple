@@ -64,10 +64,6 @@ final class TeamManageViewController: BaseViewController {
         }
     }
     
-    override func configUI() {
-        super.configUI()
-    }
-    
     // MARK: - func
     
     private func setupDelegate() {
