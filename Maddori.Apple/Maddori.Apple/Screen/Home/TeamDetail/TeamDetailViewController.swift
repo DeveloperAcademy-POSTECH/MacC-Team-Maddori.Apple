@@ -50,12 +50,20 @@ final class TeamDetailViewController: BaseViewController {
         view.backgroundColor = .gray300
         return view
     }()
-    private let codyShareButton: UIButton = {
+    private let codeShareButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle(TextLiteral.teamDetailViewControllerShareCodeText, for: .normal)
         button.setTitleColor(.blue200, for: .normal)
         button.titleLabel?.font = .label2
         return button
+    }()
+    private let invitationCodeLabel: UILabel = {
+        let label = UILabel()
+        // FIXME: - APi 연결 후 삭제
+        label.text = "1BCDEF"
+        label.font = .label2
+        label.textColor = .gray600
+        return label
     }()
     
     // MARK: - life cycle
@@ -120,10 +128,16 @@ final class TeamDetailViewController: BaseViewController {
             $0.height.equalTo(4)
         }
         
-        view.addSubview(codyShareButton)
-        codyShareButton.snp.makeConstraints {
-            $0.top.equalTo(fullDividerView.snp.bottom).offset(20)
+        view.addSubview(codeShareButton)
+        codeShareButton.snp.makeConstraints {
+            $0.top.equalTo(fullDividerView.snp.bottom).offset(14)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+        
+        view.addSubview(invitationCodeLabel)
+        invitationCodeLabel.snp.makeConstraints {
+            $0.top.equalTo(fullDividerView.snp.bottom).offset(20)
+            $0.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
     }
     
