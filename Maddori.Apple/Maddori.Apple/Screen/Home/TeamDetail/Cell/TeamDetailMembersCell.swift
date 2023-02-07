@@ -13,18 +13,11 @@ final class TeamDetailMembersCell: BaseCollectionViewCell {
     
     // MARK: - property
     
-    private let profileImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = ImageLiterals.icPersonCircle
-        imageView.layer.cornerRadius = 23
-        return imageView
-    }()
+    private let memberInformationView = MemberInformationView()
+    
+    // MARK: - life cycle
     
     override func render() {
-        self.addSubview(profileImageView)
-        profileImageView.snp.makeConstraints {
-            $0.top.leading.equalToSuperview()
-            $0.width.height.equalTo(46)
-        }
+        self.addSubview(memberInformationView)
     }
 }

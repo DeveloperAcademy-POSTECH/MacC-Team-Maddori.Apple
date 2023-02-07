@@ -10,6 +10,9 @@ import UIKit
 import SnapKit
 
 final class MemberInformationView: UIView {
+    
+    // MARK: - property
+    
     private let profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.layer.cornerRadius = 23
@@ -32,6 +35,8 @@ final class MemberInformationView: UIView {
         label.textColor = .gray400
         return label
     }()
+    
+    // MARK: - life cycle
     
     override init(frame: CGRect) {
         super.init(frame: frame)
