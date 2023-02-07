@@ -20,6 +20,22 @@ final class ChangeTeamView: UIView {
         label.textColor = .black100
         return label
     }()
+    private let collectionViewFlowLayout: UICollectionViewFlowLayout = {
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.scrollDirection = .vertical
+        flowLayout.sectionInset = UIEdgeInsets(top: 12, left: SizeLiteral.leadingTrailingPadding, bottom: 16, right: SizeLiteral.leadingTrailingPadding)
+        flowLayout.itemSize = CGSize(width: 335, height: 59)
+        flowLayout.minimumLineSpacing = 8
+        return flowLayout
+    }()
+    private lazy var teamCollectionView: UICollectionView = {
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewFlowLayout)
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.register(TeamChangeCollectionViewCell.self, forCellWithReuseIdentifier: TeamChangeCollectionViewCell.className)
+        collectionView.backgroundColor = .white200
+        return collectionView
+    }()
     
     // MARK: - life cycle
     
@@ -41,10 +57,35 @@ final class ChangeTeamView: UIView {
             $0.top.equalTo(safeAreaLayoutGuide.snp.top).inset(26)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
+        
+        self.addSubview(teamCollectionView)
+        teamCollectionView.snp.makeConstraints {
+            $0.top.equalTo(titleLabel.snp.bottom)
+            $0.directionalHorizontalEdges.equalToSuperview()
+            $0.height.equalToSuperview()
+        }
     }
     
     // MARK: - function
     
 
+    
+}
+
+extension ChangeTeamView: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 3
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TeamChangeCollectionViewCell.className, for: indexPath) as? TeamChangeCollectionViewCell else { return UICollectionViewCell() }
+        cell.teamNameLabel.text = "맛쟁이 사과처럼 입니다"
+        return cell
+    }
+    
+    
+}
+
+extension ChangeTeamView: UICollectionViewDelegate {
     
 }
