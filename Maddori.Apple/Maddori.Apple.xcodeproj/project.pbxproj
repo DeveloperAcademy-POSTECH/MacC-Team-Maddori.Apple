@@ -23,6 +23,7 @@
 		39257DF528F93E4700201E0B /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39257DF428F93E4700201E0B /* UIColor+Extension.swift */; };
 		39307CF52917DA9300789AB6 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39307CF42917DA9300789AB6 /* LoginViewController.swift */; };
 		39341E0A298BA419006C1727 /* TeamDetailMembersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39341E09298BA419006C1727 /* TeamDetailMembersView.swift */; };
+		39341E0D298BC354006C1727 /* TeamDetailMembersCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39341E0C298BC354006C1727 /* TeamDetailMembersCell.swift */; };
 		39436C1029127BBA0083D77A /* MyFeedbackCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39436C0F29127BBA0083D77A /* MyFeedbackCollectionView.swift */; };
 		39436C132912877D0083D77A /* MyFeedbackHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39436C122912877D0083D77A /* MyFeedbackHeaderView.swift */; };
 		39436C15291287A00083D77A /* MyFeedbackCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39436C14291287A00083D77A /* MyFeedbackCollectionViewCell.swift */; };
@@ -163,6 +164,7 @@
 		39257DF428F93E4700201E0B /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		39307CF42917DA9300789AB6 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		39341E09298BA419006C1727 /* TeamDetailMembersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamDetailMembersView.swift; sourceTree = "<group>"; };
+		39341E0C298BC354006C1727 /* TeamDetailMembersCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamDetailMembersCell.swift; sourceTree = "<group>"; };
 		39436C0F29127BBA0083D77A /* MyFeedbackCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFeedbackCollectionView.swift; sourceTree = "<group>"; };
 		39436C122912877D0083D77A /* MyFeedbackHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFeedbackHeaderView.swift; sourceTree = "<group>"; };
 		39436C14291287A00083D77A /* MyFeedbackCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFeedbackCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -475,6 +477,14 @@
 			path = UIComponent;
 			sourceTree = "<group>";
 		};
+		39341E0B298BC344006C1727 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				39341E0C298BC354006C1727 /* TeamDetailMembersCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		39436C162912A2D30083D77A /* Feedback */ = {
 			isa = PBXGroup;
 			children = (
@@ -512,6 +522,7 @@
 		3960863F29811D86003AB4F8 /* TeamDetail */ = {
 			isa = PBXGroup;
 			children = (
+				39341E0B298BC344006C1727 /* Cell */,
 				39341E08298BA3FC006C1727 /* UIComponent */,
 				3960864029811E3C003AB4F8 /* TeamDetailViewController.swift */,
 			);
@@ -1108,6 +1119,7 @@
 				39F15C0C296D371500952D02 /* EmptyPersonView.swift in Sources */,
 				52DC9091291A98CC00904739 /* MyFeedbackEditViewController.swift in Sources */,
 				3E66777529419C8300BB5670 /* KeywordTextFieldView.swift in Sources */,
+				39341E0D298BC354006C1727 /* TeamDetailMembersCell.swift in Sources */,
 				3EA341E82925E5EA005CBD1C /* String+Extension.swift in Sources */,
 				D7AFB7C72916FF9400E998B7 /* CustomSegmentControl.swift in Sources */,
 				7E8CDC67292E19B000984742 /* SettingButton.swift in Sources */,

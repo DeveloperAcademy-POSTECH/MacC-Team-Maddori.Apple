@@ -11,10 +11,20 @@ import SnapKit
 
 final class TeamDetailMembersView: UIView {
     
+    private let cellWidth = UIScreen.main.bounds.width - (SizeLiteral.leadingTrailingPadding * 2)
+    
     // MARK: - property
     
-    private let memberCollectionView: UICollectionView = {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout.init())
+    private lazy var flowLayout: UICollectionViewFlowLayout = {
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.scrollDirection = .vertical
+        flowLayout.itemSize = CGSize(width: cellWidth, height: 46)
+        flowLayout.minimumLineSpacing = 20
+        return flowLayout
+    }()
+    private lazy var memberCollectionView: UICollectionView = {
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+        collectionView.register(TeamDetailMembersCell.self, forCellWithReuseIdentifier: TeamDetailMembersCell.className)
         return collectionView
     }()
     
@@ -23,6 +33,7 @@ final class TeamDetailMembersView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         render()
+        setupDelegation()
     }
     
     required init?(coder: NSCoder) { nil }
@@ -35,8 +46,25 @@ final class TeamDetailMembersView: UIView {
             $0.edges.equalToSuperview()
         }
     }
+    
+    private func setupDelegation() {
+        memberCollectionView.delegate = self
+        memberCollectionView.dataSource = self
+    }
 }
 
-extension TeamDetailMembersView: UICollectionViewDelegateFlowLayout {
+extension TeamDetailMembersView: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        // FIXME: - 임시 확인 값
+        return 3
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TeamDetailMembersCell.className, for: indexPath) as? TeamDetailMembersCell else { return UICollectionViewCell() }
+        return cell
+    }
+}
+
+extension TeamDetailMembersView: UICollectionViewDelegate {
     
 }
