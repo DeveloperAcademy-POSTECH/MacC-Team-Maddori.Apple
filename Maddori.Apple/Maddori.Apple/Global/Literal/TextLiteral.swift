@@ -44,6 +44,13 @@ enum TextLiteral {
     static let setNicknameViewControllerNicknameTextFieldPlaceHolder = "예) 진저, 호야, 성민"
     static let setNicknameViewControllerAlertTitle = "특수문자를 사용할 수 없습니다."
     static let setNicknameControllerAlertMessage = "닉네임을 다시 입력해주세요."
+    static let setNicknameControllerNavigationTitleLabel = "프로필 생성"
+    static let setNicknameControllerTitleLabel = "에서\n사용할 프로필을 작성해 주세요"
+    static let setNicknameControllerNicknameLabel = "닉네임 *"
+    static let setNicknameControllerNicknameTextFieldPlaceHolderText = "ex) 진저"
+    static let setNicknameControllerRoleLabel = "역할"
+    static let setNicknameControllerRoleTextFieldPlaceHolderText = "ex) iOS 개발자"
+    static let setNicknameControllerDoneButtonText = "입력 완료"
     
     // MARK: - HomeViewController
     
@@ -213,4 +220,9 @@ enum TextLiteral {
     
     static let DetailTitleLabel: String = "피드백 줄 멤버와 종류를\n선택해주세요"
     static let toNameTitleLabel: String = "피드백 줄 멤버"
+    
+    // MARK: - TeamDetailViewController
+    
+    static let teamDetailViewControllerEditButteonText: String = "편집"
+    static let teamDetailViewControllerMemberTitleLabel: String = "멤버"
 }
