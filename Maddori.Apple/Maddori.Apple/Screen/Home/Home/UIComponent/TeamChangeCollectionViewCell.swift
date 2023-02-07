@@ -23,7 +23,7 @@ final class TeamChangeCollectionViewCell: BaseCollectionViewCell {
     // MARK: - life cycle
     
     override func render() {
-        self.addSubview(teamNameLabel)
+        contentView.addSubview(teamNameLabel)
         teamNameLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.leading.equalToSuperview().inset(16)
@@ -32,5 +32,17 @@ final class TeamChangeCollectionViewCell: BaseCollectionViewCell {
     
     override func configUI() {
         self.backgroundColor = .white200
+        self.layer.cornerRadius = 10
+        self.makeShadow(color: .black100, opacity: 0.3, offset: CGSize(width: 0, height: 0), radius: 1)
+        self.layer.masksToBounds = false
+        
     }
+    
+    // MARK: - func
+    
+    private func setBorder(color: CGColor, width: CGFloat) {
+        self.layer.borderColor = color
+        self.layer.borderWidth = width
+    }
+
 }
