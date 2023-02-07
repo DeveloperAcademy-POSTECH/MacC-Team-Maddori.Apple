@@ -16,6 +16,7 @@ final class TeamManageSettingCell: BaseTableViewCell {
     let cellTitleLabel: UILabel = {
         let label = UILabel()
         label.font = .label2
+        label.textColor = .black100
         return label
     }()
     
