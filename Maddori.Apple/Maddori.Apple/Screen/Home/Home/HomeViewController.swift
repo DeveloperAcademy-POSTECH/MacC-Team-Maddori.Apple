@@ -180,7 +180,7 @@ final class HomeViewController: BaseViewController {
         present(teamViewController, animated: true)
     }
     
-    private func setUpDelegation() {
+    private func setupDelegation() {
         keywordCollectionView.delegate = self
         keywordCollectionView.dataSource = self
     }
