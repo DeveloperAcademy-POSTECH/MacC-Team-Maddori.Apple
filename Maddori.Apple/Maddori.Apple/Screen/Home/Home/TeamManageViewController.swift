@@ -15,10 +15,7 @@ final class TeamManageViewController: BaseViewController {
     
     // MARK: - property
     
-    private let chageTeamView: ChangeTeamView = {
-        let view = ChangeTeamView()
-        return view
-    }()
+    private let chageTeamView = ChangeTeamView()
     private let dividerView: UIView = {
         let view = UIView()
         view.backgroundColor = .gray100
