@@ -11,6 +11,9 @@ import SnapKit
 
 final class ChangeTeamView: UIView {
     
+    // MARK: - FIXME: 데이터 더미 입니다.
+    private let teamDataDummy: [String] = ["맛쟁이 사과처럼", "굿굿이에요", "테스트더미에요"]
+    
     // MARK: - property
     
     private let titleLabel: UILabel = {
@@ -74,12 +77,12 @@ final class ChangeTeamView: UIView {
 
 extension ChangeTeamView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return teamDataDummy.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TeamChangeCollectionViewCell.className, for: indexPath) as? TeamChangeCollectionViewCell else { return UICollectionViewCell() }
-        cell.teamNameLabel.text = "맛쟁이 사과처럼 입니다"
+        cell.teamNameLabel.text = teamDataDummy[indexPath.item]
         return cell
     }
     
@@ -87,5 +90,10 @@ extension ChangeTeamView: UICollectionViewDataSource {
 }
 
 extension ChangeTeamView: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        // MARK: - FIXME
+        let selectedTeamName = teamDataDummy[indexPath.item]
+        print(selectedTeamName)
     
+    }
 }

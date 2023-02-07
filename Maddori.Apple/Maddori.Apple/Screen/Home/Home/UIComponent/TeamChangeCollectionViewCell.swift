@@ -22,6 +22,17 @@ final class TeamChangeCollectionViewCell: BaseCollectionViewCell {
 
     // MARK: - life cycle
     
+    override var isSelected: Bool {
+        didSet {
+            if isSelected {
+                applyAttribute()
+            }
+            else {
+                resetAttribute()
+            }
+        }
+    }
+    
     override func render() {
         contentView.addSubview(teamNameLabel)
         teamNameLabel.snp.makeConstraints {
@@ -44,5 +55,15 @@ final class TeamChangeCollectionViewCell: BaseCollectionViewCell {
         self.layer.borderColor = color
         self.layer.borderWidth = width
     }
+    
+    private func applyAttribute() {
+        if isSelected {
+            self.layer.borderWidth = 2
+            self.layer.borderColor = UIColor.blue200.cgColor
+        }
+    }
 
+    private func resetAttribute() {
+        self.layer.borderWidth = 0
+    }
 }
