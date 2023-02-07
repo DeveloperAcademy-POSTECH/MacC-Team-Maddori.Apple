@@ -10,6 +10,8 @@ import UIKit
 import SnapKit
 
 final class MemberInformationView: UIView {
+    let nickname: String
+    let role: String
     
     // MARK: - property
     
@@ -19,18 +21,16 @@ final class MemberInformationView: UIView {
         imageView.image = ImageLiterals.imgPersonTab
         return imageView
     }()
-    private let profileNicknameLabel: UILabel = {
+    private lazy var profileNicknameLabel: UILabel = {
         let label = UILabel()
-        // FIXME: - API 연결 후 삭제
-        label.text = "이두"
+        label.text = nickname
         label.font = .label2
         label.textColor = .gray600
         return label
     }()
-    private let profileRoleLabel: UILabel = {
+    private lazy var profileRoleLabel: UILabel = {
         let label = UILabel()
-        // FIXME: - API 연결 후 삭제
-        label.text = "디자인 리드 / 개발자"
+        label.text = role
         label.font = .caption2
         label.textColor = .gray400
         return label
@@ -38,8 +38,10 @@ final class MemberInformationView: UIView {
     
     // MARK: - life cycle
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init(nickname: String, role: String) {
+        self.nickname = nickname
+        self.role = role
+        super.init(frame: .zero)
         render()
     }
     

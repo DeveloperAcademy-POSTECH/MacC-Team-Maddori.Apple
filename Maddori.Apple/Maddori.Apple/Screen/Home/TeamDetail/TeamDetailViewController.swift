@@ -37,7 +37,7 @@ final class TeamDetailViewController: BaseViewController {
         label.font = .label2
         return label
     }()
-    private let memberInformationView = MemberInformationView()
+    private let memberInformationView = MemberInformationView(nickname: "이드", role: "디자인 리드 / 개발자")
     private let dividerView: UIView = {
         let view = UIView()
         view.layer.borderWidth = 0.5

@@ -13,7 +13,7 @@ final class TeamDetailMembersCell: BaseCollectionViewCell {
     
     // MARK: - property
     
-    private let memberInformationView = MemberInformationView()
+    private let memberInformationView = MemberInformationView(nickname: "익명", role: "팀원")
     
     // MARK: - life cycle
     
