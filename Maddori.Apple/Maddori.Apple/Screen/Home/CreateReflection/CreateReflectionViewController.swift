@@ -16,13 +16,7 @@ final class CreateReflectionViewController: BaseViewController {
     var reflectionTitle: String?
     var reflectionDate: Date?
     
-    var isCreateReflection: Bool {
-        if reflectionTitle == nil {
-            return true
-        } else {
-            return false
-        }
-    }
+    var isEditReflection: Bool = false
     
     init(reflectionId: Int) {
         self.reflectionId = reflectionId
@@ -33,6 +27,7 @@ final class CreateReflectionViewController: BaseViewController {
         self.reflectionId = reflectionId
         self.reflectionTitle = reflectionTitle
         self.reflectionDate = reflectionDate?.formatStringToDate()
+        self.isEditReflection = true
         super.init()
     }
     
@@ -48,23 +43,22 @@ final class CreateReflectionViewController: BaseViewController {
         button.addAction(action, for: .touchUpInside)
         return button
     }()
+    private lazy var deleteButton: DeleteButton = {
+        let button = DeleteButton(type: .system)
+        let action = UIAction { [weak self] _ in
+            // FIXME: Delete Reflection API 연결
+            print("삭제")
+        }
+        button.addAction(action, for: .touchUpInside)
+        return button
+    }()
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        if isCreateReflection {
-            label.setTitleFont(text: TextLiteral.createReflectionViewControllerTitle)
-        } else {
-            label.setTitleFont(text: TextLiteral.editReflectionViewControllerTitle)
-        }
+        label.setTitleFont(text: TextLiteral.createReflectionViewControllerTitle)
         label.textColor = .black100
         return label
     }()
-    private lazy var reflectionNameView: ReflectionNameView = {
-        let nameView = ReflectionNameView()
-        if let name = reflectionTitle {
-            nameView.nameTextField.text = reflectionTitle
-        }
-        return nameView
-    }()
+    private let reflectionNameView = ReflectionNameView()
     private let reflectionDateLabel: UILabel = {
         let label = UILabel()
         label.text = TextLiteral.createReflectionViewControllerDateLabel
@@ -79,9 +73,6 @@ final class CreateReflectionViewController: BaseViewController {
         }
         let hideKeyboardAction = UIAction { [weak self] _ in
             self?.view.endEditing(true)
-        }
-        if let date = reflectionDate {
-            picker.date = date
         }
         picker.datePickerMode = .date
         picker.locale = Locale(identifier: "ko_KR")
@@ -101,9 +92,6 @@ final class CreateReflectionViewController: BaseViewController {
         let hideKeyboardAction = UIAction { [weak self] _ in
             self?.view.endEditing(true)
         }
-        if let time = reflectionDate {
-            picker.date = time
-        }
         picker.datePickerMode = .time
         picker.locale = Locale(identifier: "ko_KR")
         picker.preferredDatePickerStyle = .inline
@@ -116,11 +104,7 @@ final class CreateReflectionViewController: BaseViewController {
     }()
     private lazy var mainButton: MainButton = {
         let button = MainButton()
-        if reflectionTitle == nil {
-            button.title = TextLiteral.createReflectionViewControllerButtonText
-        } else {
-            button.title = TextLiteral.editReflectionViewControllerButtonText
-        }
+        button.title = TextLiteral.createReflectionViewControllerButtonText
         return button
     }()
     
@@ -130,6 +114,13 @@ final class CreateReflectionViewController: BaseViewController {
         super.viewDidLoad()
         setupAddReflection()
         setupNotificationCenter()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if isEditReflection {
+            setupEditReflection()
+        }
     }
     
     override func render() {
@@ -199,10 +190,24 @@ final class CreateReflectionViewController: BaseViewController {
                 ))
             } else {
                 // FIXME: UX writing 생각
-                self?.makeAlert(title: "회고 일시 오류", message: "회고 일시를 미래로 설정해주세요")
+                self?.makeAlert(title: "회고 일정 설정 오류", message: "회고 일정은 현시각보다 이전으로 설정할 수 없습니다.")
             }
         }
         mainButton.addAction(action, for: .touchUpInside)
+    }
+    
+    private func setupEditReflection() {
+        titleLabel.setTitleFont(text: TextLiteral.editReflectionViewControllerTitle)
+        mainButton.title = TextLiteral.editReflectionViewControllerButtonText
+        guard let title = reflectionTitle, let date = reflectionDate else { return }
+        reflectionNameView.nameTextField.text = title
+        datePicker.date = date
+        timePicker.date = date
+        
+        let closeButton = makeBarButtonItem(with: closeButton)
+        let deleteButton = makeBarButtonItem(with: deleteButton)
+        navigationItem.leftBarButtonItem = closeButton
+        navigationItem.rightBarButtonItem = deleteButton
     }
     
     // MARK: - func

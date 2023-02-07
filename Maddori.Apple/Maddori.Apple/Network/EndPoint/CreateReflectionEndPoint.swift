@@ -13,7 +13,7 @@ enum CreateReflectionEndPoint<T: Encodable> {
     var address: String {
         switch self {
         case .patchReflectionDetail(let reflectionId, _):
-            return "\(UrlLiteral.baseUrl)/teams/\(UserDefaultStorage.teamId)/reflections/\(reflectionId)"
+            return "\(UrlLiteral.v2BaseUrl)/teams/\(UserDefaultStorage.teamId)/reflections/\(reflectionId)"
         }
     }
     
