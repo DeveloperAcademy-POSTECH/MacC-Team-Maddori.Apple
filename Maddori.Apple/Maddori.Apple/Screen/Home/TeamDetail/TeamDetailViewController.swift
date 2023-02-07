@@ -37,28 +37,7 @@ final class TeamDetailViewController: BaseViewController {
         label.font = .label2
         return label
     }()
-    private let profileImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.layer.cornerRadius = 23
-        imageView.image = ImageLiterals.imgPersonTab
-        return imageView
-    }()
-    private let profileNicknameLabel: UILabel = {
-        let label = UILabel()
-        // FIXME: - API 연결 후 삭제
-        label.text = "이두"
-        label.font = .label2
-        label.textColor = .gray600
-        return label
-    }()
-    private let profileRoleLabel: UILabel = {
-        let label = UILabel()
-        // FIXME: - API 연결 후 삭제
-        label.text = "디자인 리드 / 개발자"
-        label.font = .caption2
-        label.textColor = .gray400
-        return label
-    }()
+    private let memberInformationView = MemberInformationView()
     private let dividerView: UIView = {
         let view = UIView()
         view.layer.borderWidth = 0.5
@@ -101,28 +80,16 @@ final class TeamDetailViewController: BaseViewController {
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
-        view.addSubview(profileImageView)
-        profileImageView.snp.makeConstraints {
+        view.addSubview(memberInformationView)
+        memberInformationView.snp.makeConstraints {
             $0.top.equalTo(memberTitleLabel.snp.bottom).offset(20)
-            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-            $0.width.height.equalTo(46)
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.height.equalTo(46)
         }
-        
-        view.addSubview(profileNicknameLabel)
-        profileNicknameLabel.snp.makeConstraints {
-            $0.leading.equalTo(profileImageView.snp.trailing).offset(12)
-            $0.bottom.equalTo(profileImageView.snp.centerY)
-        }
-        
-        view.addSubview(profileRoleLabel)
-        profileRoleLabel.snp.makeConstraints {
-            $0.leading.equalTo(profileImageView.snp.trailing).offset(12)
-            $0.top.equalTo(profileNicknameLabel.snp.bottom).offset(4)
-        }
-        
+
         view.addSubview(dividerView)
         dividerView.snp.makeConstraints {
-            $0.top.equalTo(profileImageView.snp.bottom).offset(25)
+            $0.top.equalTo(memberInformationView.snp.bottom).offset(25)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.height.equalTo(1)
         }
