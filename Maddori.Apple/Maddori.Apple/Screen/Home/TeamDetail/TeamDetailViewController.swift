@@ -50,6 +50,13 @@ final class TeamDetailViewController: BaseViewController {
         view.backgroundColor = .gray300
         return view
     }()
+    private let codyShareButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle(TextLiteral.teamDetailViewControllerShareCodeText, for: .normal)
+        button.setTitleColor(.blue200, for: .normal)
+        button.titleLabel?.font = .label2
+        return button
+    }()
     
     // MARK: - life cycle
     
@@ -111,6 +118,12 @@ final class TeamDetailViewController: BaseViewController {
             $0.top.equalTo(memberCollectionView.snp.bottom)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(4)
+        }
+        
+        view.addSubview(codyShareButton)
+        codyShareButton.snp.makeConstraints {
+            $0.top.equalTo(fullDividerView.snp.bottom).offset(20)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
     }
     

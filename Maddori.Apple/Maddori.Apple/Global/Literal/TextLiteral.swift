@@ -235,4 +235,5 @@ enum TextLiteral {
     
     static let teamDetailViewControllerEditButteonText: String = "편집"
     static let teamDetailViewControllerMemberTitleLabel: String = "멤버"
+    static let teamDetailViewControllerShareCodeText: String = "초대코드 공유하기"
 }
