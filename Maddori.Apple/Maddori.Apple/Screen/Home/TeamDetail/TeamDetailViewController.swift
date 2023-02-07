@@ -45,11 +45,7 @@ final class TeamDetailViewController: BaseViewController {
         return view
     }()
     private let memberCollectionView = TeamDetailMembersView()
-    private let fullDividerView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .gray300
-        return view
-    }()
+    private let firstFullDividerView = FullDividerView()
     private let codeShareButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle(TextLiteral.teamDetailViewControllerShareCodeText, for: .normal)
@@ -65,6 +61,7 @@ final class TeamDetailViewController: BaseViewController {
         label.textColor = .gray600
         return label
     }()
+    private let secondFullDividerView = FullDividerView()
     
     // MARK: - life cycle
     
@@ -121,8 +118,8 @@ final class TeamDetailViewController: BaseViewController {
             $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(120)
         }
         
-        view.addSubview(fullDividerView)
-        fullDividerView.snp.makeConstraints {
+        view.addSubview(firstFullDividerView)
+        firstFullDividerView.snp.makeConstraints {
             $0.top.equalTo(memberCollectionView.snp.bottom)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(4)
@@ -130,14 +127,20 @@ final class TeamDetailViewController: BaseViewController {
         
         view.addSubview(codeShareButton)
         codeShareButton.snp.makeConstraints {
-            $0.top.equalTo(fullDividerView.snp.bottom).offset(14)
+            $0.top.equalTo(firstFullDividerView.snp.bottom).offset(14)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
         view.addSubview(invitationCodeLabel)
         invitationCodeLabel.snp.makeConstraints {
-            $0.top.equalTo(fullDividerView.snp.bottom).offset(20)
+            $0.top.equalTo(firstFullDividerView.snp.bottom).offset(20)
             $0.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+        
+        view.addSubview(secondFullDividerView)
+        secondFullDividerView.snp.makeConstraints {
+            $0.top.equalTo(invitationCodeLabel.snp.bottom).offset(20)
+            $0.leading.trailing.equalToSuperview()
         }
     }
     

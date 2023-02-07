@@ -25,6 +25,7 @@
 		39341E0A298BA419006C1727 /* TeamDetailMembersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39341E09298BA419006C1727 /* TeamDetailMembersView.swift */; };
 		39341E0D298BC354006C1727 /* TeamDetailMembersCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39341E0C298BC354006C1727 /* TeamDetailMembersCell.swift */; };
 		39341E0F29921181006C1727 /* MemberInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39341E0E29921181006C1727 /* MemberInformationView.swift */; };
+		39341E1129922D17006C1727 /* FullDividerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39341E1029922D17006C1727 /* FullDividerView.swift */; };
 		39436C1029127BBA0083D77A /* MyFeedbackCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39436C0F29127BBA0083D77A /* MyFeedbackCollectionView.swift */; };
 		39436C132912877D0083D77A /* MyFeedbackHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39436C122912877D0083D77A /* MyFeedbackHeaderView.swift */; };
 		39436C15291287A00083D77A /* MyFeedbackCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39436C14291287A00083D77A /* MyFeedbackCollectionViewCell.swift */; };
@@ -168,6 +169,7 @@
 		39341E09298BA419006C1727 /* TeamDetailMembersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamDetailMembersView.swift; sourceTree = "<group>"; };
 		39341E0C298BC354006C1727 /* TeamDetailMembersCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamDetailMembersCell.swift; sourceTree = "<group>"; };
 		39341E0E29921181006C1727 /* MemberInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberInformationView.swift; sourceTree = "<group>"; };
+		39341E1029922D17006C1727 /* FullDividerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullDividerView.swift; sourceTree = "<group>"; };
 		39436C0F29127BBA0083D77A /* MyFeedbackCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFeedbackCollectionView.swift; sourceTree = "<group>"; };
 		39436C122912877D0083D77A /* MyFeedbackHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFeedbackHeaderView.swift; sourceTree = "<group>"; };
 		39436C14291287A00083D77A /* MyFeedbackCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFeedbackCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -478,6 +480,7 @@
 			children = (
 				39341E09298BA419006C1727 /* TeamDetailMembersView.swift */,
 				39341E0E29921181006C1727 /* MemberInformationView.swift */,
+				39341E1029922D17006C1727 /* FullDividerView.swift */,
 			);
 			path = UIComponent;
 			sourceTree = "<group>";
@@ -1147,6 +1150,7 @@
 				39257DC528F8FEBD00201E0B /* AppDelegate.swift in Sources */,
 				39F52C4B29232E2600B19A77 /* CreateTeamDTO.swift in Sources */,
 				39F52C74292476EA00B19A77 /* FeedBackResponse.swift in Sources */,
+				39341E1129922D17006C1727 /* FullDividerView.swift in Sources */,
 				39F5583D2908CFAD00CD6F6E /* Encodable+Extension.swift in Sources */,
 				39257DC728F8FEBD00201E0B /* SceneDelegate.swift in Sources */,
 				52F07B9A2912541B0015BC8B /* MyFeedbackDetailViewController.swift in Sources */,
