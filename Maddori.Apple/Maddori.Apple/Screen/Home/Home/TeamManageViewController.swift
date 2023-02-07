@@ -75,14 +75,13 @@ final class TeamManageViewController: BaseViewController {
         sections.append(Section(options: [Option(title: "새로운 팀 합류하기", handler: {
             print("새로운 팀 합류하기")
         }),
-                                                      Option(title: "팀 생성하기", handler: {
+                                          Option(title: "팀 생성하기", handler: {
             print("팀 생성하기")
         })]))
-        
         sections.append(Section(options: [Option(title: "로그아웃", handler: {
             print("로그아웃")
         }),
-                                                       Option(title: "회원탈퇴", handler: {
+                                          Option(title: "회원탈퇴", handler: {
             print("회원탈퇴")
         })]))
     }
@@ -104,7 +103,7 @@ extension TeamManageViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: TeamManageSettingCell.className, for: indexPath) as? TeamManageSettingCell else { return UITableViewCell() }
         
         if indexPath.section == 1 {
-            cell.cellTitleLabel.textColor = .red
+            cell.cellTitleLabel.textColor = .red100
         }
         
         cell.cellTitleLabel.text = model.title
