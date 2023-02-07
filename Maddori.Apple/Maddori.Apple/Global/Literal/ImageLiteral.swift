@@ -24,7 +24,7 @@ enum ImageLiterals {
     static var icPersonCircle: UIImage { .load(systemName: "person.crop.circle") }
     static var icChevronDown: UIImage { .load(systemName: "chevron.down") }
     static var icTeamMananage: UIImage { .load(systemName: "person.2.circle") }
-    static var icPlus: UIImage { .load(systemName: "plus.circle.fill") }
+    static var icPlus: UIImage { .load(name: "plus") }
     
     // MARK: - image
     
