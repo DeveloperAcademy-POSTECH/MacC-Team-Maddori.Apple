@@ -45,6 +45,11 @@ final class TeamDetailViewController: BaseViewController {
         return view
     }()
     private let memberCollectionView = TeamDetailMembersView()
+    private let fullDividerView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .gray300
+        return view
+    }()
     
     // MARK: - life cycle
     
@@ -98,8 +103,14 @@ final class TeamDetailViewController: BaseViewController {
         memberCollectionView.snp.makeConstraints {
             $0.top.equalTo(dividerView.snp.bottom).offset(24)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-            // FIXME: - 아래 뷰 만들고 바텀 레이아웃 수정
-            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(120)
+        }
+        
+        view.addSubview(fullDividerView)
+        fullDividerView.snp.makeConstraints {
+            $0.top.equalTo(memberCollectionView.snp.bottom)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(4)
         }
     }
     
