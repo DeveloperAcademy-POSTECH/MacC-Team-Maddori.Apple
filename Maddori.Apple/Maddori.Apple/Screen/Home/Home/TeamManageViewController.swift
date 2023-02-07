@@ -14,6 +14,7 @@ final class TeamManageViewController: BaseViewController {
     // MARK: - property
     
     // MARK: - life cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }

@@ -57,7 +57,6 @@ final class HomeViewController: BaseViewController {
         button.setPreferredSymbolConfiguration(UIImage.SymbolConfiguration(pointSize: 13, weight: .semibold), forImageIn: .normal)
         button.tintColor = .black100
         let action = UIAction { [weak self] _ in
-            // FIXME: 버튼 눌렀을 때 action 추가
             self?.presentTeamModal()
         }
         button.addAction(action, for: .touchUpInside)
