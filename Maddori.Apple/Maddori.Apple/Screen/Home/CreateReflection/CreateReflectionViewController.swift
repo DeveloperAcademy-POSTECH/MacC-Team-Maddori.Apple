@@ -16,6 +16,14 @@ final class CreateReflectionViewController: BaseViewController {
     var reflectionTitle: String?
     var reflectionDate: Date?
     
+    var isCreateReflection: Bool {
+        if reflectionTitle == nil {
+            return true
+        } else {
+            return false
+        }
+    }
+    
     init(reflectionId: Int) {
         self.reflectionId = reflectionId
         super.init()
@@ -42,7 +50,7 @@ final class CreateReflectionViewController: BaseViewController {
     }()
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        if reflectionTitle == nil {
+        if isCreateReflection {
             label.setTitleFont(text: TextLiteral.createReflectionViewControllerTitle)
         } else {
             label.setTitleFont(text: TextLiteral.editReflectionViewControllerTitle)
