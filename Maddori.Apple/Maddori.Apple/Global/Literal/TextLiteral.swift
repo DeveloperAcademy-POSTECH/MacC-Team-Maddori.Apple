@@ -17,6 +17,7 @@ enum TextLiteral {
     static let feedbackContentLabel = "내용"
     static let doneButtonNext = "다음"
     static let doneButtonComplete = "완료"
+    static let actionSheetCancelTitle = "취소"
     
     // MARK: - MainViewController
     
@@ -51,6 +52,13 @@ enum TextLiteral {
     static let setNicknameControllerRoleLabel = "역할"
     static let setNicknameControllerRoleTextFieldPlaceHolderText = "ex) iOS 개발자"
     static let setNicknameControllerDoneButtonText = "입력 완료"
+    static let setNicknameControllerProfileActionSheetTitle = "프로필 사진 설정"
+    static let setNicknameControllerProfileActionSheetLibraryTitle = "앨범에서 사진 선택"
+    static let setNicknameControllerProfileActionSheetCameraTitle = "사진 촬영"
+    static let setNicknameControllerCameraErrorAlertTitle = "카메라를 실행할 수 없습니다."
+    static let setNicknameControllerCameraErrorAlertMessage = "설정에서 카메라 접근 권한을 확인해 주세요."
+    static let setNicknameControllerLibraryErrorAlertTitle = "이미지를 불러올 수 없습니다."
+    static let setNicknameControllerLibraryErrorAlertMessage = "설정에서 이미지 접근 권한을 다시 확인해 주세요."
     
     // MARK: - HomeViewController
     
@@ -195,8 +203,10 @@ enum TextLiteral {
     
     // MARK: - JoinReflectionButton
     
-    static let joinReflectionButtonStatusText: String = "회고가 시작되었습니다!"
-    static let joinReflectionTouchToEnterLabel: String = "터치하여 회고에 참여해주세요"
+    static let reflectionTitleLabelSettingRequired: String = "아직 회고 일정이 없습니다"
+    static let reflectionTitleLabelProgressing: String = "회고가 시작되었습니다!"
+    static let reflectionDescriptionLabelSettingRequired: String = "회고 일정을 정해주세요"
+    static let reflectionDescriptionLabelProgressing: String = "터치하여 회고에 참여해주세요"
     
     // MARK: - MyReflectionViewController
     
