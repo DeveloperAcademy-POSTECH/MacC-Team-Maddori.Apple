@@ -189,8 +189,7 @@ final class CreateReflectionViewController: BaseViewController {
                     )
                 ))
             } else {
-                // FIXME: UX writing 생각
-                self?.makeAlert(title: "회고 일정 설정 오류", message: "회고 일정은 현시각보다 이전으로 설정할 수 없습니다.")
+                self?.makeAlert(title: TextLiteral.createReflectionAlertTitle, message: TextLiteral.createReflectionAlertContent)
             }
         }
         mainButton.addAction(action, for: .touchUpInside)
