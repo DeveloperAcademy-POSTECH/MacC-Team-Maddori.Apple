@@ -31,7 +31,7 @@ final class FullDividerView: UIView {
     private func render() {
         self.addSubview(dividerView)
         dividerView.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview()
+            $0.edges.equalToSuperview()
             $0.height.equalTo(4)
         }
     }

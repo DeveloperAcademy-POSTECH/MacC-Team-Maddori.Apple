@@ -62,6 +62,13 @@ final class TeamDetailViewController: BaseViewController {
         return label
     }()
     private let secondFullDividerView = FullDividerView()
+    private let teamLeaveButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("팀 나가기", for: .normal)
+        button.titleLabel?.font = .label2
+        button.setTitleColor(.red100, for: .normal)
+        return button
+    }()
     
     // MARK: - life cycle
     
@@ -111,36 +118,42 @@ final class TeamDetailViewController: BaseViewController {
             $0.height.equalTo(1)
         }
         
-        view.addSubview(memberCollectionView)
-        memberCollectionView.snp.makeConstraints {
-            $0.top.equalTo(dividerView.snp.bottom).offset(24)
-            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(120)
-        }
-        
-        view.addSubview(firstFullDividerView)
-        firstFullDividerView.snp.makeConstraints {
-            $0.top.equalTo(memberCollectionView.snp.bottom)
-            $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(4)
-        }
-        
-        view.addSubview(codeShareButton)
-        codeShareButton.snp.makeConstraints {
-            $0.top.equalTo(firstFullDividerView.snp.bottom).offset(14)
+        view.addSubview(teamLeaveButton)
+        teamLeaveButton.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-        }
-        
-        view.addSubview(invitationCodeLabel)
-        invitationCodeLabel.snp.makeConstraints {
-            $0.top.equalTo(firstFullDividerView.snp.bottom).offset(20)
-            $0.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(20)
         }
         
         view.addSubview(secondFullDividerView)
         secondFullDividerView.snp.makeConstraints {
-            $0.top.equalTo(invitationCodeLabel.snp.bottom).offset(20)
             $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalTo(teamLeaveButton.snp.top).offset(-20)
+        }
+        
+        view.addSubview(invitationCodeLabel)
+        invitationCodeLabel.snp.makeConstraints {
+            $0.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.bottom.equalTo(secondFullDividerView.snp.top).offset(-20)
+        }
+
+        view.addSubview(codeShareButton)
+        codeShareButton.snp.makeConstraints {
+            $0.centerY.equalTo(invitationCodeLabel.snp.centerY)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+
+        view.addSubview(firstFullDividerView)
+
+        firstFullDividerView.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalTo(invitationCodeLabel.snp.top).offset(-20)
+        }
+
+        view.addSubview(memberCollectionView)
+        memberCollectionView.snp.makeConstraints {
+            $0.top.equalTo(dividerView.snp.bottom).offset(24)
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.bottom.equalTo(firstFullDividerView.snp.top)
         }
     }
     
