@@ -64,7 +64,7 @@ final class TeamDetailViewController: BaseViewController {
     private let secondFullDividerView = FullDividerView()
     private let teamLeaveButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("팀 나가기", for: .normal)
+        button.setTitle(TextLiteral.teamDetailViewControllerLeaveTeamLabel, for: .normal)
         button.titleLabel?.font = .label2
         button.setTitleColor(.red100, for: .normal)
         return button
@@ -76,6 +76,7 @@ final class TeamDetailViewController: BaseViewController {
         super.viewDidLoad()
         setupBackButton()
         setupEditButton()
+        setupExitButton()
     }
     
     override func configUI() {
@@ -186,5 +187,15 @@ final class TeamDetailViewController: BaseViewController {
             print("action")
         }
         self.editButton.addAction(action, for: .touchUpInside)
+    }
+    
+    private func setupExitButton() {
+        let action = UIAction { [weak self] _ in
+            self?.makeRequestAlert(title: TextLiteral.teamDetailViewControllerLeaveTeamAlertTitle,
+                                   message: TextLiteral.teamDetailViewControllerLeaveTeamAlertMessage,
+                                   // FIXME: - 팀 나가기 API 연결
+                                   okAction: nil)
+        }
+        teamLeaveButton.addAction(action, for: .touchUpInside)
     }
 }
