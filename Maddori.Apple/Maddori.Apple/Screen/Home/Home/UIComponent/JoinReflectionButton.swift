@@ -15,14 +15,6 @@ final class JoinReflectionButton: UIView {
     
     // MARK: - property
     
-    let shadowView: UIView = {
-        let view = UIView()
-        view.layer.shadowColor = UIColor.black100.cgColor
-        view.layer.shadowOffset = .zero
-        view.layer.shadowRadius = 2
-        view.layer.shadowOpacity = 0.05
-        return view
-    }()
     let joinButton: UIButton = {
         let button = UIButton()
         button.layer.cornerRadius = 10
@@ -59,12 +51,7 @@ final class JoinReflectionButton: UIView {
     required init?(coder: NSCoder) { nil }
     
     func render() {
-        self.addSubview(shadowView)
-        shadowView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-        }
-        
-        shadowView.addSubview(joinButton)
+        self.addSubview(joinButton)
         joinButton.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
@@ -93,7 +80,7 @@ final class JoinReflectionButton: UIView {
     // MARK: - func
     
     private func configUI() {
-        shadowView.makeShadow(color: .black100, opacity: 0.2, offset: .zero, radius: 3)
+        self.makeShadow(color: .black100, opacity: 0.2, offset: .zero, radius: 2)
     }
     
     private func setupJoinButtonAction() {
