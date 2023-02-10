@@ -44,11 +44,6 @@ final class LoginViewController: BaseViewController {
     
     // MARK: - life cycle
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        navigateToLastView()
-    }
-    
     override func configUI() {
         super.configUI()
         setGradientText()
@@ -110,20 +105,6 @@ final class LoginViewController: BaseViewController {
         UserDefaultHandler.setIsLogin(isLogin: true)
     }
     
-    private func navigateToLastView() {
-        let hasNickname = UserDefaultStorage.nickname != ""
-        let hasTeamId = UserDefaultStorage.teamId != 0
-        if hasNickname && hasTeamId {
-            let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
-            sceneDelegate?.changeRootViewCustomTabBarView()
-            self.setLoginUserDefaults()
-        } else if hasTeamId {
-            self.presentViewController(viewController: SetNicknameViewController())
-        } else {
-            return
-        }
-    }
-    
     // MARK: - api
     
     private func dispatchAppleLogin(type: SetupEndPoint<AppleLoginDTO>) {
@@ -142,14 +123,7 @@ final class LoginViewController: BaseViewController {
                 UserDefaultHandler.setAccessToken(accessToken: accessToken)
                 UserDefaultHandler.setRefreshToken(refreshToken: refreshToken)
                 UserDefaultHandler.setUserId(userId: userId)
-                let hasNickName = data.detail?.user?.userName != nil
-                let hasTeamId = data.detail?.user?.teamId != nil
-                if hasNickName && hasTeamId {
-                    guard let nickName = data.detail?.user?.userName,
-                          let teamId = data.detail?.user?.teamId
-                    else { return }
-                    UserDefaultHandler.setNickname(nickname: nickName)
-                    UserDefaultHandler.setTeamId(teamId: teamId)
+                if UserDefaultStorage.isLogin {
                     let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
                     sceneDelegate?.changeRootViewCustomTabBarView()
                 } else {
