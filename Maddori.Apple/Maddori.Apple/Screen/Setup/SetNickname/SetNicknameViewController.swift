@@ -198,7 +198,7 @@ final class SetNicknameViewController: BaseViewController {
                 TextLiteral.actionSheetCancelTitle
             ],
             actionStyle: [.default, .default, .cancel],
-            actions: [{ _ in self.openLibrary() }, { _ in self.openCamera() }, nil]
+            actions: [{ _ in self.setupPhotoLibrary() }, { _ in self.openCamera() }, nil]
         )
     }
     
@@ -306,6 +306,34 @@ final class SetNicknameViewController: BaseViewController {
         navigationController?.pushViewController(viewController, animated: true)
     }
     
+    private func setupPhotoLibrary() {
+        switch PHPhotoLibrary.authorizationStatus(for: .readWrite) {
+        case .limited, .authorized:
+            openLibrary()
+        case .notDetermined:
+            PHPhotoLibrary.requestAuthorization(for: .readWrite) { [weak self] status in
+                switch status {
+                case .limited, .authorized:
+                    self?.openLibrary()
+                default:
+                    self?.showPermissionAlert()
+                }
+            }
+        case .restricted, .denied:
+            showPermissionAlert()
+        default:
+            break
+        }
+    }
+    
+    private func showPermissionAlert() {
+        DispatchQueue.main.async {
+            self.makeAlert(title: "사진 접근 권한", message: "사진 추가를 원하시면 '확인'을 눌러 사진 접근을 허용해 주세요.", okAction: { _ in
+                UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+            })
+        }
+    }
+    
     // MARK: - selector
     
     @objc private func keyboardWillShow(notification: NSNotification) {
@@ -399,7 +427,6 @@ extension SetNicknameViewController: PHPickerViewControllerDelegate {
                 DispatchQueue.main.async {
                     self.profileImageButton.profileImage.image = image as? UIImage
                 }
-                // FIXME: - 이미지 정보 가져오기
             }
         } else {
             self.makeAlert(title: TextLiteral.setNicknameControllerLibraryErrorAlertTitle, message: TextLiteral.setNicknameControllerLibraryErrorAlertMessage)
