@@ -272,7 +272,7 @@ final class HomeViewController: BaseViewController {
                 else { return }
                 self.isAdmin = isAdmin
                 DispatchQueue.main.async {
-                    self.teamButton.setTitle(teamName, for: .normal)
+                    self.teamButton.setTitle(teamName + " ", for: .normal)
                 }
             } else {
                 DispatchQueue.main.async {
