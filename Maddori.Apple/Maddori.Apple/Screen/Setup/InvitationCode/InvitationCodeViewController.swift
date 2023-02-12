@@ -23,7 +23,7 @@ final class InvitationCodeViewController: BaseViewController {
     required init?(coder: NSCoder) { nil }
     
     // MARK: - property
-    
+
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.setTitleFont(text: TextLiteral.invitationCodeViewControllerTitleLabel)
@@ -93,7 +93,7 @@ final class InvitationCodeViewController: BaseViewController {
             $0.centerX.equalToSuperview()
             $0.height.equalTo(46)
         }
-        
+
         view.addSubview(titleLabel)
         titleLabel.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.topPadding)
