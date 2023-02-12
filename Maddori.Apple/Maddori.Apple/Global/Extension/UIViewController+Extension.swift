@@ -89,5 +89,5 @@ extension UIViewController: UIGestureRecognizerDelegate {
     public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
          guard touch.view is UIButton else { return true }
          return false
-    }
+     }
 }
