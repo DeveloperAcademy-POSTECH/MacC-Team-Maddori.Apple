@@ -159,7 +159,6 @@ final class InvitationCodeViewController: BaseViewController {
         let action = UIAction { [weak self] _ in
             UIPasteboard.general.string = self?.invitedCodeLabel.text
             self?.showToastPopUp()
-            self?.presentSharePanel(text: self?.invitedCodeLabel.text ?? "")
         }
         copyCodeButton.addAction(action, for: .touchUpInside)
     }

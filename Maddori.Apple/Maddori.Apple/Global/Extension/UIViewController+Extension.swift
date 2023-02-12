@@ -78,18 +78,6 @@ extension UIViewController {
         viewController.modalTransitionStyle = .crossDissolve
         self.present(viewController, animated: true)
     }
-    
-    func presentSharePanel(text: String) {
-        let shareText = text
-        var shareObject = [Any]()
-        shareObject.append(shareText)
-        
-        let activityViewController = UIActivityViewController(activityItems: shareObject, applicationActivities: nil)
-        activityViewController.popoverPresentationController?.sourceView = self.view
-        activityViewController.excludedActivityTypes = [UIActivity.ActivityType.airDrop, UIActivity.ActivityType.postToFacebook, UIActivity.ActivityType.postToTwitter, UIActivity.ActivityType.mail]
-        
-        self.present(activityViewController, animated: true, completion: nil)
-    }
 }
 
 extension UIViewController: UIGestureRecognizerDelegate {
