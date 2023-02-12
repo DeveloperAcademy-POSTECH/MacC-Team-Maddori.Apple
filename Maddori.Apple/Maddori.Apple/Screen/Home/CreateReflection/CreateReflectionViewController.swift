@@ -128,13 +128,6 @@ final class CreateReflectionViewController: BaseViewController {
         setupNotificationCenter()
     }
     
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//        if isEditReflection {
-//            setupEditReflection()
-//        }
-//    }
-    
     override func render() {
         view.addSubview(titleLabel)
         titleLabel.snp.makeConstraints {
