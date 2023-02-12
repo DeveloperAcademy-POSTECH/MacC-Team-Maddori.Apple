@@ -114,7 +114,7 @@ final class CreateReflectionViewController: BaseViewController {
         picker.addAction(hideKeyboardAction, for: .editingDidBegin)
         return picker
     }()
-    private lazy var mainButton: MainButton = {
+    private let mainButton: MainButton = {
         let button = MainButton()
         button.title = isEditReflection ? TextLiteral.editReflectionViewControllerButtonText : TextLiteral.createReflectionViewControllerButtonText
         return button
