@@ -14,7 +14,8 @@ final class ReflectionMemberCollectionView: UIView {
     private enum Size {
         static let collectionHorizontalSpacing: CGFloat = 34
         static let collectionVerticalSpacing: CGFloat = 20
-        static let cellLength: CGFloat = 140
+        static let cellWidth: CGFloat = UIScreen.main.bounds.width * 0.37
+        static let cellHeight: CGFloat = 140
         static let cellInteritemSpacingSpacing: CGFloat = 27
         static let cellLineSpacing: CGFloat = 20
         static let collectionInsets = UIEdgeInsets(
@@ -42,7 +43,7 @@ final class ReflectionMemberCollectionView: UIView {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .vertical
         flowLayout.sectionInset = Size.collectionInsets
-        flowLayout.itemSize = CGSize(width: Size.cellLength, height: Size.cellLength)
+        flowLayout.itemSize = CGSize(width: Size.cellWidth, height: Size.cellHeight)
         flowLayout.minimumInteritemSpacing = Size.cellInteritemSpacingSpacing
         flowLayout.minimumLineSpacing = Size.cellLineSpacing
         return flowLayout
