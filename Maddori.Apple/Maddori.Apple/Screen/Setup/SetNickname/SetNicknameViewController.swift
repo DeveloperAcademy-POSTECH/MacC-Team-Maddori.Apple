@@ -20,6 +20,7 @@ final class SetNicknameViewController: BaseViewController {
     }
     private let cameraPicker = UIImagePickerController()
     private let teamName: String = UserDefaultStorage.teamName
+    var profileURL: URL?
     
     // MARK: - property
     
@@ -287,14 +288,12 @@ final class SetNicknameViewController: BaseViewController {
     private func didTappedDoneButton() {
         guard let nickname = nicknameTextField.text else { return }
         guard let role = roleTextField.text else { return }
-        // FIXME: - 이미지 데이터 추가
-        
         if UserDefaultStorage.teamId == 0 {
-            let dto = CreateTeamDTO(team_name: teamName, nickname: nickname, role: role, profile_image: nil)
-            dispatchCreateTeam(type: .dispatchCreateTeam(dto))
+//            let dto = CreateTeamDTO(team_name: teamName, nickname: nickname, role: role, profile_image: nil)
+            dispatchCreateTeam(type: .dispatchCreateTeam, teamName: teamName, nickname: nickname, role: role)
         } else {
-            let dto = JoinTeamDTO(nickname: nickname, role: role, profile_image: nil)
-            dispatchJoinTeam(type: .dispatchJoinTeam(teamId: UserDefaultStorage.teamId, dto))
+            //            let dto = JoinTeamDTO(nickname: nickname, role: role, profile_image: nil)
+            dispatchJoinTeam(type: .dispatchJoinTeam(teamId: UserDefaultStorage.teamId), nickname: nickname, role: role)
         }
         
         nicknameTextField.resignFirstResponder()
@@ -356,48 +355,56 @@ final class SetNicknameViewController: BaseViewController {
     
     // MARK: - api
     
-    private func dispatchCreateTeam(type: SetupEndPoint<CreateTeamDTO>) {
-        AF.request(type.address,
-                   method: type.method,
-                   parameters: type.body,
-                   encoder: JSONParameterEncoder.default,
-                   headers: type.headers
-        ).responseDecodable(of: BaseModel<CreateTeamResponse>.self) { json in
-            if let json = json.value {
-                dump(json)
-                guard let teamId = json.detail?.id else { return }
-                UserDefaultHandler.setTeamId(teamId: teamId)
-                DispatchQueue.main.async {
-                    if let invitationCode = json.detail?.team?.invitationCode {
-                        self.pushInvitationCodeViewController(invitationCode: invitationCode)
-                    }
-                }
-            } else {
-                DispatchQueue.main.async {
-                    self.makeAlert(title: TextLiteral.setNicknameViewControllerCreateTeamAlertTitle, message: TextLiteral.setNicknameViewControllerAlertMessage)
-                }
+    private func dispatchCreateTeam(type: SetupEndPoint<EncodeDTO>, teamName: String, nickname: String, role: String?) {
+        AF.upload(multipartFormData: { multipartFormData in
+            let teamInfo: Dictionary = ["team_name": teamName, "nickname": nickname, "role": role]
+            for (key, value) in teamInfo {
+                    multipartFormData.append("\(value)".data(using: .utf8)!, withName: key, mimeType: "text/plain")
+                    print(key, value)
             }
+            if let profileURL = self.profileURL {
+                multipartFormData.append(profileURL, withName: "profile_image", fileName: ".png", mimeType: "image/png")
+            }
+        }, to: type.address, method: type.method, headers: type.headers).response { response in
+            dump(response)
         }
+//        AF.request(type.address,
+//                   method: type.method,
+//                   parameters: type.body,
+//                   encoder: JSONParameterEncoder.default,
+//                   headers: type.headers
+//        ).responseDecodable(of: BaseModel<CreateTeamResponse>.self) { json in
+//            if let json = json.value {
+//                dump(json)
+//                guard let teamId = json.detail?.id else { return }
+//                UserDefaultHandler.setTeamId(teamId: teamId)
+//                DispatchQueue.main.async {
+//                    if let invitationCode = json.detail?.team?.invitationCode {
+//                        self.pushInvitationCodeViewController(invitationCode: invitationCode)
+//                    }
+//                }
+//            } else {
+//                DispatchQueue.main.async {
+//                    self.makeAlert(title: TextLiteral.setNicknameViewControllerCreateTeamAlertTitle, message: TextLiteral.setNicknameViewControllerAlertMessage)
+//                }
+//            }
+//        }
     }
-    
-    private func dispatchJoinTeam(type: SetupEndPoint<JoinTeamDTO>) {
-        AF.request(type.address,
-                   method: type.method,
-                   parameters: type.body,
-                   encoder: JSONParameterEncoder.default,
-                   headers: type.headers
-        ).responseDecodable(of: BaseModel<JoinTeamResponse>.self) { json in
+
+    private func dispatchJoinTeam(type: SetupEndPoint<EncodeDTO>, nickname: String, role: String?) {
+        let profileInfo: Dictionary = ["nickname": nickname, "role": role]
+        
+        AF.upload(multipartFormData: { multipartFormData in
+            for (key, value) in profileInfo {
+                    multipartFormData.append("\(value)".data(using: .utf8)!, withName: key, mimeType: "text/plain")
+                    print(key, value)
+            }
+            if let profileURL = self.profileURL {
+                multipartFormData.append(profileURL, withName: "profile_image", fileName: "\(nickname).jpg", mimeType: "image/jpg")
+            }
+        }, to: type.address, method: type.method, headers: type.headers).responseDecodable(of: BaseModel<JoinTeamResponse>.self) { json in
             if let json = json.value {
                 dump(json)
-                DispatchQueue.main.async {
-                    if let invitationCode = json.detail?.team?.invitationCode {
-                        self.pushInvitationCodeViewController(invitationCode: invitationCode)
-                    }
-                }
-            } else {
-                DispatchQueue.main.async {
-                    self.makeAlert(title: TextLiteral.setNicknameViewControllerJoinTeamAlertTitle, message: TextLiteral.setNicknameViewControllerAlertMessage)
-                }
             }
         }
     }
@@ -426,6 +433,18 @@ extension SetNicknameViewController: PHPickerViewControllerDelegate {
             itemProvider.loadObject(ofClass: UIImage.self) { (image, error) in
                 DispatchQueue.main.async {
                     self.profileImageButton.profileImage.image = image as? UIImage
+                }
+                let profileImage = image as? UIImage
+                if let data = profileImage?.pngData() {
+                    let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+                    let url = documents.appendingPathComponent(".png")
+                    do {
+                        try data.write(to: url)
+                        self.profileURL = url
+                    } catch {
+                        // FIXME: - alert 추가
+                        print("Unable to Write Data to Disk (\(error))")
+                    }
                 }
             }
         } else {
