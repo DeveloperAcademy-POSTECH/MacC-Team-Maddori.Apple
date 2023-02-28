@@ -470,6 +470,17 @@ extension SetNicknameViewController: UIImagePickerControllerDelegate, UINavigati
         
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             self.profileImageButton.profileImage.image = image
+            if let data = image.pngData() {
+                let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+                let url = documents.appendingPathComponent(".png")
+                do {
+                    try data.write(to: url)
+                    self.profileURL = url
+                } catch {
+                    // FIXME: - alert 추가
+                    print("Unable to Write Data to Disk (\(error))")
+                }
+            }
         }
     }
 }
