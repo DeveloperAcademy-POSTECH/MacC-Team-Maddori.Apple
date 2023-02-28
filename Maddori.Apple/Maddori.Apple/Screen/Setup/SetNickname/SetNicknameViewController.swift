@@ -369,8 +369,11 @@ final class SetNicknameViewController: BaseViewController {
         }, to: type.address, method: type.method, headers: type.headers).responseDecodable(of: BaseModel<CreateTeamResponse>.self) { json in
             if let json = json.value {
                 dump(json)
-                guard let teamId = json.detail?.id else { return }
+                guard let teamId = json.detail?.team?.id else { return }
+                guard let nickname = json.detail?.nickname else { return }
                 UserDefaultHandler.setTeamId(teamId: teamId)
+                UserDefaultHandler.setNickname(nickname: nickname)
+                UserDefaultHandler.setIsLogin(isLogin: true)
                 DispatchQueue.main.async {
                     if let invitationCode = json.detail?.team?.invitationCode {
                         self.pushInvitationCodeViewController(invitationCode: invitationCode)
@@ -385,19 +388,33 @@ final class SetNicknameViewController: BaseViewController {
     }
     
     private func dispatchJoinTeam(type: SetupEndPoint<EncodeDTO>, nickname: String, role: String?) {
-        let profileInfo: Dictionary = ["nickname": nickname, "role": role]
-        
         AF.upload(multipartFormData: { multipartFormData in
+            let profileInfo: Dictionary = ["nickname": nickname, "role": role]
             for (key, value) in profileInfo {
-                multipartFormData.append("\(value)".data(using: .utf8)!, withName: key, mimeType: "text/plain")
-                print(key, value)
+                if let value = value {
+                    multipartFormData.append("\(value)".data(using: .utf8)!, withName: key, mimeType: "text/plain")
+                }
             }
             if let profileURL = self.profileURL {
-                multipartFormData.append(profileURL, withName: "profile_image", fileName: "\(nickname).jpg", mimeType: "image/jpg")
+                multipartFormData.append(profileURL, withName: "profile_image", fileName: ".png", mimeType: "image/png")
             }
         }, to: type.address, method: type.method, headers: type.headers).responseDecodable(of: BaseModel<JoinTeamResponse>.self) { json in
             if let json = json.value {
                 dump(json)
+                guard let teamId = json.detail?.team?.id else { return }
+                guard let nickname = json.detail?.nickname else { return }
+                UserDefaultHandler.setTeamId(teamId: teamId)
+                UserDefaultHandler.setNickname(nickname: nickname)
+                UserDefaultHandler.setIsLogin(isLogin: true)
+                DispatchQueue.main.async {
+                    if let invitationCode = json.detail?.team?.invitationCode {
+                        self.pushInvitationCodeViewController(invitationCode: invitationCode)
+                    }
+                }
+            } else {
+                DispatchQueue.main.async {
+                    self.makeAlert(title: TextLiteral.setNicknameViewControllerJoinTeamAlertTitle, message: TextLiteral.setNicknameViewControllerAlertMessage)
+                }
             }
         }
     }
