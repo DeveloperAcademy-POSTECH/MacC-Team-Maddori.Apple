@@ -60,6 +60,9 @@ enum TextLiteral {
     static let setNicknameViewControllerCreateTeamAlertTitle = "팀 생성 및 팀 합류 실패"
     static let setNicknameViewControllerJoinTeamAlertTitle = "팀 합류 실패"
     static let setNicknameViewControllerAlertMessage = "다시 시도해 주세요."
+    static let setNicknameViewControllerPermissionAlertTitle = "사진 접근 권한"
+    static let setNicknameViewControllerPermissionAlertMessage = "사진 추가를 원하시면 '확인'을 눌러 사진 접근을 허용해 주세요."
+    static let setNicknameViewControllerCameraAlertTitle = "촬영된 이미지를 불러올 수 없습니다."
     
     // MARK: - HomeViewController
     

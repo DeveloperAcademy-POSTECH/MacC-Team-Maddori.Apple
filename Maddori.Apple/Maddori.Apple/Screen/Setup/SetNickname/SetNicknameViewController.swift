@@ -289,10 +289,8 @@ final class SetNicknameViewController: BaseViewController {
         guard let nickname = nicknameTextField.text else { return }
         guard let role = roleTextField.text else { return }
         if UserDefaultStorage.teamId == 0 {
-            //            let dto = CreateTeamDTO(team_name: teamName, nickname: nickname, role: role, profile_image: nil)
             dispatchCreateTeam(type: .dispatchCreateTeam, teamName: teamName, nickname: nickname, role: role)
         } else {
-            //            let dto = JoinTeamDTO(nickname: nickname, role: role, profile_image: nil)
             dispatchJoinTeam(type: .dispatchJoinTeam(teamId: UserDefaultStorage.teamId), nickname: nickname, role: role)
         }
         
@@ -327,7 +325,7 @@ final class SetNicknameViewController: BaseViewController {
     
     private func showPermissionAlert() {
         DispatchQueue.main.async {
-            self.makeAlert(title: "사진 접근 권한", message: "사진 추가를 원하시면 '확인'을 눌러 사진 접근을 허용해 주세요.", okAction: { _ in
+            self.makeAlert(title: TextLiteral.setNicknameViewControllerPermissionAlertTitle, message: TextLiteral.setNicknameViewControllerPermissionAlertMessage, okAction: { _ in
                 UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
             })
         }
@@ -476,10 +474,10 @@ extension SetNicknameViewController: UIImagePickerControllerDelegate, UINavigati
                     try data.write(to: url)
                     self.profileURL = url
                 } catch {
-                    self.makeAlert(title: "촬영된 이미지를 불러올 수 없습니다.", message: "다시 시도해 주세요.")
+                    self.makeAlert(title: TextLiteral.setNicknameViewControllerCameraAlertTitle, message: TextLiteral.setNicknameViewControllerAlertMessage)
                 }
             } else {
-                self.makeAlert(title: "촬영된 이미지를 불러올 수 없습니다.", message: "다시 시도해 주세요.")
+                self.makeAlert(title: TextLiteral.setNicknameViewControllerCameraAlertTitle, message: TextLiteral.setNicknameViewControllerAlertMessage)
             }
         }
     }
