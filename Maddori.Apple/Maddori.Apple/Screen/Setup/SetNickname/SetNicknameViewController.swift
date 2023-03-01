@@ -452,8 +452,7 @@ extension SetNicknameViewController: PHPickerViewControllerDelegate {
                         try data.write(to: url)
                         self.profileURL = url
                     } catch {
-                        // FIXME: - alert 추가
-                        print("Unable to Write Data to Disk (\(error))")
+                        self.makeAlert(title: TextLiteral.setNicknameControllerLibraryErrorAlertTitle, message: TextLiteral.setNicknameControllerLibraryErrorAlertMessage)
                     }
                 }
             }
@@ -477,9 +476,10 @@ extension SetNicknameViewController: UIImagePickerControllerDelegate, UINavigati
                     try data.write(to: url)
                     self.profileURL = url
                 } catch {
-                    // FIXME: - alert 추가
-                    print("Unable to Write Data to Disk (\(error))")
+                    self.makeAlert(title: "촬영된 이미지를 불러올 수 없습니다.", message: "다시 시도해 주세요.")
                 }
+            } else {
+                self.makeAlert(title: "촬영된 이미지를 불러올 수 없습니다.", message: "다시 시도해 주세요.")
             }
         }
     }
