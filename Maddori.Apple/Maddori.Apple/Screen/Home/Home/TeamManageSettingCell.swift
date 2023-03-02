@@ -33,7 +33,7 @@ final class TeamManageSettingCell: BaseTableViewCell {
     }
 }
 
-final class TeamManageSettingFooterCell: UITableViewHeaderFooterView {
+final class TeamManageSettingFooterView: UITableViewHeaderFooterView {
     
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)

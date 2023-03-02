@@ -27,7 +27,7 @@ final class TeamManageViewController: BaseViewController {
     private let settingTableView: UITableView = {
         let tableView = UITableView()
         tableView.register(TeamManageSettingCell.self, forCellReuseIdentifier: TeamManageSettingCell.className)
-        tableView.register(TeamManageSettingFooterCell.self, forHeaderFooterViewReuseIdentifier: TeamManageSettingFooterCell.className)
+        tableView.register(TeamManageSettingFooterView.self, forHeaderFooterViewReuseIdentifier: TeamManageSettingFooterView.className)
         tableView.isScrollEnabled = false
         tableView.separatorInset = UIEdgeInsets(top: 0, left: SizeLiteral.leadingTrailingPadding, bottom: 0, right: SizeLiteral.leadingTrailingPadding)
         return tableView
@@ -121,7 +121,7 @@ extension TeamManageViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        guard let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: TeamManageSettingFooterCell.className) as? TeamManageSettingFooterCell else { return UITableViewHeaderFooterView()
+        guard let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: TeamManageSettingFooterView.className) as? TeamManageSettingFooterView else { return UITableViewHeaderFooterView()
         }
         return view
     }
