@@ -29,7 +29,10 @@ final class TeamManageViewController: BaseViewController {
         tableView.register(TeamManageSettingCell.self, forCellReuseIdentifier: TeamManageSettingCell.className)
         tableView.register(TeamManageSettingFooterView.self, forHeaderFooterViewReuseIdentifier: TeamManageSettingFooterView.className)
         tableView.isScrollEnabled = false
-        tableView.separatorInset = UIEdgeInsets(top: 0, left: SizeLiteral.leadingTrailingPadding, bottom: 0, right: SizeLiteral.leadingTrailingPadding)
+        tableView.separatorInset = UIEdgeInsets(top: 0,
+                                                left: SizeLiteral.leadingTrailingPadding,
+                                                bottom: 0,
+                                                right: SizeLiteral.leadingTrailingPadding)
         return tableView
     }()
     
