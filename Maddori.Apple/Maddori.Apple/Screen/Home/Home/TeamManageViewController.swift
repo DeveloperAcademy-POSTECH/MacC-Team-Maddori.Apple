@@ -35,6 +35,7 @@ final class TeamManageViewController: BaseViewController {
                                                 right: SizeLiteral.leadingTrailingPadding)
         return tableView
     }()
+    private let scrollView: UIScrollView = UIScrollView()
     
     // MARK: - life cycle
     
@@ -45,24 +46,29 @@ final class TeamManageViewController: BaseViewController {
     }
     
     override func render() {
-        view.addSubview(tempView)
+        view.addSubview(scrollView)
+        scrollView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+        
+        scrollView.addSubview(tempView)
         tempView.snp.makeConstraints {
-            $0.width.equalToSuperview()
+            $0.width.equalTo(UIScreen.main.bounds.width)
             $0.height.equalTo(275) // FIXME: 수치 바꿀것
             $0.top.equalToSuperview()
         }
         
-        view.addSubview(dividerView)
+        scrollView.addSubview(dividerView)
         dividerView.snp.makeConstraints {
             $0.top.equalTo(tempView.snp.bottom)
             $0.width.equalToSuperview()
             $0.height.equalTo(6)
         }
         
-        view.addSubview(settingTableView)
+        scrollView.addSubview(settingTableView)
         settingTableView.snp.makeConstraints {
             $0.top.equalTo(dividerView.snp.bottom)
-            $0.directionalHorizontalEdges.equalToSuperview()
+            $0.width.equalTo(UIScreen.main.bounds.width)
             $0.height.equalTo(1000) // FIXME: 수치 바꿀것
         }
     }
