@@ -305,7 +305,7 @@ final class HomeViewController: BaseViewController {
                         case .Progressing:
                             self.hideAddFeedbackButton()
                             if !UserDefaultStorage.hasSeenReflectionAlert {
-                                self.showStartReflectionView()
+                                self.presentStartReflectionView()
                             }
                         }
                         self.flowLayout.count = reflectionKeywordList.count
