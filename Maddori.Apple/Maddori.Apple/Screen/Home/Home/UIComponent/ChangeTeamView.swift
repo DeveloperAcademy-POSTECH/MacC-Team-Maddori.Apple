@@ -12,7 +12,7 @@ import SnapKit
 final class ChangeTeamView: UIView {
     
     // MARK: - FIXME: 데이터 더미 입니다.
-    private let teamDataDummy: [String] = []
+    let teamDataDummy: [String] = ["맛쟁이 사과처럼", "명예 소방관"]
     
     // MARK: - property
     
@@ -31,7 +31,7 @@ final class ChangeTeamView: UIView {
         flowLayout.minimumLineSpacing = 8
         return flowLayout
     }()
-    private lazy var teamCollectionView: UICollectionView = {
+    lazy var teamCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewFlowLayout)
         collectionView.delegate = self
         collectionView.dataSource = self
