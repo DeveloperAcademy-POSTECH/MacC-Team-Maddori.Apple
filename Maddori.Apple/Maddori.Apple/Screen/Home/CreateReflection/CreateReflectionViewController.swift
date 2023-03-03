@@ -125,6 +125,7 @@ final class CreateReflectionViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupAddReflection()
+        setupDeleteReflection()
         setupNotificationCenter()
     }
     
@@ -168,8 +169,15 @@ final class CreateReflectionViewController: BaseViewController {
     }
     
     override func setupNavigationBar() {
-        let item = makeBarButtonItem(with: closeButton)
-        navigationItem.rightBarButtonItem = item
+        if !isEditReflection {
+            let closeButton = makeBarButtonItem(with: closeButton)
+            navigationItem.rightBarButtonItem = closeButton
+        } else {
+            let closeButton = makeBarButtonItem(with: closeButton)
+            let deleteButton = makeBarButtonItem(with: deleteButton)
+            navigationItem.leftBarButtonItem = closeButton
+            navigationItem.rightBarButtonItem = deleteButton
+        }
     }
     
     // MARK: - setup
@@ -200,21 +208,24 @@ final class CreateReflectionViewController: BaseViewController {
         mainButton.addAction(action, for: .touchUpInside)
     }
     
-    
-    private func setupEditReflection() {
-//        titleLabel.setTitleFont(text: TextLiteral.editReflectionViewControllerTitle)
-//        mainButton.title = TextLiteral.editReflectionViewControllerButtonText
-        guard let title = reflectionTitle, let date = reflectionDate else { return }
-        reflectionNameView.nameTextField.text = title
-        datePicker.date = date
-        timePicker.date = date
-        
-        let closeButton = makeBarButtonItem(with: closeButton)
-        let deleteButton = makeBarButtonItem(with: deleteButton)
-        navigationItem.leftBarButtonItem = closeButton
-        navigationItem.rightBarButtonItem = deleteButton
+    private func setupDeleteReflection() {
+        let action = UIAction { [weak self] _ in
+            guard let reflectionId = self?.reflectionId else { return }
+            
+            let alert = UIAlertController(title: "회고 일정 삭제하게", message: "회고 일정을 정말 삭제하시겠습니까?", preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: "취소", style: .cancel)
+            let deleteAction = UIAlertAction(title: "삭제", style: .destructive) { [weak self] _ in
+                self?.deleteReflectionDetail(type: .deleteReflectionDetail(reflectionId: reflectionId))
+                self?.dismiss(animated: true)
+            }
+            
+            alert.addAction(cancelAction)
+            alert.addAction(deleteAction)
+            
+            self?.present(alert, animated: true)
+        }
+        deleteButton.addAction(action, for: .touchUpInside)
     }
-    
     
     // MARK: - func
     
@@ -269,6 +280,19 @@ final class CreateReflectionViewController: BaseViewController {
         ).responseDecodable(of: BaseModel<AddReflectionResponse>.self) { [weak self] json in
             if let _ = json.value {
                 self?.dismiss(animated: true)
+            }
+        }
+    }
+    
+    private func deleteReflectionDetail(type: CreateReflectionEndPoint<VoidModel>) {
+        AF.request(type.address,
+                   method: type.method,
+                   parameters: type.body,
+                   encoder: JSONParameterEncoder.default,
+                   headers: type.header
+        ).responseDecodable(of: BaseModel<DeleteReflectionResponse>.self) { [weak self] json in
+            if let result = json.value {
+                dump(result)
             }
         }
     }
