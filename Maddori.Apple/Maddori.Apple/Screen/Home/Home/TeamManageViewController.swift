@@ -54,7 +54,7 @@ final class TeamManageViewController: BaseViewController {
         chageTeamView.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.width.equalToSuperview()
-            $0.height.equalTo(375) // FIXME: 수치 바꿀것
+            $0.height.equalTo(280) // FIXME: 수치 바꿀것
         }
         
         scrollView.addSubview(dividerView)

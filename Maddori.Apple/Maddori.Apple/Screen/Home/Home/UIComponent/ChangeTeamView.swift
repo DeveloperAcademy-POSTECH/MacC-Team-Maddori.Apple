@@ -12,7 +12,7 @@ import SnapKit
 final class ChangeTeamView: UIView {
     
     // MARK: - FIXME: 데이터 더미 입니다.
-    private let teamDataDummy: [String] = ["맛쟁이 사과처럼", "굿굿이에요", "테스트더미에요"]
+    private let teamDataDummy: [String] = []
     
     // MARK: - property
     
@@ -26,8 +26,8 @@ final class ChangeTeamView: UIView {
     private let collectionViewFlowLayout: UICollectionViewFlowLayout = {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .vertical
-        flowLayout.sectionInset = UIEdgeInsets(top: 12, left: SizeLiteral.leadingTrailingPadding, bottom: 16, right: SizeLiteral.leadingTrailingPadding)
-        flowLayout.itemSize = CGSize(width: 335, height: 59)
+        flowLayout.sectionInset = UIEdgeInsets(top: 12, left: 0 , bottom: 16, right: 0)
+        flowLayout.itemSize = CGSize(width: UIScreen.main.bounds.width - SizeLiteral.leadingTrailingPadding*2, height: 59)
         flowLayout.minimumLineSpacing = 8
         return flowLayout
     }()
@@ -39,6 +39,7 @@ final class ChangeTeamView: UIView {
         collectionView.backgroundColor = .white200
         return collectionView
     }()
+    private lazy var emptyView = EmptyTeamView()
     
     // MARK: - life cycle
     
@@ -61,6 +62,12 @@ final class ChangeTeamView: UIView {
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
+        teamDataDummy.isEmpty ? setLayoutEmptyView() : setLayoutTeamListView()
+    }
+    
+    // MARK: - function
+    
+    private func setLayoutTeamListView() {
         self.addSubview(teamCollectionView)
         teamCollectionView.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom)
@@ -69,9 +76,14 @@ final class ChangeTeamView: UIView {
         }
     }
     
-    // MARK: - function
-    
-
+    private func setLayoutEmptyView() {
+        self.addSubview(emptyView)
+        emptyView.snp.makeConstraints {
+            $0.top.equalTo(titleLabel.snp.bottom)
+            $0.directionalHorizontalEdges.equalToSuperview()
+            $0.height.equalToSuperview()
+        }
+    }
     
 }
 

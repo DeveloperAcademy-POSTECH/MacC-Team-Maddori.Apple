@@ -42,6 +42,7 @@ enum ImageLiterals {
     static var imgProgress4: UIImage { .load(name: "ProgressBar4") }
     static var imgProgress5: UIImage { .load(name: "ProgressBar5") }
     static var imgProfileNone: UIImage { .load(name: "profileNone") }
+    static var imgEmptyTeam: UIImage { .load(name: "team") }
 }
 
 extension UIImage {
