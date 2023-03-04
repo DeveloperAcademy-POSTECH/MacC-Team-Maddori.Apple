@@ -102,7 +102,6 @@ final class MyReflectionViewController: BaseViewController {
     
     private func logoutUser() {
         makeRequestAlert(title: TextLiteral.myReflectionViewControllerLogOutMessage, message: "", okTitle: "확인", cancelTitle: "취소") { _ in
-            UserDefaultHandler.clearAllData()
             guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate
                     as? SceneDelegate else { return }
             sceneDelegate.logout()
