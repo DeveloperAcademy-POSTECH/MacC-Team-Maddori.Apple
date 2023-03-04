@@ -55,7 +55,7 @@ final class TeamManageViewController: BaseViewController {
         chageTeamView.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.width.equalToSuperview()
-            teamCount == 0 ? $0.height.equalTo(280) : $0.height.equalTo(teamCount * 59 + (teamCount-1) * 8 + 80)
+            teamCount == 0 ? $0.height.equalTo(280) : $0.height.equalTo((teamCount * 59) + ((teamCount-1) * 8) + 80)
         }
         
         scrollView.addSubview(dividerView)
