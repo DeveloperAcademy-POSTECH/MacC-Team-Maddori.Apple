@@ -339,6 +339,7 @@ final class SetNicknameViewController: BaseViewController {
                 dump(json)
                 guard let teamId = json.detail?.id else { return }
                 UserDefaultHandler.setTeamId(teamId: teamId)
+                UserDefaultHandler.setIsLogin(isLogin: true)
                 DispatchQueue.main.async {
                     if let invitationCode = json.detail?.team?.invitationCode {
                         self.pushInvitationCodeViewController(invitationCode: invitationCode)
@@ -361,6 +362,9 @@ final class SetNicknameViewController: BaseViewController {
         ).responseDecodable(of: BaseModel<JoinTeamResponse>.self) { json in
             if let json = json.value {
                 dump(json)
+                guard let nickname = json.detail?.nickname else { return }
+                UserDefaultHandler.setIsLogin(isLogin: true)
+                UserDefaultHandler.setNickname(nickname: nickname)
                 DispatchQueue.main.async {
                     if let invitationCode = json.detail?.team?.invitationCode {
                         self.pushInvitationCodeViewController(invitationCode: invitationCode)
