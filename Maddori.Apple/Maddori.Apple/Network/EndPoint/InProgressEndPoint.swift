@@ -17,7 +17,7 @@ enum InProgressEndPoint<T: Encodable>: EndPointable {
     var address: String {
         switch self {
         case .fetchTeamMembers:
-            return "\(UrlLiteral.baseUrl)/teams/\(UserDefaultStorage.teamId)/members"
+            return "\(UrlLiteral.baseUrl2)/teams/\(UserDefaultStorage.teamId)/members"
         case .fetchTeamAndUserFeedback(let reflectionId, let memberId):
             return "\(UrlLiteral.baseUrl)/teams/\(UserDefaultStorage.teamId)/reflections/\(reflectionId)/feedbacks/from-team?members=\(memberId)"
         case .patchEndReflection(let reflectionId):

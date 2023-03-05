@@ -137,6 +137,7 @@ final class SelectReflectionMemberViewController: BaseViewController {
                    headers: type.headers
         ).responseDecodable(of: BaseModel<TeamMembersResponse>.self) { json in
             if let json = json.value {
+                dump(json)
                 guard let fetchedMemberList = json.detail?.members else { return }
                 DispatchQueue.main.async {
                     self.memberCollectionView.memberList = fetchedMemberList
