@@ -14,9 +14,9 @@ enum CreateReflectionEndPoint<T: Encodable> {
     var address: String {
         switch self {
         case .patchReflectionDetail(let reflectionId, _):
-            return "\(UrlLiteral.v2BaseUrl)/teams/\(UserDefaultStorage.teamId)/reflections/\(reflectionId)"
+            return "\(UrlLiteral.baseUrl2)/teams/\(UserDefaultStorage.teamId)/reflections/\(reflectionId)"
         case .deleteReflectionDetail(let reflectionId):
-            return "\(UrlLiteral.v2BaseUrl)/teams/\(UserDefaultStorage.teamId)/reflections/\(reflectionId)"
+            return "\(UrlLiteral.baseUrl2)/teams/\(UserDefaultStorage.teamId)/reflections/\(reflectionId)"
         }
     }
     
