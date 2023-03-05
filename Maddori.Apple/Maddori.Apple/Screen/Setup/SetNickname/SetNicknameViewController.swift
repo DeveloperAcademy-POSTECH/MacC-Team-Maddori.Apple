@@ -311,7 +311,9 @@ final class SetNicknameViewController: BaseViewController {
             PHPhotoLibrary.requestAuthorization(for: .readWrite) { [weak self] status in
                 switch status {
                 case .limited, .authorized:
-                    self?.openLibrary()
+                    DispatchQueue.main.async {
+                        self?.openLibrary()
+                    }
                 default:
                     self?.showPermissionAlert()
                 }
