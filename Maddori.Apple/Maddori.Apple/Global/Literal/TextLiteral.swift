@@ -122,7 +122,7 @@ enum TextLiteral {
     static let invitationCodeViewControllerTitleLabel = "초대코드를 공유하여\n팀원들을 초대해주세요"
     static let invitationCodeViewControllerCopyCodeButtonText = "코드 복사하기"
     static let invitationCodeViewControllerStartButtonText = "시작하기"
-    static let invitationCodeViewControllerSubLabelText = "초대코드는 팀관리 화면에서 공유할 수 있습니다"
+    static let invitationCodeViewControllerSubLabelText = "초대코드는 팀 관리 화면에서 공유할 수 있습니다"
     
     // MARK: - StartSuggestionView
     
