@@ -31,9 +31,8 @@ final class ReflectionMemberCollectionViewCell: BaseCollectionViewCell {
         label.font = .label2
         return label
     }()
-    private let roleLabel: UILabel = {
+    let roleLabel: UILabel = {
         let label = UILabel()
-        label.text = "PM / 개발자 / 디자이너"
         label.textColor = .gray400
         label.font = .caption2
         return label
