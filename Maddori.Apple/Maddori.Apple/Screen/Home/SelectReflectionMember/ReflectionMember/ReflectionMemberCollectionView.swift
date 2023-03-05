@@ -30,6 +30,12 @@ final class ReflectionMemberCollectionView: UIView {
             collectionView.reloadData()
         }
     }
+    // FIXME: - memberList v2, 전체적으로 다 이걸로 변경
+    var teamMemberList: [TeamMemberResponse] = [] {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
     var didTappedMember: ((MemberResponse, [Int]) -> ())?
     var selectedMemberList: [Int] = UserDefaultStorage.seenMemberIdList {
         willSet {

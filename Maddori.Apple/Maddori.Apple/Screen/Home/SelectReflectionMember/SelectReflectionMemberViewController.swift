@@ -135,12 +135,12 @@ final class SelectReflectionMemberViewController: BaseViewController {
         AF.request(type.address,
                    method: type.method,
                    headers: type.headers
-        ).responseDecodable(of: BaseModel<TeamMembersResponse>.self) { json in
+        ).responseDecodable(of: BaseModel<MembersResponse>.self) { json in
             if let json = json.value {
                 dump(json)
                 guard let fetchedMemberList = json.detail?.members else { return }
                 DispatchQueue.main.async {
-                    self.memberCollectionView.memberList = fetchedMemberList
+                    self.memberCollectionView.teamMemberList = fetchedMemberList
                     self.feedbackDoneButton.title = TextLiteral.selectReflectionMemberViewControllerDoneButtonText + "(\(self.memberCollectionView.selectedMemberList.count)/\(self.memberCollectionView.memberList.count))"
                 }
             }
