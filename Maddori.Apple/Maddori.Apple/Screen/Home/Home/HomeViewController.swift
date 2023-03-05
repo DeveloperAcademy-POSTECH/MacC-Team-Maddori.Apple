@@ -28,11 +28,6 @@ final class HomeViewController: BaseViewController {
     var reflectionStatus: ReflectionStatus = .Before
     
     var isAdmin: Bool = false
-    var hasSeenReflectionAlert: Bool = UserDefaultStorage.hasSeenReflectionAlert {
-        willSet {
-            UserDefaultHandler.setHasSeenAlert(to: newValue)
-        }
-    }
     
     // MARK: - property
     
@@ -107,9 +102,6 @@ final class HomeViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if reflectionStatus == .Progressing && !hasSeenReflectionAlert {
-            presentStartReflectionView()
-        }
         fetchCertainTeamDetail(type: .fetchCertainTeamDetail)
         fetchCurrentReflectionDetail(type: .fetchCurrentReflectionDetail)
     }
@@ -220,7 +212,7 @@ final class HomeViewController: BaseViewController {
         let viewController = StartReflectionViewController(reflectionId: currentReflectionId, navigationViewController: navigationController, isAdmin: self.isAdmin)
         viewController.modalPresentationStyle = .overFullScreen
         present(viewController, animated: true)
-        hasSeenReflectionAlert = true
+        UserDefaultHandler.setHasSeenAlert(to: true)
         UserDefaultHandler.clearUserDefaults(of: .seenKeywordIdList)
         UserDefaultHandler.clearUserDefaults(of: .seenMemberIdList)
         UserDefaultHandler.clearUserDefaults(of: .completedCurrentReflection)
@@ -312,7 +304,7 @@ final class HomeViewController: BaseViewController {
                             self.showAddFeedbackButton()
                         case .Progressing:
                             self.hideAddFeedbackButton()
-                            if !self.hasSeenReflectionAlert {
+                            if !UserDefaultStorage.hasSeenReflectionAlert {
                                 self.presentStartReflectionView()
                             }
                         }
