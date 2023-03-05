@@ -42,7 +42,7 @@ final class SelectReflectionMemberViewController: BaseViewController {
             } else {
                 self?.dismiss(animated: true)
             }
-            self?.resetHasSeenAlert()
+            UserDefaultHandler.setHasSeenAlert(to: false)
         }
         button.addAction(action, for: .touchUpInside)
         button.isDisabled = true
@@ -108,10 +108,6 @@ final class SelectReflectionMemberViewController: BaseViewController {
         if UserDefaultStorage.completedCurrentReflection {
             feedbackDoneButton.isDisabled = false
         }
-    }
-    
-    private func resetHasSeenAlert() {
-        UserDefaultHandler.setHasSeenAlert(to: false)
     }
     
     private func didTappedMember() {
