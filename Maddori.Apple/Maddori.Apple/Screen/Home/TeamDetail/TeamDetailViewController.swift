@@ -30,6 +30,41 @@ final class TeamDetailViewController: BaseViewController {
         button.setUnderline()
         return button
     }()
+    private let memberTitleLabel: UILabel = {
+        let label = UILabel()
+        label.text = TextLiteral.teamDetailViewControllerMemberTitleLabel
+        label.textColor = .black100
+        label.font = .label2
+        return label
+    }()
+    private let profileImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.layer.cornerRadius = 23
+        imageView.image = ImageLiterals.imgDefaultProfile
+        return imageView
+    }()
+    private let profileNicknameLabel: UILabel = {
+        let label = UILabel()
+        // FIXME: - API 연결 후 삭제
+        label.text = "이두"
+        label.font = .label2
+        label.textColor = .gray600
+        return label
+    }()
+    private let profileRoleLabel: UILabel = {
+        let label = UILabel()
+        // FIXME: - API 연결 후 삭제
+        label.text = "디자인 리드 / 개발자"
+        label.font = .caption2
+        label.textColor = .gray400
+        return label
+    }()
+    private let dividerView: UIView = {
+        let view = UIView()
+        view.layer.borderWidth = 0.5
+        view.layer.borderColor = UIColor.gray300.cgColor
+        return view
+    }()
     
     // MARK: - life cycle
     
@@ -57,6 +92,38 @@ final class TeamDetailViewController: BaseViewController {
             $0.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.centerY.equalTo(titleLabel.snp.centerY)
             $0.width.height.equalTo(44)
+        }
+        
+        view.addSubview(memberTitleLabel)
+        memberTitleLabel.snp.makeConstraints {
+            $0.top.equalTo(titleLabel.snp.bottom).offset(SizeLiteral.topComponentPadding)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+        
+        view.addSubview(profileImageView)
+        profileImageView.snp.makeConstraints {
+            $0.top.equalTo(memberTitleLabel.snp.bottom).offset(20)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.width.height.equalTo(46)
+        }
+        
+        view.addSubview(profileNicknameLabel)
+        profileNicknameLabel.snp.makeConstraints {
+            $0.leading.equalTo(profileImageView.snp.trailing).offset(12)
+            $0.bottom.equalTo(profileImageView.snp.centerY)
+        }
+        
+        view.addSubview(profileRoleLabel)
+        profileRoleLabel.snp.makeConstraints {
+            $0.leading.equalTo(profileImageView.snp.trailing).offset(12)
+            $0.top.equalTo(profileNicknameLabel.snp.bottom).offset(4)
+        }
+        
+        view.addSubview(dividerView)
+        dividerView.snp.makeConstraints {
+            $0.top.equalTo(profileImageView.snp.bottom).offset(25)
+            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.height.equalTo(1)
         }
     }
     
