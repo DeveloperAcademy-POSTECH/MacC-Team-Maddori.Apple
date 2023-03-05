@@ -13,11 +13,7 @@ final class ReflectionMemberCollectionViewCell: BaseCollectionViewCell {
     
     override var isSelected: Bool {
         didSet {
-            if isSelected {
-                applyAttribute()
-            } else {
-                resetAttribute()
-            }
+            applyAttribute()
         }
     }
     
@@ -80,13 +76,5 @@ final class ReflectionMemberCollectionViewCell: BaseCollectionViewCell {
         self.nicknameLabel.textColor = .gray300
         self.roleLabel.textColor = .gray300
         self.makeShadow(color: .black, opacity: 0.2, offset: CGSize.zero, radius: 1)
-    }
-    
-    private func resetAttribute() {
-        self.backgroundColor = .white300
-        self.profileImage.layer.opacity = 1
-        self.nicknameLabel.textColor = .gray600
-        self.roleLabel.textColor = .gray400
-        self.makeShadow(color: .black, opacity: 0.2, offset: CGSize.zero, radius: 2)
     }
 }
