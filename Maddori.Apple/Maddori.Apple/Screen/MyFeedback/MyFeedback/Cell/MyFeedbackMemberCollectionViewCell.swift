@@ -30,6 +30,10 @@ final class MyFeedbackMemberCollectionViewCell: BaseCollectionViewCell {
         view.makeShadow(color: .black, opacity: 0.25, offset: CGSize.zero, radius: 1)
         return view
     }()
+    let profileImageView: UIImageView = {
+        let view = UIImageView(image: ImageLiterals.imgProfileNone)
+        return view
+    }()
     private let memberNameLabel: UILabel = {
         let label = UILabel()
         label.font = .body2
@@ -48,12 +52,18 @@ final class MyFeedbackMemberCollectionViewCell: BaseCollectionViewCell {
     override func render() {
         self.addSubview(shadowView)
         shadowView.snp.makeConstraints {
+            $0.centerX.top.equalToSuperview()
+            $0.width.height.equalTo(60)
+        }
+        
+        shadowView.addSubview(profileImageView)
+        profileImageView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
         
         self.addSubview(memberNameLabel)
         memberNameLabel.snp.makeConstraints {
-            $0.center.equalToSuperview()
+            $0.top.equalTo(shadowView.snp.bottom).offset(8)
             $0.leading.trailing.equalToSuperview().inset(4)
         }
     }
@@ -61,18 +71,18 @@ final class MyFeedbackMemberCollectionViewCell: BaseCollectionViewCell {
     // MARK: - func
     
     private func setSelectedCellLayer() {
-        self.layer.cornerRadius = 30
-        self.layer.borderColor = UIColor.blue200.cgColor
-        self.layer.borderWidth = 2
-        self.layer.shadowOpacity = 0
+        shadowView.layer.cornerRadius = 30
+        shadowView.layer.borderColor = UIColor.blue200.cgColor
+        shadowView.layer.borderWidth = 2
+        shadowView.layer.shadowOpacity = 0
         memberNameLabel.textColor = .blue200
     }
     
     private func setShadowLayer() {
-        self.layer.cornerRadius = 30
-        self.layer.borderWidth = 0
-        self.layer.borderColor = UIColor.clear.cgColor
-        self.makeShadow(color: .black, opacity: 0.25, offset: CGSize.zero, radius: 1)
+        shadowView.layer.cornerRadius = 30
+        shadowView.layer.borderWidth = 0
+        shadowView.layer.borderColor = UIColor.clear.cgColor
+        shadowView.makeShadow(color: .black, opacity: 0.25, offset: CGSize.zero, radius: 1)
         memberNameLabel.textColor = .gray400
     }
     

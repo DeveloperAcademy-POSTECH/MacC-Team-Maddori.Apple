@@ -45,7 +45,7 @@ final class MyFeedbackViewController: BaseViewController {
                                                left: Size.horizontalPadding,
                                                bottom: Size.verticalPadding,
                                                right: Size.horizontalPadding)
-        flowLayout.itemSize = CGSize(width: Size.cellSize, height: Size.cellSize)
+        flowLayout.itemSize = CGSize(width: Size.cellSize, height: Size.cellSize + 20)
         flowLayout.minimumLineSpacing = Size.minimumLineSpacing
         return flowLayout
     }()
@@ -110,7 +110,7 @@ final class MyFeedbackViewController: BaseViewController {
         memberCollectionView.snp.makeConstraints {
             $0.top.equalTo(myFeedbackLabel.snp.bottom).offset(7)
             $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(100)
+            $0.height.equalTo(120)
         }
         
         view.addSubview(dividerView)
