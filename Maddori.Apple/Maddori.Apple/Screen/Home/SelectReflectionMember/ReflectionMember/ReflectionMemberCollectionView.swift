@@ -99,6 +99,22 @@ extension ReflectionMemberCollectionView: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         
+        if let profileImageURL = memberList[indexPath.item].profileImagePath {
+            //            if let profileImageData = try? Data(contentsOf: URL(string: UrlLiteral.baseUrl2 + profileImageURL)!) {
+            //                DispatchQueue.main.async {
+            //                    cell.profileImage.image = UIImage(data: profileImageData)
+            //                }
+            //            }
+            URLSession.shared.dataTask(with: NSURL(string: UrlLiteral.baseUrl2 + profileImageURL)! as URL, completionHandler: { (data, response, error) -> Void in
+                if error != nil {
+                    return
+                }
+                DispatchQueue.main.async {
+                    cell.profileImage.image = UIImage(data: data!)
+                }
+            }).resume()
+        }
+        
         cell.nicknameLabel.text = memberList[indexPath.item].nickname
         cell.roleLabel.text = memberList[indexPath.item].role
         

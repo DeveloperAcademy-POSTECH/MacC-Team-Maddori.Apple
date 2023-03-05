@@ -115,6 +115,7 @@
 		525E722128FFC9A800EF3FCB /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525E722028FFC9A800EF3FCB /* BackButton.swift */; };
 		525E722528FFCFA600EF3FCB /* FeedbackTypeButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525E722428FFCFA600EF3FCB /* FeedbackTypeButtonView.swift */; };
 		52988B742921EAD50044A77F /* MyReflectionFeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52988B732921EAD50044A77F /* MyReflectionFeedbackViewController.swift */; };
+		52A53DDC29B49A3100C4BB4C /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A53DDB29B49A3100C4BB4C /* UIImageView+Extension.swift */; };
 		52AED2DD29128532004D70B9 /* FeedbackFromMeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52AED2DC29128532004D70B9 /* FeedbackFromMeModel.swift */; };
 		52CD58BC297BE24B008567E0 /* ProfileImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52CD58BB297BE24B008567E0 /* ProfileImageButton.swift */; };
 		52DC9091291A98CC00904739 /* MyFeedbackEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DC9090291A98CC00904739 /* MyFeedbackEditViewController.swift */; };
@@ -256,6 +257,7 @@
 		525E722028FFC9A800EF3FCB /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
 		525E722428FFCFA600EF3FCB /* FeedbackTypeButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackTypeButtonView.swift; sourceTree = "<group>"; };
 		52988B732921EAD50044A77F /* MyReflectionFeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReflectionFeedbackViewController.swift; sourceTree = "<group>"; };
+		52A53DDB29B49A3100C4BB4C /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		52AED2DC29128532004D70B9 /* FeedbackFromMeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackFromMeModel.swift; sourceTree = "<group>"; };
 		52CD58BB297BE24B008567E0 /* ProfileImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageButton.swift; sourceTree = "<group>"; };
 		52DC9090291A98CC00904739 /* MyFeedbackEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFeedbackEditViewController.swift; sourceTree = "<group>"; };
@@ -438,6 +440,7 @@
 				3EB508912917585600FB77CB /* UICollectionView + Extension.swift */,
 				7E7F160E2921CD4A00C6BE96 /* UITabBar+Extension.swift */,
 				3EA341E72925E5EA005CBD1C /* String+Extension.swift */,
+				52A53DDB29B49A3100C4BB4C /* UIImageView+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1215,6 +1218,7 @@
 				7E2ECA102901136700A4D65C /* SetNicknameViewController.swift in Sources */,
 				3984742629264ACE00EDC139 /* MyFeedBackEndPoint.swift in Sources */,
 				39F52C4D29232E5D00B19A77 /* AddReflectionDTO.swift in Sources */,
+				52A53DDC29B49A3100C4BB4C /* UIImageView+Extension.swift in Sources */,
 				7E3907012943545A003E9743 /* FeedbackContent.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

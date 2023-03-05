@@ -19,7 +19,7 @@ final class ReflectionMemberCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - property
     
-    private let profileImage: UIImageView = {
+    let profileImage: UIImageView = {
         let imageView = UIImageView()
         imageView.image = ImageLiterals.imgProfileNone
         imageView.layer.cornerRadius = 23
