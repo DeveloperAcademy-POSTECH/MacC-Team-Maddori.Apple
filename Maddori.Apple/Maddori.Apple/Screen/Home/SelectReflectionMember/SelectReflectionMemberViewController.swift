@@ -112,8 +112,8 @@ final class SelectReflectionMemberViewController: BaseViewController {
     
     private func didTappedMember() {
         memberCollectionView.didTappedMember = { [weak self] member, members in
-            guard let id = member.userId,
-                  let username = member.userName,
+            guard let id = member.id,
+                  let username = member.nickname,
                   let reflectionId = self?.reflectionId else { return }
             let viewController = InProgressViewController(memberId: id, memberUsername: username, reflectionId: reflectionId)
             self?.navigationController?.pushViewController(viewController, animated: true)
@@ -140,7 +140,7 @@ final class SelectReflectionMemberViewController: BaseViewController {
                 dump(json)
                 guard let fetchedMemberList = json.detail?.members else { return }
                 DispatchQueue.main.async {
-                    self.memberCollectionView.teamMemberList = fetchedMemberList
+                    self.memberCollectionView.memberList = fetchedMemberList
                     self.feedbackDoneButton.title = TextLiteral.selectReflectionMemberViewControllerDoneButtonText + "(\(self.memberCollectionView.selectedMemberList.count)/\(self.memberCollectionView.memberList.count))"
                 }
             }
