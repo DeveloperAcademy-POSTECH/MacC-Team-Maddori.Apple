@@ -96,7 +96,9 @@ final class CreateReflectionViewController: BaseViewController {
         let hideKeyboardAction = UIAction { [weak self] _ in
             self?.view.endEditing(true)
         }
-        if isEditReflection, let date = reflectionDate {
+        if !isEditReflection {
+            picker.date = Date(timeIntervalSinceNow: 1 * 60)
+        } else if isEditReflection, let date = reflectionDate {
             picker.date = date
         }
         picker.datePickerMode = .time
@@ -111,6 +113,7 @@ final class CreateReflectionViewController: BaseViewController {
     }()
     private lazy var mainButton: MainButton = {
         let button = MainButton()
+        button.isDisabled = isEditReflection ? false : true
         button.title = isEditReflection ? TextLiteral.editReflectionViewControllerButtonText : TextLiteral.createReflectionViewControllerButtonText
         return button
     }()
@@ -121,6 +124,7 @@ final class CreateReflectionViewController: BaseViewController {
         super.viewDidLoad()
         setupAddReflection()
         setupNotificationCenter()
+        setupTextfieldObserver()
         if isEditReflection {
             setupDeleteReflection()
         }
@@ -182,6 +186,10 @@ final class CreateReflectionViewController: BaseViewController {
     private func setupNotificationCenter() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    private func setupTextfieldObserver() {
+        reflectionNameView.nameTextField.addTarget(self, action: #selector(texfieldHasContent), for: .editingChanged)
     }
     
     private func setupAddReflection() {
@@ -270,6 +278,15 @@ final class CreateReflectionViewController: BaseViewController {
         })
     }
     
+    @objc private func texfieldHasContent() {
+        if reflectionNameView.nameTextField.hasText {
+            
+            mainButton.isDisabled = false
+        } else {
+            mainButton.isDisabled = true
+        }
+    }
+    
     // MARK: - api
     
     private func patchReflectionDetail(type: CreateReflectionEndPoint<AddReflectionDTO>) {
@@ -291,9 +308,9 @@ final class CreateReflectionViewController: BaseViewController {
                    parameters: type.body,
                    encoder: JSONParameterEncoder.default,
                    headers: type.header
-        ).responseDecodable(of: BaseModel<DeleteReflectionResponse>.self) { [weak self] json in
-            if let result = json.value {
-                dump(result)
+        ).responseDecodable(of: BaseModel<DeleteReflectionResponse>.self) { json in
+            if let data = json.value {
+                dump(data)
             }
         }
     }

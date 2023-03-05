@@ -39,7 +39,7 @@ enum TextLiteral {
     static let createReflectionViewControllerDateLabel = "회고 일시"
     static let createReflectionViewControllerButtonText = "추가하기"
     static let createReflectionAlertTitle = "회고 일정 설정 오류"
-    static let createReflectionAlertContent = "회고 일정은 현 시간보다 이전으로\n설정할 수 없습니다."
+    static let createReflectionAlertContent = "회고 일정은 현 시간 이후로 설정해주세요."
     static let editReflectionViewControllerTitle = "회고 정보를 수정해 주세요"
     static let editReflectionViewControllerButtonText = "수정하기"
     static let deleteReflectionAlertTitle = "회고 일정을 삭제하시겠습니까?"
