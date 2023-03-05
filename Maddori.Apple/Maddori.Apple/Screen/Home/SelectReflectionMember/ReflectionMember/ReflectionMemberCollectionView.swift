@@ -100,26 +100,22 @@ extension ReflectionMemberCollectionView: UICollectionViewDataSource {
         }
         
         if let profileImageURL = memberList[indexPath.item].profileImagePath {
-            //            if let profileImageData = try? Data(contentsOf: URL(string: UrlLiteral.baseUrl2 + profileImageURL)!) {
-            //                DispatchQueue.main.async {
-            //                    cell.profileImage.image = UIImage(data: profileImageData)
-            //                }
-            //            }
-            URLSession.shared.dataTask(with: NSURL(string: UrlLiteral.baseUrl2 + profileImageURL)! as URL, completionHandler: { (data, response, error) -> Void in
+            URLSession.shared.dataTask(with: NSURL(string: UrlLiteral.imageBaseURL + profileImageURL)! as URL, completionHandler: { (data, response, error) -> Void in
                 if error != nil {
                     return
-                }
-                DispatchQueue.main.async {
-                    cell.profileImage.image = UIImage(data: data!)
+                } else {
+                    DispatchQueue.main.async {
+                        cell.profileImage.image = UIImage(data: data!)
+                        cell.profileImage.clipsToBounds = true
+                        cell.profileImage.layer.cornerRadius = 23
+                    }
                 }
             }).resume()
         }
         
         cell.nicknameLabel.text = memberList[indexPath.item].nickname
         cell.roleLabel.text = memberList[indexPath.item].role
-        
-        // FIXME: - profile image, role 추가
-        
+                
         if let userId = memberList[indexPath.item].id {
             if selectedMemberList.contains(userId) {
                 cell.applyAttribute()
