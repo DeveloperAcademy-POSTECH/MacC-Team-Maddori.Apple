@@ -45,11 +45,6 @@ final class CreateReflectionViewController: BaseViewController {
     }()
     private lazy var deleteButton: DeleteButton = {
         let button = DeleteButton(type: .system)
-        let action = UIAction { [weak self] _ in
-            // FIXME: Delete Reflection API 연결
-            print("삭제")
-        }
-        button.addAction(action, for: .touchUpInside)
         return button
     }()
     private lazy var titleLabel: UILabel = {
@@ -125,8 +120,10 @@ final class CreateReflectionViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupAddReflection()
-        setupDeleteReflection()
         setupNotificationCenter()
+        if isEditReflection {
+            setupDeleteReflection()
+        }
     }
     
     override func render() {
@@ -212,7 +209,11 @@ final class CreateReflectionViewController: BaseViewController {
         let action = UIAction { [weak self] _ in
             guard let reflectionId = self?.reflectionId else { return }
             
-            let alert = UIAlertController(title: "회고 일정 삭제하게", message: "회고 일정을 정말 삭제하시겠습니까?", preferredStyle: .alert)
+            let alert = UIAlertController(
+                title: TextLiteral.deleteReflectionAlertTitle,
+                message: TextLiteral.deleteReflectionAlertDetail,
+                preferredStyle: .alert
+            )
             let cancelAction = UIAlertAction(title: "취소", style: .cancel)
             let deleteAction = UIAlertAction(title: "삭제", style: .destructive) { [weak self] _ in
                 self?.deleteReflectionDetail(type: .deleteReflectionDetail(reflectionId: reflectionId))
