@@ -21,7 +21,7 @@ enum InProgressEndPoint<T: Encodable>: EndPointable {
         case .fetchTeamAndUserFeedback(let reflectionId, let memberId):
             return "\(UrlLiteral.baseUrl)/teams/\(UserDefaultStorage.teamId)/reflections/\(reflectionId)/feedbacks/from-team?members=\(memberId)"
         case .patchEndReflection(let reflectionId):
-            return "\(UrlLiteral.baseUrl)/teams/\(UserDefaultStorage.teamId)/reflections/\(reflectionId)/end"
+            return "\(UrlLiteral.baseUrl2)/teams/\(UserDefaultStorage.teamId)/reflections/\(reflectionId)/end"
         }
     }
     

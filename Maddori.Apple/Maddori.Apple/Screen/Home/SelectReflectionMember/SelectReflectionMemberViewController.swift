@@ -36,12 +36,7 @@ final class SelectReflectionMemberViewController: BaseViewController {
         let button = MainButton()
         let action = UIAction { [weak self] _ in
             guard let reflectionId = self?.reflectionId else { return }
-            guard let isAdmin = self?.isAdmin else { return }
-            if isAdmin {
-                self?.patchEndReflection(type: .patchEndReflection(reflectionId: reflectionId))
-            } else {
-                self?.dismiss(animated: true)
-            }
+            self?.patchEndReflection(type: .patchEndReflection(reflectionId: reflectionId))
             UserDefaultHandler.setHasSeenAlert(to: false)
         }
         button.addAction(action, for: .touchUpInside)
@@ -151,7 +146,8 @@ final class SelectReflectionMemberViewController: BaseViewController {
                    method: type.method,
                    headers: type.headers
         ).responseDecodable(of: BaseModel<ReflectionInfoResponse>.self) { [weak self] json in
-            if let _ = json.value {
+            if let json = json.value {
+                dump(json)
                 self?.dismiss(animated: true)
             }
         }
