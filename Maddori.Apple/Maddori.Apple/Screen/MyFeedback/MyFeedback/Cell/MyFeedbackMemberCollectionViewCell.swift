@@ -96,7 +96,6 @@ final class MyFeedbackMemberCollectionViewCell: BaseCollectionViewCell {
         if let path = path {
             if let fullImagePath = URL(string: UrlLiteral.iamgeBaseUrl + path) {
                 profileImageView.load(from: fullImagePath)
-                
             }
         } else {
             profileImageView.image = ImageLiterals.imgProfileNone
