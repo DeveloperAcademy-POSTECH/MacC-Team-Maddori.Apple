@@ -12,7 +12,7 @@ import SnapKit
 
 final class MyFeedbackViewController: BaseViewController {
     var selectedIndex: Int = 0
-    private var memberList: [MemberResponse] = [] {
+    private var memberList: [MemberDetailResponse] = [] {
         didSet {
             if memberList.isEmpty {
                 setLayoutEmptyView()
@@ -143,7 +143,7 @@ final class MyFeedbackViewController: BaseViewController {
                    headers: type.headers
         ).responseDecodable(of: BaseModel<TeamMembersResponse>.self) { [weak self] json in
             if let data = json.value {
-                var memberArray: [MemberResponse] = []
+                var memberArray: [MemberDetailResponse] = []
                 guard let members = json.value?.detail?.members else { return }
                 members.forEach {
                     if $0.userName != UserDefaultStorage.nickname {
@@ -190,6 +190,7 @@ extension MyFeedbackViewController: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         cell.setMemberName(name: memberList[indexPath.item].userName ?? "")
+        cell.setMemberProfileImage(from: memberList[indexPath.item].profileImagePath)
         if indexPath.item == selectedIndex {
             cell.isSelected = true
             collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .init())

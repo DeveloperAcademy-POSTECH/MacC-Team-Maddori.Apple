@@ -107,15 +107,15 @@ final class MemberCollectionView: UIView {
     
     var type: CollectionType
     var currentToUserId = 0
-    var memberList: [MemberResponse] = [] {
+    var memberList: [MemberDetailResponse] = [] {
         didSet {
             collectionView.reloadData()
         }
     }
-    var didTappedMember: (([MemberResponse]) -> ())?
-    var didTappedFeedBackMember: ((MemberResponse) -> ())?
-    var selectedMember: MemberResponse?
-    private var selectedMemberList: [MemberResponse] = []
+    var didTappedMember: (([MemberDetailResponse]) -> ())?
+    var didTappedFeedBackMember: ((MemberDetailResponse) -> ())?
+    var selectedMember: MemberDetailResponse?
+    private var selectedMemberList: [MemberDetailResponse] = []
     var selectedMemberIdList: [Int] = UserDefaultStorage.seenMemberIdList {
         willSet {
             UserDefaultHandler.appendSeenMemberIdList(memberIdList: newValue)
@@ -171,7 +171,7 @@ extension MemberCollectionView: UICollectionViewDelegate {
             didTappedFeedBackMember?(member)
             
         case .progressReflection:
-            let selectedItem: MemberResponse = memberList[indexPath.item]
+            let selectedItem: MemberDetailResponse = memberList[indexPath.item]
             if !selectedMemberList.contains(where: { $0.userName == selectedItem.userName } ) {
                 selectedMemberList.append(selectedItem)
             }

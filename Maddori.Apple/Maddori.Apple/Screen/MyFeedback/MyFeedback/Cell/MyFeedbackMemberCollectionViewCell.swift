@@ -30,9 +30,11 @@ final class MyFeedbackMemberCollectionViewCell: BaseCollectionViewCell {
         view.makeShadow(color: .black, opacity: 0.25, offset: CGSize.zero, radius: 1)
         return view
     }()
-    let profileImageView: UIImageView = {
-        let view = UIImageView(image: ImageLiterals.imgProfileNone)
-        return view
+    private let profileImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.layer.cornerRadius = 30
+        imageView.clipsToBounds = true
+        return imageView
     }()
     private let memberNameLabel: UILabel = {
         let label = UILabel()
@@ -88,5 +90,16 @@ final class MyFeedbackMemberCollectionViewCell: BaseCollectionViewCell {
     
     func setMemberName(name: String) {
         memberNameLabel.text = name
+    }
+    
+    func setMemberProfileImage(from path: String?) {
+        if let path = path {
+            if let fullImagePath = URL(string: UrlLiteral.iamgeBaseUrl + path) {
+                profileImageView.load(from: fullImagePath)
+                
+            }
+        } else {
+            profileImageView.image = ImageLiterals.imgProfileNone
+        }
     }
 }

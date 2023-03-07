@@ -12,7 +12,7 @@ import SnapKit
 
 final class SelectMemberView: UIStackView {
     
-    var didSelectedMemeber: ((MemberResponse) -> ())?
+    var didSelectedMemeber: ((MemberDetailResponse) -> ())?
     var isSelectedMember: ((Bool) -> ())?
     
     var isOpened: Bool = false {
