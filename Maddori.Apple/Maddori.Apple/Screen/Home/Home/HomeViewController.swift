@@ -386,6 +386,4 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
-extension HomeViewController: UISheetPresentationControllerDelegate {
-
-}
+extension HomeViewController: UISheetPresentationControllerDelegate {}
