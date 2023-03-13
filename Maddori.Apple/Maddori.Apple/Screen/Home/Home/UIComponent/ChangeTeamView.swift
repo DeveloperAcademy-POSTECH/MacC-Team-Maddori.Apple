@@ -19,7 +19,7 @@ final class ChangeTeamView: UIView {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = .label2
-        label.text = "참여 중인 팀"
+        label.text = TextLiteral.changeTeamViewLabel
         label.textColor = .black100
         return label
     }()

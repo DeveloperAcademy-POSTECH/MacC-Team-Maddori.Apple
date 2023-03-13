@@ -81,16 +81,16 @@ final class TeamManageViewController: BaseViewController {
     }
     
     private func configureSettingModels() {
-        sections.append(Section(options: [Option(title: "새로운 팀 합류하기", handler: {
+        sections.append(Section(options: [Option(title: TextLiteral.teamManageViewControllerJoinNewTeam, handler: {
             self.joinNewTeam()
         }),
-                                          Option(title: "팀 생성하기", handler: {
+                                          Option(title: TextLiteral.teamManageViewControllerCreateTeam, handler: {
             self.createTeam()
         })]))
-        sections.append(Section(options: [Option(title: "로그아웃", handler: {
+        sections.append(Section(options: [Option(title: TextLiteral.teamManageViewControllerLoggout, handler: {
             self.logout()
         }),
-                                          Option(title: "회원탈퇴", handler: {
+                                          Option(title: TextLiteral.teamManageViewControllerWithdrawl, handler: {
             self.withdrawal()
         })]))
     }
