@@ -8,5 +8,7 @@
 import Foundation
 
 struct JoinTeamDTO: Encodable {
-    let invitation_code: String
+    let nickname: String
+    let role: String?
+    let profile_image: String?
 }
