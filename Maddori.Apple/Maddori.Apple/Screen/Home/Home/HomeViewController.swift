@@ -49,9 +49,8 @@ final class HomeViewController: BaseViewController {
         button.semanticContentAttribute = .forceRightToLeft
         button.setPreferredSymbolConfiguration(UIImage.SymbolConfiguration(pointSize: 13, weight: .semibold), forImageIn: .normal)
         button.tintColor = .black100
-        let action = UIAction { _ in
-            // FIXME: 버튼 눌렀을 때 action 추가
-            print("touched")
+        let action = UIAction { [weak self] _ in
+            self?.presentTeamModal()
         }
         button.addAction(action, for: .touchUpInside)
         return button
@@ -154,6 +153,24 @@ final class HomeViewController: BaseViewController {
     }
     
     // MARK: - func
+    
+    private func presentTeamModal() {
+        let teamViewController = TeamManageViewController()
+        
+        teamViewController.modalPresentationStyle = .pageSheet
+        
+        if #available(iOS 15.0, *) {
+            if let sheet = teamViewController.sheetPresentationController {
+                sheet.detents = [.medium(), .large()]
+                sheet.delegate = self
+                sheet.prefersGrabberVisible = true
+            }
+        } else {
+            // FIXME: 15 미만일때는 어떻게 해야할지 고민중..
+        }
+        
+        present(teamViewController, animated: true)
+    }
     
     private func setupDelegation() {
         keywordCollectionView.delegate = self
@@ -368,3 +385,5 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
         return KeywordCollectionViewCell.fittingSize(availableHeight: size, keyword: keywordList[indexPath.item])
     }
 }
+
+extension HomeViewController: UISheetPresentationControllerDelegate {}
