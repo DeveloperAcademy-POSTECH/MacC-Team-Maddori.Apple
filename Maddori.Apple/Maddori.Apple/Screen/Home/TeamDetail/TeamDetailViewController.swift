@@ -194,6 +194,7 @@ final class TeamDetailViewController: BaseViewController {
         let action = UIAction { [weak self] _ in
             self?.makeRequestAlert(title: TextLiteral.teamDetailViewControllerLeaveTeamAlertTitle,
                                    message: TextLiteral.teamDetailViewControllerLeaveTeamAlertMessage,
+                                   okTitle: TextLiteral.leaveTitle,
                                    // FIXME: - 팀 나가기 API 연결
                                    okAction: nil)
         }

@@ -18,6 +18,7 @@ enum TextLiteral {
     static let doneButtonNext = "다음"
     static let doneButtonComplete = "완료"
     static let actionSheetCancelTitle = "취소"
+    static let leaveTitle = "나가기"
     
     // MARK: - MainViewController
     
