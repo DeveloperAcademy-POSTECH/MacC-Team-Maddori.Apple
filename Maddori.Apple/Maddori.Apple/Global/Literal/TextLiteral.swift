@@ -214,6 +214,8 @@ enum TextLiteral {
     static let reflectionTitleLabelProgressing: String = "회고가 시작되었습니다!"
     static let reflectionDescriptionLabelSettingRequired: String = "회고 일정을 정해주세요"
     static let reflectionDescriptionLabelProgressing: String = "터치하여 회고에 참여해주세요"
+    static let previewTitleLabel: String = "회고 일정을 추가할 수 없습니다"
+    static let previewDescriptionLabel: String = "팀을 생성하거나 팀에 합류해주세요"
     
     // MARK: - MyReflectionViewController
     

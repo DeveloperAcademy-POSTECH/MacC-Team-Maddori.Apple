@@ -133,6 +133,7 @@
 		7EB4D58229011EF7001FC396 /* JoinTeamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB4D58129011EF7001FC396 /* JoinTeamViewController.swift */; };
 		7EE38BAD2925DDD200FD738D /* EncodeDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE38BAC2925DDD200FD738D /* EncodeDTO.swift */; };
 		7EE38BB3292623F500FD738D /* MyReflectionEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE38BB2292623F500FD738D /* MyReflectionEndPoint.swift */; };
+		D702278A297F99510027EF64 /* TeamManageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7022789297F99500027EF64 /* TeamManageViewController.swift */; };
 		D724790C28FEC8C900D67B50 /* BaseTextFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D724790B28FEC8C900D67B50 /* BaseTextFieldViewController.swift */; };
 		D724790E28FEEEC300D67B50 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D724790D28FEEEC300D67B50 /* CustomTextField.swift */; };
 		D72CF1B0290552960067A118 /* InvitationCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72CF1AF290552960067A118 /* InvitationCodeViewController.swift */; };
@@ -274,6 +275,7 @@
 		7EB4D58129011EF7001FC396 /* JoinTeamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinTeamViewController.swift; sourceTree = "<group>"; };
 		7EE38BAC2925DDD200FD738D /* EncodeDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncodeDTO.swift; sourceTree = "<group>"; };
 		7EE38BB2292623F500FD738D /* MyReflectionEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReflectionEndPoint.swift; sourceTree = "<group>"; };
+		D7022789297F99500027EF64 /* TeamManageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamManageViewController.swift; sourceTree = "<group>"; };
 		D724790B28FEC8C900D67B50 /* BaseTextFieldViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTextFieldViewController.swift; sourceTree = "<group>"; };
 		D724790D28FEEEC300D67B50 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		D72CF1AF290552960067A118 /* InvitationCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationCodeViewController.swift; sourceTree = "<group>"; };
@@ -728,6 +730,7 @@
 			children = (
 				3E5195A9292B05B000710A01 /* UIComponent */,
 				3E557FC228FE7BBC00714E46 /* HomeViewController.swift */,
+				D7022789297F99500027EF64 /* TeamManageViewController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -1161,6 +1164,7 @@
 				3E557FC528FE854600714E46 /* KeywordLabel.swift in Sources */,
 				39F52C53292330D200B19A77 /* MemberResponse.swift in Sources */,
 				39F52C6A292473A800B19A77 /* ReflectionInfoResponse.swift in Sources */,
+				D702278A297F99510027EF64 /* TeamManageViewController.swift in Sources */,
 				39F52C68292472EB00B19A77 /* AllFeedBackResponse.swift in Sources */,
 				3975CEAF293EEDD6002D4F1A /* KeywordView.swift in Sources */,
 				39257DF128F93C2A00201E0B /* ImageLiteral.swift in Sources */,
