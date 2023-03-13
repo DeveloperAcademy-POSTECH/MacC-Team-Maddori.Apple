@@ -12,14 +12,14 @@ import Alamofire
 import SnapKit
 
 final class SetNicknameViewController: BaseViewController {
-    // FIXME: - 합류한 팀 이름 받아오기
-    var teamName = "맛쟁이사과처럼세글자"
+    
     private enum TextLength {
         static let totalMin: Int = 0
         static let nicknameMax: Int = 6
         static let roleMax: Int = 20
     }
     private let cameraPicker = UIImagePickerController()
+    private let teamName: String = UserDefaultStorage.teamName
     
     // MARK: - property
     
@@ -99,11 +99,7 @@ final class SetNicknameViewController: BaseViewController {
         button.title = TextLiteral.setNicknameControllerDoneButtonText
         button.isDisabled = true
         let action = UIAction { [weak self] _ in
-            guard let nickname = self?.nicknameTextField.text else { return }
-            guard let role = self?.roleTextField.text else { return }
-            // FIXME: - 수정된 api 연결 (userJoinTeam)
-            self?.nicknameTextField.resignFirstResponder()
-            self?.roleTextField.resignFirstResponder()
+            self?.didTappedDoneButton()
         }
         button.addAction(action, for: .touchUpInside)
         return button
@@ -288,6 +284,28 @@ final class SetNicknameViewController: BaseViewController {
         }
     }
     
+    private func didTappedDoneButton() {
+        guard let nickname = nicknameTextField.text else { return }
+        guard let role = roleTextField.text else { return }
+        // FIXME: - 이미지 데이터 추가
+        
+        if UserDefaultStorage.teamId == 0 {
+            let dto = CreateTeamDTO(team_name: teamName, nickname: nickname, role: role, profile_image: nil)
+            dispatchCreateTeam(type: .dispatchCreateTeam(dto))
+        } else {
+            let dto = JoinTeamDTO(nickname: nickname, role: role, profile_image: nil)
+            dispatchJoinTeam(type: .dispatchJoinTeam(teamId: UserDefaultStorage.teamId, dto))
+        }
+        
+        nicknameTextField.resignFirstResponder()
+        roleTextField.resignFirstResponder()
+    }
+    
+    private func pushInvitationCodeViewController(invitationCode: String) {
+        let viewController = InvitationCodeViewController(invitationCode: invitationCode)
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
     // MARK: - selector
     
     @objc private func keyboardWillShow(notification: NSNotification) {
@@ -306,6 +324,58 @@ final class SetNicknameViewController: BaseViewController {
         })
         
         didTappedBackground()
+    }
+    
+    // MARK: - api
+    
+    private func dispatchCreateTeam(type: SetupEndPoint<CreateTeamDTO>) {
+        AF.request(type.address,
+                   method: type.method,
+                   parameters: type.body,
+                   encoder: JSONParameterEncoder.default,
+                   headers: type.headers
+        ).responseDecodable(of: BaseModel<CreateTeamResponse>.self) { json in
+            if let json = json.value {
+                dump(json)
+                guard let teamId = json.detail?.id else { return }
+                UserDefaultHandler.setTeamId(teamId: teamId)
+                UserDefaultHandler.setIsLogin(isLogin: true)
+                DispatchQueue.main.async {
+                    if let invitationCode = json.detail?.team?.invitationCode {
+                        self.pushInvitationCodeViewController(invitationCode: invitationCode)
+                    }
+                }
+            } else {
+                DispatchQueue.main.async {
+                    self.makeAlert(title: TextLiteral.setNicknameViewControllerCreateTeamAlertTitle, message: TextLiteral.setNicknameViewControllerAlertMessage)
+                }
+            }
+        }
+    }
+    
+    private func dispatchJoinTeam(type: SetupEndPoint<JoinTeamDTO>) {
+        AF.request(type.address,
+                   method: type.method,
+                   parameters: type.body,
+                   encoder: JSONParameterEncoder.default,
+                   headers: type.headers
+        ).responseDecodable(of: BaseModel<JoinTeamResponse>.self) { json in
+            if let json = json.value {
+                dump(json)
+                guard let nickname = json.detail?.nickname else { return }
+                UserDefaultHandler.setIsLogin(isLogin: true)
+                UserDefaultHandler.setNickname(nickname: nickname)
+                DispatchQueue.main.async {
+                    if let invitationCode = json.detail?.team?.invitationCode {
+                        self.pushInvitationCodeViewController(invitationCode: invitationCode)
+                    }
+                }
+            } else {
+                DispatchQueue.main.async {
+                    self.makeAlert(title: TextLiteral.setNicknameViewControllerJoinTeamAlertTitle, message: TextLiteral.setNicknameViewControllerAlertMessage)
+                }
+            }
+        }
     }
 }
 

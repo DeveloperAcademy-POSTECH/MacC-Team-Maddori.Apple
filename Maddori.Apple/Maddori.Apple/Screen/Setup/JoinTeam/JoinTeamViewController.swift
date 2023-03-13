@@ -14,7 +14,7 @@ final class JoinTeamViewController: BaseTextFieldViewController {
     
     override var titleText: String {
         get {
-            return UserDefaultStorage.nickname + TextLiteral.joinTeamViewControllerTitleLabel
+            return TextLiteral.joinTeamViewControllerTitleLabel
         }
         
         set {
@@ -124,9 +124,10 @@ final class JoinTeamViewController: BaseTextFieldViewController {
         rootViewController.modalPresentationStyle = .fullScreen
         present(rootViewController, animated: true)
     }
-        
-    private func presentCertainTeamViewController(teamName: String, teamId: Int) {
-        self.showAlertView(type: .join, teamName: teamName)
+    
+    private func pushSetNicknameViewController() {
+        let viewController = SetNicknameViewController()
+        navigationController?.pushViewController(viewController, animated: true)
     }
     
     // MARK: - api
@@ -137,11 +138,13 @@ final class JoinTeamViewController: BaseTextFieldViewController {
                    headers: type.headers
         ).responseDecodable(of: BaseModel<TeamInfoResponse>.self) { json in
             if let json = json.value {
+                dump(json)
                 guard let teamId = json.detail?.id,
                       let teamName = json.detail?.teamName
                 else { return }
                 UserDefaultHandler.setTeamId(teamId: teamId)
-                self.presentCertainTeamViewController(teamName: teamName, teamId: UserDefaultStorage.teamId)
+                UserDefaultHandler.setTeamName(teamName: teamName)
+                self.pushSetNicknameViewController()
             } else {
                 DispatchQueue.main.async {
                     self.makeAlert(title: TextLiteral.joinTeamViewControllerAlertTitle, message: TextLiteral.joinTeamViewControllerAlertMessage)

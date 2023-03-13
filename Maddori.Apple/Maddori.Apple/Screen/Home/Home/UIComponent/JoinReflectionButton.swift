@@ -90,26 +90,34 @@ final class JoinReflectionButton: UIView {
         joinButton.addAction(action, for: .touchUpInside)
     }
     
-    func setupAttribute(reflectionStatus: ReflectionStatus, title: String, date: String) {
-        switch reflectionStatus {
-        case .SettingRequired, .Done:
-            reflectionTitleLabel.text = TextLiteral.reflectionTitleLabelSettingRequired
+    func setupAttribute(reflectionStatus: ReflectionStatus, title: String, date: String, isPreview: Bool) {
+        if !isPreview {
+            switch reflectionStatus {
+            case .SettingRequired, .Done:
+                reflectionTitleLabel.text = TextLiteral.reflectionTitleLabelSettingRequired
+                reflectionTitleLabel.textColor = .gray600
+                reflectionDescriptionLabel.text = TextLiteral.reflectionDescriptionLabelSettingRequired
+                reflectionDescriptionLabel.textColor = .gray500
+                calendarImageView.image = ImageLiterals.imgEmptyCalendar
+            case .Before:
+                reflectionTitleLabel.text = title
+                reflectionTitleLabel.textColor = .gray600
+                reflectionDescriptionLabel.text = date.formatDateString(to: "M월 d일 (EEE) HH:mm")
+                reflectionDescriptionLabel.textColor = .gray500
+                calendarImageView.image = ImageLiterals.imgCalendar
+            case .Progressing:
+                reflectionTitleLabel.text = TextLiteral.reflectionTitleLabelProgressing
+                reflectionTitleLabel.textColor = .white100
+                reflectionDescriptionLabel.text = TextLiteral.reflectionDescriptionLabelProgressing
+                reflectionDescriptionLabel.textColor = .white100
+                calendarImageView.image = ImageLiterals.imgYellowCalendar
+            }
+        } else {
+            reflectionTitleLabel.text = TextLiteral.previewTitleLabel
             reflectionTitleLabel.textColor = .gray600
-            reflectionDescriptionLabel.text = TextLiteral.reflectionDescriptionLabelSettingRequired
+            reflectionDescriptionLabel.text = TextLiteral.previewDescriptionLabel
             reflectionDescriptionLabel.textColor = .gray500
             calendarImageView.image = ImageLiterals.imgEmptyCalendar
-        case .Before:
-            reflectionTitleLabel.text = title
-            reflectionTitleLabel.textColor = .gray600
-            reflectionDescriptionLabel.text = date.formatDateString(to: "M월 d일 (EEE) HH:mm")
-            reflectionDescriptionLabel.textColor = .gray500
-            calendarImageView.image = ImageLiterals.imgCalendar
-        case .Progressing:
-            reflectionTitleLabel.text = TextLiteral.reflectionTitleLabelProgressing
-            reflectionTitleLabel.textColor = .white100
-            reflectionDescriptionLabel.text = TextLiteral.reflectionDescriptionLabelProgressing
-            reflectionDescriptionLabel.textColor = .white100
-            calendarImageView.image = ImageLiterals.imgYellowCalendar
         }
     }
 }
