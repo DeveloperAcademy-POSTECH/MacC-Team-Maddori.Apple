@@ -104,7 +104,7 @@ extension ReflectionMemberCollectionView: UICollectionViewDataSource {
         
         if let userId = memberList[indexPath.item].userId {
             if selectedMemberList.contains(userId) {
-                cell.applyAttribute()
+                cell.applySelectedAttribute()
             }
         }
         
