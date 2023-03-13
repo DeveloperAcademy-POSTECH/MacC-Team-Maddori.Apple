@@ -319,7 +319,7 @@ final class HomeViewController: BaseViewController {
                 self.currentReflectionId = reflectionId
                 self.reflectionTitle = reflectionTitle
                 self.reflectionDate = reflectionDate
-                self.joinReflectionButton.setupAttribute(reflectionStatus: reflectionStatus, title: reflectionTitle, date: reflectionDate)
+                self.joinReflectionButton.setupAttribute(reflectionStatus: reflectionStatus, title: reflectionTitle, date: reflectionDate, isPreview: false)
                 
                 self.setupJoinReflectionButtonAction(status: reflectionStatus)
                 self.setupJoinReflectionButtonBackground(status: reflectionStatus)
