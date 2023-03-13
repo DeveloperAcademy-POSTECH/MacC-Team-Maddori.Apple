@@ -82,17 +82,37 @@ final class TeamManageViewController: BaseViewController {
     
     private func configureSettingModels() {
         sections.append(Section(options: [Option(title: "새로운 팀 합류하기", handler: {
-            print("새로운 팀 합류하기")
+            self.joinNewTeam()
         }),
                                           Option(title: "팀 생성하기", handler: {
-            print("팀 생성하기")
+            self.createTeam()
         })]))
         sections.append(Section(options: [Option(title: "로그아웃", handler: {
-            print("로그아웃")
+            self.logout()
         }),
                                           Option(title: "회원탈퇴", handler: {
-            print("회원탈퇴")
+            self.withdrawal()
         })]))
+    }
+    
+    private func joinNewTeam() {
+        // FIXME: api 연결
+        print("새로운 팀 합류하기")
+    }
+    
+    private func createTeam() {
+        // FIXME: api 연결
+        print("팀 생성하기")
+    }
+    
+    private func logout() {
+        // FIXME: api 연결
+        print("로그아웃")
+    }
+    
+    private func withdrawal() {
+        // FIXME: api 연결
+        print("회원탈퇴")
     }
 }
 
