@@ -129,6 +129,7 @@ final class TeamDetailViewController: BaseViewController {
         secondFullDividerView.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview()
             $0.bottom.equalTo(teamLeaveButton.snp.top).offset(-20)
+            $0.height.equalTo(4)
         }
         
         view.addSubview(invitationCodeLabel)
@@ -144,10 +145,10 @@ final class TeamDetailViewController: BaseViewController {
         }
 
         view.addSubview(firstFullDividerView)
-
         firstFullDividerView.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview()
             $0.bottom.equalTo(invitationCodeLabel.snp.top).offset(-20)
+            $0.height.equalTo(4)
         }
 
         view.addSubview(memberCollectionView)

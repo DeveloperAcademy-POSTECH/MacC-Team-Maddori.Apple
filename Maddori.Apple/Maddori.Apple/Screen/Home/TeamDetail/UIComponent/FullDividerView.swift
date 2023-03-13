@@ -13,26 +13,27 @@ final class FullDividerView: UIView {
     
     // MARK: - property
     
-    let dividerView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .gray300
-        return view
-    }()
+//    let dividerView: UIView = {
+//        let view = UIView()
+//        view.backgroundColor = .gray300
+//        return view
+//    }()
     
     // MARK: - life cycle
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        render()
+        self.backgroundColor = .gray300
+//        render()
     }
     
     required init?(coder: NSCoder) { nil }
     
-    private func render() {
-        self.addSubview(dividerView)
-        dividerView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-            $0.height.equalTo(4)
-        }
-    }
+//    private func render() {
+//        self.addSubview(dividerView)
+//        dividerView.snp.makeConstraints {
+//            $0.edges.equalToSuperview()
+//            $0.height.equalTo(4)
+//        }
+//    }
 }
