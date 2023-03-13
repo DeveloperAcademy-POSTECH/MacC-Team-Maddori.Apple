@@ -327,8 +327,9 @@ final class SetNicknameViewController: BaseViewController {
     
     private func showPermissionAlert() {
         DispatchQueue.main.async {
+            guard let settingURL = URL(string: UIApplication.openSettingsURLString) else { return }
             self.makeAlert(title: TextLiteral.setNicknameViewControllerPermissionAlertTitle, message: TextLiteral.setNicknameViewControllerPermissionAlertMessage, okAction: { _ in
-                UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+                UIApplication.shared.open(settingURL)
             })
         }
     }
@@ -357,14 +358,20 @@ final class SetNicknameViewController: BaseViewController {
     
     private func dispatchCreateTeam(type: SetupEndPoint<EncodeDTO>, teamName: String, nickname: String, role: String?) {
         AF.upload(multipartFormData: { multipartFormData in
-            let teamInfo: Dictionary = ["team_name": teamName, "nickname": nickname, "role": role]
+            let teamInfo: Dictionary = ["team_name": teamName,
+                                        "nickname": nickname,
+                                        "role": role]
             for (key, value) in teamInfo {
                 if let value = value {
-                    multipartFormData.append("\(value)".data(using: .utf8)!, withName: key, mimeType: "text/plain")
+                    guard let data = "\(value)".data(using: .utf8) else { return }
+                    multipartFormData.append(data, withName: key, mimeType: "text/plain")
                 }
             }
             if let profileURL = self.profileURL {
-                multipartFormData.append(profileURL, withName: "profile_image", fileName: ".png", mimeType: "image/png")
+                multipartFormData.append(profileURL,
+                                         withName: "profile_image",
+                                         fileName: ".png",
+                                         mimeType: "image/png")
             }
         }, to: type.address, method: type.method, headers: type.headers).responseDecodable(of: BaseModel<CreateTeamResponse>.self) { json in
             if let json = json.value {
@@ -392,11 +399,15 @@ final class SetNicknameViewController: BaseViewController {
             let profileInfo: Dictionary = ["nickname": nickname, "role": role]
             for (key, value) in profileInfo {
                 if let value = value {
-                    multipartFormData.append("\(value)".data(using: .utf8)!, withName: key, mimeType: "text/plain")
+                    guard let data = "\(value)".data(using: .utf8) else { return }
+                    multipartFormData.append(data, withName: key, mimeType: "text/plain")
                 }
             }
             if let profileURL = self.profileURL {
-                multipartFormData.append(profileURL, withName: "profile_image", fileName: ".png", mimeType: "image/png")
+                multipartFormData.append(profileURL,
+                                         withName: "profile_image",
+                                         fileName: ".png",
+                                         mimeType: "image/png")
             }
         }, to: type.address, method: type.method, headers: type.headers).responseDecodable(of: BaseModel<JoinTeamResponse>.self) { json in
             if let json = json.value {
