@@ -20,7 +20,7 @@ final class SetNicknameViewController: BaseViewController {
     }
     private let cameraPicker = UIImagePickerController()
     private let teamName: String = UserDefaultStorage.teamName
-    var profileURL: URL?
+    private var profileURL: URL?
     
     // MARK: - property
     
