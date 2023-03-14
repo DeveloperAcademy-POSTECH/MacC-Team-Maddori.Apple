@@ -12,11 +12,11 @@ import SnapKit
 final class TeamManageViewController: BaseViewController {
     
     private var sections: [Section] = []
-    private lazy var teamCount = chageTeamView.teamDataDummy.count
+    private lazy var teamCount = changeTeamView.teamDataDummy.count
     
     // MARK: - property
     
-    private let chageTeamView = ChangeTeamView()
+    private let changeTeamView = ChangeTeamView()
     private let dividerView: UIView = {
         let view = UIView()
         view.backgroundColor = .gray100
@@ -51,8 +51,8 @@ final class TeamManageViewController: BaseViewController {
             $0.edges.equalToSuperview()
         }
         
-        scrollView.addSubview(chageTeamView)
-        chageTeamView.snp.makeConstraints {
+        scrollView.addSubview(changeTeamView)
+        changeTeamView.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.width.equalToSuperview()
             teamCount == 0 ? $0.height.equalTo(280) : $0.height.equalTo((teamCount * 59) + ((teamCount-1) * 8) + 80)
@@ -60,7 +60,7 @@ final class TeamManageViewController: BaseViewController {
         
         scrollView.addSubview(dividerView)
         dividerView.snp.makeConstraints {
-            $0.top.equalTo(chageTeamView.snp.bottom)
+            $0.top.equalTo(changeTeamView.snp.bottom)
             $0.width.equalToSuperview()
             $0.height.equalTo(6)
         }
