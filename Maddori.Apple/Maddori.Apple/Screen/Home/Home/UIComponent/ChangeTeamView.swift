@@ -12,7 +12,7 @@ import SnapKit
 final class ChangeTeamView: UIView {
     
     // MARK: - FIXME: 데이터 더미 입니다.
-    let teamDataDummy: [String] = ["맛쟁이 사과처럼", "명예 소방관"]
+    let teamDataDummy: [String] = []
     
     // MARK: - property
     
@@ -58,7 +58,7 @@ final class ChangeTeamView: UIView {
     private func render() {
         self.addSubview(titleLabel)
         titleLabel.snp.makeConstraints {
-            $0.top.equalTo(safeAreaLayoutGuide.snp.top).inset(26)
+            $0.top.equalTo(safeAreaLayoutGuide.snp.top).inset(34)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
