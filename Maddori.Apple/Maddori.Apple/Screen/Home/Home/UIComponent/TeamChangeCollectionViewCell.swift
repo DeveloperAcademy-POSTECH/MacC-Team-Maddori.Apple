@@ -59,9 +59,11 @@ final class TeamChangeCollectionViewCell: BaseCollectionViewCell {
     private func applyAttribute() {
         self.layer.borderWidth = 2
         self.layer.borderColor = UIColor.blue200.cgColor
+        self.makeShadow(color: .black100, opacity: 0.3, offset: CGSize(width: 0, height: 0), radius: 0)
     }
 
     private func resetAttribute() {
         self.layer.borderWidth = 0
+        self.makeShadow(color: .black100, opacity: 0.3, offset: CGSize(width: 0, height: 0), radius: 1)
     }
 }
