@@ -89,8 +89,8 @@ extension ReflectionMemberCollectionView: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         let selectedMember = memberList[indexPath.item]
-        if !selectedMemberList.contains(where: { $0 == selectedMember.userId }) {
-            selectedMemberList.append(selectedMember.userId ?? 0)
+        if !selectedMemberList.contains(where: { $0 == selectedMember.id }) {
+            selectedMemberList.append(selectedMember.id ?? 0)
         }
         didTappedMember?(selectedMember, selectedMemberList)
     }
