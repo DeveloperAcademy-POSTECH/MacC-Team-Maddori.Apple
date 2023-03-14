@@ -134,7 +134,7 @@ enum TextLiteral {
     // MARK: - SelectReflectionMemberViewController
     
     static let selectReflectionMemberViewControllerTitleLabel = "각 팀원이 받은 피드백을\n공유해 보세요"
-    static let selectReflectionMemberViewControllerDoneButtonText = "모든 회고 끝내기"
+    static let selectReflectionMemberViewControllerDoneButtonText = "모든 회고 끝내기 "
     
     // MARK: - InProgressViewController
     
