@@ -38,6 +38,12 @@ enum TextLiteral {
     static let createReflectionViewControllerTextFieldPlaceHolder = "예) 1차 스프린트"
     static let createReflectionViewControllerDateLabel = "회고 일시"
     static let createReflectionViewControllerButtonText = "추가하기"
+    static let createReflectionAlertTitle = "회고 일정 설정 오류"
+    static let createReflectionAlertContent = "회고 일정은 현 시간 이후로 설정해주세요."
+    static let editReflectionViewControllerTitle = "회고 정보를 수정해 주세요"
+    static let editReflectionViewControllerButtonText = "수정하기"
+    static let deleteReflectionAlertTitle = "회고 일정을 삭제하시겠습니까?"
+    static let deleteReflectionAlertDetail = "이미 작성된 피드백은 삭제되지 않고\n다음 회고에서 확인할 수 있습니다."
     
     // MARK: - SetNicknameViewController
     
@@ -101,6 +107,7 @@ enum TextLiteral {
     static let joinTeamViewControllerSubButtonText = "팀 생성하기"
     static let joinTeamViewControllerAlertTitle = "잘못된 초대코드"
     static let joinTeamViewControllerAlertMessage = "초대코드를 다시 입력해주세요."
+    static let joinTeamViewControllerSkipButtonText = "건너뛰기"
     
     // MARK: - StartReflectionViewController
     

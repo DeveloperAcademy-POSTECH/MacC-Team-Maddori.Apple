@@ -13,7 +13,7 @@ final class ReflectionMemberCollectionViewCell: BaseCollectionViewCell {
     
     override var isSelected: Bool {
         didSet {
-            applyAttribute()
+            applySelectedAttribute()
         }
     }
     
@@ -69,7 +69,7 @@ final class ReflectionMemberCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - func
     
-    func applyAttribute() {
+    func applySelectedAttribute() {
         self.backgroundColor = .white100
         self.profileImage.layer.opacity = 0.5
         self.nicknameLabel.textColor = .gray300
