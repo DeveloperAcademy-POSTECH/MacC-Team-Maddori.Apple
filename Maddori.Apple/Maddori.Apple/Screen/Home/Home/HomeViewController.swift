@@ -26,6 +26,8 @@ final class HomeViewController: BaseViewController {
     
     var currentReflectionId: Int = 0
     var reflectionStatus: ReflectionStatus = .Before
+    var reflectionTitle: String = ""
+    var reflectionDate: String = ""
     
     var isAdmin: Bool = false
     
@@ -49,9 +51,8 @@ final class HomeViewController: BaseViewController {
         button.semanticContentAttribute = .forceRightToLeft
         button.setPreferredSymbolConfiguration(UIImage.SymbolConfiguration(pointSize: 13, weight: .semibold), forImageIn: .normal)
         button.tintColor = .black100
-        let action = UIAction { _ in
-            // FIXME: 버튼 눌렀을 때 action 추가
-            print("touched")
+        let action = UIAction { [weak self] _ in
+            self?.presentTeamModal()
         }
         button.addAction(action, for: .touchUpInside)
         return button
@@ -155,6 +156,24 @@ final class HomeViewController: BaseViewController {
     
     // MARK: - func
     
+    private func presentTeamModal() {
+        let teamViewController = TeamManageViewController()
+        
+        teamViewController.modalPresentationStyle = .pageSheet
+        
+        if #available(iOS 15.0, *) {
+            if let sheet = teamViewController.sheetPresentationController {
+                sheet.detents = [.medium(), .large()]
+                sheet.delegate = self
+                sheet.prefersGrabberVisible = true
+            }
+        } else {
+            // FIXME: 15 미만일때는 어떻게 해야할지 고민중..
+        }
+        
+        present(teamViewController, animated: true)
+    }
+    
     private func setupDelegation() {
         keywordCollectionView.delegate = self
         keywordCollectionView.dataSource = self
@@ -179,8 +198,7 @@ final class HomeViewController: BaseViewController {
             case .SettingRequired, .Done:
                 self?.presentCreateReflectionViewController()
             case .Before:
-                // FIXME: edit reflection VC
-                print("fixme")
+                self?.presentEditReflectionViewController()
             case .Progressing:
                 self?.presentSelectReflectionMemberViewController()
             }
@@ -197,6 +215,12 @@ final class HomeViewController: BaseViewController {
     
     private func presentCreateReflectionViewController() {
         let viewController = UINavigationController(rootViewController: CreateReflectionViewController(reflectionId: currentReflectionId))
+        viewController.modalPresentationStyle = .fullScreen
+        present(viewController, animated: true)
+    }
+    
+    private func presentEditReflectionViewController() {
+        let viewController = UINavigationController(rootViewController: CreateReflectionViewController(reflectionId: currentReflectionId, reflectionTitle: reflectionTitle, reflectionDate: reflectionDate))
         viewController.modalPresentationStyle = .fullScreen
         present(viewController, animated: true)
     }
@@ -293,6 +317,8 @@ final class HomeViewController: BaseViewController {
                 
                 self.reflectionStatus = reflectionStatus
                 self.currentReflectionId = reflectionId
+                self.reflectionTitle = reflectionTitle
+                self.reflectionDate = reflectionDate
                 self.joinReflectionButton.setupAttribute(reflectionStatus: reflectionStatus, title: reflectionTitle, date: reflectionDate, isPreview: false)
                 
                 self.setupJoinReflectionButtonAction(status: reflectionStatus)
@@ -368,3 +394,5 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
         return KeywordCollectionViewCell.fittingSize(availableHeight: size, keyword: keywordList[indexPath.item])
     }
 }
+
+extension HomeViewController: UISheetPresentationControllerDelegate {}

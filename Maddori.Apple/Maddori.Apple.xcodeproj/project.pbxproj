@@ -86,6 +86,8 @@
 		39F909D7292679C400DAD0A3 /* EditFeedBackDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F909D6292679C400DAD0A3 /* EditFeedBackDTO.swift */; };
 		3E5195A42928C8FB00710A01 /* CreateReflectionEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5195A32928C8FB00710A01 /* CreateReflectionEndPoint.swift */; };
 		3E5195AB292B05BC00710A01 /* JoinReflectionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5195AA292B05BC00710A01 /* JoinReflectionButton.swift */; };
+		3E5368992992461A000CBD48 /* DeleteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5368982992461A000CBD48 /* DeleteButton.swift */; };
+		3E5368C629B24351000CBD48 /* DeleteReflectionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5368C529B24351000CBD48 /* DeleteReflectionResponse.swift */; };
 		3E5368C829B60B70000CBD48 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5368C729B60B70000CBD48 /* UIImageView+Extension.swift */; };
 		3E557FC328FE7BBC00714E46 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E557FC228FE7BBC00714E46 /* HomeViewController.swift */; };
 		3E557FC528FE854600714E46 /* KeywordLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E557FC428FE854600714E46 /* KeywordLabel.swift */; };
@@ -132,6 +134,7 @@
 		7EB4D58229011EF7001FC396 /* JoinTeamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB4D58129011EF7001FC396 /* JoinTeamViewController.swift */; };
 		7EE38BAD2925DDD200FD738D /* EncodeDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE38BAC2925DDD200FD738D /* EncodeDTO.swift */; };
 		7EE38BB3292623F500FD738D /* MyReflectionEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE38BB2292623F500FD738D /* MyReflectionEndPoint.swift */; };
+		D702278A297F99510027EF64 /* TeamManageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7022789297F99500027EF64 /* TeamManageViewController.swift */; };
 		D724790C28FEC8C900D67B50 /* BaseTextFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D724790B28FEC8C900D67B50 /* BaseTextFieldViewController.swift */; };
 		D724790E28FEEEC300D67B50 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D724790D28FEEEC300D67B50 /* CustomTextField.swift */; };
 		D72CF1B0290552960067A118 /* InvitationCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72CF1AF290552960067A118 /* InvitationCodeViewController.swift */; };
@@ -226,6 +229,8 @@
 		39F909D6292679C400DAD0A3 /* EditFeedBackDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditFeedBackDTO.swift; sourceTree = "<group>"; };
 		3E5195A32928C8FB00710A01 /* CreateReflectionEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateReflectionEndPoint.swift; sourceTree = "<group>"; };
 		3E5195AA292B05BC00710A01 /* JoinReflectionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinReflectionButton.swift; sourceTree = "<group>"; };
+		3E5368982992461A000CBD48 /* DeleteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteButton.swift; sourceTree = "<group>"; };
+		3E5368C529B24351000CBD48 /* DeleteReflectionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteReflectionResponse.swift; sourceTree = "<group>"; };
 		3E5368C729B60B70000CBD48 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		3E557FC228FE7BBC00714E46 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		3E557FC428FE854600714E46 /* KeywordLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordLabel.swift; sourceTree = "<group>"; };
@@ -272,6 +277,7 @@
 		7EB4D58129011EF7001FC396 /* JoinTeamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinTeamViewController.swift; sourceTree = "<group>"; };
 		7EE38BAC2925DDD200FD738D /* EncodeDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncodeDTO.swift; sourceTree = "<group>"; };
 		7EE38BB2292623F500FD738D /* MyReflectionEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReflectionEndPoint.swift; sourceTree = "<group>"; };
+		D7022789297F99500027EF64 /* TeamManageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamManageViewController.swift; sourceTree = "<group>"; };
 		D724790B28FEC8C900D67B50 /* BaseTextFieldViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTextFieldViewController.swift; sourceTree = "<group>"; };
 		D724790D28FEEEC300D67B50 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		D72CF1AF290552960067A118 /* InvitationCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationCodeViewController.swift; sourceTree = "<group>"; };
@@ -554,6 +560,7 @@
 				395C7E1C28FEC8C400FC2FCA /* CloseButton.swift */,
 				395C7E0C28F959A500FC2FCA /* MainButton.swift */,
 				7E8CDC66292E19B000984742 /* SettingButton.swift */,
+				3E5368982992461A000CBD48 /* DeleteButton.swift */,
 			);
 			path = Button;
 			sourceTree = "<group>";
@@ -694,6 +701,7 @@
 				398474212925CF4800EDC139 /* TeamInfoResponse.swift */,
 				396334D8292DAE0000E74B77 /* AppleLoginResponse.swift */,
 				396334DA292DAE8300E74B77 /* UserResponse.swift */,
+				3E5368C529B24351000CBD48 /* DeleteReflectionResponse.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -725,6 +733,7 @@
 			children = (
 				3E5195A9292B05B000710A01 /* UIComponent */,
 				3E557FC228FE7BBC00714E46 /* HomeViewController.swift */,
+				D7022789297F99500027EF64 /* TeamManageViewController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -1148,6 +1157,7 @@
 				3EB50866291350BB00FB77CB /* TotalReflectionCell.swift in Sources */,
 				7E7F160B2921CC4800C6BE96 /* CustomTabBarController.swift in Sources */,
 				395C7E1D28FEC8C400FC2FCA /* CloseButton.swift in Sources */,
+				3E5368992992461A000CBD48 /* DeleteButton.swift in Sources */,
 				39F52C572923317500B19A77 /* CreateTeamResponse.swift in Sources */,
 				398474222925CF4800EDC139 /* TeamInfoResponse.swift in Sources */,
 				3EDED995293C81EC0000B4DC /* AddFeedbackKeywordViewController.swift in Sources */,
@@ -1158,6 +1168,7 @@
 				3E557FC528FE854600714E46 /* KeywordLabel.swift in Sources */,
 				39F52C53292330D200B19A77 /* MemberResponse.swift in Sources */,
 				39F52C6A292473A800B19A77 /* ReflectionInfoResponse.swift in Sources */,
+				D702278A297F99510027EF64 /* TeamManageViewController.swift in Sources */,
 				39F52C68292472EB00B19A77 /* AllFeedBackResponse.swift in Sources */,
 				3975CEAF293EEDD6002D4F1A /* KeywordView.swift in Sources */,
 				39257DF128F93C2A00201E0B /* ImageLiteral.swift in Sources */,
@@ -1198,6 +1209,7 @@
 				52F2D1C12906F172009CBF89 /* SelectReflectionMemberViewController.swift in Sources */,
 				395C7E0328F945B500FC2FCA /* UIFont+Extension.swift in Sources */,
 				3E8052DF2906E09100A6449D /* KeywordSectionHeaderView.swift in Sources */,
+				3E5368C629B24351000CBD48 /* DeleteReflectionResponse.swift in Sources */,
 				3EDED991293B8CE00000B4DC /* AddFeedbackContentViewController.swift in Sources */,
 				39436C182912A2E10083D77A /* Feedback.swift in Sources */,
 				7E2ECA102901136700A4D65C /* SetNicknameViewController.swift in Sources */,

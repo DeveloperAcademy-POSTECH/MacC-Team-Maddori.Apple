@@ -20,6 +20,13 @@ extension String {
         return dateToStringFormatter.string(from: date)
     }
     
+    func formatStringToDate() -> Date {
+        let stringToDateFormatter = DateFormatter()
+        stringToDateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        stringToDateFormatter.locale = Locale(identifier: "ko_KR")
+        return stringToDateFormatter.date(from: self) ?? Date()
+    }
+    
     func hasSpecialCharacters() -> Bool {
         if let regex = try? NSRegularExpression(pattern: "[0-9a-zA-Zㄱ-ㅎㅏ-ㅣ가-힣\\s]", options: .caseInsensitive) {
             let numOfString = regex.numberOfMatches(in: self, options: [], range: NSMakeRange(0, self.count))
