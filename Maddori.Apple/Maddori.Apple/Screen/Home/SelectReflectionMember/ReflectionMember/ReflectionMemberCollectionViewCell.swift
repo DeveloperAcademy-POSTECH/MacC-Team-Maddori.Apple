@@ -23,6 +23,7 @@ final class ReflectionMemberCollectionViewCell: BaseCollectionViewCell {
         let imageView = UIImageView()
         imageView.image = ImageLiterals.imgProfileNone
         imageView.layer.cornerRadius = 23
+        imageView.clipsToBounds = true
         return imageView
     }()
     let nicknameLabel: UILabel = {

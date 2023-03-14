@@ -114,8 +114,6 @@ extension ReflectionMemberCollectionView: UICollectionViewDataSource {
                 } else {
                     DispatchQueue.main.async {
                         cell.profileImage.image = UIImage(data: data!)
-                        cell.profileImage.clipsToBounds = true
-                        cell.profileImage.layer.cornerRadius = 23
                     }
                 }
             }).resume()
