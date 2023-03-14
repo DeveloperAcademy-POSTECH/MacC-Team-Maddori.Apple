@@ -57,10 +57,8 @@ final class TeamChangeCollectionViewCell: BaseCollectionViewCell {
     }
     
     private func applyAttribute() {
-        if isSelected {
-            self.layer.borderWidth = 2
-            self.layer.borderColor = UIColor.blue200.cgColor
-        }
+        self.layer.borderWidth = 2
+        self.layer.borderColor = UIColor.blue200.cgColor
     }
 
     private func resetAttribute() {
