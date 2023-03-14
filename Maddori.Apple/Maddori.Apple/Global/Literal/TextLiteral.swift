@@ -38,13 +38,17 @@ enum TextLiteral {
     static let createReflectionViewControllerTextFieldPlaceHolder = "예) 1차 스프린트"
     static let createReflectionViewControllerDateLabel = "회고 일시"
     static let createReflectionViewControllerButtonText = "추가하기"
+    static let createReflectionAlertTitle = "회고 일정 설정 오류"
+    static let createReflectionAlertContent = "회고 일정은 현 시간 이후로 설정해주세요."
+    static let editReflectionViewControllerTitle = "회고 정보를 수정해 주세요"
+    static let editReflectionViewControllerButtonText = "수정하기"
+    static let deleteReflectionAlertTitle = "회고 일정을 삭제하시겠습니까?"
+    static let deleteReflectionAlertDetail = "이미 작성된 피드백은 삭제되지 않고\n다음 회고에서 확인할 수 있습니다."
     
     // MARK: - SetNicknameViewController
     
     static let setNicknameViewControllerTitleLabel = "키고에서 사용할 \n닉네임을 입력해주세요"
     static let setNicknameViewControllerNicknameTextFieldPlaceHolder = "예) 진저, 호야, 성민"
-    static let setNicknameViewControllerAlertTitle = "특수문자를 사용할 수 없습니다."
-    static let setNicknameControllerAlertMessage = "닉네임을 다시 입력해주세요."
     static let setNicknameControllerNavigationTitleLabel = "프로필 생성"
     static let setNicknameControllerTitleLabel = "에서\n사용할 프로필을 작성해 주세요"
     static let setNicknameControllerNicknameLabel = "닉네임 *"
@@ -59,6 +63,9 @@ enum TextLiteral {
     static let setNicknameControllerCameraErrorAlertMessage = "설정에서 카메라 접근 권한을 확인해 주세요."
     static let setNicknameControllerLibraryErrorAlertTitle = "이미지를 불러올 수 없습니다."
     static let setNicknameControllerLibraryErrorAlertMessage = "설정에서 이미지 접근 권한을 다시 확인해 주세요."
+    static let setNicknameViewControllerCreateTeamAlertTitle = "팀 생성 및 팀 합류 실패"
+    static let setNicknameViewControllerJoinTeamAlertTitle = "팀 합류 실패"
+    static let setNicknameViewControllerAlertMessage = "다시 시도해 주세요."
     
     // MARK: - HomeViewController
     
@@ -94,7 +101,7 @@ enum TextLiteral {
     
     // MARK: - JoinTeamViewController
     
-    static let joinTeamViewControllerTitleLabel = "님 반가워요!\n이제 팀에 합류해주세요"
+    static let joinTeamViewControllerTitleLabel = "초대코드를 입력하여\n팀에 합류해주세요"
     static let joinTeamViewControllerNicknameTextFieldPlaceHolder = "초대코드"
     static let joinTeamViewControllerSubText = "팀이 없나요?"
     static let joinTeamViewControllerSubButtonText = "팀 생성하기"
@@ -118,7 +125,7 @@ enum TextLiteral {
     static let invitationCodeViewControllerTitleLabel = "초대코드를 공유하여\n팀원들을 초대해주세요"
     static let invitationCodeViewControllerCopyCodeButtonText = "코드 복사하기"
     static let invitationCodeViewControllerStartButtonText = "시작하기"
-    static let invitationCodeViewControllerSubLabelText = "초대코드는 다시 복사할 수 있습니다"
+    static let invitationCodeViewControllerSubLabelText = "초대코드는 팀 관리 화면에서 공유할 수 있습니다"
     
     // MARK: - StartSuggestionView
     
@@ -207,6 +214,8 @@ enum TextLiteral {
     static let reflectionTitleLabelProgressing: String = "회고가 시작되었습니다!"
     static let reflectionDescriptionLabelSettingRequired: String = "회고 일정을 정해주세요"
     static let reflectionDescriptionLabelProgressing: String = "터치하여 회고에 참여해주세요"
+    static let previewTitleLabel: String = "회고 일정을 추가할 수 없습니다"
+    static let previewDescriptionLabel: String = "팀을 생성하거나 팀에 합류해주세요"
     
     // MARK: - MyReflectionViewController
     
@@ -246,4 +255,5 @@ enum TextLiteral {
     // MARK: - ChangeTeamView
     
     static let changeTeamViewLabel: String = "참여 중인 팀"
+    static let teamDetailViewControllerMemberTitleLabel: String = "멤버"
 }
