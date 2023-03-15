@@ -39,7 +39,7 @@ final class MyFeedbackMemberCollectionViewCell: BaseCollectionViewCell {
     }()
     private let memberNameLabel: UILabel = {
         let label = UILabel()
-        label.font = .body2
+        label.font = .toast
         label.textColor = .gray400
         label.lineBreakMode = .byTruncatingTail
         label.textAlignment = .center
