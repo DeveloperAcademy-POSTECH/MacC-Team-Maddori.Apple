@@ -56,7 +56,7 @@ final class MyFeedbackMemberCollectionViewCell: BaseCollectionViewCell {
         self.addSubview(shadowView)
         shadowView.snp.makeConstraints {
             $0.centerX.top.equalToSuperview()
-            $0.width.height.equalTo(60)
+            $0.width.height.equalTo(59)
         }
         
         shadowView.addSubview(profileImageView)
