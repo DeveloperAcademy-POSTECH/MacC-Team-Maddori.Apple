@@ -94,9 +94,9 @@ final class MyFeedbackMemberCollectionViewCell: BaseCollectionViewCell {
     
     func setMemberProfileImage(from path: String?) {
         if let path = path {
-            if let fullImagePath = URL(string: UrlLiteral.iamgeBaseUrl + path) {
-                profileImageView.load(from: fullImagePath)
-            }
+            let fullImagePath = UrlLiteral.iamgeBaseUrl + path
+            profileImageView.load(from: fullImagePath)
+            
         } else {
             profileImageView.image = ImageLiterals.imgProfileNone
         }
