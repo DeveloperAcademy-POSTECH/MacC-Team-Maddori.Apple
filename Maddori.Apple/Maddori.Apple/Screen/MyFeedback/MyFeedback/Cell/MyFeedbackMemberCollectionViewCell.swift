@@ -32,6 +32,7 @@ final class MyFeedbackMemberCollectionViewCell: BaseCollectionViewCell {
     }()
     private let profileImageView: UIImageView = {
         let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = 30
         imageView.clipsToBounds = true
         return imageView
