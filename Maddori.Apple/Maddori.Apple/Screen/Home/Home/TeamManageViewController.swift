@@ -26,6 +26,8 @@ final class TeamManageViewController: BaseViewController {
             }
         }
     }
+    // MARK: - 1
+    // var navigation: UINavigationController?
     
     // MARK: - property
     
@@ -50,6 +52,16 @@ final class TeamManageViewController: BaseViewController {
     private let contentView: UIView = UIView()
     
     // MARK: - life cycle
+    
+    // MARK: - 1
+//    required init(navigationController: UINavigationController?) {
+//        navigation = navigationController
+//        super.init()
+//    }
+//
+//    required init?(coder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -122,7 +134,12 @@ final class TeamManageViewController: BaseViewController {
     
     private func joinNewTeam() {
         // FIXME: api 연결
-        print("새로운 팀 합류하기")
+        // MARK: - 1
+//        let joinViewController = JoinTeamViewController()
+//        dismiss(animated: true) {
+//            self.navigation?.pushViewController(joinViewController, animated: true)
+//        }
+//        print("새로운 팀 합류하기")
     }
     
     private func createTeam() {
@@ -131,13 +148,19 @@ final class TeamManageViewController: BaseViewController {
     }
     
     private func logout() {
-        // FIXME: api 연결
-        print("로그아웃")
+        self.logoutUser()
     }
     
     private func withdrawal() {
-        // FIXME: api 연결
-        print("회원탈퇴")
+        self.deleteUser(type: .deleteUser)
+    }
+    
+    private func logoutUser() {
+        makeRequestAlert(title: TextLiteral.myReflectionViewControllerLogOutMessage, message: "", okTitle: "확인", cancelTitle: "취소") { _ in
+            guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate
+                    as? SceneDelegate else { return }
+            sceneDelegate.logout()
+        }
     }
     
     // MARK: - api
@@ -151,6 +174,21 @@ final class TeamManageViewController: BaseViewController {
                 self.teamCount = teamCount
                 guard let team = json.detail else { return }
                 self.changeTeamView.teamDataDummy = team
+            }
+        }
+    }
+    
+    private func deleteUser(type: MyReflectionEndPoint<VoidModel>) {
+        AF.request(type.address,
+                   method: type.method,
+                   headers: type.headers
+        )
+        .responseDecodable(of: BaseModel<VoidModel>.self) { json in
+            if let _ = json.value {
+                UserDefaultHandler.clearAllData()
+                guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate
+                        as? SceneDelegate else { return }
+                sceneDelegate.logout()
             }
         }
     }

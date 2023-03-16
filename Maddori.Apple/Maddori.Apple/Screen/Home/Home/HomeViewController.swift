@@ -157,6 +157,8 @@ final class HomeViewController: BaseViewController {
     // MARK: - func
     
     private func presentTeamModal() {
+//        guard let navigationController = self.navigationController else { return }
+//        let teamViewController = TeamManageViewController(navigationController: navigationController)
         let teamViewController = TeamManageViewController()
         
         teamViewController.modalPresentationStyle = .pageSheet
