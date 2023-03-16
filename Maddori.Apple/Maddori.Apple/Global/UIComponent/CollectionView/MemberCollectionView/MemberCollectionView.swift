@@ -24,13 +24,13 @@ final class MemberCollectionView: UIView {
             right: collectionHorizontalSpacing)
     }
     
-    var memberList: [MemberResponse] = [] {
+    var memberList: [MemberDetailResponse] = [] {
         didSet {
             collectionView.reloadData()
         }
     }
-    var didTappedFeedBackMember: ((MemberResponse) -> ())?
-    var selectedMember: MemberResponse?
+    var didTappedFeedBackMember: ((MemberDetailResponse) -> ())?
+    var selectedMember: MemberDetailResponse?
     
     // MARK: - property
     

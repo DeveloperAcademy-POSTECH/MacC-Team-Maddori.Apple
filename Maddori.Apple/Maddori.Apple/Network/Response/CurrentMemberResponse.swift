@@ -7,9 +7,24 @@
 
 import Foundation
 
+struct MemberDetailResponse: Decodable {
+    let userId: Int?
+    let userName: String?
+    let role: String?
+    let profileImagePath: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case userId = "id"
+        case userName = "nickname"
+        case role = "role"
+        case profileImagePath = "profile_image_path"
+    }
+}
+
+
 struct TeamMembersResponse: Decodable {
     // MARK: - getTeamMembers
-    let members: [MemberResponse]?
+    let members: [MemberDetailResponse]?
 }
 
 // MARK: - TeamMembersResponse v2, conflict 방지용

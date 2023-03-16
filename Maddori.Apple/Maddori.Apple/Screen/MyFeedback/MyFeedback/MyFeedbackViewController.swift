@@ -12,7 +12,7 @@ import SnapKit
 
 final class MyFeedbackViewController: BaseViewController {
     var selectedIndex: Int = 0
-    private var memberList: [MemberResponse] = [] {
+    private var memberList: [MemberDetailResponse] = [] {
         didSet {
             if memberList.isEmpty {
                 setLayoutEmptyView()
@@ -45,7 +45,7 @@ final class MyFeedbackViewController: BaseViewController {
                                                left: Size.horizontalPadding,
                                                bottom: Size.verticalPadding,
                                                right: Size.horizontalPadding)
-        flowLayout.itemSize = CGSize(width: Size.cellSize, height: Size.cellSize)
+        flowLayout.itemSize = CGSize(width: Size.cellSize, height: Size.cellSize + 20)
         flowLayout.minimumLineSpacing = Size.minimumLineSpacing
         return flowLayout
     }()
@@ -110,7 +110,7 @@ final class MyFeedbackViewController: BaseViewController {
         memberCollectionView.snp.makeConstraints {
             $0.top.equalTo(myFeedbackLabel.snp.bottom).offset(7)
             $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(100)
+            $0.height.equalTo(120)
         }
         
         view.addSubview(dividerView)
@@ -143,7 +143,7 @@ final class MyFeedbackViewController: BaseViewController {
                    headers: type.headers
         ).responseDecodable(of: BaseModel<TeamMembersResponse>.self) { [weak self] json in
             if let data = json.value {
-                var memberArray: [MemberResponse] = []
+                var memberArray: [MemberDetailResponse] = []
                 guard let members = json.value?.detail?.members else { return }
                 members.forEach {
                     if $0.userName != UserDefaultStorage.nickname {
@@ -190,6 +190,7 @@ extension MyFeedbackViewController: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         cell.setMemberName(name: memberList[indexPath.item].userName ?? "")
+        cell.setMemberProfileImage(from: memberList[indexPath.item].profileImagePath)
         if indexPath.item == selectedIndex {
             cell.isSelected = true
             collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .init())
