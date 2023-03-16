@@ -97,8 +97,6 @@ extension ChangeTeamView: UICollectionViewDataSource {
         cell.teamNameLabel.text = teamDataDummy[indexPath.item]
         return cell
     }
-    
-    
 }
 
 extension ChangeTeamView: UICollectionViewDelegate {
