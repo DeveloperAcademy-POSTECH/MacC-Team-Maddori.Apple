@@ -137,6 +137,7 @@
 		7EE38BAD2925DDD200FD738D /* EncodeDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE38BAC2925DDD200FD738D /* EncodeDTO.swift */; };
 		7EE38BB3292623F500FD738D /* MyReflectionEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE38BB2292623F500FD738D /* MyReflectionEndPoint.swift */; };
 		D702278A297F99510027EF64 /* TeamManageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7022789297F99500027EF64 /* TeamManageViewController.swift */; };
+		D70AF89729C2FDF6003A500C /* TeamInfoEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70AF89629C2FDF6003A500C /* TeamInfoEndPoint.swift */; };
 		D7195FBC299223F6002526E7 /* TeamChangeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7195FBB299223F6002526E7 /* TeamChangeCollectionViewCell.swift */; };
 		D724790C28FEC8C900D67B50 /* BaseTextFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D724790B28FEC8C900D67B50 /* BaseTextFieldViewController.swift */; };
 		D724790E28FEEEC300D67B50 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D724790D28FEEEC300D67B50 /* CustomTextField.swift */; };
@@ -288,6 +289,7 @@
 		7EE38BAC2925DDD200FD738D /* EncodeDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncodeDTO.swift; sourceTree = "<group>"; };
 		7EE38BB2292623F500FD738D /* MyReflectionEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReflectionEndPoint.swift; sourceTree = "<group>"; };
 		D7022789297F99500027EF64 /* TeamManageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamManageViewController.swift; sourceTree = "<group>"; };
+		D70AF89629C2FDF6003A500C /* TeamInfoEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamInfoEndPoint.swift; sourceTree = "<group>"; };
 		D7195FBB299223F6002526E7 /* TeamChangeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamChangeCollectionViewCell.swift; sourceTree = "<group>"; };
 		D724790B28FEC8C900D67B50 /* BaseTextFieldViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTextFieldViewController.swift; sourceTree = "<group>"; };
 		D724790D28FEEEC300D67B50 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
@@ -750,6 +752,7 @@
 				7EE38BB2292623F500FD738D /* MyReflectionEndPoint.swift */,
 				3EA341E52924E2AD005CBD1C /* HomeEndPoint.swift */,
 				3E5195A32928C8FB00710A01 /* CreateReflectionEndPoint.swift */,
+				D70AF89629C2FDF6003A500C /* TeamInfoEndPoint.swift */,
 			);
 			path = EndPoint;
 			sourceTree = "<group>";
@@ -1134,6 +1137,7 @@
 				39F52C44292329BA00B19A77 /* BaseModel.swift in Sources */,
 				522D99BF29041B51009CBD95 /* CustomTextView.swift in Sources */,
 				3EA341C129221998005CBD1C /* ToastContentView.swift in Sources */,
+				D70AF89729C2FDF6003A500C /* TeamInfoEndPoint.swift in Sources */,
 				39F1A13529125762005E3456 /* MyFeedbackViewController.swift in Sources */,
 				39F52C702924747600B19A77 /* AllCertainTypeFeedBackResponse.swift in Sources */,
 				391D217C29050427003FC871 /* CustomVisualEffectView.swift in Sources */,
