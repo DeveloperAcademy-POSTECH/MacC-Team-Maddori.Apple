@@ -152,13 +152,18 @@ final class TeamManageViewController: BaseViewController {
     }
     
     private func withdrawal() {
-        self.makeRequestAlert(title: TextLiteral.myReflectionViewControllerDeleteUserAlertTitle, message: TextLiteral.myReflectionViewControllerDeleteUserAlertMessage, okAction: { [weak self] _ in
+        self.makeRequestAlert(title: TextLiteral.myReflectionViewControllerDeleteUserAlertTitle,
+                              message: TextLiteral.myReflectionViewControllerDeleteUserAlertMessage,
+                              okAction: { [weak self] _ in
             self?.deleteUser(type: .deleteUser)
         })
     }
     
     private func logoutUser() {
-        makeRequestAlert(title: TextLiteral.myReflectionViewControllerLogOutMessage, message: "", okTitle: "확인", cancelTitle: "취소") { _ in
+        makeRequestAlert(title: TextLiteral.myReflectionViewControllerLogOutMessage,
+                         message: "",
+                         okTitle: "확인",
+                         cancelTitle: "취소") { _ in
             guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate
                     as? SceneDelegate else { return }
             sceneDelegate.logout()
@@ -166,6 +171,7 @@ final class TeamManageViewController: BaseViewController {
     }
     
     // MARK: - api
+    
     private func fetchUserTeamList(type: TeamInfoEndPoint<VoidModel>) {
         AF.request(type.address,
                    method: type.method,
