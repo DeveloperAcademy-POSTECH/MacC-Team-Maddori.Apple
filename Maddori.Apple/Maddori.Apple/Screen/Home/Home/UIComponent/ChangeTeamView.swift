@@ -79,7 +79,7 @@ final class ChangeTeamView: UIView {
     private func setLayoutEmptyView() {
         self.addSubview(emptyView)
         emptyView.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.bottom).offset(28)
+            $0.top.equalTo(titleLabel.snp.bottom)
             $0.directionalHorizontalEdges.equalToSuperview()
             $0.height.equalToSuperview()
         }
