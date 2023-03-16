@@ -19,7 +19,13 @@ final class TeamManageViewController: BaseViewController {
     }
     
     private var sections: [Section] = []
-    private lazy var teamCount = changeTeamView.teamDataDummy.count
+    private lazy var teamCount = 0 {
+        didSet {
+            changeTeamView.snp.updateConstraints {
+                $0.height.equalTo((teamCount * Size.teamSectionHeight) + ((teamCount - 1) * Size.teamSectionSpacing) + Size.teamSectionPadding)
+            }
+        }
+    }
     
     // MARK: - property
     
@@ -49,6 +55,7 @@ final class TeamManageViewController: BaseViewController {
         super.viewDidLoad()
         setupDelegate()
         configureSettingModels()
+        fetchUserTeamList(type: .fetchUserTeamList)
     }
     
     override func render() {
@@ -77,7 +84,7 @@ final class TeamManageViewController: BaseViewController {
         
         contentView.addSubview(dividerView)
         dividerView.snp.makeConstraints {
-            $0.top.equalTo(changeTeamView.snp.bottom).offset(50)
+            $0.top.equalTo(changeTeamView.snp.bottom).offset(55)
             $0.width.equalToSuperview()
             $0.height.equalTo(6)
         }
@@ -131,6 +138,21 @@ final class TeamManageViewController: BaseViewController {
     private func withdrawal() {
         // FIXME: api 연결
         print("회원탈퇴")
+    }
+    
+    // MARK: - api
+    private func fetchUserTeamList(type: TeamInfoEndPoint<VoidModel>) {
+        AF.request(type.address,
+                   method: type.method,
+                   headers: type.headers
+        ).responseDecodable(of: BaseModel<[TeamInfoResponse]>.self) { json in
+            if let json = json.value {
+                guard let teamCount = json.detail?.count else { return }
+                self.teamCount = teamCount
+                guard let team = json.detail else { return }
+                self.changeTeamView.teamDataDummy = team
+            }
+        }
     }
 }
 

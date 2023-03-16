@@ -11,8 +11,11 @@ import SnapKit
 
 final class ChangeTeamView: UIView {
     
-    // MARK: - FIXME: 데이터 더미 입니다.
-    let teamDataDummy: [String] = []
+    var teamDataDummy: [TeamInfoResponse] = [] {
+        didSet {
+            teamDataDummy.isEmpty ? setLayoutEmptyView() : setLayoutTeamListView()
+        }
+    }
     
     // MARK: - property
     
@@ -61,8 +64,6 @@ final class ChangeTeamView: UIView {
             $0.top.equalTo(safeAreaLayoutGuide.snp.top).inset(34)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
-        
-        teamDataDummy.isEmpty ? setLayoutEmptyView() : setLayoutTeamListView()
     }
     
     // MARK: - function
@@ -94,7 +95,7 @@ extension ChangeTeamView: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TeamChangeCollectionViewCell.className, for: indexPath) as? TeamChangeCollectionViewCell else { return UICollectionViewCell() }
-        cell.teamNameLabel.text = teamDataDummy[indexPath.item]
+        cell.teamNameLabel.text = teamDataDummy[indexPath.item].teamName
         return cell
     }
 }
