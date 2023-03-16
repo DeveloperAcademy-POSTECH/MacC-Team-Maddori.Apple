@@ -34,6 +34,7 @@ final class TeamManageViewController: BaseViewController {
         return tableView
     }()
     private let scrollView: UIScrollView = UIScrollView()
+    private let contentView: UIView = UIView()
     
     // MARK: - life cycle
     
@@ -49,25 +50,37 @@ final class TeamManageViewController: BaseViewController {
             $0.edges.equalToSuperview()
         }
         
-        scrollView.addSubview(changeTeamView)
+        scrollView.addSubview(contentView)
+        contentView.snp.makeConstraints {
+            $0.edges.equalTo(scrollView.contentLayoutGuide)
+            $0.width.equalTo(scrollView.frameLayoutGuide)
+        }
+ 
+        contentView.addSubview(changeTeamView)
         changeTeamView.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.width.equalToSuperview()
-            teamCount == 0 ? $0.height.equalTo(220) : $0.height.equalTo((teamCount * 59) + ((teamCount-1) * 8) + 80)
+            if changeTeamView.teamDataDummy.isEmpty {
+                $0.height.equalTo(150)
+            }
+            else {
+                $0.height.equalTo((teamCount * 59) + ((teamCount - 1) * 8) + 28)
+            }
         }
         
-        scrollView.addSubview(dividerView)
+        contentView.addSubview(dividerView)
         dividerView.snp.makeConstraints {
-            $0.top.equalTo(changeTeamView.snp.bottom)
+            $0.top.equalTo(changeTeamView.snp.bottom).offset(50)
             $0.width.equalToSuperview()
             $0.height.equalTo(6)
         }
         
-        scrollView.addSubview(settingTableView)
+        contentView.addSubview(settingTableView)
         settingTableView.snp.makeConstraints {
             $0.top.equalTo(dividerView.snp.bottom)
             $0.width.equalTo(UIScreen.main.bounds.width)
-            $0.height.equalTo(1000) // FIXME: 수치 바꿀것
+            $0.bottom.equalToSuperview()
+            $0.height.equalTo(252) // FIXME: 수치 바꿀것
         }
     }
     
