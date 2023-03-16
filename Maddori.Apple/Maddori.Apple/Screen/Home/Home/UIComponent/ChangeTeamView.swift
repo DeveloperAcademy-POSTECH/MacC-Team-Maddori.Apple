@@ -27,7 +27,7 @@ final class ChangeTeamView: UIView {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .vertical
         flowLayout.sectionInset = UIEdgeInsets(top: 12, left: 0 , bottom: 16, right: 0)
-        flowLayout.itemSize = CGSize(width: UIScreen.main.bounds.width - SizeLiteral.leadingTrailingPadding*2, height: 59)
+        flowLayout.itemSize = CGSize(width: UIScreen.main.bounds.width - SizeLiteral.leadingTrailingPadding * 2, height: 59)
         flowLayout.minimumLineSpacing = 8
         return flowLayout
     }()
