@@ -11,6 +11,12 @@ import SnapKit
 
 final class TeamManageViewController: BaseViewController {
     
+    private enum Size {
+        static let teamSectionHeight = 59
+        static let teamSectionSpacing = 8
+        static let teamSectionPadding = 28
+    }
+    
     private var sections: [Section] = []
     private lazy var teamCount = changeTeamView.teamDataDummy.count
     
@@ -64,7 +70,7 @@ final class TeamManageViewController: BaseViewController {
                 $0.height.equalTo(150)
             }
             else {
-                $0.height.equalTo((teamCount * 59) + ((teamCount - 1) * 8) + 28)
+                $0.height.equalTo((teamCount * Size.teamSectionHeight) + ((teamCount - 1) * Size.teamSectionSpacing) + Size.teamSectionPadding)
             }
         }
         
@@ -80,7 +86,7 @@ final class TeamManageViewController: BaseViewController {
             $0.top.equalTo(dividerView.snp.bottom)
             $0.width.equalTo(UIScreen.main.bounds.width)
             $0.bottom.equalToSuperview()
-            $0.height.equalTo(252) // FIXME: 수치 바꿀것
+            $0.height.equalTo(252)
         }
     }
     
