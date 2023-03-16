@@ -107,16 +107,9 @@ extension ReflectionMemberCollectionView: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         
-        if let profileImageURL = memberList[indexPath.item].profileImagePath {
-            URLSession.shared.dataTask(with: NSURL(string: UrlLiteral.imageBaseURL + profileImageURL)! as URL, completionHandler: { (data, response, error) -> Void in
-                if error != nil {
-                    return
-                } else {
-                    DispatchQueue.main.async {
-                        cell.profileImage.image = UIImage(data: data!)
-                    }
-                }
-            }).resume()
+        if let imagePath = memberList[indexPath.item].profileImagePath {
+            let fullImagePath = UrlLiteral.imageBaseURL + imagePath
+            cell.profileImage.load(from: fullImagePath)
         }
         
         cell.nicknameLabel.text = memberList[indexPath.item].nickname
