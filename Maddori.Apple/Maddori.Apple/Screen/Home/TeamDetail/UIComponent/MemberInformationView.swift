@@ -18,7 +18,7 @@ final class MemberInformationView: UIView {
     private let profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.layer.cornerRadius = 23
-        imageView.image = ImageLiterals.imgPersonTab
+        imageView.image = ImageLiterals.imgProfileNone
         return imageView
     }()
     private lazy var profileNicknameLabel: UILabel = {
