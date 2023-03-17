@@ -11,15 +11,15 @@ import SnapKit
 
 final class TeamDetailViewController: BaseViewController {
     
-    private enum PropertySize {
-        static let headerViewHeight: CGFloat = 70
-        static let cellSize: CGFloat = 46
-        static let cellSpacing: CGFloat = 20
-        static let navigationBarHeight: CGFloat = 44
-        static let homeIndicatorHeight: CGFloat = 34
-        static let tableViewTopProperty: CGFloat = 86
-        static let tableViewBottomProperty: CGFloat = 120
-    }
+//    private enum PropertySize {
+//        static let headerViewHeight: CGFloat = 70
+//        static let cellSize: CGFloat = 46
+//        static let cellSpacing: CGFloat = 20
+//        static let navigationBarHeight: CGFloat = 44
+//        static let homeIndicatorHeight: CGFloat = 34
+//        static let tableViewTopProperty: CGFloat = 86
+//        static let tableViewBottomProperty: CGFloat = 120
+//    }
     
     // MARK: - property
     
@@ -123,12 +123,12 @@ final class TeamDetailViewController: BaseViewController {
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.height.equalTo(16)
         }
-        
+        let size = TeamDetailMembersView.PropertySize.self
         let topInset: CGFloat = UIApplication.shared.keyWindow?.safeAreaInsets.top ?? UIApplication.shared.statusBarFrame.size.height
         let hasHomeIndicator = UIScreen.main.bounds.width * 2 < UIScreen.main.bounds.height
         let bottomInset: CGFloat = hasHomeIndicator ? 34 : 0
-        let minHeight = view.frame.size.height - topInset - PropertySize.navigationBarHeight - PropertySize.tableViewTopProperty - PropertySize.tableViewBottomProperty - bottomInset - 60
-        let currentHeight = (PropertySize.cellSize + PropertySize.cellSpacing) * CGFloat(memberTableView.members.count) + PropertySize.headerViewHeight + PropertySize.cellSpacing
+        let minHeight = view.frame.size.height - topInset - size.navigationBarHeight - size.tableViewTopProperty - size.tableViewBottomProperty - bottomInset - 60
+        let currentHeight = (size.cellSize + size.cellSpacing) * CGFloat(memberTableView.members.count) + size.headerViewHeight + size.cellSpacing
         let height = max(minHeight, currentHeight)
 
         contentView.addSubview(memberTableView)

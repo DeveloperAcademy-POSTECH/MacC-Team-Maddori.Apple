@@ -14,6 +14,16 @@ final class TeamDetailMembersView: UIView {
     // FIXME: - API연결 후 수정
     let members: [String] = Array(repeating: "", count: 2)
     
+    enum PropertySize {
+        static let headerViewHeight: CGFloat = 70
+        static let cellSize: CGFloat = 46
+        static let cellSpacing: CGFloat = 20
+        static let navigationBarHeight: CGFloat = 44
+        static let homeIndicatorHeight: CGFloat = 34
+        static let tableViewTopProperty: CGFloat = 86
+        static let tableViewBottomProperty: CGFloat = 120
+    }
+    
     // MARK: - property
     
     private let memberTableView: UITableView = {
@@ -69,7 +79,7 @@ extension TeamDetailMembersView: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 66
+        return PropertySize.cellSize + PropertySize.cellSpacing
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -78,6 +88,6 @@ extension TeamDetailMembersView: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 70 + 24
+        return PropertySize.headerViewHeight + PropertySize.cellSpacing
     }
 }
