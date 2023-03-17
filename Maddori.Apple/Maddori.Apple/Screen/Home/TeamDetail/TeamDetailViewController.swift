@@ -11,16 +11,6 @@ import SnapKit
 
 final class TeamDetailViewController: BaseViewController {
     
-//    private enum PropertySize {
-//        static let headerViewHeight: CGFloat = 70
-//        static let cellSize: CGFloat = 46
-//        static let cellSpacing: CGFloat = 20
-//        static let navigationBarHeight: CGFloat = 44
-//        static let homeIndicatorHeight: CGFloat = 34
-//        static let tableViewTopProperty: CGFloat = 86
-//        static let tableViewBottomProperty: CGFloat = 120
-//    }
-    
     // MARK: - property
     
     private lazy var backButton = BackButton(type: .system)
