@@ -65,7 +65,6 @@ final class TeamDetailMembersView: UIView {
 // MARK: - extension
 
 extension TeamDetailMembersView: UITableViewDelegate {
-    
 }
 
 extension TeamDetailMembersView: UITableViewDataSource {
@@ -75,6 +74,7 @@ extension TeamDetailMembersView: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: TeamDetailMemberTableViewCell.className, for: indexPath) as? TeamDetailMemberTableViewCell else { return UITableViewCell() }
+        cell.selectionStyle = .none
         return cell
     }
     
