@@ -30,6 +30,8 @@ final class TeamDetailMemberTableHeaderView: UITableViewHeaderFooterView {
     
     required init?(coder: NSCoder) { nil }
     
+    // MARK: - func
+    
     private func render() {
         self.addSubview(memberInformationView)
         memberInformationView.snp.makeConstraints {

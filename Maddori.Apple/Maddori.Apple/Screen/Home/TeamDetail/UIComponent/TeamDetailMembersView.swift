@@ -11,6 +11,7 @@ import SnapKit
 
 final class TeamDetailMembersView: UIView {
     
+    // FIXME: - API연결 후 수정
     let members: [String] = Array(repeating: "", count: 2)
     
     // MARK: - property

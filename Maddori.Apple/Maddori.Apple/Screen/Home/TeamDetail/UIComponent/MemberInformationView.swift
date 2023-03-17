@@ -47,6 +47,8 @@ final class MemberInformationView: UIView {
     
     required init?(coder: NSCoder) { nil }
     
+    // MARK: - func
+    
     private func render() {
         self.addSubview(profileImageView)
         profileImageView.snp.makeConstraints {
