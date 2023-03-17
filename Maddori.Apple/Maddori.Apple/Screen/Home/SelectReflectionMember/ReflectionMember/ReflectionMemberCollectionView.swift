@@ -25,12 +25,12 @@ final class ReflectionMemberCollectionView: UIView {
             right: collectionHorizontalSpacing)
     }
     
-    var memberList: [MemberResponse] = [] {
+    var memberList: [MemberDetailResponse] = [] {
         didSet {
             collectionView.reloadData()
         }
     }
-    var didTappedMember: ((MemberResponse, [Int]) -> ())?
+    var didTappedMember: ((MemberDetailResponse, [Int]) -> ())?
     var selectedMemberList: [Int] = UserDefaultStorage.seenMemberIdList {
         willSet {
             UserDefaultHandler.appendSeenMemberIdList(memberIdList: newValue)
