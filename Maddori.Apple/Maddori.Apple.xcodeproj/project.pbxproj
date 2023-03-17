@@ -11,6 +11,8 @@
 		391CBA19290580460044CA30 /* InProgressDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391CBA18290580460044CA30 /* InProgressDetailViewController.swift */; };
 		391CBA1C290582130044CA30 /* ReflectionInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391CBA1B290582130044CA30 /* ReflectionInfoModel.swift */; };
 		391D217C29050427003FC871 /* CustomVisualEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391D217B29050427003FC871 /* CustomVisualEffectView.swift */; };
+		391D38DB29C449DE00A6BFED /* TeamDetailMemberTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391D38DA29C449DE00A6BFED /* TeamDetailMemberTableViewCell.swift */; };
+		391D38DD29C44A0400A6BFED /* TeamDetailMemberTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391D38DC29C44A0400A6BFED /* TeamDetailMemberTableHeaderView.swift */; };
 		39257DC528F8FEBD00201E0B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39257DC428F8FEBD00201E0B /* AppDelegate.swift */; };
 		39257DC728F8FEBD00201E0B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39257DC628F8FEBD00201E0B /* SceneDelegate.swift */; };
 		39257DCE28F8FEBE00201E0B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 39257DCD28F8FEBE00201E0B /* Assets.xcassets */; };
@@ -23,7 +25,6 @@
 		39257DF528F93E4700201E0B /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39257DF428F93E4700201E0B /* UIColor+Extension.swift */; };
 		39307CF52917DA9300789AB6 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39307CF42917DA9300789AB6 /* LoginViewController.swift */; };
 		39341E0A298BA419006C1727 /* TeamDetailMembersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39341E09298BA419006C1727 /* TeamDetailMembersView.swift */; };
-		39341E0D298BC354006C1727 /* TeamDetailMembersCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39341E0C298BC354006C1727 /* TeamDetailMembersCell.swift */; };
 		39341E0F29921181006C1727 /* MemberInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39341E0E29921181006C1727 /* MemberInformationView.swift */; };
 		39341E1129922D17006C1727 /* FullDividerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39341E1029922D17006C1727 /* FullDividerView.swift */; };
 		39436C1029127BBA0083D77A /* MyFeedbackCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39436C0F29127BBA0083D77A /* MyFeedbackCollectionView.swift */; };
@@ -161,6 +162,8 @@
 		391CBA18290580460044CA30 /* InProgressDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InProgressDetailViewController.swift; sourceTree = "<group>"; };
 		391CBA1B290582130044CA30 /* ReflectionInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReflectionInfoModel.swift; sourceTree = "<group>"; };
 		391D217B29050427003FC871 /* CustomVisualEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomVisualEffectView.swift; sourceTree = "<group>"; };
+		391D38DA29C449DE00A6BFED /* TeamDetailMemberTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamDetailMemberTableViewCell.swift; sourceTree = "<group>"; };
+		391D38DC29C44A0400A6BFED /* TeamDetailMemberTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamDetailMemberTableHeaderView.swift; sourceTree = "<group>"; };
 		39257DC128F8FEBD00201E0B /* Maddori.Apple.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Maddori.Apple.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		39257DC428F8FEBD00201E0B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		39257DC628F8FEBD00201E0B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -175,7 +178,6 @@
 		39257DF428F93E4700201E0B /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		39307CF42917DA9300789AB6 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		39341E09298BA419006C1727 /* TeamDetailMembersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamDetailMembersView.swift; sourceTree = "<group>"; };
-		39341E0C298BC354006C1727 /* TeamDetailMembersCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamDetailMembersCell.swift; sourceTree = "<group>"; };
 		39341E0E29921181006C1727 /* MemberInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberInformationView.swift; sourceTree = "<group>"; };
 		39341E1029922D17006C1727 /* FullDividerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullDividerView.swift; sourceTree = "<group>"; };
 		39436C0F29127BBA0083D77A /* MyFeedbackCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFeedbackCollectionView.swift; sourceTree = "<group>"; };
@@ -504,7 +506,8 @@
 		39341E0B298BC344006C1727 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				39341E0C298BC354006C1727 /* TeamDetailMembersCell.swift */,
+				391D38DA29C449DE00A6BFED /* TeamDetailMemberTableViewCell.swift */,
+				391D38DC29C44A0400A6BFED /* TeamDetailMemberTableHeaderView.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1177,7 +1180,6 @@
 				39F15C0C296D371500952D02 /* EmptyPersonView.swift in Sources */,
 				52DC9091291A98CC00904739 /* MyFeedbackEditViewController.swift in Sources */,
 				3E66777529419C8300BB5670 /* KeywordTextFieldView.swift in Sources */,
-				39341E0D298BC354006C1727 /* TeamDetailMembersCell.swift in Sources */,
 				3EA341E82925E5EA005CBD1C /* String+Extension.swift in Sources */,
 				D7AFB7C72916FF9400E998B7 /* CustomSegmentControl.swift in Sources */,
 				7E8CDC67292E19B000984742 /* SettingButton.swift in Sources */,
@@ -1200,6 +1202,7 @@
 				39F52C652923369000B19A77 /* EditFeedBackResponse.swift in Sources */,
 				525E722528FFCFA600EF3FCB /* FeedbackTypeButtonView.swift in Sources */,
 				39A64ACE2905885F001DB020 /* StartSuggestionView.swift in Sources */,
+				391D38DD29C44A0400A6BFED /* TeamDetailMemberTableHeaderView.swift in Sources */,
 				D7AFB7C52916EDC300E998B7 /* MyReflectionDetailTableViewCell.swift in Sources */,
 				520FEC44292234C0009FC1F2 /* FeedbackToMeModel.swift in Sources */,
 				3E5195AB292B05BC00710A01 /* JoinReflectionButton.swift in Sources */,
@@ -1234,6 +1237,7 @@
 				39F52C68292472EB00B19A77 /* AllFeedBackResponse.swift in Sources */,
 				3975CEAF293EEDD6002D4F1A /* KeywordView.swift in Sources */,
 				39257DF128F93C2A00201E0B /* ImageLiteral.swift in Sources */,
+				391D38DB29C449DE00A6BFED /* TeamDetailMemberTableViewCell.swift in Sources */,
 				395C7E252900E74700FC2FCA /* StartReflectionViewController.swift in Sources */,
 				3E557FF82901CD3400714E46 /* KeywordCollectionViewFlowLayout.swift in Sources */,
 				39847424292603B000EDC139 /* AddFeedBackEndPoint.swift in Sources */,
