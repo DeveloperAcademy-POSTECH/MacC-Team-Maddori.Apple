@@ -11,6 +11,16 @@ import SnapKit
 
 final class TeamDetailViewController: BaseViewController {
     
+    private enum PropertySize {
+        static let headerViewHeight: CGFloat = 70
+        static let cellSize: CGFloat = 46
+        static let cellSpacing: CGFloat = 20
+        static let navigationBarHeight: CGFloat = 44
+        static let homeIndicatorHeight: CGFloat = 34
+        static let tableViewTopProperty: CGFloat = 86
+        static let tableViewBottomProperty: CGFloat = 120
+    }
+    
     // MARK: - property
     
     private lazy var backButton = BackButton(type: .system)
@@ -30,6 +40,8 @@ final class TeamDetailViewController: BaseViewController {
         button.setUnderline()
         return button
     }()
+    private let scrollView = UIScrollView()
+    private let contentView = UIView()
     private let memberTitleLabel: UILabel = {
         let label = UILabel()
         label.text = TextLiteral.teamDetailViewControllerMemberTitleLabel
@@ -37,14 +49,7 @@ final class TeamDetailViewController: BaseViewController {
         label.font = .label2
         return label
     }()
-    private let memberInformationView = MemberInformationView(nickname: "이드", role: "디자인 리드 / 개발자")
-    private let dividerView: UIView = {
-        let view = UIView()
-        view.layer.borderWidth = 0.5
-        view.layer.borderColor = UIColor.gray300.cgColor
-        return view
-    }()
-    private let memberCollectionView = TeamDetailMembersView()
+    private let memberTableView = TeamDetailMembersView()
     private let firstFullDividerView = FullDividerView()
     private let codeShareButton: UIButton = {
         let button = UIButton(type: .system)
@@ -99,63 +104,71 @@ final class TeamDetailViewController: BaseViewController {
             $0.width.height.equalTo(44)
         }
         
-        view.addSubview(memberTitleLabel)
-        memberTitleLabel.snp.makeConstraints {
+        view.addSubview(scrollView)
+        scrollView.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(SizeLiteral.topComponentPadding)
-            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.leading.trailing.bottom.equalToSuperview()
         }
         
-        view.addSubview(memberInformationView)
-        memberInformationView.snp.makeConstraints {
+        scrollView.addSubview(contentView)
+        contentView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+            $0.width.equalTo(view.snp.width)
+            $0.height.equalTo(view.snp.height).priority(.low)
+        }
+
+        contentView.addSubview(memberTitleLabel)
+        memberTitleLabel.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.height.equalTo(16)
+        }
+        
+        let topInset: CGFloat = UIApplication.shared.keyWindow?.safeAreaInsets.top ?? UIApplication.shared.statusBarFrame.size.height
+        let hasHomeIndicator = UIScreen.main.bounds.width * 2 < UIScreen.main.bounds.height
+        let bottomInset: CGFloat = hasHomeIndicator ? 34 : 0
+        let minHeight = view.frame.size.height - topInset - PropertySize.navigationBarHeight - PropertySize.tableViewTopProperty - PropertySize.tableViewBottomProperty - bottomInset - 60
+        let currentHeight = (PropertySize.cellSize + PropertySize.cellSpacing) * CGFloat(memberTableView.members.count) + PropertySize.headerViewHeight + PropertySize.cellSpacing
+        let height = max(minHeight, currentHeight)
+
+        contentView.addSubview(memberTableView)
+        memberTableView.snp.makeConstraints {
             $0.top.equalTo(memberTitleLabel.snp.bottom).offset(20)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-            $0.height.equalTo(46)
-        }
-
-        view.addSubview(dividerView)
-        dividerView.snp.makeConstraints {
-            $0.top.equalTo(memberInformationView.snp.bottom).offset(25)
-            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-            $0.height.equalTo(1)
+            $0.height.equalTo(height)
         }
         
-        view.addSubview(teamLeaveButton)
-        teamLeaveButton.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(20)
-        }
-        
-        view.addSubview(secondFullDividerView)
-        secondFullDividerView.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview()
-            $0.bottom.equalTo(teamLeaveButton.snp.top).offset(-20)
-            $0.height.equalTo(4)
-        }
-        
-        view.addSubview(invitationCodeLabel)
-        invitationCodeLabel.snp.makeConstraints {
-            $0.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-            $0.bottom.equalTo(secondFullDividerView.snp.top).offset(-20)
-        }
-
-        view.addSubview(codeShareButton)
-        codeShareButton.snp.makeConstraints {
-            $0.centerY.equalTo(invitationCodeLabel.snp.centerY)
-            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-        }
-
-        view.addSubview(firstFullDividerView)
+        contentView.addSubview(firstFullDividerView)
         firstFullDividerView.snp.makeConstraints {
+            $0.top.equalTo(memberTableView.snp.bottom)
             $0.leading.trailing.equalToSuperview()
-            $0.bottom.equalTo(invitationCodeLabel.snp.top).offset(-20)
+            $0.height.equalTo(4)
+        }
+        
+        contentView.addSubview(codeShareButton)
+        codeShareButton.snp.makeConstraints {
+            $0.top.equalTo(firstFullDividerView.snp.bottom).offset(20)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+
+        contentView.addSubview(invitationCodeLabel)
+        invitationCodeLabel.snp.makeConstraints {
+            $0.centerY.equalTo(codeShareButton.snp.centerY)
+            $0.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+
+        contentView.addSubview(secondFullDividerView)
+        secondFullDividerView.snp.makeConstraints {
+            $0.top.equalTo(invitationCodeLabel.snp.bottom).offset(20)
+            $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(4)
         }
 
-        view.addSubview(memberCollectionView)
-        memberCollectionView.snp.makeConstraints {
-            $0.top.equalTo(dividerView.snp.bottom).offset(24)
-            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-            $0.bottom.equalTo(firstFullDividerView.snp.top)
+        contentView.addSubview(teamLeaveButton)
+        teamLeaveButton.snp.makeConstraints {
+            $0.top.equalTo(secondFullDividerView.snp.bottom).offset(20)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+            $0.bottom.equalToSuperview()
         }
     }
     
