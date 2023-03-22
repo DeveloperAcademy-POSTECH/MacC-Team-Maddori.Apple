@@ -114,6 +114,11 @@ final class SetNicknameViewController: BaseViewController {
         setupNotificationCenter()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        doneButton.isLoading = false
+    }
+    
     override func render() {
         view.addSubview(titleLabel)
         titleLabel.snp.makeConstraints {
