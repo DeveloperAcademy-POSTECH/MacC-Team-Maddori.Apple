@@ -70,6 +70,11 @@ final class CreateTeamViewController: BaseTextFieldViewController {
         setupDoneButton()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        doneButton.isLoading = false
+    }
+    
     override func setupNavigationBar() {
         super.setupNavigationBar()
         
@@ -84,6 +89,7 @@ final class CreateTeamViewController: BaseTextFieldViewController {
     
     private func setupDoneButton() {
         let action = UIAction { [weak self] _ in
+            self?.doneButton.isLoading = true
             if let teamName = self?.kigoTextField.text {
                 if teamName.hasSpecialCharacters() {
                     DispatchQueue.main.async {

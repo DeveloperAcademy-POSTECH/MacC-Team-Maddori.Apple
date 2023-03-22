@@ -178,6 +178,7 @@ final class JoinTeamViewController: BaseTextFieldViewController {
             } else {
                 DispatchQueue.main.async {
                     self.makeAlert(title: TextLiteral.joinTeamViewControllerAlertTitle, message: TextLiteral.joinTeamViewControllerAlertMessage)
+                    self.doneButton.isLoading = false
                 }
             }
         }
