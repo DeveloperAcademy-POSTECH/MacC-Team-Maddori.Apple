@@ -100,6 +100,7 @@ final class SetNicknameViewController: BaseViewController {
         button.isDisabled = true
         let action = UIAction { [weak self] _ in
             self?.didTappedDoneButton()
+            button.isLoading = true
         }
         button.addAction(action, for: .touchUpInside)
         return button

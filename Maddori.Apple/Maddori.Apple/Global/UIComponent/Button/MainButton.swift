@@ -15,6 +15,12 @@ final class MainButton: UIButton {
         static let height: CGFloat = 54
     }
     
+    var isLoading: Bool = false {
+        didSet { updateLoadingView() }
+        // 다른거 네이밍이 setup으로 시작되는데
+        // didSet 다음에 오는거라면 update가 맞지 않을까?
+    }
+    
     var title: String? {
         didSet { setupAttribute() }
     }
@@ -22,6 +28,8 @@ final class MainButton: UIButton {
     var isDisabled: Bool = false {
         didSet { setupAttribute() }
     }
+    
+    private var spinner = UIActivityIndicatorView()
     
     // MARK: - life cycle
     
@@ -41,12 +49,18 @@ final class MainButton: UIButton {
         setTitleColor(.white, for: .disabled)
         setBackgroundColor(.blue200, for: .normal)
         setBackgroundColor(.gray200, for: .disabled)
+        configLoadingIndicator()
     }
     
     private func render() {
         self.snp.makeConstraints {
             $0.width.equalTo(Size.width)
             $0.height.equalTo(Size.height)
+        }
+        
+        self.addSubview(spinner)
+        spinner.snp.makeConstraints {
+            $0.center.equalTo(self.snp.center)
         }
     }
     
@@ -56,7 +70,24 @@ final class MainButton: UIButton {
         if let title = title {
             setTitle(title, for: .normal)
         }
-        
         isEnabled = !isDisabled
+    }
+    
+    private func configLoadingIndicator() {
+        spinner.hidesWhenStopped = true
+        spinner.color = .gray600
+        spinner.style = .medium
+    }
+    
+    func updateLoadingView() {
+        if isLoading {
+            spinner.startAnimating()
+            titleLabel?.alpha = 0
+            isEnabled = false
+        } else {
+            spinner.stopAnimating()
+            titleLabel?.alpha = 1
+            isEnabled = true
+        }
     }
 }
