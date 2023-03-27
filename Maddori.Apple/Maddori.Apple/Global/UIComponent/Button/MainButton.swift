@@ -17,8 +17,6 @@ final class MainButton: UIButton {
     
     var isLoading: Bool = false {
         didSet { updateLoadingView() }
-        // 다른거 네이밍이 setup으로 시작되는데
-        // didSet 다음에 오는거라면 update가 맞지 않을까?
     }
     
     var title: String? {
@@ -79,7 +77,7 @@ final class MainButton: UIButton {
         spinner.style = .medium
     }
     
-    func updateLoadingView() {
+    private func updateLoadingView() {
         if isLoading {
             spinner.startAnimating()
             titleLabel?.alpha = 0
