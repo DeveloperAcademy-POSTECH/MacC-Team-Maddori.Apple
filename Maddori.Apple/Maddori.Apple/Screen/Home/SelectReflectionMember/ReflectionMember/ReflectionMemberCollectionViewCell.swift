@@ -68,6 +68,22 @@ final class ReflectionMemberCollectionViewCell: BaseCollectionViewCell {
         self.makeShadow(color: .black, opacity: 0.2, offset: CGSize.zero, radius: 2)
     }
     
+    override func prepareForReuse() {
+        if isSelected {
+            self.backgroundColor = .white100
+            self.profileImage.layer.opacity = 0.5
+            self.nicknameLabel.textColor = .gray300
+            self.roleLabel.textColor = .gray300
+            self.makeShadow(color: .black, opacity: 0.2, offset: CGSize.zero, radius: 1)
+        } else {
+            self.backgroundColor = .white300
+            self.profileImage.layer.opacity = 1
+            self.nicknameLabel.textColor = .gray600
+            self.roleLabel.textColor = .gray400
+            self.makeShadow(color: .black, opacity: 0.2, offset: CGSize.zero, radius: 2)
+        }
+    }
+    
     // MARK: - func
     
     func applySelectedAttribute() {
