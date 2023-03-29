@@ -466,11 +466,11 @@ extension SetNicknameViewController: PHPickerViewControllerDelegate {
         let itemProvider = results.first?.itemProvider
         if let itemProvider = itemProvider, itemProvider.canLoadObject(ofClass: UIImage.self) {
             itemProvider.loadObject(ofClass: UIImage.self) { (image, error) in
-                DispatchQueue.main.async {
-                    self.profileImageButton.profileImage.image = image as? UIImage
-                }
                 guard let profileImage = image as? UIImage else { return }
-                let cropImage = self.cropSquare(profileImage)
+                DispatchQueue.main.async {
+                    self.profileImageButton.profileImage.image = profileImage.fixOrientation()
+                }
+                let cropImage = self.cropSquare(profileImage.fixOrientation())
                 if let data = cropImage?.pngData() {
                     let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
                     let url = documents.appendingPathComponent(".png")
@@ -495,9 +495,9 @@ extension SetNicknameViewController: UIImagePickerControllerDelegate, UINavigati
         
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             DispatchQueue.main.async {
-                self.profileImageButton.profileImage.image = image
+                self.profileImageButton.profileImage.image = image.fixOrientation()
             }
-            let cropImage = self.cropSquare(image)
+            let cropImage = self.cropSquare(image.fixOrientation())
             if let data = cropImage?.pngData() {
                 let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
                 let url = documents.appendingPathComponent(".png")
