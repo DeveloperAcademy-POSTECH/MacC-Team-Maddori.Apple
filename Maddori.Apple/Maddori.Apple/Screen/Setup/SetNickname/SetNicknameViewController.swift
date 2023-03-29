@@ -334,20 +334,6 @@ final class SetNicknameViewController: BaseViewController {
         }
     }
     
-    private func cropSquare(_ image: UIImage) -> UIImage? {
-        let imageSize = image.size
-        let shortLength = imageSize.width < imageSize.height ? imageSize.width : imageSize.height
-        print(imageSize.width, imageSize.height, shortLength)
-        let origin = CGPoint(
-            x: imageSize.width / 2 - shortLength / 2,
-            y: imageSize.height / 2 - shortLength / 2
-        )
-        let size = CGSize(width: shortLength, height: shortLength)
-        let square = CGRect(origin: origin, size: size)
-        guard let squareImage = image.cgImage?.cropping(to: square) else { return nil }
-        return UIImage(cgImage: squareImage, scale: shortLength, orientation: .up)
-    }
-    
     // MARK: - selector
     
     @objc private func keyboardWillShow(notification: NSNotification) {
@@ -470,8 +456,7 @@ extension SetNicknameViewController: PHPickerViewControllerDelegate {
                 DispatchQueue.main.async {
                     self.profileImageButton.profileImage.image = profileImage.fixOrientation()
                 }
-                let cropImage = self.cropSquare(profileImage.fixOrientation())
-                if let data = cropImage?.pngData() {
+                if let data = profileImage.fixOrientation().pngData() {
                     let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
                     let url = documents.appendingPathComponent(".png")
                     do {
@@ -497,8 +482,7 @@ extension SetNicknameViewController: UIImagePickerControllerDelegate, UINavigati
             DispatchQueue.main.async {
                 self.profileImageButton.profileImage.image = image.fixOrientation()
             }
-            let cropImage = self.cropSquare(image.fixOrientation())
-            if let data = cropImage?.pngData() {
+            if let data = image.fixOrientation().pngData() {
                 let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
                 let url = documents.appendingPathComponent(".png")
                 do {
