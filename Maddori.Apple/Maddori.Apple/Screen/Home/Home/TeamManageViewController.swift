@@ -142,7 +142,7 @@ final class TeamManageViewController: BaseViewController {
 //        print("새로운 팀 합류하기")
         let rootView = presentingViewController
         dismiss(animated: true) {
-            let joinViewController = JoinTeamViewController()
+            let joinViewController = UINavigationController(rootViewController: CreateTeamViewController())
             joinViewController.modalPresentationStyle = .fullScreen
             rootView?.present(joinViewController, animated: true)
         }
