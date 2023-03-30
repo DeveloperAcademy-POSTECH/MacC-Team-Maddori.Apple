@@ -200,15 +200,15 @@ final class TeamDetailViewController: BaseViewController {
             self?.makeRequestAlert(title: TextLiteral.teamDetailViewControllerLeaveTeamAlertTitle,
                                    message: TextLiteral.teamDetailViewControllerLeaveTeamAlertMessage,
                                    okTitle: TextLiteral.leaveTitle,
-                                   // FIXME: - 팀 나가기 API 연결
-                                   okAction: nil)
+                                   okAction: { _ in
+                self?.deleteLeaveTeam(type: .deleteLeaveTeam)
+            })
         }
         teamLeaveButton.addAction(action, for: .touchUpInside)
     }
     
     private func setupCodeShareButton() {
         let action = UIAction { [weak self] _ in
-            print(self?.invitationCode)
             UIPasteboard.general.string = self?.invitationCode
         }
         codeShareButton.addAction(action, for: .touchUpInside)
@@ -256,6 +256,17 @@ final class TeamDetailViewController: BaseViewController {
                 DispatchQueue.main.async {
                     self.titleLabel.text = teamName
                 }
+            }
+        }
+    }
+    
+    private func deleteLeaveTeam(type: TeamDetailEndPoint<VoidModel>) {
+        AF.request(type.address,
+                   method: type.method,
+                   headers: type.headers).responseDecodable(of: BaseModel<VoidModel>.self) { json in
+            if let _ = json.value {
+                self.navigationController?.popViewController(animated: true)
+                UserDefaultHandler.setTeamId(teamId: 0)
             }
         }
     }

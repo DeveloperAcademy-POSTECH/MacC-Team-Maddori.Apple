@@ -10,6 +10,7 @@ import Alamofire
 enum TeamDetailEndPoint<T: Encodable>: EndPointable {
     case fetchTeamMember
     case fetchTeamInformation
+    case deleteLeaveTeam
     
     var address: String {
         switch self {
@@ -18,6 +19,9 @@ enum TeamDetailEndPoint<T: Encodable>: EndPointable {
             
         case .fetchTeamInformation:
             return "\(UrlLiteral.baseUrl2)/teams/\(UserDefaultStorage.teamId)"
+            
+        case .deleteLeaveTeam:
+            return "\(UrlLiteral.baseUrl2)/users/team/\(UserDefaultStorage.teamId)/leave"
         }
     }
     
@@ -28,6 +32,9 @@ enum TeamDetailEndPoint<T: Encodable>: EndPointable {
             
         case .fetchTeamInformation:
             return .get
+            
+        case .deleteLeaveTeam:
+            return .delete
         }
     }
     
@@ -37,6 +44,9 @@ enum TeamDetailEndPoint<T: Encodable>: EndPointable {
             return nil
             
         case .fetchTeamInformation:
+            return nil
+            
+        case .deleteLeaveTeam:
             return nil
         }
     }
@@ -51,6 +61,13 @@ enum TeamDetailEndPoint<T: Encodable>: EndPointable {
             return HTTPHeaders(headers)
             
         case .fetchTeamInformation:
+            let headers = [
+                "access_token": "\(UserDefaultStorage.accessToken)",
+                "refresh_token": "\(UserDefaultStorage.refreshToken)"
+            ]
+            return HTTPHeaders(headers)
+            
+        case .deleteLeaveTeam:
             let headers = [
                 "access_token": "\(UserDefaultStorage.accessToken)",
                 "refresh_token": "\(UserDefaultStorage.refreshToken)"
