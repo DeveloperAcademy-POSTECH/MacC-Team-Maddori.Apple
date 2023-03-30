@@ -86,9 +86,8 @@ extension TeamDetailMembersView: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: TeamDetailMemberTableViewCell.className, for: indexPath) as? TeamDetailMemberTableViewCell else { return UITableViewCell() }
-        if let username = members[indexPath.item].userName,
-           let role = members[indexPath.item].role {
-            cell.setupLayoutInfoView(nickname: username, role: role)
+        if let username = members[indexPath.item].userName {
+            cell.setupLayoutInfoView(nickname: username, role: members[indexPath.item].role ?? "", imagePath: members[indexPath.item].profileImagePath)
         }
         cell.selectionStyle = .none
         return cell

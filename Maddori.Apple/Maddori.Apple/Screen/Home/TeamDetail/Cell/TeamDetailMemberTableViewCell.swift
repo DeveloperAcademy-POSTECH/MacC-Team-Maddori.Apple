@@ -24,8 +24,11 @@ final class TeamDetailMemberTableViewCell: BaseTableViewCell {
     
     // MARK: - func
     
-    func setupLayoutInfoView(nickname: String, role: String) {
+    func setupLayoutInfoView(nickname: String, role: String, imagePath: String?) {
         memberInfoView.profileNicknameLabel.text = nickname
         memberInfoView.profileRoleLabel.text = role
+        if let imagePath {
+            memberInfoView.profileImageView.load(from: UrlLiteral.iamgeBaseUrl + imagePath)
+        }
     }
 }
