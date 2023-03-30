@@ -43,7 +43,7 @@ final class ChangeTeamView: UIView {
         collectionView.backgroundColor = .white200
         return collectionView
     }()
-    private let emptyView = EmptyTeamView()
+    private lazy var emptyView = EmptyTeamView()
     
     // MARK: - life cycle
     
