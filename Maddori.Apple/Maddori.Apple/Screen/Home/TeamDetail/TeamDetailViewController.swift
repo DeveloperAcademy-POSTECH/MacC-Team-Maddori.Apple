@@ -19,8 +19,7 @@ final class TeamDetailViewController: BaseViewController {
         let label = UILabel()
         label.font = .title
         label.textColor = .black100
-        // FIXME: - API 연결 후 삭제
-        label.text = "맛쟁이 사과처럼"
+        label.text = UserDefaultStorage.teamName
         return label
     }()
     private let editButton: UIButton = {
@@ -226,8 +225,8 @@ final class TeamDetailViewController: BaseViewController {
                    headers: type.headers).responseDecodable(of: BaseModel<TeamMembersResponse>.self) { json in
             if let json = json.value {
                 guard let members = json.detail?.members else { return }
-                self.memberTableView.loadData(data: members)
                 DispatchQueue.main.async {
+                    self.memberTableView.loadData(data: members)
                     self.updateLayout()
                 }
             }
