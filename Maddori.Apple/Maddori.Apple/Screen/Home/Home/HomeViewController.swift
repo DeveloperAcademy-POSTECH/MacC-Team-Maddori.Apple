@@ -106,6 +106,7 @@ final class HomeViewController: BaseViewController {
         super.viewWillAppear(animated)
         fetchCertainTeamDetail(type: .fetchCertainTeamDetail)
         fetchCurrentReflectionDetail(type: .fetchCurrentReflectionDetail)
+        setupNotification()
     }
     
     override func configUI() {
@@ -156,6 +157,10 @@ final class HomeViewController: BaseViewController {
     }
     
     // MARK: - func
+    
+    private func setupNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadHomeViewController(_:)), name: .chagneNotification, object: nil)
+    }
     
     private func presentTeamModal() {
         let teamViewController = TeamManageViewController(teamId: currentTeamId)
@@ -277,6 +282,17 @@ final class HomeViewController: BaseViewController {
     private func pushTeamDetailViewController() {
         let viewController = TeamDetailViewController()
         self.navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    // MARK: - selector
+    
+    @objc
+    private func reloadHomeViewController(_ sender: Notification) {
+        if let teamId = sender.object as? Int {
+            UserDefaultHandler.setTeamId(teamId: teamId)
+            fetchCertainTeamDetail(type: .fetchCertainTeamDetail)
+            fetchCurrentReflectionDetail(type: .fetchCurrentReflectionDetail)
+        }
     }
     
     // MARK: - api

@@ -67,6 +67,7 @@ final class TeamManageViewController: BaseViewController {
         setupDelegate()
         configureSettingModels()
         fetchUserTeamList(type: .fetchUserTeamList)
+        setChangeTeamViewDelegate()
     }
     
     override func render() {
@@ -110,6 +111,10 @@ final class TeamManageViewController: BaseViewController {
     }
     
     // MARK: - func
+    
+    private func setChangeTeamViewDelegate() {
+        changeTeamView.delegate = self
+    }
     
     private func setCurrentTeam() {
         changeTeamView.currentTeamId = currentTeamId
@@ -262,5 +267,12 @@ extension TeamManageViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         let model = sections[indexPath.section].options[indexPath.row]
         model.handler()
+    }
+}
+
+extension TeamManageViewController: ChangeTeamViewDelegate {
+    func chagneTeam(teamId: Int) {
+        NotificationCenter.default.post(name: .chagneNotification, object: teamId)
+        dismiss(animated: true)
     }
 }

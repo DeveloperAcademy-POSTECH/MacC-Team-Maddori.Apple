@@ -9,6 +9,10 @@ import UIKit
 
 import SnapKit
 
+protocol ChangeTeamViewDelegate: AnyObject {
+    func chagneTeam(teamId: Int)
+}
+
 final class ChangeTeamView: UIView {
     
     var teamDataDummy: [TeamInfoResponse] = [] {
@@ -17,6 +21,7 @@ final class ChangeTeamView: UIView {
         }
     }
     var currentTeamId: Int?
+    weak var delegate: ChangeTeamViewDelegate?
     
     // MARK: - property
     
@@ -108,8 +113,6 @@ extension ChangeTeamView: UICollectionViewDataSource {
 
 extension ChangeTeamView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // MARK: - FIXME
-        let selectedTeamName = teamDataDummy[indexPath.item]
-        print(selectedTeamName)
+        self.delegate?.chagneTeam(teamId: teamDataDummy[indexPath.item].id!)
     }
 }
