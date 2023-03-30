@@ -16,6 +16,7 @@ final class ChangeTeamView: UIView {
             teamDataDummy.isEmpty ? setLayoutEmptyView() : setLayoutTeamListView()
         }
     }
+    var currentTeamId: Int?
     
     // MARK: - property
     
@@ -95,6 +96,12 @@ extension ChangeTeamView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TeamChangeCollectionViewCell.className, for: indexPath) as? TeamChangeCollectionViewCell else { return UICollectionViewCell() }
         cell.teamNameLabel.text = teamDataDummy[indexPath.item].teamName
+        if let currentTeamId = self.currentTeamId {
+            if teamDataDummy[indexPath.item].id == currentTeamId {
+                cell.isSelected = true
+            }
+        }
+        
         return cell
     }
 }

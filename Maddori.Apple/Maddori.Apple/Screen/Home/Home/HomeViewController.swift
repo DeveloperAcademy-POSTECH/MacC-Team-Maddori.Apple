@@ -30,6 +30,7 @@ final class HomeViewController: BaseViewController {
     var reflectionDate: String = ""
     
     var isAdmin: Bool = false
+    var currentTeamId: Int = 0
     
     // MARK: - property
     
@@ -157,9 +158,7 @@ final class HomeViewController: BaseViewController {
     // MARK: - func
     
     private func presentTeamModal() {
-//        guard let navigationController = self.navigationController else { return }
-//        let teamViewController = TeamManageViewController(navigationController: navigationController)
-        let teamViewController = TeamManageViewController()
+        let teamViewController = TeamManageViewController(teamId: currentTeamId)
         
         teamViewController.modalPresentationStyle = .pageSheet
         
@@ -289,9 +288,11 @@ final class HomeViewController: BaseViewController {
         ).responseDecodable(of: BaseModel<CertainTeamDetailResponse>.self) { json in
             if let json = json.value {
                 guard let isAdmin = json.detail?.admin,
-                      let teamName = json.detail?.teamName
+                      let teamName = json.detail?.teamName,
+                      let teamId = json.detail?.teamId
                 else { return }
                 self.isAdmin = isAdmin
+                self.currentTeamId = teamId
                 DispatchQueue.main.async {
                     self.teamButton.setTitle(teamName + " ", for: .normal)
                 }

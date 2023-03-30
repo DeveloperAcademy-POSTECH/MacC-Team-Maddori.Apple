@@ -26,8 +26,6 @@ final class TeamManageViewController: BaseViewController {
             }
         }
     }
-    // MARK: - 1
-    // var navigation: UINavigationController?
     
     // MARK: - property
     
@@ -51,17 +49,18 @@ final class TeamManageViewController: BaseViewController {
     private let scrollView: UIScrollView = UIScrollView()
     private let contentView: UIView = UIView()
     
+    private var currentTeamId: Int
+    
     // MARK: - life cycle
     
-    // MARK: - 1
-//    required init(navigationController: UINavigationController?) {
-//        navigation = navigationController
-//        super.init()
-//    }
-//
-//    required init?(coder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
+    init(teamId: Int) {
+        self.currentTeamId = teamId
+        super.init()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -112,6 +111,10 @@ final class TeamManageViewController: BaseViewController {
     
     // MARK: - func
     
+    private func setCurrentTeam() {
+        changeTeamView.currentTeamId = currentTeamId
+    }
+    
     private func setupDelegate() {
         settingTableView.delegate = self
         settingTableView.dataSource = self
@@ -133,13 +136,6 @@ final class TeamManageViewController: BaseViewController {
     }
     
     private func joinNewTeam() {
-        // FIXME: api 연결
-        // MARK: - 1
-//        let joinViewController = JoinTeamViewController()
-//        dismiss(animated: true) {
-//            self.navigation?.pushViewController(joinViewController, animated: true)
-//        }
-//        print("새로운 팀 합류하기")
         let rootView = presentingViewController
         dismiss(animated: true) {
             let joinViewController = UINavigationController(rootViewController: CreateTeamViewController())
@@ -188,6 +184,7 @@ final class TeamManageViewController: BaseViewController {
                 self.teamCount = teamCount
                 guard let team = json.detail else { return }
                 self.changeTeamView.teamDataDummy = team
+                self.setCurrentTeam()
             }
         }
     }
