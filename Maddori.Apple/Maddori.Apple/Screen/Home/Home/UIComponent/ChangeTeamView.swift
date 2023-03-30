@@ -85,7 +85,6 @@ final class ChangeTeamView: UIView {
             $0.height.equalToSuperview()
         }
     }
-    
 }
 
 extension ChangeTeamView: UICollectionViewDataSource {
@@ -105,6 +104,5 @@ extension ChangeTeamView: UICollectionViewDelegate {
         // MARK: - FIXME
         let selectedTeamName = teamDataDummy[indexPath.item]
         print(selectedTeamName)
-    
     }
 }
