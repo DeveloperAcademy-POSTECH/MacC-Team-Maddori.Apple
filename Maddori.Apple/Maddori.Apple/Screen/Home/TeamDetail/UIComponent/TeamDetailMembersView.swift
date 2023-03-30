@@ -13,6 +13,7 @@ final class TeamDetailMembersView: UIView {
     
     // FIXME: - API연결 후 수정
     var members: [MemberDetailResponse] = []
+    var currentMember: MemberDetailResponse?
     
     enum PropertySize {
         static let headerViewHeight: CGFloat = 70
@@ -62,7 +63,13 @@ final class TeamDetailMembersView: UIView {
     }
     
     func loadData(data: [MemberDetailResponse]) {
-        self.members = data
+        data.forEach {
+            if $0.userId == UserDefaultStorage.userId {
+                currentMember = $0
+            } else {
+                members.append($0)
+            }
+        }
         memberTableView.reloadData()
     }
 }
@@ -93,6 +100,9 @@ extension TeamDetailMembersView: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: TeamDetailMemberTableHeaderView.className) as? TeamDetailMemberTableHeaderView else { return UITableViewHeaderFooterView() }
+        headerView.setupMemberInfoView(nickname: currentMember?.userName ?? UserDefaultStorage.nickname,
+                           role: currentMember?.role ?? "",
+                           imagePath: currentMember?.profileImagePath ?? "")
         return headerView
     }
     
