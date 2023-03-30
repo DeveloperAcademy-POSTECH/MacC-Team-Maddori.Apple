@@ -13,7 +13,7 @@ final class TeamDetailMemberTableHeaderView: UITableViewHeaderFooterView {
     
     // MARK: - property
     
-    private let memberInformationView = MemberInformationView(nickname: "이드", role: "디자인 리드 / 개발자")
+    private let memberInformationView = MemberInformationView()
     private let dividerView: UIView = {
         let view = UIView()
         view.layer.borderWidth = 0.5
