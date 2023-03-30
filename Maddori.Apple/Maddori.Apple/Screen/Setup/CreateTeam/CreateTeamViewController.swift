@@ -96,6 +96,7 @@ final class CreateTeamViewController: BaseTextFieldViewController {
                         self?.makeAlert(title: TextLiteral.createTeamViewControllerAlertTitle, message: TextLiteral.createTeamViewControllerAlertMessage)
                     }
                 } else {
+                    self?.doneButton.isLoading = true
                     UserDefaultHandler.setTeamName(teamName: teamName)
                     self?.pushSetNicknameViewController()
                 }
