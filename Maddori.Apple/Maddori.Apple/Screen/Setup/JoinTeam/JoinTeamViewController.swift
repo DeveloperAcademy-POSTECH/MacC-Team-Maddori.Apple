@@ -184,7 +184,7 @@ final class JoinTeamViewController: BaseTextFieldViewController {
     }
     
     private func pushSetNicknameViewController() {
-        let viewController = SetNicknameViewController()
+        let viewController = SetNicknameViewController(from: .joinView)
         navigationController?.pushViewController(viewController, animated: true)
     }
     

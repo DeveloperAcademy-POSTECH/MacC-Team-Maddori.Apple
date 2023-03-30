@@ -13,6 +13,10 @@ import SnapKit
 
 final class SetNicknameViewController: BaseViewController {
     
+    enum ViewType {
+        case createView
+        case joinView
+    }
     private enum TextLength {
         static let totalMin: Int = 0
         static let nicknameMax: Int = 6
@@ -20,6 +24,7 @@ final class SetNicknameViewController: BaseViewController {
     }
     private let cameraPicker = UIImagePickerController()
     private let teamName: String = UserDefaultStorage.teamName
+    private let fromView: ViewType
     
     // MARK: - property
     
@@ -106,6 +111,16 @@ final class SetNicknameViewController: BaseViewController {
     }()
     
     // MARK: - life cycle
+    
+    init(from: ViewType) {
+        self.fromView = from
+        super.init()
+    }
+    
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -289,13 +304,22 @@ final class SetNicknameViewController: BaseViewController {
         guard let role = roleTextField.text else { return }
         // FIXME: - 이미지 데이터 추가
         
-        if UserDefaultStorage.teamId == 0 {
+        if fromView == .createView {
             let dto = CreateTeamDTO(team_name: teamName, nickname: nickname, role: role, profile_image: nil)
             dispatchCreateTeam(type: .dispatchCreateTeam(dto))
-        } else {
+        }
+        else if fromView == .joinView {
             let dto = JoinTeamDTO(nickname: nickname, role: role, profile_image: nil)
             dispatchJoinTeam(type: .dispatchJoinTeam(teamId: UserDefaultStorage.teamId, dto))
         }
+        // FIXME: 진저가 확인 후 코드리뷰 시 삭제 예정
+//        if UserDefaultStorage.teamId == 0 {
+//            let dto = CreateTeamDTO(team_name: teamName, nickname: nickname, role: role, profile_image: nil)
+//            dispatchCreateTeam(type: .dispatchCreateTeam(dto))
+//        } else {
+//            let dto = JoinTeamDTO(nickname: nickname, role: role, profile_image: nil)
+//            dispatchJoinTeam(type: .dispatchJoinTeam(teamId: UserDefaultStorage.teamId, dto))
+//        }
         
         nicknameTextField.resignFirstResponder()
         roleTextField.resignFirstResponder()

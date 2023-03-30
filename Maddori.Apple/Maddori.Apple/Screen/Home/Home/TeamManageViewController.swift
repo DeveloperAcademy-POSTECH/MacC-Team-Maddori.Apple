@@ -145,8 +145,12 @@ final class TeamManageViewController: BaseViewController {
     }
     
     private func createTeam() {
-        // FIXME: api 연결
-        print("팀 생성하기")
+        let rootView = presentingViewController
+        dismiss(animated: true) {
+            let createTeamViewController = UINavigationController(rootViewController: CreateTeamViewController())
+            createTeamViewController.modalPresentationStyle = .fullScreen
+            rootView?.present(createTeamViewController, animated: true)
+        }
     }
     
     private func logout() {
