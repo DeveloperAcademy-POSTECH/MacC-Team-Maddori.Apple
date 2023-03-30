@@ -27,7 +27,7 @@ final class MainButton: UIButton {
         didSet { setupAttribute() }
     }
     
-    private var spinner = UIActivityIndicatorView()
+    lazy private var spinner = UIActivityIndicatorView()
     
     // MARK: - life cycle
     
