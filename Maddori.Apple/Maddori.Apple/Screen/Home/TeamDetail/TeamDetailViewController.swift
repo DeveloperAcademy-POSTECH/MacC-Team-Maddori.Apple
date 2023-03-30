@@ -68,12 +68,20 @@ final class TeamDetailViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupBackButton()
-        setupEditButton()
-        setupExitButton()
-        setupCodeShareButton()
-        fetchTeamDetailMember(type: .fetchTeamMember)
-        fetchTeamInformation(type: .fetchTeamInformation)
+        if UserDefaultStorage.teamId != 0 {
+            setupBackButton()
+            setupEditButton()
+            setupExitButton()
+            setupCodeShareButton()
+            fetchTeamDetailMember(type: .fetchTeamMember)
+            fetchTeamInformation(type: .fetchTeamInformation)
+        } else {
+            makeAlert(title: "팀 없음",
+                      message: "현재 속한 팀이 없습니다.\n 팀을 생성하거나, 참가 해 주세요.",
+                      okAction: { [weak self] _ in
+                self?.navigationController?.popViewController(animated: true)
+            })
+        }
     }
     
     override func configUI() {
