@@ -138,7 +138,7 @@ final class TeamManageViewController: BaseViewController {
     private func joinNewTeam() {
         let rootView = presentingViewController
         dismiss(animated: true) {
-            let joinViewController = UINavigationController(rootViewController: CreateTeamViewController())
+            let joinViewController = UINavigationController(rootViewController: JoinTeamViewController(from: .teamManageView))
             joinViewController.modalPresentationStyle = .fullScreen
             rootView?.present(joinViewController, animated: true)
         }
