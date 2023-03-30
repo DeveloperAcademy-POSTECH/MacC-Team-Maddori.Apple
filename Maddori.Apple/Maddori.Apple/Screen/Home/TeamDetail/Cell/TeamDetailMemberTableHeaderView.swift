@@ -46,4 +46,12 @@ final class TeamDetailMemberTableHeaderView: UITableViewHeaderFooterView {
             $0.height.equalTo(1)
         }
     }
+    
+    func setupMemberInfoView(nickname: String, role: String, imagePath: String?) {
+        memberInformationView.profileNicknameLabel.text = nickname
+        memberInformationView.profileRoleLabel.text = role
+        if let imagePath {        
+            memberInformationView.profileImageView.load(from: UrlLiteral.iamgeBaseUrl + imagePath)
+        }
+    }
 }

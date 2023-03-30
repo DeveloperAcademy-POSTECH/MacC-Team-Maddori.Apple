@@ -16,6 +16,7 @@ final class MemberInformationView: UIView {
     let profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.layer.cornerRadius = 23
+        imageView.clipsToBounds = true
         imageView.image = ImageLiterals.imgProfileNone
         return imageView
     }()
