@@ -11,6 +11,7 @@ import Alamofire
 import SnapKit
 
 final class TeamDetailViewController: BaseViewController {
+    private var invitationCode: String?
     
     // MARK: - property
     
@@ -72,7 +73,9 @@ final class TeamDetailViewController: BaseViewController {
         setupBackButton()
         setupEditButton()
         setupExitButton()
+        setupCodeShareButton()
         fetchTeamDetailMember(type: .fetchTeamMember)
+        fetchTeamInformation(type: .fetchTeamInformation)
     }
     
     override func configUI() {
@@ -203,6 +206,14 @@ final class TeamDetailViewController: BaseViewController {
         teamLeaveButton.addAction(action, for: .touchUpInside)
     }
     
+    private func setupCodeShareButton() {
+        let action = UIAction { [weak self] _ in
+            print(self?.invitationCode)
+            UIPasteboard.general.string = self?.invitationCode
+        }
+        codeShareButton.addAction(action, for: .touchUpInside)
+    }
+    
     private func updateLayout() {
         let size = TeamDetailMembersView.PropertySize.self
         let topInset: CGFloat = UIApplication.shared.keyWindow?.safeAreaInsets.top ?? UIApplication.shared.statusBarFrame.size.height
@@ -223,11 +234,27 @@ final class TeamDetailViewController: BaseViewController {
         AF.request(type.address,
                    method: type.method,
                    headers: type.headers).responseDecodable(of: BaseModel<TeamMembersResponse>.self) { json in
-            if let json = json.value {
-                guard let members = json.detail?.members else { return }
+            if let data = json.value {
+                guard let members = data.detail?.members else { return }
                 DispatchQueue.main.async {
                     self.memberTableView.loadData(data: members)
                     self.updateLayout()
+                }
+            }
+        }
+    }
+    
+    private func fetchTeamInformation(type: TeamDetailEndPoint<VoidModel>) {
+        AF.request(type.address,
+                   method: type.method,
+                   headers: type.headers).responseDecodable(of: BaseModel<CertainTeamDetailResponse>.self) { json in
+            if let data = json.value {
+                guard let teamName = data.detail?.teamName,
+                      let invitationCode = data.detail?.invitationCode
+                else { return }
+                self.invitationCode = invitationCode
+                DispatchQueue.main.async {
+                    self.titleLabel.text = teamName
                 }
             }
         }
