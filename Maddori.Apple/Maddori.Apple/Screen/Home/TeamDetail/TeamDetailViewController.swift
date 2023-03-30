@@ -7,6 +7,7 @@
 
 import UIKit
 
+import Alamofire
 import SnapKit
 
 final class TeamDetailViewController: BaseViewController {
@@ -72,6 +73,7 @@ final class TeamDetailViewController: BaseViewController {
         setupBackButton()
         setupEditButton()
         setupExitButton()
+        fetchTeamDetailMember(type: .fetchTeamMember)
     }
     
     override func configUI() {
@@ -118,14 +120,12 @@ final class TeamDetailViewController: BaseViewController {
         let hasHomeIndicator = UIScreen.main.bounds.width * 2 < UIScreen.main.bounds.height
         let bottomInset: CGFloat = hasHomeIndicator ? 34 : 0
         let minHeight = view.frame.size.height - topInset - size.navigationBarHeight - size.tableViewTopProperty - size.tableViewBottomProperty - bottomInset - 60
-        let currentHeight = (size.cellSize + size.cellSpacing) * CGFloat(memberTableView.members.count) + size.headerViewHeight + size.cellSpacing
-        let height = max(minHeight, currentHeight)
 
         contentView.addSubview(memberTableView)
         memberTableView.snp.makeConstraints {
             $0.top.equalTo(memberTitleLabel.snp.bottom).offset(20)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-            $0.height.equalTo(height)
+            $0.height.equalTo(minHeight)
         }
         
         contentView.addSubview(firstFullDividerView)
@@ -202,5 +202,35 @@ final class TeamDetailViewController: BaseViewController {
                                    okAction: nil)
         }
         teamLeaveButton.addAction(action, for: .touchUpInside)
+    }
+    
+    private func updateLayout() {
+        let size = TeamDetailMembersView.PropertySize.self
+        let topInset: CGFloat = UIApplication.shared.keyWindow?.safeAreaInsets.top ?? UIApplication.shared.statusBarFrame.size.height
+        let hasHomeIndicator = UIScreen.main.bounds.width * 2 < UIScreen.main.bounds.height
+        let bottomInset: CGFloat = hasHomeIndicator ? 34 : 0
+        let minHeight = view.frame.size.height - topInset - size.navigationBarHeight - size.tableViewTopProperty - size.tableViewBottomProperty - bottomInset - 60
+        let currentHeight = (size.cellSize + size.cellSpacing) * CGFloat(memberTableView.members.count) + size.headerViewHeight + size.cellSpacing
+        let height = max(minHeight, currentHeight)
+
+        memberTableView.snp.updateConstraints {
+            $0.height.equalTo(height)
+        }
+    }
+    
+    // MARK: - api
+    
+    private func fetchTeamDetailMember(type: TeamDetailEndPoint<VoidModel>) {
+        AF.request(type.address,
+                   method: type.method,
+                   headers: type.headers).responseDecodable(of: BaseModel<TeamMembersResponse>.self) { json in
+            if let json = json.value {
+                guard let members = json.detail?.members else { return }
+                self.memberTableView.loadData(data: members)
+                DispatchQueue.main.async {
+                    self.updateLayout()
+                }
+            }
+        }
     }
 }

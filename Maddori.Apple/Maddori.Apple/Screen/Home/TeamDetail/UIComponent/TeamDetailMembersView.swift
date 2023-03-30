@@ -12,7 +12,7 @@ import SnapKit
 final class TeamDetailMembersView: UIView {
     
     // FIXME: - API연결 후 수정
-    let members: [String] = Array(repeating: "", count: 2)
+    var members: [MemberDetailResponse] = []
     
     enum PropertySize {
         static let headerViewHeight: CGFloat = 70
@@ -60,6 +60,11 @@ final class TeamDetailMembersView: UIView {
         memberTableView.delegate = self
         memberTableView.dataSource = self
     }
+    
+    func loadData(data: [MemberDetailResponse]) {
+        self.members = data
+        memberTableView.reloadData()
+    }
 }
 
 // MARK: - extension
@@ -74,6 +79,10 @@ extension TeamDetailMembersView: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: TeamDetailMemberTableViewCell.className, for: indexPath) as? TeamDetailMemberTableViewCell else { return UITableViewCell() }
+        if let username = members[indexPath.item].userName,
+           let role = members[indexPath.item].role {
+            cell.setupLayoutInfoView(nickname: username, role: role)
+        }
         cell.selectionStyle = .none
         return cell
     }
