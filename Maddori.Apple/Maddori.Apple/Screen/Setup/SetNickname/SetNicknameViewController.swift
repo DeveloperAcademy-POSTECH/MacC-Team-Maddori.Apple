@@ -354,6 +354,7 @@ final class SetNicknameViewController: BaseViewController {
             } else {
                 DispatchQueue.main.async {
                     self.makeAlert(title: TextLiteral.setNicknameViewControllerCreateTeamAlertTitle, message: TextLiteral.setNicknameViewControllerAlertMessage)
+                    self.doneButton.isLoading = false
                 }
             }
         }
@@ -379,6 +380,7 @@ final class SetNicknameViewController: BaseViewController {
             } else {
                 DispatchQueue.main.async {
                     self.makeAlert(title: TextLiteral.setNicknameViewControllerJoinTeamAlertTitle, message: TextLiteral.setNicknameViewControllerAlertMessage)
+                    self.doneButton.isLoading = false
                 }
             }
         }
