@@ -11,26 +11,12 @@ import SnapKit
 
 final class MemberCollectionViewCell: BaseCollectionViewCell {
     
-    var index: FromCellIndex = .fromSelectMember
-    
-    var cellColor: UIColor = .white300 {
-        didSet {
-            memberLabel.backgroundColor = cellColor
-        }
-    }
-    
     override var isSelected: Bool {
         didSet {
-            if index == FromCellIndex.fromAddFeedback {
-                if isSelected {
-                    applyAttribute()
-                }
-                else {
-                    resetAttribute()
-                }
-            }
-            else {
-                setupAttribute()
+            if isSelected {
+                applyAttribute()
+            } else {
+                resetAttribute()
             }
         }
     }
@@ -39,11 +25,12 @@ final class MemberCollectionViewCell: BaseCollectionViewCell {
     
     let memberLabel: UILabel = {
         let label = UILabel()
-        label.font = .label1
+        label.font = .main
         label.textColor = .black100
         label.layer.masksToBounds = true
         label.layer.cornerRadius = 8
         label.textAlignment = .center
+        label.backgroundColor = .white100
         return label
     }()
     private lazy var memberShadow: UIView = {
@@ -63,7 +50,7 @@ final class MemberCollectionViewCell: BaseCollectionViewCell {
         memberShadow.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
-                
+        
         memberShadow.addSubview(memberLabel)
         memberLabel.snp.makeConstraints {
             $0.edges.equalToSuperview()
@@ -71,12 +58,6 @@ final class MemberCollectionViewCell: BaseCollectionViewCell {
     }
     
     // MARK: - func
-    
-    func setupAttribute() {
-        memberLabel.textColor = .gray300
-        memberLabel.backgroundColor = .white100
-        memberShadow.layer.shadowRadius = 1
-    }
     
     private func applyAttribute() {
         if isSelected {

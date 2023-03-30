@@ -12,7 +12,7 @@ import SnapKit
 
 final class SelectMemberView: UIStackView {
     
-    var didSelectedMemeber: ((MemberResponse) -> ())?
+    var didSelectedMemeber: ((MemberDetailResponse) -> ())?
     var isSelectedMember: ((Bool) -> ())?
     
     var isOpened: Bool = false {
@@ -59,7 +59,7 @@ final class SelectMemberView: UIStackView {
         return imageView
     }()
     lazy var memberCollectionView: MemberCollectionView = {
-        let collectionView = MemberCollectionView(type: .addFeedback)
+        let collectionView = MemberCollectionView()
         collectionView.didTappedFeedBackMember = { [weak self] user in
             self?.didSelectedMemeber?(user)
             self?.isSelectedMember?(true)
