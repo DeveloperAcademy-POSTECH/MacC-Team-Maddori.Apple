@@ -51,8 +51,6 @@ final class TeamDetailViewController: BaseViewController {
     }()
     private let invitationCodeLabel: UILabel = {
         let label = UILabel()
-        // FIXME: - APi 연결 후 삭제
-        label.text = "1BCDEF"
         label.font = .label2
         label.textColor = .gray600
         return label
@@ -254,6 +252,7 @@ final class TeamDetailViewController: BaseViewController {
                 else { return }
                 self.invitationCode = invitationCode
                 DispatchQueue.main.async {
+                    self.invitationCodeLabel.text = invitationCode
                     self.titleLabel.text = teamName
                 }
             }
