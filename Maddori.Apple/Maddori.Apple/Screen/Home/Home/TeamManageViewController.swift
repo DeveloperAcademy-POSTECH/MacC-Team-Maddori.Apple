@@ -16,13 +16,14 @@ final class TeamManageViewController: BaseViewController {
         static let teamSectionHeight = 59
         static let teamSectionSpacing = 8
         static let teamSectionPadding = 28
+        static let teamTitleLabelHeight = 50
     }
     
     private var sections: [Section] = []
     private lazy var teamCount = 0 {
         didSet {
             changeTeamView.snp.updateConstraints {
-                $0.height.equalTo((teamCount * Size.teamSectionHeight) + ((teamCount - 1) * Size.teamSectionSpacing) + Size.teamSectionPadding)
+                $0.height.equalTo((teamCount * Size.teamSectionHeight) + ((teamCount - 1) * Size.teamSectionSpacing) + Size.teamSectionPadding + Size.teamTitleLabelHeight)
             }
         }
     }
@@ -86,17 +87,12 @@ final class TeamManageViewController: BaseViewController {
         changeTeamView.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.width.equalToSuperview()
-            if changeTeamView.teamDataDummy.isEmpty {
-                $0.height.equalTo(150)
-            }
-            else {
-                $0.height.equalTo((teamCount * Size.teamSectionHeight) + ((teamCount - 1) * Size.teamSectionSpacing) + Size.teamSectionPadding)
-            }
+            $0.height.equalTo(150)
         }
         
         contentView.addSubview(dividerView)
         dividerView.snp.makeConstraints {
-            $0.top.equalTo(changeTeamView.snp.bottom).offset(55)
+            $0.top.equalTo(changeTeamView.snp.bottom)
             $0.width.equalToSuperview()
             $0.height.equalTo(6)
         }
@@ -271,7 +267,7 @@ extension TeamManageViewController: UITableViewDelegate {
 }
 
 extension TeamManageViewController: ChangeTeamViewDelegate {
-    func chagneTeam(teamId: Int) {
+    func changeTeam(teamId: Int) {
         NotificationCenter.default.post(name: .chagneNotification, object: teamId)
         dismiss(animated: true)
     }

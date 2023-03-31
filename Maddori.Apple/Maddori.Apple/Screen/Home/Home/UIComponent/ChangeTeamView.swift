@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 
 protocol ChangeTeamViewDelegate: AnyObject {
-    func chagneTeam(teamId: Int)
+    func changeTeam(teamId: Int)
 }
 
 final class ChangeTeamView: UIView {
@@ -113,6 +113,6 @@ extension ChangeTeamView: UICollectionViewDataSource {
 
 extension ChangeTeamView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.delegate?.chagneTeam(teamId: teamDataDummy[indexPath.item].id!)
+        self.delegate?.changeTeam(teamId: teamDataDummy[indexPath.item].id!)
     }
 }
