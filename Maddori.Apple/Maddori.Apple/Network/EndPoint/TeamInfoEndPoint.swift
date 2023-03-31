@@ -13,7 +13,7 @@ enum TeamInfoEndPoint<T: Encodable>: EndPointable {
     var address: String {
         switch self {
         case .fetchUserTeamList:
-            return "http://15.165.21.115:3001/api/v2/users/teams"
+            return "\(UrlLiteral.baseUrl2)/users/teams"
         }
     }
     
