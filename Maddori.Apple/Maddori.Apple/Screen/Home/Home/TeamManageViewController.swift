@@ -189,7 +189,7 @@ final class TeamManageViewController: BaseViewController {
                 guard let teamCount = json.detail?.count else { return }
                 self.teamCount = teamCount
                 guard let team = json.detail else { return }
-                self.changeTeamView.teamDataDummy = team
+                self.changeTeamView.teamList = team
                 self.setCurrentTeam()
             }
         }

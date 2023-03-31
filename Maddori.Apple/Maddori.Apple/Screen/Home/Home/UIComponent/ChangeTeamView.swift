@@ -15,9 +15,9 @@ protocol ChangeTeamViewDelegate: AnyObject {
 
 final class ChangeTeamView: UIView {
     
-    var teamDataDummy: [TeamInfoResponse] = [] {
+    var teamList: [TeamInfoResponse] = [] {
         didSet {
-            teamDataDummy.isEmpty ? setLayoutEmptyView() : setLayoutTeamListView()
+            teamList.isEmpty ? setLayoutEmptyView() : setLayoutTeamListView()
         }
     }
     var currentTeamId: Int?
@@ -95,14 +95,14 @@ final class ChangeTeamView: UIView {
 
 extension ChangeTeamView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return teamDataDummy.count
+        return teamList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TeamChangeCollectionViewCell.className, for: indexPath) as? TeamChangeCollectionViewCell else { return UICollectionViewCell() }
-        cell.teamNameLabel.text = teamDataDummy[indexPath.item].teamName
+        cell.teamNameLabel.text = teamList[indexPath.item].teamName
         if let currentTeamId = self.currentTeamId {
-            if teamDataDummy[indexPath.item].id == currentTeamId {
+            if teamList[indexPath.item].id == currentTeamId {
                 cell.isSelected = true
             }
         }
@@ -113,6 +113,6 @@ extension ChangeTeamView: UICollectionViewDataSource {
 
 extension ChangeTeamView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.delegate?.changeTeam(teamId: teamDataDummy[indexPath.item].id!)
+        self.delegate?.changeTeam(teamId: teamList[indexPath.item].id!)
     }
 }
