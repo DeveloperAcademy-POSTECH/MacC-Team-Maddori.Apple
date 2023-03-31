@@ -159,7 +159,7 @@ final class HomeViewController: BaseViewController {
     // MARK: - func
     
     private func setupNotification() {
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadHomeViewController(_:)), name: .chagneNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadHomeViewController(_:)), name: .changeTeamNotification, object: nil)
     }
     
     private func presentTeamModal() {

@@ -8,5 +8,5 @@
 import Foundation
 
 extension Notification.Name {
-    static let chagneNotification = Notification.Name("changeTeamNotification")
+    static let changeTeamNotification = Notification.Name("changeTeamNotification")
 }

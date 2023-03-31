@@ -269,7 +269,7 @@ extension TeamManageViewController: UITableViewDelegate {
 
 extension TeamManageViewController: ChangeTeamViewDelegate {
     func changeTeam(teamId: Int) {
-        NotificationCenter.default.post(name: .chagneNotification, object: teamId)
+        NotificationCenter.default.post(name: .changeTeamNotification, object: teamId)
         dismiss(animated: true)
     }
 }
