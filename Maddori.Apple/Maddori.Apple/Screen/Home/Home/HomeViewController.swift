@@ -30,7 +30,7 @@ final class HomeViewController: BaseViewController {
     var reflectionDate: String = ""
     
     var isAdmin: Bool = false
-    var currentTeamId: Int = 0
+    private var currentTeamId: Int = 0
     
     // MARK: - property
     
@@ -106,7 +106,7 @@ final class HomeViewController: BaseViewController {
         super.viewWillAppear(animated)
         fetchCertainTeamDetail(type: .fetchCertainTeamDetail)
         fetchCurrentReflectionDetail(type: .fetchCurrentReflectionDetail)
-        setupNotification()
+        self.setupNotification()
     }
     
     override func configUI() {
@@ -159,11 +159,11 @@ final class HomeViewController: BaseViewController {
     // MARK: - func
     
     private func setupNotification() {
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadHomeViewController(_:)), name: .changeTeamNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.reloadHomeViewController(_:)), name: .changeTeamNotification, object: nil)
     }
     
     private func presentTeamModal() {
-        let teamViewController = TeamManageViewController(teamId: currentTeamId)
+        let teamViewController = TeamManageViewController(teamId: self.currentTeamId)
         
         teamViewController.modalPresentationStyle = .pageSheet
         
@@ -290,8 +290,8 @@ final class HomeViewController: BaseViewController {
     private func reloadHomeViewController(_ sender: Notification) {
         if let teamId = sender.object as? Int {
             UserDefaultHandler.setTeamId(teamId: teamId)
-            fetchCertainTeamDetail(type: .fetchCertainTeamDetail)
-            fetchCurrentReflectionDetail(type: .fetchCurrentReflectionDetail)
+            self.fetchCertainTeamDetail(type: .fetchCertainTeamDetail)
+            self.fetchCurrentReflectionDetail(type: .fetchCurrentReflectionDetail)
         }
     }
     

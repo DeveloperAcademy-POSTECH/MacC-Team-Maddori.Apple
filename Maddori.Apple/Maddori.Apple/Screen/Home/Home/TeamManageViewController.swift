@@ -22,11 +22,12 @@ final class TeamManageViewController: BaseViewController {
     private var sections: [Section] = []
     private lazy var teamCount = 0 {
         didSet {
-            changeTeamView.snp.updateConstraints {
-                $0.height.equalTo((teamCount * Size.teamSectionHeight) + ((teamCount - 1) * Size.teamSectionSpacing) + Size.teamSectionPadding + Size.teamTitleLabelHeight)
+            self.changeTeamView.snp.updateConstraints {
+                $0.height.equalTo((self.teamCount * Size.teamSectionHeight) + ((self.teamCount - 1) * Size.teamSectionSpacing) + Size.teamSectionPadding + Size.teamTitleLabelHeight)
             }
         }
     }
+    private var currentTeamId: Int
     
     // MARK: - property
     
@@ -50,8 +51,6 @@ final class TeamManageViewController: BaseViewController {
     private let scrollView: UIScrollView = UIScrollView()
     private let contentView: UIView = UIView()
     
-    private var currentTeamId: Int
-    
     // MARK: - life cycle
     
     init(teamId: Int) {
@@ -66,10 +65,10 @@ final class TeamManageViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupDelegate()
-        configureSettingModels()
-        fetchUserTeamList(type: .fetchUserTeamList)
-        setChangeTeamViewDelegate()
+        self.setupDelegate()
+        self.configureSettingModels()
+        self.fetchUserTeamList(type: .fetchUserTeamList)
+        self.setChangeTeamViewDelegate()
     }
     
     override func render() {
@@ -110,11 +109,11 @@ final class TeamManageViewController: BaseViewController {
     // MARK: - func
     
     private func setChangeTeamViewDelegate() {
-        changeTeamView.delegate = self
+        self.changeTeamView.delegate = self
     }
     
     private func setCurrentTeam() {
-        changeTeamView.currentTeamId = currentTeamId
+        self.changeTeamView.currentTeamId = self.currentTeamId
     }
     
     private func setupDelegate() {
@@ -139,7 +138,7 @@ final class TeamManageViewController: BaseViewController {
     
     private func joinNewTeam() {
         let rootView = presentingViewController
-        dismiss(animated: true) {
+        self.dismiss(animated: true) {
             let joinViewController = UINavigationController(rootViewController: JoinTeamViewController(from: .teamManageView))
             joinViewController.modalPresentationStyle = .fullScreen
             rootView?.present(joinViewController, animated: true)
@@ -148,7 +147,7 @@ final class TeamManageViewController: BaseViewController {
     
     private func createTeam() {
         let rootView = presentingViewController
-        dismiss(animated: true) {
+        self.dismiss(animated: true) {
             let createTeamViewController = UINavigationController(rootViewController: CreateTeamViewController())
             createTeamViewController.modalPresentationStyle = .fullScreen
             rootView?.present(createTeamViewController, animated: true)
@@ -270,6 +269,6 @@ extension TeamManageViewController: UITableViewDelegate {
 extension TeamManageViewController: ChangeTeamViewDelegate {
     func changeTeam(teamId: Int) {
         NotificationCenter.default.post(name: .changeTeamNotification, object: teamId)
-        dismiss(animated: true)
+        self.dismiss(animated: true)
     }
 }
