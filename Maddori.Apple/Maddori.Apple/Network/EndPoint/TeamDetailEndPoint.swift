@@ -11,6 +11,7 @@ enum TeamDetailEndPoint<T: Encodable>: EndPointable {
     case fetchTeamMember
     case fetchTeamInformation
     case deleteLeaveTeam
+    case fetchTeams
     
     var address: String {
         switch self {
@@ -22,6 +23,9 @@ enum TeamDetailEndPoint<T: Encodable>: EndPointable {
             
         case .deleteLeaveTeam:
             return "\(UrlLiteral.baseUrl2)/users/team/\(UserDefaultStorage.teamId)/leave"
+            
+        case .fetchTeams:
+            return "\(UrlLiteral.baseUrl2)/users/teams"
         }
     }
     
@@ -35,6 +39,9 @@ enum TeamDetailEndPoint<T: Encodable>: EndPointable {
             
         case .deleteLeaveTeam:
             return .delete
+            
+        case .fetchTeams:
+            return .get
         }
     }
     
@@ -47,6 +54,9 @@ enum TeamDetailEndPoint<T: Encodable>: EndPointable {
             return nil
             
         case .deleteLeaveTeam:
+            return nil
+            
+        case .fetchTeams:
             return nil
         }
     }
@@ -68,6 +78,13 @@ enum TeamDetailEndPoint<T: Encodable>: EndPointable {
             return HTTPHeaders(headers)
             
         case .deleteLeaveTeam:
+            let headers = [
+                "access_token": "\(UserDefaultStorage.accessToken)",
+                "refresh_token": "\(UserDefaultStorage.refreshToken)"
+            ]
+            return HTTPHeaders(headers)
+            
+        case .fetchTeams:
             let headers = [
                 "access_token": "\(UserDefaultStorage.accessToken)",
                 "refresh_token": "\(UserDefaultStorage.refreshToken)"
