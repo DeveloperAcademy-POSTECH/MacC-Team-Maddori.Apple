@@ -75,6 +75,9 @@ final class TeamDetailViewController: BaseViewController {
             setupCodeShareButton()
             fetchTeamDetailMember(type: .fetchTeamMember)
             fetchTeamInformation(type: .fetchTeamInformation)
+//            fetchUserTeamList(type: .fetchTeams, completion: {
+//                print("completion")
+//            })
         } else {
             makeAlert(title: "팀 없음",
                       message: "현재 속한 팀이 없습니다.\n 팀을 생성하거나, 참가 해 주세요.",
@@ -272,8 +275,26 @@ final class TeamDetailViewController: BaseViewController {
                    method: type.method,
                    headers: type.headers).responseDecodable(of: BaseModel<VoidModel>.self) { json in
             if let _ = json.value {
-                self.navigationController?.popViewController(animated: true)
-                UserDefaultHandler.setTeamId(teamId: 0)
+                self.fetchUserTeamList(type: .fetchTeams) {
+                    self.navigationController?.popViewController(animated: true)
+                }
+            }
+        }
+    }
+    
+    private func fetchUserTeamList(type: TeamDetailEndPoint<VoidModel>, completion: @escaping (() ->())) {
+        AF.request(type.address,
+                   method: type.method,
+                   headers: type.headers).responseDecodable(of: BaseModel<[TeamInfoResponse]>.self) { json in
+            if let data = json.value {
+                guard let teams = data.detail else { return }
+                if !teams.isEmpty {
+                    guard let teamId = teams.first?.id else { return }
+                    UserDefaultHandler.setTeamId(teamId: teamId)
+                } else {
+                    UserDefaultHandler.setTeamId(teamId: 0)
+                }
+                completion()
             }
         }
     }
