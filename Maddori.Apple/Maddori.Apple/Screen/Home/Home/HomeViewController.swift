@@ -308,6 +308,7 @@ final class HomeViewController: BaseViewController {
                    headers: type.headers
         ).responseDecodable(of: BaseModel<CurrentReflectionResponse>.self) { json in
             if let json = json.value {
+                dump(json)
                 let reflectionDetail = json.detail
                 guard let reflectionStatus = reflectionDetail?.reflectionStatus,
                       let reflectionId = reflectionDetail?.currentReflectionId

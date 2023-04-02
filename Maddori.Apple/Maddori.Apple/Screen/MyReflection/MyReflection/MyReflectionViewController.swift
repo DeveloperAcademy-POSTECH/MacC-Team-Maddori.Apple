@@ -108,13 +108,16 @@ final class MyReflectionViewController: BaseViewController {
         }
     }
     
+    // MARK: - api
+    
     private func deleteUser(type: MyReflectionEndPoint<VoidModel>) {
         AF.request(type.address,
                    method: type.method,
                    headers: type.headers
         )
         .responseDecodable(of: BaseModel<VoidModel>.self) { json in
-            if let _ = json.value {
+            if let json = json.value {
+                dump(json)
                 UserDefaultHandler.clearAllData()
                 guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate
                         as? SceneDelegate else { return }
@@ -122,8 +125,6 @@ final class MyReflectionViewController: BaseViewController {
             }
         }
     }
-    
-    // MARK: - api
     
     private func fetchAllReflection(type: MyReflectionEndPoint<EncodeDTO>) {
         AF.request(type.address,

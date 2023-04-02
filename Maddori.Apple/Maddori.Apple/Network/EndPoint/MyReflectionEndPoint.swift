@@ -19,7 +19,7 @@ enum MyReflectionEndPoint<T: Encodable>: EndPointable {
         case .fetchCertainTypeFeedbackAllID(let reflectionId, let cssType):
             return "\(UrlLiteral.baseUrl)/teams/\(UserDefaultStorage.teamId)/reflections/\(reflectionId)/feedbacks?type=\(cssType.rawValue)"
         case .deleteUser:
-            return "\(UrlLiteral.baseUrl)/login/signout"
+            return "\(UrlLiteral.baseUrl2)/auth/signout"
         }
     }
     
