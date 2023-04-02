@@ -11,14 +11,18 @@ import SnapKit
 
 final class TeamManageViewController: BaseViewController {
     
+    private enum Size {
+        static let teamSectionHeight = 59
+        static let teamSectionSpacing = 8
+        static let teamSectionPadding = 28
+    }
+    
     private var sections: [Section] = []
+    private lazy var teamCount = changeTeamView.teamDataDummy.count
     
     // MARK: - property
     
-    private let tempView: UIView = {
-        let view = UIView()
-        return view
-    }()
+    private let changeTeamView = ChangeTeamView()
     private let dividerView: UIView = {
         let view = UIView()
         view.backgroundColor = .gray100
@@ -36,6 +40,7 @@ final class TeamManageViewController: BaseViewController {
         return tableView
     }()
     private let scrollView: UIScrollView = UIScrollView()
+    private let contentView: UIView = UIView()
     
     // MARK: - life cycle
     
@@ -51,25 +56,37 @@ final class TeamManageViewController: BaseViewController {
             $0.edges.equalToSuperview()
         }
         
-        scrollView.addSubview(tempView)
-        tempView.snp.makeConstraints {
-            $0.width.equalTo(UIScreen.main.bounds.width)
-            $0.height.equalTo(275) // FIXME: 수치 바꿀것
+        scrollView.addSubview(contentView)
+        contentView.snp.makeConstraints {
+            $0.edges.equalTo(scrollView.contentLayoutGuide)
+            $0.width.equalTo(scrollView.frameLayoutGuide)
+        }
+ 
+        contentView.addSubview(changeTeamView)
+        changeTeamView.snp.makeConstraints {
             $0.top.equalToSuperview()
+            $0.width.equalToSuperview()
+            if changeTeamView.teamDataDummy.isEmpty {
+                $0.height.equalTo(150)
+            }
+            else {
+                $0.height.equalTo((teamCount * Size.teamSectionHeight) + ((teamCount - 1) * Size.teamSectionSpacing) + Size.teamSectionPadding)
+            }
         }
         
-        scrollView.addSubview(dividerView)
+        contentView.addSubview(dividerView)
         dividerView.snp.makeConstraints {
-            $0.top.equalTo(tempView.snp.bottom)
+            $0.top.equalTo(changeTeamView.snp.bottom).offset(50)
             $0.width.equalToSuperview()
             $0.height.equalTo(6)
         }
         
-        scrollView.addSubview(settingTableView)
+        contentView.addSubview(settingTableView)
         settingTableView.snp.makeConstraints {
             $0.top.equalTo(dividerView.snp.bottom)
             $0.width.equalTo(UIScreen.main.bounds.width)
-            $0.height.equalTo(1000) // FIXME: 수치 바꿀것
+            $0.bottom.equalToSuperview()
+            $0.height.equalTo(252)
         }
     }
     
@@ -81,18 +98,38 @@ final class TeamManageViewController: BaseViewController {
     }
     
     private func configureSettingModels() {
-        sections.append(Section(options: [Option(title: "새로운 팀 합류하기", handler: {
-            print("새로운 팀 합류하기")
+        sections.append(Section(options: [Option(title: TextLiteral.teamManageViewControllerJoinNewTeam, handler: {
+            self.joinNewTeam()
         }),
-                                          Option(title: "팀 생성하기", handler: {
-            print("팀 생성하기")
+                                          Option(title: TextLiteral.teamManageViewControllerCreateTeam, handler: {
+            self.createTeam()
         })]))
-        sections.append(Section(options: [Option(title: "로그아웃", handler: {
-            print("로그아웃")
+        sections.append(Section(options: [Option(title: TextLiteral.teamManageViewControllerLoggout, handler: {
+            self.logout()
         }),
-                                          Option(title: "회원탈퇴", handler: {
-            print("회원탈퇴")
+                                          Option(title: TextLiteral.teamManageViewControllerWithdrawl, handler: {
+            self.withdrawal()
         })]))
+    }
+    
+    private func joinNewTeam() {
+        // FIXME: api 연결
+        print("새로운 팀 합류하기")
+    }
+    
+    private func createTeam() {
+        // FIXME: api 연결
+        print("팀 생성하기")
+    }
+    
+    private func logout() {
+        // FIXME: api 연결
+        print("로그아웃")
+    }
+    
+    private func withdrawal() {
+        // FIXME: api 연결
+        print("회원탈퇴")
     }
 }
 

@@ -244,5 +244,17 @@ enum TextLiteral {
     // MARK: - TeamDetailViewController
     
     static let teamDetailViewControllerEditButteonText: String = "편집"
+    
+    // MARK: - TeamManageViewController
+    
+    static let teamManageViewControllerEmptyLabel: String = "참여 중인 팀이 없습니다\n팀에 합류하거나 팀을 생성해주세요"
+    static let teamManageViewControllerJoinNewTeam: String = "새로운 팀 합류하기"
+    static let teamManageViewControllerCreateTeam: String = "팀 생성하기"
+    static let teamManageViewControllerLoggout: String = "로그아웃"
+    static let teamManageViewControllerWithdrawl: String = "회원탈퇴"
+    
+    // MARK: - ChangeTeamView
+    
+    static let changeTeamViewLabel: String = "참여 중인 팀"
     static let teamDetailViewControllerMemberTitleLabel: String = "멤버"
 }
