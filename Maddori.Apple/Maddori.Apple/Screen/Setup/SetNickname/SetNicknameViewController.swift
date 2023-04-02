@@ -343,7 +343,7 @@ final class SetNicknameViewController: BaseViewController {
         ).responseDecodable(of: BaseModel<CreateTeamResponse>.self) { json in
             if let json = json.value {
                 dump(json)
-                guard let teamId = json.detail?.id else { return }
+                guard let teamId = json.detail?.team?.id else { return }
                 UserDefaultHandler.setTeamId(teamId: teamId)
                 UserDefaultHandler.setIsLogin(isLogin: true)
                 DispatchQueue.main.async {
