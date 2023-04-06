@@ -257,8 +257,7 @@ final class MyFeedbackEditViewController: BaseViewController {
     private func didTappedDoneButton() {
         let dto = EditFeedBackDTO(type: feedbackType,
                                   keyword: keywordTextFieldView.keywordTextField.text ?? "",
-                                  content: feedbackContentTextView.text ?? "",
-                                  start_content: nil)
+                                  content: feedbackContentTextView.text ?? "")
         putEditFeedBack(type: .putEditFeedBack(reflectionId: feedbackDetail.reflectionId, feedBackId: feedbackDetail.feedbackId, dto))
     }
     

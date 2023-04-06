@@ -22,7 +22,7 @@ enum MyFeedBackEndPoint<T: Encodable> {
         case .deleteFeedBack(let reflectionId, let feedBackId):
             return "\(UrlLiteral.baseUrl2)/teams/\(UserDefaultStorage.teamId)/reflections/\(reflectionId)/feedbacks/\(feedBackId)"
         case .putEditFeedBack(let reflectionId, let feedBackId, _):
-            return "\(UrlLiteral.baseUrl)/teams/\(UserDefaultStorage.teamId)/reflections/\(reflectionId)/feedbacks/\(feedBackId)"
+            return "\(UrlLiteral.baseUrl2)/teams/\(UserDefaultStorage.teamId)/reflections/\(reflectionId)/feedbacks/\(feedBackId)"
         }
     }
     

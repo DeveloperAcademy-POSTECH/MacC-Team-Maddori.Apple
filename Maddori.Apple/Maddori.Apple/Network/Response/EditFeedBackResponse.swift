@@ -9,5 +9,17 @@ import Foundation
 
 struct EditFeedBackResponse: Decodable {
     // MARK: - updateFeedback
-    let feedback: FeedBackResponse?
+    let id: Int
+    let type: FeedBackType
+    let keyword: String
+    let content: String
+    let toUser: SimpleMemberResponse
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case type
+        case keyword
+        case content
+        case toUser = "to_user"
+    }
 }
