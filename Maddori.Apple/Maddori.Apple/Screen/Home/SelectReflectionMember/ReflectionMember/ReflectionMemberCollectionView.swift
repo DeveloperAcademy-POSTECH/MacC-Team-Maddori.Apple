@@ -25,12 +25,12 @@ final class ReflectionMemberCollectionView: UIView {
             right: collectionHorizontalSpacing)
     }
     
-    var memberList: [MemberDetailResponse] = [] {
+    var memberList: [TeamMemberResponse] = [] {
         didSet {
             collectionView.reloadData()
         }
     }
-    var didTappedMember: ((MemberDetailResponse, [Int]) -> ())?
+    var didTappedMember: ((TeamMemberResponse, [Int]) -> ())?
     var selectedMemberList: [Int] = UserDefaultStorage.seenMemberIdList {
         willSet {
             UserDefaultHandler.appendSeenMemberIdList(memberIdList: newValue)
@@ -81,16 +81,16 @@ final class ReflectionMemberCollectionView: UIView {
 extension ReflectionMemberCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let selectedMember = memberList[indexPath.item]
-        if !selectedMemberList.contains(where: { $0 == selectedMember.userId }) {
-            selectedMemberList.append(selectedMember.userId ?? 0)
+        if !selectedMemberList.contains(where: { $0 == selectedMember.id }) {
+            selectedMemberList.append(selectedMember.id ?? 0)
         }
         didTappedMember?(selectedMember, selectedMemberList)
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         let selectedMember = memberList[indexPath.item]
-        if !selectedMemberList.contains(where: { $0 == selectedMember.userId }) {
-            selectedMemberList.append(selectedMember.userId ?? 0)
+        if !selectedMemberList.contains(where: { $0 == selectedMember.id }) {
+            selectedMemberList.append(selectedMember.id ?? 0)
         }
         didTappedMember?(selectedMember, selectedMemberList)
     }
@@ -107,10 +107,15 @@ extension ReflectionMemberCollectionView: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         
-        cell.nicknameLabel.text = memberList[indexPath.item].userName
-        // FIXME: - profile image, role 추가
+        if let imagePath = memberList[indexPath.item].profileImagePath {
+            let fullImagePath = UrlLiteral.imageBaseURL + imagePath
+            cell.profileImage.load(from: fullImagePath)
+        }
         
-        if let userId = memberList[indexPath.item].userId {
+        cell.nicknameLabel.text = memberList[indexPath.item].nickname
+        cell.roleLabel.text = memberList[indexPath.item].role
+                
+        if let userId = memberList[indexPath.item].id {
             if selectedMemberList.contains(userId) {
                 cell.applySelectedAttribute()
             }

@@ -67,6 +67,9 @@ enum TextLiteral {
     static let setNicknameViewControllerCreateTeamAlertTitle = "팀 생성 및 팀 합류 실패"
     static let setNicknameViewControllerJoinTeamAlertTitle = "팀 합류 실패"
     static let setNicknameViewControllerAlertMessage = "다시 시도해 주세요."
+    static let setNicknameViewControllerPermissionAlertTitle = "사진 접근 권한"
+    static let setNicknameViewControllerPermissionAlertMessage = "사진 추가를 원하시면 '확인'을 눌러 사진 접근을 허용해 주세요."
+    static let setNicknameViewControllerCameraAlertTitle = "촬영된 이미지를 불러올 수 없습니다."
     
     // MARK: - HomeViewController
     
@@ -245,6 +248,18 @@ enum TextLiteral {
     // MARK: - TeamDetailViewController
     
     static let teamDetailViewControllerEditButteonText: String = "편집"
+    
+    // MARK: - TeamManageViewController
+    
+    static let teamManageViewControllerEmptyLabel: String = "참여 중인 팀이 없습니다\n팀에 합류하거나 팀을 생성해주세요"
+    static let teamManageViewControllerJoinNewTeam: String = "새로운 팀 합류하기"
+    static let teamManageViewControllerCreateTeam: String = "팀 생성하기"
+    static let teamManageViewControllerLoggout: String = "로그아웃"
+    static let teamManageViewControllerWithdrawl: String = "회원탈퇴"
+    
+    // MARK: - ChangeTeamView
+    
+    static let changeTeamViewLabel: String = "참여 중인 팀"
     static let teamDetailViewControllerMemberTitleLabel: String = "멤버"
     static let teamDetailViewControllerShareCodeText: String = "초대코드 공유하기"
     static let teamDetailViewControllerLeaveTeamLabel: String = "팀 나가기"

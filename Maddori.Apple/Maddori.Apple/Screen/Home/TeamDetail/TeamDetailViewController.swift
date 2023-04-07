@@ -76,10 +76,9 @@ final class TeamDetailViewController: BaseViewController {
         fetchTeamInformation(type: .fetchTeamInformation)
     }
     
-    override func configUI() {
-        super.configUI()
-        navigationController?.isNavigationBarHidden = false
-        self.tabBarController?.tabBar.isHidden = true
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupNavigationAndTapbar()
     }
     
     override func render() {
@@ -115,17 +114,12 @@ final class TeamDetailViewController: BaseViewController {
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.height.equalTo(16)
         }
-        let size = TeamDetailMembersView.PropertySize.self
-        let topInset: CGFloat = UIApplication.shared.keyWindow?.safeAreaInsets.top ?? UIApplication.shared.statusBarFrame.size.height
-        let hasHomeIndicator = UIScreen.main.bounds.width * 2 < UIScreen.main.bounds.height
-        let bottomInset: CGFloat = hasHomeIndicator ? 34 : 0
-        let minHeight = view.frame.size.height - topInset - size.navigationBarHeight - size.tableViewTopProperty - size.tableViewBottomProperty - bottomInset - 60
 
         contentView.addSubview(memberTableView)
         memberTableView.snp.makeConstraints {
             $0.top.equalTo(memberTitleLabel.snp.bottom).offset(20)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-            $0.height.equalTo(minHeight)
+            $0.height.equalTo(calculateHeight())
         }
         
         contentView.addSubview(firstFullDividerView)
@@ -286,5 +280,20 @@ final class TeamDetailViewController: BaseViewController {
                 completion()
             }
         }
+    }
+    
+    private func setupNavigationAndTapbar() {
+        navigationController?.isNavigationBarHidden = false
+        self.tabBarController?.tabBar.isHidden = true
+    }
+    
+    private func calculateHeight() -> CGFloat {
+        let size = TeamDetailMembersView.PropertySize.self
+        let hasHomeIndicator = UIScreen.main.bounds.width * 2 < UIScreen.main.bounds.height
+        let bottomInset: CGFloat = hasHomeIndicator ? 34 : 0
+        let minHeight = view.frame.size.height - statusBarHeight - size.navigationBarHeight - size.tableViewTopProperty - size.tableViewBottomProperty - bottomInset - 60
+        let currentHeight = (size.cellSize + size.cellSpacing) * CGFloat(memberTableView.members.count) + size.headerViewHeight + size.cellSpacing
+        let height = max(minHeight, currentHeight)
+        return height
     }
 }
