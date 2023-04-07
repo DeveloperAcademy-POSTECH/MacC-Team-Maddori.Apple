@@ -19,10 +19,11 @@ final class ReflectionMemberCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - property
     
-    private let profileImage: UIImageView = {
+    let profileImage: UIImageView = {
         let imageView = UIImageView()
         imageView.image = ImageLiterals.imgProfileNone
         imageView.layer.cornerRadius = 23
+        imageView.clipsToBounds = true
         return imageView
     }()
     let nicknameLabel: UILabel = {
@@ -31,9 +32,8 @@ final class ReflectionMemberCollectionViewCell: BaseCollectionViewCell {
         label.font = .label2
         return label
     }()
-    private let roleLabel: UILabel = {
+    let roleLabel: UILabel = {
         let label = UILabel()
-        label.text = "PM / 개발자 / 디자이너"
         label.textColor = .gray400
         label.font = .caption2
         return label
@@ -66,6 +66,22 @@ final class ReflectionMemberCollectionViewCell: BaseCollectionViewCell {
         self.backgroundColor = .white300
         self.layer.cornerRadius = 8
         self.makeShadow(color: .black, opacity: 0.2, offset: CGSize.zero, radius: 2)
+    }
+    
+    override func prepareForReuse() {
+        if isSelected {
+            self.backgroundColor = .white100
+            self.profileImage.layer.opacity = 0.5
+            self.nicknameLabel.textColor = .gray300
+            self.roleLabel.textColor = .gray300
+            self.makeShadow(color: .black, opacity: 0.2, offset: CGSize.zero, radius: 1)
+        } else {
+            self.backgroundColor = .white300
+            self.profileImage.layer.opacity = 1
+            self.nicknameLabel.textColor = .gray600
+            self.roleLabel.textColor = .gray400
+            self.makeShadow(color: .black, opacity: 0.2, offset: CGSize.zero, radius: 2)
+        }
     }
     
     // MARK: - func

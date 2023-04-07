@@ -26,3 +26,10 @@ struct TeamMembersResponse: Decodable {
     // MARK: - getTeamMembers
     let members: [MemberDetailResponse]?
 }
+
+// MARK: - TeamMembersResponse v2, conflict 방지용
+
+struct MembersResponse: Decodable {
+    // MARK: - getTeamMembers
+    let members: [TeamMemberResponse]?
+}

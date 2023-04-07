@@ -8,6 +8,14 @@
 import UIKit
 
 extension UIViewController {
+    var statusBarHeight: CGFloat {
+        if #available(iOS 13.0, *) {
+            return UIApplication.shared.windows.first?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
+        } else {
+            return UIApplication.shared.statusBarFrame.height
+        }
+    }
+    
     func makeAlert(title: String,
                    message: String? = nil,
                    okAction: ((UIAlertAction) -> Void)? = nil,
