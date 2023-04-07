@@ -103,6 +103,7 @@ final class HomeViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        setLayoutTeamManageButton()
         fetchCertainTeamDetail(type: .fetchCertainTeamDetail)
         fetchCurrentReflectionDetail(type: .fetchCurrentReflectionDetail)
     }
@@ -278,6 +279,11 @@ final class HomeViewController: BaseViewController {
         self.navigationController?.pushViewController(viewController, animated: true)
     }
     
+    private func setLayoutTeamManageButton() {
+        let hasTeam = UserDefaultStorage.teamId != 0
+        teamManageButton.isHidden = !hasTeam
+    }
+    
     // MARK: - api
     
     private func fetchCertainTeamDetail(type: HomeEndPoint<VoidModel>) {
@@ -308,6 +314,7 @@ final class HomeViewController: BaseViewController {
                    headers: type.headers
         ).responseDecodable(of: BaseModel<CurrentReflectionResponse>.self) { json in
             if let json = json.value {
+                dump(json)
                 let reflectionDetail = json.detail
                 guard let reflectionStatus = reflectionDetail?.reflectionStatus,
                       let reflectionId = reflectionDetail?.currentReflectionId

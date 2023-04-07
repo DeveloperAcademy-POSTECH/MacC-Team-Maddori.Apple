@@ -16,7 +16,7 @@ enum HomeEndPoint<T: Encodable>: EndPointable {
         case .fetchCertainTeamDetail:
             return "\(UrlLiteral.baseUrl)/teams/\(UserDefaultStorage.teamId)"
         case .fetchCurrentReflectionDetail:
-            return "\(UrlLiteral.baseUrl)/teams/\(UserDefaultStorage.teamId)/reflections/current"
+            return "\(UrlLiteral.baseUrl2)/teams/\(UserDefaultStorage.teamId)/reflections/current"
         }
     }
     
