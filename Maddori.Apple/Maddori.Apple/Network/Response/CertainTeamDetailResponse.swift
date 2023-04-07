@@ -12,12 +12,10 @@ struct CertainTeamDetailResponse: Decodable {
     let teamId: Int?
     let teamName: String?
     let invitationCode: String?
-    let admin: Bool?
     
     enum CodingKeys: String, CodingKey {
-        case teamId = "team_id"
+        case teamId = "id"
         case teamName = "team_name"
         case invitationCode = "invitation_code"
-        case admin
     }
 }

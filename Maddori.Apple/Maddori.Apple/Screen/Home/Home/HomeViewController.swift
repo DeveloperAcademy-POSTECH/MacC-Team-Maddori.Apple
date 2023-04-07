@@ -309,11 +309,9 @@ final class HomeViewController: BaseViewController {
                    headers: type.headers
         ).responseDecodable(of: BaseModel<CertainTeamDetailResponse>.self) { json in
             if let json = json.value {
-                guard let isAdmin = json.detail?.admin,
-                      let teamName = json.detail?.teamName,
+                guard let teamName = json.detail?.teamName,
                       let teamId = json.detail?.teamId
                 else { return }
-                self.isAdmin = isAdmin
                 self.currentTeamId = teamId
                 DispatchQueue.main.async {
                     self.teamButton.setTitle(teamName + " ", for: .normal)
