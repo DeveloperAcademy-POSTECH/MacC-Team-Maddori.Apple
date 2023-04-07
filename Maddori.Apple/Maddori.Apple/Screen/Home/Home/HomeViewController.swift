@@ -26,13 +26,10 @@ final class HomeViewController: BaseViewController {
     
     var currentReflectionId: Int = 0
     var reflectionStatus: ReflectionStatus = .Before
+    var reflectionTitle: String = ""
+    var reflectionDate: String = ""
     
     var isAdmin: Bool = false
-    var hasSeenReflectionAlert: Bool = UserDefaultStorage.hasSeenReflectionAlert {
-        willSet {
-            UserDefaultHandler.setHasSeenAlert(to: newValue)
-        }
-    }
     
     // MARK: - property
     
@@ -54,9 +51,8 @@ final class HomeViewController: BaseViewController {
         button.semanticContentAttribute = .forceRightToLeft
         button.setPreferredSymbolConfiguration(UIImage.SymbolConfiguration(pointSize: 13, weight: .semibold), forImageIn: .normal)
         button.tintColor = .black100
-        let action = UIAction { _ in
-            // FIXME: 버튼 눌렀을 때 action 추가
-            print("touched")
+        let action = UIAction { [weak self] _ in
+            self?.presentTeamModal()
         }
         button.addAction(action, for: .touchUpInside)
         return button
@@ -107,9 +103,6 @@ final class HomeViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if reflectionStatus == .Progressing && !hasSeenReflectionAlert {
-            presentStartReflectionView()
-        }
         fetchCertainTeamDetail(type: .fetchCertainTeamDetail)
         fetchCurrentReflectionDetail(type: .fetchCurrentReflectionDetail)
     }
@@ -163,6 +156,24 @@ final class HomeViewController: BaseViewController {
     
     // MARK: - func
     
+    private func presentTeamModal() {
+        let teamViewController = TeamManageViewController()
+        
+        teamViewController.modalPresentationStyle = .pageSheet
+        
+        if #available(iOS 15.0, *) {
+            if let sheet = teamViewController.sheetPresentationController {
+                sheet.detents = [.medium(), .large()]
+                sheet.delegate = self
+                sheet.prefersGrabberVisible = true
+            }
+        } else {
+            // FIXME: 15 미만일때는 어떻게 해야할지 고민중..
+        }
+        
+        present(teamViewController, animated: true)
+    }
+    
     private func setupDelegation() {
         keywordCollectionView.delegate = self
         keywordCollectionView.dataSource = self
@@ -187,8 +198,7 @@ final class HomeViewController: BaseViewController {
             case .SettingRequired, .Done:
                 self?.presentCreateReflectionViewController()
             case .Before:
-                // FIXME: edit reflection VC
-                print("fixme")
+                self?.presentEditReflectionViewController()
             case .Progressing:
                 self?.presentSelectReflectionMemberViewController()
             }
@@ -209,6 +219,12 @@ final class HomeViewController: BaseViewController {
         present(viewController, animated: true)
     }
     
+    private func presentEditReflectionViewController() {
+        let viewController = UINavigationController(rootViewController: CreateReflectionViewController(reflectionId: currentReflectionId, reflectionTitle: reflectionTitle, reflectionDate: reflectionDate))
+        viewController.modalPresentationStyle = .fullScreen
+        present(viewController, animated: true)
+    }
+    
     private func presentSelectReflectionMemberViewController() {
         let viewController = UINavigationController(rootViewController: SelectReflectionMemberViewController(reflectionId: currentReflectionId, isAdmin: self.isAdmin))
         viewController.modalPresentationStyle = .fullScreen
@@ -220,7 +236,7 @@ final class HomeViewController: BaseViewController {
         let viewController = StartReflectionViewController(reflectionId: currentReflectionId, navigationViewController: navigationController, isAdmin: self.isAdmin)
         viewController.modalPresentationStyle = .overFullScreen
         present(viewController, animated: true)
-        hasSeenReflectionAlert = true
+        UserDefaultHandler.setHasSeenAlert(to: true)
         UserDefaultHandler.clearUserDefaults(of: .seenKeywordIdList)
         UserDefaultHandler.clearUserDefaults(of: .seenMemberIdList)
         UserDefaultHandler.clearUserDefaults(of: .completedCurrentReflection)
@@ -275,7 +291,12 @@ final class HomeViewController: BaseViewController {
                 else { return }
                 self.isAdmin = isAdmin
                 DispatchQueue.main.async {
-                    self.teamButton.setTitle(teamName, for: .normal)
+                    self.teamButton.setTitle(teamName + " ", for: .normal)
+                }
+            } else {
+                DispatchQueue.main.async {
+                    self.teamButton.setTitle("팀 없음", for: .normal)
+                    self.teamButton.tintColor = .gray500
                 }
             }
         }
@@ -296,7 +317,9 @@ final class HomeViewController: BaseViewController {
                 
                 self.reflectionStatus = reflectionStatus
                 self.currentReflectionId = reflectionId
-                self.joinReflectionButton.setupAttribute(reflectionStatus: reflectionStatus, title: reflectionTitle, date: reflectionDate)
+                self.reflectionTitle = reflectionTitle
+                self.reflectionDate = reflectionDate
+                self.joinReflectionButton.setupAttribute(reflectionStatus: reflectionStatus, title: reflectionTitle, date: reflectionDate, isPreview: false)
                 
                 self.setupJoinReflectionButtonAction(status: reflectionStatus)
                 self.setupJoinReflectionButtonBackground(status: reflectionStatus)
@@ -312,13 +335,18 @@ final class HomeViewController: BaseViewController {
                             self.showAddFeedbackButton()
                         case .Progressing:
                             self.hideAddFeedbackButton()
-                            if !self.hasSeenReflectionAlert {
+                            if !UserDefaultStorage.hasSeenReflectionAlert {
                                 self.presentStartReflectionView()
                             }
                         }
                         self.flowLayout.count = reflectionKeywordList.count
                         self.keywordCollectionView.reloadData()
                     }
+                }
+            } else {
+                DispatchQueue.main.async {
+                    self.joinReflectionButton.setupAttribute(reflectionStatus: .Before, title: "", date: "", isPreview: true)
+                    self.setupJoinReflectionButtonBackground(status: .Before)
                 }
             }
         }
@@ -357,7 +385,6 @@ extension HomeViewController: UICollectionViewDataSource {
             viewController.modalPresentationStyle = .fullScreen
             navigationController.present(viewController, animated: true)
         }
-        
     }
 }
 
@@ -368,3 +395,4 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
+extension HomeViewController: UISheetPresentationControllerDelegate {}

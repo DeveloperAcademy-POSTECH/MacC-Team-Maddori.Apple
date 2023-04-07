@@ -11,17 +11,9 @@ import Alamofire
 import SnapKit
 
 final class SelectReflectionMemberViewController: BaseViewController {
-        
+    
     let reflectionId: Int
     let isAdmin: Bool
-    
-    init(reflectionId: Int, isAdmin: Bool) {
-        self.reflectionId = reflectionId
-        self.isAdmin = isAdmin
-        super.init()
-    }
-    
-    required init?(coder: NSCoder) { nil }
     
     // MARK: - property
     
@@ -39,30 +31,13 @@ final class SelectReflectionMemberViewController: BaseViewController {
         label.setTitleFont(text: TextLiteral.selectReflectionMemberViewControllerTitleLabel)
         return label
     }()
-    private lazy var memberCollectionView: MemberCollectionView = {
-        let collectionView = MemberCollectionView(type: .progressReflection)
-        collectionView.didTappedFeedBackMember = { [weak self] _ in
-            let member = collectionView.selectedMember
-            guard let id = member?.userId,
-                  let username = member?.userName,
-                  let reflectionId = self?.reflectionId
-            else { return }
-            let viewController = InProgressViewController(memberId: id, memberUsername: username, reflectionId: reflectionId)
-            self?.navigationController?.pushViewController(viewController, animated: true)
-        }
-        return collectionView
-    }()
+    private let memberCollectionView = ReflectionMemberCollectionView()
     private lazy var feedbackDoneButton: MainButton = {
         let button = MainButton()
         let action = UIAction { [weak self] _ in
             guard let reflectionId = self?.reflectionId else { return }
-            guard let isAdmin = self?.isAdmin else { return }
-            if isAdmin {
-                self?.patchEndReflection(type: .patchEndReflection(reflectionId: reflectionId))
-            } else {
-                self?.dismiss(animated: true)
-            }
-            self?.resetHasSeenAlert()
+            self?.patchEndReflection(type: .patchEndReflection(reflectionId: reflectionId))
+            UserDefaultHandler.setHasSeenAlert(to: false)
         }
         button.addAction(action, for: .touchUpInside)
         button.isDisabled = true
@@ -70,6 +45,14 @@ final class SelectReflectionMemberViewController: BaseViewController {
     }()
     
     // MARK: - life cycle
+    
+    init(reflectionId: Int, isAdmin: Bool) {
+        self.reflectionId = reflectionId
+        self.isAdmin = isAdmin
+        super.init()
+    }
+    
+    required init?(coder: NSCoder) { nil }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -90,17 +73,17 @@ final class SelectReflectionMemberViewController: BaseViewController {
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
-        view.addSubview(memberCollectionView)
-        memberCollectionView.snp.makeConstraints {
-            $0.top.equalTo(selectFeedbackMemberTitleLabel.snp.bottom)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide)
-            $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-        }
-        
         view.addSubview(feedbackDoneButton)
         feedbackDoneButton.snp.makeConstraints {
             $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.bottomPadding)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+        
+        view.addSubview(memberCollectionView)
+        memberCollectionView.snp.makeConstraints {
+            $0.top.equalTo(selectFeedbackMemberTitleLabel.snp.bottom).offset(20)
+            $0.bottom.equalTo(feedbackDoneButton.snp.top).inset(-6)
+            $0.leading.trailing.equalToSuperview()
         }
     }
     
@@ -122,16 +105,20 @@ final class SelectReflectionMemberViewController: BaseViewController {
         }
     }
     
-    private func resetHasSeenAlert() {
-        UserDefaultHandler.setHasSeenAlert(to: false)
-    }
-    
     private func didTappedMember() {
-        memberCollectionView.didTappedMember = { [weak self] member in
+        memberCollectionView.didTappedMember = { [weak self] member, members in
+            guard let id = member.id,
+                  let username = member.nickname,
+                  let reflectionId = self?.reflectionId else { return }
+            let viewController = InProgressViewController(memberId: id, memberUsername: username, reflectionId: reflectionId)
+            self?.navigationController?.pushViewController(viewController, animated: true)
+            
             guard let memberCollectionView = self?.memberCollectionView else { return }
-            self?.feedbackDoneButton.title = TextLiteral.selectReflectionMemberViewControllerDoneButtonText + "(\( memberCollectionView.selectedMemberIdList.count)/\(memberCollectionView.memberList.count))"
-            if member.count == self?.memberCollectionView.memberList.count {
+            self?.feedbackDoneButton.title = TextLiteral.selectReflectionMemberViewControllerDoneButtonText + "(\( members.count)/\(memberCollectionView.memberList.count))"
+            
+            if members.count == memberCollectionView.memberList.count {
                 self?.feedbackDoneButton.isDisabled = false
+                UserDefaultHandler.isCurrentReflectionFinished(true)
             }
         }
     }
@@ -142,12 +129,13 @@ final class SelectReflectionMemberViewController: BaseViewController {
         AF.request(type.address,
                    method: type.method,
                    headers: type.headers
-        ).responseDecodable(of: BaseModel<TeamMembersResponse>.self) { json in
+        ).responseDecodable(of: BaseModel<MembersResponse>.self) { json in
             if let json = json.value {
+                dump(json)
                 guard let fetchedMemberList = json.detail?.members else { return }
                 DispatchQueue.main.async {
                     self.memberCollectionView.memberList = fetchedMemberList
-                    self.feedbackDoneButton.title = TextLiteral.selectReflectionMemberViewControllerDoneButtonText + "(\(self.memberCollectionView.selectedMemberIdList.count)/\(self.memberCollectionView.memberList.count))"
+                    self.feedbackDoneButton.title = TextLiteral.selectReflectionMemberViewControllerDoneButtonText + "(\(self.memberCollectionView.selectedMemberList.count)/\(self.memberCollectionView.memberList.count))"
                 }
             }
         }
@@ -158,7 +146,8 @@ final class SelectReflectionMemberViewController: BaseViewController {
                    method: type.method,
                    headers: type.headers
         ).responseDecodable(of: BaseModel<ReflectionInfoResponse>.self) { [weak self] json in
-            if let _ = json.value {
+            if let json = json.value {
+                dump(json)
                 self?.dismiss(animated: true)
             }
         }

@@ -38,6 +38,12 @@ enum TextLiteral {
     static let createReflectionViewControllerTextFieldPlaceHolder = "예) 1차 스프린트"
     static let createReflectionViewControllerDateLabel = "회고 일시"
     static let createReflectionViewControllerButtonText = "추가하기"
+    static let createReflectionAlertTitle = "회고 일정 설정 오류"
+    static let createReflectionAlertContent = "회고 일정은 현 시간 이후로 설정해주세요."
+    static let editReflectionViewControllerTitle = "회고 정보를 수정해 주세요"
+    static let editReflectionViewControllerButtonText = "수정하기"
+    static let deleteReflectionAlertTitle = "회고 일정을 삭제하시겠습니까?"
+    static let deleteReflectionAlertDetail = "이미 작성된 피드백은 삭제되지 않고\n다음 회고에서 확인할 수 있습니다."
     
     // MARK: - SetNicknameViewController
     
@@ -104,6 +110,7 @@ enum TextLiteral {
     static let joinTeamViewControllerSubButtonText = "팀 생성하기"
     static let joinTeamViewControllerAlertTitle = "잘못된 초대코드"
     static let joinTeamViewControllerAlertMessage = "초대코드를 다시 입력해주세요."
+    static let joinTeamViewControllerSkipButtonText = "건너뛰기"
     
     // MARK: - StartReflectionViewController
     
@@ -131,7 +138,7 @@ enum TextLiteral {
     // MARK: - SelectReflectionMemberViewController
     
     static let selectReflectionMemberViewControllerTitleLabel = "각 팀원이 받은 피드백을\n공유해 보세요"
-    static let selectReflectionMemberViewControllerDoneButtonText = "모든 회고 끝내기"
+    static let selectReflectionMemberViewControllerDoneButtonText = "모든 회고 끝내기 "
     
     // MARK: - InProgressViewController
     
@@ -211,6 +218,8 @@ enum TextLiteral {
     static let reflectionTitleLabelProgressing: String = "회고가 시작되었습니다!"
     static let reflectionDescriptionLabelSettingRequired: String = "회고 일정을 정해주세요"
     static let reflectionDescriptionLabelProgressing: String = "터치하여 회고에 참여해주세요"
+    static let previewTitleLabel: String = "회고 일정을 추가할 수 없습니다"
+    static let previewDescriptionLabel: String = "팀을 생성하거나 팀에 합류해주세요"
     
     // MARK: - MyReflectionViewController
     
@@ -238,5 +247,17 @@ enum TextLiteral {
     // MARK: - TeamDetailViewController
     
     static let teamDetailViewControllerEditButteonText: String = "편집"
+    
+    // MARK: - TeamManageViewController
+    
+    static let teamManageViewControllerEmptyLabel: String = "참여 중인 팀이 없습니다\n팀에 합류하거나 팀을 생성해주세요"
+    static let teamManageViewControllerJoinNewTeam: String = "새로운 팀 합류하기"
+    static let teamManageViewControllerCreateTeam: String = "팀 생성하기"
+    static let teamManageViewControllerLoggout: String = "로그아웃"
+    static let teamManageViewControllerWithdrawl: String = "회원탈퇴"
+    
+    // MARK: - ChangeTeamView
+    
+    static let changeTeamViewLabel: String = "참여 중인 팀"
     static let teamDetailViewControllerMemberTitleLabel: String = "멤버"
 }
