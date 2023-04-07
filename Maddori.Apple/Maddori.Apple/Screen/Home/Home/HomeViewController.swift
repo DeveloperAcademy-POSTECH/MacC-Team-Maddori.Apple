@@ -30,6 +30,7 @@ final class HomeViewController: BaseViewController {
     var reflectionDate: String = ""
     
     var isAdmin: Bool = false
+    private var currentTeamId: Int = 0
     
     // MARK: - property
     
@@ -106,6 +107,7 @@ final class HomeViewController: BaseViewController {
         setLayoutTeamManageButton()
         fetchCertainTeamDetail(type: .fetchCertainTeamDetail)
         fetchCurrentReflectionDetail(type: .fetchCurrentReflectionDetail)
+        self.setupNotification()
     }
     
     override func configUI() {
@@ -157,8 +159,12 @@ final class HomeViewController: BaseViewController {
     
     // MARK: - func
     
+    private func setupNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(self.reloadHomeViewController(_:)), name: .changeTeamNotification, object: nil)
+    }
+    
     private func presentTeamModal() {
-        let teamViewController = TeamManageViewController()
+        let teamViewController = TeamManageViewController(teamId: self.currentTeamId)
         
         teamViewController.modalPresentationStyle = .pageSheet
         
@@ -284,6 +290,17 @@ final class HomeViewController: BaseViewController {
         teamManageButton.isHidden = !hasTeam
     }
     
+    // MARK: - selector
+    
+    @objc
+    private func reloadHomeViewController(_ sender: Notification) {
+        if let teamId = sender.object as? Int {
+            UserDefaultHandler.setTeamId(teamId: teamId)
+            self.fetchCertainTeamDetail(type: .fetchCertainTeamDetail)
+            self.fetchCurrentReflectionDetail(type: .fetchCurrentReflectionDetail)
+        }
+    }
+    
     // MARK: - api
     
     private func fetchCertainTeamDetail(type: HomeEndPoint<VoidModel>) {
@@ -293,9 +310,11 @@ final class HomeViewController: BaseViewController {
         ).responseDecodable(of: BaseModel<CertainTeamDetailResponse>.self) { json in
             if let json = json.value {
                 guard let isAdmin = json.detail?.admin,
-                      let teamName = json.detail?.teamName
+                      let teamName = json.detail?.teamName,
+                      let teamId = json.detail?.teamId
                 else { return }
                 self.isAdmin = isAdmin
+                self.currentTeamId = teamId
                 DispatchQueue.main.async {
                     self.teamButton.setTitle(teamName + " ", for: .normal)
                 }

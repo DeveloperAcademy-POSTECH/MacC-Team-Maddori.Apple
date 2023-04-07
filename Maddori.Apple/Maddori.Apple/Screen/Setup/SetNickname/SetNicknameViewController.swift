@@ -13,6 +13,10 @@ import SnapKit
 
 final class SetNicknameViewController: BaseViewController {
     
+    enum ViewType {
+        case createView
+        case joinView
+    }
     private enum TextLength {
         static let totalMin: Int = 0
         static let nicknameMax: Int = 6
@@ -21,6 +25,7 @@ final class SetNicknameViewController: BaseViewController {
     private let cameraPicker = UIImagePickerController()
     private let teamName: String = UserDefaultStorage.teamName
     private var profileURL: URL?
+    private let fromView: ViewType
     
     // MARK: - property
     
@@ -108,6 +113,14 @@ final class SetNicknameViewController: BaseViewController {
     }()
     
     // MARK: - life cycle
+    
+    init(from: ViewType) {
+        self.fromView = from
+        super.init()
+    }
+    
+    @available(*, unavailable)
+    required init?(coder: NSCoder) { nil }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -294,9 +307,11 @@ final class SetNicknameViewController: BaseViewController {
     private func didTappedDoneButton() {
         guard let nickname = nicknameTextField.text else { return }
         guard let role = roleTextField.text else { return }
-        if UserDefaultStorage.teamId == 0 {
+        
+        switch fromView {
+        case .createView:
             dispatchCreateTeam(type: .dispatchCreateTeam, teamName: teamName, nickname: nickname, role: role)
-        } else {
+        case .joinView:
             dispatchJoinTeam(type: .dispatchJoinTeam(teamId: UserDefaultStorage.teamId), nickname: nickname, role: role)
         }
         
