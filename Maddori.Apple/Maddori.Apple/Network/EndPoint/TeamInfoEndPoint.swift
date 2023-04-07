@@ -17,7 +17,7 @@ enum TeamInfoEndPoint<T: Encodable>: EndPointable {
         }
     }
     
-    var method: Alamofire.HTTPMethod {
+    var method: HTTPMethod {
         switch self {
         case .fetchUserTeamList:
             return .get

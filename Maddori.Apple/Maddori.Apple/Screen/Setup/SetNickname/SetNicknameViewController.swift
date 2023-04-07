@@ -312,15 +312,6 @@ final class SetNicknameViewController: BaseViewController {
             let dto = JoinTeamDTO(nickname: nickname, role: role, profile_image: nil)
             dispatchJoinTeam(type: .dispatchJoinTeam(teamId: UserDefaultStorage.teamId, dto))
         }
-        // FIXME: 진저가 확인 후 코드리뷰 시 삭제 예정
-//        if UserDefaultStorage.teamId == 0 {
-//            let dto = CreateTeamDTO(team_name: teamName, nickname: nickname, role: role, profile_image: nil)
-//            dispatchCreateTeam(type: .dispatchCreateTeam(dto))
-//        } else {
-//            let dto = JoinTeamDTO(nickname: nickname, role: role, profile_image: nil)
-//            dispatchJoinTeam(type: .dispatchJoinTeam(teamId: UserDefaultStorage.teamId, dto))
-//        }
-        
         nicknameTextField.resignFirstResponder()
         roleTextField.resignFirstResponder()
     }
