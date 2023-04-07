@@ -193,7 +193,7 @@ final class TeamDetailViewController: BaseViewController {
                                    message: TextLiteral.teamDetailViewControllerLeaveTeamAlertMessage,
                                    okTitle: TextLiteral.leaveTitle,
                                    okAction: { _ in
-                self?.deleteLeaveTeam(type: .deleteLeaveTeam)
+                self?.deleteLeaveTeam(type: .deleteTeam)
             })
         }
         teamLeaveButton.addAction(action, for: .touchUpInside)
