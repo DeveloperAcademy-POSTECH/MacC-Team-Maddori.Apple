@@ -18,6 +18,7 @@ enum TextLiteral {
     static let doneButtonNext = "다음"
     static let doneButtonComplete = "완료"
     static let actionSheetCancelTitle = "취소"
+    static let leaveTitle = "나가기"
     
     // MARK: - MainViewController
     
@@ -260,4 +261,8 @@ enum TextLiteral {
     
     static let changeTeamViewLabel: String = "참여 중인 팀"
     static let teamDetailViewControllerMemberTitleLabel: String = "멤버"
+    static let teamDetailViewControllerShareCodeText: String = "초대코드 공유하기"
+    static let teamDetailViewControllerLeaveTeamLabel: String = "팀 나가기"
+    static let teamDetailViewControllerLeaveTeamAlertTitle: String = "팀에서 나가시겠습니까?"
+    static let teamDetailViewControllerLeaveTeamAlertMessage: String = "모든 회고와 피드백 정보가 사라지며,\n되돌릴 수 없습니다."
 }
