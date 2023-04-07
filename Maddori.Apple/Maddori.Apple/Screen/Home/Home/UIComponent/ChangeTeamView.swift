@@ -9,10 +9,19 @@ import UIKit
 
 import SnapKit
 
+protocol ChangeTeamViewDelegate: AnyObject {
+    func changeTeam(teamId: Int)
+}
+
 final class ChangeTeamView: UIView {
     
-    // MARK: - FIXME: 데이터 더미 입니다.
-    let teamDataDummy: [String] = []
+    var teamList: [TeamInfoResponse] = [] {
+        didSet {
+            self.teamList.isEmpty ? self.setLayoutEmptyView() : self.setLayoutTeamListView()
+        }
+    }
+    var currentTeamId: Int?
+    weak var delegate: ChangeTeamViewDelegate?
     
     // MARK: - property
     
@@ -39,7 +48,7 @@ final class ChangeTeamView: UIView {
         collectionView.backgroundColor = .white200
         return collectionView
     }()
-    private let emptyView = EmptyTeamView()
+    private lazy var emptyView = EmptyTeamView()
     
     // MARK: - life cycle
     
@@ -61,8 +70,6 @@ final class ChangeTeamView: UIView {
             $0.top.equalTo(safeAreaLayoutGuide.snp.top).inset(34)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
-        
-        teamDataDummy.isEmpty ? setLayoutEmptyView() : setLayoutTeamListView()
     }
     
     // MARK: - function
@@ -88,20 +95,24 @@ final class ChangeTeamView: UIView {
 
 extension ChangeTeamView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return teamDataDummy.count
+        return self.teamList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TeamChangeCollectionViewCell.className, for: indexPath) as? TeamChangeCollectionViewCell else { return UICollectionViewCell() }
-        cell.teamNameLabel.text = teamDataDummy[indexPath.item]
+        cell.teamNameLabel.text = self.teamList[indexPath.item].teamName
+        if let currentTeamId = self.currentTeamId {
+            if self.teamList[indexPath.item].id == currentTeamId {
+                cell.isSelected = true
+            }
+        }
+        
         return cell
     }
 }
 
 extension ChangeTeamView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // MARK: - FIXME
-        let selectedTeamName = teamDataDummy[indexPath.item]
-        print(selectedTeamName)
+        self.delegate?.changeTeam(teamId: self.teamList[indexPath.item].id!)
     }
 }

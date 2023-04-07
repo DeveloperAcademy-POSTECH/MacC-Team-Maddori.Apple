@@ -11,9 +11,7 @@ import SnapKit
 
 final class TeamDetailMemberTableViewCell: BaseTableViewCell {
     
-    // MARK: - property
-    
-    private let memberInfoView = MemberInformationView(nickname: "nickname test", role: "role test")
+    private let memberInfoView = MemberInformationView()
     
     // MARK: - life cycle
     
@@ -21,6 +19,16 @@ final class TeamDetailMemberTableViewCell: BaseTableViewCell {
         self.addSubview(memberInfoView)
         memberInfoView.snp.makeConstraints {
             $0.edges.equalToSuperview()
+        }
+    }
+    
+    // MARK: - func
+    
+    func setupLayoutInfoView(nickname: String, role: String, imagePath: String?) {
+        memberInfoView.profileNicknameLabel.text = nickname
+        memberInfoView.profileRoleLabel.text = role
+        if let imagePath {
+            memberInfoView.profileImageView.load(from: UrlLiteral.imageBaseURL + imagePath)
         }
     }
 }

@@ -11,5 +11,4 @@ struct EditFeedBackDTO: Encodable {
     let type: FeedBackDTO
     let keyword: String
     let content: String
-    let start_content: String?
 }

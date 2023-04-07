@@ -13,7 +13,7 @@ final class TeamDetailMemberTableHeaderView: UITableViewHeaderFooterView {
     
     // MARK: - property
     
-    private let memberInformationView = MemberInformationView(nickname: "이드", role: "디자인 리드 / 개발자")
+    private let memberInformationView = MemberInformationView()
     private let dividerView: UIView = {
         let view = UIView()
         view.layer.borderWidth = 0.5
@@ -44,6 +44,14 @@ final class TeamDetailMemberTableHeaderView: UITableViewHeaderFooterView {
             $0.top.equalTo(memberInformationView.snp.bottom).offset(24)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(1)
+        }
+    }
+    
+    func setupMemberInfoView(nickname: String, role: String, imagePath: String?) {
+        memberInformationView.profileNicknameLabel.text = nickname
+        memberInformationView.profileRoleLabel.text = role
+        if let imagePath {        
+            memberInformationView.profileImageView.load(from: UrlLiteral.imageBaseURL + imagePath)
         }
     }
 }

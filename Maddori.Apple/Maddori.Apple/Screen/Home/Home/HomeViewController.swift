@@ -30,6 +30,7 @@ final class HomeViewController: BaseViewController {
     var reflectionDate: String = ""
     
     var isAdmin: Bool = false
+    private var currentTeamId: Int = 0
     
     // MARK: - property
     
@@ -103,8 +104,10 @@ final class HomeViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        setLayoutTeamManageButton()
         fetchCertainTeamDetail(type: .fetchCertainTeamDetail)
         fetchCurrentReflectionDetail(type: .fetchCurrentReflectionDetail)
+        self.setupNotification()
     }
     
     override func configUI() {
@@ -156,8 +159,12 @@ final class HomeViewController: BaseViewController {
     
     // MARK: - func
     
+    private func setupNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(self.reloadHomeViewController(_:)), name: .changeTeamNotification, object: nil)
+    }
+    
     private func presentTeamModal() {
-        let teamViewController = TeamManageViewController()
+        let teamViewController = TeamManageViewController(teamId: self.currentTeamId)
         
         teamViewController.modalPresentationStyle = .pageSheet
         
@@ -278,6 +285,22 @@ final class HomeViewController: BaseViewController {
         self.navigationController?.pushViewController(viewController, animated: true)
     }
     
+    private func setLayoutTeamManageButton() {
+        let hasTeam = UserDefaultStorage.teamId != 0
+        teamManageButton.isHidden = !hasTeam
+    }
+    
+    // MARK: - selector
+    
+    @objc
+    private func reloadHomeViewController(_ sender: Notification) {
+        if let teamId = sender.object as? Int {
+            UserDefaultHandler.setTeamId(teamId: teamId)
+            self.fetchCertainTeamDetail(type: .fetchCertainTeamDetail)
+            self.fetchCurrentReflectionDetail(type: .fetchCurrentReflectionDetail)
+        }
+    }
+    
     // MARK: - api
     
     private func fetchCertainTeamDetail(type: HomeEndPoint<VoidModel>) {
@@ -286,7 +309,10 @@ final class HomeViewController: BaseViewController {
                    headers: type.headers
         ).responseDecodable(of: BaseModel<CertainTeamDetailResponse>.self) { json in
             if let json = json.value {
-                guard let teamName = json.detail?.teamName else { return }
+                guard let teamName = json.detail?.teamName,
+                      let teamId = json.detail?.teamId
+                else { return }
+                self.currentTeamId = teamId
                 DispatchQueue.main.async {
                     self.teamButton.setTitle(teamName + " ", for: .normal)
                 }
@@ -305,6 +331,7 @@ final class HomeViewController: BaseViewController {
                    headers: type.headers
         ).responseDecodable(of: BaseModel<CurrentReflectionResponse>.self) { json in
             if let json = json.value {
+                dump(json)
                 let reflectionDetail = json.detail
                 guard let reflectionStatus = reflectionDetail?.reflectionStatus,
                       let reflectionId = reflectionDetail?.currentReflectionId

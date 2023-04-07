@@ -7,9 +7,11 @@
 
 import UIKit
 
+import Alamofire
 import SnapKit
 
 final class TeamDetailViewController: BaseViewController {
+    private var invitationCode: String?
     
     // MARK: - property
     
@@ -18,8 +20,7 @@ final class TeamDetailViewController: BaseViewController {
         let label = UILabel()
         label.font = .title
         label.textColor = .black100
-        // FIXME: - API 연결 후 삭제
-        label.text = "맛쟁이 사과처럼"
+        label.text = UserDefaultStorage.teamName
         return label
     }()
     private let editButton: UIButton = {
@@ -50,8 +51,6 @@ final class TeamDetailViewController: BaseViewController {
     }()
     private let invitationCodeLabel: UILabel = {
         let label = UILabel()
-        // FIXME: - APi 연결 후 삭제
-        label.text = "1BCDEF"
         label.font = .label2
         label.textColor = .gray600
         return label
@@ -72,11 +71,14 @@ final class TeamDetailViewController: BaseViewController {
         setupBackButton()
         setupEditButton()
         setupExitButton()
+        setupCodeShareButton()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupNavigationAndTapbar()
+        fetchTeamDetailMember(type: .fetchTeamMember)
+        fetchTeamInformation(type: .fetchTeamInformation)
     }
     
     override func render() {
@@ -190,10 +192,86 @@ final class TeamDetailViewController: BaseViewController {
             self?.makeRequestAlert(title: TextLiteral.teamDetailViewControllerLeaveTeamAlertTitle,
                                    message: TextLiteral.teamDetailViewControllerLeaveTeamAlertMessage,
                                    okTitle: TextLiteral.leaveTitle,
-                                   // FIXME: - 팀 나가기 API 연결
-                                   okAction: nil)
+                                   okAction: { _ in
+                self?.deleteLeaveTeam(type: .deleteTeam)
+            })
         }
         teamLeaveButton.addAction(action, for: .touchUpInside)
+    }
+    
+    private func setupCodeShareButton() {
+        let action = UIAction { [weak self] _ in
+            UIPasteboard.general.string = self?.invitationCode
+        }
+        codeShareButton.addAction(action, for: .touchUpInside)
+    }
+    
+    private func updateLayout() {
+        memberTableView.snp.updateConstraints {
+            $0.height.equalTo(calculateHeight())
+        }
+    }
+    
+    // MARK: - api
+    
+    private func fetchTeamDetailMember(type: TeamDetailEndPoint<VoidModel>) {
+        AF.request(type.address,
+                   method: type.method,
+                   headers: type.headers).responseDecodable(of: BaseModel<TeamMembersResponse>.self) { json in
+            if let data = json.value {
+                guard let members = data.detail?.members else { return }
+                DispatchQueue.main.async {
+                    self.memberTableView.loadData(data: members)
+                    self.updateLayout()
+                }
+            }
+        }
+    }
+    
+    private func fetchTeamInformation(type: TeamDetailEndPoint<VoidModel>) {
+        AF.request(type.address,
+                   method: type.method,
+                   headers: type.headers).responseDecodable(of: BaseModel<CertainTeamDetailResponse>.self) { json in
+            if let data = json.value {
+                guard let teamName = data.detail?.teamName,
+                      let invitationCode = data.detail?.invitationCode
+                else { return }
+                self.invitationCode = invitationCode
+                DispatchQueue.main.async {
+                    self.invitationCodeLabel.text = invitationCode
+                    self.titleLabel.text = teamName
+                }
+            }
+        }
+    }
+    
+    private func deleteLeaveTeam(type: TeamDetailEndPoint<VoidModel>) {
+        AF.request(type.address,
+                   method: type.method,
+                   headers: type.headers).responseDecodable(of: BaseModel<VoidModel>.self) { json in
+            if let _ = json.value {
+                self.fetchUserTeamList(type: .fetchUserTeamList) {
+                    self.navigationController?.popViewController(animated: true)
+                }
+            }
+        }
+    }
+    
+    private func fetchUserTeamList(type: TeamDetailEndPoint<VoidModel>, completion: @escaping (() ->())) {
+        AF.request(type.address,
+                   method: type.method,
+                   headers: type.headers).responseDecodable(of: BaseModel<[TeamInfoResponse]>.self) { json in
+            if let data = json.value {
+                guard let teams = data.detail else { return }
+                if !teams.isEmpty {
+                    guard let teamId = teams.first?.id else { return }
+                    UserDefaultHandler.setTeamId(teamId: teamId)
+                } else {
+                    UserDefaultHandler.setTeamId(teamId: 0)
+                }
+                completion()
+            }
+        }
     }
     
     private func setupNavigationAndTapbar() {

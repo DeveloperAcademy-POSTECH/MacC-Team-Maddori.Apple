@@ -7,6 +7,7 @@
 
 import UIKit
 
+import Alamofire
 import SnapKit
 
 final class TeamManageViewController: BaseViewController {
@@ -15,10 +16,18 @@ final class TeamManageViewController: BaseViewController {
         static let teamSectionHeight = 59
         static let teamSectionSpacing = 8
         static let teamSectionPadding = 28
+        static let teamTitleLabelHeight = 50
     }
     
     private var sections: [Section] = []
-    private lazy var teamCount = changeTeamView.teamDataDummy.count
+    private lazy var teamCount = 0 {
+        didSet {
+            self.changeTeamView.snp.updateConstraints {
+                $0.height.equalTo((self.teamCount * Size.teamSectionHeight) + ((self.teamCount - 1) * Size.teamSectionSpacing) + Size.teamSectionPadding + Size.teamTitleLabelHeight)
+            }
+        }
+    }
+    private var currentTeamId: Int
     
     // MARK: - property
     
@@ -44,10 +53,20 @@ final class TeamManageViewController: BaseViewController {
     
     // MARK: - life cycle
     
+    init(teamId: Int) {
+        self.currentTeamId = teamId
+        super.init()
+    }
+    
+    @available(*, unavailable)
+    required init?(coder: NSCoder) { nil }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupDelegate()
-        configureSettingModels()
+        self.setupDelegate()
+        self.configureSettingModels()
+        self.fetchUserTeamList(type: .fetchUserTeamList)
+        self.setChangeTeamViewDelegate()
     }
     
     override func render() {
@@ -66,17 +85,12 @@ final class TeamManageViewController: BaseViewController {
         changeTeamView.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.width.equalToSuperview()
-            if changeTeamView.teamDataDummy.isEmpty {
-                $0.height.equalTo(150)
-            }
-            else {
-                $0.height.equalTo((teamCount * Size.teamSectionHeight) + ((teamCount - 1) * Size.teamSectionSpacing) + Size.teamSectionPadding)
-            }
+            $0.height.equalTo(150)
         }
         
         contentView.addSubview(dividerView)
         dividerView.snp.makeConstraints {
-            $0.top.equalTo(changeTeamView.snp.bottom).offset(50)
+            $0.top.equalTo(changeTeamView.snp.bottom)
             $0.width.equalToSuperview()
             $0.height.equalTo(6)
         }
@@ -91,6 +105,14 @@ final class TeamManageViewController: BaseViewController {
     }
     
     // MARK: - func
+    
+    private func setChangeTeamViewDelegate() {
+        self.changeTeamView.delegate = self
+    }
+    
+    private func setCurrentTeam() {
+        self.changeTeamView.currentTeamId = self.currentTeamId
+    }
     
     private func setupDelegate() {
         settingTableView.delegate = self
@@ -113,23 +135,75 @@ final class TeamManageViewController: BaseViewController {
     }
     
     private func joinNewTeam() {
-        // FIXME: api 연결
-        print("새로운 팀 합류하기")
+        let rootView = presentingViewController
+        self.dismiss(animated: true) {
+            let joinViewController = UINavigationController(rootViewController: JoinTeamViewController(from: .teamManageView))
+            joinViewController.modalPresentationStyle = .fullScreen
+            rootView?.present(joinViewController, animated: true)
+        }
     }
     
     private func createTeam() {
-        // FIXME: api 연결
-        print("팀 생성하기")
+        let rootView = presentingViewController
+        self.dismiss(animated: true) {
+            let createTeamViewController = UINavigationController(rootViewController: CreateTeamViewController())
+            createTeamViewController.modalPresentationStyle = .fullScreen
+            rootView?.present(createTeamViewController, animated: true)
+        }
     }
     
     private func logout() {
-        // FIXME: api 연결
-        print("로그아웃")
+        self.logoutUser()
     }
     
     private func withdrawal() {
-        // FIXME: api 연결
-        print("회원탈퇴")
+        self.makeRequestAlert(title: TextLiteral.myReflectionViewControllerDeleteUserAlertTitle,
+                              message: TextLiteral.myReflectionViewControllerDeleteUserAlertMessage,
+                              okAction: { [weak self] _ in
+            self?.deleteUser(type: .deleteUser)
+        })
+    }
+    
+    private func logoutUser() {
+        makeRequestAlert(title: TextLiteral.myReflectionViewControllerLogOutMessage,
+                         message: "",
+                         okTitle: "확인",
+                         cancelTitle: "취소") { _ in
+            guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate
+                    as? SceneDelegate else { return }
+            sceneDelegate.logout()
+        }
+    }
+    
+    // MARK: - api
+    
+    private func fetchUserTeamList(type: TeamInfoEndPoint<VoidModel>) {
+        AF.request(type.address,
+                   method: type.method,
+                   headers: type.headers
+        ).responseDecodable(of: BaseModel<[TeamInfoResponse]>.self) { json in
+            if let json = json.value {
+                guard let teamCount = json.detail?.count else { return }
+                self.teamCount = teamCount
+                guard let team = json.detail else { return }
+                self.changeTeamView.teamList = team
+                self.setCurrentTeam()
+            }
+        }
+    }
+    
+    private func deleteUser(type: MyReflectionEndPoint<VoidModel>) {
+        AF.request(type.address,
+                   method: type.method,
+                   headers: type.headers
+        ).responseDecodable(of: BaseModel<VoidModel>.self) { json in
+            if let _ = json.value {
+                UserDefaultHandler.clearAllData()
+                guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate
+                        as? SceneDelegate else { return }
+                sceneDelegate.logout()
+            }
+        }
     }
 }
 
@@ -186,5 +260,12 @@ extension TeamManageViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         let model = sections[indexPath.section].options[indexPath.row]
         model.handler()
+    }
+}
+
+extension TeamManageViewController: ChangeTeamViewDelegate {
+    func changeTeam(teamId: Int) {
+        NotificationCenter.default.post(name: .changeTeamNotification, object: teamId)
+        self.dismiss(animated: true)
     }
 }

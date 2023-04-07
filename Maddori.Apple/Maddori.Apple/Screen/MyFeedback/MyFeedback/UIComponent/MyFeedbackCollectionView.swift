@@ -104,11 +104,11 @@ extension MyFeedbackCollectionView: UICollectionViewDelegate {
             let hasContinueStop = collectionView.numberOfSections == 2
             let isContinueSection = indexPath.section == 0
             if hasContinueStop {
-                let reflectionId = data.reflectionId ?? 0
+                let reflectionId = data.reflection.id ?? 0
                 let feedbackId = isContinueSection
                 ? data.continueArray[indexPath.item].id ?? 0
                 : data.stopArray[indexPath.item].id ?? 0
-                let nickName = data.toUsername ?? ""
+                let nickName = data.toUser.nickname ?? ""
                 let keyword = isContinueSection
                 ? data.continueArray[indexPath.item].keyword ?? ""
                 : data.stopArray[indexPath.item].keyword ?? ""
@@ -118,7 +118,7 @@ extension MyFeedbackCollectionView: UICollectionViewDelegate {
                 let start = isContinueSection
                 ? data.continueArray[indexPath.item].startContent
                 : data.stopArray[indexPath.item].startContent
-                let reflectionStatus = ReflectionStatus.init(rawValue: feedbackInfo?.reflectionStatus ?? "Before")
+                let reflectionStatus = ReflectionStatus.init(rawValue: feedbackInfo?.reflection.state?.rawValue ?? "Before")
                 
                 let data = FeedbackFromMeModel(reflectionId: reflectionId,
                                                feedbackId: feedbackId,
@@ -133,11 +133,11 @@ extension MyFeedbackCollectionView: UICollectionViewDelegate {
             } else {
                 let continueArray = data.continueArray
                 let stopArray = data.stopArray
-                let reflectionStatus = ReflectionStatus.init(rawValue: data.reflectionStatus ?? "Before")
+                let reflectionStatus = ReflectionStatus.init(rawValue: data.reflection.state?.rawValue ?? "Before")
                 if !continueArray.isEmpty {
-                    let data = FeedbackFromMeModel(reflectionId: data.reflectionId ?? 0,
+                    let data = FeedbackFromMeModel(reflectionId: data.reflection.id ?? 0,
                                                    feedbackId: continueArray[indexPath.item].id ?? 0,
-                                                   nickname: data.toUsername ?? "",
+                                                   nickname: data.toUser.nickname ?? "",
                                                    feedbackType: .continueType,
                                                    keyword: continueArray[indexPath.item].keyword ?? "",
                                                    info: continueArray[indexPath.item].content ?? "",
@@ -146,9 +146,9 @@ extension MyFeedbackCollectionView: UICollectionViewDelegate {
                     )
                     didTappedCell?(data)
                 } else {
-                    let data = FeedbackFromMeModel(reflectionId: data.reflectionId ?? 0,
+                    let data = FeedbackFromMeModel(reflectionId: data.reflection.id ?? 0,
                                                    feedbackId: stopArray[indexPath.item].id ?? 0,
-                                                   nickname: data.toUsername ?? "",
+                                                   nickname: data.toUser.nickname ?? "",
                                                    feedbackType: .stopType,
                                                    keyword: stopArray[indexPath.item].keyword ?? "",
                                                    info: stopArray[indexPath.item].content ?? "",
