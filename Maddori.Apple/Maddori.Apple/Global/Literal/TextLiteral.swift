@@ -18,6 +18,7 @@ enum TextLiteral {
     static let doneButtonNext = "다음"
     static let doneButtonComplete = "완료"
     static let actionSheetCancelTitle = "취소"
+    static let leaveTitle = "나가기"
     
     // MARK: - MainViewController
     
@@ -66,6 +67,9 @@ enum TextLiteral {
     static let setNicknameViewControllerCreateTeamAlertTitle = "팀 생성 및 팀 합류 실패"
     static let setNicknameViewControllerJoinTeamAlertTitle = "팀 합류 실패"
     static let setNicknameViewControllerAlertMessage = "다시 시도해 주세요."
+    static let setNicknameViewControllerPermissionAlertTitle = "사진 접근 권한"
+    static let setNicknameViewControllerPermissionAlertMessage = "사진 추가를 원하시면 '확인'을 눌러 사진 접근을 허용해 주세요."
+    static let setNicknameViewControllerCameraAlertTitle = "촬영된 이미지를 불러올 수 없습니다."
     
     // MARK: - HomeViewController
     
@@ -257,4 +261,8 @@ enum TextLiteral {
     
     static let changeTeamViewLabel: String = "참여 중인 팀"
     static let teamDetailViewControllerMemberTitleLabel: String = "멤버"
+    static let teamDetailViewControllerShareCodeText: String = "초대코드 공유하기"
+    static let teamDetailViewControllerLeaveTeamLabel: String = "팀 나가기"
+    static let teamDetailViewControllerLeaveTeamAlertTitle: String = "팀에서 나가시겠습니까?"
+    static let teamDetailViewControllerLeaveTeamAlertMessage: String = "모든 회고와 피드백 정보가 사라지며,\n되돌릴 수 없습니다."
 }

@@ -94,9 +94,11 @@ final class CreateTeamViewController: BaseTextFieldViewController {
                 if teamName.hasSpecialCharacters() {
                     DispatchQueue.main.async {
                         self?.makeAlert(title: TextLiteral.createTeamViewControllerAlertTitle, message: TextLiteral.createTeamViewControllerAlertMessage)
+                        self?.doneButton.isLoading = false
                     }
                 } else {
                     UserDefaultHandler.setTeamName(teamName: teamName)
+                    UserDefaultHandler.setTeamId(teamId: 0)
                     self?.pushSetNicknameViewController()
                 }
             }

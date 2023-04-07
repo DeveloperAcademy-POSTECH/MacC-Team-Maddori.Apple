@@ -20,6 +20,7 @@ final class SetNicknameViewController: BaseViewController {
     }
     private let cameraPicker = UIImagePickerController()
     private let teamName: String = UserDefaultStorage.teamName
+    private var profileURL: URL?
     
     // MARK: - property
     
@@ -204,7 +205,7 @@ final class SetNicknameViewController: BaseViewController {
                 TextLiteral.actionSheetCancelTitle
             ],
             actionStyle: [.default, .default, .cancel],
-            actions: [{ _ in self.openLibrary() }, { _ in self.openCamera() }, nil]
+            actions: [{ _ in self.setupPhotoLibrary() }, { _ in self.openCamera() }, nil]
         )
     }
     
@@ -293,14 +294,10 @@ final class SetNicknameViewController: BaseViewController {
     private func didTappedDoneButton() {
         guard let nickname = nicknameTextField.text else { return }
         guard let role = roleTextField.text else { return }
-        // FIXME: - 이미지 데이터 추가
-        
         if UserDefaultStorage.teamId == 0 {
-            let dto = CreateTeamDTO(team_name: teamName, nickname: nickname, role: role, profile_image: nil)
-            dispatchCreateTeam(type: .dispatchCreateTeam(dto))
+            dispatchCreateTeam(type: .dispatchCreateTeam, teamName: teamName, nickname: nickname, role: role)
         } else {
-            let dto = JoinTeamDTO(nickname: nickname, role: role, profile_image: nil)
-            dispatchJoinTeam(type: .dispatchJoinTeam(teamId: UserDefaultStorage.teamId, dto))
+            dispatchJoinTeam(type: .dispatchJoinTeam(teamId: UserDefaultStorage.teamId), nickname: nickname, role: role)
         }
         
         nicknameTextField.resignFirstResponder()
@@ -310,6 +307,37 @@ final class SetNicknameViewController: BaseViewController {
     private func pushInvitationCodeViewController(invitationCode: String) {
         let viewController = InvitationCodeViewController(invitationCode: invitationCode)
         navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    private func setupPhotoLibrary() {
+        switch PHPhotoLibrary.authorizationStatus(for: .readWrite) {
+        case .limited, .authorized:
+            openLibrary()
+        case .notDetermined:
+            PHPhotoLibrary.requestAuthorization(for: .readWrite) { [weak self] status in
+                switch status {
+                case .limited, .authorized:
+                    DispatchQueue.main.async {
+                        self?.openLibrary()
+                    }
+                default:
+                    self?.showPermissionAlert()
+                }
+            }
+        case .restricted, .denied:
+            showPermissionAlert()
+        default:
+            break
+        }
+    }
+    
+    private func showPermissionAlert() {
+        DispatchQueue.main.async {
+            guard let settingURL = URL(string: UIApplication.openSettingsURLString) else { return }
+            self.makeAlert(title: TextLiteral.setNicknameViewControllerPermissionAlertTitle, message: TextLiteral.setNicknameViewControllerPermissionAlertMessage, okAction: { _ in
+                UIApplication.shared.open(settingURL)
+            })
+        }
     }
     
     // MARK: - selector
@@ -334,17 +362,30 @@ final class SetNicknameViewController: BaseViewController {
     
     // MARK: - api
     
-    private func dispatchCreateTeam(type: SetupEndPoint<CreateTeamDTO>) {
-        AF.request(type.address,
-                   method: type.method,
-                   parameters: type.body,
-                   encoder: JSONParameterEncoder.default,
-                   headers: type.headers
-        ).responseDecodable(of: BaseModel<CreateTeamResponse>.self) { json in
+    private func dispatchCreateTeam(type: SetupEndPoint<EncodeDTO>, teamName: String, nickname: String, role: String?) {
+        AF.upload(multipartFormData: { multipartFormData in
+            let teamInfo: Dictionary = ["team_name": teamName,
+                                        "nickname": nickname,
+                                        "role": role]
+            for (key, value) in teamInfo {
+                if let value = value {
+                    guard let data = "\(value)".data(using: .utf8) else { return }
+                    multipartFormData.append(data, withName: key, mimeType: "text/plain")
+                }
+            }
+            if let profileURL = self.profileURL {
+                multipartFormData.append(profileURL,
+                                         withName: "profile_image",
+                                         fileName: ".png",
+                                         mimeType: "image/png")
+            }
+        }, to: type.address, method: type.method, headers: type.headers).responseDecodable(of: BaseModel<CreateTeamResponse>.self) { json in
             if let json = json.value {
                 dump(json)
                 guard let teamId = json.detail?.team?.id else { return }
+                guard let nickname = json.detail?.nickname else { return }
                 UserDefaultHandler.setTeamId(teamId: teamId)
+                UserDefaultHandler.setNickname(nickname: nickname)
                 UserDefaultHandler.setIsLogin(isLogin: true)
                 DispatchQueue.main.async {
                     if let invitationCode = json.detail?.team?.invitationCode {
@@ -354,23 +395,35 @@ final class SetNicknameViewController: BaseViewController {
             } else {
                 DispatchQueue.main.async {
                     self.makeAlert(title: TextLiteral.setNicknameViewControllerCreateTeamAlertTitle, message: TextLiteral.setNicknameViewControllerAlertMessage)
+                    self.doneButton.isLoading = false
                 }
             }
         }
     }
     
-    private func dispatchJoinTeam(type: SetupEndPoint<JoinTeamDTO>) {
-        AF.request(type.address,
-                   method: type.method,
-                   parameters: type.body,
-                   encoder: JSONParameterEncoder.default,
-                   headers: type.headers
-        ).responseDecodable(of: BaseModel<JoinTeamResponse>.self) { json in
+    private func dispatchJoinTeam(type: SetupEndPoint<EncodeDTO>, nickname: String, role: String?) {
+        AF.upload(multipartFormData: { multipartFormData in
+            let profileInfo: Dictionary = ["nickname": nickname, "role": role]
+            for (key, value) in profileInfo {
+                if let value = value {
+                    guard let data = "\(value)".data(using: .utf8) else { return }
+                    multipartFormData.append(data, withName: key, mimeType: "text/plain")
+                }
+            }
+            if let profileURL = self.profileURL {
+                multipartFormData.append(profileURL,
+                                         withName: "profile_image",
+                                         fileName: ".png",
+                                         mimeType: "image/png")
+            }
+        }, to: type.address, method: type.method, headers: type.headers).responseDecodable(of: BaseModel<JoinTeamResponse>.self) { json in
             if let json = json.value {
                 dump(json)
+                guard let teamId = json.detail?.team?.id else { return }
                 guard let nickname = json.detail?.nickname else { return }
-                UserDefaultHandler.setIsLogin(isLogin: true)
+                UserDefaultHandler.setTeamId(teamId: teamId)
                 UserDefaultHandler.setNickname(nickname: nickname)
+                UserDefaultHandler.setIsLogin(isLogin: true)
                 DispatchQueue.main.async {
                     if let invitationCode = json.detail?.team?.invitationCode {
                         self.pushInvitationCodeViewController(invitationCode: invitationCode)
@@ -379,6 +432,7 @@ final class SetNicknameViewController: BaseViewController {
             } else {
                 DispatchQueue.main.async {
                     self.makeAlert(title: TextLiteral.setNicknameViewControllerJoinTeamAlertTitle, message: TextLiteral.setNicknameViewControllerAlertMessage)
+                    self.doneButton.isLoading = false
                 }
             }
         }
@@ -406,10 +460,20 @@ extension SetNicknameViewController: PHPickerViewControllerDelegate {
         let itemProvider = results.first?.itemProvider
         if let itemProvider = itemProvider, itemProvider.canLoadObject(ofClass: UIImage.self) {
             itemProvider.loadObject(ofClass: UIImage.self) { (image, error) in
+                guard let profileImage = image as? UIImage else { return }
                 DispatchQueue.main.async {
-                    self.profileImageButton.profileImage.image = image as? UIImage
+                    self.profileImageButton.profileImage.image = profileImage.fixOrientation()
                 }
-                // FIXME: - 이미지 정보 가져오기
+                if let data = profileImage.fixOrientation().pngData() {
+                    let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+                    let url = documents.appendingPathComponent(".png")
+                    do {
+                        try data.write(to: url)
+                        self.profileURL = url
+                    } catch {
+                        self.makeAlert(title: TextLiteral.setNicknameControllerLibraryErrorAlertTitle, message: TextLiteral.setNicknameControllerLibraryErrorAlertMessage)
+                    }
+                }
             }
         } else {
             self.makeAlert(title: TextLiteral.setNicknameControllerLibraryErrorAlertTitle, message: TextLiteral.setNicknameControllerLibraryErrorAlertMessage)
@@ -423,7 +487,21 @@ extension SetNicknameViewController: UIImagePickerControllerDelegate, UINavigati
         cameraPicker.dismiss(animated: true)
         
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            self.profileImageButton.profileImage.image = image
+            DispatchQueue.main.async {
+                self.profileImageButton.profileImage.image = image.fixOrientation()
+            }
+            if let data = image.fixOrientation().pngData() {
+                let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+                let url = documents.appendingPathComponent(".png")
+                do {
+                    try data.write(to: url)
+                    self.profileURL = url
+                } catch {
+                    self.makeAlert(title: TextLiteral.setNicknameViewControllerCameraAlertTitle, message: TextLiteral.setNicknameViewControllerAlertMessage)
+                }
+            } else {
+                self.makeAlert(title: TextLiteral.setNicknameViewControllerCameraAlertTitle, message: TextLiteral.setNicknameViewControllerAlertMessage)
+            }
         }
     }
 }
