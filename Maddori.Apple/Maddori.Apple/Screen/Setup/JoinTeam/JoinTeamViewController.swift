@@ -70,15 +70,6 @@ final class JoinTeamViewController: BaseTextFieldViewController {
         button.isHidden = fromView == .loginView ? false : true
         return button
     }()
-    private lazy var skipButton: UIButton = {
-        let button = UIButton()
-        button.setTitle(TextLiteral.joinTeamViewControllerSkipButtonText, for: .normal)
-        button.setTitleColor(.gray500, for: .normal)
-        button.titleLabel?.font = .toast
-        button.frame = CGRect(x: 0, y: 0, width: 49, height: 44)
-        button.isHidden = fromView == .loginView ? false : true
-        return button
-    }()
     private lazy var createView: LabelButtonView = {
         let view = LabelButtonView()
         view.subText = TextLiteral.joinTeamViewControllerSubText
@@ -115,7 +106,6 @@ final class JoinTeamViewController: BaseTextFieldViewController {
         super.viewDidLoad()
         setupDoneButton()
         setupKeyboard()
-        setupSkipButton()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -139,12 +129,10 @@ final class JoinTeamViewController: BaseTextFieldViewController {
         if fromView == .loginView {
             let button = removeBarButtonItemOffset(with: backButton, offsetX: 10)
             let backButton = makeBarButtonItem(with: button)
-            let skipButton = makeBarButtonItem(with: skipButton)
             
             navigationController?.navigationBar.prefersLargeTitles = false
             navigationItem.largeTitleDisplayMode = .never
             navigationItem.leftBarButtonItem = backButton
-            navigationItem.rightBarButtonItem = skipButton
         }
         else if fromView == .teamManageView {
             let button = removeBarButtonItemOffset(with: closeButton, offsetX: -10)
@@ -173,13 +161,6 @@ final class JoinTeamViewController: BaseTextFieldViewController {
         super.kigoTextField.autocapitalizationType = .allCharacters
     }
     
-    private func setupSkipButton() {
-        let action = UIAction { [weak self] _ in
-            self?.pushHomeViewController()
-        }
-        skipButton.addAction(action, for: .touchUpInside)
-    }
-    
     // MARK: - func
     
     private func presentCreateTeamViewController() {
@@ -192,11 +173,6 @@ final class JoinTeamViewController: BaseTextFieldViewController {
     private func pushSetNicknameViewController() {
         let viewController = SetNicknameViewController(from: .joinView)
         navigationController?.pushViewController(viewController, animated: true)
-    }
-    
-    private func pushHomeViewController() {
-        let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
-        sceneDelegate?.changeRootViewCustomTabBarView()
     }
     
     // MARK: - api
