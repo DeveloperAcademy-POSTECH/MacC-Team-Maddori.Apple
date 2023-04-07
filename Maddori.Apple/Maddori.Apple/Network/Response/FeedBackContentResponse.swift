@@ -33,3 +33,21 @@ struct FeedBackContentResponse: Decodable {
         case fromUser = "from_user"
     }
 }
+
+// MARK: - create feedback 용 / 나중에 FeedBackContentResponse 합치기
+struct SimpleFeedBackContentResponse: Decodable {
+    // MARK: - createFeedback
+    let id: Int?
+    let type: FeedBackType?
+    let keyword: String?
+    let content: String?
+    let toUser: SimpleMemberResponse?
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case type
+        case keyword
+        case content
+        case toUser = "to_user"
+    }
+}

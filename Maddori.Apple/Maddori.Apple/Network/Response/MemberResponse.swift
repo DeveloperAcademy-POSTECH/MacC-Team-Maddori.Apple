@@ -34,3 +34,11 @@ struct TeamMemberResponse: Decodable {
         case profileImagePath = "profile_image_path"
     }
 }
+
+// MARK: - MemberResponse와 동일한 역할 v2용
+
+struct SimpleMemberResponse: Decodable {
+    // MARK: - createFeedback(FeedBackContentResponse)
+    let id: Int?
+    let nickname: String?
+}
