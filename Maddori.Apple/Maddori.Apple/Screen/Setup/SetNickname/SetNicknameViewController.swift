@@ -309,14 +309,14 @@ final class SetNicknameViewController: BaseViewController {
     private func didTappedDoneButton() {
         guard let nickname = nicknameTextField.text else { return }
         guard let role = roleTextField.text else { return }
-        // FIXME: - 이미지 데이터 추가
         
-        if fromView == .createView {
+        switch fromView {
+        case .createView:
             dispatchCreateTeam(type: .dispatchCreateTeam, teamName: teamName, nickname: nickname, role: role)
-        }
-        else if fromView == .joinView {
+        case .joinView:
             dispatchJoinTeam(type: .dispatchJoinTeam(teamId: UserDefaultStorage.teamId), nickname: nickname, role: role)
         }
+        
         nicknameTextField.resignFirstResponder()
         roleTextField.resignFirstResponder()
     }

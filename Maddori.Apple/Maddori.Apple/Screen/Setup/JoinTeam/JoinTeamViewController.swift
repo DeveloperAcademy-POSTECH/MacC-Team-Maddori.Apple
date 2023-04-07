@@ -126,22 +126,21 @@ final class JoinTeamViewController: BaseTextFieldViewController {
     
     override func setupNavigationBar() {
         super.setupNavigationBar()
-        if fromView == .loginView {
+        switch fromView {
+        case .loginView:
             let button = removeBarButtonItemOffset(with: backButton, offsetX: 10)
             let backButton = makeBarButtonItem(with: button)
             
             navigationController?.navigationBar.prefersLargeTitles = false
             navigationItem.largeTitleDisplayMode = .never
             navigationItem.leftBarButtonItem = backButton
-        }
-        else if fromView == .teamManageView {
+        case .teamManageView:
             let button = removeBarButtonItemOffset(with: closeButton, offsetX: -10)
             let closeButton = makeBarButtonItem(with: button)
         
             navigationController?.navigationBar.prefersLargeTitles = false
             navigationItem.largeTitleDisplayMode = .never
             navigationItem.rightBarButtonItem = closeButton
-            
         }
     }
     
