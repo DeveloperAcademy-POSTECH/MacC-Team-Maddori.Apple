@@ -118,6 +118,11 @@ final class JoinTeamViewController: BaseTextFieldViewController {
         setupSkipButton()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        doneButton.isLoading = false
+    }
+    
     override func render() {
         super.render()
         
@@ -157,6 +162,7 @@ final class JoinTeamViewController: BaseTextFieldViewController {
     private func setupDoneButton() {
         let action = UIAction { [weak self] _ in
             guard let invitationCode = self?.kigoTextField.text else { return }
+            self?.doneButton.isLoading = true
             self?.fetchCertainTeam(type: .fetchCertainTeam(invitationCode: invitationCode))
         }
         super.doneButton.addAction(action, for: .touchUpInside)
@@ -211,6 +217,7 @@ final class JoinTeamViewController: BaseTextFieldViewController {
             } else {
                 DispatchQueue.main.async {
                     self.makeAlert(title: TextLiteral.joinTeamViewControllerAlertTitle, message: TextLiteral.joinTeamViewControllerAlertMessage)
+                    self.doneButton.isLoading = false
                 }
             }
         }

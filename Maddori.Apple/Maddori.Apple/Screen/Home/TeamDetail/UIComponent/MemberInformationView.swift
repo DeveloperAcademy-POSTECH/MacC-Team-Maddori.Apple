@@ -10,27 +10,24 @@ import UIKit
 import SnapKit
 
 final class MemberInformationView: UIView {
-    let nickname: String
-    let role: String
     
     // MARK: - property
     
-    private let profileImageView: UIImageView = {
+    let profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.layer.cornerRadius = 23
-        imageView.image = ImageLiterals.imgPersonTab
+        imageView.clipsToBounds = true
+        imageView.image = ImageLiterals.imgProfileNone
         return imageView
     }()
-    private lazy var profileNicknameLabel: UILabel = {
+    let profileNicknameLabel: UILabel = {
         let label = UILabel()
-        label.text = nickname
         label.font = .label2
         label.textColor = .gray600
         return label
     }()
-    private lazy var profileRoleLabel: UILabel = {
+    let profileRoleLabel: UILabel = {
         let label = UILabel()
-        label.text = role
         label.font = .caption2
         label.textColor = .gray400
         return label
@@ -38,14 +35,14 @@ final class MemberInformationView: UIView {
     
     // MARK: - life cycle
     
-    init(nickname: String, role: String) {
-        self.nickname = nickname
-        self.role = role
-        super.init(frame: .zero)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         render()
     }
     
     required init?(coder: NSCoder) { nil }
+    
+    // MARK: - func
     
     private func render() {
         self.addSubview(profileImageView)
