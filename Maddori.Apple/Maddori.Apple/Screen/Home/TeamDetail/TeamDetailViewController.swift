@@ -72,12 +72,12 @@ final class TeamDetailViewController: BaseViewController {
         setupEditButton()
         setupExitButton()
         setupCodeShareButton()
-        fetchTeamDetailMember(type: .fetchTeamMember)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupNavigationAndTapbar()
+        fetchTeamDetailMember(type: .fetchTeamMember)
         fetchTeamInformation(type: .fetchTeamInformation)
     }
     
