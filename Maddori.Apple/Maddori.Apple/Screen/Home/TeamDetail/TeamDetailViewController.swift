@@ -113,19 +113,12 @@ final class TeamDetailViewController: BaseViewController {
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
             $0.height.equalTo(16)
         }
-        let size = TeamDetailMembersView.PropertySize.self
-        let topInset: CGFloat = UIApplication.shared.keyWindow?.safeAreaInsets.top ?? UIApplication.shared.statusBarFrame.size.height
-        let hasHomeIndicator = UIScreen.main.bounds.width * 2 < UIScreen.main.bounds.height
-        let bottomInset: CGFloat = hasHomeIndicator ? 34 : 0
-        let minHeight = view.frame.size.height - topInset - size.navigationBarHeight - size.tableViewTopProperty - size.tableViewBottomProperty - bottomInset - 60
-        let currentHeight = (size.cellSize + size.cellSpacing) * CGFloat(memberTableView.members.count) + size.headerViewHeight + size.cellSpacing
-        let height = max(minHeight, currentHeight)
 
         contentView.addSubview(memberTableView)
         memberTableView.snp.makeConstraints {
             $0.top.equalTo(memberTitleLabel.snp.bottom).offset(20)
             $0.leading.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-            $0.height.equalTo(height)
+            $0.height.equalTo(calculateHeight())
         }
         
         contentView.addSubview(firstFullDividerView)
@@ -202,5 +195,15 @@ final class TeamDetailViewController: BaseViewController {
                                    okAction: nil)
         }
         teamLeaveButton.addAction(action, for: .touchUpInside)
+    }
+    
+    private func calculateHeight() -> CGFloat {
+        let size = TeamDetailMembersView.PropertySize.self
+        let hasHomeIndicator = UIScreen.main.bounds.width * 2 < UIScreen.main.bounds.height
+        let bottomInset: CGFloat = hasHomeIndicator ? 34 : 0
+        let minHeight = view.frame.size.height - statusBarHeight - size.navigationBarHeight - size.tableViewTopProperty - size.tableViewBottomProperty - bottomInset - 60
+        let currentHeight = (size.cellSize + size.cellSpacing) * CGFloat(memberTableView.members.count) + size.headerViewHeight + size.cellSpacing
+        let height = max(minHeight, currentHeight)
+        return height
     }
 }
