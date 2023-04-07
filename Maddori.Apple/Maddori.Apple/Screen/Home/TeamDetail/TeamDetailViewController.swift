@@ -74,10 +74,9 @@ final class TeamDetailViewController: BaseViewController {
         setupExitButton()
     }
     
-    override func configUI() {
-        super.configUI()
-        navigationController?.isNavigationBarHidden = false
-        self.tabBarController?.tabBar.isHidden = true
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupNavigationAndTapbar()
     }
     
     override func render() {
@@ -195,6 +194,11 @@ final class TeamDetailViewController: BaseViewController {
                                    okAction: nil)
         }
         teamLeaveButton.addAction(action, for: .touchUpInside)
+    }
+    
+    private func setupNavigationAndTapbar() {
+        navigationController?.isNavigationBarHidden = false
+        self.tabBarController?.tabBar.isHidden = true
     }
     
     private func calculateHeight() -> CGFloat {
