@@ -101,6 +101,7 @@ final class SetNicknameViewController: BaseViewController {
         button.isDisabled = true
         let action = UIAction { [weak self] _ in
             self?.didTappedDoneButton()
+            button.isLoading = true
         }
         button.addAction(action, for: .touchUpInside)
         return button
@@ -112,6 +113,11 @@ final class SetNicknameViewController: BaseViewController {
         super.viewDidLoad()
         setupDelegate()
         setupNotificationCenter()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        doneButton.isLoading = false
     }
     
     override func render() {
@@ -389,6 +395,7 @@ final class SetNicknameViewController: BaseViewController {
             } else {
                 DispatchQueue.main.async {
                     self.makeAlert(title: TextLiteral.setNicknameViewControllerCreateTeamAlertTitle, message: TextLiteral.setNicknameViewControllerAlertMessage)
+                    self.doneButton.isLoading = false
                 }
             }
         }
@@ -425,6 +432,7 @@ final class SetNicknameViewController: BaseViewController {
             } else {
                 DispatchQueue.main.async {
                     self.makeAlert(title: TextLiteral.setNicknameViewControllerJoinTeamAlertTitle, message: TextLiteral.setNicknameViewControllerAlertMessage)
+                    self.doneButton.isLoading = false
                 }
             }
         }
