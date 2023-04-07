@@ -207,16 +207,8 @@ final class TeamDetailViewController: BaseViewController {
     }
     
     private func updateLayout() {
-        let size = TeamDetailMembersView.PropertySize.self
-        let topInset: CGFloat = UIApplication.shared.keyWindow?.safeAreaInsets.top ?? UIApplication.shared.statusBarFrame.size.height
-        let hasHomeIndicator = UIScreen.main.bounds.width * 2 < UIScreen.main.bounds.height
-        let bottomInset: CGFloat = hasHomeIndicator ? 34 : 0
-        let minHeight = view.frame.size.height - topInset - size.navigationBarHeight - size.tableViewTopProperty - size.tableViewBottomProperty - bottomInset - 60
-        let currentHeight = (size.cellSize + size.cellSpacing) * CGFloat(memberTableView.members.count) + size.headerViewHeight + size.cellSpacing
-        let height = max(minHeight, currentHeight)
-
         memberTableView.snp.updateConstraints {
-            $0.height.equalTo(height)
+            $0.height.equalTo(calculateHeight())
         }
     }
     
