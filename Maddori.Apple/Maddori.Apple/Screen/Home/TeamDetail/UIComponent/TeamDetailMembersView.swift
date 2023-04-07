@@ -12,7 +12,8 @@ import SnapKit
 final class TeamDetailMembersView: UIView {
     
     // FIXME: - API연결 후 수정
-    let members: [String] = Array(repeating: "", count: 2)
+    var members: [MemberDetailResponse] = []
+    var currentMember: MemberDetailResponse?
     
     enum PropertySize {
         static let headerViewHeight: CGFloat = 70
@@ -60,6 +61,17 @@ final class TeamDetailMembersView: UIView {
         memberTableView.delegate = self
         memberTableView.dataSource = self
     }
+    
+    func loadData(data: [MemberDetailResponse]) {
+        data.forEach {
+            if $0.userId == UserDefaultStorage.userId {
+                currentMember = $0
+            } else {
+                members.append($0)
+            }
+        }
+        memberTableView.reloadData()
+    }
 }
 
 // MARK: - extension
@@ -74,6 +86,9 @@ extension TeamDetailMembersView: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: TeamDetailMemberTableViewCell.className, for: indexPath) as? TeamDetailMemberTableViewCell else { return UITableViewCell() }
+        if let username = members[indexPath.item].userName {
+            cell.setupLayoutInfoView(nickname: username, role: members[indexPath.item].role ?? "", imagePath: members[indexPath.item].profileImagePath)
+        }
         cell.selectionStyle = .none
         return cell
     }
@@ -84,6 +99,9 @@ extension TeamDetailMembersView: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: TeamDetailMemberTableHeaderView.className) as? TeamDetailMemberTableHeaderView else { return UITableViewHeaderFooterView() }
+        headerView.setupMemberInfoView(nickname: currentMember?.userName ?? UserDefaultStorage.nickname,
+                           role: currentMember?.role ?? "",
+                           imagePath: currentMember?.profileImagePath ?? "")
         return headerView
     }
     

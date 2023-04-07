@@ -13,6 +13,7 @@
 		391D217C29050427003FC871 /* CustomVisualEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391D217B29050427003FC871 /* CustomVisualEffectView.swift */; };
 		391D38DB29C449DE00A6BFED /* TeamDetailMemberTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391D38DA29C449DE00A6BFED /* TeamDetailMemberTableViewCell.swift */; };
 		391D38DD29C44A0400A6BFED /* TeamDetailMemberTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391D38DC29C44A0400A6BFED /* TeamDetailMemberTableHeaderView.swift */; };
+		391D38F529D54CBA00A6BFED /* TeamDetailEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391D38F429D54CBA00A6BFED /* TeamDetailEndPoint.swift */; };
 		39257DC528F8FEBD00201E0B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39257DC428F8FEBD00201E0B /* AppDelegate.swift */; };
 		39257DC728F8FEBD00201E0B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39257DC628F8FEBD00201E0B /* SceneDelegate.swift */; };
 		39257DCE28F8FEBE00201E0B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 39257DCD28F8FEBE00201E0B /* Assets.xcassets */; };
@@ -170,6 +171,7 @@
 		391D217B29050427003FC871 /* CustomVisualEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomVisualEffectView.swift; sourceTree = "<group>"; };
 		391D38DA29C449DE00A6BFED /* TeamDetailMemberTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamDetailMemberTableViewCell.swift; sourceTree = "<group>"; };
 		391D38DC29C44A0400A6BFED /* TeamDetailMemberTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamDetailMemberTableHeaderView.swift; sourceTree = "<group>"; };
+		391D38F429D54CBA00A6BFED /* TeamDetailEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamDetailEndPoint.swift; sourceTree = "<group>"; };
 		39257DC128F8FEBD00201E0B /* Maddori.Apple.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Maddori.Apple.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		39257DC428F8FEBD00201E0B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		39257DC628F8FEBD00201E0B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -769,6 +771,7 @@
 				7EE38BB2292623F500FD738D /* MyReflectionEndPoint.swift */,
 				3EA341E52924E2AD005CBD1C /* HomeEndPoint.swift */,
 				3E5195A32928C8FB00710A01 /* CreateReflectionEndPoint.swift */,
+				391D38F429D54CBA00A6BFED /* TeamDetailEndPoint.swift */,
 			);
 			path = EndPoint;
 			sourceTree = "<group>";
@@ -1287,6 +1290,7 @@
 				D7AFB7C32916EAB100E998B7 /* MyReflectionDetailViewController.swift in Sources */,
 				39F52C632923357700B19A77 /* FeedBackInfoResponse.swift in Sources */,
 				39F52C5D292332EA00B19A77 /* AddReflectionResponse.swift in Sources */,
+				391D38F529D54CBA00A6BFED /* TeamDetailEndPoint.swift in Sources */,
 				3960864129811E3C003AB4F8 /* TeamDetailViewController.swift in Sources */,
 				D72CF1B0290552960067A118 /* InvitationCodeViewController.swift in Sources */,
 				39257DF328F93D8900201E0B /* TextLiteral.swift in Sources */,

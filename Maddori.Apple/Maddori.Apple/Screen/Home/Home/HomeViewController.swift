@@ -103,6 +103,7 @@ final class HomeViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        setLayoutTeamManageButton()
         fetchCertainTeamDetail(type: .fetchCertainTeamDetail)
         fetchCurrentReflectionDetail(type: .fetchCurrentReflectionDetail)
     }
@@ -276,6 +277,11 @@ final class HomeViewController: BaseViewController {
     private func pushTeamDetailViewController() {
         let viewController = TeamDetailViewController()
         self.navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    private func setLayoutTeamManageButton() {
+        let hasTeam = UserDefaultStorage.teamId != 0
+        teamManageButton.isHidden = !hasTeam
     }
     
     // MARK: - api
