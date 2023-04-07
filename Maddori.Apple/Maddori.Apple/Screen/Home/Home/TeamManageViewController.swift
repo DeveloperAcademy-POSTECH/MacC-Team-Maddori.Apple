@@ -198,8 +198,7 @@ final class TeamManageViewController: BaseViewController {
         AF.request(type.address,
                    method: type.method,
                    headers: type.headers
-        )
-        .responseDecodable(of: BaseModel<VoidModel>.self) { json in
+        ).responseDecodable(of: BaseModel<VoidModel>.self) { json in
             if let _ = json.value {
                 UserDefaultHandler.clearAllData()
                 guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate
