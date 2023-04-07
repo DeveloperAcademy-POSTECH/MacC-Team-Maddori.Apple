@@ -12,12 +12,6 @@ struct FeedBackResponse: Decodable {
     let type: String?
     let keyword: String?
     let content: String?
-    let startContent: String?
-    let fromId: Int?
-    let toId: Int?
-    let teamId: Int?
-    let reflectionId: Int?
-    let reflection: ReflectionResponse?
     let fromUser: MemberResponse?
     
     enum CodingKeys: String, CodingKey {
@@ -25,12 +19,6 @@ struct FeedBackResponse: Decodable {
         case type
         case keyword
         case content
-        case startContent = "start_content"
-        case fromId = "from_id"
-        case toId = "to_id"
-        case teamId = "team_id"
-        case reflectionId = "reflection_id"
-        case reflection
         case fromUser = "from_user"
     }
 }
