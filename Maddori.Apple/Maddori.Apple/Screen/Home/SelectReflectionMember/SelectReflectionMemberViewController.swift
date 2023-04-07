@@ -36,12 +36,7 @@ final class SelectReflectionMemberViewController: BaseViewController {
         let button = MainButton()
         let action = UIAction { [weak self] _ in
             guard let reflectionId = self?.reflectionId else { return }
-            guard let isAdmin = self?.isAdmin else { return }
-            if isAdmin {
-                self?.patchEndReflection(type: .patchEndReflection(reflectionId: reflectionId))
-            } else {
-                self?.dismiss(animated: true)
-            }
+            self?.patchEndReflection(type: .patchEndReflection(reflectionId: reflectionId))
             UserDefaultHandler.setHasSeenAlert(to: false)
         }
         button.addAction(action, for: .touchUpInside)
@@ -112,8 +107,8 @@ final class SelectReflectionMemberViewController: BaseViewController {
     
     private func didTappedMember() {
         memberCollectionView.didTappedMember = { [weak self] member, members in
-            guard let id = member.userId,
-                  let username = member.userName,
+            guard let id = member.id,
+                  let username = member.nickname,
                   let reflectionId = self?.reflectionId else { return }
             let viewController = InProgressViewController(memberId: id, memberUsername: username, reflectionId: reflectionId)
             self?.navigationController?.pushViewController(viewController, animated: true)
@@ -129,14 +124,14 @@ final class SelectReflectionMemberViewController: BaseViewController {
     }
     
     // MARK: - api
-    // FIXME: - fetchTeamMembers, patchEndReflection v2 api 로 변경하기
     
     private func fetchTeamMembers(type: InProgressEndPoint<VoidModel>) {
         AF.request(type.address,
                    method: type.method,
                    headers: type.headers
-        ).responseDecodable(of: BaseModel<TeamMembersResponse>.self) { json in
+        ).responseDecodable(of: BaseModel<MembersResponse>.self) { json in
             if let json = json.value {
+                dump(json)
                 guard let fetchedMemberList = json.detail?.members else { return }
                 DispatchQueue.main.async {
                     self.memberCollectionView.memberList = fetchedMemberList
@@ -151,7 +146,8 @@ final class SelectReflectionMemberViewController: BaseViewController {
                    method: type.method,
                    headers: type.headers
         ).responseDecodable(of: BaseModel<ReflectionInfoResponse>.self) { [weak self] json in
-            if let _ = json.value {
+            if let json = json.value {
+                dump(json)
                 self?.dismiss(animated: true)
             }
         }

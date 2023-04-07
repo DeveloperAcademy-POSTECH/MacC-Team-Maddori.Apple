@@ -91,6 +91,7 @@ final class CreateTeamViewController: BaseTextFieldViewController {
                     }
                 } else {
                     UserDefaultHandler.setTeamName(teamName: teamName)
+                    UserDefaultHandler.setTeamId(teamId: 0)
                     self?.pushSetNicknameViewController()
                 }
             }
