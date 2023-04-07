@@ -312,12 +312,10 @@ final class SetNicknameViewController: BaseViewController {
         // FIXME: - 이미지 데이터 추가
         
         if fromView == .createView {
-            let dto = CreateTeamDTO(team_name: teamName, nickname: nickname, role: role, profile_image: nil)
-            dispatchCreateTeam(type: .dispatchCreateTeam(dto))
+            dispatchCreateTeam(type: .dispatchCreateTeam, teamName: teamName, nickname: nickname, role: role)
         }
         else if fromView == .joinView {
-            let dto = JoinTeamDTO(nickname: nickname, role: role, profile_image: nil)
-            dispatchJoinTeam(type: .dispatchJoinTeam(teamId: UserDefaultStorage.teamId, dto))
+            dispatchJoinTeam(type: .dispatchJoinTeam(teamId: UserDefaultStorage.teamId), nickname: nickname, role: role)
         }
         nicknameTextField.resignFirstResponder()
         roleTextField.resignFirstResponder()
