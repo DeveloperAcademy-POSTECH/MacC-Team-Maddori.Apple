@@ -28,7 +28,7 @@ final class TeamDetailMemberTableViewCell: BaseTableViewCell {
         memberInfoView.profileNicknameLabel.text = nickname
         memberInfoView.profileRoleLabel.text = role
         if let imagePath {
-            memberInfoView.profileImageView.load(from: UrlLiteral.iamgeBaseUrl + imagePath)
+            memberInfoView.profileImageView.load(from: UrlLiteral.imageBaseURL + imagePath)
         }
     }
 }

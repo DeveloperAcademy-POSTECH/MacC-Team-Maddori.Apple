@@ -51,7 +51,7 @@ final class TeamDetailMemberTableHeaderView: UITableViewHeaderFooterView {
         memberInformationView.profileNicknameLabel.text = nickname
         memberInformationView.profileRoleLabel.text = role
         if let imagePath {        
-            memberInformationView.profileImageView.load(from: UrlLiteral.iamgeBaseUrl + imagePath)
+            memberInformationView.profileImageView.load(from: UrlLiteral.imageBaseURL + imagePath)
         }
     }
 }
