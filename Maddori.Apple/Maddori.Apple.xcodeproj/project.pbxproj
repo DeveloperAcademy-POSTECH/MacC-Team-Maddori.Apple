@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		391596622904176500A432D9 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391596612904176500A432D9 /* UIView+Extension.swift */; };
+		391612D529E551BD004AE982 /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391612D429E551BD004AE982 /* ToastView.swift */; };
 		391CBA19290580460044CA30 /* InProgressDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391CBA18290580460044CA30 /* InProgressDetailViewController.swift */; };
 		391CBA1C290582130044CA30 /* ReflectionInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391CBA1B290582130044CA30 /* ReflectionInfoModel.swift */; };
 		391D217C29050427003FC871 /* CustomVisualEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391D217B29050427003FC871 /* CustomVisualEffectView.swift */; };
@@ -168,6 +169,7 @@
 
 /* Begin PBXFileReference section */
 		391596612904176500A432D9 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		391612D429E551BD004AE982 /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
 		391CBA18290580460044CA30 /* InProgressDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InProgressDetailViewController.swift; sourceTree = "<group>"; };
 		391CBA1B290582130044CA30 /* ReflectionInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReflectionInfoModel.swift; sourceTree = "<group>"; };
 		391D217B29050427003FC871 /* CustomVisualEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomVisualEffectView.swift; sourceTree = "<group>"; };
@@ -652,6 +654,7 @@
 				52F0CB5129178C2700E39C50 /* AlertViewController.swift */,
 				3EA341C029221998005CBD1C /* ToastContentView.swift */,
 				3975CEAE293EEDD6002D4F1A /* KeywordView.swift */,
+				391612D429E551BD004AE982 /* ToastView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1217,6 +1220,7 @@
 				39F5582B2908027500CD6F6E /* UIDevice+Extension.swift in Sources */,
 				395C7E1328F9841A00FC2FCA /* SizeLiteral.swift in Sources */,
 				52E6770F29911E3E00A0935B /* ReflectionMemberCollectionView.swift in Sources */,
+				391612D529E551BD004AE982 /* ToastView.swift in Sources */,
 				3EB508902917525600FB77CB /* EmptyReflectionView.swift in Sources */,
 				D7A585292990DB0D00E1F4EE /* Option.swift in Sources */,
 				3EB5088E2916D05F00FB77CB /* EmptyFeedbackView.swift in Sources */,
