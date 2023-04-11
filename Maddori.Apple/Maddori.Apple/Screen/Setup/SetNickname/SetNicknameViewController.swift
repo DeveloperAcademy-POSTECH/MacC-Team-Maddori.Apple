@@ -16,6 +16,7 @@ final class SetNicknameViewController: BaseViewController {
     enum ViewType {
         case createView
         case joinView
+        case teamDetail
     }
     private enum TextLength {
         static let totalMin: Int = 0
@@ -24,6 +25,9 @@ final class SetNicknameViewController: BaseViewController {
     }
     private let cameraPicker = UIImagePickerController()
     private let teamName: String = UserDefaultStorage.teamName
+    var userName: String?
+    var role: String?
+    var profilePath: String?
     private var profileURL: URL?
     private let fromView: ViewType
     
@@ -121,6 +125,11 @@ final class SetNicknameViewController: BaseViewController {
     
     @available(*, unavailable)
     required init?(coder: NSCoder) { nil }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupEditProfile()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -313,6 +322,8 @@ final class SetNicknameViewController: BaseViewController {
             dispatchCreateTeam(type: .dispatchCreateTeam, teamName: teamName, nickname: nickname, role: role)
         case .joinView:
             dispatchJoinTeam(type: .dispatchJoinTeam(teamId: UserDefaultStorage.teamId), nickname: nickname, role: role)
+        case .teamDetail:
+            putEditProfile(type: .putEditProfile, nickname: nickname, role: role)
         }
         
         nicknameTextField.resignFirstResponder()
@@ -352,6 +363,19 @@ final class SetNicknameViewController: BaseViewController {
             self.makeAlert(title: TextLiteral.setNicknameViewControllerPermissionAlertTitle, message: TextLiteral.setNicknameViewControllerPermissionAlertMessage, okAction: { _ in
                 UIApplication.shared.open(settingURL)
             })
+        }
+    }
+    
+    private func setupEditProfile() {
+        if fromView == .teamDetail {
+            navigationController?.isNavigationBarHidden = false
+            self.tabBarController?.tabBar.isHidden = true
+            
+            nicknameTextField.text = userName
+            roleTextField.text = role
+            if let profilePath {
+                profileImageButton.profileImage.load(from: UrlLiteral.imageBaseURL + profilePath)
+            }
         }
     }
     

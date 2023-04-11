@@ -72,6 +72,7 @@ final class TeamDetailViewController: BaseViewController {
         setupEditButton()
         setupExitButton()
         setupCodeShareButton()
+        setupMyProfileButton()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -209,6 +210,16 @@ final class TeamDetailViewController: BaseViewController {
     private func updateLayout() {
         memberTableView.snp.updateConstraints {
             $0.height.equalTo(calculateHeight())
+        }
+    }
+    
+    private func setupMyProfileButton() {
+        memberTableView.didTappedMyProfile = { [weak self] userName, role, profilePath in
+            let viewController = SetNicknameViewController(from: .teamDetail)
+            viewController.userName = userName
+            viewController.role = role
+            viewController.profilePath = profilePath
+            self?.navigationController?.pushViewController(viewController, animated: true)
         }
     }
     
