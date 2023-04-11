@@ -7,6 +7,8 @@
 
 import UIKit
 
+import Alamofire
+
 final class EditTeamNameViewController: BaseTextFieldViewController {
     override var titleText: String {
         get {
@@ -62,6 +64,11 @@ final class EditTeamNameViewController: BaseTextFieldViewController {
     
     // MARK: - life cycle
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupDoneButton()
+    }
+    
     override func setupNavigationBar() {
         super.setupNavigationBar()
         
@@ -71,5 +78,32 @@ final class EditTeamNameViewController: BaseTextFieldViewController {
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.largeTitleDisplayMode = .never
         navigationItem.leftBarButtonItem = backButton
+    }
+    
+    // MARK: - func
+    
+    private func setupDoneButton() {
+        let action = UIAction { [weak self] _ in
+            guard let teamName = self?.kigoTextField.text else { return }
+            self?.dispatchTeamName(type: .patchEditTeamName(EditTeamNameDTO(team_name: teamName)))
+        }
+        self.doneButton.addAction(action, for: .touchUpInside)
+    }
+    
+    // MARK: - api
+    
+    private func dispatchTeamName(type: EditTeamNameEndPoint<EditTeamNameDTO>) {
+        AF.request(
+            type.address,
+            method: type.method,
+            parameters: type.body,
+            encoder: JSONParameterEncoder.default,
+            headers: type.headers
+        ).responseDecodable(of: BaseModel<EditTeamNameResponse>.self) { json in
+            if let data = json.value {
+                dump(data)
+                self.navigationController?.popViewController(animated: true)
+            }
+        }
     }
 }
