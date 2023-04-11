@@ -498,13 +498,13 @@ final class SetNicknameViewController: BaseViewController {
                 guard let nickname = json.detail?.nickname else { return }
                 UserDefaultHandler.setNickname(nickname: nickname)
                 DispatchQueue.main.async {
-                    // FIXME: - 뒤로가기
+                    self.navigationController?.popViewController(animated: true)
+                    self.doneButton.isLoading = false
                 }
             } else {
                 DispatchQueue.main.async {
-                    self.makeAlert(title: TextLiteral.setNicknameViewControllerJoinTeamAlertTitle, message: TextLiteral.setNicknameViewControllerAlertMessage)
+                    self.makeAlert(title: TextLiteral.setNicknameViewControllerEditProfileAlertTitle, message: TextLiteral.setNicknameViewControllerAlertMessage)
                     self.doneButton.isLoading = false
-                    // FIXME: - alert label 수정
                 }
             }
         }
