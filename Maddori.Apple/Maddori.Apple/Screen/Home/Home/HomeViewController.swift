@@ -104,6 +104,7 @@ final class HomeViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationController?.isNavigationBarHidden = true
         setLayoutTeamManageButton()
         fetchCertainTeamDetail(type: .fetchCertainTeamDetail)
         fetchCurrentReflectionDetail(type: .fetchCurrentReflectionDetail)
@@ -111,7 +112,6 @@ final class HomeViewController: BaseViewController {
     }
     
     override func configUI() {
-        navigationController?.isNavigationBarHidden = true
         view.backgroundColor = .white200
     }
     
@@ -282,6 +282,7 @@ final class HomeViewController: BaseViewController {
     
     private func pushTeamDetailViewController() {
         let viewController = TeamDetailViewController()
+        viewController.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(viewController, animated: true)
     }
     
