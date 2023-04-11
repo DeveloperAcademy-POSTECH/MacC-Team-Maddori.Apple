@@ -63,6 +63,7 @@ final class TeamDetailMembersView: UIView {
     }
     
     func loadData(data: [MemberDetailResponse]) {
+        members.removeAll()
         data.forEach {
             if $0.userId == UserDefaultStorage.userId {
                 currentMember = $0
