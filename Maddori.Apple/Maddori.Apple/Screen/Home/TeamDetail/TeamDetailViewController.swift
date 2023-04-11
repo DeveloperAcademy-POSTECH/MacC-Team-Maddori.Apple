@@ -44,7 +44,7 @@ final class TeamDetailViewController: BaseViewController {
     private let firstFullDividerView = FullDividerView()
     private let codeShareButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle(TextLiteral.teamDetailViewControllerShareCodeText, for: .normal)
+        button.setTitle(TextLiteral.teamDetailViewControllerCopyCodeText, for: .normal)
         button.setTitleColor(.blue200, for: .normal)
         button.titleLabel?.font = .label2
         return button
