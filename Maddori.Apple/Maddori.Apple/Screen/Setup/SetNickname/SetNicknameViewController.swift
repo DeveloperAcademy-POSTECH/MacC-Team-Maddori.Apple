@@ -519,8 +519,16 @@ extension SetNicknameViewController: UITextFieldDelegate {
         checkMaxLength(textField: textField)
         
         if textField == nicknameTextField {
-            let hasText = textField.hasText
-            doneButton.isDisabled = !hasText
+            if textField.text != userName {
+                let hasText = textField.hasText
+                doneButton.isDisabled = !hasText
+            } else {
+                doneButton.isDisabled = true
+            }
+        } else if textField == roleTextField {
+            if fromView == .teamDetail && textField.text != role && nicknameTextField.hasText {
+                doneButton.isDisabled = false
+            }
         }
     }
 }
@@ -542,6 +550,12 @@ extension SetNicknameViewController: PHPickerViewControllerDelegate {
                     do {
                         try data.write(to: url)
                         self.profileURL = url
+                        if url != URL(string: self.profilePath ?? "") && self.nicknameTextField.hasText {
+                            DispatchQueue.main.async {
+                                self.doneButton.isDisabled = false
+                                
+                            }
+                        }
                     } catch {
                         self.makeAlert(title: TextLiteral.setNicknameControllerLibraryErrorAlertTitle, message: TextLiteral.setNicknameControllerLibraryErrorAlertMessage)
                     }
@@ -568,6 +582,12 @@ extension SetNicknameViewController: UIImagePickerControllerDelegate, UINavigati
                 do {
                     try data.write(to: url)
                     self.profileURL = url
+                    if url != URL(string: self.profilePath ?? "") && self.nicknameTextField.hasText {
+                        DispatchQueue.main.async {
+                            self.doneButton.isDisabled = false
+                            
+                        }
+                    }
                 } catch {
                     self.makeAlert(title: TextLiteral.setNicknameViewControllerCameraAlertTitle, message: TextLiteral.setNicknameViewControllerAlertMessage)
                 }
