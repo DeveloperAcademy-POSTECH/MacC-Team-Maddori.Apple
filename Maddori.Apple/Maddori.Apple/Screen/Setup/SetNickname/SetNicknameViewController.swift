@@ -452,6 +452,39 @@ final class SetNicknameViewController: BaseViewController {
             }
         }
     }
+    
+    private func putEditProfile(type: TeamDetailEndPoint<EncodeDTO>, nickname: String, role: String?) {
+        AF.upload(multipartFormData: { multipartFormData in
+            let profileInfo: Dictionary = ["nickname": nickname, "role": role]
+            for (key, value) in profileInfo {
+                if let value = value {
+                    guard let data = "\(value)".data(using: .utf8) else { return }
+                    multipartFormData.append(data, withName: key, mimeType: "text/plain")
+                }
+            }
+            if let profileURL = self.profileURL {
+                multipartFormData.append(profileURL,
+                                         withName: "profile_image",
+                                         fileName: ".png",
+                                         mimeType: "image/png")
+            }
+        }, to: type.address, method: type.method, headers: type.headers).responseDecodable(of: BaseModel<TeamMemberResponse>.self) { json in
+            if let json = json.value {
+                dump(json)
+                guard let nickname = json.detail?.nickname else { return }
+                UserDefaultHandler.setNickname(nickname: nickname)
+                DispatchQueue.main.async {
+                    // FIXME: - 뒤로가기
+                }
+            } else {
+                DispatchQueue.main.async {
+                    self.makeAlert(title: TextLiteral.setNicknameViewControllerJoinTeamAlertTitle, message: TextLiteral.setNicknameViewControllerAlertMessage)
+                    self.doneButton.isLoading = false
+                    // FIXME: - alert label 수정
+                }
+            }
+        }
+    }
 }
 
 // MARK: - extension
