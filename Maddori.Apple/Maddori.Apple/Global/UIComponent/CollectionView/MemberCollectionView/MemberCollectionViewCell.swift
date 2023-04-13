@@ -35,6 +35,14 @@ final class MemberCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - func
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        memberInfoView.profileNicknameLabel.text = nil
+        memberInfoView.profileImageView.image = ImageLiterals.imgDefaultProfile
+        memberInfoView.profileNicknameLabel.text = nil
+    }
+    
     func setupLayoutInfoView(nickname: String, role: String, imagePath: String?) {
         memberInfoView.profileNicknameLabel.text = nickname
         memberInfoView.profileRoleLabel.text = role
