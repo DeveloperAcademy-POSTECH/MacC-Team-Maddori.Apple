@@ -553,7 +553,6 @@ extension SetNicknameViewController: PHPickerViewControllerDelegate {
                         if url != URL(string: self.profilePath ?? "") && self.nicknameTextField.hasText {
                             DispatchQueue.main.async {
                                 self.doneButton.isDisabled = false
-                                
                             }
                         }
                     } catch {
@@ -585,7 +584,6 @@ extension SetNicknameViewController: UIImagePickerControllerDelegate, UINavigati
                     if url != URL(string: self.profilePath ?? "") && self.nicknameTextField.hasText {
                         DispatchQueue.main.async {
                             self.doneButton.isDisabled = false
-                            
                         }
                     }
                 } catch {
