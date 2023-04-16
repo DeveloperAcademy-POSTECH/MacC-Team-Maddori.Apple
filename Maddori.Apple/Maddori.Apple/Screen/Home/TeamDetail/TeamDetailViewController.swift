@@ -77,8 +77,14 @@ final class TeamDetailViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: true)
         fetchTeamDetailMember(type: .fetchTeamMember)
         fetchTeamInformation(type: .fetchTeamInformation)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
     override func render() {
