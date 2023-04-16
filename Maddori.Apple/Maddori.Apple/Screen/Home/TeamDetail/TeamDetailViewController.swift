@@ -237,6 +237,7 @@ final class TeamDetailViewController: BaseViewController {
                     self.invitationCodeLabel.text = invitationCode
                     self.titleLabel.text = teamName
                 }
+                UserDefaultHandler.setTeamName(teamName: teamName)
             }
         }
     }

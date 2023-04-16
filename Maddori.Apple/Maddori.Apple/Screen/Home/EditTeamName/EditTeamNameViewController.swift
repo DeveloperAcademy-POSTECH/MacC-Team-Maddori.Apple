@@ -66,6 +66,7 @@ final class EditTeamNameViewController: BaseTextFieldViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupDoneButton()
+        setupDefaultTextFieldText()
     }
     
     override func setupNavigationBar() {
@@ -87,6 +88,10 @@ final class EditTeamNameViewController: BaseTextFieldViewController {
             self?.dispatchTeamName(type: .patchEditTeamName(EditTeamNameDTO(team_name: teamName)))
         }
         self.doneButton.addAction(action, for: .touchUpInside)
+    }
+    
+    private func setupDefaultTextFieldText() {
+        self.kigoTextField.text = UserDefaultStorage.teamName
     }
     
     // MARK: - api
