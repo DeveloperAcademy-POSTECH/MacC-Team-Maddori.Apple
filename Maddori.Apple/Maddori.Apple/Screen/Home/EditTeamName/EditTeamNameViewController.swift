@@ -22,8 +22,7 @@ final class EditTeamNameViewController: BaseTextFieldViewController {
     
     override var placeholderText: String {
         get {
-            // FIXME: - place holder의 내용이 피그마에 없음.
-            return "수정할 팀 이름을 입력해 주세요."
+            return TextLiteral.createTeamViewControllerTextFieldPlaceHolder
         }
         
         set {
