@@ -38,7 +38,7 @@ final class MemberCollectionView: UIView {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .vertical
         flowLayout.sectionInset = Size.collectionInsets
-        flowLayout.itemSize = CGSize(width: UIScreen.main.bounds.width - SizeLiteral.leadingTrailingPadding * 4, height: 52)
+        flowLayout.itemSize = CGSize(width: UIScreen.main.bounds.width - SizeLiteral.leadingTrailingPadding * 2 - 38, height: 52)
         flowLayout.minimumLineSpacing = Size.cellSpacing
         return flowLayout
     }()
