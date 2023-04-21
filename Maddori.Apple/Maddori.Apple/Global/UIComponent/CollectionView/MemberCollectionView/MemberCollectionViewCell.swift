@@ -35,6 +35,11 @@ final class MemberCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - func
     
+    override func configUI() {
+        super.configUI()
+        backgroundColor = .backgroundWhite
+    }
+    
     override func prepareForReuse() {
         super.prepareForReuse()
         
