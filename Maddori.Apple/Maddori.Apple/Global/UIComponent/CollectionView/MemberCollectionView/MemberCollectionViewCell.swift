@@ -59,7 +59,7 @@ final class MemberCollectionViewCell: BaseCollectionViewCell {
     }
     
     private func resetAttribute() {
-        memberInfoView.profileNicknameLabel.textColor = .black
-        memberInfoView.profileRoleLabel.textColor = .black
+        memberInfoView.profileNicknameLabel.textColor = .gray600
+        memberInfoView.profileRoleLabel.textColor = .gray400
     }
 }
