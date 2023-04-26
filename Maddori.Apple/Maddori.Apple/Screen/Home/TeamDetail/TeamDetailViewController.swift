@@ -68,6 +68,7 @@ final class TeamDetailViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.isNavigationBarHidden = false
         setupBackButton()
         setupEditButton()
         setupExitButton()
@@ -76,9 +77,14 @@ final class TeamDetailViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setupNavigationAndTapbar()
+        navigationController?.setNavigationBarHidden(false, animated: true)
         fetchTeamDetailMember(type: .fetchTeamMember)
         fetchTeamInformation(type: .fetchTeamInformation)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
     override func render() {
@@ -165,11 +171,6 @@ final class TeamDetailViewController: BaseViewController {
         navigationItem.leftBarButtonItem = backButton
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        navigationController?.isNavigationBarHidden = true
-        self.tabBarController?.tabBar.isHidden = false
-    }
-    
     // MARK: - func
     
     private func setupBackButton() {
@@ -180,9 +181,10 @@ final class TeamDetailViewController: BaseViewController {
     }
     
     private func setupEditButton() {
-        let action = UIAction { _ in
-            // FIXME: - 방 정보 수정 view 연결
-            print("action")
+        let action = UIAction { [weak self] _ in
+            let viewController = EditTeamNameViewController()
+            viewController.hidesBottomBarWhenPushed = true
+            self?.navigationController?.pushViewController(viewController, animated: true)
         }
         self.editButton.addAction(action, for: .touchUpInside)
     }
@@ -241,6 +243,7 @@ final class TeamDetailViewController: BaseViewController {
                     self.invitationCodeLabel.text = invitationCode
                     self.titleLabel.text = teamName
                 }
+                UserDefaultHandler.setTeamName(teamName: teamName)
             }
         }
     }
@@ -272,11 +275,6 @@ final class TeamDetailViewController: BaseViewController {
                 completion()
             }
         }
-    }
-    
-    private func setupNavigationAndTapbar() {
-        navigationController?.isNavigationBarHidden = false
-        self.tabBarController?.tabBar.isHidden = true
     }
     
     private func calculateHeight() -> CGFloat {

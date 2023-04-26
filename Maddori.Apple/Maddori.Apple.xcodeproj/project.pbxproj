@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		391596622904176500A432D9 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391596612904176500A432D9 /* UIView+Extension.swift */; };
+		391612CD29E51F1B004AE982 /* EditTeamNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391612CC29E51F1B004AE982 /* EditTeamNameViewController.swift */; };
+		391612CF29E5352A004AE982 /* EditTeamNameEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391612CE29E5352A004AE982 /* EditTeamNameEndPoint.swift */; };
+		391612D129E5364A004AE982 /* EditTeamNameDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391612D029E5364A004AE982 /* EditTeamNameDTO.swift */; };
+		391612D329E53745004AE982 /* EditTeamNameResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391612D229E53745004AE982 /* EditTeamNameResponse.swift */; };
 		391CBA19290580460044CA30 /* InProgressDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391CBA18290580460044CA30 /* InProgressDetailViewController.swift */; };
 		391CBA1C290582130044CA30 /* ReflectionInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391CBA1B290582130044CA30 /* ReflectionInfoModel.swift */; };
 		391D217C29050427003FC871 /* CustomVisualEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391D217B29050427003FC871 /* CustomVisualEffectView.swift */; };
@@ -168,6 +172,10 @@
 
 /* Begin PBXFileReference section */
 		391596612904176500A432D9 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		391612CC29E51F1B004AE982 /* EditTeamNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTeamNameViewController.swift; sourceTree = "<group>"; };
+		391612CE29E5352A004AE982 /* EditTeamNameEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTeamNameEndPoint.swift; sourceTree = "<group>"; };
+		391612D029E5364A004AE982 /* EditTeamNameDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTeamNameDTO.swift; sourceTree = "<group>"; };
+		391612D229E53745004AE982 /* EditTeamNameResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTeamNameResponse.swift; sourceTree = "<group>"; };
 		391CBA18290580460044CA30 /* InProgressDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InProgressDetailViewController.swift; sourceTree = "<group>"; };
 		391CBA1B290582130044CA30 /* ReflectionInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReflectionInfoModel.swift; sourceTree = "<group>"; };
 		391D217B29050427003FC871 /* CustomVisualEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomVisualEffectView.swift; sourceTree = "<group>"; };
@@ -340,6 +348,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		391612CB29E51F03004AE982 /* EditTeamName */ = {
+			isa = PBXGroup;
+			children = (
+				391612CC29E51F1B004AE982 /* EditTeamNameViewController.swift */,
+			);
+			path = EditTeamName;
+			sourceTree = "<group>";
+		};
 		391CBA17290580360044CA30 /* InProgressDetail */ = {
 			isa = PBXGroup;
 			children = (
@@ -579,6 +595,7 @@
 		3977E11F2910CECB000E9761 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				391612CB29E51F03004AE982 /* EditTeamName */,
 				3E557FC128FE7B9200714E46 /* Home */,
 				395C7E1928FEC3FB00FC2FCA /* CreateReflection */,
 				525E721D28FFC85200EF3FCB /* AddFeedback */,
@@ -725,6 +742,7 @@
 				39F909D6292679C400DAD0A3 /* EditFeedBackDTO.swift */,
 				7EE38BAC2925DDD200FD738D /* EncodeDTO.swift */,
 				396334D6292DADBE00E74B77 /* AppleLoginDTO.swift */,
+				391612D029E5364A004AE982 /* EditTeamNameDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -761,6 +779,7 @@
 				396334D8292DAE0000E74B77 /* AppleLoginResponse.swift */,
 				396334DA292DAE8300E74B77 /* UserResponse.swift */,
 				3E5368C529B24351000CBD48 /* DeleteReflectionResponse.swift */,
+				391612D229E53745004AE982 /* EditTeamNameResponse.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -777,6 +796,7 @@
 				3E5195A32928C8FB00710A01 /* CreateReflectionEndPoint.swift */,
 				391D38F429D54CBA00A6BFED /* TeamDetailEndPoint.swift */,
 				D70AF89629C2FDF6003A500C /* TeamInfoEndPoint.swift */,
+				391612CE29E5352A004AE982 /* EditTeamNameEndPoint.swift */,
 			);
 			path = EndPoint;
 			sourceTree = "<group>";
@@ -1179,6 +1199,7 @@
 				395C7E2028FED7B500FC2FCA /* ReflectionNameView.swift in Sources */,
 				3E953A9529C1CE7D0073302F /* ImageCacheManager.swift in Sources */,
 				39F52C44292329BA00B19A77 /* BaseModel.swift in Sources */,
+				391612CD29E51F1B004AE982 /* EditTeamNameViewController.swift in Sources */,
 				522D99BF29041B51009CBD95 /* CustomTextView.swift in Sources */,
 				3EA341C129221998005CBD1C /* ToastContentView.swift in Sources */,
 				D70AF89729C2FDF6003A500C /* TeamInfoEndPoint.swift in Sources */,
@@ -1225,6 +1246,7 @@
 				39F5582B2908027500CD6F6E /* UIDevice+Extension.swift in Sources */,
 				395C7E1328F9841A00FC2FCA /* SizeLiteral.swift in Sources */,
 				52E6770F29911E3E00A0935B /* ReflectionMemberCollectionView.swift in Sources */,
+				391612D329E53745004AE982 /* EditTeamNameResponse.swift in Sources */,
 				3EB508902917525600FB77CB /* EmptyReflectionView.swift in Sources */,
 				D7A585292990DB0D00E1F4EE /* Option.swift in Sources */,
 				3EB5088E2916D05F00FB77CB /* EmptyFeedbackView.swift in Sources */,
@@ -1299,6 +1321,7 @@
 				39257DED28F9378D00201E0B /* BaseCollectionViewCell.swift in Sources */,
 				391CBA19290580460044CA30 /* InProgressDetailViewController.swift in Sources */,
 				39F1A13C2912637E005E3456 /* MyFeedbackMemberCollectionViewCell.swift in Sources */,
+				391612CF29E5352A004AE982 /* EditTeamNameEndPoint.swift in Sources */,
 				3E5195A42928C8FB00710A01 /* CreateReflectionEndPoint.swift in Sources */,
 				525E721A28FF0F1900EF3FCB /* MemberCollectionViewCell.swift in Sources */,
 				395C7E2228FEDB6500FC2FCA /* UITextField+Extension.swift in Sources */,
@@ -1314,6 +1337,7 @@
 				3EB5088C2916C64800FB77CB /* EmptyFeedbackKeyword.swift in Sources */,
 				39436C15291287A00083D77A /* MyFeedbackCollectionViewCell.swift in Sources */,
 				3EA341E62924E2AD005CBD1C /* HomeEndPoint.swift in Sources */,
+				391612D129E5364A004AE982 /* EditTeamNameDTO.swift in Sources */,
 				395C7E0D28F959A500FC2FCA /* MainButton.swift in Sources */,
 				396334DB292DAE8300E74B77 /* UserResponse.swift in Sources */,
 				3EB508622912B12700FB77CB /* MyReflectionCollectionViewHeader.swift in Sources */,
