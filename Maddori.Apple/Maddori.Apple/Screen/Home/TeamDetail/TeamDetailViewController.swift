@@ -16,6 +16,7 @@ final class TeamDetailViewController: BaseViewController {
     // MARK: - property
     
     private lazy var backButton = BackButton(type: .system)
+    private lazy var toastView = ToastView(type: .complete)
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = .title
@@ -42,9 +43,9 @@ final class TeamDetailViewController: BaseViewController {
     }()
     private let memberTableView = TeamDetailMembersView()
     private let firstFullDividerView = FullDividerView()
-    private let codeShareButton: UIButton = {
+    private let codeCopyButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle(TextLiteral.teamDetailViewControllerShareCodeText, for: .normal)
+        button.setTitle(TextLiteral.teamDetailViewControllerCopyCodeText, for: .normal)
         button.setTitleColor(.blue200, for: .normal)
         button.titleLabel?.font = .label2
         return button
@@ -135,15 +136,15 @@ final class TeamDetailViewController: BaseViewController {
             $0.height.equalTo(4)
         }
         
-        contentView.addSubview(codeShareButton)
-        codeShareButton.snp.makeConstraints {
+        contentView.addSubview(codeCopyButton)
+        codeCopyButton.snp.makeConstraints {
             $0.top.equalTo(firstFullDividerView.snp.bottom).offset(20)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
 
         contentView.addSubview(invitationCodeLabel)
         invitationCodeLabel.snp.makeConstraints {
-            $0.centerY.equalTo(codeShareButton.snp.centerY)
+            $0.centerY.equalTo(codeCopyButton.snp.centerY)
             $0.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
 
@@ -204,8 +205,10 @@ final class TeamDetailViewController: BaseViewController {
     private func setupCodeShareButton() {
         let action = UIAction { [weak self] _ in
             UIPasteboard.general.string = self?.invitationCode
+            guard let navigation = self?.navigationController else { return }
+            self?.toastView.showToast(navigationController: navigation)
         }
-        codeShareButton.addAction(action, for: .touchUpInside)
+        codeCopyButton.addAction(action, for: .touchUpInside)
     }
     
     private func updateLayout() {
