@@ -98,6 +98,7 @@ final class HomeViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.isNavigationBarHidden = true
         setupDelegation()
         render()
     }
@@ -111,7 +112,6 @@ final class HomeViewController: BaseViewController {
     }
     
     override func configUI() {
-        navigationController?.isNavigationBarHidden = true
         view.backgroundColor = .white200
     }
     
@@ -282,6 +282,7 @@ final class HomeViewController: BaseViewController {
     
     private func pushTeamDetailViewController() {
         let viewController = TeamDetailViewController()
+        viewController.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(viewController, animated: true)
     }
     

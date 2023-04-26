@@ -264,4 +264,8 @@ enum TextLiteral {
     static let teamDetailViewControllerLeaveTeamLabel: String = "팀 나가기"
     static let teamDetailViewControllerLeaveTeamAlertTitle: String = "팀에서 나가시겠습니까?"
     static let teamDetailViewControllerLeaveTeamAlertMessage: String = "모든 회고와 피드백 정보가 사라지며,\n되돌릴 수 없습니다."
+    
+    // MARK: - EditTeamNameView
+    
+    static let editTeamLabelText: String = "팀 이름을 수정해 주세요"
 }
