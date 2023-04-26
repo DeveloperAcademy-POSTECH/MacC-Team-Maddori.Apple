@@ -11,7 +11,7 @@ import SnapKit
 
 final class ToastView: UIView {
     let type: ToastType
-    var isTappedCopyButton: Bool = false
+    private var isTappedCopyButton: Bool = false
     
     enum ToastType {
         case warning
