@@ -14,6 +14,7 @@ final class TeamDetailMembersView: UIView {
     // FIXME: - API연결 후 수정
     var members: [MemberDetailResponse] = []
     var currentMember: MemberDetailResponse?
+    var didTappedMyProfile: ((String, String, String) -> ())?
     
     enum PropertySize {
         static let headerViewHeight: CGFloat = 70
@@ -103,10 +104,16 @@ extension TeamDetailMembersView: UITableViewDataSource {
         headerView.setupMemberInfoView(nickname: currentMember?.userName ?? UserDefaultStorage.nickname,
                            role: currentMember?.role ?? "",
                            imagePath: currentMember?.profileImagePath ?? "")
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTappedHeaderView))
+        headerView.addGestureRecognizer(tapRecognizer)
         return headerView
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return PropertySize.headerViewHeight + PropertySize.cellSpacing
+    }
+    
+    @objc func didTappedHeaderView(gestureRecognizer: UIGestureRecognizer) {
+        didTappedMyProfile?(currentMember?.userName ?? UserDefaultStorage.nickname, currentMember?.role ?? "", currentMember?.profileImagePath ?? "")
     }
 }

@@ -70,6 +70,7 @@ enum TextLiteral {
     static let setNicknameViewControllerPermissionAlertTitle = "사진 접근 권한"
     static let setNicknameViewControllerPermissionAlertMessage = "사진 추가를 원하시면 '확인'을 눌러 사진 접근을 허용해 주세요."
     static let setNicknameViewControllerCameraAlertTitle = "촬영된 이미지를 불러올 수 없습니다."
+    static let setNicknameViewControllerEditProfileAlertTitle = "프로필 수정 실패"
     
     // MARK: - HomeViewController
     

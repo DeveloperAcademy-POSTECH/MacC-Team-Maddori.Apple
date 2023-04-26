@@ -16,6 +16,7 @@ final class SetNicknameViewController: BaseViewController {
     enum ViewType {
         case createView
         case joinView
+        case teamDetail
     }
     private enum TextLength {
         static let totalMin: Int = 0
@@ -24,6 +25,9 @@ final class SetNicknameViewController: BaseViewController {
     }
     private let cameraPicker = UIImagePickerController()
     private let teamName: String = UserDefaultStorage.teamName
+    var userName: String?
+    var role: String?
+    var profilePath: String?
     private var profileURL: URL?
     private let fromView: ViewType
     
@@ -121,6 +125,11 @@ final class SetNicknameViewController: BaseViewController {
     
     @available(*, unavailable)
     required init?(coder: NSCoder) { nil }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupEditProfile()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -313,6 +322,9 @@ final class SetNicknameViewController: BaseViewController {
             dispatchCreateTeam(type: .dispatchCreateTeam, teamName: teamName, nickname: nickname, role: role)
         case .joinView:
             dispatchJoinTeam(type: .dispatchJoinTeam(teamId: UserDefaultStorage.teamId), nickname: nickname, role: role)
+        case .teamDetail:
+            let dto = JoinTeamDTO(nickname: nickname, role: role)
+            putEditProfile(type: .putEditProfile(dto))
         }
         
         nicknameTextField.resignFirstResponder()
@@ -352,6 +364,19 @@ final class SetNicknameViewController: BaseViewController {
             self.makeAlert(title: TextLiteral.setNicknameViewControllerPermissionAlertTitle, message: TextLiteral.setNicknameViewControllerPermissionAlertMessage, okAction: { _ in
                 UIApplication.shared.open(settingURL)
             })
+        }
+    }
+    
+    private func setupEditProfile() {
+        if fromView == .teamDetail {
+            navigationController?.isNavigationBarHidden = false
+            self.tabBarController?.tabBar.isHidden = true
+            
+            nicknameTextField.text = userName
+            roleTextField.text = role
+            if let profilePath {
+                profileImageButton.profileImage.load(from: UrlLiteral.imageBaseURL + profilePath)
+            }
         }
     }
     
@@ -452,6 +477,39 @@ final class SetNicknameViewController: BaseViewController {
             }
         }
     }
+    
+    private func putEditProfile(type: TeamDetailEndPoint<JoinTeamDTO>) {
+        AF.upload(multipartFormData: { multipartFormData in
+            guard let nickname = type.body?.nickname,
+                  let nicknameData = nickname.utf8Encode() else { return }
+            multipartFormData.append(nicknameData, withName: "nickname")
+            if let role = type.body?.role {
+                guard let roleData = role.utf8Encode() else { return }
+                multipartFormData.append(roleData, withName: "role")
+            }
+            if let profileURL = self.profileURL {
+                multipartFormData.append(profileURL,
+                                         withName: "profile_image",
+                                         fileName: ".png",
+                                         mimeType: "image/png")
+            }
+        }, to: type.address, method: type.method, headers: type.headers).responseDecodable(of: BaseModel<TeamMemberResponse>.self) { json in
+            if let json = json.value {
+                dump(json)
+                guard let nickname = json.detail?.nickname else { return }
+                UserDefaultHandler.setNickname(nickname: nickname)
+                DispatchQueue.main.async {
+                    self.navigationController?.popViewController(animated: true)
+                    self.doneButton.isLoading = false
+                }
+            } else {
+                DispatchQueue.main.async {
+                    self.makeAlert(title: TextLiteral.setNicknameViewControllerEditProfileAlertTitle, message: TextLiteral.setNicknameViewControllerAlertMessage)
+                    self.doneButton.isLoading = false
+                }
+            }
+        }
+    }
 }
 
 // MARK: - extension
@@ -462,8 +520,16 @@ extension SetNicknameViewController: UITextFieldDelegate {
         checkMaxLength(textField: textField)
         
         if textField == nicknameTextField {
-            let hasText = textField.hasText
-            doneButton.isDisabled = !hasText
+            if textField.text != userName {
+                let hasText = textField.hasText
+                doneButton.isDisabled = !hasText
+            } else {
+                doneButton.isDisabled = true
+            }
+        } else if textField == roleTextField {
+            if fromView == .teamDetail && textField.text != role && nicknameTextField.hasText {
+                doneButton.isDisabled = false
+            }
         }
     }
 }
@@ -485,6 +551,11 @@ extension SetNicknameViewController: PHPickerViewControllerDelegate {
                     do {
                         try data.write(to: url)
                         self.profileURL = url
+                        if url != URL(string: self.profilePath ?? "") && self.nicknameTextField.hasText {
+                            DispatchQueue.main.async {
+                                self.doneButton.isDisabled = false
+                            }
+                        }
                     } catch {
                         self.makeAlert(title: TextLiteral.setNicknameControllerLibraryErrorAlertTitle, message: TextLiteral.setNicknameControllerLibraryErrorAlertMessage)
                     }
@@ -511,6 +582,11 @@ extension SetNicknameViewController: UIImagePickerControllerDelegate, UINavigati
                 do {
                     try data.write(to: url)
                     self.profileURL = url
+                    if url != URL(string: self.profilePath ?? "") && self.nicknameTextField.hasText {
+                        DispatchQueue.main.async {
+                            self.doneButton.isDisabled = false
+                        }
+                    }
                 } catch {
                     self.makeAlert(title: TextLiteral.setNicknameViewControllerCameraAlertTitle, message: TextLiteral.setNicknameViewControllerAlertMessage)
                 }

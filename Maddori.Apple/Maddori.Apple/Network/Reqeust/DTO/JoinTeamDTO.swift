@@ -10,5 +10,4 @@ import Foundation
 struct JoinTeamDTO: Encodable {
     let nickname: String
     let role: String?
-    let profile_image: String?
 }

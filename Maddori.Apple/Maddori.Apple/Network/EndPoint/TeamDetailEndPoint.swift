@@ -12,6 +12,7 @@ enum TeamDetailEndPoint<T: Encodable>: EndPointable {
     case fetchTeamInformation
     case deleteTeam
     case fetchUserTeamList
+    case putEditProfile(T)
     
     var address: String {
         switch self {
@@ -26,6 +27,9 @@ enum TeamDetailEndPoint<T: Encodable>: EndPointable {
             
         case .fetchUserTeamList:
             return "\(UrlLiteral.baseUrl2)/users/teams"
+            
+        case .putEditProfile:
+            return "\(UrlLiteral.baseUrl2)/users/teams/\(UserDefaultStorage.teamId)/profile"
         }
     }
     
@@ -42,6 +46,9 @@ enum TeamDetailEndPoint<T: Encodable>: EndPointable {
             
         case .fetchUserTeamList:
             return .get
+            
+        case .putEditProfile:
+            return .put
         }
     }
     
@@ -58,6 +65,9 @@ enum TeamDetailEndPoint<T: Encodable>: EndPointable {
             
         case .fetchUserTeamList:
             return nil
+            
+        case .putEditProfile(let body):
+            return body
         }
     }
     
@@ -88,6 +98,14 @@ enum TeamDetailEndPoint<T: Encodable>: EndPointable {
             let headers = [
                 "access_token": "\(UserDefaultStorage.accessToken)",
                 "refresh_token": "\(UserDefaultStorage.refreshToken)"
+            ]
+            return HTTPHeaders(headers)
+            
+        case .putEditProfile:
+            let headers = [
+                "access_token": "\(UserDefaultStorage.accessToken)",
+                "refresh_token": "\(UserDefaultStorage.refreshToken)",
+                "Content-Type": "multipart/form-data"
             ]
             return HTTPHeaders(headers)
         }
