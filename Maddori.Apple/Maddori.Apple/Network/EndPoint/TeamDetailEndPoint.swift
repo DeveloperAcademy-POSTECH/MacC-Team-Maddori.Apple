@@ -12,7 +12,7 @@ enum TeamDetailEndPoint<T: Encodable>: EndPointable {
     case fetchTeamInformation
     case deleteTeam
     case fetchUserTeamList
-    case putEditProfile
+    case putEditProfile(T)
     
     var address: String {
         switch self {
@@ -66,8 +66,8 @@ enum TeamDetailEndPoint<T: Encodable>: EndPointable {
         case .fetchUserTeamList:
             return nil
             
-        case .putEditProfile:
-            return nil
+        case .putEditProfile(let body):
+            return body
         }
     }
     

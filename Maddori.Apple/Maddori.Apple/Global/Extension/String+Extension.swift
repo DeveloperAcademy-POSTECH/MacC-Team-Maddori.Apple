@@ -38,4 +38,8 @@ extension String {
         }
         return false
     }
+    
+    func utf8Encode() -> Data? {
+        return data(using: .utf8)
+    }
 }

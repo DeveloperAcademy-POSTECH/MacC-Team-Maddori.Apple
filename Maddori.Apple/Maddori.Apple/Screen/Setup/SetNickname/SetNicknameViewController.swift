@@ -323,7 +323,8 @@ final class SetNicknameViewController: BaseViewController {
         case .joinView:
             dispatchJoinTeam(type: .dispatchJoinTeam(teamId: UserDefaultStorage.teamId), nickname: nickname, role: role)
         case .teamDetail:
-            putEditProfile(type: .putEditProfile, nickname: nickname, role: role)
+            let dto = JoinTeamDTO(nickname: nickname, role: role)
+            putEditProfile(type: .putEditProfile(dto))
         }
         
         nicknameTextField.resignFirstResponder()
@@ -477,14 +478,14 @@ final class SetNicknameViewController: BaseViewController {
         }
     }
     
-    private func putEditProfile(type: TeamDetailEndPoint<EncodeDTO>, nickname: String, role: String?) {
+    private func putEditProfile(type: TeamDetailEndPoint<JoinTeamDTO>) {
         AF.upload(multipartFormData: { multipartFormData in
-            let profileInfo: Dictionary = ["nickname": nickname, "role": role]
-            for (key, value) in profileInfo {
-                if let value = value {
-                    guard let data = "\(value)".data(using: .utf8) else { return }
-                    multipartFormData.append(data, withName: key, mimeType: "text/plain")
-                }
+            guard let nickname = type.body?.nickname,
+                  let nicknameData = nickname.utf8Encode() else { return }
+            multipartFormData.append(nicknameData, withName: "nickname")
+            if let role = type.body?.role {
+                guard let roleData = role.utf8Encode() else { return }
+                multipartFormData.append(roleData, withName: "role")
             }
             if let profileURL = self.profileURL {
                 multipartFormData.append(profileURL,
