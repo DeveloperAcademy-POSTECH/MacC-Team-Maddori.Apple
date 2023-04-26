@@ -38,7 +38,7 @@ final class MemberCollectionView: UIView {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .vertical
         flowLayout.sectionInset = Size.collectionInsets
-        flowLayout.itemSize = CGSize(width: Size.cellWidth, height: Size.cellHeight)
+        flowLayout.itemSize = CGSize(width: UIScreen.main.bounds.width - SizeLiteral.leadingTrailingPadding * 2 - 38, height: 52)
         flowLayout.minimumLineSpacing = Size.cellSpacing
         return flowLayout
     }()
@@ -89,9 +89,9 @@ extension MemberCollectionView: UICollectionViewDataSource {
             assert(false, "Wrong Cell")
             return UICollectionViewCell()
         }
-        
-        cell.memberLabel.text = memberList[indexPath.item].userName
-        
+        if let username = memberList[indexPath.item].userName {
+            cell.setupLayoutInfoView(nickname: username, role: memberList[indexPath.item].role ?? "", imagePath: memberList[indexPath.item].profileImagePath)
+        }
         return cell
     }
 }
