@@ -132,8 +132,8 @@ final class MyReflectionDetailViewController: BaseViewController {
             if let json = json.value {
                 guard let jsonDetail = json.detail else { return }
                 self.contentArray.append(contentsOf: jsonDetail.feedback)
-                self.continueArray = self.contentArray.filter { $0.type == "Continue" }
-                self.stopArray = self.contentArray.filter{ $0.type == "Stop" }
+                self.continueArray = self.contentArray.filter { $0.type == .continueType }
+                self.stopArray = self.contentArray.filter{ $0.type == .stopType }
                 
                 self.reloadTableView(type: FeedBackDTO.continueType.rawValue)
             }

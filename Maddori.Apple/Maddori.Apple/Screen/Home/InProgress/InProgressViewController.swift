@@ -157,7 +157,7 @@ final class InProgressViewController: BaseViewController {
     
     // MARK: - func
     
-    private func convert(_ response: [FeedBackContentResponse]) -> [Keyword] {
+    private func convert(_ response: [FeedBackResponse]) -> [Keyword] {
         var keywordList: [Keyword] = []
         for feedback in response {
             let keyword = Keyword(
@@ -165,8 +165,6 @@ final class InProgressViewController: BaseViewController {
                 type: feedback.type ?? .continueType,
                 keyword: feedback.keyword ?? "키워드",
                 content: feedback.content ?? "",
-                // FIXME: startContent가 없을 경우 "" 로 둬도 될까?
-                startContent: feedback.startContent ?? "",
                 fromUser: feedback.fromUser?.nickname ?? "팀원"
             )
             keywordList.append(keyword)
@@ -213,12 +211,11 @@ extension InProgressViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let cell = keywordCollectionView.cellForItem(at: indexPath) as? KeywordCollectionViewCell else { return }
         let keyword = keywordsSectionList[indexPath.section][indexPath.item]
-        guard let startContent = keyword.startContent else { return }
         let feedbackInfo = ReflectionInfoModel(
             nickname: keyword.fromUser,
             feedbackType: keyword.type,
             keyword: keyword.keyword,
-            info: keyword.content, start: startContent
+            info: keyword.content
         )
         UserDefaultHandler.appendSeenKeywordIdList(keywordId: keyword.id)
         DispatchQueue.main.async {
