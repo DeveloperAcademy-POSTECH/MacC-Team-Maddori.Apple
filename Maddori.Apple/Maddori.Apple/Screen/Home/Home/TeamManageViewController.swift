@@ -181,7 +181,7 @@ final class TeamManageViewController: BaseViewController {
         AF.request(type.address,
                    method: type.method,
                    headers: type.headers
-        ).responseDecodable(of: BaseModel<[TeamInfoResponse]>.self) { json in
+        ).responseDecodable(of: BaseModel<[TeamNameResponse]>.self) { json in
             if let json = json.value {
                 guard let teamCount = json.detail?.count else { return }
                 self.teamCount = teamCount

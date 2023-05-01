@@ -308,10 +308,10 @@ final class HomeViewController: BaseViewController {
         AF.request(type.address,
                    method: type.method,
                    headers: type.headers
-        ).responseDecodable(of: BaseModel<CertainTeamDetailResponse>.self) { json in
+        ).responseDecodable(of: BaseModel<TeamInfoResponse>.self) { json in
             if let json = json.value {
                 guard let teamName = json.detail?.teamName,
-                      let teamId = json.detail?.teamId
+                      let teamId = json.detail?.id
                 else { return }
                 self.currentTeamId = teamId
                 DispatchQueue.main.async {

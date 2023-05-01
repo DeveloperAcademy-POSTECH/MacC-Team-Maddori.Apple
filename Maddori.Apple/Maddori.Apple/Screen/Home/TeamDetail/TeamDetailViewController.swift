@@ -247,7 +247,7 @@ final class TeamDetailViewController: BaseViewController {
     private func fetchTeamInformation(type: TeamDetailEndPoint<VoidModel>) {
         AF.request(type.address,
                    method: type.method,
-                   headers: type.headers).responseDecodable(of: BaseModel<CertainTeamDetailResponse>.self) { json in
+                   headers: type.headers).responseDecodable(of: BaseModel<TeamInfoResponse>.self) { json in
             if let data = json.value {
                 guard let teamName = data.detail?.teamName,
                       let invitationCode = data.detail?.invitationCode
