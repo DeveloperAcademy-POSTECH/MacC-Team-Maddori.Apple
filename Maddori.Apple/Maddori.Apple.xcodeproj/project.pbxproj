@@ -75,7 +75,6 @@
 		39F52C552923311200B19A77 /* JoinTeamResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F52C542923311200B19A77 /* JoinTeamResponse.swift */; };
 		39F52C572923317500B19A77 /* CreateTeamResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F52C562923317500B19A77 /* CreateTeamResponse.swift */; };
 		39F52C5B2923327F00B19A77 /* CurrentReflectionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F52C5A2923327F00B19A77 /* CurrentReflectionResponse.swift */; };
-		39F52C5D292332EA00B19A77 /* AddReflectionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F52C5C292332EA00B19A77 /* AddReflectionResponse.swift */; };
 		39F52C5F2923338B00B19A77 /* CurrentMemberResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F52C5E2923338B00B19A77 /* CurrentMemberResponse.swift */; };
 		39F52C612923344C00B19A77 /* FeedBackContentResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F52C602923344C00B19A77 /* FeedBackContentResponse.swift */; };
 		39F52C632923357700B19A77 /* FeedBackInfoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F52C622923357700B19A77 /* FeedBackInfoResponse.swift */; };
@@ -95,7 +94,6 @@
 		3E5195A42928C8FB00710A01 /* CreateReflectionEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5195A32928C8FB00710A01 /* CreateReflectionEndPoint.swift */; };
 		3E5195AB292B05BC00710A01 /* JoinReflectionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5195AA292B05BC00710A01 /* JoinReflectionButton.swift */; };
 		3E5368992992461A000CBD48 /* DeleteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5368982992461A000CBD48 /* DeleteButton.swift */; };
-		3E5368C629B24351000CBD48 /* DeleteReflectionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5368C529B24351000CBD48 /* DeleteReflectionResponse.swift */; };
 		3E5368C829B60B70000CBD48 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5368C729B60B70000CBD48 /* UIImageView+Extension.swift */; };
 		3E557FC328FE7BBC00714E46 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E557FC228FE7BBC00714E46 /* HomeViewController.swift */; };
 		3E557FC528FE854600714E46 /* KeywordLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E557FC428FE854600714E46 /* KeywordLabel.swift */; };
@@ -239,7 +237,6 @@
 		39F52C542923311200B19A77 /* JoinTeamResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinTeamResponse.swift; sourceTree = "<group>"; };
 		39F52C562923317500B19A77 /* CreateTeamResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTeamResponse.swift; sourceTree = "<group>"; };
 		39F52C5A2923327F00B19A77 /* CurrentReflectionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentReflectionResponse.swift; sourceTree = "<group>"; };
-		39F52C5C292332EA00B19A77 /* AddReflectionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReflectionResponse.swift; sourceTree = "<group>"; };
 		39F52C5E2923338B00B19A77 /* CurrentMemberResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentMemberResponse.swift; sourceTree = "<group>"; };
 		39F52C602923344C00B19A77 /* FeedBackContentResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedBackContentResponse.swift; sourceTree = "<group>"; };
 		39F52C622923357700B19A77 /* FeedBackInfoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedBackInfoResponse.swift; sourceTree = "<group>"; };
@@ -258,7 +255,6 @@
 		3E5195A32928C8FB00710A01 /* CreateReflectionEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateReflectionEndPoint.swift; sourceTree = "<group>"; };
 		3E5195AA292B05BC00710A01 /* JoinReflectionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinReflectionButton.swift; sourceTree = "<group>"; };
 		3E5368982992461A000CBD48 /* DeleteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteButton.swift; sourceTree = "<group>"; };
-		3E5368C529B24351000CBD48 /* DeleteReflectionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteReflectionResponse.swift; sourceTree = "<group>"; };
 		3E5368C729B60B70000CBD48 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		3E557FC228FE7BBC00714E46 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		3E557FC428FE854600714E46 /* KeywordLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordLabel.swift; sourceTree = "<group>"; };
@@ -758,7 +754,6 @@
 				39F52C542923311200B19A77 /* JoinTeamResponse.swift */,
 				39F52C562923317500B19A77 /* CreateTeamResponse.swift */,
 				39F52C5A2923327F00B19A77 /* CurrentReflectionResponse.swift */,
-				39F52C5C292332EA00B19A77 /* AddReflectionResponse.swift */,
 				39F52C5E2923338B00B19A77 /* CurrentMemberResponse.swift */,
 				39F52C602923344C00B19A77 /* FeedBackContentResponse.swift */,
 				39F52C622923357700B19A77 /* FeedBackInfoResponse.swift */,
@@ -772,7 +767,6 @@
 				39F52C73292476EA00B19A77 /* FeedBackResponse.swift */,
 				398474212925CF4800EDC139 /* TeamInfoResponse.swift */,
 				396334D8292DAE0000E74B77 /* AppleLoginResponse.swift */,
-				3E5368C529B24351000CBD48 /* DeleteReflectionResponse.swift */,
 				391612D229E53745004AE982 /* TeamNameResponse.swift */,
 			);
 			path = Response;
@@ -1321,7 +1315,6 @@
 				39341E0F29921181006C1727 /* MemberInformationView.swift in Sources */,
 				D7AFB7C32916EAB100E998B7 /* MyReflectionDetailViewController.swift in Sources */,
 				39F52C632923357700B19A77 /* FeedBackInfoResponse.swift in Sources */,
-				39F52C5D292332EA00B19A77 /* AddReflectionResponse.swift in Sources */,
 				391D38F529D54CBA00A6BFED /* TeamDetailEndPoint.swift in Sources */,
 				3960864129811E3C003AB4F8 /* TeamDetailViewController.swift in Sources */,
 				D72CF1B0290552960067A118 /* InvitationCodeViewController.swift in Sources */,
@@ -1337,7 +1330,6 @@
 				52F2D1C12906F172009CBF89 /* SelectReflectionMemberViewController.swift in Sources */,
 				395C7E0328F945B500FC2FCA /* UIFont+Extension.swift in Sources */,
 				3E8052DF2906E09100A6449D /* KeywordSectionHeaderView.swift in Sources */,
-				3E5368C629B24351000CBD48 /* DeleteReflectionResponse.swift in Sources */,
 				3EDED991293B8CE00000B4DC /* AddFeedbackContentViewController.swift in Sources */,
 				39436C182912A2E10083D77A /* Feedback.swift in Sources */,
 				7E2ECA102901136700A4D65C /* SetNicknameViewController.swift in Sources */,
