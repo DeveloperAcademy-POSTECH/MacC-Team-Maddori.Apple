@@ -66,7 +66,7 @@ final class MyFeedbackDetailViewController: BaseViewController {
     private let feedbackContentScrollView = UIScrollView()
     private lazy var feedbackContentText: UILabel = {
         let label = UILabel()
-        let text = feedbackDetail.info + "\n\n" + (feedbackDetail.start ?? "")
+        let text = feedbackDetail.info
         label.setTextWithLineHeight(text: text, lineHeight: 24)
         label.textColor = .gray400
         label.font = .body1

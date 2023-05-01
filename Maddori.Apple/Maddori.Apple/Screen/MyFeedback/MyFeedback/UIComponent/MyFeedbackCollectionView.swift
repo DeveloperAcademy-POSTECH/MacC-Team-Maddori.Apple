@@ -115,9 +115,6 @@ extension MyFeedbackCollectionView: UICollectionViewDelegate {
                 let info = isContinueSection
                 ? data.continueArray[indexPath.item].content ?? ""
                 : data.stopArray[indexPath.item].content ?? ""
-                let start = isContinueSection
-                ? data.continueArray[indexPath.item].startContent
-                : data.stopArray[indexPath.item].startContent
                 let reflectionStatus = ReflectionStatus.init(rawValue: feedbackInfo?.reflection.state?.rawValue ?? "Before")
                 
                 let data = FeedbackFromMeModel(reflectionId: reflectionId,
@@ -126,7 +123,6 @@ extension MyFeedbackCollectionView: UICollectionViewDelegate {
                                                feedbackType: indexPath.section == 0 ? .continueType : .stopType,
                                                keyword: keyword,
                                                info: info,
-                                               start: start,
                                                reflectionStatus: reflectionStatus ?? .Before
                 )
                 didTappedCell?(data)
@@ -141,7 +137,6 @@ extension MyFeedbackCollectionView: UICollectionViewDelegate {
                                                    feedbackType: .continueType,
                                                    keyword: continueArray[indexPath.item].keyword ?? "",
                                                    info: continueArray[indexPath.item].content ?? "",
-                                                   start: continueArray[indexPath.item].startContent,
                                                    reflectionStatus: reflectionStatus ?? .Before
                     )
                     didTappedCell?(data)
@@ -152,7 +147,6 @@ extension MyFeedbackCollectionView: UICollectionViewDelegate {
                                                    feedbackType: .stopType,
                                                    keyword: stopArray[indexPath.item].keyword ?? "",
                                                    info: stopArray[indexPath.item].content ?? "",
-                                                   start: stopArray[indexPath.item].startContent,
                                                    reflectionStatus: reflectionStatus ?? .Before
                     )
                     didTappedCell?(data)
