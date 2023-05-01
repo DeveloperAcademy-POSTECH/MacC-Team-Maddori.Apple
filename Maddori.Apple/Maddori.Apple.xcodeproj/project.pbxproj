@@ -77,7 +77,6 @@
 		39F52C5F2923338B00B19A77 /* MembersDetailResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F52C5E2923338B00B19A77 /* MembersDetailResponse.swift */; };
 		39F52C612923344C00B19A77 /* FeedBackContentResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F52C602923344C00B19A77 /* FeedBackContentResponse.swift */; };
 		39F52C632923357700B19A77 /* FeedBackInfoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F52C622923357700B19A77 /* FeedBackInfoResponse.swift */; };
-		39F52C652923369000B19A77 /* EditFeedBackResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F52C642923369000B19A77 /* EditFeedBackResponse.swift */; };
 		39F52C68292472EB00B19A77 /* AllFeedBackResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F52C67292472EB00B19A77 /* AllFeedBackResponse.swift */; };
 		39F52C6A292473A800B19A77 /* ReflectionInfoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F52C69292473A800B19A77 /* ReflectionInfoResponse.swift */; };
 		39F52C6C292473EC00B19A77 /* AllReflectionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F52C6B292473EC00B19A77 /* AllReflectionResponse.swift */; };
@@ -238,7 +237,6 @@
 		39F52C5E2923338B00B19A77 /* MembersDetailResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MembersDetailResponse.swift; sourceTree = "<group>"; };
 		39F52C602923344C00B19A77 /* FeedBackContentResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedBackContentResponse.swift; sourceTree = "<group>"; };
 		39F52C622923357700B19A77 /* FeedBackInfoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedBackInfoResponse.swift; sourceTree = "<group>"; };
-		39F52C642923369000B19A77 /* EditFeedBackResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditFeedBackResponse.swift; sourceTree = "<group>"; };
 		39F52C67292472EB00B19A77 /* AllFeedBackResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllFeedBackResponse.swift; sourceTree = "<group>"; };
 		39F52C69292473A800B19A77 /* ReflectionInfoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReflectionInfoResponse.swift; sourceTree = "<group>"; };
 		39F52C6B292473EC00B19A77 /* AllReflectionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllReflectionResponse.swift; sourceTree = "<group>"; };
@@ -754,7 +752,6 @@
 				39F52C5E2923338B00B19A77 /* MembersDetailResponse.swift */,
 				39F52C602923344C00B19A77 /* FeedBackContentResponse.swift */,
 				39F52C622923357700B19A77 /* FeedBackInfoResponse.swift */,
-				39F52C642923369000B19A77 /* EditFeedBackResponse.swift */,
 				39F52C67292472EB00B19A77 /* AllFeedBackResponse.swift */,
 				39F52C69292473A800B19A77 /* ReflectionInfoResponse.swift */,
 				39F52C6B292473EC00B19A77 /* AllReflectionResponse.swift */,
@@ -1245,7 +1242,6 @@
 				39257DC728F8FEBD00201E0B /* SceneDelegate.swift in Sources */,
 				52F07B9A2912541B0015BC8B /* MyFeedbackDetailViewController.swift in Sources */,
 				39307CF52917DA9300789AB6 /* LoginViewController.swift in Sources */,
-				39F52C652923369000B19A77 /* EditFeedBackResponse.swift in Sources */,
 				525E722528FFCFA600EF3FCB /* FeedbackTypeButtonView.swift in Sources */,
 				39A64ACE2905885F001DB020 /* StartSuggestionView.swift in Sources */,
 				391D38DD29C44A0400A6BFED /* TeamDetailMemberTableHeaderView.swift in Sources */,
