@@ -13,7 +13,6 @@ import SnapKit
 final class SelectReflectionMemberViewController: BaseViewController {
     
     let reflectionId: Int
-    let isAdmin: Bool
     
     // MARK: - property
     
@@ -46,9 +45,8 @@ final class SelectReflectionMemberViewController: BaseViewController {
     
     // MARK: - life cycle
     
-    init(reflectionId: Int, isAdmin: Bool) {
+    init(reflectionId: Int) {
         self.reflectionId = reflectionId
-        self.isAdmin = isAdmin
         super.init()
     }
     
