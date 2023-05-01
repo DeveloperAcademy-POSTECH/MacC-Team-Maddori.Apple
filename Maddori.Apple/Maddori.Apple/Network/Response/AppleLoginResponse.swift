@@ -8,6 +8,7 @@
 import Foundation
 
 struct AppleLoginResponse: Decodable {
+    // MARK: - appleLogin
     let created: Bool?
     let accessToken: String?
     let refreshToken: String?

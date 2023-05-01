@@ -8,6 +8,7 @@
 import Foundation
 
 struct TeamNameResponse: Decodable {
+    // MARK: - getCertainTeamName, editTeamName, getUserTeamList
     let id: Int
     let teamName: String
     

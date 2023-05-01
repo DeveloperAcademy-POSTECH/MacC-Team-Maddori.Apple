@@ -13,6 +13,7 @@ struct MemberResponse: Decodable {
 }
 
 struct MemberDetailResponse: Decodable {
+    // MARK: - editProfile
     let id: Int?
     let nickname: String?
     let role: String?

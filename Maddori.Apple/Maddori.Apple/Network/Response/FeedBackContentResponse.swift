@@ -1,5 +1,5 @@
 //
-//  AddFeedBackContentResponse.swift
+//  FeedBackContentResponse.swift
 //  Maddori.Apple
 //
 //  Created by Mingwan Choi on 2022/11/15.
@@ -8,7 +8,7 @@
 import Foundation
 
 struct FeedBackContentResponse: Decodable {
-    // MARK: - createFeedback
+    // MARK: - createFeedback, updateFeedback
     let id: Int?
     let type: FeedBackType?
     let keyword: String?
