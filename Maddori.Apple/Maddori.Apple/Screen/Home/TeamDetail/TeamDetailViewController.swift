@@ -277,7 +277,7 @@ final class TeamDetailViewController: BaseViewController {
     private func fetchUserTeamList(type: TeamDetailEndPoint<VoidModel>, completion: @escaping (() ->())) {
         AF.request(type.address,
                    method: type.method,
-                   headers: type.headers).responseDecodable(of: BaseModel<[TeamInfoResponse]>.self) { json in
+                   headers: type.headers).responseDecodable(of: BaseModel<[TeamNameResponse]>.self) { json in
             if let data = json.value {
                 guard let teams = data.detail else { return }
                 if !teams.isEmpty {
