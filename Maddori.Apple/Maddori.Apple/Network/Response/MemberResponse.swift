@@ -8,20 +8,11 @@
 import Foundation
 
 struct MemberResponse: Decodable {
-    // MARK: - userLogin
-    let userId: Int?
-    let userName: String?
-
-    enum CodingKeys: String, CodingKey {
-        case userId = "id"
-        case userName = "username"
-    }
+    let id: Int?
+    let nickname: String?
 }
 
-// MARK: - MemberResponse v2 / conflict 방지용
-
-struct TeamMemberResponse: Decodable {
-    // MARK: - userLogin
+struct MemberDetailResponse: Decodable {
     let id: Int?
     let nickname: String?
     let role: String?
@@ -33,12 +24,4 @@ struct TeamMemberResponse: Decodable {
         case role
         case profileImagePath = "profile_image_path"
     }
-}
-
-// MARK: - MemberResponse와 동일한 역할 v2용
-
-struct SimpleMemberResponse: Decodable {
-    // MARK: - createFeedback(FeedBackContentResponse)
-    let id: Int?
-    let nickname: String?
 }

@@ -19,7 +19,7 @@ final class MyFeedbackViewController: BaseViewController {
             } else {
                 setLayoutMyFeedbackView()
                 memberCollectionView.reloadData()
-                fetchCertainMemberFeedBack(type: .fetchCertainMemberFeedBack(memberId: memberList[selectedIndex].userId ?? 0))
+                fetchCertainMemberFeedBack(type: .fetchCertainMemberFeedBack(memberId: memberList[selectedIndex].id ?? 0))
             }
         }
     }
@@ -141,12 +141,12 @@ final class MyFeedbackViewController: BaseViewController {
         AF.request(type.address,
                    method: type.method,
                    headers: type.headers
-        ).responseDecodable(of: BaseModel<TeamMembersResponse>.self) { [weak self] json in
+        ).responseDecodable(of: BaseModel<MembersDetailResponse>.self) { [weak self] json in
             if let data = json.value {
                 var memberArray: [MemberDetailResponse] = []
                 guard let members = json.value?.detail?.members else { return }
                 members.forEach {
-                    if $0.userName != UserDefaultStorage.nickname {
+                    if $0.nickname != UserDefaultStorage.nickname {
                         memberArray.append($0)
                     }
                 }
@@ -174,7 +174,7 @@ final class MyFeedbackViewController: BaseViewController {
 
 extension MyFeedbackViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let memberId = memberList[indexPath.item].userId else { return }
+        guard let memberId = memberList[indexPath.item].id else { return }
         fetchCertainMemberFeedBack(type: .fetchCertainMemberFeedBack(memberId: memberId))
         selectedIndex = indexPath.item
     }
@@ -189,7 +189,7 @@ extension MyFeedbackViewController: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyFeedbackMemberCollectionViewCell.className, for: indexPath) as? MyFeedbackMemberCollectionViewCell else {
             return UICollectionViewCell()
         }
-        cell.setMemberName(name: memberList[indexPath.item].userName ?? "")
+        cell.setMemberName(name: memberList[indexPath.item].nickname ?? "")
         cell.setMemberProfileImage(from: memberList[indexPath.item].profileImagePath)
         if indexPath.item == selectedIndex {
             cell.isSelected = true

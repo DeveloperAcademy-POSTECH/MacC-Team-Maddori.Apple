@@ -13,7 +13,7 @@ struct EditFeedBackResponse: Decodable {
     let type: FeedBackType
     let keyword: String
     let content: String
-    let toUser: SimpleMemberResponse
+    let toUser: MemberResponse
     
     enum CodingKeys: String, CodingKey {
         case id

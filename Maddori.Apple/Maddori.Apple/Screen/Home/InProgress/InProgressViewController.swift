@@ -167,7 +167,7 @@ final class InProgressViewController: BaseViewController {
                 content: feedback.content ?? "",
                 // FIXME: startContent가 없을 경우 "" 로 둬도 될까?
                 startContent: feedback.startContent ?? "",
-                fromUser: feedback.fromUser?.userName ?? "팀원"
+                fromUser: feedback.fromUser?.nickname ?? "팀원"
             )
             keywordList.append(keyword)
         }

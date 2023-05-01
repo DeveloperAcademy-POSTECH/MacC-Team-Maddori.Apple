@@ -25,7 +25,7 @@ final class SetNicknameViewController: BaseViewController {
     }
     private let cameraPicker = UIImagePickerController()
     private let teamName: String = UserDefaultStorage.teamName
-    var userName: String?
+    var nickname: String?
     var role: String?
     var profilePath: String?
     private var profileURL: URL?
@@ -372,7 +372,7 @@ final class SetNicknameViewController: BaseViewController {
             navigationController?.isNavigationBarHidden = false
             self.tabBarController?.tabBar.isHidden = true
             
-            nicknameTextField.text = userName
+            nicknameTextField.text = nickname
             roleTextField.text = role
             if let profilePath {
                 profileImageButton.profileImage.load(from: UrlLiteral.imageBaseURL + profilePath)
@@ -493,7 +493,7 @@ final class SetNicknameViewController: BaseViewController {
                                          fileName: ".png",
                                          mimeType: "image/png")
             }
-        }, to: type.address, method: type.method, headers: type.headers).responseDecodable(of: BaseModel<TeamMemberResponse>.self) { json in
+        }, to: type.address, method: type.method, headers: type.headers).responseDecodable(of: BaseModel<MemberDetailResponse>.self) { json in
             if let json = json.value {
                 dump(json)
                 guard let nickname = json.detail?.nickname else { return }
@@ -520,7 +520,7 @@ extension SetNicknameViewController: UITextFieldDelegate {
         checkMaxLength(textField: textField)
         
         if textField == nicknameTextField {
-            if textField.text != userName {
+            if textField.text != nickname {
                 let hasText = textField.hasText
                 doneButton.isDisabled = !hasText
             } else {
