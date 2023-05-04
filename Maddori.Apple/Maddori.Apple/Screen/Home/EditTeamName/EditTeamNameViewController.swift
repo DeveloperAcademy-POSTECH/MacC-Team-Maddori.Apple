@@ -53,7 +53,7 @@ final class EditTeamNameViewController: BaseTextFieldViewController {
     // MARK: - property
     
     private lazy var backButton: BackButton = {
-        let button = BackButton()
+        let button = BackButton(type: .system)
         let action = UIAction { [weak self] _ in
             self?.navigationController?.popViewController(animated: true)
         }
