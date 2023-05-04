@@ -69,6 +69,11 @@ final class EditTeamNameViewController: BaseTextFieldViewController {
         setupDefaultTextFieldText()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
     override func setupNavigationBar() {
         super.setupNavigationBar()
         
