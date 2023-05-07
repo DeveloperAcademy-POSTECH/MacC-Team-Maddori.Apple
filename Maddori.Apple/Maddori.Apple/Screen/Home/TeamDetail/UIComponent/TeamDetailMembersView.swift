@@ -63,6 +63,12 @@ final class TeamDetailMembersView: UIView {
         memberTableView.dataSource = self
     }
     
+    private func determineEmptyTeam() {
+        if members.isEmpty {
+            memberTableView.backgroundView = EmptyPersonView()
+        }
+    }
+    
     func loadData(data: [MemberDetailResponse]) {
         members.removeAll()
         data.forEach {
@@ -72,6 +78,7 @@ final class TeamDetailMembersView: UIView {
                 members.append($0)
             }
         }
+        determineEmptyTeam()
         memberTableView.reloadData()
     }
 }
