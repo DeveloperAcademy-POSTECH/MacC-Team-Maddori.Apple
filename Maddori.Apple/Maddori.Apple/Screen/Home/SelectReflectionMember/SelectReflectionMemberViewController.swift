@@ -31,6 +31,13 @@ final class SelectReflectionMemberViewController: BaseViewController {
         label.setTitleFont(text: TextLiteral.selectReflectionMemberViewControllerTitleLabel)
         return label
     }()
+    private let reflectionGuidelineLabel: UILabel = {
+        let label = UILabel()
+        label.text = TextLiteral.selectReflectionMemberViewControllerSubtitleLabel
+        label.font = .caption1
+        label.textColor = .gray400
+        return label
+    }()
     private let memberCollectionView = ReflectionMemberCollectionView()
     private lazy var feedbackDoneButton: MainButton = {
         let button = MainButton()
@@ -73,6 +80,12 @@ final class SelectReflectionMemberViewController: BaseViewController {
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
+        view.addSubview(reflectionGuidelineLabel)
+        reflectionGuidelineLabel.snp.makeConstraints {
+            $0.top.equalTo(selectFeedbackMemberTitleLabel.snp.bottom).offset(SizeLiteral.titleSubtitleSpacing)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+        
         view.addSubview(feedbackDoneButton)
         feedbackDoneButton.snp.makeConstraints {
             $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.bottomPadding)
@@ -81,7 +94,7 @@ final class SelectReflectionMemberViewController: BaseViewController {
         
         view.addSubview(memberCollectionView)
         memberCollectionView.snp.makeConstraints {
-            $0.top.equalTo(selectFeedbackMemberTitleLabel.snp.bottom).offset(20)
+            $0.top.equalTo(reflectionGuidelineLabel.snp.bottom).offset(20)
             $0.bottom.equalTo(feedbackDoneButton.snp.top).inset(-6)
             $0.leading.trailing.equalToSuperview()
         }
