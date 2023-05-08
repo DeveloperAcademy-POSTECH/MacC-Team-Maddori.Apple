@@ -97,9 +97,7 @@ final class CreateTeamViewController: BaseTextFieldViewController {
                         self?.doneButton.isLoading = false
                     }
                 } else {
-                    UserDefaultHandler.setTeamName(teamName: teamName)
-                    UserDefaultHandler.setTeamId(teamId: 0)
-                    self?.pushSetNicknameViewController()
+                    self?.pushSetNicknameViewController(teamName: teamName)
                 }
             }
         }
@@ -108,8 +106,8 @@ final class CreateTeamViewController: BaseTextFieldViewController {
     
     // MARK: - func
 
-    private func pushSetNicknameViewController() {
-        let viewController = SetNicknameViewController(from: .createView)
+    private func pushSetNicknameViewController(teamName: String) {
+        let viewController = SetNicknameViewController(from: .createView, teamId: nil, teamName: teamName)
         navigationController?.pushViewController(viewController, animated: true)
     }
 }
