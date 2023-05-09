@@ -77,32 +77,8 @@ final class MyReflectionViewController: BaseViewController {
         reflectionCollectionView.dataSource = self
     }
     
-    private func logoutUser() {
-        makeRequestAlert(title: TextLiteral.TeamManageViewControllerLogOutMessage, message: "", okTitle: "확인", cancelTitle: "취소") { _ in
-            guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate
-                    as? SceneDelegate else { return }
-            sceneDelegate.logout()
-        }
-    }
-    
     // MARK: - api
-    
-    private func deleteUser(type: MyReflectionEndPoint<VoidModel>) {
-        AF.request(type.address,
-                   method: type.method,
-                   headers: type.headers
-        )
-        .responseDecodable(of: BaseModel<VoidModel>.self) { json in
-            if let json = json.value {
-                dump(json)
-                UserDefaultHandler.clearAllData()
-                guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate
-                        as? SceneDelegate else { return }
-                sceneDelegate.logout()
-            }
-        }
-    }
-    
+        
     private func fetchAllReflection(type: MyReflectionEndPoint<EncodeDTO>) {
         AF.request(type.address,
                    method: type.method,
