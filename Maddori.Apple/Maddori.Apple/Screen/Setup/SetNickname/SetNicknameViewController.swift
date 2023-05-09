@@ -106,7 +106,7 @@ final class SetNicknameViewController: BaseViewController {
     }()
     private lazy var doneButton: MainButton = {
         let button = MainButton()
-        button.title = TextLiteral.setNicknameControllerDoneButtonText
+        button.title = TextLiteral.doneButtonTitle
         button.isDisabled = true
         let action = UIAction { [weak self] _ in
             self?.didTappedDoneButton()

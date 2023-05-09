@@ -8,11 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		391596622904176500A432D9 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391596612904176500A432D9 /* UIView+Extension.swift */; };
-		391612D529E551BD004AE982 /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391612D429E551BD004AE982 /* ToastView.swift */; };
 		391612CD29E51F1B004AE982 /* EditTeamNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391612CC29E51F1B004AE982 /* EditTeamNameViewController.swift */; };
 		391612CF29E5352A004AE982 /* EditTeamNameEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391612CE29E5352A004AE982 /* EditTeamNameEndPoint.swift */; };
 		391612D129E5364A004AE982 /* EditTeamNameDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391612D029E5364A004AE982 /* EditTeamNameDTO.swift */; };
 		391612D329E53745004AE982 /* EditTeamNameResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391612D229E53745004AE982 /* EditTeamNameResponse.swift */; };
+		391612D529E551BD004AE982 /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391612D429E551BD004AE982 /* ToastView.swift */; };
 		391CBA19290580460044CA30 /* InProgressDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391CBA18290580460044CA30 /* InProgressDetailViewController.swift */; };
 		391CBA1C290582130044CA30 /* ReflectionInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391CBA1B290582130044CA30 /* ReflectionInfoModel.swift */; };
 		391D217C29050427003FC871 /* CustomVisualEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391D217B29050427003FC871 /* CustomVisualEffectView.swift */; };
@@ -61,7 +61,6 @@
 		3984742629264ACE00EDC139 /* MyFeedBackEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3984742529264ACE00EDC139 /* MyFeedBackEndPoint.swift */; };
 		39847428292656EB00EDC139 /* VoidModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39847427292656EB00EDC139 /* VoidModel.swift */; };
 		3998E86F295C308100541752 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3998E86E295C308100541752 /* Settings.bundle */; };
-		39A64ACE2905885F001DB020 /* StartSuggestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A64ACD2905885F001DB020 /* StartSuggestionView.swift */; };
 		39AC287F29269BC6006CFEE6 /* Endpointable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39AC287E29269BC6006CFEE6 /* Endpointable.swift */; };
 		39F15C0C296D371500952D02 /* EmptyPersonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F15C0B296D371500952D02 /* EmptyPersonView.swift */; };
 		39F1A13529125762005E3456 /* MyFeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F1A13429125762005E3456 /* MyFeedbackViewController.swift */; };
@@ -172,11 +171,11 @@
 
 /* Begin PBXFileReference section */
 		391596612904176500A432D9 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
-		391612D429E551BD004AE982 /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
 		391612CC29E51F1B004AE982 /* EditTeamNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTeamNameViewController.swift; sourceTree = "<group>"; };
 		391612CE29E5352A004AE982 /* EditTeamNameEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTeamNameEndPoint.swift; sourceTree = "<group>"; };
 		391612D029E5364A004AE982 /* EditTeamNameDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTeamNameDTO.swift; sourceTree = "<group>"; };
 		391612D229E53745004AE982 /* EditTeamNameResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTeamNameResponse.swift; sourceTree = "<group>"; };
+		391612D429E551BD004AE982 /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
 		391CBA18290580460044CA30 /* InProgressDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InProgressDetailViewController.swift; sourceTree = "<group>"; };
 		391CBA1B290582130044CA30 /* ReflectionInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReflectionInfoModel.swift; sourceTree = "<group>"; };
 		391D217B29050427003FC871 /* CustomVisualEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomVisualEffectView.swift; sourceTree = "<group>"; };
@@ -227,7 +226,6 @@
 		3984742529264ACE00EDC139 /* MyFeedBackEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFeedBackEndPoint.swift; sourceTree = "<group>"; };
 		39847427292656EB00EDC139 /* VoidModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoidModel.swift; sourceTree = "<group>"; };
 		3998E86E295C308100541752 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
-		39A64ACD2905885F001DB020 /* StartSuggestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartSuggestionView.swift; sourceTree = "<group>"; };
 		39AC287E29269BC6006CFEE6 /* Endpointable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpointable.swift; sourceTree = "<group>"; };
 		39F15C0B296D371500952D02 /* EmptyPersonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyPersonView.swift; sourceTree = "<group>"; };
 		39F1A13429125762005E3456 /* MyFeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFeedbackViewController.swift; sourceTree = "<group>"; };
@@ -359,7 +357,6 @@
 		391CBA17290580360044CA30 /* InProgressDetail */ = {
 			isa = PBXGroup;
 			children = (
-				39A64ACC2905882C001DB020 /* UIComponent */,
 				391CBA18290580460044CA30 /* InProgressDetailViewController.swift */,
 			);
 			path = InProgressDetail;
@@ -680,14 +677,6 @@
 				3E953A9429C1CE7D0073302F /* ImageCacheManager.swift */,
 			);
 			path = Storage;
-			sourceTree = "<group>";
-		};
-		39A64ACC2905882C001DB020 /* UIComponent */ = {
-			isa = PBXGroup;
-			children = (
-				39A64ACD2905885F001DB020 /* StartSuggestionView.swift */,
-			);
-			path = UIComponent;
 			sourceTree = "<group>";
 		};
 		39AC287D29269BBB006CFEE6 /* Protocol */ = {
@@ -1262,7 +1251,6 @@
 				39307CF52917DA9300789AB6 /* LoginViewController.swift in Sources */,
 				39F52C652923369000B19A77 /* EditFeedBackResponse.swift in Sources */,
 				525E722528FFCFA600EF3FCB /* FeedbackTypeButtonView.swift in Sources */,
-				39A64ACE2905885F001DB020 /* StartSuggestionView.swift in Sources */,
 				391D38DD29C44A0400A6BFED /* TeamDetailMemberTableHeaderView.swift in Sources */,
 				D7AFB7C52916EDC300E998B7 /* MyReflectionDetailTableViewCell.swift in Sources */,
 				D7195FBC299223F6002526E7 /* TeamChangeCollectionViewCell.swift in Sources */,

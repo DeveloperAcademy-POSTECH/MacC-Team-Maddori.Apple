@@ -76,7 +76,7 @@ final class MyFeedbackEditViewController: BaseViewController {
     private let feedbackContentTextView = CustomTextView()
     private lazy var feedbackDoneButton: MainButton = {
         let button = MainButton()
-        button.title = TextLiteral.addFeedbackViewControllerDoneButtonTitle
+        button.title = TextLiteral.doneButtonComplete
         button.isDisabled = true
         let action = UIAction { [weak self] _ in
             self?.didTappedDoneButton()
@@ -330,7 +330,7 @@ extension MyFeedbackEditViewController: UITextViewDelegate {
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.text == TextLiteral.addFeedbackViewControllerFeedbackContentTextViewPlaceholder || textView.text == TextLiteral.addFeedbackViewControllerStartTextViewPlaceholder {
+        if textView.text == TextLiteral.addFeedbackViewControllerFeedbackContentTextViewPlaceholder {
             textView.text = nil
             textView.textColor = .black100
         }

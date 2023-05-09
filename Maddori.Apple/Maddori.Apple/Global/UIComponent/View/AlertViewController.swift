@@ -102,7 +102,7 @@ final class AlertViewController: BaseViewController {
     }()
     private lazy var cancelButton: UIButton = {
         let button = UIButton()
-        button.setTitle(TextLiteral.alertViewControllerCancelButtonText, for: .normal)
+        button.setTitle(TextLiteral.actionSheetCancelTitle, for: .normal)
         button.setTitleColor(.gray500, for: .normal)
         button.titleLabel?.font = .body2
         button.titleLabel?.textAlignment = .center
