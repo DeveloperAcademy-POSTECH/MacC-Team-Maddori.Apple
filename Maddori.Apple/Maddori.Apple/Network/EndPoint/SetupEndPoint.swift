@@ -8,7 +8,7 @@
 import Alamofire
 
 enum SetupEndPoint<T: Encodable>: EndPointable {
-    case dispatchCreateTeam
+    case dispatchCreateTeam(T)
     case dispatchJoinTeam(teamId: Int, T)
     case fetchCertainTeam(invitationCode: String)
     case dispatchAppleLogin(T)
@@ -41,8 +41,8 @@ enum SetupEndPoint<T: Encodable>: EndPointable {
     
     var body: T? {
         switch self {
-        case .dispatchCreateTeam:
-            return nil
+        case .dispatchCreateTeam(let body):
+            return body
         case .dispatchJoinTeam(_, let body):
             return body
         case .fetchCertainTeam:

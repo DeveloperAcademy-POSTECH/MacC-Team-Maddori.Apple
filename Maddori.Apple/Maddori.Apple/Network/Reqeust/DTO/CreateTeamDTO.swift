@@ -11,5 +11,4 @@ struct CreateTeamDTO: Encodable {
     let team_name: String
     let nickname: String
     let role: String?
-    let profile_image: String?
 }
