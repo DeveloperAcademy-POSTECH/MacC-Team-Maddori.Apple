@@ -299,10 +299,11 @@ final class AddFeedbackDetailViewController: BaseViewController {
                    method: type.method,
                    headers: type.headers).responseDecodable(of: BaseModel<TeamMembersResponse>.self) { json in
             if let data = json.value {
-                guard var members = data.detail?.members else { return }
-                members.removeFirst()
+                guard let members = data.detail?.members else { return }
+                
+                let membersExceptMe = members.filter { $0.userId != UserDefaultStorage.userId }
                 DispatchQueue.main.async {
-                    self.selectMemberView.memberCollectionView.memberList = members
+                    self.selectMemberView.memberCollectionView.memberList = membersExceptMe
                 }
             }
         }
