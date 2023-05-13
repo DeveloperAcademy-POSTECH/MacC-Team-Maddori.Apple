@@ -224,12 +224,12 @@ enum TextLiteral {
     
     // MARK: - TeamManageViewController
     
-    static let TeamManageViewControllerLogOutTitle: String = "로그아웃"
-    static let TeamManageViewControllerLogOutMessage: String = "로그아웃 하시겠습니까?"
-    static let TeamManageViewControllerDeleteUser: String = "회원탈퇴"
-    static let TeamManageViewControllerDeleteUserAlertTitle: String = "회원탈퇴 하시겠습니까?"
-    static let TeamManageViewControllerDeleteUserAlertMessage: String = "모든 회고와 피드백 정보가 사라지며, \n되돌릴 수 없습니다."
-    static let TeamManageViewControllerDeleteUserTitle: String = "탈퇴한 멤버"
+    static let teamManageViewControllerLogOutTitle: String = "로그아웃"
+    static let teamManageViewControllerLogOutMessage: String = "로그아웃 하시겠습니까?"
+    static let teamManageViewControllerDeleteUser: String = "회원탈퇴"
+    static let teamManageViewControllerDeleteUserAlertTitle: String = "회원탈퇴 하시겠습니까?"
+    static let teamManageViewControllerDeleteUserAlertMessage: String = "모든 회고와 피드백 정보가 사라지며, \n되돌릴 수 없습니다."
+    static let teamManageViewControllerDeleteUserTitle: String = "탈퇴한 멤버"
     
     // MARK: - FeedbackTypeButtonView
     
