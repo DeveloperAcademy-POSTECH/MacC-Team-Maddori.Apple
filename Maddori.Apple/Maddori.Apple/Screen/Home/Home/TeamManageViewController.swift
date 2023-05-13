@@ -157,15 +157,15 @@ final class TeamManageViewController: BaseViewController {
     }
     
     private func withdrawal() {
-        self.makeRequestAlert(title: TextLiteral.TeamManageViewControllerDeleteUserAlertTitle,
-                              message: TextLiteral.TeamManageViewControllerDeleteUserAlertMessage,
+        self.makeRequestAlert(title: TextLiteral.teamManageViewControllerDeleteUserAlertTitle,
+                              message: TextLiteral.teamManageViewControllerDeleteUserAlertMessage,
                               okAction: { [weak self] _ in
             self?.deleteUser(type: .deleteUser)
         })
     }
     
     private func logoutUser() {
-        makeRequestAlert(title: TextLiteral.TeamManageViewControllerLogOutMessage,
+        makeRequestAlert(title: TextLiteral.teamManageViewControllerLogOutMessage,
                          message: "",
                          okTitle: "확인",
                          cancelTitle: "취소") { _ in

@@ -54,7 +54,7 @@ final class MyReflectionFeedbackViewController: BaseViewController {
     }()
     private lazy var feedbackFromText: UILabel = {
         let label = UILabel()
-        label.text = model.fromUser?.userName ?? TextLiteral.TeamManageViewControllerDeleteUserTitle
+        label.text = model.fromUser?.userName ?? TextLiteral.teamManageViewControllerDeleteUserTitle
         label.textColor = .black100
         label.font = .label3
         return label
