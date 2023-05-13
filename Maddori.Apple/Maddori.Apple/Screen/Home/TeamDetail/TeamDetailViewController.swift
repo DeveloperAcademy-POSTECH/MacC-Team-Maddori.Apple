@@ -69,7 +69,6 @@ final class TeamDetailViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.isNavigationBarHidden = false
         setupBackButton()
         setupEditButton()
         setupExitButton()
@@ -82,11 +81,6 @@ final class TeamDetailViewController: BaseViewController {
         navigationController?.setNavigationBarHidden(false, animated: true)
         fetchTeamDetailMember(type: .fetchTeamMember)
         fetchTeamInformation(type: .fetchTeamInformation)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
     override func render() {
