@@ -161,6 +161,7 @@ extension MyFeedbackCollectionView: UICollectionViewDelegate {
         }
     }
 }
+
 extension MyFeedbackCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         guard let data = feedbackInfo else { return 0 }
@@ -230,10 +231,19 @@ extension MyFeedbackCollectionView: UICollectionViewDelegateFlowLayout {
         return CGSize(width: 80, height: 45)
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        guard let data = feedbackInfo else { return .zero }
+        if data.continueArray.isEmpty && data.stopArray.isEmpty {
+            return .zero
+        }
+        
+        return Size.collectionViewInset
+    }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         guard let data = feedbackInfo else { return .zero }
         if data.continueArray.isEmpty && data.stopArray.isEmpty {
-            return CGSize(width: 300, height: 300)
+            return CGSize(width: UIScreen.main.bounds.width, height: 300)
         } else {
             var feedbackList: [String] = []
             guard let data = feedbackInfo else { return .zero }
