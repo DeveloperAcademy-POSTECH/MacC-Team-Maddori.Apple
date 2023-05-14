@@ -24,12 +24,13 @@ final class SetNicknameViewController: BaseViewController {
         static let roleMax: Int = 20
     }
     private let cameraPicker = UIImagePickerController()
-    private let teamName: String = UserDefaultStorage.teamName
     var userName: String?
     var role: String?
     var profilePath: String?
     private var profileURL: URL?
     private let fromView: ViewType
+    private var teamId: Int?
+    private let teamName: String
     
     // MARK: - property
     
@@ -118,8 +119,10 @@ final class SetNicknameViewController: BaseViewController {
     
     // MARK: - life cycle
     
-    init(from: ViewType) {
+    init(from: ViewType, teamId: Int? = nil, teamName: String) {
         self.fromView = from
+        self.teamId = teamId
+        self.teamName = teamName
         super.init()
     }
     
@@ -321,7 +324,9 @@ final class SetNicknameViewController: BaseViewController {
         case .createView:
             dispatchCreateTeam(type: .dispatchCreateTeam, teamName: teamName, nickname: nickname, role: role)
         case .joinView:
-            dispatchJoinTeam(type: .dispatchJoinTeam(teamId: UserDefaultStorage.teamId), nickname: nickname, role: role)
+            if let teamId {
+                dispatchJoinTeam(type: .dispatchJoinTeam(teamId: teamId), nickname: nickname, role: role)
+            }
         case .teamDetail:
             let dto = JoinTeamDTO(nickname: nickname, role: role)
             putEditProfile(type: .putEditProfile(dto))
