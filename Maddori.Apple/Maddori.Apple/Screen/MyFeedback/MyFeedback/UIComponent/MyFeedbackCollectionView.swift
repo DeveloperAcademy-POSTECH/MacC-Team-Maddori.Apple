@@ -34,7 +34,6 @@ final class MyFeedbackCollectionView: UIView {
     private let collectionViewFlowLayout: UICollectionViewFlowLayout = {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .vertical
-        flowLayout.sectionInset = Size.collectionViewInset
         flowLayout.minimumLineSpacing = 20
         return flowLayout
     }()
@@ -236,7 +235,6 @@ extension MyFeedbackCollectionView: UICollectionViewDelegateFlowLayout {
         if data.continueArray.isEmpty && data.stopArray.isEmpty {
             return .zero
         }
-        
         return Size.collectionViewInset
     }
     
