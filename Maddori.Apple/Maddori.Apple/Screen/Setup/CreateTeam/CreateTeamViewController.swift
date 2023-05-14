@@ -107,7 +107,7 @@ final class CreateTeamViewController: BaseTextFieldViewController {
     // MARK: - func
 
     private func pushSetNicknameViewController(teamName: String) {
-        let viewController = SetNicknameViewController(from: .createView, teamId: nil, teamName: teamName)
+        let viewController = SetNicknameViewController(from: .createView, teamName: teamName)
         navigationController?.pushViewController(viewController, animated: true)
     }
 }

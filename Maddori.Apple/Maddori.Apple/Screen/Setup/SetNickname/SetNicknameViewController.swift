@@ -119,7 +119,7 @@ final class SetNicknameViewController: BaseViewController {
     
     // MARK: - life cycle
     
-    init(from: ViewType, teamId: Int?, teamName: String) {
+    init(from: ViewType, teamId: Int? = nil, teamName: String) {
         self.fromView = from
         self.teamId = teamId
         self.teamName = teamName
