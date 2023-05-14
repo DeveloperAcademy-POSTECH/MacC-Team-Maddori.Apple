@@ -280,6 +280,10 @@ final class HomeViewController: BaseViewController {
         keywordList = TextLiteral.homeViewControllerEmptyCollectionViewList
     }
     
+    private func emptyKeywordListWhenProgressing() {
+        keywordList = TextLiteral.homeViewControllerEmptyCollectionViewListWhenProgressing
+    }
+    
     private func pushTeamDetailViewController() {
         let viewController = TeamDetailViewController()
         viewController.hidesBottomBarWhenPushed = true
@@ -359,6 +363,7 @@ final class HomeViewController: BaseViewController {
                         case .SettingRequired, .Before, .Done:
                             self.showAddFeedbackButton()
                         case .Progressing:
+                            self.emptyKeywordListWhenProgressing()
                             self.hideAddFeedbackButton()
                             if !UserDefaultStorage.hasSeenReflectionAlert {
                                 self.presentStartReflectionView()
