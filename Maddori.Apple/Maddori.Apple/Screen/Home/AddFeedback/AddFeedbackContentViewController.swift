@@ -110,6 +110,7 @@ final class AddFeedbackContentViewController: BaseViewController {
         let view = UITextView()
         view.backgroundColor = .white200
         view.font = .body1
+        view.keyboardDismissMode = .interactive
         return view
     }()
     private lazy var doneButton: MainButton = {

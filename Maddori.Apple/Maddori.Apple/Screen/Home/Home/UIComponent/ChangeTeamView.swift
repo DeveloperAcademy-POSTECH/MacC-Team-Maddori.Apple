@@ -15,7 +15,7 @@ protocol ChangeTeamViewDelegate: AnyObject {
 
 final class ChangeTeamView: UIView {
     
-    var teamList: [TeamInfoResponse] = [] {
+    var teamList: [TeamNameResponse] = [] {
         didSet {
             self.teamList.isEmpty ? self.setLayoutEmptyView() : self.setLayoutTeamListView()
         }
