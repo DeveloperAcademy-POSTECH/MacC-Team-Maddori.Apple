@@ -17,6 +17,7 @@ final class TeamManageViewController: BaseViewController {
         static let teamSectionSpacing = 8
         static let teamSectionPadding = 28
         static let teamTitleLabelHeight = 50
+        static let emptyViewHeught = 150
     }
     
     private var sections: [Section] = []
@@ -24,7 +25,7 @@ final class TeamManageViewController: BaseViewController {
         didSet {
             if teamCount == 0 {
                 self.changeTeamView.snp.updateConstraints {
-                    $0.height.equalTo(150 + Size.teamTitleLabelHeight)
+                    $0.height.equalTo(Size.emptyViewHeught + Size.teamTitleLabelHeight)
                 }
             }
             else {
