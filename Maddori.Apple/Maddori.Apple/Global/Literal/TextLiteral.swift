@@ -222,14 +222,14 @@ enum TextLiteral {
     static let previewTitleLabel: String = "회고 일정을 추가할 수 없습니다"
     static let previewDescriptionLabel: String = "팀을 생성하거나 팀에 합류해주세요"
     
-    // MARK: - MyReflectionViewController
+    // MARK: - TeamManageViewController
     
-    static let myReflectionViewControllerLogOutTitle: String = "로그아웃"
-    static let myReflectionViewControllerLogOutMessage: String = "로그아웃 하시겠습니까?"
-    static let myReflectionViewControllerDeleteUser: String = "회원탈퇴"
-    static let myReflectionViewControllerDeleteUserAlertTitle: String = "회원탈퇴 하시겠습니까?"
-    static let myReflectionViewControllerDeleteUserAlertMessage: String = "모든 회고와 피드백 정보가 사라지며, \n되돌릴 수 없습니다."
-    static let myReflectionViewControllerDeleteUserTitle: String = "탈퇴한 멤버"
+    static let teamManageViewControllerLogOutTitle: String = "로그아웃"
+    static let teamManageViewControllerLogOutMessage: String = "로그아웃 하시겠습니까?"
+    static let teamManageViewControllerDeleteUser: String = "회원탈퇴"
+    static let teamManageViewControllerDeleteUserAlertTitle: String = "회원탈퇴 하시겠습니까?"
+    static let teamManageViewControllerDeleteUserAlertMessage: String = "모든 회고와 피드백 정보가 사라지며, \n되돌릴 수 없습니다."
+    static let teamManageViewControllerDeleteUserTitle: String = "탈퇴한 멤버"
     
     // MARK: - FeedbackTypeButtonView
     
