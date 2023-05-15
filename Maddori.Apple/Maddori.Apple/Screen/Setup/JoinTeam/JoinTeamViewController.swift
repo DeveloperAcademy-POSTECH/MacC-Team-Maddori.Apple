@@ -178,7 +178,7 @@ final class JoinTeamViewController: BaseTextFieldViewController {
         AF.request(type.address,
                    method: type.method,
                    headers: type.headers
-        ).responseDecodable(of: BaseModel<TeamInfoResponse>.self) { json in
+        ).responseDecodable(of: BaseModel<TeamNameResponse>.self) { json in
             if let json = json.value {
                 dump(json)
                 guard let teamId = json.detail?.id,

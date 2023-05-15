@@ -13,7 +13,6 @@ import SnapKit
 final class SelectReflectionMemberViewController: BaseViewController {
     
     let reflectionId: Int
-    let isAdmin: Bool
     
     // MARK: - property
     
@@ -46,9 +45,8 @@ final class SelectReflectionMemberViewController: BaseViewController {
     
     // MARK: - life cycle
     
-    init(reflectionId: Int, isAdmin: Bool) {
+    init(reflectionId: Int) {
         self.reflectionId = reflectionId
-        self.isAdmin = isAdmin
         super.init()
     }
     
@@ -108,9 +106,9 @@ final class SelectReflectionMemberViewController: BaseViewController {
     private func didTappedMember() {
         memberCollectionView.didTappedMember = { [weak self] member, members in
             guard let id = member.id,
-                  let username = member.nickname,
+                  let nickname = member.nickname,
                   let reflectionId = self?.reflectionId else { return }
-            let viewController = InProgressViewController(memberId: id, memberUsername: username, reflectionId: reflectionId)
+            let viewController = InProgressViewController(memberId: id, memberUsername: nickname, reflectionId: reflectionId)
             self?.navigationController?.pushViewController(viewController, animated: true)
             
             guard let memberCollectionView = self?.memberCollectionView else { return }
@@ -129,7 +127,7 @@ final class SelectReflectionMemberViewController: BaseViewController {
         AF.request(type.address,
                    method: type.method,
                    headers: type.headers
-        ).responseDecodable(of: BaseModel<MembersResponse>.self) { json in
+        ).responseDecodable(of: BaseModel<MembersDetailResponse>.self) { json in
             if let json = json.value {
                 dump(json)
                 guard let fetchedMemberList = json.detail?.members else { return }

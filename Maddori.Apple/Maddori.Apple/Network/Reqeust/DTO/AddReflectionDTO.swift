@@ -8,6 +8,7 @@
 import Foundation
 
 struct AddReflectionDTO: Encodable {
+    // MARK: - updateReflectionDetail
     let reflection_name: String
     let reflection_date: String
 }
