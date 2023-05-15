@@ -22,8 +22,15 @@ final class TeamManageViewController: BaseViewController {
     private var sections: [Section] = []
     private lazy var teamCount = 0 {
         didSet {
-            self.changeTeamView.snp.updateConstraints {
-                $0.height.equalTo((self.teamCount * Size.teamSectionHeight) + ((self.teamCount - 1) * Size.teamSectionSpacing) + Size.teamSectionPadding + Size.teamTitleLabelHeight)
+            if teamCount == 0 {
+                self.changeTeamView.snp.updateConstraints {
+                    $0.height.equalTo(150 + Size.teamTitleLabelHeight)
+                }
+            }
+            else {
+                self.changeTeamView.snp.updateConstraints {
+                    $0.height.equalTo((self.teamCount * Size.teamSectionHeight) + ((self.teamCount - 1) * Size.teamSectionSpacing) + Size.teamSectionPadding + Size.teamTitleLabelHeight)
+                }
             }
         }
     }
