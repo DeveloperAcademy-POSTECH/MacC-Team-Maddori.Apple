@@ -26,7 +26,12 @@ final class MemberCollectionView: UIView {
     
     var memberList: [MemberDetailResponse] = [] {
         didSet {
-            collectionView.reloadData()
+            if memberList.isEmpty {
+                setupEmptyView()
+            }
+            else {
+                collectionView.reloadData()
+            }
         }
     }
     var didTappedFeedBackMember: ((MemberDetailResponse) -> ())?
@@ -51,6 +56,7 @@ final class MemberCollectionView: UIView {
         collectionView.register(MemberCollectionViewCell.self, forCellWithReuseIdentifier: MemberCollectionViewCell.className)
         return collectionView
     }()
+    lazy var emptyView = EmptyPersonView()
     
     // MARK: - life cycle
     
@@ -64,6 +70,13 @@ final class MemberCollectionView: UIView {
     private func render() {
         self.addSubview(collectionView)
         collectionView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+    }
+    
+    private func setupEmptyView() {
+        self.addSubview(self.emptyView)
+        self.emptyView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
     }
