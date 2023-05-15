@@ -8,11 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		391596622904176500A432D9 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391596612904176500A432D9 /* UIView+Extension.swift */; };
-		391612D529E551BD004AE982 /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391612D429E551BD004AE982 /* ToastView.swift */; };
 		391612CD29E51F1B004AE982 /* EditTeamNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391612CC29E51F1B004AE982 /* EditTeamNameViewController.swift */; };
 		391612CF29E5352A004AE982 /* EditTeamNameEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391612CE29E5352A004AE982 /* EditTeamNameEndPoint.swift */; };
 		391612D129E5364A004AE982 /* EditTeamNameDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391612D029E5364A004AE982 /* EditTeamNameDTO.swift */; };
 		391612D329E53745004AE982 /* EditTeamNameResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391612D229E53745004AE982 /* EditTeamNameResponse.swift */; };
+		391612D529E551BD004AE982 /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391612D429E551BD004AE982 /* ToastView.swift */; };
 		391CBA19290580460044CA30 /* InProgressDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391CBA18290580460044CA30 /* InProgressDetailViewController.swift */; };
 		391CBA1C290582130044CA30 /* ReflectionInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391CBA1B290582130044CA30 /* ReflectionInfoModel.swift */; };
 		391D217C29050427003FC871 /* CustomVisualEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391D217B29050427003FC871 /* CustomVisualEffectView.swift */; };
@@ -172,11 +172,11 @@
 
 /* Begin PBXFileReference section */
 		391596612904176500A432D9 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
-		391612D429E551BD004AE982 /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
 		391612CC29E51F1B004AE982 /* EditTeamNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTeamNameViewController.swift; sourceTree = "<group>"; };
 		391612CE29E5352A004AE982 /* EditTeamNameEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTeamNameEndPoint.swift; sourceTree = "<group>"; };
 		391612D029E5364A004AE982 /* EditTeamNameDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTeamNameDTO.swift; sourceTree = "<group>"; };
 		391612D229E53745004AE982 /* EditTeamNameResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTeamNameResponse.swift; sourceTree = "<group>"; };
+		391612D429E551BD004AE982 /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
 		391CBA18290580460044CA30 /* InProgressDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InProgressDetailViewController.swift; sourceTree = "<group>"; };
 		391CBA1B290582130044CA30 /* ReflectionInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReflectionInfoModel.swift; sourceTree = "<group>"; };
 		391D217B29050427003FC871 /* CustomVisualEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomVisualEffectView.swift; sourceTree = "<group>"; };
@@ -595,6 +595,7 @@
 		3977E11F2910CECB000E9761 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				D7E5B7702A11CF4700DDAEB3 /* TeamManage */,
 				391612CB29E51F03004AE982 /* EditTeamName */,
 				3E557FC128FE7B9200714E46 /* Home */,
 				395C7E1928FEC3FB00FC2FCA /* CreateReflection */,
@@ -805,9 +806,6 @@
 			isa = PBXGroup;
 			children = (
 				3E5195AA292B05BC00710A01 /* JoinReflectionButton.swift */,
-				D7A5852A2990DCE700E1F4EE /* ChangeTeamView.swift */,
-				D7195FBB299223F6002526E7 /* TeamChangeCollectionViewCell.swift */,
-				D75D0D2129B2003F0013ADA5 /* EmptyTeamView.swift */,
 			);
 			path = UIComponent;
 			sourceTree = "<group>";
@@ -815,11 +813,8 @@
 		3E557FC128FE7B9200714E46 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				D7A585252990DAE500E1F4EE /* Model */,
 				3E5195A9292B05B000710A01 /* UIComponent */,
 				3E557FC228FE7BBC00714E46 /* HomeViewController.swift */,
-				D7022789297F99500027EF64 /* TeamManageViewController.swift */,
-				D7A585212990C50700E1F4EE /* TeamManageSettingCell.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -1114,6 +1109,35 @@
 				D7AFB7C22916EAB100E998B7 /* MyReflectionDetailViewController.swift */,
 			);
 			path = MyReflectionDetail;
+			sourceTree = "<group>";
+		};
+		D7E5B7702A11CF4700DDAEB3 /* TeamManage */ = {
+			isa = PBXGroup;
+			children = (
+				D7022789297F99500027EF64 /* TeamManageViewController.swift */,
+				D7E5B7722A11CF8000DDAEB3 /* Cell */,
+				D7E5B7712A11CF5E00DDAEB3 /* UIComponent */,
+				D7A585252990DAE500E1F4EE /* Model */,
+			);
+			path = TeamManage;
+			sourceTree = "<group>";
+		};
+		D7E5B7712A11CF5E00DDAEB3 /* UIComponent */ = {
+			isa = PBXGroup;
+			children = (
+				D7A5852A2990DCE700E1F4EE /* ChangeTeamView.swift */,
+				D7195FBB299223F6002526E7 /* TeamChangeCollectionViewCell.swift */,
+				D75D0D2129B2003F0013ADA5 /* EmptyTeamView.swift */,
+			);
+			path = UIComponent;
+			sourceTree = "<group>";
+		};
+		D7E5B7722A11CF8000DDAEB3 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				D7A585212990C50700E1F4EE /* TeamManageSettingCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
