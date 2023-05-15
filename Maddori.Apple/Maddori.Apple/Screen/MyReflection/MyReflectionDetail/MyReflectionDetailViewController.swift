@@ -132,8 +132,8 @@ final class MyReflectionDetailViewController: BaseViewController {
             if let json = json.value {
                 guard let jsonDetail = json.detail else { return }
                 self.contentArray.append(contentsOf: jsonDetail.feedback)
-                self.continueArray = self.contentArray.filter { $0.type == "Continue" }
-                self.stopArray = self.contentArray.filter{ $0.type == "Stop" }
+                self.continueArray = self.contentArray.filter { $0.type == .continueType }
+                self.stopArray = self.contentArray.filter{ $0.type == .stopType }
                 
                 self.reloadTableView(type: FeedBackDTO.continueType.rawValue)
             }
@@ -173,7 +173,7 @@ extension MyReflectionDetailViewController: UITableViewDataSource {
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: MyReflectionDetailTableViewCell.className, for: indexPath) as? MyReflectionDetailTableViewCell else { return UITableViewCell() }
                 guard let keyword = contentArray[indexPath.row].keyword,
                       let content = contentArray[indexPath.row].content else { return UITableViewCell() }
-                let fromLabelText = contentArray[indexPath.row].fromUser?.userName ?? TextLiteral.teamManageViewControllerDeleteUserTitle
+                let fromLabelText = contentArray[indexPath.row].fromUser?.nickname ?? TextLiteral.teamManageViewControllerDeleteUserTitle
                 cell.configLabel(title: keyword, fromLabel: fromLabelText, content: content)
                 tableView.isScrollEnabled = true
                 return cell
