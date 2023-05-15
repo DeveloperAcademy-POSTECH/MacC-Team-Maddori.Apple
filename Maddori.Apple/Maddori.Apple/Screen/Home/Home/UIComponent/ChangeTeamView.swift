@@ -114,5 +114,6 @@ extension ChangeTeamView: UICollectionViewDataSource {
 extension ChangeTeamView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.delegate?.changeTeam(teamId: self.teamList[indexPath.item].id!)
+        UserDefaultHandler.setNickname(nickname: self.teamList[indexPath.item].nickname!)
     }
 }
