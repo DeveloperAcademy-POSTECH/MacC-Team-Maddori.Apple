@@ -10,8 +10,8 @@ import Foundation
 struct AllFeedBackResponse: Decodable {
     // MARK: - getTeamAndUserFeedback
     let category: String?
-    let userFeedback: [FeedBackContentResponse]?
-    let teamFeedback: [FeedBackContentResponse]?
+    let userFeedback: [FeedBackResponse]?
+    let teamFeedback: [FeedBackResponse]?
     
     enum CodingKeys: String, CodingKey {
         case category

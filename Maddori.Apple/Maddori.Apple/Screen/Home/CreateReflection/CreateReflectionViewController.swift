@@ -295,7 +295,7 @@ final class CreateReflectionViewController: BaseViewController {
                    parameters: type.body,
                    encoder: JSONParameterEncoder.default,
                    headers: type.header
-        ).responseDecodable(of: BaseModel<AddReflectionResponse>.self) { [weak self] json in
+        ).responseDecodable(of: BaseModel<ReflectionResponse>.self) { [weak self] json in
             if let _ = json.value {
                 self?.dismiss(animated: true)
             }
@@ -308,7 +308,7 @@ final class CreateReflectionViewController: BaseViewController {
                    parameters: type.body,
                    encoder: JSONParameterEncoder.default,
                    headers: type.header
-        ).responseDecodable(of: BaseModel<DeleteReflectionResponse>.self) { json in
+        ).responseDecodable(of: BaseModel<ReflectionResponse>.self) { json in
             if let data = json.value {
                 dump(data)
             }

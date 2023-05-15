@@ -27,7 +27,6 @@ final class MyReflectionViewController: BaseViewController {
     
     // MARK: - property
     
-    private let ellipsisButton = SettingButton(type: .system)
     private lazy var myReflectionTitleLabel: UILabel = {
         let label = UILabel()
         label.setTitleFont(text: user + "님의 회고")
@@ -46,16 +45,9 @@ final class MyReflectionViewController: BaseViewController {
     
     // MARK: - life cycle
     
-    override func setupNavigationBar() {
-        super.setupNavigationBar()
-        let rightItemButton = makeBarButtonItem(with: ellipsisButton)
-        navigationItem.rightBarButtonItem = rightItemButton
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpDelegation()
-        setUpEllipsisButtonMenu()               
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -86,53 +78,13 @@ final class MyReflectionViewController: BaseViewController {
         reflectionCollectionView.dataSource = self
     }
     
-    private func setUpEllipsisButtonMenu() {
-        let menu = UIMenu(options: .displayInline, children: [
-            UIAction(title: TextLiteral.myReflectionViewControllerLogOutTitle, handler: { [weak self] _ in
-                self?.logoutUser()
-            }),
-            UIAction(title: TextLiteral.myReflectionViewControllerDeleteUser, attributes: .destructive, handler: { [weak self] _ in
-                self?.makeRequestAlert(title: TextLiteral.myReflectionViewControllerDeleteUserAlertTitle, message: TextLiteral.myReflectionViewControllerDeleteUserAlertMessage, okAction: { [weak self] _ in
-                    self?.deleteUser(type: .deleteUser)
-                })
-            })
-        ])
-        ellipsisButton.showsMenuAsPrimaryAction = true
-        ellipsisButton.menu = menu
-    }
-    
-    private func logoutUser() {
-        makeRequestAlert(title: TextLiteral.myReflectionViewControllerLogOutMessage, message: "", okTitle: "확인", cancelTitle: "취소") { _ in
-            guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate
-                    as? SceneDelegate else { return }
-            sceneDelegate.logout()
-        }
-    }
-    
     private func setupNickname() {
         user = UserDefaultStorage.nickname
         myReflectionTitleLabel.setTitleFont(text: user + "님의 회고")
         myReflectionTitleLabel.applyColor(to: user, with: .blue200)
     }
-    
     // MARK: - api
-    
-    private func deleteUser(type: MyReflectionEndPoint<VoidModel>) {
-        AF.request(type.address,
-                   method: type.method,
-                   headers: type.headers
-        )
-        .responseDecodable(of: BaseModel<VoidModel>.self) { json in
-            if let json = json.value {
-                dump(json)
-                UserDefaultHandler.clearAllData()
-                guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate
-                        as? SceneDelegate else { return }
-                sceneDelegate.logout()
-            }
-        }
-    }
-    
+        
     private func fetchAllReflection(type: MyReflectionEndPoint<EncodeDTO>) {
         AF.request(type.address,
                    method: type.method,

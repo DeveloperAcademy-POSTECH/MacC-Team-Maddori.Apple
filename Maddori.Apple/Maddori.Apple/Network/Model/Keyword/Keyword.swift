@@ -13,6 +13,5 @@ struct Keyword {
     let type: FeedBackType
     let keyword: String
     let content: String
-    let startContent: String?
     let fromUser: String
 }

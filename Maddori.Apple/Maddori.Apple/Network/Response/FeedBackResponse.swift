@@ -9,7 +9,7 @@ import Foundation
 
 struct FeedBackResponse: Decodable {
     let id: Int?
-    let type: String?
+    let type: FeedBackType?
     let keyword: String?
     let content: String?
     let fromUser: MemberResponse?
