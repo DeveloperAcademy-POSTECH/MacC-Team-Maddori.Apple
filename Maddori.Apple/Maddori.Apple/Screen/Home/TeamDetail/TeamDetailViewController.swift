@@ -220,7 +220,7 @@ final class TeamDetailViewController: BaseViewController {
     
     private func setupMyProfileButton() {
         memberTableView.didTappedMyProfile = { [weak self] nickname, role, profilePath in
-            let viewController = SetNicknameViewController(from: .teamDetail)
+            let viewController = SetNicknameViewController(from: .teamDetail, teamId: UserDefaultStorage.teamId, teamName: UserDefaultStorage.teamName)
             viewController.nickname = nickname
             viewController.role = role
             viewController.profilePath = profilePath

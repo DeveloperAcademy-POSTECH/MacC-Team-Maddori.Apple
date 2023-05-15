@@ -24,7 +24,6 @@ final class SetNicknameViewController: BaseViewController {
         static let roleMax: Int = 20
     }
     private let cameraPicker = UIImagePickerController()
-    private let teamName: String = UserDefaultStorage.teamName
     var nickname: String?
     var role: String?
     var profilePath: String?

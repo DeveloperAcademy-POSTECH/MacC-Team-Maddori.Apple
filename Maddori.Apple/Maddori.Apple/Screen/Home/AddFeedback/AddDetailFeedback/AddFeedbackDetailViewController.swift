@@ -301,7 +301,7 @@ final class AddFeedbackDetailViewController: BaseViewController {
             if let data = json.value {
                 guard let members = data.detail?.members else { return }
                 
-                let membersExceptMe = members.filter { $0.userId != UserDefaultStorage.userId }
+                let membersExceptMe = members.filter { $0.id != UserDefaultStorage.userId }
                 DispatchQueue.main.async {
                     self.selectMemberView.memberCollectionView.memberList = membersExceptMe
                 }
