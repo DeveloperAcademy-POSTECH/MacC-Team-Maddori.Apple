@@ -288,6 +288,7 @@ final class TeamDetailViewController: BaseViewController {
                     UserDefaultHandler.setNickname(nickname: nickname)
                 } else {
                     UserDefaultHandler.setTeamId(teamId: 0)
+                    UserDefaultHandler.setNickname(nickname: "(알 수 없음)")
                 }
                 completion()
             }
