@@ -151,7 +151,7 @@ final class HomeViewController: BaseViewController {
         
         view.addSubview(keywordCollectionView)
         keywordCollectionView.snp.makeConstraints {
-            $0.top.equalTo(currentReflectionLabel.snp.bottom).offset(SizeLiteral.titleSubtitleSpacing)
+            $0.top.equalTo(currentReflectionLabel.snp.bottom).offset(5)
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             $0.bottom.equalTo(addFeedbackButton.snp.top).offset(-10)
         }
@@ -252,7 +252,7 @@ final class HomeViewController: BaseViewController {
     private func showAddFeedbackButton() {
         addFeedbackButton.isHidden = false
         keywordCollectionView.snp.remakeConstraints {
-            $0.top.equalTo(currentReflectionLabel.snp.bottom).offset(SizeLiteral.titleSubtitleSpacing)
+            $0.top.equalTo(currentReflectionLabel.snp.bottom).offset(5)
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             $0.bottom.equalTo(addFeedbackButton.snp.top).offset(-10)
         }
@@ -261,7 +261,7 @@ final class HomeViewController: BaseViewController {
     private func hideAddFeedbackButton() {
         addFeedbackButton.isHidden = true
         keywordCollectionView.snp.remakeConstraints {
-            $0.top.equalTo(currentReflectionLabel.snp.bottom).offset(SizeLiteral.titleSubtitleSpacing)
+            $0.top.equalTo(currentReflectionLabel.snp.bottom).offset(5)
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(SizeLiteral.bottomTabBarPadding)
         }
