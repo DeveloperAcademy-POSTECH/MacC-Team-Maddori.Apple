@@ -15,7 +15,7 @@ final class TeamDetailViewController: BaseViewController {
     
     // MARK: - property
     
-    private lazy var backButton = BackButton(type: .system)
+    private lazy var backButton = BackButton()
     private lazy var toastView = ToastView(type: .complete)
     private let titleLabel: UILabel = {
         let label = UILabel()
