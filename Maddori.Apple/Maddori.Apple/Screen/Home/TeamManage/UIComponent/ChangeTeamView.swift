@@ -88,7 +88,7 @@ final class ChangeTeamView: UIView {
         emptyView.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(28)
             $0.directionalHorizontalEdges.equalToSuperview()
-            $0.height.equalToSuperview()
+            $0.height.equalTo(150)
         }
     }
 }
