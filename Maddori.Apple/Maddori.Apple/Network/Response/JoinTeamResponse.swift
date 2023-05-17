@@ -8,7 +8,7 @@
 import Foundation
 
 struct JoinTeamResponse: Decodable {
-    // MARK: - userJoinTeam
+    // MARK: - userJoinTeam, createTeam
     let id: Int?
     let nickname: String?
     let role: String?

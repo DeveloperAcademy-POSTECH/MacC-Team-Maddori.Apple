@@ -15,7 +15,7 @@ protocol ChangeTeamViewDelegate: AnyObject {
 
 final class ChangeTeamView: UIView {
     
-    var teamList: [TeamInfoResponse] = [] {
+    var teamList: [TeamNameResponse] = [] {
         didSet {
             self.teamList.isEmpty ? self.setLayoutEmptyView() : self.setLayoutTeamListView()
         }
@@ -113,6 +113,6 @@ extension ChangeTeamView: UICollectionViewDataSource {
 
 extension ChangeTeamView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.delegate?.changeTeam(teamId: self.teamList[indexPath.item].id!)
+        self.delegate?.changeTeam(teamId: self.teamList[indexPath.item].id)
     }
 }

@@ -8,6 +8,7 @@
 import Foundation
 
 struct JoinTeamDTO: Encodable {
+    // MARK: - userJoinTeam, editProfile
     let nickname: String
     let role: String?
 }

@@ -19,7 +19,6 @@ struct FeedbackFromMeModel {
     let feedbackType: FeedbackButtonType
     let keyword: String
     let info: String
-    let start: String?
     let reflectionStatus: ReflectionStatus
 }
 
