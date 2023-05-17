@@ -8,6 +8,7 @@
 import Foundation
 
 struct EditFeedBackDTO: Encodable {
+    // MARK: - updateFeedback
     let type: FeedBackDTO
     let keyword: String
     let content: String
