@@ -89,8 +89,8 @@ extension MemberCollectionView: UICollectionViewDataSource {
             assert(false, "Wrong Cell")
             return UICollectionViewCell()
         }
-        if let username = memberList[indexPath.item].userName {
-            cell.setupLayoutInfoView(nickname: username, role: memberList[indexPath.item].role ?? "", imagePath: memberList[indexPath.item].profileImagePath)
+        if let nickname = memberList[indexPath.item].nickname {
+            cell.setupLayoutInfoView(nickname: nickname, role: memberList[indexPath.item].role ?? "", imagePath: memberList[indexPath.item].profileImagePath)
         }
         return cell
     }

@@ -213,9 +213,9 @@ final class TeamDetailViewController: BaseViewController {
     }
     
     private func setupMyProfileButton() {
-        memberTableView.didTappedMyProfile = { [weak self] userName, role, profilePath in
-            let viewController = SetNicknameViewController(from: .teamDetail)
-            viewController.userName = userName
+        memberTableView.didTappedMyProfile = { [weak self] nickname, role, profilePath in
+            let viewController = SetNicknameViewController(from: .teamDetail, teamId: UserDefaultStorage.teamId, teamName: UserDefaultStorage.teamName)
+            viewController.nickname = nickname
             viewController.role = role
             viewController.profilePath = profilePath
             self?.navigationController?.pushViewController(viewController, animated: true)
@@ -227,7 +227,7 @@ final class TeamDetailViewController: BaseViewController {
     private func fetchTeamDetailMember(type: TeamDetailEndPoint<VoidModel>) {
         AF.request(type.address,
                    method: type.method,
-                   headers: type.headers).responseDecodable(of: BaseModel<TeamMembersResponse>.self) { json in
+                   headers: type.headers).responseDecodable(of: BaseModel<MembersDetailResponse>.self) { json in
             if let data = json.value {
                 guard let members = data.detail?.members else { return }
                 DispatchQueue.main.async {
@@ -241,7 +241,7 @@ final class TeamDetailViewController: BaseViewController {
     private func fetchTeamInformation(type: TeamDetailEndPoint<VoidModel>) {
         AF.request(type.address,
                    method: type.method,
-                   headers: type.headers).responseDecodable(of: BaseModel<CertainTeamDetailResponse>.self) { json in
+                   headers: type.headers).responseDecodable(of: BaseModel<TeamInfoResponse>.self) { json in
             if let data = json.value {
                 guard let teamName = data.detail?.teamName,
                       let invitationCode = data.detail?.invitationCode
@@ -271,7 +271,7 @@ final class TeamDetailViewController: BaseViewController {
     private func fetchUserTeamList(type: TeamDetailEndPoint<VoidModel>, completion: @escaping (() ->())) {
         AF.request(type.address,
                    method: type.method,
-                   headers: type.headers).responseDecodable(of: BaseModel<[TeamInfoResponse]>.self) { json in
+                   headers: type.headers).responseDecodable(of: BaseModel<[TeamNameResponse]>.self) { json in
             if let data = json.value {
                 guard let teams = data.detail else { return }
                 if !teams.isEmpty {

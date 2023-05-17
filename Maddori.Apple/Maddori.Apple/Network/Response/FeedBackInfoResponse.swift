@@ -9,7 +9,7 @@ import Foundation
 
 struct FeedBackInfoResponse: Decodable {
     // MARK: - getFromMeToCertainMemberFeedbackAll
-    let toUser: SimpleMemberResponse
+    let toUser: MemberResponse
     let reflection: ReflectionResponse
     let continueArray: [KeywordResponse]
     let stopArray: [KeywordResponse]

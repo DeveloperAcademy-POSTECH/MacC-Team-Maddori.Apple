@@ -1,5 +1,5 @@
 //
-//  EditTeamNameResponse.swift
+//  TeamNameResponse.swift
 //  Maddori.Apple
 //
 //  Created by Mingwan Choi on 2023/04/11.
@@ -7,7 +7,8 @@
 
 import Foundation
 
-struct EditTeamNameResponse: Decodable {
+struct TeamNameResponse: Decodable {
+    // MARK: - getCertainTeamName, editTeamName, getUserTeamList
     let id: Int
     let teamName: String
     
