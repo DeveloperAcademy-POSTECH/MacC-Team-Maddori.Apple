@@ -318,7 +318,7 @@ final class HomeViewController: BaseViewController {
                 }
             } else {
                 DispatchQueue.main.async {
-                    self.teamButton.setTitle("팀 없음", for: .normal)
+                    self.teamButton.setTitle("팀 없음 ", for: .normal)
                     self.teamButton.tintColor = .gray500
                 }
             }
