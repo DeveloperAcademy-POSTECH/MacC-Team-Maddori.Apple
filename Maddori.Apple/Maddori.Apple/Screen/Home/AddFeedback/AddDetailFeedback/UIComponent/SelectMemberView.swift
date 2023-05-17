@@ -25,6 +25,7 @@ final class SelectMemberView: UIStackView {
                     self.layoutIfNeeded()
                 }
                 self.memberCollectionView.isHidden = false
+                self.memberCollectionView.emptyView.isHidden = false
             }
             else {
                 self.memberCollectionView.snp.updateConstraints {
@@ -34,6 +35,7 @@ final class SelectMemberView: UIStackView {
                     self.layoutIfNeeded()
                 }
                 self.memberCollectionView.isHidden = false
+                self.memberCollectionView.emptyView.isHidden = true
             }
         }
     }
