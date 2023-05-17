@@ -66,6 +66,7 @@ enum TextLiteral {
     
     static let homeViewControllerEmptyDescriptionLabel = "아직 회고 일정이 정해지지 않았습니다"
     static let homeViewControllerEmptyCollectionViewList = ["첫 번째", "키워드를", "📝", "작성해보세요", "✚"]
+    static let homeViewControllerEmptyCollectionViewListWhenProgressing = ["이번", "회고에는", "작성된", "피드백이", "없습니다", "🥲"]
     
     // MARK: - AddFeedbackViewController
     
