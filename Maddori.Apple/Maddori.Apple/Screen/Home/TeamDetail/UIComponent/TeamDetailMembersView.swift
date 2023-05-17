@@ -63,8 +63,16 @@ final class TeamDetailMembersView: UIView {
         memberTableView.dataSource = self
     }
     
+    private func setupEmptyView() {
+        memberTableView.backgroundView = EmptyPersonView()
+    }
+    
     func loadData(data: [MemberDetailResponse]) {
         members.removeAll()
+        if members.isEmpty {
+            setupEmptyView()
+            return
+        }
         data.forEach {
             if $0.id == UserDefaultStorage.userId {
                 currentMember = $0
