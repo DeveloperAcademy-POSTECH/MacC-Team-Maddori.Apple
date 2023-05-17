@@ -275,10 +275,14 @@ final class TeamDetailViewController: BaseViewController {
             if let data = json.value {
                 guard let teams = data.detail else { return }
                 if !teams.isEmpty {
-                    guard let teamId = teams.first?.id else { return }
+                    guard let teamId = teams.first?.id,
+                          let nickname = teams.first?.nickname
+                    else { return }
                     UserDefaultHandler.setTeamId(teamId: teamId)
+                    UserDefaultHandler.setNickname(nickname: nickname)
                 } else {
                     UserDefaultHandler.setTeamId(teamId: 0)
+                    UserDefaultHandler.setNickname(nickname: "(알 수 없음)")
                 }
                 completion()
             }

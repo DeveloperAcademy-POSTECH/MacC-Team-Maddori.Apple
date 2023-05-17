@@ -12,7 +12,7 @@ import SnapKit
 
 final class MyReflectionViewController: BaseViewController {
     
-    private let user = UserDefaultStorage.nickname
+    private var user = UserDefaultStorage.nickname
     private var allReflection: AllReflectionResponse? 
     private var totalReflection: [ReflectionResponse] = [] {
         didSet {
@@ -53,6 +53,7 @@ final class MyReflectionViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         fetchAllReflection(type: .fetchPastReflectionList(teamId: UserDefaultStorage.teamId))
+        setupNickname()
     }
     
     override func render() {
@@ -77,6 +78,11 @@ final class MyReflectionViewController: BaseViewController {
         reflectionCollectionView.dataSource = self
     }
     
+    private func setupNickname() {
+        user = UserDefaultStorage.nickname
+        myReflectionTitleLabel.setTitleFont(text: user + "님의 회고")
+        myReflectionTitleLabel.applyColor(to: user, with: .blue200)
+    }
     // MARK: - api
         
     private func fetchAllReflection(type: MyReflectionEndPoint<EncodeDTO>) {

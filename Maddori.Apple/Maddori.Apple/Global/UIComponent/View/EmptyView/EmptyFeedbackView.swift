@@ -34,8 +34,7 @@ final class EmptyCollectionFeedbackView: BaseCollectionViewCell {
     override func render() {
         self.addSubview(emptyFeedbackKeyword)
         emptyFeedbackKeyword.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.centerY.equalToSuperview().offset(-Size.capsuleYOffset)
+            $0.center.equalToSuperview()
             $0.width.equalTo(Size.capsuleWidth)
             $0.height.equalTo(Size.capsuleHeight)
         }
@@ -78,8 +77,7 @@ final class EmptyTableFeedbackView: BaseTableViewCell {
     override func render() {
         self.addSubview(emptyFeedbackKeyword)
         emptyFeedbackKeyword.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.centerY.equalToSuperview().offset(-Size.capsuleYOffset)
+            $0.center.equalToSuperview()
             $0.width.equalTo(Size.capsuleWidth)
             $0.height.equalTo(Size.capsuleHeight)
         }
