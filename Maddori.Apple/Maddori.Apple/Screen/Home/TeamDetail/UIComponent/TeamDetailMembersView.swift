@@ -63,14 +63,16 @@ final class TeamDetailMembersView: UIView {
         memberTableView.dataSource = self
     }
     
-    private func determineEmptyTeam() {
-        if members.isEmpty {
-            memberTableView.backgroundView = EmptyPersonView()
-        }
+    private func setupEmptyView() {
+        memberTableView.backgroundView = EmptyPersonView()
     }
     
     func loadData(data: [MemberDetailResponse]) {
         members.removeAll()
+        if members.isEmpty {
+            setupEmptyView()
+            return
+        }
         data.forEach {
             if $0.userId == UserDefaultStorage.userId {
                 currentMember = $0
@@ -78,7 +80,6 @@ final class TeamDetailMembersView: UIView {
                 members.append($0)
             }
         }
-        determineEmptyTeam()
         memberTableView.reloadData()
     }
 }
