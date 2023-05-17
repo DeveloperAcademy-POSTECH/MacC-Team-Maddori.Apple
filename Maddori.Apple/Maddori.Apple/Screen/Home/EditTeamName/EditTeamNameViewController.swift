@@ -103,7 +103,7 @@ final class EditTeamNameViewController: BaseTextFieldViewController {
             parameters: type.body,
             encoder: JSONParameterEncoder.default,
             headers: type.headers
-        ).responseDecodable(of: BaseModel<EditTeamNameResponse>.self) { json in
+        ).responseDecodable(of: BaseModel<TeamNameResponse>.self) { json in
             if let data = json.value {
                 dump(data)
                 self.navigationController?.popViewController(animated: true)

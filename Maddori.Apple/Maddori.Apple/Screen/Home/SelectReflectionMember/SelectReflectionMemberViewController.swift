@@ -13,7 +13,6 @@ import SnapKit
 final class SelectReflectionMemberViewController: BaseViewController {
     
     let reflectionId: Int
-    let isAdmin: Bool
     
     // MARK: - property
     
@@ -31,6 +30,13 @@ final class SelectReflectionMemberViewController: BaseViewController {
         label.setTitleFont(text: TextLiteral.selectReflectionMemberViewControllerTitleLabel)
         return label
     }()
+    private let reflectionGuidelineLabel: UILabel = {
+        let label = UILabel()
+        label.text = TextLiteral.selectReflectionMemberViewControllerSubtitleLabel
+        label.font = .caption1
+        label.textColor = .gray400
+        return label
+    }()
     private let memberCollectionView = ReflectionMemberCollectionView()
     private lazy var feedbackDoneButton: MainButton = {
         let button = MainButton()
@@ -46,9 +52,8 @@ final class SelectReflectionMemberViewController: BaseViewController {
     
     // MARK: - life cycle
     
-    init(reflectionId: Int, isAdmin: Bool) {
+    init(reflectionId: Int) {
         self.reflectionId = reflectionId
-        self.isAdmin = isAdmin
         super.init()
     }
     
@@ -73,6 +78,12 @@ final class SelectReflectionMemberViewController: BaseViewController {
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
+        view.addSubview(reflectionGuidelineLabel)
+        reflectionGuidelineLabel.snp.makeConstraints {
+            $0.top.equalTo(selectFeedbackMemberTitleLabel.snp.bottom).offset(SizeLiteral.titleSubtitleSpacing)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+        
         view.addSubview(feedbackDoneButton)
         feedbackDoneButton.snp.makeConstraints {
             $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.bottomPadding)
@@ -81,7 +92,7 @@ final class SelectReflectionMemberViewController: BaseViewController {
         
         view.addSubview(memberCollectionView)
         memberCollectionView.snp.makeConstraints {
-            $0.top.equalTo(selectFeedbackMemberTitleLabel.snp.bottom).offset(20)
+            $0.top.equalTo(reflectionGuidelineLabel.snp.bottom).offset(20)
             $0.bottom.equalTo(feedbackDoneButton.snp.top).inset(-6)
             $0.leading.trailing.equalToSuperview()
         }
@@ -108,9 +119,9 @@ final class SelectReflectionMemberViewController: BaseViewController {
     private func didTappedMember() {
         memberCollectionView.didTappedMember = { [weak self] member, members in
             guard let id = member.id,
-                  let username = member.nickname,
+                  let nickname = member.nickname,
                   let reflectionId = self?.reflectionId else { return }
-            let viewController = InProgressViewController(memberId: id, memberUsername: username, reflectionId: reflectionId)
+            let viewController = InProgressViewController(memberId: id, memberUsername: nickname, reflectionId: reflectionId)
             self?.navigationController?.pushViewController(viewController, animated: true)
             
             guard let memberCollectionView = self?.memberCollectionView else { return }
@@ -129,7 +140,7 @@ final class SelectReflectionMemberViewController: BaseViewController {
         AF.request(type.address,
                    method: type.method,
                    headers: type.headers
-        ).responseDecodable(of: BaseModel<MembersResponse>.self) { json in
+        ).responseDecodable(of: BaseModel<MembersDetailResponse>.self) { json in
             if let json = json.value {
                 dump(json)
                 guard let fetchedMemberList = json.detail?.members else { return }

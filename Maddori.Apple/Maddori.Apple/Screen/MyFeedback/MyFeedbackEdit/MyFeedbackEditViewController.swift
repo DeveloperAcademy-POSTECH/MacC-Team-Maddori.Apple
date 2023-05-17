@@ -301,7 +301,7 @@ final class MyFeedbackEditViewController: BaseViewController {
                    parameters: type.body,
                    encoder: JSONParameterEncoder.default,
                    headers: type.headers
-        ).responseDecodable(of: BaseModel<EditFeedBackResponse>.self) { json in
+        ).responseDecodable(of: BaseModel<FeedBackContentResponse>.self) { json in
             if let _ = json.value {
                 DispatchQueue.main.async {
                     self.dismiss(animated: true) {

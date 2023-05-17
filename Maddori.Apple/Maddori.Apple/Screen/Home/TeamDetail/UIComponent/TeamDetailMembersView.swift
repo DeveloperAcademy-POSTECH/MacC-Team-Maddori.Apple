@@ -63,10 +63,18 @@ final class TeamDetailMembersView: UIView {
         memberTableView.dataSource = self
     }
     
+    private func setupEmptyView() {
+        memberTableView.backgroundView = EmptyPersonView()
+    }
+    
     func loadData(data: [MemberDetailResponse]) {
         members.removeAll()
+        if members.isEmpty {
+            setupEmptyView()
+            return
+        }
         data.forEach {
-            if $0.userId == UserDefaultStorage.userId {
+            if $0.id == UserDefaultStorage.userId {
                 currentMember = $0
             } else {
                 members.append($0)
@@ -88,8 +96,8 @@ extension TeamDetailMembersView: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: TeamDetailMemberTableViewCell.className, for: indexPath) as? TeamDetailMemberTableViewCell else { return UITableViewCell() }
-        if let username = members[indexPath.item].userName {
-            cell.setupLayoutInfoView(nickname: username, role: members[indexPath.item].role ?? "", imagePath: members[indexPath.item].profileImagePath)
+        if let nickname = members[indexPath.item].nickname {
+            cell.setupLayoutInfoView(nickname: nickname, role: members[indexPath.item].role ?? "", imagePath: members[indexPath.item].profileImagePath)
         }
         cell.selectionStyle = .none
         return cell
@@ -101,7 +109,7 @@ extension TeamDetailMembersView: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: TeamDetailMemberTableHeaderView.className) as? TeamDetailMemberTableHeaderView else { return UITableViewHeaderFooterView() }
-        headerView.setupMemberInfoView(nickname: currentMember?.userName ?? UserDefaultStorage.nickname,
+        headerView.setupMemberInfoView(nickname: currentMember?.nickname ?? UserDefaultStorage.nickname,
                            role: currentMember?.role ?? "",
                            imagePath: currentMember?.profileImagePath ?? "")
         let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTappedHeaderView))
@@ -114,6 +122,6 @@ extension TeamDetailMembersView: UITableViewDataSource {
     }
     
     @objc func didTappedHeaderView(gestureRecognizer: UIGestureRecognizer) {
-        didTappedMyProfile?(currentMember?.userName ?? UserDefaultStorage.nickname, currentMember?.role ?? "", currentMember?.profileImagePath ?? "")
+        didTappedMyProfile?(currentMember?.nickname ?? UserDefaultStorage.nickname, currentMember?.role ?? "", currentMember?.profileImagePath ?? "")
     }
 }
