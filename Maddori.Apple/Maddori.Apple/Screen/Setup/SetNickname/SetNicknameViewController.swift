@@ -107,7 +107,7 @@ final class SetNicknameViewController: BaseViewController {
     }()
     private lazy var doneButton: MainButton = {
         let button = MainButton()
-        button.title = TextLiteral.setNicknameControllerDoneButtonText
+        button.title = TextLiteral.doneButtonTitle
         button.isDisabled = true
         let action = UIAction { [weak self] _ in
             self?.didTappedDoneButton()
@@ -322,11 +322,11 @@ final class SetNicknameViewController: BaseViewController {
         
         switch fromView {
         case .createView:
-            dispatchCreateTeam(type: .dispatchCreateTeam, teamName: teamName, nickname: nickname, role: role)
+            let dto = CreateTeamDTO(team_name: teamName, nickname: nickname, role: role)
+            dispatchCreateTeam(type: .dispatchCreateTeam(dto))
         case .joinView:
-            if let teamId {
-                dispatchJoinTeam(type: .dispatchJoinTeam(teamId: teamId), nickname: nickname, role: role)
-            }
+            let dto = JoinTeamDTO(nickname: nickname, role: role)
+            dispatchJoinTeam(type: .dispatchJoinTeam(teamId: UserDefaultStorage.teamId, dto))
         case .teamDetail:
             let dto = JoinTeamDTO(nickname: nickname, role: role)
             patchEditProfile(type: .patchEditProfile(dto))
@@ -407,16 +407,17 @@ final class SetNicknameViewController: BaseViewController {
     
     // MARK: - api
     
-    private func dispatchCreateTeam(type: SetupEndPoint<EncodeDTO>, teamName: String, nickname: String, role: String?) {
+    private func dispatchCreateTeam(type: SetupEndPoint<CreateTeamDTO>) {
         AF.upload(multipartFormData: { multipartFormData in
-            let teamInfo: Dictionary = ["team_name": teamName,
-                                        "nickname": nickname,
-                                        "role": role]
-            for (key, value) in teamInfo {
-                if let value = value {
-                    guard let data = "\(value)".data(using: .utf8) else { return }
-                    multipartFormData.append(data, withName: key, mimeType: "text/plain")
-                }
+            guard let teamName = type.body?.team_name,
+                  let teamNameData = teamName.utf8Encode() else { return }
+            multipartFormData.append(teamNameData, withName: "team_name")
+            guard let nickname = type.body?.nickname,
+                  let nicknameData = nickname.utf8Encode() else { return }
+            multipartFormData.append(nicknameData, withName: "nickname")
+            if let role = type.body?.role {
+                guard let roleData = role.utf8Encode() else { return }
+                multipartFormData.append(roleData, withName: "role")
             }
             if let profileURL = self.profileURL {
                 multipartFormData.append(profileURL,
@@ -446,14 +447,14 @@ final class SetNicknameViewController: BaseViewController {
         }
     }
     
-    private func dispatchJoinTeam(type: SetupEndPoint<EncodeDTO>, nickname: String, role: String?) {
+    private func dispatchJoinTeam(type: SetupEndPoint<JoinTeamDTO>) {
         AF.upload(multipartFormData: { multipartFormData in
-            let profileInfo: Dictionary = ["nickname": nickname, "role": role]
-            for (key, value) in profileInfo {
-                if let value = value {
-                    guard let data = "\(value)".data(using: .utf8) else { return }
-                    multipartFormData.append(data, withName: key, mimeType: "text/plain")
-                }
+            guard let nickname = type.body?.nickname,
+                  let nicknameData = nickname.utf8Encode() else { return }
+            multipartFormData.append(nicknameData, withName: "nickname")
+            if let role = type.body?.role {
+                guard let roleData = role.utf8Encode() else { return }
+                multipartFormData.append(roleData, withName: "role")
             }
             if let profileURL = self.profileURL {
                 multipartFormData.append(profileURL,
@@ -556,8 +557,8 @@ extension SetNicknameViewController: PHPickerViewControllerDelegate {
                     do {
                         try data.write(to: url)
                         self.profileURL = url
-                        if url != URL(string: self.profilePath ?? "") && self.nicknameTextField.hasText {
-                            DispatchQueue.main.async {
+                        DispatchQueue.main.async {
+                            if url != URL(string: self.profilePath ?? "") && self.nicknameTextField.hasText {
                                 self.doneButton.isDisabled = false
                             }
                         }

@@ -8,8 +8,8 @@
 import Alamofire
 
 enum SetupEndPoint<T: Encodable>: EndPointable {
-    case dispatchCreateTeam
-    case dispatchJoinTeam(teamId: Int)
+    case dispatchCreateTeam(T)
+    case dispatchJoinTeam(teamId: Int, T)
     case fetchCertainTeam(invitationCode: String)
     case dispatchAppleLogin(T)
     
@@ -17,7 +17,7 @@ enum SetupEndPoint<T: Encodable>: EndPointable {
         switch self {
         case .dispatchCreateTeam:
             return "\(UrlLiteral.baseUrl2)/teams"
-        case .dispatchJoinTeam(let teamId):
+        case .dispatchJoinTeam(let teamId, _):
             return "\(UrlLiteral.baseUrl2)/users/join-team/\(teamId)"
         case .fetchCertainTeam(let invitationCode):
             return "\(UrlLiteral.baseUrl2)/teams?invitation_code=\(invitationCode)"
@@ -41,10 +41,10 @@ enum SetupEndPoint<T: Encodable>: EndPointable {
     
     var body: T? {
         switch self {
-        case .dispatchCreateTeam:
-            return nil
-        case .dispatchJoinTeam:
-            return nil
+        case .dispatchCreateTeam(let body):
+            return body
+        case .dispatchJoinTeam(_, let body):
+            return body
         case .fetchCertainTeam:
             return nil
         case .dispatchAppleLogin(let body):

@@ -60,7 +60,6 @@
 		3984742629264ACE00EDC139 /* MyFeedBackEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3984742529264ACE00EDC139 /* MyFeedBackEndPoint.swift */; };
 		39847428292656EB00EDC139 /* VoidModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39847427292656EB00EDC139 /* VoidModel.swift */; };
 		3998E86F295C308100541752 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3998E86E295C308100541752 /* Settings.bundle */; };
-		39A64ACE2905885F001DB020 /* StartSuggestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A64ACD2905885F001DB020 /* StartSuggestionView.swift */; };
 		39AC287F29269BC6006CFEE6 /* Endpointable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39AC287E29269BC6006CFEE6 /* Endpointable.swift */; };
 		39F15C0C296D371500952D02 /* EmptyPersonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F15C0B296D371500952D02 /* EmptyPersonView.swift */; };
 		39F1A13529125762005E3456 /* MyFeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F1A13429125762005E3456 /* MyFeedbackViewController.swift */; };
@@ -220,7 +219,6 @@
 		3984742529264ACE00EDC139 /* MyFeedBackEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFeedBackEndPoint.swift; sourceTree = "<group>"; };
 		39847427292656EB00EDC139 /* VoidModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoidModel.swift; sourceTree = "<group>"; };
 		3998E86E295C308100541752 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
-		39A64ACD2905885F001DB020 /* StartSuggestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartSuggestionView.swift; sourceTree = "<group>"; };
 		39AC287E29269BC6006CFEE6 /* Endpointable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpointable.swift; sourceTree = "<group>"; };
 		39F15C0B296D371500952D02 /* EmptyPersonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyPersonView.swift; sourceTree = "<group>"; };
 		39F1A13429125762005E3456 /* MyFeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFeedbackViewController.swift; sourceTree = "<group>"; };
@@ -347,7 +345,6 @@
 		391CBA17290580360044CA30 /* InProgressDetail */ = {
 			isa = PBXGroup;
 			children = (
-				39A64ACC2905882C001DB020 /* UIComponent */,
 				391CBA18290580460044CA30 /* InProgressDetailViewController.swift */,
 			);
 			path = InProgressDetail;
@@ -669,14 +666,6 @@
 				3E953A9429C1CE7D0073302F /* ImageCacheManager.swift */,
 			);
 			path = Storage;
-			sourceTree = "<group>";
-		};
-		39A64ACC2905882C001DB020 /* UIComponent */ = {
-			isa = PBXGroup;
-			children = (
-				39A64ACD2905885F001DB020 /* StartSuggestionView.swift */,
-			);
-			path = UIComponent;
 			sourceTree = "<group>";
 		};
 		39AC287D29269BBB006CFEE6 /* Protocol */ = {
@@ -1267,7 +1256,6 @@
 				52F07B9A2912541B0015BC8B /* MyFeedbackDetailViewController.swift in Sources */,
 				39307CF52917DA9300789AB6 /* LoginViewController.swift in Sources */,
 				525E722528FFCFA600EF3FCB /* FeedbackTypeButtonView.swift in Sources */,
-				39A64ACE2905885F001DB020 /* StartSuggestionView.swift in Sources */,
 				391D38DD29C44A0400A6BFED /* TeamDetailMemberTableHeaderView.swift in Sources */,
 				D7AFB7C52916EDC300E998B7 /* MyReflectionDetailTableViewCell.swift in Sources */,
 				D7195FBC299223F6002526E7 /* TeamChangeCollectionViewCell.swift in Sources */,
