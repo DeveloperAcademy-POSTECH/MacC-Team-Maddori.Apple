@@ -15,7 +15,7 @@ final class TeamDetailViewController: BaseViewController {
     
     // MARK: - property
     
-    private lazy var backButton = BackButton(type: .system)
+    private lazy var backButton = BackButton()
     private lazy var toastView = ToastView(type: .complete)
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -69,7 +69,6 @@ final class TeamDetailViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.isNavigationBarHidden = false
         setupBackButton()
         setupEditButton()
         setupExitButton()
@@ -82,11 +81,6 @@ final class TeamDetailViewController: BaseViewController {
         navigationController?.setNavigationBarHidden(false, animated: true)
         fetchTeamDetailMember(type: .fetchTeamMember)
         fetchTeamInformation(type: .fetchTeamInformation)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
     override func render() {
@@ -281,10 +275,14 @@ final class TeamDetailViewController: BaseViewController {
             if let data = json.value {
                 guard let teams = data.detail else { return }
                 if !teams.isEmpty {
-                    guard let teamId = teams.first?.id else { return }
+                    guard let teamId = teams.first?.id,
+                          let nickname = teams.first?.nickname
+                    else { return }
                     UserDefaultHandler.setTeamId(teamId: teamId)
+                    UserDefaultHandler.setNickname(nickname: nickname)
                 } else {
                     UserDefaultHandler.setTeamId(teamId: 0)
+                    UserDefaultHandler.setNickname(nickname: "(알 수 없음)")
                 }
                 completion()
             }
