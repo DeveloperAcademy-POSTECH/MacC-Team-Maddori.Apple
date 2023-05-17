@@ -329,7 +329,7 @@ final class SetNicknameViewController: BaseViewController {
             }
         case .teamDetail:
             let dto = JoinTeamDTO(nickname: nickname, role: role)
-            putEditProfile(type: .putEditProfile(dto))
+            patchEditProfile(type: .patchEditProfile(dto))
         }
         
         nicknameTextField.resignFirstResponder()
@@ -483,7 +483,7 @@ final class SetNicknameViewController: BaseViewController {
         }
     }
     
-    private func putEditProfile(type: TeamDetailEndPoint<JoinTeamDTO>) {
+    private func patchEditProfile(type: TeamDetailEndPoint<JoinTeamDTO>) {
         AF.upload(multipartFormData: { multipartFormData in
             guard let nickname = type.body?.nickname,
                   let nicknameData = nickname.utf8Encode() else { return }
