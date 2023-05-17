@@ -15,7 +15,7 @@ protocol ChangeTeamViewDelegate: AnyObject {
 
 final class ChangeTeamView: UIView {
     
-    var teamList: [TeamInfoResponse] = [] {
+    var teamList: [TeamNameResponse] = [] {
         didSet {
             self.teamList.isEmpty ? self.setLayoutEmptyView() : self.setLayoutTeamListView()
         }
@@ -88,7 +88,7 @@ final class ChangeTeamView: UIView {
         emptyView.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(28)
             $0.directionalHorizontalEdges.equalToSuperview()
-            $0.height.equalToSuperview()
+            $0.height.equalTo(150)
         }
     }
 }
@@ -113,6 +113,10 @@ extension ChangeTeamView: UICollectionViewDataSource {
 
 extension ChangeTeamView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.delegate?.changeTeam(teamId: self.teamList[indexPath.item].id!)
+        guard let teamId = self.teamList[indexPath.item].id,
+              let nickname = self.teamList[indexPath.item].nickname
+        else { return }
+        self.delegate?.changeTeam(teamId: teamId)
+        UserDefaultHandler.setNickname(nickname: nickname)
     }
 }

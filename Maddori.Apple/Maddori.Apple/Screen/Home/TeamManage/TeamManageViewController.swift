@@ -16,14 +16,22 @@ final class TeamManageViewController: BaseViewController {
         static let teamSectionHeight = 59
         static let teamSectionSpacing = 8
         static let teamSectionPadding = 28
-        static let teamTitleLabelHeight = 50
+        static let teamTitleLableHeight = 50
+        static let emptyViewHeight = 150
     }
     
     private var sections: [Section] = []
     private lazy var teamCount = 0 {
         didSet {
-            self.changeTeamView.snp.updateConstraints {
-                $0.height.equalTo((self.teamCount * Size.teamSectionHeight) + ((self.teamCount - 1) * Size.teamSectionSpacing) + Size.teamSectionPadding + Size.teamTitleLabelHeight)
+            if teamCount == 0 {
+                self.changeTeamView.snp.updateConstraints {
+                    $0.height.equalTo(Size.emptyViewHeight + Size.teamTitleLableHeight)
+                }
+            }
+            else {
+                self.changeTeamView.snp.updateConstraints {
+                    $0.height.equalTo((self.teamCount * Size.teamSectionHeight) + ((self.teamCount - 1) * Size.teamSectionSpacing) + Size.teamSectionPadding + Size.teamTitleLableHeight)
+                }
             }
         }
     }
@@ -157,15 +165,15 @@ final class TeamManageViewController: BaseViewController {
     }
     
     private func withdrawal() {
-        self.makeRequestAlert(title: TextLiteral.myReflectionViewControllerDeleteUserAlertTitle,
-                              message: TextLiteral.myReflectionViewControllerDeleteUserAlertMessage,
+        self.makeRequestAlert(title: TextLiteral.teamManageViewControllerDeleteUserAlertTitle,
+                              message: TextLiteral.teamManageViewControllerDeleteUserAlertMessage,
                               okAction: { [weak self] _ in
             self?.deleteUser(type: .deleteUser)
         })
     }
     
     private func logoutUser() {
-        makeRequestAlert(title: TextLiteral.myReflectionViewControllerLogOutMessage,
+        makeRequestAlert(title: TextLiteral.teamManageViewControllerLogOutMessage,
                          message: "",
                          okTitle: "확인",
                          cancelTitle: "취소") { _ in
@@ -181,7 +189,7 @@ final class TeamManageViewController: BaseViewController {
         AF.request(type.address,
                    method: type.method,
                    headers: type.headers
-        ).responseDecodable(of: BaseModel<[TeamInfoResponse]>.self) { json in
+        ).responseDecodable(of: BaseModel<[TeamNameResponse]>.self) { json in
             if let json = json.value {
                 guard let teamCount = json.detail?.count else { return }
                 self.teamCount = teamCount

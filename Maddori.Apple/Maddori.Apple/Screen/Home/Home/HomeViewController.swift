@@ -29,7 +29,6 @@ final class HomeViewController: BaseViewController {
     var reflectionTitle: String = ""
     var reflectionDate: String = ""
     
-    var isAdmin: Bool = false
     private var currentTeamId: Int = 0
     
     // MARK: - property
@@ -98,13 +97,13 @@ final class HomeViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.isNavigationBarHidden = true
         setupDelegation()
         render()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationController?.isNavigationBarHidden = true
         setLayoutTeamManageButton()
         fetchCertainTeamDetail(type: .fetchCertainTeamDetail)
         fetchCurrentReflectionDetail(type: .fetchCurrentReflectionDetail)
@@ -151,7 +150,7 @@ final class HomeViewController: BaseViewController {
         
         view.addSubview(keywordCollectionView)
         keywordCollectionView.snp.makeConstraints {
-            $0.top.equalTo(currentReflectionLabel.snp.bottom).offset(SizeLiteral.titleSubtitleSpacing)
+            $0.top.equalTo(currentReflectionLabel.snp.bottom).offset(5)
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             $0.bottom.equalTo(addFeedbackButton.snp.top).offset(-10)
         }
@@ -233,14 +232,14 @@ final class HomeViewController: BaseViewController {
     }
     
     private func presentSelectReflectionMemberViewController() {
-        let viewController = UINavigationController(rootViewController: SelectReflectionMemberViewController(reflectionId: currentReflectionId, isAdmin: self.isAdmin))
+        let viewController = UINavigationController(rootViewController: SelectReflectionMemberViewController(reflectionId: currentReflectionId))
         viewController.modalPresentationStyle = .fullScreen
         present(viewController, animated: true)
     }
     
     private func presentStartReflectionView() {
         guard let navigationController = self.navigationController else { return }
-        let viewController = StartReflectionViewController(reflectionId: currentReflectionId, navigationViewController: navigationController, isAdmin: self.isAdmin)
+        let viewController = StartReflectionViewController(reflectionId: currentReflectionId, navigationViewController: navigationController)
         viewController.modalPresentationStyle = .overFullScreen
         present(viewController, animated: true)
         UserDefaultHandler.setHasSeenAlert(to: true)
@@ -252,7 +251,7 @@ final class HomeViewController: BaseViewController {
     private func showAddFeedbackButton() {
         addFeedbackButton.isHidden = false
         keywordCollectionView.snp.remakeConstraints {
-            $0.top.equalTo(currentReflectionLabel.snp.bottom).offset(SizeLiteral.titleSubtitleSpacing)
+            $0.top.equalTo(currentReflectionLabel.snp.bottom).offset(5)
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             $0.bottom.equalTo(addFeedbackButton.snp.top).offset(-10)
         }
@@ -261,7 +260,7 @@ final class HomeViewController: BaseViewController {
     private func hideAddFeedbackButton() {
         addFeedbackButton.isHidden = true
         keywordCollectionView.snp.remakeConstraints {
-            $0.top.equalTo(currentReflectionLabel.snp.bottom).offset(SizeLiteral.titleSubtitleSpacing)
+            $0.top.equalTo(currentReflectionLabel.snp.bottom).offset(5)
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(SizeLiteral.bottomTabBarPadding)
         }
@@ -312,10 +311,10 @@ final class HomeViewController: BaseViewController {
         AF.request(type.address,
                    method: type.method,
                    headers: type.headers
-        ).responseDecodable(of: BaseModel<CertainTeamDetailResponse>.self) { json in
+        ).responseDecodable(of: BaseModel<TeamInfoResponse>.self) { json in
             if let json = json.value {
                 guard let teamName = json.detail?.teamName,
-                      let teamId = json.detail?.teamId
+                      let teamId = json.detail?.id
                 else { return }
                 self.currentTeamId = teamId
                 DispatchQueue.main.async {
@@ -411,7 +410,7 @@ extension HomeViewController: UICollectionViewDataSource {
             presentAddFeedbackViewController()
         case .Progressing:
             guard let navigationController = self.navigationController else { return }
-            let viewController = UINavigationController(rootViewController: SelectReflectionMemberViewController(reflectionId: currentReflectionId, isAdmin: isAdmin))
+            let viewController = UINavigationController(rootViewController: SelectReflectionMemberViewController(reflectionId: currentReflectionId))
             viewController.modalPresentationStyle = .fullScreen
             navigationController.present(viewController, animated: true)
         }
