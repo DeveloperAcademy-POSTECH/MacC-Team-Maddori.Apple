@@ -22,6 +22,14 @@ final class TeamDetailMemberTableViewCell: BaseTableViewCell {
         }
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+
+        memberInfoView.profileImageView.image = ImageLiterals.imgProfileNone
+        memberInfoView.profileNicknameLabel.text = nil
+        memberInfoView.profileRoleLabel.text = nil
+    }
+    
     // MARK: - func
     
     func setupLayoutInfoView(nickname: String, role: String, imagePath: String?) {
