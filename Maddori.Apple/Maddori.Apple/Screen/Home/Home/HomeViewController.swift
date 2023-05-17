@@ -362,7 +362,9 @@ final class HomeViewController: BaseViewController {
                         case .SettingRequired, .Before, .Done:
                             self.showAddFeedbackButton()
                         case .Progressing:
-                            self.emptyKeywordListWhenProgressing()
+                            if reflectionKeywordList.isEmpty {
+                                self.emptyKeywordListWhenProgressing()
+                            }
                             self.hideAddFeedbackButton()
                             if !UserDefaultStorage.hasSeenReflectionAlert {
                                 self.presentStartReflectionView()
