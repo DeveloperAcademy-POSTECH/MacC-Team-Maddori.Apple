@@ -99,6 +99,7 @@
 		3E557FFD2901CD7400714E46 /* Keyword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E557FFC2901CD7400714E46 /* Keyword.swift */; };
 		3E5580072906A7B200714E46 /* InProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5580062906A7B200714E46 /* InProgressViewController.swift */; };
 		3E66777529419C8300BB5670 /* KeywordTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E66777429419C8300BB5670 /* KeywordTextFieldView.swift */; };
+		3E6FFF6D2A1FA02700166DCE /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E6FFF6C2A1FA02700166DCE /* Config.swift */; };
 		3E8052DF2906E09100A6449D /* KeywordSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8052DE2906E09100A6449D /* KeywordSectionHeaderView.swift */; };
 		3E953A9529C1CE7D0073302F /* ImageCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E953A9429C1CE7D0073302F /* ImageCacheManager.swift */; };
 		3EA341E62924E2AD005CBD1C /* HomeEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA341E52924E2AD005CBD1C /* HomeEndPoint.swift */; };
@@ -257,6 +258,7 @@
 		3E557FFC2901CD7400714E46 /* Keyword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keyword.swift; sourceTree = "<group>"; };
 		3E5580062906A7B200714E46 /* InProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InProgressViewController.swift; sourceTree = "<group>"; };
 		3E66777429419C8300BB5670 /* KeywordTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordTextFieldView.swift; sourceTree = "<group>"; };
+		3E6FFF6C2A1FA02700166DCE /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		3E8052DE2906E09100A6449D /* KeywordSectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordSectionHeaderView.swift; sourceTree = "<group>"; };
 		3E953A9429C1CE7D0073302F /* ImageCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheManager.swift; sourceTree = "<group>"; };
 		3EA341E52924E2AD005CBD1C /* HomeEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeEndPoint.swift; sourceTree = "<group>"; };
@@ -397,6 +399,7 @@
 		39257DD828F90EA900201E0B /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				3E6FFF6B2A1FA01600166DCE /* Setting */,
 				39AC287D29269BBB006CFEE6 /* Protocol */,
 				397E49582924F80E004220D6 /* Storage */,
 				39F52C782924CC8600B19A77 /* EndPoint */,
@@ -812,6 +815,14 @@
 				3E66777429419C8300BB5670 /* KeywordTextFieldView.swift */,
 			);
 			path = UIComponent;
+			sourceTree = "<group>";
+		};
+		3E6FFF6B2A1FA01600166DCE /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				3E6FFF6C2A1FA02700166DCE /* Config.swift */,
+			);
+			path = Setting;
 			sourceTree = "<group>";
 		};
 		3EB508672913550000FB77CB /* Reflection */ = {
@@ -1310,6 +1321,7 @@
 				39F52C4929232DFB00B19A77 /* JoinTeamDTO.swift in Sources */,
 				39F52C552923311200B19A77 /* JoinTeamResponse.swift in Sources */,
 				39257DED28F9378D00201E0B /* BaseCollectionViewCell.swift in Sources */,
+				3E6FFF6D2A1FA02700166DCE /* Config.swift in Sources */,
 				391CBA19290580460044CA30 /* InProgressDetailViewController.swift in Sources */,
 				39F1A13C2912637E005E3456 /* MyFeedbackMemberCollectionViewCell.swift in Sources */,
 				391612CF29E5352A004AE982 /* EditTeamNameEndPoint.swift in Sources */,
