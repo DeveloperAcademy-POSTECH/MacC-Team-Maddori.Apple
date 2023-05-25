@@ -13,7 +13,7 @@ enum EditTeamNameEndPoint<T: Encodable>: EndPointable {
     var address: String {
         switch self {
         case .patchEditTeamName:
-            return "\(UrlLiteral.baseUrl2)/teams/\(UserDefaultStorage.teamId)/team-name"
+            return "\(Config.baseUrl)/teams/\(UserDefaultStorage.teamId)/team-name"
         }
     }
     

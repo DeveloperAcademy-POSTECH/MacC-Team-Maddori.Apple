@@ -17,11 +17,11 @@ enum InProgressEndPoint<T: Encodable>: EndPointable {
     var address: String {
         switch self {
         case .fetchTeamMembers:
-            return "\(UrlLiteral.baseUrl2)/teams/\(UserDefaultStorage.teamId)/members"
+            return "\(Config.baseUrl)/teams/\(UserDefaultStorage.teamId)/members"
         case .fetchTeamAndUserFeedback(let reflectionId, let memberId):
-            return "\(UrlLiteral.baseUrl2)/teams/\(UserDefaultStorage.teamId)/reflections/\(reflectionId)/feedbacks/from-team?members=\(memberId)"
+            return "\(Config.baseUrl)/teams/\(UserDefaultStorage.teamId)/reflections/\(reflectionId)/feedbacks/from-team?members=\(memberId)"
         case .patchEndReflection(let reflectionId):
-            return "\(UrlLiteral.baseUrl2)/teams/\(UserDefaultStorage.teamId)/reflections/\(reflectionId)/end"
+            return "\(Config.baseUrl)/teams/\(UserDefaultStorage.teamId)/reflections/\(reflectionId)/end"
         }
     }
     

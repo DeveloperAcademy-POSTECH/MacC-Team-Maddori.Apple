@@ -380,7 +380,7 @@ final class SetNicknameViewController: BaseViewController {
             nicknameTextField.text = nickname
             roleTextField.text = role
             if let profilePath {
-                profileImageButton.profileImage.load(from: UrlLiteral.imageBaseURL + profilePath)
+                profileImageButton.profileImage.load(from: Config.imageBaseUrl + profilePath)
             }
         }
     }

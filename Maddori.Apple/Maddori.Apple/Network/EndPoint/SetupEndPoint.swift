@@ -16,13 +16,13 @@ enum SetupEndPoint<T: Encodable>: EndPointable {
     var address: String {
         switch self {
         case .dispatchCreateTeam:
-            return "\(UrlLiteral.baseUrl2)/teams"
+            return "\(Config.baseUrl)/teams"
         case .dispatchJoinTeam(let teamId, _):
-            return "\(UrlLiteral.baseUrl2)/users/join-team/\(teamId)"
+            return "\(Config.baseUrl)/users/join-team/\(teamId)"
         case .fetchCertainTeam(let invitationCode):
-            return "\(UrlLiteral.baseUrl2)/teams?invitation_code=\(invitationCode)"
+            return "\(Config.baseUrl)/teams?invitation_code=\(invitationCode)"
         case .dispatchAppleLogin:
-            return "\(UrlLiteral.baseUrl2)/auth"
+            return "\(Config.baseUrl)/auth"
         }
     }
 

@@ -108,7 +108,7 @@ extension ReflectionMemberCollectionView: UICollectionViewDataSource {
         }
         
         if let imagePath = memberList[indexPath.item].profileImagePath {
-            let fullImagePath = UrlLiteral.imageBaseURL + imagePath
+            let fullImagePath = Config.imageBaseUrl + imagePath
             cell.profileImage.load(from: fullImagePath)
         }
         

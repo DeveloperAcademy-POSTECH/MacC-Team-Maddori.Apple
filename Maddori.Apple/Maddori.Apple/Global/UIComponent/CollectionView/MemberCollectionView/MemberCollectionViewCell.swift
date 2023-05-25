@@ -52,7 +52,7 @@ final class MemberCollectionViewCell: BaseCollectionViewCell {
         memberInfoView.profileNicknameLabel.text = nickname
         memberInfoView.profileRoleLabel.text = role
         if let imagePath {
-            memberInfoView.profileImageView.load(from: UrlLiteral.imageBaseURL + imagePath)
+            memberInfoView.profileImageView.load(from: Config.imageBaseUrl + imagePath)
         }
     }
     

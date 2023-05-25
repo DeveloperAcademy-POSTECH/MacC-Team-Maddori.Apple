@@ -17,19 +17,19 @@ enum TeamDetailEndPoint<T: Encodable>: EndPointable {
     var address: String {
         switch self {
         case .fetchTeamMember:
-            return "\(UrlLiteral.baseUrl2)/teams/\(UserDefaultStorage.teamId)/members"
+            return "\(Config.baseUrl)/teams/\(UserDefaultStorage.teamId)/members"
             
         case .fetchTeamInformation:
-            return "\(UrlLiteral.baseUrl2)/teams/\(UserDefaultStorage.teamId)"
+            return "\(Config.baseUrl)/teams/\(UserDefaultStorage.teamId)"
             
         case .deleteTeam:
-            return "\(UrlLiteral.baseUrl2)/users/team/\(UserDefaultStorage.teamId)/leave"
+            return "\(Config.baseUrl)/users/team/\(UserDefaultStorage.teamId)/leave"
             
         case .fetchUserTeamList:
-            return "\(UrlLiteral.baseUrl2)/users/teams"
+            return "\(Config.baseUrl)/users/teams"
             
         case .patchEditProfile:
-            return "\(UrlLiteral.baseUrl2)/users/teams/\(UserDefaultStorage.teamId)/profile"
+            return "\(Config.baseUrl)/users/teams/\(UserDefaultStorage.teamId)/profile"
         }
     }
     
