@@ -16,10 +16,13 @@ enum Config {
     }
     
     private static let infoDictionary: [String: Any] = {
-        guard let dict = Bundle.main.infoDictionary else {
+        guard let path = Bundle.main.path(forResource: "UrlInfo", ofType: "plist") else {
             fatalError("plist cannot be found.")
         }
-        return dict
+        guard let dict = NSDictionary(contentsOfFile: path) else {
+            fatalError()
+        }
+        return dict as! [String : Any]
     }()
     
 }
