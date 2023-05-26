@@ -3,8 +3,8 @@
 <plist version="1.0">
 <dict>
 	<key>BASE_URL</key>
-	<string>http://15.165.21.115:3001/api/v2</string>
+	<string></string>
 	<key>IMAGE_BASE_URL</key>
-	<string>http://15.165.21.115:3001</string>
+	<string></string>
 </dict>
 </plist>
