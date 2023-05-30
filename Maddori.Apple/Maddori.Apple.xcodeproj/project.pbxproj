@@ -1475,8 +1475,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Maddori.Apple/Global/Supports/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "키고";
-				INFOPLIST_KEY_NSCameraUsageDescription = "'키고'가 프로필 사진 설정을 위해 카메라에 접근하려고 합니다.";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "'키고'가 프로필 사진 설정을 위해 사용자의 사진에 접근하려고 합니다.";
+				INFOPLIST_KEY_NSCameraUsageDescription = "프로필 이미지를 설정하기 위해 사용자의 카메라에 접근합니다.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "프로필 이미지를 설정하기 위해 사용자의 사진에 접근합니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -1512,8 +1512,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Maddori.Apple/Global/Supports/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "키고";
-				INFOPLIST_KEY_NSCameraUsageDescription = "'키고'가 프로필 사진 설정을 위해 카메라에 접근하려고 합니다.";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "'키고'가 프로필 사진 설정을 위해 사용자의 사진에 접근하려고 합니다.";
+				INFOPLIST_KEY_NSCameraUsageDescription = "프로필 이미지를 설정하기 위해 사용자의 카메라에 접근합니다.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "프로필 이미지를 설정하기 위해 사용자의 사진에 접근합니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
