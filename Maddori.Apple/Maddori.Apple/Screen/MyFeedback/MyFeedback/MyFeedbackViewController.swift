@@ -14,8 +14,10 @@ final class MyFeedbackViewController: BaseViewController {
     var selectedIndex: Int = 0
     private var memberList: [MemberDetailResponse] = [] {
         didSet {
+            removeChildViews()
             if memberList.isEmpty {
                 setLayoutEmptyView()
+                feedbackCollectionView.feedbackCollectionView.reloadData()
             } else {
                 setLayoutMyFeedbackView()
                 memberCollectionView.reloadData()
@@ -56,6 +58,7 @@ final class MyFeedbackViewController: BaseViewController {
         collectionView.dataSource = self
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.register(MyFeedbackMemberCollectionViewCell.self, forCellWithReuseIdentifier: MyFeedbackMemberCollectionViewCell.className)
+        collectionView.accessibilityIdentifier = "removableView"
         return collectionView
     }()
     private lazy var dividerView: UIView = {
@@ -76,15 +79,21 @@ final class MyFeedbackViewController: BaseViewController {
             )
             self?.navigationController?.pushViewController(MyFeedbackDetailViewController(feedbackDetail: data), animated: true)
         }
+        collectionView.accessibilityIdentifier = "removableView"
         return collectionView
     }()
-    private lazy var emptyView = EmptyPersonView()
+    private lazy var emptyView: EmptyPersonView = {
+        let view = EmptyPersonView()
+        view.accessibilityIdentifier = "removableView"
+        return view
+    }()
     
     // MARK: - life cycle
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         fetchCurrentTeamMember(type: .fetchCurrentTeamMember)
+        print(UserDefaultStorage.teamId)
         tabBarController?.tabBar.isHidden = false
     }
     
@@ -131,6 +140,15 @@ final class MyFeedbackViewController: BaseViewController {
         emptyView.snp.makeConstraints {
             $0.top.equalTo(myFeedbackLabel.snp.bottom)
             $0.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
+    }
+    
+    private func removeChildViews() {
+        let removableView = self.view.subviews.filter {
+            $0.accessibilityIdentifier == "removableView"
+        }
+        removableView.forEach {
+            $0.removeFromSuperview()
         }
     }
     
