@@ -17,7 +17,6 @@ final class MyFeedbackViewController: BaseViewController {
             removeChildViews()
             if memberList.isEmpty {
                 setLayoutEmptyView()
-                feedbackCollectionView.feedbackCollectionView.reloadData()
             } else {
                 setLayoutMyFeedbackView()
                 memberCollectionView.reloadData()
