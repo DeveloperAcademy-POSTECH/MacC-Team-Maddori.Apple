@@ -12,14 +12,11 @@ import SnapKit
 
 enum AlertType: String {
     case delete = "삭제"
-    case join = "합류"
     
     var title: String {
         switch self {
         case .delete:
             return TextLiteral.alertViewControllerTypeDeleteTitle
-        case .join:
-            return TextLiteral.alertViewControllerTypeJoinTitle
         }
     }
     
@@ -27,16 +24,12 @@ enum AlertType: String {
         switch self {
         case .delete:
             return TextLiteral.alertViewControllerTypeDeleteSubTitle
-        case .join:
-            return TextLiteral.alertViewControllerTypeJoinSubTitle
         }
     }
     
     var actionTitle: String {
         switch self {
         case .delete:
-            return self.rawValue
-        case .join:
             return self.rawValue
         }
     }
@@ -45,8 +38,6 @@ enum AlertType: String {
         switch self {
         case .delete:
             return .red100
-        case .join:
-            return .gray500
         }
     }
 }
@@ -111,7 +102,7 @@ final class AlertViewController: BaseViewController {
     }()
     private lazy var cancelButton: UIButton = {
         let button = UIButton()
-        button.setTitle(TextLiteral.alertViewControllerCancelButtonText, for: .normal)
+        button.setTitle(TextLiteral.actionSheetCancelTitle, for: .normal)
         button.setTitleColor(.gray500, for: .normal)
         button.titleLabel?.font = .body2
         button.titleLabel?.textAlignment = .center
@@ -140,8 +131,6 @@ final class AlertViewController: BaseViewController {
     
     override func configUI() {
         view.backgroundColor = .black100.withAlphaComponent(0.85)
-        setOkLabelColor()
-        setTeamName()
     }
     
     override func render() {
@@ -198,56 +187,17 @@ final class AlertViewController: BaseViewController {
     
     // MARK: - func
     
-    private func setOkLabelColor() {
-        if type == .join {
-            DispatchQueue.main.async {
-                self.actionButton.setTitleColor(self.type.actionTitleColor, for: .normal)
-            }
-        }
-    }
-    
-    private func setTeamName() {
-        if type == .join {
-            if teamName != nil {
-                DispatchQueue.main.async {
-                    self.titleLabel.text = self.teamName
-                }
-            }
-        }
-    }
-    
     private func didTappedActionButton(_ type: AlertType) {
         switch type {
         case .delete:
             self.deleteFeedBack(type: .deleteFeedBack(reflectionId: self.reflectionId, feedBackId: self.feedbackId))
-        case .join:
-            self.dispatchJoinTeam(type: .dispatchJoinTeam(teamId: UserDefaultStorage.teamId))
         }
         self.dismiss(animated: true) {
             self.navigation?.popViewController(animated: true)
         }
     }
     
-    private func pushHomeViewController() {
-        let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
-        sceneDelegate?.changeRootViewCustomTabBarView()
-    }
-    
     // MARK: - api
-    
-    private func dispatchJoinTeam(type: SetupEndPoint<JoinTeamDTO>) {
-        AF.request(type.address,
-                   method: type.method,
-                   headers: type.headers
-        ).responseDecodable(of: BaseModel<JoinTeamResponse>.self) { json in
-            if let json = json.value {
-                dump(json)
-                DispatchQueue.main.async {
-                    self.pushHomeViewController()
-                }
-            }
-        }
-    }
     
     private func deleteFeedBack(type: MyFeedBackEndPoint<VoidModel>) {
         AF.request(type.address,

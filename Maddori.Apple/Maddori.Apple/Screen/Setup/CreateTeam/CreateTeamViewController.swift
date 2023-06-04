@@ -70,6 +70,11 @@ final class CreateTeamViewController: BaseTextFieldViewController {
         setupDoneButton()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        doneButton.isLoading = false
+    }
+    
     override func setupNavigationBar() {
         super.setupNavigationBar()
         
@@ -84,44 +89,25 @@ final class CreateTeamViewController: BaseTextFieldViewController {
     
     private func setupDoneButton() {
         let action = UIAction { [weak self] _ in
-            guard let teamName = self?.kigoTextField.text else { return }
-            self?.dispatchCreateTeam(type: .dispatchCreateTeam(CreateTeamDTO(team_name: teamName)))
+            self?.doneButton.isLoading = true
+            if let teamName = self?.kigoTextField.text {
+                if teamName.hasSpecialCharacters() {
+                    DispatchQueue.main.async {
+                        self?.makeAlert(title: TextLiteral.createTeamViewControllerAlertTitle, message: TextLiteral.createTeamViewControllerAlertMessage)
+                        self?.doneButton.isLoading = false
+                    }
+                } else {
+                    self?.pushSetNicknameViewController(teamName: teamName)
+                }
+            }
         }
         super.doneButton.addAction(action, for: .touchUpInside)
     }
     
     // MARK: - func
-    
-    private func pushInvitationViewController(invitationCode: String) {
-        if let teamName = super.kigoTextField.text {
-            let viewController = InvitationCodeViewController(teamName: teamName, invitationCode: invitationCode)
-            self.navigationController?.pushViewController(viewController, animated: true)
-        }
-    }
-    
-    // MARK: - api
-    
-    private func dispatchCreateTeam(type: SetupEndPoint<CreateTeamDTO>) {
-        AF.request(type.address,
-                   method: type.method,
-                   parameters: type.body,
-                   encoder: JSONParameterEncoder.default,
-                   headers: type.headers
-        ).responseDecodable(of: BaseModel<CreateTeamResponse>.self) { json in
-            if let json = json.value {
-                dump(json)
-                guard let teamId = json.detail?.id else { return }
-                UserDefaultHandler.setTeamId(teamId: teamId)
-                DispatchQueue.main.async {
-                    if let invitationCode = json.detail?.invitationCode {
-                        self.pushInvitationViewController(invitationCode: invitationCode)
-                    }
-                }
-            } else {
-                DispatchQueue.main.async {
-                    self.makeAlert(title: TextLiteral.createTeamViewControllerAlertTitle, message: TextLiteral.createTeamViewControllerAlertMessage)
-                }
-            }
-        }
+
+    private func pushSetNicknameViewController(teamName: String) {
+        let viewController = SetNicknameViewController(from: .createView, teamName: teamName)
+        navigationController?.pushViewController(viewController, animated: true)
     }
 }

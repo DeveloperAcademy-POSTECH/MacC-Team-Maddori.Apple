@@ -16,13 +16,13 @@ enum MyFeedBackEndPoint<T: Encodable> {
     var address: String {
         switch self {
         case .fetchCurrentTeamMember:
-            return "\(UrlLiteral.baseUrl)/teams/\(UserDefaultStorage.teamId)/members"
+            return "\(UrlLiteral.baseUrl2)/teams/\(UserDefaultStorage.teamId)/members"
         case .fetchCertainMemberFeedBack(let memberId):
-            return "\(UrlLiteral.baseUrl)/teams/\(UserDefaultStorage.teamId)/reflections/current/feedbacks/from-me?members=\(memberId)"
+            return "\(UrlLiteral.baseUrl2)/teams/\(UserDefaultStorage.teamId)/reflections/current/feedbacks/from-me?members=\(memberId)"
         case .deleteFeedBack(let reflectionId, let feedBackId):
-            return "\(UrlLiteral.baseUrl)/teams/\(UserDefaultStorage.teamId)/reflections/\(reflectionId)/feedbacks/\(feedBackId)"
+            return "\(UrlLiteral.baseUrl2)/teams/\(UserDefaultStorage.teamId)/reflections/\(reflectionId)/feedbacks/\(feedBackId)"
         case .putEditFeedBack(let reflectionId, let feedBackId, _):
-            return "\(UrlLiteral.baseUrl)/teams/\(UserDefaultStorage.teamId)/reflections/\(reflectionId)/feedbacks/\(feedBackId)"
+            return "\(UrlLiteral.baseUrl2)/teams/\(UserDefaultStorage.teamId)/reflections/\(reflectionId)/feedbacks/\(feedBackId)"
         }
     }
     

@@ -15,11 +15,11 @@ enum MyReflectionEndPoint<T: Encodable>: EndPointable {
     var address: String {
         switch self {
         case .fetchPastReflectionList(let teamId):
-            return "\(UrlLiteral.baseUrl)/teams/\(teamId)/reflections"
+            return "\(UrlLiteral.baseUrl2)/teams/\(teamId)/reflections"
         case .fetchCertainTypeFeedbackAllID(let reflectionId, let cssType):
-            return "\(UrlLiteral.baseUrl)/teams/\(UserDefaultStorage.teamId)/reflections/\(reflectionId)/feedbacks?type=\(cssType.rawValue)"
+            return "\(UrlLiteral.baseUrl2)/teams/\(UserDefaultStorage.teamId)/reflections/\(reflectionId)/feedbacks?type=\(cssType.rawValue)"
         case .deleteUser:
-            return "\(UrlLiteral.baseUrl)/login/signout"
+            return "\(UrlLiteral.baseUrl2)/auth/signout"
         }
     }
     

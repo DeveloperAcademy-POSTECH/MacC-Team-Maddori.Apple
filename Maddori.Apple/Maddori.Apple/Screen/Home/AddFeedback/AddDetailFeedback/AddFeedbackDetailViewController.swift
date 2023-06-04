@@ -70,9 +70,9 @@ final class AddFeedbackDetailViewController: BaseViewController {
         let view = SelectMemberView()
         view.upDownImageView.transform = CGAffineTransform(rotationAngle: .pi)
         view.didSelectedMemeber = { [weak self] user in
-            guard let userName = user.userName,
-                  let userId = user.userId   else { return }
-            self?.toName = userName
+            guard let nickname = user.nickname,
+                  let userId = user.id   else { return }
+            self?.toName = nickname
             self?.toId = userId
             
             self?.openSelectTypeView()
@@ -112,7 +112,7 @@ final class AddFeedbackDetailViewController: BaseViewController {
         setupShadowView()
         detectMemberIsSelected()
         detectFeedbackTypeIsSelected()
-        fetchCurrentTeamMember(type: .fetchCurrentTeamMember)
+        fetchTeamDetailMember(type: .fetchTeamMember)
     }
     
     override func setupNavigationBar() {
@@ -294,18 +294,16 @@ final class AddFeedbackDetailViewController: BaseViewController {
     
     // MARK: - api
     
-    private func fetchCurrentTeamMember(type: AddFeedBackEndPoint<AddReflectionDTO>) {
-        AF.request(
-            type.address,
-            method: type.method,
-            headers: type.headers
-        ).responseDecodable(of: BaseModel<TeamMembersResponse>.self) { json in
-            dump(json.value)
+    private func fetchTeamDetailMember(type: TeamDetailEndPoint<VoidModel>) {
+        AF.request(type.address,
+                   method: type.method,
+                   headers: type.headers).responseDecodable(of: BaseModel<MembersDetailResponse>.self) { json in
             if let data = json.value {
-                guard let allMemberList = data.detail?.members else { return }
-                let memberList = allMemberList.filter { $0.userName != UserDefaultStorage.nickname }
+                guard let members = data.detail?.members else { return }
+                
+                let membersExceptMe = members.filter { $0.id != UserDefaultStorage.userId }
                 DispatchQueue.main.async {
-                    self.selectMemberView.memberCollectionView.memberList = memberList
+                    self.selectMemberView.memberCollectionView.memberList = membersExceptMe
                 }
             }
         }

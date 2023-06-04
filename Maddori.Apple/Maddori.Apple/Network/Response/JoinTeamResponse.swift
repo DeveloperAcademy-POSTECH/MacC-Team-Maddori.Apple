@@ -8,16 +8,20 @@
 import Foundation
 
 struct JoinTeamResponse: Decodable {
-    // MARK: - userJoinTeam
-    let admin: Bool?
+    // MARK: - userJoinTeam, createTeam
     let id: Int?
+    let nickname: String?
+    let role: String?
+    let profileImagePath: String?
     let userId: Int?
-    let teamId: String?
+    let team: TeamInfoResponse?
     
     enum CodingKeys: String, CodingKey {
-        case admin
         case id
+        case nickname
+        case role
+        case profileImagePath = "profile_image_path"
         case userId = "user_id"
-        case teamId = "team_id"
+        case team
     }
 }

@@ -13,9 +13,21 @@ import SnapKit
 final class CreateReflectionViewController: BaseViewController {
     
     var reflectionId: Int
+    var reflectionTitle: String?
+    var reflectionDate: Date?
+    
+    var isEditReflection: Bool = false
     
     init(reflectionId: Int) {
         self.reflectionId = reflectionId
+        super.init()
+    }
+    
+    init(reflectionId: Int, reflectionTitle: String?, reflectionDate: String?) {
+        self.reflectionId = reflectionId
+        self.reflectionTitle = reflectionTitle
+        self.reflectionDate = reflectionDate?.formatStringToDate()
+        self.isEditReflection = true
         super.init()
     }
     
@@ -31,13 +43,23 @@ final class CreateReflectionViewController: BaseViewController {
         button.addAction(action, for: .touchUpInside)
         return button
     }()
-    private let titleLabel: UILabel = {
+    private lazy var deleteButton: DeleteButton = {
+        let button = DeleteButton(type: .system)
+        return button
+    }()
+    private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.setTitleFont(text: TextLiteral.createReflectionViewControllerTitle)
+        label.setTitleFont(text: isEditReflection ? TextLiteral.editReflectionViewControllerTitle : TextLiteral.createReflectionViewControllerTitle)
         label.textColor = .black100
         return label
     }()
-    private let reflectionNameView = ReflectionNameView()
+    private lazy var reflectionNameView: ReflectionNameView = {
+        let nameView = ReflectionNameView()
+        if isEditReflection {
+            nameView.nameTextField.text = reflectionTitle
+        }
+        return nameView
+    }()
     private let reflectionDateLabel: UILabel = {
         let label = UILabel()
         label.text = TextLiteral.createReflectionViewControllerDateLabel
@@ -52,6 +74,9 @@ final class CreateReflectionViewController: BaseViewController {
         }
         let hideKeyboardAction = UIAction { [weak self] _ in
             self?.view.endEditing(true)
+        }
+        if isEditReflection, let date = reflectionDate {
+            picker.date = date
         }
         picker.datePickerMode = .date
         picker.locale = Locale(identifier: "ko_KR")
@@ -71,6 +96,11 @@ final class CreateReflectionViewController: BaseViewController {
         let hideKeyboardAction = UIAction { [weak self] _ in
             self?.view.endEditing(true)
         }
+        if !isEditReflection {
+            picker.date = Date(timeIntervalSinceNow: 1 * 60)
+        } else if isEditReflection, let date = reflectionDate {
+            picker.date = date
+        }
         picker.datePickerMode = .time
         picker.locale = Locale(identifier: "ko_KR")
         picker.preferredDatePickerStyle = .inline
@@ -81,9 +111,10 @@ final class CreateReflectionViewController: BaseViewController {
         picker.addAction(hideKeyboardAction, for: .editingDidBegin)
         return picker
     }()
-    private let mainButton: MainButton = {
+    private lazy var mainButton: MainButton = {
         let button = MainButton()
-        button.title = TextLiteral.createReflectionViewControllerButtonText
+        button.isDisabled = isEditReflection ? false : true
+        button.title = isEditReflection ? TextLiteral.editReflectionViewControllerButtonText : TextLiteral.createReflectionViewControllerButtonText
         return button
     }()
     
@@ -93,6 +124,10 @@ final class CreateReflectionViewController: BaseViewController {
         super.viewDidLoad()
         setupAddReflection()
         setupNotificationCenter()
+        setupTextfieldObserver()
+        if isEditReflection {
+            setupDeleteReflection()
+        }
     }
     
     override func render() {
@@ -135,8 +170,15 @@ final class CreateReflectionViewController: BaseViewController {
     }
     
     override func setupNavigationBar() {
-        let item = makeBarButtonItem(with: closeButton)
-        navigationItem.rightBarButtonItem = item
+        if !isEditReflection {
+            let closeButton = makeBarButtonItem(with: closeButton)
+            navigationItem.rightBarButtonItem = closeButton
+        } else {
+            let closeButton = makeBarButtonItem(with: closeButton)
+            let deleteButton = makeBarButtonItem(with: deleteButton)
+            navigationItem.leftBarButtonItem = closeButton
+            navigationItem.rightBarButtonItem = deleteButton
+        }
     }
     
     // MARK: - setup
@@ -146,21 +188,52 @@ final class CreateReflectionViewController: BaseViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
+    private func setupTextfieldObserver() {
+        reflectionNameView.nameTextField.addTarget(self, action: #selector(texfieldHasContent), for: .editingChanged)
+    }
+    
     private func setupAddReflection() {
         let action = UIAction { [weak self] _ in
             guard let reflectionDate = self?.combineDateAndTime(),
                   let reflectionName = self?.reflectionNameView.nameTextField.text,
                   let reflectionId = self?.reflectionId
             else { return }
-            self?.patchReflectionDetail(type: .patchReflectionDetail(
-                reflectionId: reflectionId,
-                AddReflectionDTO(
-                    reflection_name: reflectionName,
-                    reflection_date: String(describing: reflectionDate)
-                )
-            ))
+            if reflectionDate >= Date() {
+                self?.patchReflectionDetail(type: .patchReflectionDetail(
+                    reflectionId: reflectionId,
+                    AddReflectionDTO(
+                        reflection_name: reflectionName,
+                        reflection_date: String(describing: reflectionDate)
+                    )
+                ))
+            } else {
+                self?.makeAlert(title: TextLiteral.createReflectionAlertTitle, message: TextLiteral.createReflectionAlertContent)
+            }
         }
         mainButton.addAction(action, for: .touchUpInside)
+    }
+    
+    private func setupDeleteReflection() {
+        let action = UIAction { [weak self] _ in
+            guard let reflectionId = self?.reflectionId else { return }
+            
+            let alert = UIAlertController(
+                title: TextLiteral.deleteReflectionAlertTitle,
+                message: TextLiteral.deleteReflectionAlertDetail,
+                preferredStyle: .alert
+            )
+            let cancelAction = UIAlertAction(title: "취소", style: .cancel)
+            let deleteAction = UIAlertAction(title: "삭제", style: .destructive) { [weak self] _ in
+                self?.deleteReflectionDetail(type: .deleteReflectionDetail(reflectionId: reflectionId))
+                self?.dismiss(animated: true)
+            }
+            
+            alert.addAction(cancelAction)
+            alert.addAction(deleteAction)
+            
+            self?.present(alert, animated: true)
+        }
+        deleteButton.addAction(action, for: .touchUpInside)
     }
     
     // MARK: - func
@@ -205,6 +278,15 @@ final class CreateReflectionViewController: BaseViewController {
         })
     }
     
+    @objc private func texfieldHasContent() {
+        if reflectionNameView.nameTextField.hasText {
+            
+            mainButton.isDisabled = false
+        } else {
+            mainButton.isDisabled = true
+        }
+    }
+    
     // MARK: - api
     
     private func patchReflectionDetail(type: CreateReflectionEndPoint<AddReflectionDTO>) {
@@ -213,9 +295,22 @@ final class CreateReflectionViewController: BaseViewController {
                    parameters: type.body,
                    encoder: JSONParameterEncoder.default,
                    headers: type.header
-        ).responseDecodable(of: BaseModel<AddReflectionResponse>.self) { [weak self] json in
+        ).responseDecodable(of: BaseModel<ReflectionResponse>.self) { [weak self] json in
             if let _ = json.value {
                 self?.dismiss(animated: true)
+            }
+        }
+    }
+    
+    private func deleteReflectionDetail(type: CreateReflectionEndPoint<VoidModel>) {
+        AF.request(type.address,
+                   method: type.method,
+                   parameters: type.body,
+                   encoder: JSONParameterEncoder.default,
+                   headers: type.header
+        ).responseDecodable(of: BaseModel<ReflectionResponse>.self) { json in
+            if let data = json.value {
+                dump(data)
             }
         }
     }

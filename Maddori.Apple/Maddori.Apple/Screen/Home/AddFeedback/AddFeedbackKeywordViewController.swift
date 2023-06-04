@@ -231,7 +231,7 @@ final class AddFeedbackKeywordViewController: BaseViewController {
               let userId = feedbackContent.toUserId
         else { return }
         let contentString = feedbackContent.content
-        let dto = FeedBackContentDTO(type: type, keyword: keyword, content: contentString, start_content: nil, to_id: userId)
+        let dto = FeedBackContentDTO(type: type, keyword: keyword, content: contentString, to_id: userId)
         dispatchAddFeedBack(type: .dispatchAddFeedBack(reflectionId: feedbackContent.reflectionId, dto))
     }
     
@@ -249,6 +249,8 @@ final class AddFeedbackKeywordViewController: BaseViewController {
                 DispatchQueue.main.async {
                     self.dismiss(animated: true)
                 }
+            } else {
+                print("실패")
             }
         }
     }

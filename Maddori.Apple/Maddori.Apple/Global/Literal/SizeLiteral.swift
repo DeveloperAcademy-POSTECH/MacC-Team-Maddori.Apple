@@ -12,6 +12,7 @@ enum SizeLiteral {
     // MARK: - common
     
     static let leadingTrailingPadding: CGFloat = 24
+    static let buttonLeadingTrailingPadding: CGFloat = 20
     static let topPadding: CGFloat = 12
     static let bottomPadding: CGFloat = 2
     static let bottomTabBarPadding: CGFloat = 12
@@ -20,5 +21,5 @@ enum SizeLiteral {
     static let labelComponentPadding: CGFloat = 10
     static let componentIntervalPadding: CGFloat = 36
     static let componentCornerRadius: CGFloat = 10
-    static let titleSubtitleSpacing: CGFloat = 5
+    static let titleSubtitleSpacing: CGFloat = 10
 }

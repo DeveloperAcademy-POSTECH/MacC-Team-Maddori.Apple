@@ -16,9 +16,9 @@ enum AddFeedBackEndPoint<T: Encodable> {
     var address: String {
         switch self {
         case .fetchCurrentTeamMember:
-            return "\(UrlLiteral.baseUrl)/teams/\(UserDefaultStorage.teamId)/members"
+            return "\(UrlLiteral.baseUrl2)/teams/\(UserDefaultStorage.teamId)/members"
         case .dispatchAddFeedBack(let reflectionId, _):
-            return "\(UrlLiteral.baseUrl)/teams/\(UserDefaultStorage.teamId)/reflections/\(reflectionId)/feedbacks"
+            return "\(UrlLiteral.baseUrl2)/teams/\(UserDefaultStorage.teamId)/reflections/\(reflectionId)/feedbacks"
         }
     }
 

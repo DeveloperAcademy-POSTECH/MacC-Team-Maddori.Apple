@@ -8,13 +8,20 @@
 
 /* Begin PBXBuildFile section */
 		391596622904176500A432D9 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391596612904176500A432D9 /* UIView+Extension.swift */; };
+		391612CD29E51F1B004AE982 /* EditTeamNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391612CC29E51F1B004AE982 /* EditTeamNameViewController.swift */; };
+		391612CF29E5352A004AE982 /* EditTeamNameEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391612CE29E5352A004AE982 /* EditTeamNameEndPoint.swift */; };
+		391612D129E5364A004AE982 /* EditTeamNameDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391612D029E5364A004AE982 /* EditTeamNameDTO.swift */; };
+		391612D329E53745004AE982 /* TeamNameResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391612D229E53745004AE982 /* TeamNameResponse.swift */; };
+		391612D529E551BD004AE982 /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391612D429E551BD004AE982 /* ToastView.swift */; };
 		391CBA19290580460044CA30 /* InProgressDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391CBA18290580460044CA30 /* InProgressDetailViewController.swift */; };
 		391CBA1C290582130044CA30 /* ReflectionInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391CBA1B290582130044CA30 /* ReflectionInfoModel.swift */; };
 		391D217C29050427003FC871 /* CustomVisualEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391D217B29050427003FC871 /* CustomVisualEffectView.swift */; };
+		391D38DB29C449DE00A6BFED /* TeamDetailMemberTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391D38DA29C449DE00A6BFED /* TeamDetailMemberTableViewCell.swift */; };
+		391D38DD29C44A0400A6BFED /* TeamDetailMemberTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391D38DC29C44A0400A6BFED /* TeamDetailMemberTableHeaderView.swift */; };
+		391D38F529D54CBA00A6BFED /* TeamDetailEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391D38F429D54CBA00A6BFED /* TeamDetailEndPoint.swift */; };
 		39257DC528F8FEBD00201E0B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39257DC428F8FEBD00201E0B /* AppDelegate.swift */; };
 		39257DC728F8FEBD00201E0B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39257DC628F8FEBD00201E0B /* SceneDelegate.swift */; };
 		39257DCE28F8FEBE00201E0B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 39257DCD28F8FEBE00201E0B /* Assets.xcassets */; };
-		39257DD128F8FEBE00201E0B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39257DCF28F8FEBE00201E0B /* LaunchScreen.storyboard */; };
 		39257DEB28F9373900201E0B /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39257DEA28F9373900201E0B /* BaseViewController.swift */; };
 		39257DED28F9378D00201E0B /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39257DEC28F9378D00201E0B /* BaseCollectionViewCell.swift */; };
 		39257DEF28F937A500201E0B /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39257DEE28F937A500201E0B /* BaseTableViewCell.swift */; };
@@ -22,6 +29,9 @@
 		39257DF328F93D8900201E0B /* TextLiteral.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39257DF228F93D8900201E0B /* TextLiteral.swift */; };
 		39257DF528F93E4700201E0B /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39257DF428F93E4700201E0B /* UIColor+Extension.swift */; };
 		39307CF52917DA9300789AB6 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39307CF42917DA9300789AB6 /* LoginViewController.swift */; };
+		39341E0A298BA419006C1727 /* TeamDetailMembersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39341E09298BA419006C1727 /* TeamDetailMembersView.swift */; };
+		39341E0F29921181006C1727 /* MemberInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39341E0E29921181006C1727 /* MemberInformationView.swift */; };
+		39341E1129922D17006C1727 /* FullDividerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39341E1029922D17006C1727 /* FullDividerView.swift */; };
 		39436C1029127BBA0083D77A /* MyFeedbackCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39436C0F29127BBA0083D77A /* MyFeedbackCollectionView.swift */; };
 		39436C132912877D0083D77A /* MyFeedbackHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39436C122912877D0083D77A /* MyFeedbackHeaderView.swift */; };
 		39436C15291287A00083D77A /* MyFeedbackCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39436C14291287A00083D77A /* MyFeedbackCollectionViewCell.swift */; };
@@ -38,9 +48,9 @@
 		395C7E2028FED7B500FC2FCA /* ReflectionNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395C7E1F28FED7B500FC2FCA /* ReflectionNameView.swift */; };
 		395C7E2228FEDB6500FC2FCA /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395C7E2128FEDB6500FC2FCA /* UITextField+Extension.swift */; };
 		395C7E252900E74700FC2FCA /* StartReflectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395C7E242900E74700FC2FCA /* StartReflectionViewController.swift */; };
+		3960864129811E3C003AB4F8 /* TeamDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3960864029811E3C003AB4F8 /* TeamDetailViewController.swift */; };
 		396334D7292DADBE00E74B77 /* AppleLoginDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396334D6292DADBE00E74B77 /* AppleLoginDTO.swift */; };
 		396334D9292DAE0000E74B77 /* AppleLoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396334D8292DAE0000E74B77 /* AppleLoginResponse.swift */; };
-		396334DB292DAE8300E74B77 /* UserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396334DA292DAE8300E74B77 /* UserResponse.swift */; };
 		3975CEAF293EEDD6002D4F1A /* KeywordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3975CEAE293EEDD6002D4F1A /* KeywordView.swift */; };
 		397E49572924D93F004220D6 /* UrlLiteral.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397E49562924D93F004220D6 /* UrlLiteral.swift */; };
 		397E495A2924F871004220D6 /* UserDefaultStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397E49592924F871004220D6 /* UserDefaultStorage.swift */; };
@@ -50,13 +60,11 @@
 		3984742629264ACE00EDC139 /* MyFeedBackEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3984742529264ACE00EDC139 /* MyFeedBackEndPoint.swift */; };
 		39847428292656EB00EDC139 /* VoidModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39847427292656EB00EDC139 /* VoidModel.swift */; };
 		3998E86F295C308100541752 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3998E86E295C308100541752 /* Settings.bundle */; };
-		39A64ACE2905885F001DB020 /* StartSuggestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A64ACD2905885F001DB020 /* StartSuggestionView.swift */; };
 		39AC287F29269BC6006CFEE6 /* Endpointable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39AC287E29269BC6006CFEE6 /* Endpointable.swift */; };
 		39F15C0C296D371500952D02 /* EmptyPersonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F15C0B296D371500952D02 /* EmptyPersonView.swift */; };
 		39F1A13529125762005E3456 /* MyFeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F1A13429125762005E3456 /* MyFeedbackViewController.swift */; };
 		39F1A13C2912637E005E3456 /* MyFeedbackMemberCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F1A13B2912637E005E3456 /* MyFeedbackMemberCollectionViewCell.swift */; };
 		39F52C44292329BA00B19A77 /* BaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F52C43292329BA00B19A77 /* BaseModel.swift */; };
-		39F52C4729232DD600B19A77 /* LoginDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F52C4629232DD600B19A77 /* LoginDTO.swift */; };
 		39F52C4929232DFB00B19A77 /* JoinTeamDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F52C4829232DFB00B19A77 /* JoinTeamDTO.swift */; };
 		39F52C4B29232E2600B19A77 /* CreateTeamDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F52C4A29232E2600B19A77 /* CreateTeamDTO.swift */; };
 		39F52C4D29232E5D00B19A77 /* AddReflectionDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F52C4C29232E5D00B19A77 /* AddReflectionDTO.swift */; };
@@ -64,13 +72,10 @@
 		39F52C53292330D200B19A77 /* MemberResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F52C52292330D200B19A77 /* MemberResponse.swift */; };
 		39F52C552923311200B19A77 /* JoinTeamResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F52C542923311200B19A77 /* JoinTeamResponse.swift */; };
 		39F52C572923317500B19A77 /* CreateTeamResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F52C562923317500B19A77 /* CreateTeamResponse.swift */; };
-		39F52C592923321700B19A77 /* CertainTeamDetailResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F52C582923321700B19A77 /* CertainTeamDetailResponse.swift */; };
 		39F52C5B2923327F00B19A77 /* CurrentReflectionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F52C5A2923327F00B19A77 /* CurrentReflectionResponse.swift */; };
-		39F52C5D292332EA00B19A77 /* AddReflectionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F52C5C292332EA00B19A77 /* AddReflectionResponse.swift */; };
-		39F52C5F2923338B00B19A77 /* CurrentMemberResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F52C5E2923338B00B19A77 /* CurrentMemberResponse.swift */; };
+		39F52C5F2923338B00B19A77 /* MembersDetailResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F52C5E2923338B00B19A77 /* MembersDetailResponse.swift */; };
 		39F52C612923344C00B19A77 /* FeedBackContentResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F52C602923344C00B19A77 /* FeedBackContentResponse.swift */; };
 		39F52C632923357700B19A77 /* FeedBackInfoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F52C622923357700B19A77 /* FeedBackInfoResponse.swift */; };
-		39F52C652923369000B19A77 /* EditFeedBackResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F52C642923369000B19A77 /* EditFeedBackResponse.swift */; };
 		39F52C68292472EB00B19A77 /* AllFeedBackResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F52C67292472EB00B19A77 /* AllFeedBackResponse.swift */; };
 		39F52C6A292473A800B19A77 /* ReflectionInfoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F52C69292473A800B19A77 /* ReflectionInfoResponse.swift */; };
 		39F52C6C292473EC00B19A77 /* AllReflectionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F52C6B292473EC00B19A77 /* AllReflectionResponse.swift */; };
@@ -85,6 +90,8 @@
 		39F909D7292679C400DAD0A3 /* EditFeedBackDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F909D6292679C400DAD0A3 /* EditFeedBackDTO.swift */; };
 		3E5195A42928C8FB00710A01 /* CreateReflectionEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5195A32928C8FB00710A01 /* CreateReflectionEndPoint.swift */; };
 		3E5195AB292B05BC00710A01 /* JoinReflectionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5195AA292B05BC00710A01 /* JoinReflectionButton.swift */; };
+		3E5368992992461A000CBD48 /* DeleteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5368982992461A000CBD48 /* DeleteButton.swift */; };
+		3E5368C829B60B70000CBD48 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5368C729B60B70000CBD48 /* UIImageView+Extension.swift */; };
 		3E557FC328FE7BBC00714E46 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E557FC228FE7BBC00714E46 /* HomeViewController.swift */; };
 		3E557FC528FE854600714E46 /* KeywordLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E557FC428FE854600714E46 /* KeywordLabel.swift */; };
 		3E557FF82901CD3400714E46 /* KeywordCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E557FF72901CD3400714E46 /* KeywordCollectionViewFlowLayout.swift */; };
@@ -93,7 +100,7 @@
 		3E5580072906A7B200714E46 /* InProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5580062906A7B200714E46 /* InProgressViewController.swift */; };
 		3E66777529419C8300BB5670 /* KeywordTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E66777429419C8300BB5670 /* KeywordTextFieldView.swift */; };
 		3E8052DF2906E09100A6449D /* KeywordSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8052DE2906E09100A6449D /* KeywordSectionHeaderView.swift */; };
-		3EA341C129221998005CBD1C /* ToastContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA341C029221998005CBD1C /* ToastContentView.swift */; };
+		3E953A9529C1CE7D0073302F /* ImageCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E953A9429C1CE7D0073302F /* ImageCacheManager.swift */; };
 		3EA341E62924E2AD005CBD1C /* HomeEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA341E52924E2AD005CBD1C /* HomeEndPoint.swift */; };
 		3EA341E82925E5EA005CBD1C /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA341E72925E5EA005CBD1C /* String+Extension.swift */; };
 		3EA341EA29261ADD005CBD1C /* InProgressEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA341E929261ADD005CBD1C /* InProgressEndPoint.swift */; };
@@ -107,15 +114,20 @@
 		3EB508922917585600FB77CB /* UICollectionView + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB508912917585600FB77CB /* UICollectionView + Extension.swift */; };
 		3EDED991293B8CE00000B4DC /* AddFeedbackContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EDED990293B8CE00000B4DC /* AddFeedbackContentViewController.swift */; };
 		3EDED995293C81EC0000B4DC /* AddFeedbackKeywordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EDED994293C81EC0000B4DC /* AddFeedbackKeywordViewController.swift */; };
+		3EF7909B29E462F50052578E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3EF7909A29E462F50052578E /* LaunchScreen.storyboard */; };
 		520FEC44292234C0009FC1F2 /* FeedbackToMeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520FEC43292234C0009FC1F2 /* FeedbackToMeModel.swift */; };
 		522D99BF29041B51009CBD95 /* CustomTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522D99BE29041B51009CBD95 /* CustomTextView.swift */; };
+		523EDFB329D451590033F9A5 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523EDFB229D451590033F9A5 /* UIImage+Extension.swift */; };
 		525E721A28FF0F1900EF3FCB /* MemberCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525E721928FF0F1900EF3FCB /* MemberCollectionViewCell.swift */; };
 		525E721C28FF0F5B00EF3FCB /* MemberCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525E721B28FF0F5B00EF3FCB /* MemberCollectionView.swift */; };
 		525E722128FFC9A800EF3FCB /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525E722028FFC9A800EF3FCB /* BackButton.swift */; };
 		525E722528FFCFA600EF3FCB /* FeedbackTypeButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525E722428FFCFA600EF3FCB /* FeedbackTypeButtonView.swift */; };
 		52988B742921EAD50044A77F /* MyReflectionFeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52988B732921EAD50044A77F /* MyReflectionFeedbackViewController.swift */; };
 		52AED2DD29128532004D70B9 /* FeedbackFromMeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52AED2DC29128532004D70B9 /* FeedbackFromMeModel.swift */; };
+		52CD58BC297BE24B008567E0 /* ProfileImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52CD58BB297BE24B008567E0 /* ProfileImageButton.swift */; };
 		52DC9091291A98CC00904739 /* MyFeedbackEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DC9090291A98CC00904739 /* MyFeedbackEditViewController.swift */; };
+		52E6770D29911E0C00A0935B /* ReflectionMemberCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E6770C29911E0C00A0935B /* ReflectionMemberCollectionViewCell.swift */; };
+		52E6770F29911E3E00A0935B /* ReflectionMemberCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E6770E29911E3E00A0935B /* ReflectionMemberCollectionView.swift */; };
 		52F07B9A2912541B0015BC8B /* MyFeedbackDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F07B992912541B0015BC8B /* MyFeedbackDetailViewController.swift */; };
 		52F0CB5229178C2700E39C50 /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F0CB5129178C2700E39C50 /* AlertViewController.swift */; };
 		52F2D1C12906F172009CBF89 /* SelectReflectionMemberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F2D1C02906F172009CBF89 /* SelectReflectionMemberViewController.swift */; };
@@ -129,13 +141,22 @@
 		7EB4D58229011EF7001FC396 /* JoinTeamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB4D58129011EF7001FC396 /* JoinTeamViewController.swift */; };
 		7EE38BAD2925DDD200FD738D /* EncodeDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE38BAC2925DDD200FD738D /* EncodeDTO.swift */; };
 		7EE38BB3292623F500FD738D /* MyReflectionEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE38BB2292623F500FD738D /* MyReflectionEndPoint.swift */; };
+		D702278A297F99510027EF64 /* TeamManageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7022789297F99500027EF64 /* TeamManageViewController.swift */; };
+		D70AF89729C2FDF6003A500C /* TeamInfoEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70AF89629C2FDF6003A500C /* TeamInfoEndPoint.swift */; };
+		D7195FBC299223F6002526E7 /* TeamChangeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7195FBB299223F6002526E7 /* TeamChangeCollectionViewCell.swift */; };
 		D724790C28FEC8C900D67B50 /* BaseTextFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D724790B28FEC8C900D67B50 /* BaseTextFieldViewController.swift */; };
 		D724790E28FEEEC300D67B50 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D724790D28FEEEC300D67B50 /* CustomTextField.swift */; };
 		D72CF1B0290552960067A118 /* InvitationCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72CF1AF290552960067A118 /* InvitationCodeViewController.swift */; };
 		D7505119294239A5001BDA34 /* SelectMemberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7505118294239A5001BDA34 /* SelectMemberView.swift */; };
 		D750511B29423CB6001BDA34 /* SelectKeywordTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D750511A29423CB6001BDA34 /* SelectKeywordTypeView.swift */; };
+		D75D0D2229B2003F0013ADA5 /* EmptyTeamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D75D0D2129B2003F0013ADA5 /* EmptyTeamView.swift */; };
 		D79D908C2903B6B1004DDC4A /* LabelButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D79D908B2903B6B1004DDC4A /* LabelButtonView.swift */; };
 		D79D908E29041F42004DDC4A /* CreateTeamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D79D908D29041F42004DDC4A /* CreateTeamViewController.swift */; };
+		D7A585222990C50700E1F4EE /* TeamManageSettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A585212990C50700E1F4EE /* TeamManageSettingCell.swift */; };
+		D7A585272990DAFC00E1F4EE /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A585262990DAFC00E1F4EE /* Section.swift */; };
+		D7A585292990DB0D00E1F4EE /* Option.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A585282990DB0D00E1F4EE /* Option.swift */; };
+		D7A5852B2990DCE700E1F4EE /* ChangeTeamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A5852A2990DCE700E1F4EE /* ChangeTeamView.swift */; };
+		D7A6C63829D5EC6A0096D466 /* NotificationName+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A6C63729D5EC6A0096D466 /* NotificationName+Extension.swift */; };
 		D7AFB7C32916EAB100E998B7 /* MyReflectionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7AFB7C22916EAB100E998B7 /* MyReflectionDetailViewController.swift */; };
 		D7AFB7C52916EDC300E998B7 /* MyReflectionDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7AFB7C42916EDC300E998B7 /* MyReflectionDetailTableViewCell.swift */; };
 		D7AFB7C72916FF9400E998B7 /* CustomSegmentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7AFB7C62916FF9400E998B7 /* CustomSegmentControl.swift */; };
@@ -144,14 +165,21 @@
 
 /* Begin PBXFileReference section */
 		391596612904176500A432D9 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		391612CC29E51F1B004AE982 /* EditTeamNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTeamNameViewController.swift; sourceTree = "<group>"; };
+		391612CE29E5352A004AE982 /* EditTeamNameEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTeamNameEndPoint.swift; sourceTree = "<group>"; };
+		391612D029E5364A004AE982 /* EditTeamNameDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTeamNameDTO.swift; sourceTree = "<group>"; };
+		391612D229E53745004AE982 /* TeamNameResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamNameResponse.swift; sourceTree = "<group>"; };
+		391612D429E551BD004AE982 /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
 		391CBA18290580460044CA30 /* InProgressDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InProgressDetailViewController.swift; sourceTree = "<group>"; };
 		391CBA1B290582130044CA30 /* ReflectionInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReflectionInfoModel.swift; sourceTree = "<group>"; };
 		391D217B29050427003FC871 /* CustomVisualEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomVisualEffectView.swift; sourceTree = "<group>"; };
+		391D38DA29C449DE00A6BFED /* TeamDetailMemberTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamDetailMemberTableViewCell.swift; sourceTree = "<group>"; };
+		391D38DC29C44A0400A6BFED /* TeamDetailMemberTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamDetailMemberTableHeaderView.swift; sourceTree = "<group>"; };
+		391D38F429D54CBA00A6BFED /* TeamDetailEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamDetailEndPoint.swift; sourceTree = "<group>"; };
 		39257DC128F8FEBD00201E0B /* Maddori.Apple.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Maddori.Apple.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		39257DC428F8FEBD00201E0B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		39257DC628F8FEBD00201E0B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		39257DCD28F8FEBE00201E0B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		39257DD028F8FEBE00201E0B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		39257DD228F8FEBE00201E0B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		39257DEA28F9373900201E0B /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		39257DEC28F9378D00201E0B /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -160,6 +188,9 @@
 		39257DF228F93D8900201E0B /* TextLiteral.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextLiteral.swift; sourceTree = "<group>"; };
 		39257DF428F93E4700201E0B /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		39307CF42917DA9300789AB6 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		39341E09298BA419006C1727 /* TeamDetailMembersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamDetailMembersView.swift; sourceTree = "<group>"; };
+		39341E0E29921181006C1727 /* MemberInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberInformationView.swift; sourceTree = "<group>"; };
+		39341E1029922D17006C1727 /* FullDividerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullDividerView.swift; sourceTree = "<group>"; };
 		39436C0F29127BBA0083D77A /* MyFeedbackCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFeedbackCollectionView.swift; sourceTree = "<group>"; };
 		39436C122912877D0083D77A /* MyFeedbackHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFeedbackHeaderView.swift; sourceTree = "<group>"; };
 		39436C14291287A00083D77A /* MyFeedbackCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFeedbackCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -175,9 +206,9 @@
 		395C7E1F28FED7B500FC2FCA /* ReflectionNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReflectionNameView.swift; sourceTree = "<group>"; };
 		395C7E2128FEDB6500FC2FCA /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
 		395C7E242900E74700FC2FCA /* StartReflectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartReflectionViewController.swift; sourceTree = "<group>"; };
+		3960864029811E3C003AB4F8 /* TeamDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamDetailViewController.swift; sourceTree = "<group>"; };
 		396334D6292DADBE00E74B77 /* AppleLoginDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginDTO.swift; sourceTree = "<group>"; };
 		396334D8292DAE0000E74B77 /* AppleLoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginResponse.swift; sourceTree = "<group>"; };
-		396334DA292DAE8300E74B77 /* UserResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserResponse.swift; sourceTree = "<group>"; };
 		396334DC292DB07100E74B77 /* Maddori.Apple.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Maddori.Apple.entitlements; sourceTree = "<group>"; };
 		3975CEAE293EEDD6002D4F1A /* KeywordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordView.swift; sourceTree = "<group>"; };
 		397E49562924D93F004220D6 /* UrlLiteral.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlLiteral.swift; sourceTree = "<group>"; };
@@ -188,13 +219,11 @@
 		3984742529264ACE00EDC139 /* MyFeedBackEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFeedBackEndPoint.swift; sourceTree = "<group>"; };
 		39847427292656EB00EDC139 /* VoidModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoidModel.swift; sourceTree = "<group>"; };
 		3998E86E295C308100541752 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
-		39A64ACD2905885F001DB020 /* StartSuggestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartSuggestionView.swift; sourceTree = "<group>"; };
 		39AC287E29269BC6006CFEE6 /* Endpointable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpointable.swift; sourceTree = "<group>"; };
 		39F15C0B296D371500952D02 /* EmptyPersonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyPersonView.swift; sourceTree = "<group>"; };
 		39F1A13429125762005E3456 /* MyFeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFeedbackViewController.swift; sourceTree = "<group>"; };
 		39F1A13B2912637E005E3456 /* MyFeedbackMemberCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFeedbackMemberCollectionViewCell.swift; sourceTree = "<group>"; };
 		39F52C43292329BA00B19A77 /* BaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseModel.swift; sourceTree = "<group>"; };
-		39F52C4629232DD600B19A77 /* LoginDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginDTO.swift; sourceTree = "<group>"; };
 		39F52C4829232DFB00B19A77 /* JoinTeamDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinTeamDTO.swift; sourceTree = "<group>"; };
 		39F52C4A29232E2600B19A77 /* CreateTeamDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTeamDTO.swift; sourceTree = "<group>"; };
 		39F52C4C29232E5D00B19A77 /* AddReflectionDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReflectionDTO.swift; sourceTree = "<group>"; };
@@ -202,13 +231,10 @@
 		39F52C52292330D200B19A77 /* MemberResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberResponse.swift; sourceTree = "<group>"; };
 		39F52C542923311200B19A77 /* JoinTeamResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinTeamResponse.swift; sourceTree = "<group>"; };
 		39F52C562923317500B19A77 /* CreateTeamResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTeamResponse.swift; sourceTree = "<group>"; };
-		39F52C582923321700B19A77 /* CertainTeamDetailResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertainTeamDetailResponse.swift; sourceTree = "<group>"; };
 		39F52C5A2923327F00B19A77 /* CurrentReflectionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentReflectionResponse.swift; sourceTree = "<group>"; };
-		39F52C5C292332EA00B19A77 /* AddReflectionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReflectionResponse.swift; sourceTree = "<group>"; };
-		39F52C5E2923338B00B19A77 /* CurrentMemberResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentMemberResponse.swift; sourceTree = "<group>"; };
+		39F52C5E2923338B00B19A77 /* MembersDetailResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MembersDetailResponse.swift; sourceTree = "<group>"; };
 		39F52C602923344C00B19A77 /* FeedBackContentResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedBackContentResponse.swift; sourceTree = "<group>"; };
 		39F52C622923357700B19A77 /* FeedBackInfoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedBackInfoResponse.swift; sourceTree = "<group>"; };
-		39F52C642923369000B19A77 /* EditFeedBackResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditFeedBackResponse.swift; sourceTree = "<group>"; };
 		39F52C67292472EB00B19A77 /* AllFeedBackResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllFeedBackResponse.swift; sourceTree = "<group>"; };
 		39F52C69292473A800B19A77 /* ReflectionInfoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReflectionInfoResponse.swift; sourceTree = "<group>"; };
 		39F52C6B292473EC00B19A77 /* AllReflectionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllReflectionResponse.swift; sourceTree = "<group>"; };
@@ -222,6 +248,8 @@
 		39F909D6292679C400DAD0A3 /* EditFeedBackDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditFeedBackDTO.swift; sourceTree = "<group>"; };
 		3E5195A32928C8FB00710A01 /* CreateReflectionEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateReflectionEndPoint.swift; sourceTree = "<group>"; };
 		3E5195AA292B05BC00710A01 /* JoinReflectionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinReflectionButton.swift; sourceTree = "<group>"; };
+		3E5368982992461A000CBD48 /* DeleteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteButton.swift; sourceTree = "<group>"; };
+		3E5368C729B60B70000CBD48 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		3E557FC228FE7BBC00714E46 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		3E557FC428FE854600714E46 /* KeywordLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordLabel.swift; sourceTree = "<group>"; };
 		3E557FF72901CD3400714E46 /* KeywordCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
@@ -230,7 +258,7 @@
 		3E5580062906A7B200714E46 /* InProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InProgressViewController.swift; sourceTree = "<group>"; };
 		3E66777429419C8300BB5670 /* KeywordTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordTextFieldView.swift; sourceTree = "<group>"; };
 		3E8052DE2906E09100A6449D /* KeywordSectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordSectionHeaderView.swift; sourceTree = "<group>"; };
-		3EA341C029221998005CBD1C /* ToastContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastContentView.swift; sourceTree = "<group>"; };
+		3E953A9429C1CE7D0073302F /* ImageCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheManager.swift; sourceTree = "<group>"; };
 		3EA341E52924E2AD005CBD1C /* HomeEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeEndPoint.swift; sourceTree = "<group>"; };
 		3EA341E72925E5EA005CBD1C /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		3EA341E929261ADD005CBD1C /* InProgressEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InProgressEndPoint.swift; sourceTree = "<group>"; };
@@ -244,15 +272,20 @@
 		3EB508912917585600FB77CB /* UICollectionView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView + Extension.swift"; sourceTree = "<group>"; };
 		3EDED990293B8CE00000B4DC /* AddFeedbackContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFeedbackContentViewController.swift; sourceTree = "<group>"; };
 		3EDED994293C81EC0000B4DC /* AddFeedbackKeywordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFeedbackKeywordViewController.swift; sourceTree = "<group>"; };
+		3EF7909A29E462F50052578E /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		520FEC43292234C0009FC1F2 /* FeedbackToMeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackToMeModel.swift; sourceTree = "<group>"; };
 		522D99BE29041B51009CBD95 /* CustomTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextView.swift; sourceTree = "<group>"; };
+		523EDFB229D451590033F9A5 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		525E721928FF0F1900EF3FCB /* MemberCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberCollectionViewCell.swift; sourceTree = "<group>"; };
 		525E721B28FF0F5B00EF3FCB /* MemberCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberCollectionView.swift; sourceTree = "<group>"; };
 		525E722028FFC9A800EF3FCB /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
 		525E722428FFCFA600EF3FCB /* FeedbackTypeButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackTypeButtonView.swift; sourceTree = "<group>"; };
 		52988B732921EAD50044A77F /* MyReflectionFeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReflectionFeedbackViewController.swift; sourceTree = "<group>"; };
 		52AED2DC29128532004D70B9 /* FeedbackFromMeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackFromMeModel.swift; sourceTree = "<group>"; };
+		52CD58BB297BE24B008567E0 /* ProfileImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageButton.swift; sourceTree = "<group>"; };
 		52DC9090291A98CC00904739 /* MyFeedbackEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFeedbackEditViewController.swift; sourceTree = "<group>"; };
+		52E6770C29911E0C00A0935B /* ReflectionMemberCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReflectionMemberCollectionViewCell.swift; sourceTree = "<group>"; };
+		52E6770E29911E3E00A0935B /* ReflectionMemberCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReflectionMemberCollectionView.swift; sourceTree = "<group>"; };
 		52F07B992912541B0015BC8B /* MyFeedbackDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFeedbackDetailViewController.swift; sourceTree = "<group>"; };
 		52F0CB5129178C2700E39C50 /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
 		52F2D1C02906F172009CBF89 /* SelectReflectionMemberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectReflectionMemberViewController.swift; sourceTree = "<group>"; };
@@ -266,13 +299,22 @@
 		7EB4D58129011EF7001FC396 /* JoinTeamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinTeamViewController.swift; sourceTree = "<group>"; };
 		7EE38BAC2925DDD200FD738D /* EncodeDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncodeDTO.swift; sourceTree = "<group>"; };
 		7EE38BB2292623F500FD738D /* MyReflectionEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReflectionEndPoint.swift; sourceTree = "<group>"; };
+		D7022789297F99500027EF64 /* TeamManageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamManageViewController.swift; sourceTree = "<group>"; };
+		D70AF89629C2FDF6003A500C /* TeamInfoEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamInfoEndPoint.swift; sourceTree = "<group>"; };
+		D7195FBB299223F6002526E7 /* TeamChangeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamChangeCollectionViewCell.swift; sourceTree = "<group>"; };
 		D724790B28FEC8C900D67B50 /* BaseTextFieldViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTextFieldViewController.swift; sourceTree = "<group>"; };
 		D724790D28FEEEC300D67B50 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		D72CF1AF290552960067A118 /* InvitationCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationCodeViewController.swift; sourceTree = "<group>"; };
 		D7505118294239A5001BDA34 /* SelectMemberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectMemberView.swift; sourceTree = "<group>"; };
 		D750511A29423CB6001BDA34 /* SelectKeywordTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectKeywordTypeView.swift; sourceTree = "<group>"; };
+		D75D0D2129B2003F0013ADA5 /* EmptyTeamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyTeamView.swift; sourceTree = "<group>"; };
 		D79D908B2903B6B1004DDC4A /* LabelButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelButtonView.swift; sourceTree = "<group>"; };
 		D79D908D29041F42004DDC4A /* CreateTeamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTeamViewController.swift; sourceTree = "<group>"; };
+		D7A585212990C50700E1F4EE /* TeamManageSettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamManageSettingCell.swift; sourceTree = "<group>"; };
+		D7A585262990DAFC00E1F4EE /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
+		D7A585282990DB0D00E1F4EE /* Option.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Option.swift; sourceTree = "<group>"; };
+		D7A5852A2990DCE700E1F4EE /* ChangeTeamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeTeamView.swift; sourceTree = "<group>"; };
+		D7A6C63729D5EC6A0096D466 /* NotificationName+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationName+Extension.swift"; sourceTree = "<group>"; };
 		D7AFB7C22916EAB100E998B7 /* MyReflectionDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReflectionDetailViewController.swift; sourceTree = "<group>"; };
 		D7AFB7C42916EDC300E998B7 /* MyReflectionDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReflectionDetailTableViewCell.swift; sourceTree = "<group>"; };
 		D7AFB7C62916FF9400E998B7 /* CustomSegmentControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegmentControl.swift; sourceTree = "<group>"; };
@@ -292,10 +334,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		391612CB29E51F03004AE982 /* EditTeamName */ = {
+			isa = PBXGroup;
+			children = (
+				391612CC29E51F1B004AE982 /* EditTeamNameViewController.swift */,
+			);
+			path = EditTeamName;
+			sourceTree = "<group>";
+		};
 		391CBA17290580360044CA30 /* InProgressDetail */ = {
 			isa = PBXGroup;
 			children = (
-				39A64ACC2905882C001DB020 /* UIComponent */,
 				391CBA18290580460044CA30 /* InProgressDetailViewController.swift */,
 			);
 			path = InProgressDetail;
@@ -396,7 +445,6 @@
 		39257DE428F90F7700201E0B /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				39257DCF28F8FEBE00201E0B /* LaunchScreen.storyboard */,
 				39257DCD28F8FEBE00201E0B /* Assets.xcassets */,
 			);
 			path = Resource;
@@ -430,6 +478,9 @@
 				3EB508912917585600FB77CB /* UICollectionView + Extension.swift */,
 				7E7F160E2921CD4A00C6BE96 /* UITabBar+Extension.swift */,
 				3EA341E72925E5EA005CBD1C /* String+Extension.swift */,
+				3E5368C729B60B70000CBD48 /* UIImageView+Extension.swift */,
+				523EDFB229D451590033F9A5 /* UIImage+Extension.swift */,
+				D7A6C63729D5EC6A0096D466 /* NotificationName+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -461,6 +512,25 @@
 				39307CF42917DA9300789AB6 /* LoginViewController.swift */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		39341E08298BA3FC006C1727 /* UIComponent */ = {
+			isa = PBXGroup;
+			children = (
+				39341E09298BA419006C1727 /* TeamDetailMembersView.swift */,
+				39341E0E29921181006C1727 /* MemberInformationView.swift */,
+				39341E1029922D17006C1727 /* FullDividerView.swift */,
+			);
+			path = UIComponent;
+			sourceTree = "<group>";
+		};
+		39341E0B298BC344006C1727 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				391D38DA29C449DE00A6BFED /* TeamDetailMemberTableViewCell.swift */,
+				391D38DC29C44A0400A6BFED /* TeamDetailMemberTableHeaderView.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		39436C162912A2D30083D77A /* Feedback */ = {
@@ -497,9 +567,21 @@
 			path = StartReflection;
 			sourceTree = "<group>";
 		};
+		3960863F29811D86003AB4F8 /* TeamDetail */ = {
+			isa = PBXGroup;
+			children = (
+				39341E0B298BC344006C1727 /* Cell */,
+				39341E08298BA3FC006C1727 /* UIComponent */,
+				3960864029811E3C003AB4F8 /* TeamDetailViewController.swift */,
+			);
+			path = TeamDetail;
+			sourceTree = "<group>";
+		};
 		3977E11F2910CECB000E9761 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				D7E5B7702A11CF4700DDAEB3 /* TeamManage */,
+				391612CB29E51F03004AE982 /* EditTeamName */,
 				3E557FC128FE7B9200714E46 /* Home */,
 				395C7E1928FEC3FB00FC2FCA /* CreateReflection */,
 				525E721D28FFC85200EF3FCB /* AddFeedback */,
@@ -507,6 +589,7 @@
 				52F2D1BF2906F157009CBF89 /* SelectReflectionMember */,
 				3E5580052906A79D00714E46 /* InProgress */,
 				391CBA17290580360044CA30 /* InProgressDetail */,
+				3960863F29811D86003AB4F8 /* TeamDetail */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -538,6 +621,7 @@
 				395C7E1C28FEC8C400FC2FCA /* CloseButton.swift */,
 				395C7E0C28F959A500FC2FCA /* MainButton.swift */,
 				7E8CDC66292E19B000984742 /* SettingButton.swift */,
+				3E5368982992461A000CBD48 /* DeleteButton.swift */,
 			);
 			path = Button;
 			sourceTree = "<group>";
@@ -568,8 +652,8 @@
 				D79D908B2903B6B1004DDC4A /* LabelButtonView.swift */,
 				3E557FC428FE854600714E46 /* KeywordLabel.swift */,
 				52F0CB5129178C2700E39C50 /* AlertViewController.swift */,
-				3EA341C029221998005CBD1C /* ToastContentView.swift */,
 				3975CEAE293EEDD6002D4F1A /* KeywordView.swift */,
+				391612D429E551BD004AE982 /* ToastView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -579,16 +663,9 @@
 			children = (
 				397E49592924F871004220D6 /* UserDefaultStorage.swift */,
 				397E495B2924F8A2004220D6 /* UserDefaultHandler.swift */,
+				3E953A9429C1CE7D0073302F /* ImageCacheManager.swift */,
 			);
 			path = Storage;
-			sourceTree = "<group>";
-		};
-		39A64ACC2905882C001DB020 /* UIComponent */ = {
-			isa = PBXGroup;
-			children = (
-				39A64ACD2905885F001DB020 /* StartSuggestionView.swift */,
-			);
-			path = UIComponent;
 			sourceTree = "<group>";
 		};
 		39AC287D29269BBB006CFEE6 /* Protocol */ = {
@@ -635,7 +712,6 @@
 		39F52C4529232DBA00B19A77 /* DTO */ = {
 			isa = PBXGroup;
 			children = (
-				39F52C4629232DD600B19A77 /* LoginDTO.swift */,
 				39F52C4829232DFB00B19A77 /* JoinTeamDTO.swift */,
 				39F52C4A29232E2600B19A77 /* CreateTeamDTO.swift */,
 				39F52C4C29232E5D00B19A77 /* AddReflectionDTO.swift */,
@@ -643,6 +719,7 @@
 				39F909D6292679C400DAD0A3 /* EditFeedBackDTO.swift */,
 				7EE38BAC2925DDD200FD738D /* EncodeDTO.swift */,
 				396334D6292DADBE00E74B77 /* AppleLoginDTO.swift */,
+				391612D029E5364A004AE982 /* EditTeamNameDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -661,13 +738,10 @@
 				39F52C52292330D200B19A77 /* MemberResponse.swift */,
 				39F52C542923311200B19A77 /* JoinTeamResponse.swift */,
 				39F52C562923317500B19A77 /* CreateTeamResponse.swift */,
-				39F52C582923321700B19A77 /* CertainTeamDetailResponse.swift */,
 				39F52C5A2923327F00B19A77 /* CurrentReflectionResponse.swift */,
-				39F52C5C292332EA00B19A77 /* AddReflectionResponse.swift */,
-				39F52C5E2923338B00B19A77 /* CurrentMemberResponse.swift */,
+				39F52C5E2923338B00B19A77 /* MembersDetailResponse.swift */,
 				39F52C602923344C00B19A77 /* FeedBackContentResponse.swift */,
 				39F52C622923357700B19A77 /* FeedBackInfoResponse.swift */,
-				39F52C642923369000B19A77 /* EditFeedBackResponse.swift */,
 				39F52C67292472EB00B19A77 /* AllFeedBackResponse.swift */,
 				39F52C69292473A800B19A77 /* ReflectionInfoResponse.swift */,
 				39F52C6B292473EC00B19A77 /* AllReflectionResponse.swift */,
@@ -677,7 +751,7 @@
 				39F52C73292476EA00B19A77 /* FeedBackResponse.swift */,
 				398474212925CF4800EDC139 /* TeamInfoResponse.swift */,
 				396334D8292DAE0000E74B77 /* AppleLoginResponse.swift */,
-				396334DA292DAE8300E74B77 /* UserResponse.swift */,
+				391612D229E53745004AE982 /* TeamNameResponse.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -692,6 +766,9 @@
 				7EE38BB2292623F500FD738D /* MyReflectionEndPoint.swift */,
 				3EA341E52924E2AD005CBD1C /* HomeEndPoint.swift */,
 				3E5195A32928C8FB00710A01 /* CreateReflectionEndPoint.swift */,
+				391D38F429D54CBA00A6BFED /* TeamDetailEndPoint.swift */,
+				D70AF89629C2FDF6003A500C /* TeamInfoEndPoint.swift */,
+				391612CE29E5352A004AE982 /* EditTeamNameEndPoint.swift */,
 			);
 			path = EndPoint;
 			sourceTree = "<group>";
@@ -752,6 +829,14 @@
 				3EB5085B2912427600FB77CB /* MyReflectionViewController.swift */,
 			);
 			path = MyReflection;
+			sourceTree = "<group>";
+		};
+		3EF7909929E460370052578E /* Launch */ = {
+			isa = PBXGroup;
+			children = (
+				3EF7909A29E462F50052578E /* LaunchScreen.storyboard */,
+			);
+			path = Launch;
 			sourceTree = "<group>";
 		};
 		520FEC42292234AF009FC1F2 /* FeedbackToMe */ = {
@@ -850,6 +935,7 @@
 		52B21E5229248DC30048964C /* SetNickname */ = {
 			isa = PBXGroup;
 			children = (
+				52CD58BA297BE231008567E0 /* UIComponent */,
 				7E2ECA0F2901136700A4D65C /* SetNicknameViewController.swift */,
 			);
 			path = SetNickname;
@@ -879,12 +965,29 @@
 			path = InvitationCode;
 			sourceTree = "<group>";
 		};
+		52CD58BA297BE231008567E0 /* UIComponent */ = {
+			isa = PBXGroup;
+			children = (
+				52CD58BB297BE24B008567E0 /* ProfileImageButton.swift */,
+			);
+			path = UIComponent;
+			sourceTree = "<group>";
+		};
 		52DC908F291A98B800904739 /* MyFeedbackEdit */ = {
 			isa = PBXGroup;
 			children = (
 				52DC9090291A98CC00904739 /* MyFeedbackEditViewController.swift */,
 			);
 			path = MyFeedbackEdit;
+			sourceTree = "<group>";
+		};
+		52E6770B29911DF400A0935B /* ReflectionMember */ = {
+			isa = PBXGroup;
+			children = (
+				52E6770C29911E0C00A0935B /* ReflectionMemberCollectionViewCell.swift */,
+				52E6770E29911E3E00A0935B /* ReflectionMemberCollectionView.swift */,
+			);
+			path = ReflectionMember;
 			sourceTree = "<group>";
 		};
 		52F07B98291253D30015BC8B /* MyFeedbackDetail */ = {
@@ -906,6 +1009,7 @@
 		52F2D1BF2906F157009CBF89 /* SelectReflectionMember */ = {
 			isa = PBXGroup;
 			children = (
+				52E6770B29911DF400A0935B /* ReflectionMember */,
 				52F2D1C02906F172009CBF89 /* SelectReflectionMemberViewController.swift */,
 			);
 			path = SelectReflectionMember;
@@ -949,6 +1053,7 @@
 		D724790A28FEC8A800D67B50 /* Setup */ = {
 			isa = PBXGroup;
 			children = (
+				3EF7909929E460370052578E /* Launch */,
 				39307CF32917DA8A00789AB6 /* Login */,
 				52B21E5229248DC30048964C /* SetNickname */,
 				52B21E5329248DD80048964C /* JoinTeam */,
@@ -956,6 +1061,15 @@
 				52B21E5529248DE90048964C /* InvitationCode */,
 			);
 			path = Setup;
+			sourceTree = "<group>";
+		};
+		D7A585252990DAE500E1F4EE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D7A585262990DAFC00E1F4EE /* Section.swift */,
+				D7A585282990DB0D00E1F4EE /* Option.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		D7AFB7C12916EA7C00E998B7 /* MyReflectionDetail */ = {
@@ -966,6 +1080,35 @@
 				D7AFB7C22916EAB100E998B7 /* MyReflectionDetailViewController.swift */,
 			);
 			path = MyReflectionDetail;
+			sourceTree = "<group>";
+		};
+		D7E5B7702A11CF4700DDAEB3 /* TeamManage */ = {
+			isa = PBXGroup;
+			children = (
+				D7022789297F99500027EF64 /* TeamManageViewController.swift */,
+				D7E5B7722A11CF8000DDAEB3 /* Cell */,
+				D7E5B7712A11CF5E00DDAEB3 /* UIComponent */,
+				D7A585252990DAE500E1F4EE /* Model */,
+			);
+			path = TeamManage;
+			sourceTree = "<group>";
+		};
+		D7E5B7712A11CF5E00DDAEB3 /* UIComponent */ = {
+			isa = PBXGroup;
+			children = (
+				D7A5852A2990DCE700E1F4EE /* ChangeTeamView.swift */,
+				D7195FBB299223F6002526E7 /* TeamChangeCollectionViewCell.swift */,
+				D75D0D2129B2003F0013ADA5 /* EmptyTeamView.swift */,
+			);
+			path = UIComponent;
+			sourceTree = "<group>";
+		};
+		D7E5B7722A11CF8000DDAEB3 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				D7A585212990C50700E1F4EE /* TeamManageSettingCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1034,7 +1177,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				39257DD128F8FEBE00201E0B /* LaunchScreen.storyboard in Resources */,
+				3EF7909B29E462F50052578E /* LaunchScreen.storyboard in Resources */,
 				3998E86F295C308100541752 /* Settings.bundle in Resources */,
 				39257DCE28F8FEBE00201E0B /* Assets.xcassets in Resources */,
 			);
@@ -1049,27 +1192,32 @@
 			files = (
 				525E721C28FF0F5B00EF3FCB /* MemberCollectionView.swift in Sources */,
 				395C7E2028FED7B500FC2FCA /* ReflectionNameView.swift in Sources */,
+				3E953A9529C1CE7D0073302F /* ImageCacheManager.swift in Sources */,
 				39F52C44292329BA00B19A77 /* BaseModel.swift in Sources */,
+				391612CD29E51F1B004AE982 /* EditTeamNameViewController.swift in Sources */,
 				522D99BF29041B51009CBD95 /* CustomTextView.swift in Sources */,
-				3EA341C129221998005CBD1C /* ToastContentView.swift in Sources */,
+				D70AF89729C2FDF6003A500C /* TeamInfoEndPoint.swift in Sources */,
 				39F1A13529125762005E3456 /* MyFeedbackViewController.swift in Sources */,
 				39F52C702924747600B19A77 /* AllCertainTypeFeedBackResponse.swift in Sources */,
 				391D217C29050427003FC871 /* CustomVisualEffectView.swift in Sources */,
 				391CBA1C290582130044CA30 /* ReflectionInfoModel.swift in Sources */,
 				39F52C7A2924CC9600B19A77 /* SetupEndPoint.swift in Sources */,
-				39F52C5F2923338B00B19A77 /* CurrentMemberResponse.swift in Sources */,
+				39F52C5F2923338B00B19A77 /* MembersDetailResponse.swift in Sources */,
 				397E49572924D93F004220D6 /* UrlLiteral.swift in Sources */,
 				3E557FFA2901CD4200714E46 /* KeywordCollectionViewCell.swift in Sources */,
 				52F0CB5229178C2700E39C50 /* AlertViewController.swift in Sources */,
 				395C7E0528F953D200FC2FCA /* UIViewController+Extension.swift in Sources */,
+				52CD58BC297BE24B008567E0 /* ProfileImageButton.swift in Sources */,
 				3EB5085C2912427600FB77CB /* MyReflectionViewController.swift in Sources */,
 				39257DEB28F9373900201E0B /* BaseViewController.swift in Sources */,
+				3E5368C829B60B70000CBD48 /* UIImageView+Extension.swift in Sources */,
 				39436C1029127BBA0083D77A /* MyFeedbackCollectionView.swift in Sources */,
 				7E7F160F2921CD4A00C6BE96 /* UITabBar+Extension.swift in Sources */,
 				525E722128FFC9A800EF3FCB /* BackButton.swift in Sources */,
 				3E5580072906A7B200714E46 /* InProgressViewController.swift in Sources */,
 				39F52C4F29232E8B00B19A77 /* FeedBackContentDTO.swift in Sources */,
 				39436C132912877D0083D77A /* MyFeedbackHeaderView.swift in Sources */,
+				39341E0A298BA419006C1727 /* TeamDetailMembersView.swift in Sources */,
 				7EE38BB3292623F500FD738D /* MyReflectionEndPoint.swift in Sources */,
 				D750511B29423CB6001BDA34 /* SelectKeywordTypeView.swift in Sources */,
 				39F52C6E2924742E00B19A77 /* ReflectionResponse.swift in Sources */,
@@ -1077,6 +1225,7 @@
 				7E8753E129348BB000FBBF83 /* MyReflectionDetailViewLastCell.swift in Sources */,
 				395C7E1828F9912700FC2FCA /* UIButton+Extension.swift in Sources */,
 				39AC287F29269BC6006CFEE6 /* Endpointable.swift in Sources */,
+				D75D0D2229B2003F0013ADA5 /* EmptyTeamView.swift in Sources */,
 				7EE38BAD2925DDD200FD738D /* EncodeDTO.swift in Sources */,
 				3E557FC328FE7BBC00714E46 /* HomeViewController.swift in Sources */,
 				39847428292656EB00EDC139 /* VoidModel.swift in Sources */,
@@ -1090,21 +1239,26 @@
 				7E8CDC67292E19B000984742 /* SettingButton.swift in Sources */,
 				39F5582B2908027500CD6F6E /* UIDevice+Extension.swift in Sources */,
 				395C7E1328F9841A00FC2FCA /* SizeLiteral.swift in Sources */,
+				52E6770F29911E3E00A0935B /* ReflectionMemberCollectionView.swift in Sources */,
+				391612D529E551BD004AE982 /* ToastView.swift in Sources */,
+				391612D329E53745004AE982 /* TeamNameResponse.swift in Sources */,
 				3EB508902917525600FB77CB /* EmptyReflectionView.swift in Sources */,
+				D7A585292990DB0D00E1F4EE /* Option.swift in Sources */,
 				3EB5088E2916D05F00FB77CB /* EmptyFeedbackView.swift in Sources */,
 				391596622904176500A432D9 /* UIView+Extension.swift in Sources */,
 				3EB508922917585600FB77CB /* UICollectionView + Extension.swift in Sources */,
 				39257DC528F8FEBD00201E0B /* AppDelegate.swift in Sources */,
 				39F52C4B29232E2600B19A77 /* CreateTeamDTO.swift in Sources */,
 				39F52C74292476EA00B19A77 /* FeedBackResponse.swift in Sources */,
+				39341E1129922D17006C1727 /* FullDividerView.swift in Sources */,
 				39F5583D2908CFAD00CD6F6E /* Encodable+Extension.swift in Sources */,
 				39257DC728F8FEBD00201E0B /* SceneDelegate.swift in Sources */,
 				52F07B9A2912541B0015BC8B /* MyFeedbackDetailViewController.swift in Sources */,
 				39307CF52917DA9300789AB6 /* LoginViewController.swift in Sources */,
-				39F52C652923369000B19A77 /* EditFeedBackResponse.swift in Sources */,
 				525E722528FFCFA600EF3FCB /* FeedbackTypeButtonView.swift in Sources */,
-				39A64ACE2905885F001DB020 /* StartSuggestionView.swift in Sources */,
+				391D38DD29C44A0400A6BFED /* TeamDetailMemberTableHeaderView.swift in Sources */,
 				D7AFB7C52916EDC300E998B7 /* MyReflectionDetailTableViewCell.swift in Sources */,
+				D7195FBC299223F6002526E7 /* TeamChangeCollectionViewCell.swift in Sources */,
 				520FEC44292234C0009FC1F2 /* FeedbackToMeModel.swift in Sources */,
 				3E5195AB292B05BC00710A01 /* JoinReflectionButton.swift in Sources */,
 				52AED2DD29128532004D70B9 /* FeedbackFromMeModel.swift in Sources */,
@@ -1115,12 +1269,15 @@
 				395C7E0B28F9550A00FC2FCA /* NSObject+Extension.swift in Sources */,
 				D7E101392942380900CEC7F0 /* AddFeedbackDetailViewController.swift in Sources */,
 				D7505119294239A5001BDA34 /* SelectMemberView.swift in Sources */,
+				52E6770D29911E0C00A0935B /* ReflectionMemberCollectionViewCell.swift in Sources */,
 				39F909D7292679C400DAD0A3 /* EditFeedBackDTO.swift in Sources */,
 				D79D908E29041F42004DDC4A /* CreateTeamViewController.swift in Sources */,
 				3E557FFD2901CD7400714E46 /* Keyword.swift in Sources */,
 				3EB50866291350BB00FB77CB /* TotalReflectionCell.swift in Sources */,
 				7E7F160B2921CC4800C6BE96 /* CustomTabBarController.swift in Sources */,
 				395C7E1D28FEC8C400FC2FCA /* CloseButton.swift in Sources */,
+				3E5368992992461A000CBD48 /* DeleteButton.swift in Sources */,
+				523EDFB329D451590033F9A5 /* UIImage+Extension.swift in Sources */,
 				39F52C572923317500B19A77 /* CreateTeamResponse.swift in Sources */,
 				398474222925CF4800EDC139 /* TeamInfoResponse.swift in Sources */,
 				3EDED995293C81EC0000B4DC /* AddFeedbackKeywordViewController.swift in Sources */,
@@ -1128,19 +1285,23 @@
 				39257DEF28F937A500201E0B /* BaseTableViewCell.swift in Sources */,
 				39F52C72292476AE00B19A77 /* KeywordResponse.swift in Sources */,
 				39F52C5B2923327F00B19A77 /* CurrentReflectionResponse.swift in Sources */,
+				D7A585272990DAFC00E1F4EE /* Section.swift in Sources */,
+				D7A5852B2990DCE700E1F4EE /* ChangeTeamView.swift in Sources */,
 				3E557FC528FE854600714E46 /* KeywordLabel.swift in Sources */,
+				D7A6C63829D5EC6A0096D466 /* NotificationName+Extension.swift in Sources */,
 				39F52C53292330D200B19A77 /* MemberResponse.swift in Sources */,
 				39F52C6A292473A800B19A77 /* ReflectionInfoResponse.swift in Sources */,
+				D702278A297F99510027EF64 /* TeamManageViewController.swift in Sources */,
 				39F52C68292472EB00B19A77 /* AllFeedBackResponse.swift in Sources */,
 				3975CEAF293EEDD6002D4F1A /* KeywordView.swift in Sources */,
 				39257DF128F93C2A00201E0B /* ImageLiteral.swift in Sources */,
+				391D38DB29C449DE00A6BFED /* TeamDetailMemberTableViewCell.swift in Sources */,
 				395C7E252900E74700FC2FCA /* StartReflectionViewController.swift in Sources */,
 				3E557FF82901CD3400714E46 /* KeywordCollectionViewFlowLayout.swift in Sources */,
 				39847424292603B000EDC139 /* AddFeedBackEndPoint.swift in Sources */,
-				39F52C4729232DD600B19A77 /* LoginDTO.swift in Sources */,
 				3EA341EA29261ADD005CBD1C /* InProgressEndPoint.swift in Sources */,
-				39F52C592923321700B19A77 /* CertainTeamDetailResponse.swift in Sources */,
 				396334D7292DADBE00E74B77 /* AppleLoginDTO.swift in Sources */,
+				D7A585222990C50700E1F4EE /* TeamManageSettingCell.swift in Sources */,
 				397E495A2924F871004220D6 /* UserDefaultStorage.swift in Sources */,
 				395C7E1B28FEC42900FC2FCA /* CreateReflectionViewController.swift in Sources */,
 				39F52C612923344C00B19A77 /* FeedBackContentResponse.swift in Sources */,
@@ -1151,20 +1312,23 @@
 				39257DED28F9378D00201E0B /* BaseCollectionViewCell.swift in Sources */,
 				391CBA19290580460044CA30 /* InProgressDetailViewController.swift in Sources */,
 				39F1A13C2912637E005E3456 /* MyFeedbackMemberCollectionViewCell.swift in Sources */,
+				391612CF29E5352A004AE982 /* EditTeamNameEndPoint.swift in Sources */,
 				3E5195A42928C8FB00710A01 /* CreateReflectionEndPoint.swift in Sources */,
 				525E721A28FF0F1900EF3FCB /* MemberCollectionViewCell.swift in Sources */,
 				395C7E2228FEDB6500FC2FCA /* UITextField+Extension.swift in Sources */,
+				39341E0F29921181006C1727 /* MemberInformationView.swift in Sources */,
 				D7AFB7C32916EAB100E998B7 /* MyReflectionDetailViewController.swift in Sources */,
 				39F52C632923357700B19A77 /* FeedBackInfoResponse.swift in Sources */,
-				39F52C5D292332EA00B19A77 /* AddReflectionResponse.swift in Sources */,
+				391D38F529D54CBA00A6BFED /* TeamDetailEndPoint.swift in Sources */,
+				3960864129811E3C003AB4F8 /* TeamDetailViewController.swift in Sources */,
 				D72CF1B0290552960067A118 /* InvitationCodeViewController.swift in Sources */,
 				39257DF328F93D8900201E0B /* TextLiteral.swift in Sources */,
 				39F52C6C292473EC00B19A77 /* AllReflectionResponse.swift in Sources */,
 				3EB5088C2916C64800FB77CB /* EmptyFeedbackKeyword.swift in Sources */,
 				39436C15291287A00083D77A /* MyFeedbackCollectionViewCell.swift in Sources */,
 				3EA341E62924E2AD005CBD1C /* HomeEndPoint.swift in Sources */,
+				391612D129E5364A004AE982 /* EditTeamNameDTO.swift in Sources */,
 				395C7E0D28F959A500FC2FCA /* MainButton.swift in Sources */,
-				396334DB292DAE8300E74B77 /* UserResponse.swift in Sources */,
 				3EB508622912B12700FB77CB /* MyReflectionCollectionViewHeader.swift in Sources */,
 				39257DF528F93E4700201E0B /* UIColor+Extension.swift in Sources */,
 				52F2D1C12906F172009CBF89 /* SelectReflectionMemberViewController.swift in Sources */,
@@ -1180,17 +1344,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		39257DCF28F8FEBE00201E0B /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				39257DD028F8FEBE00201E0B /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		39257DD328F8FEBE00201E0B /* Debug */ = {
@@ -1317,11 +1470,13 @@
 				CODE_SIGN_ENTITLEMENTS = Maddori.Apple/Maddori.Apple.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = HF8GHZB58X;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Maddori.Apple/Global/Supports/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "키고";
+				INFOPLIST_KEY_NSCameraUsageDescription = "프로필 이미지를 설정하기 위해 사용자의 카메라에 접근합니다.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "프로필 이미지를 설정하기 위해 사용자의 사진에 접근합니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -1331,7 +1486,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.1;
+				MARKETING_VERSION = 2.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = mingwan.Maddori.Apple.keygo;
 				PRODUCT_NAME = Maddori.Apple;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1352,11 +1507,13 @@
 				CODE_SIGN_ENTITLEMENTS = Maddori.Apple/Maddori.Apple.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = HF8GHZB58X;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Maddori.Apple/Global/Supports/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "키고";
+				INFOPLIST_KEY_NSCameraUsageDescription = "프로필 이미지를 설정하기 위해 사용자의 카메라에 접근합니다.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "프로필 이미지를 설정하기 위해 사용자의 사진에 접근합니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -1366,7 +1523,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.1;
+				MARKETING_VERSION = 2.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = mingwan.Maddori.Apple.keygo;
 				PRODUCT_NAME = Maddori.Apple;
 				PROVISIONING_PROFILE_SPECIFIER = "";

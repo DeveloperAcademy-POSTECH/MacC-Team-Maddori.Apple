@@ -12,12 +12,10 @@ import SnapKit
 
 final class InvitationCodeViewController: BaseViewController {
     
-    let teamName: String
     let invitationCode: String
     private var isTappedCopyButton: Bool = false
     
-    init(teamName: String, invitationCode: String) {
-        self.teamName = teamName
+    init(invitationCode: String) {
         self.invitationCode = invitationCode
         super.init()
     }
@@ -58,17 +56,7 @@ final class InvitationCodeViewController: BaseViewController {
         label.textColor = .gray400
         return label
     }()
-    private let toastView: UIView = {
-        let view = UIView()
-        view.layer.cornerRadius = 10
-        view.clipsToBounds = true
-        return view
-    }()
-    private let toastContentView: ToastContentView = {
-        let view = ToastContentView()
-        view.toastType = .complete
-        return view
-    }()
+    private let toastView = ToastView(type: .complete)
     
     // MARK: - life cycle
     
@@ -76,8 +64,6 @@ final class InvitationCodeViewController: BaseViewController {
         super.viewDidLoad()
         setupCopyCodeButton()
         setupStartButton()
-        setGradientToastView()
-        render()
     }
     
     override func setupNavigationBar() {
@@ -89,7 +75,6 @@ final class InvitationCodeViewController: BaseViewController {
     }
     
     override func render() {
-        
         navigationController?.view.addSubview(toastView)
         toastView.snp.makeConstraints {
             $0.top.equalToSuperview().inset(-60)
@@ -128,40 +113,15 @@ final class InvitationCodeViewController: BaseViewController {
             $0.bottom.equalTo(startButton.snp.top)
             $0.height.equalTo(SizeLiteral.minimumTouchArea)
         }
-        
-        toastView.addSubview(toastContentView)
-        toastContentView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-        }
-        toastContentView.render()
     }
     
     // MARK: - func
     
-    private func showToastPopUp() {
-        if !isTappedCopyButton {
-            isTappedCopyButton = true
-            UIView.animate(withDuration: 0.5, delay: 0, animations: {
-                self.toastView.transform = CGAffineTransform(translationX: 0, y: 115)
-            }, completion: { _ in
-                UIView.animate(withDuration: 1, delay: 0.8, animations: {
-                    self.toastView.transform = .identity
-                }, completion: { _ in
-                    self.isTappedCopyButton = false
-                })
-            })
-        }
-    }
-    
-    private func setGradientToastView() {
-        toastView.layoutIfNeeded()
-        toastView.setGradient(colorTop: .gradientGrayTop, colorBottom: .gradientGrayBottom)
-    }
-    
     private func setupCopyCodeButton() {
         let action = UIAction { [weak self] _ in
             UIPasteboard.general.string = self?.invitedCodeLabel.text
-            self?.showToastPopUp()
+            guard let navigationController = self?.navigationController else { return }
+            self?.toastView.showToast(navigationController: navigationController)
         }
         copyCodeButton.addAction(action, for: .touchUpInside)
     }

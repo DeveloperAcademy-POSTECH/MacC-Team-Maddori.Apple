@@ -12,43 +12,27 @@ import SnapKit
 
 final class HomeViewController: BaseViewController {
     
+    private enum Size {
+        static let keywordLabelHeight: CGFloat = 50
+        static let propertyPadding: CGFloat = 32
+        static let buttonCornerRadius: CGFloat = 27
+        static let mainButtonHeight: CGFloat = 54
+    }
+    
     var keywordList: [String] = TextLiteral.homeViewControllerEmptyCollectionViewList
     var isTouched = false
     
-    private enum Size {
-        static let keywordLabelHeight: CGFloat = 50
-        static let labelButtonPadding: CGFloat = 6
-        static let propertyPadding: CGFloat = 40
-        static let buttonCornerRadius: CGFloat = 27
-        static let mainButtonHeight: CGFloat = 54
-        static let subButtonWidth: CGFloat = 54
-        static let subButtonHeight: CGFloat = 20
-        static let planReflectionViewHeight: CGFloat = 40
-    }
+    private var joinReflectionButtonActionIdentifier: UIAction.Identifier = UIAction.Identifier(rawValue: "")
     
     var currentReflectionId: Int = 0
     var reflectionStatus: ReflectionStatus = .Before
-    var hasKeyword: Bool = false
-    var isAdmin: Bool = false
-    var hasSeenReflectionAlert: Bool = UserDefaultStorage.hasSeenReflectionAlert {
-        willSet {
-            UserDefaultHandler.setHasSeenAlert(to: newValue)
-        }
-    }
+    var reflectionTitle: String = ""
+    var reflectionDate: String = ""
+    
+    private var currentTeamId: Int = 0
     
     // MARK: - property
     
-    private let toastView: UIView = {
-        let view = UIView()
-        view.layer.cornerRadius = 10
-        view.clipsToBounds = true
-        return view
-    }()
-    private let toastContentView: ToastContentView = {
-        let view = ToastContentView()
-        view.toastType = .complete
-        return view
-    }()
     private lazy var flowLayout: KeywordCollectionViewFlowLayout = {
         let layout = KeywordCollectionViewFlowLayout()
         layout.count = keywordList.count
@@ -60,26 +44,30 @@ final class HomeViewController: BaseViewController {
         collectionView.register(KeywordCollectionViewCell.self, forCellWithReuseIdentifier: KeywordCollectionViewCell.className)
         return collectionView
     }()
-    private lazy var teamNameLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .black100
-        label.numberOfLines = 0
-        return label
+    private lazy var teamButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.titleLabel?.font = .main
+        button.setImage(ImageLiterals.icChevronDown, for: .normal)
+        button.semanticContentAttribute = .forceRightToLeft
+        button.setPreferredSymbolConfiguration(UIImage.SymbolConfiguration(pointSize: 13, weight: .semibold), forImageIn: .normal)
+        button.tintColor = .black100
+        let action = UIAction { [weak self] _ in
+            self?.presentTeamModal()
+        }
+        button.addAction(action, for: .touchUpInside)
+        return button
     }()
-    private let invitationCodeButton: UIButton = {
-         let button = UIButton()
-         button.setTitle(TextLiteral.mainViewControllerInvitationButtonText, for: .normal)
-         button.setTitleColor(UIColor.blue200, for: .normal)
-         button.titleLabel?.font = .caption2
-         button.backgroundColor = .gray100
-         button.layer.cornerRadius = 4
-         return button
-     }()
-    private let descriptionLabel: UILabel = {
-        let label = UILabel()
-        label.font = .caption1
-        label.textColor = .gray400
-        return label
+    private lazy var teamManageButton: UIButton = {
+        let button = UIButton()
+        button.setImage(ImageLiterals.icTeamMananage, for: .normal)
+        button.semanticContentAttribute = .forceRightToLeft
+        button.setPreferredSymbolConfiguration(UIImage.SymbolConfiguration(pointSize: 20), forImageIn: .normal)
+        button.tintColor = .gray600
+        let action = UIAction { [weak self] _ in
+            self?.pushTeamDetailViewController()
+        }
+        button.addAction(action, for: .touchUpInside)
+        return button
     }()
     private let currentReflectionLabel: UILabel = {
         let label = UILabel()
@@ -88,29 +76,7 @@ final class HomeViewController: BaseViewController {
         label.textColor = .black100
         return label
     }()
-    private lazy var joinReflectionButton: JoinReflectionButton = {
-        let joinButton = JoinReflectionButton()
-        joinButton.layer.cornerRadius = 10
-        joinButton.clipsToBounds = true
-        joinButton.buttonAction = { [weak self] in
-            self?.presentSelectReflectionMemberViewController()
-        }
-        return joinButton
-    }()
-    private lazy var planLabelButtonView: LabelButtonView = {
-        let labelButton = LabelButtonView()
-        labelButton.buttonAction = { [weak self] in
-            self?.presentCreateReflectionViewController()
-        }
-        labelButton.subText = TextLiteral.mainViewControllerPlanLabelButtonSubText
-        labelButton.subButtonText = TextLiteral.mainViewControllerPlanLabelButtonSubButtonText
-        return labelButton
-    }()
-    private let planLabelButtonBackgroundView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .backgroundWhite
-        return view
-    }()
+    private lazy var joinReflectionButton = JoinReflectionButton()
     private lazy var addFeedbackButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .white100
@@ -121,7 +87,7 @@ final class HomeViewController: BaseViewController {
         button.layer.borderColor = UIColor.blue200.cgColor
         button.layer.cornerRadius = Size.buttonCornerRadius
         let action = UIAction { [weak self] _ in
-            self?.didTapAddFeedbackButton()
+            self?.presentAddFeedbackViewController()
         }
         button.addAction(action, for: .touchUpInside)
         return button
@@ -131,61 +97,47 @@ final class HomeViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUpDelegation()
+        setupDelegation()
         render()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if reflectionStatus == .Progressing && !hasSeenReflectionAlert {
-            showStartReflectionView()
-        }
+        navigationController?.isNavigationBarHidden = true
+        setLayoutTeamManageButton()
         fetchCertainTeamDetail(type: .fetchCertainTeamDetail)
         fetchCurrentReflectionDetail(type: .fetchCurrentReflectionDetail)
+        self.setupNotification()
     }
     
     override func configUI() {
         view.backgroundColor = .white200
-        setGradientToastView()
     }
     
     override func render() {
-        navigationController?.view.addSubview(toastView)
-        toastView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(-60)
-            $0.centerX.equalToSuperview()
-            $0.height.equalTo(46)
-        }
-        
-        toastView.addSubview(toastContentView)
-        toastContentView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-        }
-        toastContentView.render()
-        
-        view.addSubview(teamNameLabel)
-        teamNameLabel.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(SizeLiteral.topPadding)
+        view.addSubview(teamButton)
+        teamButton.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.topPadding)
+            $0.height.equalTo(SizeLiteral.minimumTouchArea)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
-        view.addSubview(invitationCodeButton)
-        invitationCodeButton.snp.makeConstraints {
-           $0.leading.equalTo(teamNameLabel.snp.trailing).offset(Size.labelButtonPadding)
-           $0.width.equalTo(Size.subButtonWidth)
-           $0.height.equalTo(Size.subButtonHeight)
-           $0.bottom.equalTo(teamNameLabel.snp.bottom).offset(-5)
+        view.addSubview(teamManageButton)
+        teamManageButton.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.topPadding)
+            $0.width.height.equalTo(SizeLiteral.minimumTouchArea)
+            $0.trailing.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
-        view.addSubview(descriptionLabel)
-        descriptionLabel.snp.makeConstraints {
-            $0.top.equalTo(teamNameLabel.snp.bottom).offset(SizeLiteral.titleSubtitleSpacing)
-            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        view.addSubview(joinReflectionButton)
+        joinReflectionButton.snp.makeConstraints {
+            $0.top.equalTo(teamButton.snp.bottom).offset(7)
+            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.buttonLeadingTrailingPadding)
         }
         
         view.addSubview(currentReflectionLabel)
         currentReflectionLabel.snp.makeConstraints {
-            $0.top.equalTo(descriptionLabel.snp.bottom).offset(Size.propertyPadding)
+            $0.top.equalTo(joinReflectionButton.snp.bottom).offset(Size.propertyPadding)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
@@ -198,7 +150,7 @@ final class HomeViewController: BaseViewController {
         
         view.addSubview(keywordCollectionView)
         keywordCollectionView.snp.makeConstraints {
-            $0.top.equalTo(currentReflectionLabel.snp.bottom).offset(SizeLiteral.titleSubtitleSpacing)
+            $0.top.equalTo(currentReflectionLabel.snp.bottom).offset(5)
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             $0.bottom.equalTo(addFeedbackButton.snp.top).offset(-10)
         }
@@ -206,65 +158,65 @@ final class HomeViewController: BaseViewController {
     
     // MARK: - func
     
-    private func setUpDelegation() {
+    private func setupNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(self.reloadHomeViewController(_:)), name: .changeTeamNotification, object: nil)
+    }
+    
+    private func presentTeamModal() {
+        let teamViewController = TeamManageViewController(teamId: self.currentTeamId)
+        
+        teamViewController.modalPresentationStyle = .pageSheet
+        
+        if #available(iOS 15.0, *) {
+            if let sheet = teamViewController.sheetPresentationController {
+                sheet.detents = [.medium(), .large()]
+                sheet.delegate = self
+                sheet.prefersGrabberVisible = true
+            }
+        } else {
+            // FIXME: 15 미만일때는 어떻게 해야할지 고민중..
+        }
+        
+        present(teamViewController, animated: true)
+    }
+    
+    private func setupDelegation() {
         keywordCollectionView.delegate = self
         keywordCollectionView.dataSource = self
     }
     
-    private func renderPlanLabelButton() {
-        view.addSubview(planLabelButtonBackgroundView)
-        planLabelButtonBackgroundView.snp.makeConstraints {
-            $0.horizontalEdges.equalToSuperview()
-            $0.bottom.equalTo(addFeedbackButton.snp.top)
-            $0.height.equalTo(SizeLiteral.minimumTouchArea)
-        }
-        
-        planLabelButtonBackgroundView.addSubview(planLabelButtonView)
-        planLabelButtonView.snp.makeConstraints {
-            $0.top.bottom.centerX.equalToSuperview()
+    private func setupJoinReflectionButtonBackground(status: ReflectionStatus) {
+        joinReflectionButton.joinButton.removeGradient()
+        switch status {
+        case .SettingRequired, .Before, .Done:
+            joinReflectionButton.joinButton.backgroundColor = .white100
+        case .Progressing:
+            joinReflectionButton.layoutIfNeeded()
+            joinReflectionButton.joinButton.setGradient(colorTop: .gradientBlueTop, colorBottom: .gradientBlueBottom)
+            joinReflectionButton.render()
         }
     }
     
-    private func didTapAddFeedbackButton() {
+    private func setupJoinReflectionButtonAction(status: ReflectionStatus) {
+        joinReflectionButton.joinButton.removeAction(identifiedBy: joinReflectionButtonActionIdentifier, for: .touchUpInside)
+        let action = UIAction { [weak self] _ in
+            switch status {
+            case .SettingRequired, .Done:
+                self?.presentCreateReflectionViewController()
+            case .Before:
+                self?.presentEditReflectionViewController()
+            case .Progressing:
+                self?.presentSelectReflectionMemberViewController()
+            }
+        }
+        joinReflectionButtonActionIdentifier = action.identifier
+        joinReflectionButton.joinButton.addAction(action, for: .touchUpInside)
+    }
+    
+    private func presentAddFeedbackViewController() {
         let viewController = UINavigationController(rootViewController: AddFeedbackDetailViewController(feedbackContent: FeedbackContent(toNickName: nil, toUserId: nil, feedbackType: nil, reflectionId: currentReflectionId)))
         viewController.modalPresentationStyle = .fullScreen
         present(viewController, animated: true)
-    }
-    
-    private func setGradientToastView() {
-        toastView.layoutIfNeeded()
-        toastView.setGradient(colorTop: .gradientGrayTop, colorBottom: .gradientGrayBottom)
-    }
-    
-    private func setGradientJoinReflectionView() {
-        joinReflectionButton.layoutIfNeeded()
-        joinReflectionButton.setGradient(colorTop: .gradientBlueTop, colorBottom: .gradientBlueBottom)
-    }
-    
-    private func showToastPopUp(of type: ToastType) {
-        if !isTouched {
-            isTouched = true
-            DispatchQueue.main.async {
-                self.toastContentView.toastType = type
-            }
-            UIView.animate(withDuration: 0.5, delay: 0, animations: {
-                self.toastView.transform = CGAffineTransform(translationX: 0, y: 115)
-            }, completion: {_ in
-                UIView.animate(withDuration: 1, delay: 0.8, animations: {
-                    self.toastView.transform = .identity
-                }, completion: {_ in
-                    self.isTouched = false
-                })
-            })
-        }
-    }
-    
-    private func setupCopyCodeButton(code: String) {
-        let action = UIAction { [weak self] _ in
-            UIPasteboard.general.string = code
-            self?.showToastPopUp(of: .complete)
-        }
-        invitationCodeButton.addAction(action, for: .touchUpInside)
     }
     
     private func presentCreateReflectionViewController() {
@@ -273,92 +225,45 @@ final class HomeViewController: BaseViewController {
         present(viewController, animated: true)
     }
     
-    private func presentSelectReflectionMemberViewController() {
-        let viewController = UINavigationController(rootViewController: SelectReflectionMemberViewController(reflectionId: currentReflectionId, isAdmin: self.isAdmin))
+    private func presentEditReflectionViewController() {
+        let viewController = UINavigationController(rootViewController: CreateReflectionViewController(reflectionId: currentReflectionId, reflectionTitle: reflectionTitle, reflectionDate: reflectionDate))
         viewController.modalPresentationStyle = .fullScreen
         present(viewController, animated: true)
     }
     
-    
-    // 회고 상태: Setting Required
-    private func showPlanLabelButton() {
-        planLabelButtonView.isHidden = false
-        planLabelButtonBackgroundView.isHidden = false
+    private func presentSelectReflectionMemberViewController() {
+        let viewController = UINavigationController(rootViewController: SelectReflectionMemberViewController(reflectionId: currentReflectionId))
+        viewController.modalPresentationStyle = .fullScreen
+        present(viewController, animated: true)
     }
     
-    // 회고 상태: Before
-    private func hidePlanLabelButton() {
-        planLabelButtonView.isHidden = true
-        planLabelButtonBackgroundView.isHidden = true
-        
-        keywordCollectionView.snp.remakeConstraints {
-            $0.top.equalTo(currentReflectionLabel.snp.bottom).offset(SizeLiteral.titleSubtitleSpacing)
-            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-            $0.bottom.equalTo(addFeedbackButton.snp.top).offset(-10)
-        }
-    }
-    
-    // 회고 상태: Progressing
-    private func showStartReflectionView() {
+    private func presentStartReflectionView() {
         guard let navigationController = self.navigationController else { return }
-        let viewController = StartReflectionViewController(reflectionId: currentReflectionId, navigationViewController: navigationController, isAdmin: self.isAdmin)
+        let viewController = StartReflectionViewController(reflectionId: currentReflectionId, navigationViewController: navigationController)
         viewController.modalPresentationStyle = .overFullScreen
         present(viewController, animated: true)
-        hasSeenReflectionAlert = true
+        UserDefaultHandler.setHasSeenAlert(to: true)
         UserDefaultHandler.clearUserDefaults(of: .seenKeywordIdList)
         UserDefaultHandler.clearUserDefaults(of: .seenMemberIdList)
         UserDefaultHandler.clearUserDefaults(of: .completedCurrentReflection)
     }
     
-    private func showJoinReflectionButton() {
-        view.addSubview(joinReflectionButton)
-        joinReflectionButton.snp.makeConstraints {
-            $0.top.equalTo(descriptionLabel.snp.bottom).offset(16)
-            $0.horizontalEdges.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-        }
-        
-        currentReflectionLabel.snp.remakeConstraints {
-            $0.top.equalTo(joinReflectionButton.snp.bottom).offset(24)
-            $0.horizontalEdges.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-        }
-        
+    private func showAddFeedbackButton() {
+        addFeedbackButton.isHidden = false
         keywordCollectionView.snp.remakeConstraints {
-            $0.top.equalTo(currentReflectionLabel.snp.bottom).offset(SizeLiteral.titleSubtitleSpacing)
-            $0.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-SizeLiteral.bottomTabBarPadding)
+            $0.top.equalTo(currentReflectionLabel.snp.bottom).offset(5)
+            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            $0.bottom.equalTo(addFeedbackButton.snp.top).offset(-10)
         }
-        
-        setGradientJoinReflectionView()
-        joinReflectionButton.render()
     }
     
     private func hideAddFeedbackButton() {
-        self.addFeedbackButton.isHidden = true
+        addFeedbackButton.isHidden = true
         keywordCollectionView.snp.remakeConstraints {
-            $0.top.equalTo(currentReflectionLabel.snp.bottom).offset(SizeLiteral.titleSubtitleSpacing)
+            $0.top.equalTo(currentReflectionLabel.snp.bottom).offset(5)
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(SizeLiteral.bottomTabBarPadding)
         }
-    }
-    
-    // 회고 상태: Done
-    private func restoreView() {
-        currentReflectionLabel.snp.remakeConstraints {
-            $0.top.equalTo(descriptionLabel.snp.bottom).offset(Size.propertyPadding)
-            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-        }
-        
-        if isAdmin {
-            keywordCollectionView.snp.remakeConstraints {
-                $0.top.equalTo(currentReflectionLabel.snp.bottom).offset(SizeLiteral.titleSubtitleSpacing)
-                $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-                $0.bottom.equalTo(planLabelButtonBackgroundView.snp.top).offset(-10)
-            }
-        }
-    }
-    
-    private func hideJoinReflectionButton() {
-        joinReflectionButton.removeFromSuperview()
     }
     
     private func convertFetchedKeywordList(of list: [String]) {
@@ -374,25 +279,51 @@ final class HomeViewController: BaseViewController {
         keywordList = TextLiteral.homeViewControllerEmptyCollectionViewList
     }
     
+    private func emptyKeywordListWhenProgressing() {
+        keywordList = TextLiteral.homeViewControllerEmptyCollectionViewListWhenProgressing
+    }
+    
+    private func pushTeamDetailViewController() {
+        let viewController = TeamDetailViewController()
+        viewController.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    private func setLayoutTeamManageButton() {
+        let hasTeam = UserDefaultStorage.teamId != 0
+        teamManageButton.isHidden = !hasTeam
+    }
+    
+    // MARK: - selector
+    
+    @objc
+    private func reloadHomeViewController(_ sender: Notification) {
+        if let teamId = sender.object as? Int {
+            UserDefaultHandler.setTeamId(teamId: teamId)
+            self.fetchCertainTeamDetail(type: .fetchCertainTeamDetail)
+            self.fetchCurrentReflectionDetail(type: .fetchCurrentReflectionDetail)
+        }
+    }
+    
     // MARK: - api
     
     private func fetchCertainTeamDetail(type: HomeEndPoint<VoidModel>) {
         AF.request(type.address,
                    method: type.method,
                    headers: type.headers
-        ).responseDecodable(of: BaseModel<CertainTeamDetailResponse>.self) { json in
+        ).responseDecodable(of: BaseModel<TeamInfoResponse>.self) { json in
             if let json = json.value {
-                guard let isAdmin = json.detail?.admin,
-                      let teamName = json.detail?.teamName,
-                      let invitationCode = json.detail?.invitationCode
+                guard let teamName = json.detail?.teamName,
+                      let teamId = json.detail?.id
                 else { return }
-                self.isAdmin = isAdmin
+                self.currentTeamId = teamId
                 DispatchQueue.main.async {
-                    self.teamNameLabel.setTitleFont(text: teamName)
-                    self.setupCopyCodeButton(code: invitationCode)
-                    if isAdmin {
-                        self.renderPlanLabelButton()
-                    }
+                    self.teamButton.setTitle(teamName + " ", for: .normal)
+                }
+            } else {
+                DispatchQueue.main.async {
+                    self.teamButton.setTitle("팀 없음 ", for: .normal)
+                    self.teamButton.tintColor = .gray500
                 }
             }
         }
@@ -404,45 +335,49 @@ final class HomeViewController: BaseViewController {
                    headers: type.headers
         ).responseDecodable(of: BaseModel<CurrentReflectionResponse>.self) { json in
             if let json = json.value {
+                dump(json)
                 let reflectionDetail = json.detail
                 guard let reflectionStatus = reflectionDetail?.reflectionStatus,
                       let reflectionId = reflectionDetail?.currentReflectionId
                 else { return }
+                let reflectionTitle = reflectionDetail?.reflectionName ?? ""
+                let reflectionDate = reflectionDetail?.reflectionDate ?? ""
                 
-                self.currentReflectionId = reflectionId
                 self.reflectionStatus = reflectionStatus
+                self.currentReflectionId = reflectionId
+                self.reflectionTitle = reflectionTitle
+                self.reflectionDate = reflectionDate
+                self.joinReflectionButton.setupAttribute(reflectionStatus: reflectionStatus, title: reflectionTitle, date: reflectionDate, isPreview: false)
+                
+                self.setupJoinReflectionButtonAction(status: reflectionStatus)
+                self.setupJoinReflectionButtonBackground(status: reflectionStatus)
+                
                 if let reflectionKeywordList = reflectionDetail?.reflectionKeywords {
-                    self.hasKeyword = true
                     if reflectionKeywordList.isEmpty {
                         self.resetKeywordList()
-                        self.hasKeyword = false
                     }
                     self.convertFetchedKeywordList(of: reflectionKeywordList)
                     DispatchQueue.main.async {
                         switch reflectionStatus {
-                        case .SettingRequired, .Done:
-                            self.descriptionLabel.text = TextLiteral.homeViewControllerEmptyDescriptionLabel
-                            self.addFeedbackButton.isHidden = false
-                            self.hideJoinReflectionButton()
-                            self.showPlanLabelButton()
-                            self.restoreView()
-                        case .Before:
-                            let reflectionDate = reflectionDetail?.reflectionDate?.formatDateString(to: "M월 d일 a h시 m분")
-                            self.descriptionLabel.text = "다음 회고는 \(reflectionDate ?? String(describing: Date()))입니다"
-                            self.hidePlanLabelButton()
+                        case .SettingRequired, .Before, .Done:
+                            self.showAddFeedbackButton()
                         case .Progressing:
-                            let reflectionDate = reflectionDetail?.reflectionDate?.formatDateString(to: "M월 d일 a h시 m분")
-                            self.descriptionLabel.text = "다음 회고는 \(reflectionDate ?? String(describing: Date()))입니다"
-                            self.showJoinReflectionButton()
-                            self.hidePlanLabelButton()
+                            if reflectionKeywordList.isEmpty {
+                                self.emptyKeywordListWhenProgressing()
+                            }
                             self.hideAddFeedbackButton()
-                            if !self.hasSeenReflectionAlert {
-                                self.showStartReflectionView()
+                            if !UserDefaultStorage.hasSeenReflectionAlert {
+                                self.presentStartReflectionView()
                             }
                         }
                         self.flowLayout.count = reflectionKeywordList.count
                         self.keywordCollectionView.reloadData()
                     }
+                }
+            } else {
+                DispatchQueue.main.async {
+                    self.joinReflectionButton.setupAttribute(reflectionStatus: .Before, title: "", date: "", isPreview: true)
+                    self.setupJoinReflectionButtonBackground(status: .Before)
                 }
             }
         }
@@ -474,18 +409,13 @@ extension HomeViewController: UICollectionViewDataSource {
         UIDevice.vibrate()
         switch reflectionStatus {
         case .Before, .SettingRequired, .Done:
-            if hasKeyword {
-                showToastPopUp(of: .warning)
-            } else {
-                didTapAddFeedbackButton()
-            }
+            presentAddFeedbackViewController()
         case .Progressing:
             guard let navigationController = self.navigationController else { return }
-            let viewController = UINavigationController(rootViewController: SelectReflectionMemberViewController(reflectionId: currentReflectionId, isAdmin: isAdmin))
+            let viewController = UINavigationController(rootViewController: SelectReflectionMemberViewController(reflectionId: currentReflectionId))
             viewController.modalPresentationStyle = .fullScreen
             navigationController.present(viewController, animated: true)
         }
-        
     }
 }
 
@@ -496,3 +426,4 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
+extension HomeViewController: UISheetPresentationControllerDelegate {}

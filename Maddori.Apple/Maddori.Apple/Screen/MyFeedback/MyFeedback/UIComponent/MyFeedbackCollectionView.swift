@@ -34,7 +34,6 @@ final class MyFeedbackCollectionView: UIView {
     private let collectionViewFlowLayout: UICollectionViewFlowLayout = {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .vertical
-        flowLayout.sectionInset = Size.collectionViewInset
         flowLayout.minimumLineSpacing = 20
         return flowLayout
     }()
@@ -104,21 +103,18 @@ extension MyFeedbackCollectionView: UICollectionViewDelegate {
             let hasContinueStop = collectionView.numberOfSections == 2
             let isContinueSection = indexPath.section == 0
             if hasContinueStop {
-                let reflectionId = data.reflectionId ?? 0
+                let reflectionId = data.reflection.id ?? 0
                 let feedbackId = isContinueSection
                 ? data.continueArray[indexPath.item].id ?? 0
                 : data.stopArray[indexPath.item].id ?? 0
-                let nickName = data.toUsername ?? ""
+                let nickName = data.toUser.nickname ?? ""
                 let keyword = isContinueSection
                 ? data.continueArray[indexPath.item].keyword ?? ""
                 : data.stopArray[indexPath.item].keyword ?? ""
                 let info = isContinueSection
                 ? data.continueArray[indexPath.item].content ?? ""
                 : data.stopArray[indexPath.item].content ?? ""
-                let start = isContinueSection
-                ? data.continueArray[indexPath.item].startContent
-                : data.stopArray[indexPath.item].startContent
-                let reflectionStatus = ReflectionStatus.init(rawValue: feedbackInfo?.reflectionStatus ?? "Before")
+                let reflectionStatus = ReflectionStatus.init(rawValue: feedbackInfo?.reflection.state?.rawValue ?? "Before")
                 
                 let data = FeedbackFromMeModel(reflectionId: reflectionId,
                                                feedbackId: feedbackId,
@@ -126,33 +122,30 @@ extension MyFeedbackCollectionView: UICollectionViewDelegate {
                                                feedbackType: indexPath.section == 0 ? .continueType : .stopType,
                                                keyword: keyword,
                                                info: info,
-                                               start: start,
                                                reflectionStatus: reflectionStatus ?? .Before
                 )
                 didTappedCell?(data)
             } else {
                 let continueArray = data.continueArray
                 let stopArray = data.stopArray
-                let reflectionStatus = ReflectionStatus.init(rawValue: data.reflectionStatus ?? "Before")
+                let reflectionStatus = ReflectionStatus.init(rawValue: data.reflection.state?.rawValue ?? "Before")
                 if !continueArray.isEmpty {
-                    let data = FeedbackFromMeModel(reflectionId: data.reflectionId ?? 0,
+                    let data = FeedbackFromMeModel(reflectionId: data.reflection.id ?? 0,
                                                    feedbackId: continueArray[indexPath.item].id ?? 0,
-                                                   nickname: data.toUsername ?? "",
+                                                   nickname: data.toUser.nickname ?? "",
                                                    feedbackType: .continueType,
                                                    keyword: continueArray[indexPath.item].keyword ?? "",
                                                    info: continueArray[indexPath.item].content ?? "",
-                                                   start: continueArray[indexPath.item].startContent,
                                                    reflectionStatus: reflectionStatus ?? .Before
                     )
                     didTappedCell?(data)
                 } else {
-                    let data = FeedbackFromMeModel(reflectionId: data.reflectionId ?? 0,
+                    let data = FeedbackFromMeModel(reflectionId: data.reflection.id ?? 0,
                                                    feedbackId: stopArray[indexPath.item].id ?? 0,
-                                                   nickname: data.toUsername ?? "",
+                                                   nickname: data.toUser.nickname ?? "",
                                                    feedbackType: .stopType,
                                                    keyword: stopArray[indexPath.item].keyword ?? "",
                                                    info: stopArray[indexPath.item].content ?? "",
-                                                   start: stopArray[indexPath.item].startContent,
                                                    reflectionStatus: reflectionStatus ?? .Before
                     )
                     didTappedCell?(data)
@@ -161,6 +154,7 @@ extension MyFeedbackCollectionView: UICollectionViewDelegate {
         }
     }
 }
+
 extension MyFeedbackCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         guard let data = feedbackInfo else { return 0 }
@@ -230,10 +224,18 @@ extension MyFeedbackCollectionView: UICollectionViewDelegateFlowLayout {
         return CGSize(width: 80, height: 45)
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        guard let data = feedbackInfo else { return .zero }
+        if data.continueArray.isEmpty && data.stopArray.isEmpty {
+            return .zero
+        }
+        return Size.collectionViewInset
+    }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         guard let data = feedbackInfo else { return .zero }
         if data.continueArray.isEmpty && data.stopArray.isEmpty {
-            return CGSize(width: 300, height: 300)
+            return CGSize(width: UIScreen.main.bounds.width, height: 300)
         } else {
             var feedbackList: [String] = []
             guard let data = feedbackInfo else { return .zero }

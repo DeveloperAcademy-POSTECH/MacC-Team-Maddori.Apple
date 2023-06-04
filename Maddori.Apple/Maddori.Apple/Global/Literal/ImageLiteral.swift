@@ -22,6 +22,9 @@ enum ImageLiterals {
     static var icEllipsis: UIImage { .load(systemName: "ellipsis") }
     static var icBottom: UIImage { .load(systemName: "chevron.down") }
     static var icPersonCircle: UIImage { .load(systemName: "person.crop.circle") }
+    static var icChevronDown: UIImage { .load(systemName: "chevron.down") }
+    static var icTeamMananage: UIImage { .load(systemName: "person.2.circle") }
+    static var icPlus: UIImage { .load(name: "plus") }
     
     // MARK: - image
     
@@ -38,6 +41,9 @@ enum ImageLiterals {
     static var imgProgress3: UIImage { .load(name: "ProgressBar3") }
     static var imgProgress4: UIImage { .load(name: "ProgressBar4") }
     static var imgProgress5: UIImage { .load(name: "ProgressBar5") }
+    static var imgDefaultProfile: UIImage { .load(name: "DefaultProfile") }
+    static var imgProfileNone: UIImage { .load(name: "profileNone") }
+    static var imgEmptyTeam: UIImage { .load(name: "team") }
 }
 
 extension UIImage {

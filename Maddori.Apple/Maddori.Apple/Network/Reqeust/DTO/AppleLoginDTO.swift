@@ -8,5 +8,6 @@
 import Foundation
 
 struct AppleLoginDTO: Encodable {
+    // MARK: - appleLogin
     let token: String
 }

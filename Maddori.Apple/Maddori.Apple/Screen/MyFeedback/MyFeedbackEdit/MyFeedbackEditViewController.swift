@@ -76,7 +76,7 @@ final class MyFeedbackEditViewController: BaseViewController {
     private let feedbackContentTextView = CustomTextView()
     private lazy var feedbackDoneButton: MainButton = {
         let button = MainButton()
-        button.title = TextLiteral.addFeedbackViewControllerDoneButtonTitle
+        button.title = TextLiteral.doneButtonComplete
         button.isDisabled = true
         let action = UIAction { [weak self] _ in
             self?.didTappedDoneButton()
@@ -257,8 +257,7 @@ final class MyFeedbackEditViewController: BaseViewController {
     private func didTappedDoneButton() {
         let dto = EditFeedBackDTO(type: feedbackType,
                                   keyword: keywordTextFieldView.keywordTextField.text ?? "",
-                                  content: feedbackContentTextView.text ?? "",
-                                  start_content: nil)
+                                  content: feedbackContentTextView.text ?? "")
         putEditFeedBack(type: .putEditFeedBack(reflectionId: feedbackDetail.reflectionId, feedBackId: feedbackDetail.feedbackId, dto))
     }
     
@@ -302,7 +301,7 @@ final class MyFeedbackEditViewController: BaseViewController {
                    parameters: type.body,
                    encoder: JSONParameterEncoder.default,
                    headers: type.headers
-        ).responseDecodable(of: BaseModel<EditFeedBackResponse>.self) { json in
+        ).responseDecodable(of: BaseModel<FeedBackContentResponse>.self) { json in
             if let _ = json.value {
                 DispatchQueue.main.async {
                     self.dismiss(animated: true) {
@@ -331,7 +330,7 @@ extension MyFeedbackEditViewController: UITextViewDelegate {
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.text == TextLiteral.addFeedbackViewControllerFeedbackContentTextViewPlaceholder || textView.text == TextLiteral.addFeedbackViewControllerStartTextViewPlaceholder {
+        if textView.text == TextLiteral.addFeedbackViewControllerFeedbackContentTextViewPlaceholder {
             textView.text = nil
             textView.textColor = .black100
         }
