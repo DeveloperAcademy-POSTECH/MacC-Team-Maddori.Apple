@@ -151,6 +151,7 @@
 		D71CC1E72AF50FDF00BAA13D /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = D71CC1E62AF50FDF00BAA13D /* RxRelay */; };
 		D71CC1EC2AF523FB00BAA13D /* InvitationCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71CC1EB2AF523FB00BAA13D /* InvitationCodeView.swift */; };
 		D71CC1F02AF53D2900BAA13D /* InvitationCodeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71CC1EF2AF53D2900BAA13D /* InvitationCodeViewModel.swift */; };
+		D71CC1F32AF53D8100BAA13D /* BaseViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71CC1F22AF53D8100BAA13D /* BaseViewModelType.swift */; };
 		D724790C28FEC8C900D67B50 /* BaseTextFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D724790B28FEC8C900D67B50 /* BaseTextFieldViewController.swift */; };
 		D724790E28FEEEC300D67B50 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D724790D28FEEEC300D67B50 /* CustomTextField.swift */; };
 		D72CF1B0290552960067A118 /* InvitationCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72CF1AF290552960067A118 /* InvitationCodeViewController.swift */; };
@@ -311,6 +312,7 @@
 		D7195FBB299223F6002526E7 /* TeamChangeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamChangeCollectionViewCell.swift; sourceTree = "<group>"; };
 		D71CC1EB2AF523FB00BAA13D /* InvitationCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationCodeView.swift; sourceTree = "<group>"; };
 		D71CC1EF2AF53D2900BAA13D /* InvitationCodeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationCodeViewModel.swift; sourceTree = "<group>"; };
+		D71CC1F22AF53D8100BAA13D /* BaseViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModelType.swift; sourceTree = "<group>"; };
 		D724790B28FEC8C900D67B50 /* BaseTextFieldViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTextFieldViewController.swift; sourceTree = "<group>"; };
 		D724790D28FEEEC300D67B50 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		D72CF1AF290552960067A118 /* InvitationCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationCodeViewController.swift; sourceTree = "<group>"; };
@@ -435,6 +437,7 @@
 		39257DDA28F90EBD00201E0B /* Global */ = {
 			isa = PBXGroup;
 			children = (
+				D71CC1F12AF53D6C00BAA13D /* Protocol */,
 				39257DE328F90F7200201E0B /* Literal */,
 				39257DE828F90F9500201E0B /* Base */,
 				39257DE728F90F8F00201E0B /* Supports */,
@@ -1090,6 +1093,14 @@
 			path = ViewController;
 			sourceTree = "<group>";
 		};
+		D71CC1F12AF53D6C00BAA13D /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				D71CC1F22AF53D8100BAA13D /* BaseViewModelType.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
 		D724790A28FEC8A800D67B50 /* Setup */ = {
 			isa = PBXGroup;
 			children = (
@@ -1279,6 +1290,7 @@
 				3EB508692913560A00FB77CB /* Reflection.swift in Sources */,
 				39F15C0C296D371500952D02 /* EmptyPersonView.swift in Sources */,
 				52DC9091291A98CC00904739 /* MyFeedbackEditViewController.swift in Sources */,
+				D71CC1F32AF53D8100BAA13D /* BaseViewModelType.swift in Sources */,
 				3E66777529419C8300BB5670 /* KeywordTextFieldView.swift in Sources */,
 				3EA341E82925E5EA005CBD1C /* String+Extension.swift in Sources */,
 				D7AFB7C72916FF9400E998B7 /* CustomSegmentControl.swift in Sources */,
