@@ -13,7 +13,6 @@ final class InvitationCodeViewModel: BaseViewModelType {
     
     struct Input {
         let viewDidLoad: Observable<Void>
-        let copyCodeButtonDidTap: Observable<Void>
     }
     
     struct Output {

@@ -14,7 +14,6 @@ final class InvitationCodeViewController: BaseViewController {
     // MARK: - property
     
     private let invitationCodeView: InvitationCodeView = InvitationCodeView()
-    private let toastView: ToastView = ToastView(type: .complete)
     
     private let viewModel: any BaseViewModelType
     private let disposeBag: DisposeBag = DisposeBag()
@@ -73,8 +72,7 @@ final class InvitationCodeViewController: BaseViewController {
     
     private func transformedOutput() -> InvitationCodeViewModel.Output? {
         guard let viewModel = viewModel as? InvitationCodeViewModel else { return nil }
-        let input = InvitationCodeViewModel.Input(viewDidLoad: Observable.just(()).asObservable(),
-                                                  copyCodeButtonDidTap: invitationCodeView.copyCodeButtonTapPublisher)
+        let input = InvitationCodeViewModel.Input(viewDidLoad: Observable.just(()).asObservable())
         return viewModel.transform(from: input)
     }
     
