@@ -9,11 +9,35 @@ import Foundation
 
 import RxSwift
 
-final class InvitationCodeViewModel {
+final class InvitationCodeViewModel: BaseViewModelType {
+    
+    struct Input {
+        let viewDidLoad: Observable<Void>
+        let copyCodeButtonDidTap: Observable<Void>
+    }
+    
+    struct Output {
+        let code: Observable<String>
+    }
     
     // MARK: - property
     
+    let invitationCode: String
+    
+    private let disposeBag: DisposeBag = DisposeBag()
+    
     // MARK: - init
     
-    // MARK: - func
+    init(invitationCode: String) {
+        self.invitationCode = invitationCode
+    }
+    
+    // MARK: - public func
+    
+    func transform(from input: Input) -> Output {
+        let code = input.viewDidLoad
+            .map { [weak self] _ in self?.invitationCode ?? "" }
+            
+        return Output(code: code)
+    }
 }

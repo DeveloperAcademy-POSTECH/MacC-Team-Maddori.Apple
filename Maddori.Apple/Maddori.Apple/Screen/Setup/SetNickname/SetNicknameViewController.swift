@@ -337,7 +337,8 @@ final class SetNicknameViewController: BaseViewController {
     }
     
     private func pushInvitationCodeViewController(invitationCode: String) {
-        let viewController = InvitationCodeViewController()
+        let viewModel = InvitationCodeViewModel(invitationCode: invitationCode)
+        let viewController = InvitationCodeViewController(viewModel: viewModel)
         navigationController?.pushViewController(viewController, animated: true)
     }
     
