@@ -150,6 +150,7 @@
 		D71CC1E52AF50FDF00BAA13D /* RxCocoa-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = D71CC1E42AF50FDF00BAA13D /* RxCocoa-Dynamic */; };
 		D71CC1E72AF50FDF00BAA13D /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = D71CC1E62AF50FDF00BAA13D /* RxRelay */; };
 		D71CC1EC2AF523FB00BAA13D /* InvitationCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71CC1EB2AF523FB00BAA13D /* InvitationCodeView.swift */; };
+		D71CC1F02AF53D2900BAA13D /* InvitationCodeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71CC1EF2AF53D2900BAA13D /* InvitationCodeViewModel.swift */; };
 		D724790C28FEC8C900D67B50 /* BaseTextFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D724790B28FEC8C900D67B50 /* BaseTextFieldViewController.swift */; };
 		D724790E28FEEEC300D67B50 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D724790D28FEEEC300D67B50 /* CustomTextField.swift */; };
 		D72CF1B0290552960067A118 /* InvitationCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72CF1AF290552960067A118 /* InvitationCodeViewController.swift */; };
@@ -309,6 +310,7 @@
 		D70AF89629C2FDF6003A500C /* TeamInfoEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamInfoEndPoint.swift; sourceTree = "<group>"; };
 		D7195FBB299223F6002526E7 /* TeamChangeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamChangeCollectionViewCell.swift; sourceTree = "<group>"; };
 		D71CC1EB2AF523FB00BAA13D /* InvitationCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationCodeView.swift; sourceTree = "<group>"; };
+		D71CC1EF2AF53D2900BAA13D /* InvitationCodeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationCodeViewModel.swift; sourceTree = "<group>"; };
 		D724790B28FEC8C900D67B50 /* BaseTextFieldViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTextFieldViewController.swift; sourceTree = "<group>"; };
 		D724790D28FEEEC300D67B50 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		D72CF1AF290552960067A118 /* InvitationCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationCodeViewController.swift; sourceTree = "<group>"; };
@@ -1067,6 +1069,7 @@
 		D71CC1E82AF523B300BAA13D /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				D71CC1EF2AF53D2900BAA13D /* InvitationCodeViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1301,6 +1304,7 @@
 				525E722528FFCFA600EF3FCB /* FeedbackTypeButtonView.swift in Sources */,
 				391D38DD29C44A0400A6BFED /* TeamDetailMemberTableHeaderView.swift in Sources */,
 				D7AFB7C52916EDC300E998B7 /* MyReflectionDetailTableViewCell.swift in Sources */,
+				D71CC1F02AF53D2900BAA13D /* InvitationCodeViewModel.swift in Sources */,
 				D7195FBC299223F6002526E7 /* TeamChangeCollectionViewCell.swift in Sources */,
 				520FEC44292234C0009FC1F2 /* FeedbackToMeModel.swift in Sources */,
 				3E5195AB292B05BC00710A01 /* JoinReflectionButton.swift in Sources */,
