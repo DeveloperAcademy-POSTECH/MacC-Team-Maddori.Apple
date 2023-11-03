@@ -970,7 +970,9 @@
 		52B21E5529248DE90048964C /* InvitationCode */ = {
 			isa = PBXGroup;
 			children = (
-				D72CF1AF290552960067A118 /* InvitationCodeViewController.swift */,
+				D71CC1EA2AF523D300BAA13D /* ViewController */,
+				D71CC1E92AF523BF00BAA13D /* View */,
+				D71CC1E82AF523B300BAA13D /* ViewModel */,
 			);
 			path = InvitationCode;
 			sourceTree = "<group>";
@@ -1058,6 +1060,28 @@
 				D750511A29423CB6001BDA34 /* SelectKeywordTypeView.swift */,
 			);
 			path = UIComponent;
+			sourceTree = "<group>";
+		};
+		D71CC1E82AF523B300BAA13D /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		D71CC1E92AF523BF00BAA13D /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D71CC1EA2AF523D300BAA13D /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				D72CF1AF290552960067A118 /* InvitationCodeViewController.swift */,
+			);
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 		D724790A28FEC8A800D67B50 /* Setup */ = {
