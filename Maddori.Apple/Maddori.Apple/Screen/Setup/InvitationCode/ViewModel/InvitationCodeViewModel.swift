@@ -35,9 +35,7 @@ final class InvitationCodeViewModel: BaseViewModelType {
     
     func transform(from input: Input) -> Output {
         let code = input.viewDidLoad
-            .map { [weak self] _ -> String in
-                guard let self else { return "" }
-                return self.invitationCode}
+            .compactMap { [weak self] in self?.invitationCode }
             
         return Output(code: code)
     }
