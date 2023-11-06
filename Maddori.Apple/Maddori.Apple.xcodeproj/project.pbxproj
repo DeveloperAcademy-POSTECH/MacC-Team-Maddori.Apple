@@ -145,9 +145,7 @@
 		D70AF89729C2FDF6003A500C /* TeamInfoEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70AF89629C2FDF6003A500C /* TeamInfoEndPoint.swift */; };
 		D7195FBC299223F6002526E7 /* TeamChangeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7195FBB299223F6002526E7 /* TeamChangeCollectionViewCell.swift */; };
 		D71CC1DF2AF50FDF00BAA13D /* RxBlocking in Frameworks */ = {isa = PBXBuildFile; productRef = D71CC1DE2AF50FDF00BAA13D /* RxBlocking */; };
-		D71CC1E12AF50FDF00BAA13D /* RxBlocking-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = D71CC1E02AF50FDF00BAA13D /* RxBlocking-Dynamic */; };
 		D71CC1E32AF50FDF00BAA13D /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = D71CC1E22AF50FDF00BAA13D /* RxCocoa */; };
-		D71CC1E52AF50FDF00BAA13D /* RxCocoa-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = D71CC1E42AF50FDF00BAA13D /* RxCocoa-Dynamic */; };
 		D71CC1E72AF50FDF00BAA13D /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = D71CC1E62AF50FDF00BAA13D /* RxRelay */; };
 		D71CC1EC2AF523FB00BAA13D /* InvitationCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71CC1EB2AF523FB00BAA13D /* InvitationCodeView.swift */; };
 		D71CC1F02AF53D2900BAA13D /* InvitationCodeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71CC1EF2AF53D2900BAA13D /* InvitationCodeViewModel.swift */; };
@@ -342,8 +340,6 @@
 				D71CC1E72AF50FDF00BAA13D /* RxRelay in Frameworks */,
 				D71CC1E32AF50FDF00BAA13D /* RxCocoa in Frameworks */,
 				39F52C772924BB9A00B19A77 /* Alamofire in Frameworks */,
-				D71CC1E52AF50FDF00BAA13D /* RxCocoa-Dynamic in Frameworks */,
-				D71CC1E12AF50FDF00BAA13D /* RxBlocking-Dynamic in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1182,9 +1178,7 @@
 				395C7E1528F984B300FC2FCA /* SnapKit */,
 				39F52C762924BB9A00B19A77 /* Alamofire */,
 				D71CC1DE2AF50FDF00BAA13D /* RxBlocking */,
-				D71CC1E02AF50FDF00BAA13D /* RxBlocking-Dynamic */,
 				D71CC1E22AF50FDF00BAA13D /* RxCocoa */,
-				D71CC1E42AF50FDF00BAA13D /* RxCocoa-Dynamic */,
 				D71CC1E62AF50FDF00BAA13D /* RxRelay */,
 			);
 			productName = Maddori.Apple;
@@ -1662,20 +1656,10 @@
 			package = D71CC1DD2AF50FDF00BAA13D /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxBlocking;
 		};
-		D71CC1E02AF50FDF00BAA13D /* RxBlocking-Dynamic */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = D71CC1DD2AF50FDF00BAA13D /* XCRemoteSwiftPackageReference "RxSwift" */;
-			productName = "RxBlocking-Dynamic";
-		};
 		D71CC1E22AF50FDF00BAA13D /* RxCocoa */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = D71CC1DD2AF50FDF00BAA13D /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxCocoa;
-		};
-		D71CC1E42AF50FDF00BAA13D /* RxCocoa-Dynamic */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = D71CC1DD2AF50FDF00BAA13D /* XCRemoteSwiftPackageReference "RxSwift" */;
-			productName = "RxCocoa-Dynamic";
 		};
 		D71CC1E62AF50FDF00BAA13D /* RxRelay */ = {
 			isa = XCSwiftPackageProductDependency;
