@@ -12,7 +12,7 @@ import RxSwift
 
 public extension Reactive where Base: UIViewController {
     var viewDidLoad: Observable<Void> {
-        return self.methodInvoked(#selector(Base.viewDidLoad)).map { _ in }
+        return Observable.just(())
     }
     
     var viewWillAppear: Observable<Void> {
