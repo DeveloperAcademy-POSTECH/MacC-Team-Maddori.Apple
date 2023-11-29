@@ -25,9 +25,8 @@ final class InvitationCodeViewController: BaseViewController {
         super.init()
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    @available(*, unavailable)
+    required init?(coder: NSCoder) { nil }
     
     // MARK: - life cycle
     
@@ -38,7 +37,7 @@ final class InvitationCodeViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         bindViewModel()
-        bindUI()
+        bindView()
     }
     
     // MARK: - override
@@ -66,27 +65,17 @@ final class InvitationCodeViewController: BaseViewController {
     }
     
     private func bindViewModel() {
-        let output = transformedOutput()
-        bindOutputToViewModel(output)
+        let output = transformInput()
+        bind(output: output)
     }
     
-    private func transformedOutput() -> InvitationCodeViewModel.Output? {
+    private func transformInput() -> InvitationCodeViewModel.Output? {
         guard let viewModel = viewModel as? InvitationCodeViewModel else { return nil }
         let input = InvitationCodeViewModel.Input(viewDidLoad: Observable.just(()).asObservable())
         return viewModel.transform(from: input)
     }
     
-    private func bindOutputToViewModel(_ output: InvitationCodeViewModel.Output?) {
-        guard let output else { return }
-        
-        output.code
-            .subscribe { [weak self] invitationCode in
-                self?.invitationCodeView.updateInvitationCode(code: invitationCode)
-            }
-            .disposed(by: disposeBag)
-    }
-    
-    private func bindUI() {
+    private func bindView() {
         guard let navigationController else { return }
         
         invitationCodeView.copyCodeButtonTapPublisher
@@ -98,6 +87,19 @@ final class InvitationCodeViewController: BaseViewController {
         invitationCodeView.startButtonTapPublisher
             .subscribe { [weak self] _ in
                 self?.pushHomeViewController()
+            }
+            .disposed(by: disposeBag)
+    }
+}
+
+// MARK: - Bind
+extension InvitationCodeViewController {
+    private func bind(output: InvitationCodeViewModel.Output?) {
+        guard let output else { return }
+        
+        output.code
+            .subscribe { [weak self] invitationCode in
+                self?.invitationCodeView.updateInvitationCode(code: invitationCode)
             }
             .disposed(by: disposeBag)
     }
