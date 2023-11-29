@@ -13,6 +13,14 @@ import SnapKit
 
 final class InvitationCodeView: UIView {
     
+    // MARK: - property
+    
+    private var invitationCode: String = "" {
+        didSet {
+            self.updateInvitationCodeLabel()
+        }
+    }
+    
     // MARK: - ui components
     
     private let titleLabel: UILabel = {
@@ -104,7 +112,7 @@ final class InvitationCodeView: UIView {
     }
     
     private func copyCode() {
-        UIPasteboard.general.string = invitedCodeLabel.text
+        UIPasteboard.general.string = self.invitationCode
     }
 
     // MARK: - public func
@@ -128,7 +136,11 @@ final class InvitationCodeView: UIView {
     }
     
     func updateInvitationCode(code: String) {
-        invitedCodeLabel.text = code
+        self.invitationCode = code
+    }
+    
+    func updateInvitationCodeLabel() {
+        self.invitedCodeLabel.text = self.invitationCode
     }
     
     func showToast(navigationController: UINavigationController) {

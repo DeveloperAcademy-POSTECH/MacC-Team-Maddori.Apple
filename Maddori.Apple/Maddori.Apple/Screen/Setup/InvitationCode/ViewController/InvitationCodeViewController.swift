@@ -38,6 +38,7 @@ final class InvitationCodeViewController: BaseViewController {
         super.viewDidLoad()
         bindViewModel()
         bindView()
+        setupToastView()
     }
     
     // MARK: - override
@@ -45,10 +46,6 @@ final class InvitationCodeViewController: BaseViewController {
     override func setupNavigationBar() {
         super.setupNavigationBar()
         configureNavigationController()
-    }
-    
-    override func render() {
-        setupToastView()
     }
     
     // MARK: - private func
@@ -106,7 +103,6 @@ extension InvitationCodeViewController {
 }
 
 // MARK: - Helper
-
 extension InvitationCodeViewController {
     private func pushHomeViewController() {
         let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
