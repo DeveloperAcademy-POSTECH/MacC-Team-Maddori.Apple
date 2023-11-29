@@ -77,40 +77,6 @@ final class InvitationCodeView: UIView {
     
     // MARK: - private func
     
-    private func setupLayout() {
-        addSubview(titleLabel)
-        titleLabel.snp.makeConstraints {
-            $0.top.equalTo(safeAreaLayoutGuide).inset(SizeLiteral.topPadding)
-            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
-        }
-        
-        addSubview(invitedCodeLabel)
-        invitedCodeLabel.snp.makeConstraints {
-            $0.center.equalToSuperview()
-        }
-        
-        addSubview(copyCodeButton)
-        copyCodeButton.snp.makeConstraints {
-            $0.top.equalTo(invitedCodeLabel.snp.bottom).offset(15)
-            $0.centerX.equalToSuperview()
-            $0.width.equalTo(124)
-            $0.height.equalTo(35)
-        }
-        
-        addSubview(startButton)
-        startButton.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.bottom.equalTo(safeAreaLayoutGuide).inset(2)
-        }
-        
-        addSubview(subLabel)
-        subLabel.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.bottom.equalTo(startButton.snp.top)
-            $0.height.equalTo(SizeLiteral.minimumTouchArea)
-        }
-    }
-    
     private func copyCode() {
         UIPasteboard.general.string = self.invitationCode
     }
@@ -146,5 +112,42 @@ final class InvitationCodeView: UIView {
     func showToast(navigationController: UINavigationController) {
         toastView.showToast(navigationController: navigationController)
         copyCode()
+    }
+}
+
+// MARK: - setupLayout
+extension InvitationCodeView {
+    private func setupLayout() {
+        addSubview(titleLabel)
+        titleLabel.snp.makeConstraints {
+            $0.top.equalTo(safeAreaLayoutGuide).inset(SizeLiteral.topPadding)
+            $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
+        }
+        
+        addSubview(invitedCodeLabel)
+        invitedCodeLabel.snp.makeConstraints {
+            $0.center.equalToSuperview()
+        }
+        
+        addSubview(copyCodeButton)
+        copyCodeButton.snp.makeConstraints {
+            $0.top.equalTo(invitedCodeLabel.snp.bottom).offset(15)
+            $0.centerX.equalToSuperview()
+            $0.width.equalTo(124)
+            $0.height.equalTo(35)
+        }
+        
+        addSubview(startButton)
+        startButton.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.bottom.equalTo(safeAreaLayoutGuide).inset(2)
+        }
+        
+        addSubview(subLabel)
+        subLabel.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.bottom.equalTo(startButton.snp.top)
+            $0.height.equalTo(SizeLiteral.minimumTouchArea)
+        }
     }
 }
