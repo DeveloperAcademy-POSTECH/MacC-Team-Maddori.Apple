@@ -1,41 +1,39 @@
 //
-//  InvitedCodeViewController.swift
+//  InvitationCodeView.swift
 //  Maddori.Apple
 //
-//  Created by 이성호 on 2022/10/23.
+//  Created by 이성호 on 11/3/23.
 //
 
 import UIKit
 
-import Alamofire
+import RxCocoa
+import RxSwift
 import SnapKit
 
-final class InvitationCodeViewController: BaseViewController {
-    
-    let invitationCode: String
-    private var isTappedCopyButton: Bool = false
-    
-    init(invitationCode: String) {
-        self.invitationCode = invitationCode
-        super.init()
-    }
-    
-    required init?(coder: NSCoder) { nil }
+final class InvitationCodeView: UIView {
     
     // MARK: - property
-
+    
+    private var invitationCode: String = "" {
+        didSet {
+            self.updateInvitationCodeLabel()
+        }
+    }
+    
+    // MARK: - ui components
+    
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.setTitleFont(text: TextLiteral.invitationCodeViewControllerTitleLabel)
         return label
     }()
-    private lazy var invitedCodeLabel: UILabel = {
+    private let invitedCodeLabel: UILabel = {
         let label = UILabel()
-        label.text = invitationCode
         label.font = UIFont.font(.bold, ofSize: 32)
         return label
     }()
-    private lazy var copyCodeButton: UIButton = {
+    private let copyCodeButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle(TextLiteral.invitationCodeViewControllerCopyCodeButtonText, for: .normal)
         button.setTitleColor(UIColor.blue200, for: .normal)
@@ -44,7 +42,7 @@ final class InvitationCodeViewController: BaseViewController {
         button.layer.cornerRadius = 7
         return button
     }()
-    private lazy var startButton: MainButton = {
+    private let startButton: MainButton = {
         let button = MainButton()
         button.title = TextLiteral.invitationCodeViewControllerStartButtonText
         return button
@@ -58,42 +56,80 @@ final class InvitationCodeViewController: BaseViewController {
     }()
     private let toastView = ToastView(type: .complete)
     
-    // MARK: - life cycle
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setupCopyCodeButton()
-        setupStartButton()
+    var copyCodeButtonTapPublisher: Observable<Void> {
+        return copyCodeButton.rx.tap.asObservable()
     }
     
-    override func setupNavigationBar() {
-        super.setupNavigationBar()
-        
-        navigationController?.navigationBar.prefersLargeTitles = false
+    var startButtonTapPublisher: Observable<Void> {
+        return startButton.rx.tap.asObservable()
+    }
+    
+    // MARK: - init
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.setupLayout()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - private func
+    
+    private func copyCode() {
+        UIPasteboard.general.string = self.invitationCode
+    }
+
+    // MARK: - public func
+    
+    func setupNavigationController(_ navigation: UINavigationController) {
+        navigation.navigationBar.prefersLargeTitles = false
+    }
+    
+    func setupNavigationItem(_ navigationItem: UINavigationItem) {
         navigationItem.largeTitleDisplayMode = .never
         navigationItem.hidesBackButton = true
     }
     
-    override func render() {
-        navigationController?.view.addSubview(toastView)
+    func setupToastView(_ navigation: UINavigationController) {
+        navigation.view.addSubview(toastView)
         toastView.snp.makeConstraints {
             $0.top.equalToSuperview().inset(-60)
             $0.centerX.equalToSuperview()
             $0.height.equalTo(46)
         }
+    }
+    
+    func updateInvitationCode(code: String) {
+        self.invitationCode = code
+    }
+    
+    func updateInvitationCodeLabel() {
+        self.invitedCodeLabel.text = self.invitationCode
+    }
+    
+    func showToast(navigationController: UINavigationController) {
+        toastView.showToast(navigationController: navigationController)
+        copyCode()
+    }
+}
 
-        view.addSubview(titleLabel)
+// MARK: - setupLayout
+extension InvitationCodeView {
+    private func setupLayout() {
+        addSubview(titleLabel)
         titleLabel.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).inset(SizeLiteral.topPadding)
+            $0.top.equalTo(safeAreaLayoutGuide).inset(SizeLiteral.topPadding)
             $0.leading.equalToSuperview().inset(SizeLiteral.leadingTrailingPadding)
         }
         
-        view.addSubview(invitedCodeLabel)
+        addSubview(invitedCodeLabel)
         invitedCodeLabel.snp.makeConstraints {
             $0.center.equalToSuperview()
         }
         
-        view.addSubview(copyCodeButton)
+        addSubview(copyCodeButton)
         copyCodeButton.snp.makeConstraints {
             $0.top.equalTo(invitedCodeLabel.snp.bottom).offset(15)
             $0.centerX.equalToSuperview()
@@ -101,40 +137,17 @@ final class InvitationCodeViewController: BaseViewController {
             $0.height.equalTo(35)
         }
         
-        view.addSubview(startButton)
+        addSubview(startButton)
         startButton.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(2)
+            $0.bottom.equalTo(safeAreaLayoutGuide).inset(2)
         }
         
-        view.addSubview(subLabel)
+        addSubview(subLabel)
         subLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.bottom.equalTo(startButton.snp.top)
             $0.height.equalTo(SizeLiteral.minimumTouchArea)
         }
-    }
-    
-    // MARK: - func
-    
-    private func setupCopyCodeButton() {
-        let action = UIAction { [weak self] _ in
-            UIPasteboard.general.string = self?.invitedCodeLabel.text
-            guard let navigationController = self?.navigationController else { return }
-            self?.toastView.showToast(navigationController: navigationController)
-        }
-        copyCodeButton.addAction(action, for: .touchUpInside)
-    }
-    
-    private func setupStartButton() {
-        let action = UIAction { [weak self] _ in
-            self?.pushHomeViewController()
-        }
-        startButton.addAction(action, for: .touchUpInside)
-    }
-    
-    private func pushHomeViewController() {
-        let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
-        sceneDelegate?.changeRootViewCustomTabBarView()
     }
 }
