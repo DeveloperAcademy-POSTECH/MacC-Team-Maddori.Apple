@@ -147,6 +147,9 @@
 		D71CC1DF2AF50FDF00BAA13D /* RxBlocking in Frameworks */ = {isa = PBXBuildFile; productRef = D71CC1DE2AF50FDF00BAA13D /* RxBlocking */; };
 		D71CC1E32AF50FDF00BAA13D /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = D71CC1E22AF50FDF00BAA13D /* RxCocoa */; };
 		D71CC1E72AF50FDF00BAA13D /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = D71CC1E62AF50FDF00BAA13D /* RxRelay */; };
+		D71CC1EC2AF523FB00BAA13D /* InvitationCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71CC1EB2AF523FB00BAA13D /* InvitationCodeView.swift */; };
+		D71CC1F02AF53D2900BAA13D /* InvitationCodeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71CC1EF2AF53D2900BAA13D /* InvitationCodeViewModel.swift */; };
+		D71CC1F32AF53D8100BAA13D /* BaseViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71CC1F22AF53D8100BAA13D /* BaseViewModelType.swift */; };
 		D724790C28FEC8C900D67B50 /* BaseTextFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D724790B28FEC8C900D67B50 /* BaseTextFieldViewController.swift */; };
 		D724790E28FEEEC300D67B50 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D724790D28FEEEC300D67B50 /* CustomTextField.swift */; };
 		D72CF1B0290552960067A118 /* InvitationCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72CF1AF290552960067A118 /* InvitationCodeViewController.swift */; };
@@ -305,6 +308,9 @@
 		D7022789297F99500027EF64 /* TeamManageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamManageViewController.swift; sourceTree = "<group>"; };
 		D70AF89629C2FDF6003A500C /* TeamInfoEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamInfoEndPoint.swift; sourceTree = "<group>"; };
 		D7195FBB299223F6002526E7 /* TeamChangeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamChangeCollectionViewCell.swift; sourceTree = "<group>"; };
+		D71CC1EB2AF523FB00BAA13D /* InvitationCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationCodeView.swift; sourceTree = "<group>"; };
+		D71CC1EF2AF53D2900BAA13D /* InvitationCodeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationCodeViewModel.swift; sourceTree = "<group>"; };
+		D71CC1F22AF53D8100BAA13D /* BaseViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModelType.swift; sourceTree = "<group>"; };
 		D724790B28FEC8C900D67B50 /* BaseTextFieldViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTextFieldViewController.swift; sourceTree = "<group>"; };
 		D724790D28FEEEC300D67B50 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		D72CF1AF290552960067A118 /* InvitationCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationCodeViewController.swift; sourceTree = "<group>"; };
@@ -427,6 +433,7 @@
 		39257DDA28F90EBD00201E0B /* Global */ = {
 			isa = PBXGroup;
 			children = (
+				D71CC1F12AF53D6C00BAA13D /* Protocol */,
 				39257DE328F90F7200201E0B /* Literal */,
 				39257DE828F90F9500201E0B /* Base */,
 				39257DE728F90F8F00201E0B /* Supports */,
@@ -966,7 +973,9 @@
 		52B21E5529248DE90048964C /* InvitationCode */ = {
 			isa = PBXGroup;
 			children = (
-				D72CF1AF290552960067A118 /* InvitationCodeViewController.swift */,
+				D71CC1EA2AF523D300BAA13D /* ViewController */,
+				D71CC1E92AF523BF00BAA13D /* View */,
+				D71CC1E82AF523B300BAA13D /* ViewModel */,
 			);
 			path = InvitationCode;
 			sourceTree = "<group>";
@@ -1054,6 +1063,38 @@
 				D750511A29423CB6001BDA34 /* SelectKeywordTypeView.swift */,
 			);
 			path = UIComponent;
+			sourceTree = "<group>";
+		};
+		D71CC1E82AF523B300BAA13D /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				D71CC1EF2AF53D2900BAA13D /* InvitationCodeViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		D71CC1E92AF523BF00BAA13D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D71CC1EB2AF523FB00BAA13D /* InvitationCodeView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D71CC1EA2AF523D300BAA13D /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				D72CF1AF290552960067A118 /* InvitationCodeViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		D71CC1F12AF53D6C00BAA13D /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				D71CC1F22AF53D8100BAA13D /* BaseViewModelType.swift */,
+			);
+			path = Protocol;
 			sourceTree = "<group>";
 		};
 		D724790A28FEC8A800D67B50 /* Setup */ = {
@@ -1243,6 +1284,7 @@
 				3EB508692913560A00FB77CB /* Reflection.swift in Sources */,
 				39F15C0C296D371500952D02 /* EmptyPersonView.swift in Sources */,
 				52DC9091291A98CC00904739 /* MyFeedbackEditViewController.swift in Sources */,
+				D71CC1F32AF53D8100BAA13D /* BaseViewModelType.swift in Sources */,
 				3E66777529419C8300BB5670 /* KeywordTextFieldView.swift in Sources */,
 				3EA341E82925E5EA005CBD1C /* String+Extension.swift in Sources */,
 				D7AFB7C72916FF9400E998B7 /* CustomSegmentControl.swift in Sources */,
@@ -1268,6 +1310,7 @@
 				525E722528FFCFA600EF3FCB /* FeedbackTypeButtonView.swift in Sources */,
 				391D38DD29C44A0400A6BFED /* TeamDetailMemberTableHeaderView.swift in Sources */,
 				D7AFB7C52916EDC300E998B7 /* MyReflectionDetailTableViewCell.swift in Sources */,
+				D71CC1F02AF53D2900BAA13D /* InvitationCodeViewModel.swift in Sources */,
 				D7195FBC299223F6002526E7 /* TeamChangeCollectionViewCell.swift in Sources */,
 				520FEC44292234C0009FC1F2 /* FeedbackToMeModel.swift in Sources */,
 				3E5195AB292B05BC00710A01 /* JoinReflectionButton.swift in Sources */,
@@ -1331,6 +1374,7 @@
 				39F52C632923357700B19A77 /* FeedBackInfoResponse.swift in Sources */,
 				391D38F529D54CBA00A6BFED /* TeamDetailEndPoint.swift in Sources */,
 				3960864129811E3C003AB4F8 /* TeamDetailViewController.swift in Sources */,
+				D71CC1EC2AF523FB00BAA13D /* InvitationCodeView.swift in Sources */,
 				D72CF1B0290552960067A118 /* InvitationCodeViewController.swift in Sources */,
 				39257DF328F93D8900201E0B /* TextLiteral.swift in Sources */,
 				39F52C6C292473EC00B19A77 /* AllReflectionResponse.swift in Sources */,
