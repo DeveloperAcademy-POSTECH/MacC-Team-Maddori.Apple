@@ -15,12 +15,12 @@ final class InvitationCodeViewController: BaseViewController {
     
     private let invitationCodeView: InvitationCodeView = InvitationCodeView()
     
-    private let viewModel: any BaseViewModelType
+    private let viewModel: any ViewModelType
     private let disposeBag: DisposeBag = DisposeBag()
     
     // MARK: - init
     
-    init(viewModel: any BaseViewModelType) {
+    init(viewModel: any ViewModelType) {
         self.viewModel = viewModel
         super.init()
     }
