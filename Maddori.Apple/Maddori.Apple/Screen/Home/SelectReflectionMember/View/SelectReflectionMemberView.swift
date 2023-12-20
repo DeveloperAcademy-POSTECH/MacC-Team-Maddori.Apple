@@ -7,11 +7,14 @@
 
 import UIKit
 
+import RxSwift
+import RxCocoa
+
 final class SelectReflectionMemberView: UIView {
     
     // MARK: - ui components
     
-    let closeButton = CloseButton()
+    private let closeButton = CloseButton()
     private let selectFeedbackMemberTitleLabel: UILabel = {
         let label = UILabel()
         label.textColor = .black100
@@ -31,6 +34,16 @@ final class SelectReflectionMemberView: UIView {
         button.isDisabled = true
         return button
     }()
+    
+    // MARK: - publisher
+    
+    var closeButtonTapPublisher: Observable<Void> {
+        return closeButton.rx.tap.asObservable()
+    }
+    
+    var feedbackDoneButtonTapPublisher: Observable<Void> {
+        return feedbackDoneButton.rx.tap.asObservable()
+    }
     
     // MARK: - init
     

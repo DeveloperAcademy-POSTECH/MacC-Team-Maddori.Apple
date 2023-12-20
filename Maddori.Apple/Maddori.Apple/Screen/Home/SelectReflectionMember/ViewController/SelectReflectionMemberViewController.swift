@@ -8,7 +8,7 @@
 import UIKit
 
 import Alamofire
-import SnapKit
+import RxSwift
 
 final class SelectReflectionMemberViewController: BaseViewController {
     
@@ -16,6 +16,8 @@ final class SelectReflectionMemberViewController: BaseViewController {
     
     let reflectionId: Int
     private let selectReflectionMemberView = SelectReflectionMemberView()
+    
+    private let disposeBag: DisposeBag = DisposeBag()
     
     // MARK: - life cycle
     
@@ -28,9 +30,9 @@ final class SelectReflectionMemberViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        bindView()
         didTappedMember()
         fetchTeamMembers(type: .fetchTeamMembers)
-        setButtonAction()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -56,6 +58,20 @@ final class SelectReflectionMemberViewController: BaseViewController {
         selectReflectionMemberView.setupNavigationController(navigationController)
         selectReflectionMemberView.setupNavigationItem(navigationItem)
     }
+    
+    private func bindView() {
+        selectReflectionMemberView.closeButtonTapPublisher
+            .subscribe { [weak self] _ in
+                self?.didTappedCloseButton()
+            }
+            .disposed(by: disposeBag)
+        
+        selectReflectionMemberView.feedbackDoneButtonTapPublisher
+            .subscribe { [weak self] _ in
+                self?.didTappedFeedbackDoneButton()
+            }
+            .disposed(by: disposeBag)
+    }
         
     private func setupPreviousStatus() {
         selectReflectionMemberView.feedbackDoneButton.title = TextLiteral.selectReflectionMemberViewControllerDoneButtonText + "(\(UserDefaultStorage.seenMemberIdList.count)/\(selectReflectionMemberView.memberCollectionView.memberList.count))"
@@ -78,18 +94,6 @@ final class SelectReflectionMemberViewController: BaseViewController {
                 UserDefaultHandler.isCurrentReflectionFinished(true)
             }
         }
-    }
-    
-    private func setButtonAction() {
-        let closeAction = UIAction { [weak self] _  in
-            self?.didTappedCloseButton()
-        }
-        let endReflectionAction = UIAction { [weak self] _ in
-            self?.didTappedFeedbackDoneButton()
-        }
-        
-        selectReflectionMemberView.closeButton.addAction(closeAction, for: .touchUpInside)
-        selectReflectionMemberView.feedbackDoneButton.addAction(endReflectionAction, for: .touchUpInside)
     }
     
     private func didTappedCloseButton() {
