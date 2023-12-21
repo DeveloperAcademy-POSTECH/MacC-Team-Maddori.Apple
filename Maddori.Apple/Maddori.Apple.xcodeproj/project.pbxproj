@@ -123,6 +123,7 @@
 		525E722128FFC9A800EF3FCB /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525E722028FFC9A800EF3FCB /* BackButton.swift */; };
 		525E722528FFCFA600EF3FCB /* FeedbackTypeButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525E722428FFCFA600EF3FCB /* FeedbackTypeButtonView.swift */; };
 		52968BAE2B32EDE500D20342 /* SelectReflectionMemberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52968BAD2B32EDE500D20342 /* SelectReflectionMemberView.swift */; };
+		52968BB02B32FD5000D20342 /* SelectReflectionMemberViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52968BAF2B32FD5000D20342 /* SelectReflectionMemberViewModel.swift */; };
 		52988B742921EAD50044A77F /* MyReflectionFeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52988B732921EAD50044A77F /* MyReflectionFeedbackViewController.swift */; };
 		52AED2DD29128532004D70B9 /* FeedbackFromMeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52AED2DC29128532004D70B9 /* FeedbackFromMeModel.swift */; };
 		52CD58BC297BE24B008567E0 /* ProfileImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52CD58BB297BE24B008567E0 /* ProfileImageButton.swift */; };
@@ -288,6 +289,7 @@
 		525E722028FFC9A800EF3FCB /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
 		525E722428FFCFA600EF3FCB /* FeedbackTypeButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackTypeButtonView.swift; sourceTree = "<group>"; };
 		52968BAD2B32EDE500D20342 /* SelectReflectionMemberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectReflectionMemberView.swift; sourceTree = "<group>"; };
+		52968BAF2B32FD5000D20342 /* SelectReflectionMemberViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectReflectionMemberViewModel.swift; sourceTree = "<group>"; };
 		52988B732921EAD50044A77F /* MyReflectionFeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReflectionFeedbackViewController.swift; sourceTree = "<group>"; };
 		52AED2DC29128532004D70B9 /* FeedbackFromMeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackFromMeModel.swift; sourceTree = "<group>"; };
 		52CD58BB297BE24B008567E0 /* ProfileImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageButton.swift; sourceTree = "<group>"; };
@@ -959,6 +961,7 @@
 		52968BAB2B32EDAF00D20342 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				52968BAF2B32FD5000D20342 /* SelectReflectionMemberViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1328,6 +1331,7 @@
 				395C7E1328F9841A00FC2FCA /* SizeLiteral.swift in Sources */,
 				52E6770F29911E3E00A0935B /* ReflectionMemberCollectionView.swift in Sources */,
 				391612D529E551BD004AE982 /* ToastView.swift in Sources */,
+				52968BB02B32FD5000D20342 /* SelectReflectionMemberViewModel.swift in Sources */,
 				391612D329E53745004AE982 /* TeamNameResponse.swift in Sources */,
 				3EB508902917525600FB77CB /* EmptyReflectionView.swift in Sources */,
 				D7A585292990DB0D00E1F4EE /* Option.swift in Sources */,

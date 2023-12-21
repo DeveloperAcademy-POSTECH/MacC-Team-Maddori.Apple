@@ -14,15 +14,16 @@ final class SelectReflectionMemberViewController: BaseViewController {
     
     // MARK: - property
     
-    let reflectionId: Int
+    private var reflectionId: Int = 0
     private let selectReflectionMemberView = SelectReflectionMemberView()
     
+    private let viewModel: any BaseViewModelType
     private let disposeBag: DisposeBag = DisposeBag()
     
     // MARK: - life cycle
     
-    init(reflectionId: Int) {
-        self.reflectionId = reflectionId
+    init(viewModel: any BaseViewModelType) {
+        self.viewModel = viewModel
         super.init()
     }
     
@@ -31,8 +32,8 @@ final class SelectReflectionMemberViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         bindView()
+        bindViewModel()
         didTappedMember()
-        fetchTeamMembers(type: .fetchTeamMembers)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -57,6 +58,17 @@ final class SelectReflectionMemberViewController: BaseViewController {
         guard let navigationController else { return }
         selectReflectionMemberView.setupNavigationController(navigationController)
         selectReflectionMemberView.setupNavigationItem(navigationItem)
+    }
+    
+    private func bindViewModel() {
+        let output = transformInput()
+        bind(output: output)
+    }
+    
+    private func transformInput() -> SelectReflectionMemberViewModel.Output? {
+        guard let viewModel = viewModel as? SelectReflectionMemberViewModel else { return nil }
+        let input = SelectReflectionMemberViewModel.Input(viewDidLoad: Observable.just(()).asObservable())
+        return viewModel.transform(from: input)
     }
     
     private func bindView() {
@@ -107,22 +119,6 @@ final class SelectReflectionMemberViewController: BaseViewController {
     
     // MARK: - api
     
-    private func fetchTeamMembers(type: InProgressEndPoint<VoidModel>) {
-        AF.request(type.address,
-                   method: type.method,
-                   headers: type.headers
-        ).responseDecodable(of: BaseModel<MembersDetailResponse>.self) { json in
-            if let json = json.value {
-                dump(json)
-                guard let fetchedMemberList = json.detail?.members else { return }
-                DispatchQueue.main.async {
-                    self.selectReflectionMemberView.memberCollectionView.memberList = fetchedMemberList
-                    self.selectReflectionMemberView.feedbackDoneButton.title = TextLiteral.selectReflectionMemberViewControllerDoneButtonText + "(\(self.selectReflectionMemberView.memberCollectionView.selectedMemberList.count)/\(self.selectReflectionMemberView.memberCollectionView.memberList.count))"
-                }
-            }
-        }
-    }
-    
     private func patchEndReflection(type: InProgressEndPoint<VoidModel>) {
         AF.request(type.address,
                    method: type.method,
@@ -133,5 +129,25 @@ final class SelectReflectionMemberViewController: BaseViewController {
                 self?.dismiss(animated: true)
             }
         }
+    }
+}
+
+// MARK: - bind
+
+extension SelectReflectionMemberViewController {
+    private func bind(output: SelectReflectionMemberViewModel.Output?) {
+        guard let output else { return }
+        
+        output.reflectionId
+            .subscribe { [weak self] reflectionId in
+                self?.reflectionId = reflectionId
+            }
+            .disposed(by: disposeBag)
+        
+        output.teamMembers
+            .subscribe { [weak self] teamMembers in
+                self?.selectReflectionMemberView.setTeamMembers(teamMembers: teamMembers)
+            }
+            .disposed(by: disposeBag)
     }
 }

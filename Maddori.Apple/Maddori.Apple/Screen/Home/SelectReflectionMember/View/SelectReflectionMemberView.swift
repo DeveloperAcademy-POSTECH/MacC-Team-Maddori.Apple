@@ -56,8 +56,6 @@ final class SelectReflectionMemberView: UIView {
     
     // MARK: - private func
     
-    
-    
     // MARK: - public func
     
     func setupNavigationController(_ navigation: UINavigationController) {
@@ -70,6 +68,11 @@ final class SelectReflectionMemberView: UIView {
         
         let rightButton = UIBarButtonItem(customView: closeButton)
         navigationItem.rightBarButtonItem = rightButton
+    }
+    
+    func setTeamMembers(teamMembers: [MemberDetailResponse]) {
+        memberCollectionView.memberList = teamMembers
+        feedbackDoneButton.title = TextLiteral.selectReflectionMemberViewControllerDoneButtonText + "(\(memberCollectionView.selectedMemberList.count)/\(memberCollectionView.memberList.count))"
     }
 }
 
