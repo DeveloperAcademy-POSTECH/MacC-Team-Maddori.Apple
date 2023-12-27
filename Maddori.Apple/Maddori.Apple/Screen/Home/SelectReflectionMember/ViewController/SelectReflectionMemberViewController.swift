@@ -83,6 +83,15 @@ final class SelectReflectionMemberViewController: BaseViewController {
                 self?.didTappedFeedbackDoneButton()
             }
             .disposed(by: disposeBag)
+        
+        selectReflectionMemberView.memberCollectionView
+            .rx
+            .itemSelected
+            .subscribe{ indexPath in
+                print("look at this code", indexPath, indexPath.item)
+//                self.navigateToInProgressViewController
+            }
+            .disposed(by: disposeBag)
     }
         
     private func setupPreviousStatus() {
@@ -90,14 +99,14 @@ final class SelectReflectionMemberViewController: BaseViewController {
     }
     
     private func didTappedMember() {
-        selectReflectionMemberView.memberCollectionView.didTappedMember = { [weak self] member, members in
+        selectReflectionMemberView.didTappedMember = { [weak self] member, members in
             guard let id = member.id,
                   let nickname = member.nickname,
                   let reflectionId = self?.reflectionId else { return }
             let viewController = InProgressViewController(memberId: id, memberUsername: nickname, reflectionId: reflectionId)
             self?.navigationController?.pushViewController(viewController, animated: true)
             
-            guard let memberCollectionView = self?.selectReflectionMemberView.memberCollectionView else { return }
+            guard let memberCollectionView = self?.selectReflectionMemberView else { return }
             self?.selectReflectionMemberView.feedbackDoneButton.title = TextLiteral.selectReflectionMemberViewControllerDoneButtonText + "(\( members.count)/\(memberCollectionView.memberList.count))"
             
             if members.count == memberCollectionView.memberList.count {

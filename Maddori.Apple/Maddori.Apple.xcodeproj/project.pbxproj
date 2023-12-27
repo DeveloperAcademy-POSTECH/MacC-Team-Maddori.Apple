@@ -129,7 +129,6 @@
 		52CD58BC297BE24B008567E0 /* ProfileImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52CD58BB297BE24B008567E0 /* ProfileImageButton.swift */; };
 		52DC9091291A98CC00904739 /* MyFeedbackEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DC9090291A98CC00904739 /* MyFeedbackEditViewController.swift */; };
 		52E6770D29911E0C00A0935B /* ReflectionMemberCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E6770C29911E0C00A0935B /* ReflectionMemberCollectionViewCell.swift */; };
-		52E6770F29911E3E00A0935B /* ReflectionMemberCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E6770E29911E3E00A0935B /* ReflectionMemberCollectionView.swift */; };
 		52F07B9A2912541B0015BC8B /* MyFeedbackDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F07B992912541B0015BC8B /* MyFeedbackDetailViewController.swift */; };
 		52F0CB5229178C2700E39C50 /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F0CB5129178C2700E39C50 /* AlertViewController.swift */; };
 		52F2D1C12906F172009CBF89 /* SelectReflectionMemberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F2D1C02906F172009CBF89 /* SelectReflectionMemberViewController.swift */; };
@@ -296,7 +295,6 @@
 		52CD58BB297BE24B008567E0 /* ProfileImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageButton.swift; sourceTree = "<group>"; };
 		52DC9090291A98CC00904739 /* MyFeedbackEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFeedbackEditViewController.swift; sourceTree = "<group>"; };
 		52E6770C29911E0C00A0935B /* ReflectionMemberCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReflectionMemberCollectionViewCell.swift; sourceTree = "<group>"; };
-		52E6770E29911E3E00A0935B /* ReflectionMemberCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReflectionMemberCollectionView.swift; sourceTree = "<group>"; };
 		52F07B992912541B0015BC8B /* MyFeedbackDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFeedbackDetailViewController.swift; sourceTree = "<group>"; };
 		52F0CB5129178C2700E39C50 /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
 		52F2D1C02906F172009CBF89 /* SelectReflectionMemberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectReflectionMemberViewController.swift; sourceTree = "<group>"; };
@@ -866,7 +864,6 @@
 			isa = PBXGroup;
 			children = (
 				52E6770C29911E0C00A0935B /* ReflectionMemberCollectionViewCell.swift */,
-				52E6770E29911E3E00A0935B /* ReflectionMemberCollectionView.swift */,
 			);
 			path = ReflectionMember;
 			sourceTree = "<group>";
@@ -1414,7 +1411,6 @@
 				7E8CDC67292E19B000984742 /* SettingButton.swift in Sources */,
 				39F5582B2908027500CD6F6E /* UIDevice+Extension.swift in Sources */,
 				395C7E1328F9841A00FC2FCA /* SizeLiteral.swift in Sources */,
-				52E6770F29911E3E00A0935B /* ReflectionMemberCollectionView.swift in Sources */,
 				391612D529E551BD004AE982 /* ToastView.swift in Sources */,
 				52968BB02B32FD5000D20342 /* SelectReflectionMemberViewModel.swift in Sources */,
 				391612D329E53745004AE982 /* TeamNameResponse.swift in Sources */,
