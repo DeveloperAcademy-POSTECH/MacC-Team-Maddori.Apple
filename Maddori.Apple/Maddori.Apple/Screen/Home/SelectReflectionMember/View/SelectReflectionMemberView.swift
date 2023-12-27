@@ -72,7 +72,12 @@ final class SelectReflectionMemberView: UIView {
     
     func setTeamMembers(teamMembers: [MemberDetailResponse]) {
         memberCollectionView.memberList = teamMembers
-        feedbackDoneButton.title = TextLiteral.selectReflectionMemberViewControllerDoneButtonText + "(\(memberCollectionView.selectedMemberList.count)/\(memberCollectionView.memberList.count))"
+        feedbackDoneButton.title = TextLiteral.selectReflectionMemberViewControllerDoneButtonText + "(\(UserDefaultStorage.seenMemberIdList.count)/\(memberCollectionView.memberList.count))"
+    }
+    
+    func setupPreviousStatus() {
+        feedbackDoneButton.title = TextLiteral.selectReflectionMemberViewControllerDoneButtonText + "(\(UserDefaultStorage.seenMemberIdList.count)/\(memberCollectionView.memberList.count))"
+        feedbackDoneButton.isDisabled = !UserDefaultStorage.completedCurrentReflection
     }
 }
 

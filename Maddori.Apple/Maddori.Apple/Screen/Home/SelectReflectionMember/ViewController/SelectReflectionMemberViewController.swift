@@ -86,8 +86,7 @@ final class SelectReflectionMemberViewController: BaseViewController {
     }
         
     private func setupPreviousStatus() {
-        selectReflectionMemberView.feedbackDoneButton.title = TextLiteral.selectReflectionMemberViewControllerDoneButtonText + "(\(UserDefaultStorage.seenMemberIdList.count)/\(selectReflectionMemberView.memberCollectionView.memberList.count))"
-        selectReflectionMemberView.feedbackDoneButton.isDisabled = !UserDefaultStorage.completedCurrentReflection
+        selectReflectionMemberView.setupPreviousStatus()
     }
     
     private func didTappedMember() {
