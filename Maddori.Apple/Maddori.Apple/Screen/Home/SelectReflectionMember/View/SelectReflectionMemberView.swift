@@ -66,7 +66,6 @@ final class SelectReflectionMemberView: UIView {
     lazy var memberCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewFlowLayout)
         collectionView.dataSource = self
-        collectionView.delegate = self
         collectionView.backgroundColor = .white200
         collectionView.showsVerticalScrollIndicator = false
         collectionView.allowsMultipleSelection = true
@@ -87,6 +86,10 @@ final class SelectReflectionMemberView: UIView {
     
     var feedbackDoneButtonTapPublisher: Observable<Void> {
         return feedbackDoneButton.rx.tap.asObservable()
+    }
+    
+    var memberCollectionViewItemTapPublisher: Observable<IndexPath> {
+        return memberCollectionView.rx.itemSelected.asObservable()
     }
     
     // MARK: - init
@@ -123,6 +126,17 @@ final class SelectReflectionMemberView: UIView {
         feedbackDoneButton.title = TextLiteral.selectReflectionMemberViewControllerDoneButtonText + "(\(UserDefaultStorage.seenMemberIdList.count)/\(memberList.count))"
         feedbackDoneButton.isDisabled = !UserDefaultStorage.completedCurrentReflection
     }
+    
+    func didSelectItem(item: Int) {
+        if !selectedMemberList.contains(where: { $0 == memberList[item].id }) {
+            selectedMemberList.append(memberList[item].id ?? 0)
+        }
+        feedbackDoneButton.title = TextLiteral.selectReflectionMemberViewControllerDoneButtonText + "(\(selectedMemberList.count)/\(memberList.count))"
+        if selectedMemberList.count == memberList.count {
+            feedbackDoneButton.isDisabled = false
+            UserDefaultHandler.isCurrentReflectionFinished(true)
+        }
+    }
 }
 
 // MARK: - setup layout
@@ -158,16 +172,6 @@ extension SelectReflectionMemberView {
 }
 
 // MARK: - collectionView extension
-
-extension SelectReflectionMemberView: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let selectedMember = memberList[indexPath.item]
-        if !selectedMemberList.contains(where: { $0 == selectedMember.id }) {
-            selectedMemberList.append(selectedMember.id ?? 0)
-        }
-        didTappedMember?(selectedMember, selectedMemberList)
-    }
-}
 
 extension SelectReflectionMemberView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

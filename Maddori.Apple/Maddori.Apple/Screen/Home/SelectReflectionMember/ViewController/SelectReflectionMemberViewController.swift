@@ -33,7 +33,6 @@ final class SelectReflectionMemberViewController: BaseViewController {
         super.viewDidLoad()
         bindView()
         bindViewModel()
-        didTappedMember()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -84,12 +83,11 @@ final class SelectReflectionMemberViewController: BaseViewController {
             }
             .disposed(by: disposeBag)
         
-        selectReflectionMemberView.memberCollectionView
-            .rx
-            .itemSelected
-            .subscribe{ indexPath in
-                print("look at this code", indexPath, indexPath.item)
-//                self.navigateToInProgressViewController
+        selectReflectionMemberView.memberCollectionViewItemTapPublisher
+            .subscribe { [weak self] indexPath in
+                self?.selectReflectionMemberView.didSelectItem(item: indexPath.item)
+                guard let memberList = self?.selectReflectionMemberView.memberList else { return }
+                self?.navigateToInprogressViewController(item: indexPath.item, memberList: memberList)
             }
             .disposed(by: disposeBag)
     }
@@ -98,31 +96,11 @@ final class SelectReflectionMemberViewController: BaseViewController {
         selectReflectionMemberView.setupPreviousStatus()
     }
     
-    private func didTappedMember() {
-        selectReflectionMemberView.didTappedMember = { [weak self] member, members in
-            guard let id = member.id,
-                  let nickname = member.nickname,
-                  let reflectionId = self?.reflectionId else { return }
-            let viewController = InProgressViewController(memberId: id, memberUsername: nickname, reflectionId: reflectionId)
-            self?.navigationController?.pushViewController(viewController, animated: true)
-            
-            guard let memberCollectionView = self?.selectReflectionMemberView else { return }
-            self?.selectReflectionMemberView.feedbackDoneButton.title = TextLiteral.selectReflectionMemberViewControllerDoneButtonText + "(\( members.count)/\(memberCollectionView.memberList.count))"
-            
-            if members.count == memberCollectionView.memberList.count {
-                self?.selectReflectionMemberView.feedbackDoneButton.isDisabled = false
-                UserDefaultHandler.isCurrentReflectionFinished(true)
-            }
-        }
-    }
-    
-    private func didTappedCloseButton() {
-        self.dismiss(animated: true)
-    }
-    
-    private func didTappedFeedbackDoneButton() {
-        self.patchEndReflection(type: .patchEndReflection(reflectionId: self.reflectionId))
-        UserDefaultHandler.setHasSeenAlert(to: false)
+    private func navigateToInprogressViewController(item: Int, memberList: [MemberDetailResponse]) {
+        guard let id = memberList[item].id,
+              let nickname = memberList[item].nickname else { return }
+        let viewController = InProgressViewController(memberId: id, memberUsername: nickname, reflectionId: reflectionId)
+        self.navigationController?.pushViewController(viewController, animated: true)
     }
     
     // MARK: - api
@@ -157,5 +135,18 @@ extension SelectReflectionMemberViewController {
                 self?.selectReflectionMemberView.setTeamMembers(teamMembers: teamMembers)
             }
             .disposed(by: disposeBag)
+    }
+}
+
+// MARK: - helper
+
+extension SelectReflectionMemberViewController {
+    private func didTappedCloseButton() {
+        self.dismiss(animated: true)
+    }
+    
+    private func didTappedFeedbackDoneButton() {
+        self.patchEndReflection(type: .patchEndReflection(reflectionId: self.reflectionId))
+        UserDefaultHandler.setHasSeenAlert(to: false)
     }
 }
