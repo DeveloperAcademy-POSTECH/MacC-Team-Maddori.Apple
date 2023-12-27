@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 import Alamofire
 
-final class SelectReflectionMemberViewModel: BaseViewModelType {
+final class SelectReflectionMemberViewModel: ViewModelType {
     
     struct Input {
         let viewDidLoad: Observable<Void>

@@ -17,12 +17,12 @@ final class SelectReflectionMemberViewController: BaseViewController {
     private var reflectionId: Int = 0
     private let selectReflectionMemberView = SelectReflectionMemberView()
     
-    private let viewModel: any BaseViewModelType
+    private let viewModel: any ViewModelType
     private let disposeBag: DisposeBag = DisposeBag()
     
     // MARK: - life cycle
     
-    init(viewModel: any BaseViewModelType) {
+    init(viewModel: any ViewModelType) {
         self.viewModel = viewModel
         super.init()
     }
