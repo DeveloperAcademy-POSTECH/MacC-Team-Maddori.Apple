@@ -7,12 +7,12 @@
 
 import Foundation
 
-struct FeedbackInfo {
+struct FeedbackInfo: Decodable {
     let id: Int
     let type: FeedBackType
     let keyword: String
     let content: String
-    let fromUser: String
+    let fromUser: UserInfo
     
     enum CodingKeys: String, CodingKey {
         case id, type, keyword, content

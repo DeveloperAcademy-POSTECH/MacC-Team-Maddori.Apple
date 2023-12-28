@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+struct TeamFeedback {
+    let category: String
+    let myFeedback: [FeedbackInfo]
+    let otherFeedback: [FeedbackInfo]
+}

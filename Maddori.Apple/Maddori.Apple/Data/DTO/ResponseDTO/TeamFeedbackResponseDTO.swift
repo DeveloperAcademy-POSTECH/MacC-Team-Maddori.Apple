@@ -10,8 +10,8 @@ import Foundation
 struct TeamFeedbackResponseDTO: Decodable {
     // MARK: - getTeamAndUserFeedback
     let category: String?
-    let userFeedback: [FeedBackResponse]?
-    let teamFeedback: [FeedBackResponse]?
+    let userFeedback: [FeedbackInfo]?
+    let teamFeedback: [FeedbackInfo]?
     
     enum CodingKeys: String, CodingKey {
         case category
@@ -21,5 +21,9 @@ struct TeamFeedbackResponseDTO: Decodable {
 }
 
 extension TeamFeedbackResponseDTO {
-    
+    func toEntity() -> TeamFeedback {
+        return TeamFeedback(category: self.category ?? "",
+                            myFeedback: self.userFeedback ?? [],
+                            otherFeedback: self.teamFeedback ?? [])
+    }
 }

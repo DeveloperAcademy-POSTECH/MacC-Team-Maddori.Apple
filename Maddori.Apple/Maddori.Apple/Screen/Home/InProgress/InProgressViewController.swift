@@ -189,8 +189,8 @@ final class InProgressViewController: BaseViewController {
                       let teamFeedbackList = json.detail?.teamFeedback
                 else { return }
                 
-                self.userKeywordData = self.convert(userFeedbackList)
-                self.teamKeywordData = self.convert(teamFeedbackList)
+//                self.userKeywordData = self.convert(userFeedbackList)
+//                self.teamKeywordData = self.convert(teamFeedbackList)
                 
                 self.setUpKeywordType()
                 if self.isUserRetrospective {
