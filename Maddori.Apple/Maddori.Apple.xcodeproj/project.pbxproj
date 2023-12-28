@@ -150,13 +150,14 @@
 		D71CC1E72AF50FDF00BAA13D /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = D71CC1E62AF50FDF00BAA13D /* RxRelay */; };
 		D71CC1EC2AF523FB00BAA13D /* InvitationCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71CC1EB2AF523FB00BAA13D /* InvitationCodeView.swift */; };
 		D71CC1F02AF53D2900BAA13D /* InvitationCodeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71CC1EF2AF53D2900BAA13D /* InvitationCodeViewModel.swift */; };
-		D71CC1F32AF53D8100BAA13D /* BaseViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71CC1F22AF53D8100BAA13D /* BaseViewModelType.swift */; };
+		D71CC1F32AF53D8100BAA13D /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71CC1F22AF53D8100BAA13D /* ViewModelType.swift */; };
 		D724790C28FEC8C900D67B50 /* BaseTextFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D724790B28FEC8C900D67B50 /* BaseTextFieldViewController.swift */; };
 		D724790E28FEEEC300D67B50 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D724790D28FEEEC300D67B50 /* CustomTextField.swift */; };
 		D72CF1B0290552960067A118 /* InvitationCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72CF1AF290552960067A118 /* InvitationCodeViewController.swift */; };
 		D7505119294239A5001BDA34 /* SelectMemberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7505118294239A5001BDA34 /* SelectMemberView.swift */; };
 		D750511B29423CB6001BDA34 /* SelectKeywordTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D750511A29423CB6001BDA34 /* SelectKeywordTypeView.swift */; };
 		D75D0D2229B2003F0013ADA5 /* EmptyTeamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D75D0D2129B2003F0013ADA5 /* EmptyTeamView.swift */; };
+		D764F73E2B333E30009BF20E /* tempSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = D764F73D2B333E30009BF20E /* tempSwift.swift */; };
 		D79D908C2903B6B1004DDC4A /* LabelButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D79D908B2903B6B1004DDC4A /* LabelButtonView.swift */; };
 		D79D908E29041F42004DDC4A /* CreateTeamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D79D908D29041F42004DDC4A /* CreateTeamViewController.swift */; };
 		D7A585222990C50700E1F4EE /* TeamManageSettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A585212990C50700E1F4EE /* TeamManageSettingCell.swift */; };
@@ -312,13 +313,14 @@
 		D7195FBB299223F6002526E7 /* TeamChangeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamChangeCollectionViewCell.swift; sourceTree = "<group>"; };
 		D71CC1EB2AF523FB00BAA13D /* InvitationCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationCodeView.swift; sourceTree = "<group>"; };
 		D71CC1EF2AF53D2900BAA13D /* InvitationCodeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationCodeViewModel.swift; sourceTree = "<group>"; };
-		D71CC1F22AF53D8100BAA13D /* BaseViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModelType.swift; sourceTree = "<group>"; };
+		D71CC1F22AF53D8100BAA13D /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
 		D724790B28FEC8C900D67B50 /* BaseTextFieldViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTextFieldViewController.swift; sourceTree = "<group>"; };
 		D724790D28FEEEC300D67B50 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		D72CF1AF290552960067A118 /* InvitationCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationCodeViewController.swift; sourceTree = "<group>"; };
 		D7505118294239A5001BDA34 /* SelectMemberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectMemberView.swift; sourceTree = "<group>"; };
 		D750511A29423CB6001BDA34 /* SelectKeywordTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectKeywordTypeView.swift; sourceTree = "<group>"; };
 		D75D0D2129B2003F0013ADA5 /* EmptyTeamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyTeamView.swift; sourceTree = "<group>"; };
+		D764F73D2B333E30009BF20E /* tempSwift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tempSwift.swift; sourceTree = "<group>"; };
 		D79D908B2903B6B1004DDC4A /* LabelButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelButtonView.swift; sourceTree = "<group>"; };
 		D79D908D29041F42004DDC4A /* CreateTeamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTeamViewController.swift; sourceTree = "<group>"; };
 		D7A585212990C50700E1F4EE /* TeamManageSettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamManageSettingCell.swift; sourceTree = "<group>"; };
@@ -400,25 +402,18 @@
 		39257DC328F8FEBD00201E0B /* Maddori.Apple */ = {
 			isa = PBXGroup;
 			children = (
-				396334DC292DB07100E74B77 /* Maddori.Apple.entitlements */,
-				39257DD828F90EA900201E0B /* Network */,
+				D764F7332B330F30009BF20E /* App */,
+				D764F71F2B33015F009BF20E /* Presentation */,
+				D764F7222B330182009BF20E /* Domain */,
+				D764F7232B33018E009BF20E /* Data */,
+				D764F7342B3310C9009BF20E /* Util */,
+				D764F7362B3310F6009BF20E /* Manager */,
+				D764F7352B3310DF009BF20E /* Resource */,
+				D764F7322B330EFD009BF20E /* --------------------- */,
 				39257DD928F90EB100201E0B /* Screen */,
 				39257DDA28F90EBD00201E0B /* Global */,
 			);
 			path = Maddori.Apple;
-			sourceTree = "<group>";
-		};
-		39257DD828F90EA900201E0B /* Network */ = {
-			isa = PBXGroup;
-			children = (
-				39AC287D29269BBB006CFEE6 /* Protocol */,
-				397E49582924F80E004220D6 /* Storage */,
-				39F52C782924CC8600B19A77 /* EndPoint */,
-				39F52C512923307000B19A77 /* Response */,
-				39F52C502923306700B19A77 /* Reqeust */,
-				39F52C422923298800B19A77 /* Model */,
-			);
-			path = Network;
 			sourceTree = "<group>";
 		};
 		39257DD928F90EB100201E0B /* Screen */ = {
@@ -435,13 +430,7 @@
 		39257DDA28F90EBD00201E0B /* Global */ = {
 			isa = PBXGroup;
 			children = (
-				D71CC1F12AF53D6C00BAA13D /* Protocol */,
-				39257DE328F90F7200201E0B /* Literal */,
 				39257DE828F90F9500201E0B /* Base */,
-				39257DE728F90F8F00201E0B /* Supports */,
-				39257DE628F90F8B00201E0B /* Extension */,
-				39257DE528F90F8100201E0B /* UIComponent */,
-				39257DE428F90F7700201E0B /* Resource */,
 			);
 			path = Global;
 			sourceTree = "<group>";
@@ -663,24 +652,6 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		397E49582924F80E004220D6 /* Storage */ = {
-			isa = PBXGroup;
-			children = (
-				397E49592924F871004220D6 /* UserDefaultStorage.swift */,
-				397E495B2924F8A2004220D6 /* UserDefaultHandler.swift */,
-				3E953A9429C1CE7D0073302F /* ImageCacheManager.swift */,
-			);
-			path = Storage;
-			sourceTree = "<group>";
-		};
-		39AC287D29269BBB006CFEE6 /* Protocol */ = {
-			isa = PBXGroup;
-			children = (
-				39AC287E29269BC6006CFEE6 /* Endpointable.swift */,
-			);
-			path = Protocol;
-			sourceTree = "<group>";
-		};
 		39F1A136291262B4005E3456 /* UIComponent */ = {
 			isa = PBXGroup;
 			children = (
@@ -697,85 +668,6 @@
 				39436C14291287A00083D77A /* MyFeedbackCollectionViewCell.swift */,
 			);
 			path = Cell;
-			sourceTree = "<group>";
-		};
-		39F52C422923298800B19A77 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				520FEC42292234AF009FC1F2 /* FeedbackToMe */,
-				3EB508672913550000FB77CB /* Reflection */,
-				39436C162912A2D30083D77A /* Feedback */,
-				52F07B9D2912849E0015BC8B /* FeedbackFromMe */,
-				391CBA1A290582030044CA30 /* ReflectionInfo */,
-				3E557FFB2901CD6600714E46 /* Keyword */,
-				39F52C43292329BA00B19A77 /* BaseModel.swift */,
-				39847427292656EB00EDC139 /* VoidModel.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		39F52C4529232DBA00B19A77 /* DTO */ = {
-			isa = PBXGroup;
-			children = (
-				39F52C4829232DFB00B19A77 /* JoinTeamDTO.swift */,
-				39F52C4A29232E2600B19A77 /* CreateTeamDTO.swift */,
-				39F52C4C29232E5D00B19A77 /* AddReflectionDTO.swift */,
-				39F52C4E29232E8B00B19A77 /* FeedBackContentDTO.swift */,
-				39F909D6292679C400DAD0A3 /* EditFeedBackDTO.swift */,
-				7EE38BAC2925DDD200FD738D /* EncodeDTO.swift */,
-				396334D6292DADBE00E74B77 /* AppleLoginDTO.swift */,
-				391612D029E5364A004AE982 /* EditTeamNameDTO.swift */,
-			);
-			path = DTO;
-			sourceTree = "<group>";
-		};
-		39F52C502923306700B19A77 /* Reqeust */ = {
-			isa = PBXGroup;
-			children = (
-				39F52C4529232DBA00B19A77 /* DTO */,
-			);
-			path = Reqeust;
-			sourceTree = "<group>";
-		};
-		39F52C512923307000B19A77 /* Response */ = {
-			isa = PBXGroup;
-			children = (
-				39F52C52292330D200B19A77 /* MemberResponse.swift */,
-				39F52C542923311200B19A77 /* JoinTeamResponse.swift */,
-				39F52C562923317500B19A77 /* CreateTeamResponse.swift */,
-				39F52C5A2923327F00B19A77 /* CurrentReflectionResponse.swift */,
-				39F52C5E2923338B00B19A77 /* MembersDetailResponse.swift */,
-				39F52C602923344C00B19A77 /* FeedBackContentResponse.swift */,
-				39F52C622923357700B19A77 /* FeedBackInfoResponse.swift */,
-				39F52C67292472EB00B19A77 /* AllFeedBackResponse.swift */,
-				39F52C69292473A800B19A77 /* ReflectionInfoResponse.swift */,
-				39F52C6B292473EC00B19A77 /* AllReflectionResponse.swift */,
-				39F52C6D2924742E00B19A77 /* ReflectionResponse.swift */,
-				39F52C6F2924747600B19A77 /* AllCertainTypeFeedBackResponse.swift */,
-				39F52C71292476AE00B19A77 /* KeywordResponse.swift */,
-				39F52C73292476EA00B19A77 /* FeedBackResponse.swift */,
-				398474212925CF4800EDC139 /* TeamInfoResponse.swift */,
-				396334D8292DAE0000E74B77 /* AppleLoginResponse.swift */,
-				391612D229E53745004AE982 /* TeamNameResponse.swift */,
-			);
-			path = Response;
-			sourceTree = "<group>";
-		};
-		39F52C782924CC8600B19A77 /* EndPoint */ = {
-			isa = PBXGroup;
-			children = (
-				39F52C792924CC9600B19A77 /* SetupEndPoint.swift */,
-				3EA341E929261ADD005CBD1C /* InProgressEndPoint.swift */,
-				39847423292603B000EDC139 /* AddFeedBackEndPoint.swift */,
-				3984742529264ACE00EDC139 /* MyFeedBackEndPoint.swift */,
-				7EE38BB2292623F500FD738D /* MyReflectionEndPoint.swift */,
-				3EA341E52924E2AD005CBD1C /* HomeEndPoint.swift */,
-				3E5195A32928C8FB00710A01 /* CreateReflectionEndPoint.swift */,
-				391D38F429D54CBA00A6BFED /* TeamDetailEndPoint.swift */,
-				D70AF89629C2FDF6003A500C /* TeamInfoEndPoint.swift */,
-				391612CE29E5352A004AE982 /* EditTeamNameEndPoint.swift */,
-			);
-			path = EndPoint;
 			sourceTree = "<group>";
 		};
 		3E5195A9292B05B000710A01 /* UIComponent */ = {
@@ -989,16 +881,6 @@
 			path = CreateTeam;
 			sourceTree = "<group>";
 		};
-		52B21E5529248DE90048964C /* InvitationCode */ = {
-			isa = PBXGroup;
-			children = (
-				D71CC1EA2AF523D300BAA13D /* ViewController */,
-				D71CC1E92AF523BF00BAA13D /* View */,
-				D71CC1E82AF523B300BAA13D /* ViewModel */,
-			);
-			path = InvitationCode;
-			sourceTree = "<group>";
-		};
 		52CD58BA297BE231008567E0 /* UIComponent */ = {
 			isa = PBXGroup;
 			children = (
@@ -1084,38 +966,6 @@
 			path = UIComponent;
 			sourceTree = "<group>";
 		};
-		D71CC1E82AF523B300BAA13D /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				D71CC1EF2AF53D2900BAA13D /* InvitationCodeViewModel.swift */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		D71CC1E92AF523BF00BAA13D /* View */ = {
-			isa = PBXGroup;
-			children = (
-				D71CC1EB2AF523FB00BAA13D /* InvitationCodeView.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		D71CC1EA2AF523D300BAA13D /* ViewController */ = {
-			isa = PBXGroup;
-			children = (
-				D72CF1AF290552960067A118 /* InvitationCodeViewController.swift */,
-			);
-			path = ViewController;
-			sourceTree = "<group>";
-		};
-		D71CC1F12AF53D6C00BAA13D /* Protocol */ = {
-			isa = PBXGroup;
-			children = (
-				D71CC1F22AF53D8100BAA13D /* BaseViewModelType.swift */,
-			);
-			path = Protocol;
-			sourceTree = "<group>";
-		};
 		D724790A28FEC8A800D67B50 /* Setup */ = {
 			isa = PBXGroup;
 			children = (
@@ -1124,9 +974,296 @@
 				52B21E5229248DC30048964C /* SetNickname */,
 				52B21E5329248DD80048964C /* JoinTeam */,
 				52B21E5429248DE10048964C /* CreateTeam */,
-				52B21E5529248DE90048964C /* InvitationCode */,
 			);
 			path = Setup;
+			sourceTree = "<group>";
+		};
+		D764F71F2B33015F009BF20E /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				D764F73A2B3311BE009BF20E /* Common */,
+				D764F7242B3301D9009BF20E /* Screen */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		D764F7222B330182009BF20E /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				D764F72F2B330E86009BF20E /* Entity */,
+			);
+			name = Domain;
+			path = "New Group";
+			sourceTree = "<group>";
+		};
+		D764F7232B33018E009BF20E /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				D764F72C2B330E14009BF20E /* DTO */,
+				D764F7302B330ECD009BF20E /* Network */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		D764F7242B3301D9009BF20E /* Screen */ = {
+			isa = PBXGroup;
+			children = (
+				D764F7262B33024F009BF20E /* Setup */,
+			);
+			path = Screen;
+			sourceTree = "<group>";
+		};
+		D764F7262B33024F009BF20E /* Setup */ = {
+			isa = PBXGroup;
+			children = (
+				D764F7272B33025C009BF20E /* InvitationCode */,
+			);
+			path = Setup;
+			sourceTree = "<group>";
+		};
+		D764F7272B33025C009BF20E /* InvitationCode */ = {
+			isa = PBXGroup;
+			children = (
+				D764F7282B33026B009BF20E /* ViewController */,
+				D764F7292B330274009BF20E /* View */,
+				D764F72A2B330276009BF20E /* ViewModel */,
+			);
+			path = InvitationCode;
+			sourceTree = "<group>";
+		};
+		D764F7282B33026B009BF20E /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				D72CF1AF290552960067A118 /* InvitationCodeViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		D764F7292B330274009BF20E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D71CC1EB2AF523FB00BAA13D /* InvitationCodeView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D764F72A2B330276009BF20E /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				D71CC1EF2AF53D2900BAA13D /* InvitationCodeViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		D764F72B2B330DF3009BF20E /* EndPoint */ = {
+			isa = PBXGroup;
+			children = (
+				39F52C792924CC9600B19A77 /* SetupEndPoint.swift */,
+				3EA341E929261ADD005CBD1C /* InProgressEndPoint.swift */,
+				39847423292603B000EDC139 /* AddFeedBackEndPoint.swift */,
+				3984742529264ACE00EDC139 /* MyFeedBackEndPoint.swift */,
+				7EE38BB2292623F500FD738D /* MyReflectionEndPoint.swift */,
+				3EA341E52924E2AD005CBD1C /* HomeEndPoint.swift */,
+				3E5195A32928C8FB00710A01 /* CreateReflectionEndPoint.swift */,
+				391D38F429D54CBA00A6BFED /* TeamDetailEndPoint.swift */,
+				D70AF89629C2FDF6003A500C /* TeamInfoEndPoint.swift */,
+				391612CE29E5352A004AE982 /* EditTeamNameEndPoint.swift */,
+			);
+			path = EndPoint;
+			sourceTree = "<group>";
+		};
+		D764F72C2B330E14009BF20E /* DTO */ = {
+			isa = PBXGroup;
+			children = (
+				D764F72E2B330E2C009BF20E /* RequestDTO */,
+				D764F72D2B330E18009BF20E /* ResponseDTO */,
+			);
+			path = DTO;
+			sourceTree = "<group>";
+		};
+		D764F72D2B330E18009BF20E /* ResponseDTO */ = {
+			isa = PBXGroup;
+			children = (
+				39F52C52292330D200B19A77 /* MemberResponse.swift */,
+				39F52C542923311200B19A77 /* JoinTeamResponse.swift */,
+				39F52C562923317500B19A77 /* CreateTeamResponse.swift */,
+				39F52C5A2923327F00B19A77 /* CurrentReflectionResponse.swift */,
+				39F52C5E2923338B00B19A77 /* MembersDetailResponse.swift */,
+				39F52C602923344C00B19A77 /* FeedBackContentResponse.swift */,
+				39F52C622923357700B19A77 /* FeedBackInfoResponse.swift */,
+				39F52C67292472EB00B19A77 /* AllFeedBackResponse.swift */,
+				39F52C69292473A800B19A77 /* ReflectionInfoResponse.swift */,
+				39F52C6B292473EC00B19A77 /* AllReflectionResponse.swift */,
+				39F52C6D2924742E00B19A77 /* ReflectionResponse.swift */,
+				39F52C6F2924747600B19A77 /* AllCertainTypeFeedBackResponse.swift */,
+				39F52C71292476AE00B19A77 /* KeywordResponse.swift */,
+				39F52C73292476EA00B19A77 /* FeedBackResponse.swift */,
+				398474212925CF4800EDC139 /* TeamInfoResponse.swift */,
+				396334D8292DAE0000E74B77 /* AppleLoginResponse.swift */,
+				391612D229E53745004AE982 /* TeamNameResponse.swift */,
+			);
+			path = ResponseDTO;
+			sourceTree = "<group>";
+		};
+		D764F72E2B330E2C009BF20E /* RequestDTO */ = {
+			isa = PBXGroup;
+			children = (
+				39F52C4829232DFB00B19A77 /* JoinTeamDTO.swift */,
+				39F52C4A29232E2600B19A77 /* CreateTeamDTO.swift */,
+				39F52C4C29232E5D00B19A77 /* AddReflectionDTO.swift */,
+				39F52C4E29232E8B00B19A77 /* FeedBackContentDTO.swift */,
+				39F909D6292679C400DAD0A3 /* EditFeedBackDTO.swift */,
+				7EE38BAC2925DDD200FD738D /* EncodeDTO.swift */,
+				396334D6292DADBE00E74B77 /* AppleLoginDTO.swift */,
+				391612D029E5364A004AE982 /* EditTeamNameDTO.swift */,
+			);
+			path = RequestDTO;
+			sourceTree = "<group>";
+		};
+		D764F72F2B330E86009BF20E /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				520FEC42292234AF009FC1F2 /* FeedbackToMe */,
+				3EB508672913550000FB77CB /* Reflection */,
+				39436C162912A2D30083D77A /* Feedback */,
+				52F07B9D2912849E0015BC8B /* FeedbackFromMe */,
+				391CBA1A290582030044CA30 /* ReflectionInfo */,
+				3E557FFB2901CD6600714E46 /* Keyword */,
+				39F52C43292329BA00B19A77 /* BaseModel.swift */,
+				39847427292656EB00EDC139 /* VoidModel.swift */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
+		D764F7302B330ECD009BF20E /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				D764F7312B330EE1009BF20E /* Foundtaion */,
+				D764F72B2B330DF3009BF20E /* EndPoint */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		D764F7312B330EE1009BF20E /* Foundtaion */ = {
+			isa = PBXGroup;
+			children = (
+				39AC287E29269BC6006CFEE6 /* Endpointable.swift */,
+			);
+			path = Foundtaion;
+			sourceTree = "<group>";
+		};
+		D764F7322B330EFD009BF20E /* --------------------- */ = {
+			isa = PBXGroup;
+			children = (
+				D764F73D2B333E30009BF20E /* tempSwift.swift */,
+			);
+			path = "---------------------";
+			sourceTree = "<group>";
+		};
+		D764F7332B330F30009BF20E /* App */ = {
+			isa = PBXGroup;
+			children = (
+				396334DC292DB07100E74B77 /* Maddori.Apple.entitlements */,
+				39257DC628F8FEBD00201E0B /* SceneDelegate.swift */,
+				39257DC428F8FEBD00201E0B /* AppDelegate.swift */,
+				39257DD228F8FEBE00201E0B /* Info.plist */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		D764F7342B3310C9009BF20E /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				39257DE328F90F7200201E0B /* Literal */,
+				D764F7392B331173009BF20E /* Extension */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
+		D764F7352B3310DF009BF20E /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				39257DCD28F8FEBE00201E0B /* Assets.xcassets */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		D764F7362B3310F6009BF20E /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				D764F7382B33112B009BF20E /* ImageCacheManager */,
+				D764F7372B331114009BF20E /* UserDefaultManager */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		D764F7372B331114009BF20E /* UserDefaultManager */ = {
+			isa = PBXGroup;
+			children = (
+				397E49592924F871004220D6 /* UserDefaultStorage.swift */,
+				397E495B2924F8A2004220D6 /* UserDefaultHandler.swift */,
+			);
+			path = UserDefaultManager;
+			sourceTree = "<group>";
+		};
+		D764F7382B33112B009BF20E /* ImageCacheManager */ = {
+			isa = PBXGroup;
+			children = (
+				3E953A9429C1CE7D0073302F /* ImageCacheManager.swift */,
+			);
+			path = ImageCacheManager;
+			sourceTree = "<group>";
+		};
+		D764F7392B331173009BF20E /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				39257DF428F93E4700201E0B /* UIColor+Extension.swift */,
+				7E6B662E28FE887300C3BEEF /* UILabel+Extension.swift */,
+				395C7E0228F945B500FC2FCA /* UIFont+Extension.swift */,
+				395C7E0428F953D200FC2FCA /* UIViewController+Extension.swift */,
+				395C7E0A28F9550A00FC2FCA /* NSObject+Extension.swift */,
+				395C7E1728F9912700FC2FCA /* UIButton+Extension.swift */,
+				395C7E2128FEDB6500FC2FCA /* UITextField+Extension.swift */,
+				391596612904176500A432D9 /* UIView+Extension.swift */,
+				39F5582A2908027500CD6F6E /* UIDevice+Extension.swift */,
+				39F5583C2908CFAD00CD6F6E /* Encodable+Extension.swift */,
+				3EB508912917585600FB77CB /* UICollectionView + Extension.swift */,
+				7E7F160E2921CD4A00C6BE96 /* UITabBar+Extension.swift */,
+				3EA341E72925E5EA005CBD1C /* String+Extension.swift */,
+				3E5368C729B60B70000CBD48 /* UIImageView+Extension.swift */,
+				523EDFB229D451590033F9A5 /* UIImage+Extension.swift */,
+				D7A6C63729D5EC6A0096D466 /* NotificationName+Extension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		D764F73A2B3311BE009BF20E /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				D764F73B2B3311C3009BF20E /* Protocol */,
+				D764F73C2B3311E0009BF20E /* UIComponent */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		D764F73B2B3311C3009BF20E /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				D71CC1F22AF53D8100BAA13D /* ViewModelType.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		D764F73C2B3311E0009BF20E /* UIComponent */ = {
+			isa = PBXGroup;
+			children = (
+				7E7F16092921CC3200C6BE96 /* TabBar */,
+				3977E12929121B6A000E9761 /* View */,
+				3977E12829121A22000E9761 /* CollectionView */,
+				3977E127291219DC000E9761 /* TextField */,
+				3977E12629121863000E9761 /* Button */,
+			);
+			path = UIComponent;
 			sourceTree = "<group>";
 		};
 		D7A585252990DAE500E1F4EE /* Model */ = {
@@ -1304,8 +1441,9 @@
 				3EB508692913560A00FB77CB /* Reflection.swift in Sources */,
 				39F15C0C296D371500952D02 /* EmptyPersonView.swift in Sources */,
 				52DC9091291A98CC00904739 /* MyFeedbackEditViewController.swift in Sources */,
-				D71CC1F32AF53D8100BAA13D /* BaseViewModelType.swift in Sources */,
+				D71CC1F32AF53D8100BAA13D /* ViewModelType.swift in Sources */,
 				3E66777529419C8300BB5670 /* KeywordTextFieldView.swift in Sources */,
+				D764F73E2B333E30009BF20E /* tempSwift.swift in Sources */,
 				3EA341E82925E5EA005CBD1C /* String+Extension.swift in Sources */,
 				D7AFB7C72916FF9400E998B7 /* CustomSegmentControl.swift in Sources */,
 				7E8CDC67292E19B000984742 /* SettingButton.swift in Sources */,
@@ -1541,13 +1679,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Maddori.Apple/Maddori.Apple.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Maddori.Apple/App/Maddori.Apple.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = HF8GHZB58X;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Maddori.Apple/Global/Supports/Info.plist;
+				INFOPLIST_FILE = Maddori.Apple/App/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "키고";
 				INFOPLIST_KEY_NSCameraUsageDescription = "프로필 이미지를 설정하기 위해 사용자의 카메라에 접근합니다.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "프로필 이미지를 설정하기 위해 사용자의 사진에 접근합니다.";
@@ -1578,13 +1716,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Maddori.Apple/Maddori.Apple.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Maddori.Apple/App/Maddori.Apple.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = HF8GHZB58X;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Maddori.Apple/Global/Supports/Info.plist;
+				INFOPLIST_FILE = Maddori.Apple/App/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "키고";
 				INFOPLIST_KEY_NSCameraUsageDescription = "프로필 이미지를 설정하기 위해 사용자의 카메라에 접근합니다.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "프로필 이미지를 설정하기 위해 사용자의 사진에 접근합니다.";

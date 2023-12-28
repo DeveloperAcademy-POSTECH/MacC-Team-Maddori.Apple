@@ -13,6 +13,14 @@ import SnapKit
 
 final class InvitationCodeView: UIView {
     
+    // MARK: - property
+    
+    private var invitationCode: String = "" {
+        didSet {
+            self.updateInvitationCodeLabel()
+        }
+    }
+    
     // MARK: - ui components
     
     private let titleLabel: UILabel = {
@@ -69,6 +77,46 @@ final class InvitationCodeView: UIView {
     
     // MARK: - private func
     
+    private func copyCode() {
+        UIPasteboard.general.string = self.invitationCode
+    }
+
+    // MARK: - public func
+    
+    func setupNavigationController(_ navigation: UINavigationController) {
+        navigation.navigationBar.prefersLargeTitles = false
+    }
+    
+    func setupNavigationItem(_ navigationItem: UINavigationItem) {
+        navigationItem.largeTitleDisplayMode = .never
+        navigationItem.hidesBackButton = true
+    }
+    
+    func setupToastView(_ navigation: UINavigationController) {
+        navigation.view.addSubview(toastView)
+        toastView.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(-60)
+            $0.centerX.equalToSuperview()
+            $0.height.equalTo(46)
+        }
+    }
+    
+    func updateInvitationCode(code: String) {
+        self.invitationCode = code
+    }
+    
+    func updateInvitationCodeLabel() {
+        self.invitedCodeLabel.text = self.invitationCode
+    }
+    
+    func showToast(navigationController: UINavigationController) {
+        toastView.showToast(navigationController: navigationController)
+        copyCode()
+    }
+}
+
+// MARK: - setupLayout
+extension InvitationCodeView {
     private func setupLayout() {
         addSubview(titleLabel)
         titleLabel.snp.makeConstraints {
@@ -101,38 +149,5 @@ final class InvitationCodeView: UIView {
             $0.bottom.equalTo(startButton.snp.top)
             $0.height.equalTo(SizeLiteral.minimumTouchArea)
         }
-    }
-    
-    private func copyCode() {
-        UIPasteboard.general.string = invitedCodeLabel.text
-    }
-
-    // MARK: - public func
-    
-    func setupNavigationController(_ navigation: UINavigationController) {
-        navigation.navigationBar.prefersLargeTitles = false
-    }
-    
-    func setupNavigationItem(_ navigationItem: UINavigationItem) {
-        navigationItem.largeTitleDisplayMode = .never
-        navigationItem.hidesBackButton = true
-    }
-    
-    func setupToastView(_ navigation: UINavigationController) {
-        navigation.view.addSubview(toastView)
-        toastView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(-60)
-            $0.centerX.equalToSuperview()
-            $0.height.equalTo(46)
-        }
-    }
-    
-    func updateInvitationCode(code: String) {
-        invitedCodeLabel.text = code
-    }
-    
-    func showToast(navigationController: UINavigationController) {
-        toastView.showToast(navigationController: navigationController)
-        copyCode()
     }
 }
