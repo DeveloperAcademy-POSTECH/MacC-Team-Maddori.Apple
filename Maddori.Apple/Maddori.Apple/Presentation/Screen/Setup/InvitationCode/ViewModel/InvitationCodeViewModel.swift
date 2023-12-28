@@ -9,7 +9,7 @@ import Foundation
 
 import RxSwift
 
-final class InvitationCodeViewModel: BaseViewModelType {
+final class InvitationCodeViewModel: ViewModelType {
     
     struct Input {
         let viewDidLoad: Observable<Void>
