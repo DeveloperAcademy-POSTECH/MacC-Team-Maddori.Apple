@@ -17,7 +17,7 @@ final class SelectReflectionMemberView: UIView {
         static let collectionVerticalSpacing: CGFloat = 20
         static let cellWidth: CGFloat = UIScreen.main.bounds.width * 0.37
         static let cellHeight: CGFloat = 140
-        static let cellInteritemSpacingSpacing: CGFloat = 27
+        static let cellInteritemSpacing: CGFloat = 27
         static let cellLineSpacing: CGFloat = 20
         static let collectionInsets = UIEdgeInsets(
             top: collectionVerticalSpacing,
@@ -26,12 +26,9 @@ final class SelectReflectionMemberView: UIView {
             right: collectionHorizontalSpacing)
     }
     
-    var memberList: [MemberDetailResponse] = [] {
-        didSet {
-            memberCollectionView.reloadData()
-        }
+    var totalMemberList: [MemberDetailResponse] = [] {
+        didSet { memberCollectionView.reloadData() }
     }
-    var didTappedMember: ((MemberDetailResponse, [Int]) -> ())?
     var selectedMemberList: [Int] = UserDefaultStorage.seenMemberIdList {
         willSet {
             UserDefaultHandler.appendSeenMemberIdList(memberIdList: newValue)
@@ -59,7 +56,7 @@ final class SelectReflectionMemberView: UIView {
         flowLayout.scrollDirection = .vertical
         flowLayout.sectionInset = Size.collectionInsets
         flowLayout.itemSize = CGSize(width: Size.cellWidth, height: Size.cellHeight)
-        flowLayout.minimumInteritemSpacing = Size.cellInteritemSpacingSpacing
+        flowLayout.minimumInteritemSpacing = Size.cellInteritemSpacing
         flowLayout.minimumLineSpacing = Size.cellLineSpacing
         return flowLayout
     }()
@@ -118,21 +115,21 @@ final class SelectReflectionMemberView: UIView {
     }
     
     func setTeamMembers(teamMembers: [MemberDetailResponse]) {
-        memberList = teamMembers
-        feedbackDoneButton.title = TextLiteral.selectReflectionMemberViewControllerDoneButtonText + "(\(UserDefaultStorage.seenMemberIdList.count)/\(memberList.count))"
+        totalMemberList = teamMembers
+        feedbackDoneButton.title = TextLiteral.selectReflectionMemberViewControllerDoneButtonText + "(\(UserDefaultStorage.seenMemberIdList.count)/\(totalMemberList.count))"
     }
     
-    func setupPreviousStatus() {
-        feedbackDoneButton.title = TextLiteral.selectReflectionMemberViewControllerDoneButtonText + "(\(UserDefaultStorage.seenMemberIdList.count)/\(memberList.count))"
+    func setPreviousStatus() {
+        feedbackDoneButton.title = TextLiteral.selectReflectionMemberViewControllerDoneButtonText + "(\(UserDefaultStorage.seenMemberIdList.count)/\(totalMemberList.count))"
         feedbackDoneButton.isDisabled = !UserDefaultStorage.completedCurrentReflection
     }
     
     func didSelectItem(item: Int) {
-        if !selectedMemberList.contains(where: { $0 == memberList[item].id }) {
-            selectedMemberList.append(memberList[item].id ?? 0)
+        if !selectedMemberList.contains(where: { $0 == totalMemberList[item].id }) {
+            selectedMemberList.append(totalMemberList[item].id ?? 0)
         }
-        feedbackDoneButton.title = TextLiteral.selectReflectionMemberViewControllerDoneButtonText + "(\(selectedMemberList.count)/\(memberList.count))"
-        if selectedMemberList.count == memberList.count {
+        feedbackDoneButton.title = TextLiteral.selectReflectionMemberViewControllerDoneButtonText + "(\(selectedMemberList.count)/\(totalMemberList.count))"
+        if selectedMemberList.count == totalMemberList.count {
             feedbackDoneButton.isDisabled = false
             UserDefaultHandler.isCurrentReflectionFinished(true)
         }
@@ -142,7 +139,6 @@ final class SelectReflectionMemberView: UIView {
 // MARK: - setup layout
 
 extension SelectReflectionMemberView {
-    
     private func setupLayout() {
         [selectFeedbackMemberTitleLabel, reflectionGuidelineLabel, feedbackDoneButton, memberCollectionView].forEach {
             self.addSubview($0)
@@ -175,7 +171,7 @@ extension SelectReflectionMemberView {
 
 extension SelectReflectionMemberView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return memberList.count
+        return totalMemberList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -184,7 +180,7 @@ extension SelectReflectionMemberView: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         
-        if let imagePath = memberList[indexPath.item].profileImagePath {
+        if let imagePath = totalMemberList[indexPath.item].profileImagePath {
             let fullImagePath = UrlLiteral.imageBaseURL + imagePath
             cell.profileImage.load(from: fullImagePath)
         }

@@ -75,17 +75,17 @@ final class SelectReflectionMemberViewController: BaseViewController {
         selectReflectionMemberView.memberCollectionViewItemTapPublisher
             .subscribe { [weak self] indexPath in
                 self?.selectReflectionMemberView.didSelectItem(item: indexPath.item)
-                guard let memberList = self?.selectReflectionMemberView.memberList else { return }
-                self?.navigateToInprogressViewController(item: indexPath.item, memberList: memberList)
+                self?.navigateToInprogressViewController(item: indexPath.item)
             }
             .disposed(by: disposeBag)
     }
     
-    private func navigateToInprogressViewController(item: Int, memberList: [MemberDetailResponse]) {
-        guard let id = memberList[item].id,
-              let nickname = memberList[item].nickname else { return }
-        let viewController = InProgressViewController(memberId: id, memberUsername: nickname, reflectionId: reflectionId)
-        self.navigationController?.pushViewController(viewController, animated: true)
+    private func navigateToInprogressViewController(item: Int) {
+            guard let id = self.selectReflectionMemberView.memberList[item].id,
+                  let nickname = self.selectReflectionMemberView.memberList[item].nickname else { return }
+            
+            let viewController = InProgressViewController(memberId: id, memberUsername: nickname, reflectionId: reflectionId)
+            self.navigationController?.pushViewController(viewController, animated: true)
     }
 }
 
@@ -115,7 +115,7 @@ extension SelectReflectionMemberViewController {
         
         output.isReload
             .subscribe { [weak self] _ in
-                self?.selectReflectionMemberView.setupPreviousStatus()
+                self?.selectReflectionMemberView.setPreviousStatus()
             }
             .disposed(by: disposeBag)
     }

@@ -29,8 +29,6 @@ final class SelectReflectionMemberViewModel: ViewModelType {
     
     let reflectionId: Int
     
-    private let disposeBag: DisposeBag = DisposeBag()
-    
     // MARK: - init
     
     init(reflectionId: Int) {
