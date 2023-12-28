@@ -35,11 +35,6 @@ final class SelectReflectionMemberViewController: BaseViewController {
         bindViewModel()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        setupPreviousStatus()
-    }
-    
     override func loadView() {
         view = selectReflectionMemberView
     }
@@ -66,7 +61,7 @@ final class SelectReflectionMemberViewController: BaseViewController {
     
     private func transformInput() -> SelectReflectionMemberViewModel.Output? {
         guard let viewModel = viewModel as? SelectReflectionMemberViewModel else { return nil }
-        let input = SelectReflectionMemberViewModel.Input(viewDidLoad: Observable.just(()).asObservable(), didTappedFeedbackDoneButton: selectReflectionMemberView.feedbackDoneButtonTapPublisher)
+        let input = SelectReflectionMemberViewModel.Input(viewDidLoad: Observable.just(()).asObservable(), viewWillAppear:  rx.sentMessage(#selector(UIViewController.viewWillAppear(_:))).map{ _ in }.asObservable(), didTappedFeedbackDoneButton: selectReflectionMemberView.feedbackDoneButtonTapPublisher)
         return viewModel.transform(from: input)
     }
     
@@ -84,10 +79,6 @@ final class SelectReflectionMemberViewController: BaseViewController {
                 self?.navigateToInprogressViewController(item: indexPath.item, memberList: memberList)
             }
             .disposed(by: disposeBag)
-    }
-        
-    private func setupPreviousStatus() {
-        selectReflectionMemberView.setupPreviousStatus()
     }
     
     private func navigateToInprogressViewController(item: Int, memberList: [MemberDetailResponse]) {
@@ -119,6 +110,12 @@ extension SelectReflectionMemberViewController {
         output.dismiss
             .subscribe { [weak self] _ in
                 self?.dismiss(animated: true)
+            }
+            .disposed(by: disposeBag)
+        
+        output.isReload
+            .subscribe { [weak self] _ in
+                self?.selectReflectionMemberView.setupPreviousStatus()
             }
             .disposed(by: disposeBag)
     }

@@ -14,6 +14,7 @@ final class SelectReflectionMemberViewModel: ViewModelType {
     
     struct Input {
         let viewDidLoad: Observable<Void>
+        let viewWillAppear: Observable<Void>
         let didTappedFeedbackDoneButton: Observable<Void>
     }
     
@@ -21,6 +22,7 @@ final class SelectReflectionMemberViewModel: ViewModelType {
         let reflectionId: Observable<Int>
         let teamMembers: Observable<[MemberDetailResponse]>
         let dismiss: Observable<Void>
+        let isReload: Observable<Void>
     }
     
     // MARK: - property
@@ -64,7 +66,9 @@ final class SelectReflectionMemberViewModel: ViewModelType {
                 }
             }
         
-        return Output(reflectionId: reflectionId, teamMembers: teamMembers, dismiss: dismiss)
+        let isReload = input.viewWillAppear
+        
+        return Output(reflectionId: reflectionId, teamMembers: teamMembers, dismiss: dismiss, isReload: isReload)
     }
     
     // MARK: - private func
