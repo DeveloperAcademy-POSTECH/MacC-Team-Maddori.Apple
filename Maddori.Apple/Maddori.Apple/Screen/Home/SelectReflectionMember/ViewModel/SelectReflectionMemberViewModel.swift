@@ -14,11 +14,13 @@ final class SelectReflectionMemberViewModel: ViewModelType {
     
     struct Input {
         let viewDidLoad: Observable<Void>
+        let didTappedFeedbackDoneButton: Observable<Void>
     }
     
     struct Output {
         let reflectionId: Observable<Int>
         let teamMembers: Observable<[MemberDetailResponse]>
+        let dismiss: Observable<Void>
     }
     
     // MARK: - property
@@ -54,7 +56,15 @@ final class SelectReflectionMemberViewModel: ViewModelType {
                 }
             }
         
-        return Output(reflectionId: reflectionId, teamMembers: teamMembers)
+        let dismiss = input.didTappedFeedbackDoneButton
+            .withUnretained(self)
+            .map { _ in
+                self.patchEndReflection(type: .patchEndReflection(reflectionId: self.reflectionId)) {
+                    return
+                }
+            }
+        
+        return Output(reflectionId: reflectionId, teamMembers: teamMembers, dismiss: dismiss)
     }
     
     // MARK: - private func
@@ -72,6 +82,19 @@ final class SelectReflectionMemberViewModel: ViewModelType {
                 }
             case .failure(_):
                 completion(nil)
+            }
+        }
+    }
+    
+    private func patchEndReflection(type: InProgressEndPoint<VoidModel>, completion: @escaping () -> ()) {
+        AF.request(type.address,
+                   method: type.method,
+                   headers: type.headers
+        ).responseDecodable(of: BaseModel<ReflectionInfoResponse>.self) { json in
+            if let json = json.value {
+                dump(json)
+                UserDefaultHandler.setHasSeenAlert(to: false)
+                completion()
             }
         }
     }

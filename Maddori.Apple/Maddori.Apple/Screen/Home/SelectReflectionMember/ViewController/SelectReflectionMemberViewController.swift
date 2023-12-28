@@ -66,20 +66,14 @@ final class SelectReflectionMemberViewController: BaseViewController {
     
     private func transformInput() -> SelectReflectionMemberViewModel.Output? {
         guard let viewModel = viewModel as? SelectReflectionMemberViewModel else { return nil }
-        let input = SelectReflectionMemberViewModel.Input(viewDidLoad: Observable.just(()).asObservable())
+        let input = SelectReflectionMemberViewModel.Input(viewDidLoad: Observable.just(()).asObservable(), didTappedFeedbackDoneButton: selectReflectionMemberView.feedbackDoneButtonTapPublisher)
         return viewModel.transform(from: input)
     }
     
     private func bindView() {
         selectReflectionMemberView.closeButtonTapPublisher
             .subscribe { [weak self] _ in
-                self?.didTappedCloseButton()
-            }
-            .disposed(by: disposeBag)
-        
-        selectReflectionMemberView.feedbackDoneButtonTapPublisher
-            .subscribe { [weak self] _ in
-                self?.didTappedFeedbackDoneButton()
+                self?.dismiss(animated: true)
             }
             .disposed(by: disposeBag)
         
@@ -102,20 +96,6 @@ final class SelectReflectionMemberViewController: BaseViewController {
         let viewController = InProgressViewController(memberId: id, memberUsername: nickname, reflectionId: reflectionId)
         self.navigationController?.pushViewController(viewController, animated: true)
     }
-    
-    // MARK: - api
-    
-    private func patchEndReflection(type: InProgressEndPoint<VoidModel>) {
-        AF.request(type.address,
-                   method: type.method,
-                   headers: type.headers
-        ).responseDecodable(of: BaseModel<ReflectionInfoResponse>.self) { [weak self] json in
-            if let json = json.value {
-                dump(json)
-                self?.dismiss(animated: true)
-            }
-        }
-    }
 }
 
 // MARK: - bind
@@ -135,18 +115,11 @@ extension SelectReflectionMemberViewController {
                 self?.selectReflectionMemberView.setTeamMembers(teamMembers: teamMembers)
             }
             .disposed(by: disposeBag)
-    }
-}
-
-// MARK: - helper
-
-extension SelectReflectionMemberViewController {
-    private func didTappedCloseButton() {
-        self.dismiss(animated: true)
-    }
-    
-    private func didTappedFeedbackDoneButton() {
-        self.patchEndReflection(type: .patchEndReflection(reflectionId: self.reflectionId))
-        UserDefaultHandler.setHasSeenAlert(to: false)
+        
+        output.dismiss
+            .subscribe { [weak self] _ in
+                self?.dismiss(animated: true)
+            }
+            .disposed(by: disposeBag)
     }
 }
