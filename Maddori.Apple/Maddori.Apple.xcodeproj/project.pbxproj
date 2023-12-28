@@ -116,6 +116,8 @@
 		3EDED995293C81EC0000B4DC /* AddFeedbackKeywordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EDED994293C81EC0000B4DC /* AddFeedbackKeywordViewController.swift */; };
 		3EE4CCC92B3D9C4200DCEB79 /* InProgressUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE4CCC82B3D9C4200DCEB79 /* InProgressUseCase.swift */; };
 		3EE4CCD82B3DD27B00DCEB79 /* FeedbackInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE4CCD72B3DD27B00DCEB79 /* FeedbackInfo.swift */; };
+		3EE4CCDA2B3DD31300DCEB79 /* TeamFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE4CCD92B3DD31300DCEB79 /* TeamFeedback.swift */; };
+		3EE4CCDE2B3DD49500DCEB79 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE4CCDD2B3DD49500DCEB79 /* UserInfo.swift */; };
 		3EF7909B29E462F50052578E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3EF7909A29E462F50052578E /* LaunchScreen.storyboard */; };
 		520FEC44292234C0009FC1F2 /* FeedbackToMeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520FEC43292234C0009FC1F2 /* FeedbackToMeModel.swift */; };
 		522D99BF29041B51009CBD95 /* CustomTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522D99BE29041B51009CBD95 /* CustomTextView.swift */; };
@@ -283,6 +285,8 @@
 		3EDED994293C81EC0000B4DC /* AddFeedbackKeywordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFeedbackKeywordViewController.swift; sourceTree = "<group>"; };
 		3EE4CCC82B3D9C4200DCEB79 /* InProgressUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InProgressUseCase.swift; sourceTree = "<group>"; };
 		3EE4CCD72B3DD27B00DCEB79 /* FeedbackInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackInfo.swift; sourceTree = "<group>"; };
+		3EE4CCD92B3DD31300DCEB79 /* TeamFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamFeedback.swift; sourceTree = "<group>"; };
+		3EE4CCDD2B3DD49500DCEB79 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		3EF7909A29E462F50052578E /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		520FEC43292234C0009FC1F2 /* FeedbackToMeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackToMeModel.swift; sourceTree = "<group>"; };
 		522D99BE29041B51009CBD95 /* CustomTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextView.swift; sourceTree = "<group>"; };
@@ -491,6 +495,7 @@
 			children = (
 				39436C172912A2E10083D77A /* Feedback.swift */,
 				3EE4CCD72B3DD27B00DCEB79 /* FeedbackInfo.swift */,
+				3EE4CCD92B3DD31300DCEB79 /* TeamFeedback.swift */,
 			);
 			path = Feedback;
 			sourceTree = "<group>";
@@ -1105,6 +1110,7 @@
 				3E557FFB2901CD6600714E46 /* Keyword */,
 				39F52C43292329BA00B19A77 /* BaseModel.swift */,
 				39847427292656EB00EDC139 /* VoidModel.swift */,
+				3EE4CCDD2B3DD49500DCEB79 /* UserInfo.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -1449,6 +1455,7 @@
 				3E5195AB292B05BC00710A01 /* JoinReflectionButton.swift in Sources */,
 				52AED2DD29128532004D70B9 /* FeedbackFromMeModel.swift in Sources */,
 				D724790C28FEC8C900D67B50 /* BaseTextFieldViewController.swift in Sources */,
+				3EE4CCDE2B3DD49500DCEB79 /* UserInfo.swift in Sources */,
 				7E6B662F28FE887300C3BEEF /* UILabel+Extension.swift in Sources */,
 				396334D9292DAE0000E74B77 /* AppleLoginResponse.swift in Sources */,
 				397E495C2924F8A2004220D6 /* UserDefaultHandler.swift in Sources */,
@@ -1491,6 +1498,7 @@
 				397E495A2924F871004220D6 /* UserDefaultStorage.swift in Sources */,
 				395C7E1B28FEC42900FC2FCA /* CreateReflectionViewController.swift in Sources */,
 				39F52C612923344C00B19A77 /* FeedBackContentResponse.swift in Sources */,
+				3EE4CCDA2B3DD31300DCEB79 /* TeamFeedback.swift in Sources */,
 				D724790E28FEEEC300D67B50 /* CustomTextField.swift in Sources */,
 				7EB4D58229011EF7001FC396 /* JoinTeamViewController.swift in Sources */,
 				39F52C4929232DFB00B19A77 /* JoinTeamDTO.swift in Sources */,
