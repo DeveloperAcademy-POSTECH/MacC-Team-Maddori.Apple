@@ -19,3 +19,7 @@ struct TeamFeedbackResponseDTO: Decodable {
         case teamFeedback = "team_feedback"
     }
 }
+
+extension TeamFeedbackResponseDTO {
+    
+}
