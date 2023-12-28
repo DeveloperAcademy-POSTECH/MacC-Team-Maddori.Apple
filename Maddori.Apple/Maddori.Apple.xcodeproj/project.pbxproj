@@ -114,6 +114,7 @@
 		3EB508922917585600FB77CB /* UICollectionView + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB508912917585600FB77CB /* UICollectionView + Extension.swift */; };
 		3EDED991293B8CE00000B4DC /* AddFeedbackContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EDED990293B8CE00000B4DC /* AddFeedbackContentViewController.swift */; };
 		3EDED995293C81EC0000B4DC /* AddFeedbackKeywordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EDED994293C81EC0000B4DC /* AddFeedbackKeywordViewController.swift */; };
+		3EE4CCC92B3D9C4200DCEB79 /* InProgressUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE4CCC82B3D9C4200DCEB79 /* InProgressUseCase.swift */; };
 		3EF7909B29E462F50052578E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3EF7909A29E462F50052578E /* LaunchScreen.storyboard */; };
 		520FEC44292234C0009FC1F2 /* FeedbackToMeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520FEC43292234C0009FC1F2 /* FeedbackToMeModel.swift */; };
 		522D99BF29041B51009CBD95 /* CustomTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522D99BE29041B51009CBD95 /* CustomTextView.swift */; };
@@ -279,6 +280,7 @@
 		3EB508912917585600FB77CB /* UICollectionView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView + Extension.swift"; sourceTree = "<group>"; };
 		3EDED990293B8CE00000B4DC /* AddFeedbackContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFeedbackContentViewController.swift; sourceTree = "<group>"; };
 		3EDED994293C81EC0000B4DC /* AddFeedbackKeywordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFeedbackKeywordViewController.swift; sourceTree = "<group>"; };
+		3EE4CCC82B3D9C4200DCEB79 /* InProgressUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InProgressUseCase.swift; sourceTree = "<group>"; };
 		3EF7909A29E462F50052578E /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		520FEC43292234C0009FC1F2 /* FeedbackToMeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackToMeModel.swift; sourceTree = "<group>"; };
 		522D99BE29041B51009CBD95 /* CustomTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextView.swift; sourceTree = "<group>"; };
@@ -683,6 +685,45 @@
 			path = MyReflection;
 			sourceTree = "<group>";
 		};
+		3EE4CCC12B3D58D900DCEB79 /* InProgress */ = {
+			isa = PBXGroup;
+			children = (
+				3EE4CCC42B3D58F100DCEB79 /* ViewController */,
+				3EE4CCC32B3D58F000DCEB79 /* View */,
+				3EE4CCC22B3D58E300DCEB79 /* ViewModel */,
+			);
+			path = InProgress;
+			sourceTree = "<group>";
+		};
+		3EE4CCC22B3D58E300DCEB79 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		3EE4CCC32B3D58F000DCEB79 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		3EE4CCC42B3D58F100DCEB79 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		3EE4CCC72B3D9C0C00DCEB79 /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+				3EE4CCC82B3D9C4200DCEB79 /* InProgressUseCase.swift */,
+			);
+			path = UseCase;
+			sourceTree = "<group>";
+		};
 		3EF7909929E460370052578E /* Launch */ = {
 			isa = PBXGroup;
 			children = (
@@ -918,6 +959,7 @@
 		D764F7222B330182009BF20E /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				3EE4CCC72B3D9C0C00DCEB79 /* UseCase */,
 				D764F72F2B330E86009BF20E /* Entity */,
 			);
 			name = Domain;
@@ -936,6 +978,7 @@
 		D764F7242B3301D9009BF20E /* Screen */ = {
 			isa = PBXGroup;
 			children = (
+				3EE4CCC12B3D58D900DCEB79 /* InProgress */,
 				D764F7262B33024F009BF20E /* Setup */,
 			);
 			path = Screen;
@@ -1374,6 +1417,7 @@
 				3EA341E82925E5EA005CBD1C /* String+Extension.swift in Sources */,
 				D7AFB7C72916FF9400E998B7 /* CustomSegmentControl.swift in Sources */,
 				7E8CDC67292E19B000984742 /* SettingButton.swift in Sources */,
+				3EE4CCC92B3D9C4200DCEB79 /* InProgressUseCase.swift in Sources */,
 				39F5582B2908027500CD6F6E /* UIDevice+Extension.swift in Sources */,
 				395C7E1328F9841A00FC2FCA /* SizeLiteral.swift in Sources */,
 				52E6770F29911E3E00A0935B /* ReflectionMemberCollectionView.swift in Sources */,
