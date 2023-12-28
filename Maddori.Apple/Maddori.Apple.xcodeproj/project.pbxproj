@@ -114,6 +114,7 @@
 		3EB508922917585600FB77CB /* UICollectionView + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB508912917585600FB77CB /* UICollectionView + Extension.swift */; };
 		3EDED991293B8CE00000B4DC /* AddFeedbackContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EDED990293B8CE00000B4DC /* AddFeedbackContentViewController.swift */; };
 		3EDED995293C81EC0000B4DC /* AddFeedbackKeywordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EDED994293C81EC0000B4DC /* AddFeedbackKeywordViewController.swift */; };
+		3EE4CCD52B3DA93000DCEB79 /* UIViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE4CCD42B3DA93000DCEB79 /* UIViewController+Rx.swift */; };
 		3EF7909B29E462F50052578E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3EF7909A29E462F50052578E /* LaunchScreen.storyboard */; };
 		520FEC44292234C0009FC1F2 /* FeedbackToMeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520FEC43292234C0009FC1F2 /* FeedbackToMeModel.swift */; };
 		522D99BF29041B51009CBD95 /* CustomTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522D99BE29041B51009CBD95 /* CustomTextView.swift */; };
@@ -279,6 +280,7 @@
 		3EB508912917585600FB77CB /* UICollectionView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView + Extension.swift"; sourceTree = "<group>"; };
 		3EDED990293B8CE00000B4DC /* AddFeedbackContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFeedbackContentViewController.swift; sourceTree = "<group>"; };
 		3EDED994293C81EC0000B4DC /* AddFeedbackKeywordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFeedbackKeywordViewController.swift; sourceTree = "<group>"; };
+		3EE4CCD42B3DA93000DCEB79 /* UIViewController+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Rx.swift"; sourceTree = "<group>"; };
 		3EF7909A29E462F50052578E /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		520FEC43292234C0009FC1F2 /* FeedbackToMeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackToMeModel.swift; sourceTree = "<group>"; };
 		522D99BE29041B51009CBD95 /* CustomTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextView.swift; sourceTree = "<group>"; };
@@ -386,6 +388,7 @@
 				3998E86E295C308100541752 /* Settings.bundle */,
 				39257DC328F8FEBD00201E0B /* Maddori.Apple */,
 				39257DC228F8FEBD00201E0B /* Products */,
+				3EE4CCD12B3DA8F400DCEB79 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -681,6 +684,44 @@
 				3EB5085B2912427600FB77CB /* MyReflectionViewController.swift */,
 			);
 			path = MyReflection;
+			sourceTree = "<group>";
+		};
+		3EE4CCD12B3DA8F400DCEB79 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
+		3EE4CCD22B3DA90B00DCEB79 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				39257DF428F93E4700201E0B /* UIColor+Extension.swift */,
+				7E6B662E28FE887300C3BEEF /* UILabel+Extension.swift */,
+				395C7E0228F945B500FC2FCA /* UIFont+Extension.swift */,
+				395C7E0428F953D200FC2FCA /* UIViewController+Extension.swift */,
+				395C7E0A28F9550A00FC2FCA /* NSObject+Extension.swift */,
+				395C7E1728F9912700FC2FCA /* UIButton+Extension.swift */,
+				395C7E2128FEDB6500FC2FCA /* UITextField+Extension.swift */,
+				391596612904176500A432D9 /* UIView+Extension.swift */,
+				39F5582A2908027500CD6F6E /* UIDevice+Extension.swift */,
+				39F5583C2908CFAD00CD6F6E /* Encodable+Extension.swift */,
+				3EB508912917585600FB77CB /* UICollectionView + Extension.swift */,
+				7E7F160E2921CD4A00C6BE96 /* UITabBar+Extension.swift */,
+				3EA341E72925E5EA005CBD1C /* String+Extension.swift */,
+				3E5368C729B60B70000CBD48 /* UIImageView+Extension.swift */,
+				523EDFB229D451590033F9A5 /* UIImage+Extension.swift */,
+				D7A6C63729D5EC6A0096D466 /* NotificationName+Extension.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		3EE4CCD32B3DA90D00DCEB79 /* Rx */ = {
+			isa = PBXGroup;
+			children = (
+				3EE4CCD42B3DA93000DCEB79 /* UIViewController+Rx.swift */,
+			);
+			path = Rx;
 			sourceTree = "<group>";
 		};
 		3EF7909929E460370052578E /* Launch */ = {
@@ -1145,22 +1186,8 @@
 		D764F7392B331173009BF20E /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				39257DF428F93E4700201E0B /* UIColor+Extension.swift */,
-				7E6B662E28FE887300C3BEEF /* UILabel+Extension.swift */,
-				395C7E0228F945B500FC2FCA /* UIFont+Extension.swift */,
-				395C7E0428F953D200FC2FCA /* UIViewController+Extension.swift */,
-				395C7E0A28F9550A00FC2FCA /* NSObject+Extension.swift */,
-				395C7E1728F9912700FC2FCA /* UIButton+Extension.swift */,
-				395C7E2128FEDB6500FC2FCA /* UITextField+Extension.swift */,
-				391596612904176500A432D9 /* UIView+Extension.swift */,
-				39F5582A2908027500CD6F6E /* UIDevice+Extension.swift */,
-				39F5583C2908CFAD00CD6F6E /* Encodable+Extension.swift */,
-				3EB508912917585600FB77CB /* UICollectionView + Extension.swift */,
-				7E7F160E2921CD4A00C6BE96 /* UITabBar+Extension.swift */,
-				3EA341E72925E5EA005CBD1C /* String+Extension.swift */,
-				3E5368C729B60B70000CBD48 /* UIImageView+Extension.swift */,
-				523EDFB229D451590033F9A5 /* UIImage+Extension.swift */,
-				D7A6C63729D5EC6A0096D466 /* NotificationName+Extension.swift */,
+				3EE4CCD32B3DA90D00DCEB79 /* Rx */,
+				3EE4CCD22B3DA90B00DCEB79 /* UI */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1375,6 +1402,7 @@
 				D7AFB7C72916FF9400E998B7 /* CustomSegmentControl.swift in Sources */,
 				7E8CDC67292E19B000984742 /* SettingButton.swift in Sources */,
 				39F5582B2908027500CD6F6E /* UIDevice+Extension.swift in Sources */,
+				3EE4CCD52B3DA93000DCEB79 /* UIViewController+Rx.swift in Sources */,
 				395C7E1328F9841A00FC2FCA /* SizeLiteral.swift in Sources */,
 				52E6770F29911E3E00A0935B /* ReflectionMemberCollectionView.swift in Sources */,
 				391612D529E551BD004AE982 /* ToastView.swift in Sources */,
