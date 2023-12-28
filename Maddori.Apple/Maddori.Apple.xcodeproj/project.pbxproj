@@ -76,7 +76,7 @@
 		39F52C5F2923338B00B19A77 /* MembersDetailResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F52C5E2923338B00B19A77 /* MembersDetailResponse.swift */; };
 		39F52C612923344C00B19A77 /* FeedBackContentResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F52C602923344C00B19A77 /* FeedBackContentResponse.swift */; };
 		39F52C632923357700B19A77 /* FeedBackInfoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F52C622923357700B19A77 /* FeedBackInfoResponse.swift */; };
-		39F52C68292472EB00B19A77 /* ReflectionFeedbackResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F52C67292472EB00B19A77 /* ReflectionFeedbackResponseDTO.swift */; };
+		39F52C68292472EB00B19A77 /* TeamFeedbackResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F52C67292472EB00B19A77 /* TeamFeedbackResponseDTO.swift */; };
 		39F52C6A292473A800B19A77 /* ReflectionInfoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F52C69292473A800B19A77 /* ReflectionInfoResponse.swift */; };
 		39F52C6C292473EC00B19A77 /* AllReflectionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F52C6B292473EC00B19A77 /* AllReflectionResponse.swift */; };
 		39F52C6E2924742E00B19A77 /* ReflectionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F52C6D2924742E00B19A77 /* ReflectionResponse.swift */; };
@@ -243,7 +243,7 @@
 		39F52C5E2923338B00B19A77 /* MembersDetailResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MembersDetailResponse.swift; sourceTree = "<group>"; };
 		39F52C602923344C00B19A77 /* FeedBackContentResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedBackContentResponse.swift; sourceTree = "<group>"; };
 		39F52C622923357700B19A77 /* FeedBackInfoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedBackInfoResponse.swift; sourceTree = "<group>"; };
-		39F52C67292472EB00B19A77 /* ReflectionFeedbackResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReflectionFeedbackResponseDTO.swift; sourceTree = "<group>"; };
+		39F52C67292472EB00B19A77 /* TeamFeedbackResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamFeedbackResponseDTO.swift; sourceTree = "<group>"; };
 		39F52C69292473A800B19A77 /* ReflectionInfoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReflectionInfoResponse.swift; sourceTree = "<group>"; };
 		39F52C6B292473EC00B19A77 /* AllReflectionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllReflectionResponse.swift; sourceTree = "<group>"; };
 		39F52C6D2924742E00B19A77 /* ReflectionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReflectionResponse.swift; sourceTree = "<group>"; };
@@ -1062,7 +1062,7 @@
 				39F52C5E2923338B00B19A77 /* MembersDetailResponse.swift */,
 				39F52C602923344C00B19A77 /* FeedBackContentResponse.swift */,
 				39F52C622923357700B19A77 /* FeedBackInfoResponse.swift */,
-				39F52C67292472EB00B19A77 /* ReflectionFeedbackResponseDTO.swift */,
+				39F52C67292472EB00B19A77 /* TeamFeedbackResponseDTO.swift */,
 				39F52C69292473A800B19A77 /* ReflectionInfoResponse.swift */,
 				39F52C6B292473EC00B19A77 /* AllReflectionResponse.swift */,
 				39F52C6D2924742E00B19A77 /* ReflectionResponse.swift */,
@@ -1474,7 +1474,7 @@
 				39F52C53292330D200B19A77 /* MemberResponse.swift in Sources */,
 				39F52C6A292473A800B19A77 /* ReflectionInfoResponse.swift in Sources */,
 				D702278A297F99510027EF64 /* TeamManageViewController.swift in Sources */,
-				39F52C68292472EB00B19A77 /* ReflectionFeedbackResponseDTO.swift in Sources */,
+				39F52C68292472EB00B19A77 /* TeamFeedbackResponseDTO.swift in Sources */,
 				3975CEAF293EEDD6002D4F1A /* KeywordView.swift in Sources */,
 				39257DF128F93C2A00201E0B /* ImageLiteral.swift in Sources */,
 				391D38DB29C449DE00A6BFED /* TeamDetailMemberTableViewCell.swift in Sources */,

@@ -183,7 +183,7 @@ final class InProgressViewController: BaseViewController {
         AF.request(type.address,
                    method: type.method,
                    headers: type.headers
-        ).responseDecodable(of: BaseModel<ReflectionFeedbackResponseDTO>.self) { json in
+        ).responseDecodable(of: BaseModel<TeamFeedbackResponseDTO>.self) { json in
             if let json = json.value {
                 guard let userFeedbackList = json.detail?.userFeedback,
                       let teamFeedbackList = json.detail?.teamFeedback
