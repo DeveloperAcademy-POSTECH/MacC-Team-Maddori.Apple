@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct AllFeedBackResponse: Decodable {
+struct ReflectionFeedbackResponseDTO: Decodable {
     // MARK: - getTeamAndUserFeedback
     let category: String?
     let userFeedback: [FeedBackResponse]?
