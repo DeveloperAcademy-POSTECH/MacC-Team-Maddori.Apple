@@ -81,11 +81,12 @@ final class SelectReflectionMemberViewController: BaseViewController {
     }
     
     private func navigateToInprogressViewController(item: Int) {
-            guard let id = self.selectReflectionMemberView.memberList[item].id,
-                  let nickname = self.selectReflectionMemberView.memberList[item].nickname else { return }
+        let totalMemberList = self.selectReflectionMemberView.totalMemberList
+        guard let id = totalMemberList[item].id,
+              let nickname = totalMemberList[item].nickname else { return }
             
-            let viewController = InProgressViewController(memberId: id, memberUsername: nickname, reflectionId: reflectionId)
-            self.navigationController?.pushViewController(viewController, animated: true)
+        let viewController = InProgressViewController(memberId: id, memberUsername: nickname, reflectionId: reflectionId)
+        self.navigationController?.pushViewController(viewController, animated: true)
     }
 }
 
@@ -94,7 +95,6 @@ final class SelectReflectionMemberViewController: BaseViewController {
 extension SelectReflectionMemberViewController {
     private func bind(output: SelectReflectionMemberViewModel.Output?) {
         guard let output else { return }
-        
         output.reflectionId
             .subscribe { [weak self] reflectionId in
                 self?.reflectionId = reflectionId

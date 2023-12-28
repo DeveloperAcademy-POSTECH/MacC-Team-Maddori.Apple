@@ -60,7 +60,7 @@ final class SelectReflectionMemberView: UIView {
         flowLayout.minimumLineSpacing = Size.cellLineSpacing
         return flowLayout
     }()
-    lazy var memberCollectionView: UICollectionView = {
+    private lazy var memberCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewFlowLayout)
         collectionView.dataSource = self
         collectionView.backgroundColor = .white200
@@ -69,7 +69,7 @@ final class SelectReflectionMemberView: UIView {
         collectionView.register(ReflectionMemberCollectionViewCell.self, forCellWithReuseIdentifier: ReflectionMemberCollectionViewCell.className)
         return collectionView
     }()
-    let feedbackDoneButton: MainButton = {
+    private let feedbackDoneButton: MainButton = {
         let button = MainButton()
         button.isDisabled = true
         return button
@@ -97,8 +97,6 @@ final class SelectReflectionMemberView: UIView {
     }
     
     required init?(coder: NSCoder) { nil }
-    
-    // MARK: - private func
     
     // MARK: - public func
     
@@ -185,13 +183,11 @@ extension SelectReflectionMemberView: UICollectionViewDataSource {
             cell.profileImage.load(from: fullImagePath)
         }
         
-        cell.nicknameLabel.text = memberList[indexPath.item].nickname
-        cell.roleLabel.text = memberList[indexPath.item].role
+        cell.nicknameLabel.text = totalMemberList[indexPath.item].nickname
+        cell.roleLabel.text = totalMemberList[indexPath.item].role
                 
-        if let userId = memberList[indexPath.item].id {
-            if selectedMemberList.contains(userId) {
-                cell.applySelectedAttribute()
-            }
+        if let userId = totalMemberList[indexPath.item].id {
+            if selectedMemberList.contains(userId) { cell.applySelectedAttribute() }
         }
         
         return cell
