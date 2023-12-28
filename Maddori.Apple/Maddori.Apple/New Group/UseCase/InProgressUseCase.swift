@@ -7,11 +7,13 @@
 
 import Foundation
 
+import Alamofire
+
 protocol InProgressUseCase {
     var reflectionID: Int { get set }
     var reflectionUserID: Int { get set }
     
-    func fetchFeedbacks(_ endpoint: InProgressEndPoint<VoidModel>) -> AllFeedBackResponse
+    func fetchFeedbacks(_ endpoint: InProgressEndPoint<VoidModel>) throws -> AllFeedBackResponse
 }
 
 final class InProgressUserCaseImpl: InProgressUseCase {
@@ -24,7 +26,13 @@ final class InProgressUserCaseImpl: InProgressUseCase {
         self.reflectionUserID = reflectionUserID
     }
     
-    func fetchFeedbacks(_ endpoint: InProgressEndPoint<VoidModel>) -> AllFeedBackResponse {
+    func fetchFeedbacks(_ endpoint: InProgressEndPoint<VoidModel>) throws -> AllFeedBackResponse {
+        let request = AF.request(endpoint.address, method: endpoint.method, headers: endpoint.headers)
+        guard let data = request.data,
+              let decodedData = try? JSONDecoder().decode(BaseModel<AllFeedBackResponse>.self, from: data),
+              let feedbackData = decodedData.detail
+        else { throw NSError(domain: "api error", code: 0) }
         
+        return feedbackData
     }
 }
