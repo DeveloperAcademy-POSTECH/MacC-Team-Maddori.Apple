@@ -25,7 +25,7 @@ final class SelectReflectionMemberViewModel: ViewModelType {
     
     // MARK: - property
     
-    let reflectionId: Int
+    private let reflectionId: Int
     
     // MARK: - init
     

@@ -7,7 +7,6 @@
 
 import UIKit
 
-import Alamofire
 import RxSwift
 
 final class SelectReflectionMemberViewController: BaseViewController {
@@ -29,14 +28,14 @@ final class SelectReflectionMemberViewController: BaseViewController {
     
     required init?(coder: NSCoder) { nil }
     
+    override func loadView() {
+        view = selectReflectionMemberView
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         bindView()
         bindViewModel()
-    }
-    
-    override func loadView() {
-        view = selectReflectionMemberView
     }
     
     // MARK: - override
@@ -61,7 +60,10 @@ final class SelectReflectionMemberViewController: BaseViewController {
     
     private func transformInput() -> SelectReflectionMemberViewModel.Output? {
         guard let viewModel = viewModel as? SelectReflectionMemberViewModel else { return nil }
-        let input = SelectReflectionMemberViewModel.Input(viewDidLoad: Observable.just(()).asObservable(), didTappedFeedbackDoneButton: selectReflectionMemberView.feedbackDoneButtonTapPublisher)
+        let input = SelectReflectionMemberViewModel.Input(
+            viewDidLoad: self.rx.viewDidLoad.asObservable(),
+            didTappedFeedbackDoneButton: selectReflectionMemberView.feedbackDoneButtonTapPublisher
+        )
         return viewModel.transform(from: input)
     }
     
