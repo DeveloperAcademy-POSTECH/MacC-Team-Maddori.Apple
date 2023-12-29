@@ -61,7 +61,7 @@ final class SelectReflectionMemberViewController: BaseViewController {
     
     private func transformInput() -> SelectReflectionMemberViewModel.Output? {
         guard let viewModel = viewModel as? SelectReflectionMemberViewModel else { return nil }
-        let input = SelectReflectionMemberViewModel.Input(viewDidLoad: Observable.just(()).asObservable(), viewWillAppear:  rx.sentMessage(#selector(UIViewController.viewWillAppear(_:))).map{ _ in }.asObservable(), didTappedFeedbackDoneButton: selectReflectionMemberView.feedbackDoneButtonTapPublisher)
+        let input = SelectReflectionMemberViewModel.Input(viewDidLoad: Observable.just(()).asObservable(), didTappedFeedbackDoneButton: selectReflectionMemberView.feedbackDoneButtonTapPublisher)
         return viewModel.transform(from: input)
     }
     
@@ -76,6 +76,13 @@ final class SelectReflectionMemberViewController: BaseViewController {
             .subscribe { [weak self] indexPath in
                 self?.selectReflectionMemberView.didSelectItem(item: indexPath.item)
                 self?.navigateToInprogressViewController(item: indexPath.item)
+            }
+            .disposed(by: disposeBag)
+        
+        let viewWillAppearPublisher = self.rx.viewWillAppear.asObservable()
+        viewWillAppearPublisher
+            .subscribe { [weak self] _ in
+                self?.selectReflectionMemberView.setPreviousStatus()
             }
             .disposed(by: disposeBag)
     }
@@ -110,12 +117,6 @@ extension SelectReflectionMemberViewController {
         output.dismiss
             .subscribe { [weak self] _ in
                 self?.dismiss(animated: true)
-            }
-            .disposed(by: disposeBag)
-        
-        output.isReload
-            .subscribe { [weak self] _ in
-                self?.selectReflectionMemberView.setPreviousStatus()
             }
             .disposed(by: disposeBag)
     }
