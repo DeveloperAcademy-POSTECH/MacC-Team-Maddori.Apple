@@ -118,6 +118,8 @@
 		3EE4CCD82B3DD27B00DCEB79 /* FeedbackInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE4CCD72B3DD27B00DCEB79 /* FeedbackInfo.swift */; };
 		3EE4CCDA2B3DD31300DCEB79 /* TeamFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE4CCD92B3DD31300DCEB79 /* TeamFeedback.swift */; };
 		3EE4CCDE2B3DD49500DCEB79 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE4CCDD2B3DD49500DCEB79 /* UserInfo.swift */; };
+		3EE4CCE22B400A1100DCEB79 /* NewInProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE4CCE12B400A1100DCEB79 /* NewInProgressViewController.swift */; };
+		3EE4CCE42B400A4F00DCEB79 /* InProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE4CCE32B400A4F00DCEB79 /* InProgressView.swift */; };
 		3EF7909B29E462F50052578E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3EF7909A29E462F50052578E /* LaunchScreen.storyboard */; };
 		520FEC44292234C0009FC1F2 /* FeedbackToMeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520FEC43292234C0009FC1F2 /* FeedbackToMeModel.swift */; };
 		522D99BF29041B51009CBD95 /* CustomTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522D99BE29041B51009CBD95 /* CustomTextView.swift */; };
@@ -287,6 +289,8 @@
 		3EE4CCD72B3DD27B00DCEB79 /* FeedbackInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackInfo.swift; sourceTree = "<group>"; };
 		3EE4CCD92B3DD31300DCEB79 /* TeamFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamFeedback.swift; sourceTree = "<group>"; };
 		3EE4CCDD2B3DD49500DCEB79 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
+		3EE4CCE12B400A1100DCEB79 /* NewInProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewInProgressViewController.swift; sourceTree = "<group>"; };
+		3EE4CCE32B400A4F00DCEB79 /* InProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InProgressView.swift; sourceTree = "<group>"; };
 		3EF7909A29E462F50052578E /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		520FEC43292234C0009FC1F2 /* FeedbackToMeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackToMeModel.swift; sourceTree = "<group>"; };
 		522D99BE29041B51009CBD95 /* CustomTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextView.swift; sourceTree = "<group>"; };
@@ -713,6 +717,7 @@
 		3EE4CCC32B3D58F000DCEB79 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				3EE4CCE32B400A4F00DCEB79 /* InProgressView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -720,6 +725,7 @@
 		3EE4CCC42B3D58F100DCEB79 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				3EE4CCE12B400A1100DCEB79 /* NewInProgressViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1527,10 +1533,12 @@
 				3EB508622912B12700FB77CB /* MyReflectionCollectionViewHeader.swift in Sources */,
 				39257DF528F93E4700201E0B /* UIColor+Extension.swift in Sources */,
 				52F2D1C12906F172009CBF89 /* SelectReflectionMemberViewController.swift in Sources */,
+				3EE4CCE42B400A4F00DCEB79 /* InProgressView.swift in Sources */,
 				395C7E0328F945B500FC2FCA /* UIFont+Extension.swift in Sources */,
 				3E8052DF2906E09100A6449D /* KeywordSectionHeaderView.swift in Sources */,
 				3EDED991293B8CE00000B4DC /* AddFeedbackContentViewController.swift in Sources */,
 				39436C182912A2E10083D77A /* Feedback.swift in Sources */,
+				3EE4CCE22B400A1100DCEB79 /* NewInProgressViewController.swift in Sources */,
 				7E2ECA102901136700A4D65C /* SetNicknameViewController.swift in Sources */,
 				3984742629264ACE00EDC139 /* MyFeedBackEndPoint.swift in Sources */,
 				39F52C4D29232E5D00B19A77 /* AddReflectionDTO.swift in Sources */,
