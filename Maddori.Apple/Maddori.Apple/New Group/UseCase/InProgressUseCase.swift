@@ -31,7 +31,7 @@ final class InProgressUserCaseImpl: InProgressUseCase {
         guard let data = request.data,
               let decodedData = try? JSONDecoder().decode(BaseModel<TeamFeedbackResponseDTO>.self, from: data),
               let feedbackData = decodedData.detail
-        else { throw NSError(domain: "api error", code: 0) }
+        else { print("usecase - fetchfeedback error"); throw NSError(domain: "api error", code: 0) }
         
         return feedbackData
     }
