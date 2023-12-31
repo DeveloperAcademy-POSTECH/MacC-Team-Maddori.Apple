@@ -19,3 +19,9 @@ struct FeedbackInfo: Decodable {
         case fromUser = "from_user"
     }
 }
+
+extension FeedbackInfo: Hashable {
+    static func == (lhs: FeedbackInfo, rhs: FeedbackInfo) -> Bool {
+        lhs.id == rhs.id
+    }
+}
