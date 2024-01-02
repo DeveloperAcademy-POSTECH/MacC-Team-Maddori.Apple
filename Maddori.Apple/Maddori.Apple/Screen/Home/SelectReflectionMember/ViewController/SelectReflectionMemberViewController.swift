@@ -62,7 +62,8 @@ final class SelectReflectionMemberViewController: BaseViewController {
         guard let viewModel = viewModel as? SelectReflectionMemberViewModel else { return nil }
         let input = SelectReflectionMemberViewModel.Input(
             viewDidLoad: self.rx.viewDidLoad,
-            feedbackDoneButtonTapped: selectReflectionMemberView.feedbackDoneButtonTapPublisher
+            feedbackDoneButtonTapped: selectReflectionMemberView.feedbackDoneButtonTapPublisher,
+            memberItemTapped: selectReflectionMemberView.memberItemTapPublisher
         )
         return viewModel.transform(from: input)
     }
@@ -94,7 +95,7 @@ extension SelectReflectionMemberViewController {
         guard let output else { return }
         
         let reflectionId = output.reflectionId
-        let memberInfo = selectReflectionMemberView.memberInfoPublisher
+        let memberInfo = selectReflectionMemberView.memberItemTapPublisher
         
         Observable.combineLatest(reflectionId, memberInfo)
             .subscribe { [weak self] reflectionId, memberInfo in

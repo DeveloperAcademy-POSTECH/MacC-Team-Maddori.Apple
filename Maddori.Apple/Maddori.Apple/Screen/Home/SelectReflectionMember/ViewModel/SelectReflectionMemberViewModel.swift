@@ -15,6 +15,7 @@ final class SelectReflectionMemberViewModel: ViewModelType {
     struct Input {
         let viewDidLoad: Observable<Void>
         let feedbackDoneButtonTapped: Observable<Void>
+        let memberItemTapped: Observable<MemberInfo>
     }
     
     struct Output {
@@ -26,6 +27,7 @@ final class SelectReflectionMemberViewModel: ViewModelType {
     // MARK: - property
     
     private let reflectionId: Int
+    private var numOfTotalMembers: Int = 0
     
     // MARK: - init
     
@@ -62,6 +64,12 @@ final class SelectReflectionMemberViewModel: ViewModelType {
                 }
             }
         
+        let memberReflectionDidEnd = input.memberItemTapped
+            .withUnretained(self)
+            .subscribe { _, memberInfo in
+                self.updateReflectionStatus(id: memberInfo.id)
+            }
+        
         return Output(reflectionId: reflectionId, teamMembers: teamMembers, reflectionDidEnd: reflectionDidEnd)
     }
     
@@ -76,6 +84,7 @@ final class SelectReflectionMemberViewModel: ViewModelType {
             case .success(let response):
                 if let fetchedMemberList = response.detail?.members {
                     dump(response)
+                    self.numOfTotalMembers = fetchedMemberList.count
                     completion(fetchedMemberList)
                 }
             case .failure(_):
@@ -95,5 +104,12 @@ final class SelectReflectionMemberViewModel: ViewModelType {
                 completion()
             }
         }
+    }
+    
+    private func updateReflectionStatus(id: Int) {
+        let selectMemberSet = Set(UserDefaultStorage.seenMemberIdList + [id])
+        UserDefaultHandler.appendSeenMemberIdList(memberIdList: Array(selectMemberSet))
+        
+        UserDefaultHandler.isCurrentReflectionFinished(UserDefaultStorage.seenMemberIdList.count == numOfTotalMembers)
     }
 }

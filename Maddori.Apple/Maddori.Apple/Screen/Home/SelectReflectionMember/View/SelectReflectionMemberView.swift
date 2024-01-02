@@ -81,7 +81,7 @@ final class SelectReflectionMemberView: UIView {
         return feedbackDoneButton.rx.tap.asObservable()
     }
 
-    var memberInfoPublisher = PublishSubject<MemberInfo>()
+    var memberItemTapPublisher = PublishSubject<MemberInfo>()
     
     // MARK: - init
     
@@ -114,17 +114,6 @@ final class SelectReflectionMemberView: UIView {
     func setPreviousStatus() {
         feedbackDoneButton.title = TextLiteral.selectReflectionMemberViewControllerDoneButtonText + "(\(UserDefaultStorage.seenMemberIdList.count)/\(totalMemberList.count))"
         feedbackDoneButton.isDisabled = !UserDefaultStorage.completedCurrentReflection
-    }
-    
-    private func didSelectItem(item: Int) {
-        guard let id = totalMemberList[item].id else { return }
-        var selectMemberSet = Set(UserDefaultStorage.seenMemberIdList + [id])
-        UserDefaultHandler.appendSeenMemberIdList(memberIdList: Array(selectMemberSet))
-        feedbackDoneButton.title = TextLiteral.selectReflectionMemberViewControllerDoneButtonText + "(\(UserDefaultStorage.seenMemberIdList.count)/\(totalMemberList.count))"
-        if UserDefaultStorage.seenMemberIdList.count == totalMemberList.count {
-            feedbackDoneButton.isDisabled = false
-            UserDefaultHandler.isCurrentReflectionFinished(true)
-        }
     }
 }
 
@@ -165,8 +154,7 @@ extension SelectReflectionMemberView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let id = totalMemberList[indexPath.item].id, let nickname = totalMemberList[indexPath.item].nickname else { return }
         let memberInfo = MemberInfo(id: id, nickname: nickname)
-        memberInfoPublisher.onNext(memberInfo)
-        didSelectItem(item: indexPath.item)
+        memberItemTapPublisher.onNext(memberInfo)
     }
 }
 
