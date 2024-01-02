@@ -61,7 +61,7 @@ final class SelectReflectionMemberViewController: BaseViewController {
     private func transformInput() -> SelectReflectionMemberViewModel.Output? {
         guard let viewModel = viewModel as? SelectReflectionMemberViewModel else { return nil }
         let input = SelectReflectionMemberViewModel.Input(
-            viewDidLoad: self.rx.viewDidLoad.asObservable(),
+            viewDidLoad: self.rx.viewDidLoad,
             didTappedFeedbackDoneButton: selectReflectionMemberView.feedbackDoneButtonTapPublisher
         )
         return viewModel.transform(from: input)
@@ -81,8 +81,7 @@ final class SelectReflectionMemberViewController: BaseViewController {
             }
             .disposed(by: disposeBag)
         
-        let viewWillAppearPublisher = self.rx.viewWillAppear.asObservable()
-        viewWillAppearPublisher
+        self.rx.viewWillAppear
             .subscribe { [weak self] _ in
                 self?.selectReflectionMemberView.setPreviousStatus()
             }
