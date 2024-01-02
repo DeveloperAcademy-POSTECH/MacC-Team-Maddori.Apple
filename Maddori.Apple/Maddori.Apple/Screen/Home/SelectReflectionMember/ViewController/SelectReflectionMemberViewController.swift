@@ -74,13 +74,6 @@ final class SelectReflectionMemberViewController: BaseViewController {
             }
             .disposed(by: disposeBag)
         
-        selectReflectionMemberView.memberCollectionViewItemTapPublisher
-            .subscribe { [weak self] indexPath in
-                self?.selectReflectionMemberView.didSelectItem(item: indexPath.item)
-                self?.navigateToInprogressViewController(item: indexPath.item)
-            }
-            .disposed(by: disposeBag)
-        
         self.rx.viewWillAppear
             .subscribe { [weak self] _ in
                 self?.selectReflectionMemberView.setPreviousStatus()
@@ -88,12 +81,8 @@ final class SelectReflectionMemberViewController: BaseViewController {
             .disposed(by: disposeBag)
     }
     
-    private func navigateToInprogressViewController(item: Int) {
-        let totalMemberList = self.selectReflectionMemberView.totalMemberList
-        guard let id = totalMemberList[item].id,
-              let nickname = totalMemberList[item].nickname else { return }
-            
-        let viewController = InProgressViewController(memberId: id, memberUsername: nickname, reflectionId: reflectionId)
+    private func navigateToInprogressViewController(reflectionId: Int, memberInfo: MemberInfo) {
+        let viewController = InProgressViewController(memberId: memberInfo.id, memberUsername: memberInfo.nickname, reflectionId: reflectionId)
         self.navigationController?.pushViewController(viewController, animated: true)
     }
 }
@@ -103,9 +92,13 @@ final class SelectReflectionMemberViewController: BaseViewController {
 extension SelectReflectionMemberViewController {
     private func bind(output: SelectReflectionMemberViewModel.Output?) {
         guard let output else { return }
-        output.reflectionId
-            .subscribe { [weak self] reflectionId in
-                self?.reflectionId = reflectionId
+        
+        let reflectionId = output.reflectionId
+        let memberInfo = selectReflectionMemberView.memberInfoPublisher
+        
+        Observable.combineLatest(reflectionId, memberInfo)
+            .subscribe { [weak self] reflectionId, memberInfo in
+                self?.navigateToInprogressViewController(reflectionId: reflectionId, memberInfo: memberInfo)
             }
             .disposed(by: disposeBag)
         

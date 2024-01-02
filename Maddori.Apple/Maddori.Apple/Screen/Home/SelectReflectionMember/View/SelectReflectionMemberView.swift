@@ -63,6 +63,7 @@ final class SelectReflectionMemberView: UIView {
     private lazy var memberCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewFlowLayout)
         collectionView.dataSource = self
+        collectionView.delegate = self
         collectionView.backgroundColor = .white200
         collectionView.showsVerticalScrollIndicator = false
         collectionView.allowsMultipleSelection = true
@@ -84,10 +85,8 @@ final class SelectReflectionMemberView: UIView {
     var feedbackDoneButtonTapPublisher: Observable<Void> {
         return feedbackDoneButton.rx.tap.asObservable()
     }
-    
-    var memberCollectionViewItemTapPublisher: Observable<IndexPath> {
-        return memberCollectionView.rx.itemSelected.asObservable()
-    }
+
+    var memberInfoPublisher = PublishSubject<MemberInfo>()
     
     // MARK: - init
     
@@ -122,7 +121,7 @@ final class SelectReflectionMemberView: UIView {
         feedbackDoneButton.isDisabled = !UserDefaultStorage.completedCurrentReflection
     }
     
-    func didSelectItem(item: Int) {
+    private func didSelectItem(item: Int) {
         if !selectedMemberList.contains(where: { $0 == totalMemberList[item].id }) {
             selectedMemberList.append(totalMemberList[item].id ?? 0)
         }
@@ -166,6 +165,15 @@ extension SelectReflectionMemberView {
 }
 
 // MARK: - collectionView extension
+
+extension SelectReflectionMemberView: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let id = totalMemberList[indexPath.item].id, let nickname = totalMemberList[indexPath.item].nickname else { return }
+        let memberInfo = MemberInfo(id: id, nickname: nickname)
+        memberInfoPublisher.onNext(memberInfo)
+        didSelectItem(item: indexPath.item)
+    }
+}
 
 extension SelectReflectionMemberView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
