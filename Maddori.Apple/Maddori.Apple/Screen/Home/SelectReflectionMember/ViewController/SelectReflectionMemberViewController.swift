@@ -62,7 +62,7 @@ final class SelectReflectionMemberViewController: BaseViewController {
         guard let viewModel = viewModel as? SelectReflectionMemberViewModel else { return nil }
         let input = SelectReflectionMemberViewModel.Input(
             viewDidLoad: self.rx.viewDidLoad,
-            didTappedFeedbackDoneButton: selectReflectionMemberView.feedbackDoneButtonTapPublisher
+            feedbackDoneButtonTapped: selectReflectionMemberView.feedbackDoneButtonTapPublisher
         )
         return viewModel.transform(from: input)
     }
@@ -108,7 +108,7 @@ extension SelectReflectionMemberViewController {
             }
             .disposed(by: disposeBag)
         
-        output.dismiss
+        output.reflectionDidEnd
             .subscribe { [weak self] _ in
                 self?.dismiss(animated: true)
             }

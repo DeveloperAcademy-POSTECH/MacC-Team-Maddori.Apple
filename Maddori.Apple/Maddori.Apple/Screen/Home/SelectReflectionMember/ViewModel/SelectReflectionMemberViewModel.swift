@@ -14,13 +14,13 @@ final class SelectReflectionMemberViewModel: ViewModelType {
     
     struct Input {
         let viewDidLoad: Observable<Void>
-        let didTappedFeedbackDoneButton: Observable<Void>
+        let feedbackDoneButtonTapped: Observable<Void>
     }
     
     struct Output {
         let reflectionId: Observable<Int>
         let teamMembers: Observable<[MemberDetailResponse]>
-        let dismiss: Observable<Void>
+        let reflectionDidEnd: Observable<Void>
     }
     
     // MARK: - property
@@ -54,7 +54,7 @@ final class SelectReflectionMemberViewModel: ViewModelType {
                 }
             }
         
-        let dismiss = input.didTappedFeedbackDoneButton
+        let reflectionDidEnd = input.feedbackDoneButtonTapped
             .withUnretained(self)
             .map { _ in
                 self.patchEndReflection(type: .patchEndReflection(reflectionId: self.reflectionId)) {
@@ -62,7 +62,7 @@ final class SelectReflectionMemberViewModel: ViewModelType {
                 }
             }
         
-        return Output(reflectionId: reflectionId, teamMembers: teamMembers, dismiss: dismiss)
+        return Output(reflectionId: reflectionId, teamMembers: teamMembers, reflectionDidEnd: reflectionDidEnd)
     }
     
     // MARK: - private func
