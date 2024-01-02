@@ -29,11 +29,6 @@ final class SelectReflectionMemberView: UIView {
     var totalMemberList: [MemberDetailResponse] = [] {
         didSet { memberCollectionView.reloadData() }
     }
-    var selectedMemberList: [Int] = UserDefaultStorage.seenMemberIdList {
-        willSet {
-            UserDefaultHandler.appendSeenMemberIdList(memberIdList: newValue)
-        }
-    }
     
     // MARK: - ui components
     
@@ -122,11 +117,11 @@ final class SelectReflectionMemberView: UIView {
     }
     
     private func didSelectItem(item: Int) {
-        if !selectedMemberList.contains(where: { $0 == totalMemberList[item].id }) {
-            selectedMemberList.append(totalMemberList[item].id ?? 0)
-        }
-        feedbackDoneButton.title = TextLiteral.selectReflectionMemberViewControllerDoneButtonText + "(\(selectedMemberList.count)/\(totalMemberList.count))"
-        if selectedMemberList.count == totalMemberList.count {
+        guard let id = totalMemberList[item].id else { return }
+        var selectMemberSet = Set(UserDefaultStorage.seenMemberIdList + [id])
+        UserDefaultHandler.appendSeenMemberIdList(memberIdList: Array(selectMemberSet))
+        feedbackDoneButton.title = TextLiteral.selectReflectionMemberViewControllerDoneButtonText + "(\(UserDefaultStorage.seenMemberIdList.count)/\(totalMemberList.count))"
+        if UserDefaultStorage.seenMemberIdList.count == totalMemberList.count {
             feedbackDoneButton.isDisabled = false
             UserDefaultHandler.isCurrentReflectionFinished(true)
         }
@@ -195,7 +190,7 @@ extension SelectReflectionMemberView: UICollectionViewDataSource {
         cell.roleLabel.text = totalMemberList[indexPath.item].role
                 
         if let userId = totalMemberList[indexPath.item].id {
-            if selectedMemberList.contains(userId) { cell.applySelectedAttribute() }
+            if UserDefaultStorage.seenMemberIdList.contains(userId) { cell.applySelectedAttribute() }
         }
         
         return cell
