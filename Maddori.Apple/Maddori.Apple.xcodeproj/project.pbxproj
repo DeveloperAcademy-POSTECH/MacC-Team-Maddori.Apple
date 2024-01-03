@@ -123,12 +123,15 @@
 		525E721C28FF0F5B00EF3FCB /* MemberCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525E721B28FF0F5B00EF3FCB /* MemberCollectionView.swift */; };
 		525E722128FFC9A800EF3FCB /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525E722028FFC9A800EF3FCB /* BackButton.swift */; };
 		525E722528FFCFA600EF3FCB /* FeedbackTypeButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525E722428FFCFA600EF3FCB /* FeedbackTypeButtonView.swift */; };
+		52968BAE2B32EDE500D20342 /* SelectReflectionMemberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52968BAD2B32EDE500D20342 /* SelectReflectionMemberView.swift */; };
+		52968BB02B32FD5000D20342 /* SelectReflectionMemberViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52968BAF2B32FD5000D20342 /* SelectReflectionMemberViewModel.swift */; };
+		52968BC22B43E46D00D20342 /* MemberInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52968BC12B43E46D00D20342 /* MemberInfo.swift */; };
+		52968BC42B452A0C00D20342 /* ReflectionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52968BC32B452A0C00D20342 /* ReflectionState.swift */; };
 		52988B742921EAD50044A77F /* MyReflectionFeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52988B732921EAD50044A77F /* MyReflectionFeedbackViewController.swift */; };
 		52AED2DD29128532004D70B9 /* FeedbackFromMeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52AED2DC29128532004D70B9 /* FeedbackFromMeModel.swift */; };
 		52CD58BC297BE24B008567E0 /* ProfileImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52CD58BB297BE24B008567E0 /* ProfileImageButton.swift */; };
 		52DC9091291A98CC00904739 /* MyFeedbackEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DC9090291A98CC00904739 /* MyFeedbackEditViewController.swift */; };
 		52E6770D29911E0C00A0935B /* ReflectionMemberCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E6770C29911E0C00A0935B /* ReflectionMemberCollectionViewCell.swift */; };
-		52E6770F29911E3E00A0935B /* ReflectionMemberCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E6770E29911E3E00A0935B /* ReflectionMemberCollectionView.swift */; };
 		52F07B9A2912541B0015BC8B /* MyFeedbackDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F07B992912541B0015BC8B /* MyFeedbackDetailViewController.swift */; };
 		52F0CB5229178C2700E39C50 /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F0CB5129178C2700E39C50 /* AlertViewController.swift */; };
 		52F2D1C12906F172009CBF89 /* SelectReflectionMemberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F2D1C02906F172009CBF89 /* SelectReflectionMemberViewController.swift */; };
@@ -289,12 +292,15 @@
 		525E721B28FF0F5B00EF3FCB /* MemberCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberCollectionView.swift; sourceTree = "<group>"; };
 		525E722028FFC9A800EF3FCB /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
 		525E722428FFCFA600EF3FCB /* FeedbackTypeButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackTypeButtonView.swift; sourceTree = "<group>"; };
+		52968BAD2B32EDE500D20342 /* SelectReflectionMemberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectReflectionMemberView.swift; sourceTree = "<group>"; };
+		52968BAF2B32FD5000D20342 /* SelectReflectionMemberViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectReflectionMemberViewModel.swift; sourceTree = "<group>"; };
+		52968BC12B43E46D00D20342 /* MemberInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberInfo.swift; sourceTree = "<group>"; };
+		52968BC32B452A0C00D20342 /* ReflectionState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReflectionState.swift; sourceTree = "<group>"; };
 		52988B732921EAD50044A77F /* MyReflectionFeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReflectionFeedbackViewController.swift; sourceTree = "<group>"; };
 		52AED2DC29128532004D70B9 /* FeedbackFromMeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackFromMeModel.swift; sourceTree = "<group>"; };
 		52CD58BB297BE24B008567E0 /* ProfileImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageButton.swift; sourceTree = "<group>"; };
 		52DC9090291A98CC00904739 /* MyFeedbackEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFeedbackEditViewController.swift; sourceTree = "<group>"; };
 		52E6770C29911E0C00A0935B /* ReflectionMemberCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReflectionMemberCollectionViewCell.swift; sourceTree = "<group>"; };
-		52E6770E29911E3E00A0935B /* ReflectionMemberCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReflectionMemberCollectionView.swift; sourceTree = "<group>"; };
 		52F07B992912541B0015BC8B /* MyFeedbackDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFeedbackDetailViewController.swift; sourceTree = "<group>"; };
 		52F0CB5129178C2700E39C50 /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
 		52F2D1C02906F172009CBF89 /* SelectReflectionMemberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectReflectionMemberViewController.swift; sourceTree = "<group>"; };
@@ -673,6 +679,7 @@
 			isa = PBXGroup;
 			children = (
 				3EB508682913560A00FB77CB /* Reflection.swift */,
+				52968BC32B452A0C00D20342 /* ReflectionState.swift */,
 			);
 			path = Reflection;
 			sourceTree = "<group>";
@@ -817,6 +824,47 @@
 			path = MemberCollectionView;
 			sourceTree = "<group>";
 		};
+		52968BA92B32EDA400D20342 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				52F2D1C02906F172009CBF89 /* SelectReflectionMemberViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		52968BAA2B32EDAB00D20342 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				52968BAC2B32EDCF00D20342 /* UIComponent */,
+				52968BAD2B32EDE500D20342 /* SelectReflectionMemberView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		52968BAB2B32EDAF00D20342 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				52968BAF2B32FD5000D20342 /* SelectReflectionMemberViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		52968BAC2B32EDCF00D20342 /* UIComponent */ = {
+			isa = PBXGroup;
+			children = (
+				52E6770B29911DF400A0935B /* ReflectionMember */,
+			);
+			path = UIComponent;
+			sourceTree = "<group>";
+		};
+		52968BC02B43E45C00D20342 /* Member */ = {
+			isa = PBXGroup;
+			children = (
+				52968BC12B43E46D00D20342 /* MemberInfo.swift */,
+			);
+			path = Member;
+			sourceTree = "<group>";
+		};
 		52988B722921EA580044A77F /* MyReflectionFeedback */ = {
 			isa = PBXGroup;
 			children = (
@@ -870,7 +918,6 @@
 			isa = PBXGroup;
 			children = (
 				52E6770C29911E0C00A0935B /* ReflectionMemberCollectionViewCell.swift */,
-				52E6770E29911E3E00A0935B /* ReflectionMemberCollectionView.swift */,
 			);
 			path = ReflectionMember;
 			sourceTree = "<group>";
@@ -894,8 +941,9 @@
 		52F2D1BF2906F157009CBF89 /* SelectReflectionMember */ = {
 			isa = PBXGroup;
 			children = (
-				52E6770B29911DF400A0935B /* ReflectionMember */,
-				52F2D1C02906F172009CBF89 /* SelectReflectionMemberViewController.swift */,
+				52968BA92B32EDA400D20342 /* ViewController */,
+				52968BAA2B32EDAB00D20342 /* View */,
+				52968BAB2B32EDAF00D20342 /* ViewModel */,
 			);
 			path = SelectReflectionMember;
 			sourceTree = "<group>";
@@ -1092,6 +1140,7 @@
 		D764F72F2B330E86009BF20E /* Entity */ = {
 			isa = PBXGroup;
 			children = (
+				52968BC02B43E45C00D20342 /* Member */,
 				520FEC42292234AF009FC1F2 /* FeedbackToMe */,
 				3EB508672913550000FB77CB /* Reflection */,
 				39436C162912A2D30083D77A /* Feedback */,
@@ -1396,6 +1445,7 @@
 				39F15C0C296D371500952D02 /* EmptyPersonView.swift in Sources */,
 				52DC9091291A98CC00904739 /* MyFeedbackEditViewController.swift in Sources */,
 				D71CC1F32AF53D8100BAA13D /* ViewModelType.swift in Sources */,
+				52968BC22B43E46D00D20342 /* MemberInfo.swift in Sources */,
 				3E66777529419C8300BB5670 /* KeywordTextFieldView.swift in Sources */,
 				D764F73E2B333E30009BF20E /* tempSwift.swift in Sources */,
 				3EA341E82925E5EA005CBD1C /* String+Extension.swift in Sources */,
@@ -1404,8 +1454,8 @@
 				39F5582B2908027500CD6F6E /* UIDevice+Extension.swift in Sources */,
 				3EE4CCD52B3DA93000DCEB79 /* UIViewController+Rx.swift in Sources */,
 				395C7E1328F9841A00FC2FCA /* SizeLiteral.swift in Sources */,
-				52E6770F29911E3E00A0935B /* ReflectionMemberCollectionView.swift in Sources */,
 				391612D529E551BD004AE982 /* ToastView.swift in Sources */,
+				52968BB02B32FD5000D20342 /* SelectReflectionMemberViewModel.swift in Sources */,
 				391612D329E53745004AE982 /* TeamNameResponse.swift in Sources */,
 				3EB508902917525600FB77CB /* EmptyReflectionView.swift in Sources */,
 				D7A585292990DB0D00E1F4EE /* Option.swift in Sources */,
@@ -1449,6 +1499,7 @@
 				3EDED995293C81EC0000B4DC /* AddFeedbackKeywordViewController.swift in Sources */,
 				D79D908C2903B6B1004DDC4A /* LabelButtonView.swift in Sources */,
 				39257DEF28F937A500201E0B /* BaseTableViewCell.swift in Sources */,
+				52968BC42B452A0C00D20342 /* ReflectionState.swift in Sources */,
 				39F52C72292476AE00B19A77 /* KeywordResponse.swift in Sources */,
 				39F52C5B2923327F00B19A77 /* CurrentReflectionResponse.swift in Sources */,
 				D7A585272990DAFC00E1F4EE /* Section.swift in Sources */,
@@ -1480,6 +1531,7 @@
 				39F1A13C2912637E005E3456 /* MyFeedbackMemberCollectionViewCell.swift in Sources */,
 				391612CF29E5352A004AE982 /* EditTeamNameEndPoint.swift in Sources */,
 				3E5195A42928C8FB00710A01 /* CreateReflectionEndPoint.swift in Sources */,
+				52968BAE2B32EDE500D20342 /* SelectReflectionMemberView.swift in Sources */,
 				525E721A28FF0F1900EF3FCB /* MemberCollectionViewCell.swift in Sources */,
 				395C7E2228FEDB6500FC2FCA /* UITextField+Extension.swift in Sources */,
 				39341E0F29921181006C1727 /* MemberInformationView.swift in Sources */,

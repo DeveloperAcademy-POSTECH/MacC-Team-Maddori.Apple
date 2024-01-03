@@ -232,7 +232,8 @@ final class HomeViewController: BaseViewController {
     }
     
     private func presentSelectReflectionMemberViewController() {
-        let viewController = UINavigationController(rootViewController: SelectReflectionMemberViewController(reflectionId: currentReflectionId))
+        let viewModel = SelectReflectionMemberViewModel(reflectionId: currentReflectionId)
+        let viewController = UINavigationController(rootViewController: SelectReflectionMemberViewController(viewModel: viewModel))
         viewController.modalPresentationStyle = .fullScreen
         present(viewController, animated: true)
     }
@@ -412,8 +413,8 @@ extension HomeViewController: UICollectionViewDataSource {
             presentAddFeedbackViewController()
         case .Progressing:
             guard let navigationController = self.navigationController else { return }
-            let viewController = UINavigationController(rootViewController: SelectReflectionMemberViewController(reflectionId: currentReflectionId))
-            viewController.modalPresentationStyle = .fullScreen
+            let viewModel = SelectReflectionMemberViewModel(reflectionId: currentReflectionId)
+            let viewController = UINavigationController(rootViewController: SelectReflectionMemberViewController(viewModel: viewModel))
             navigationController.present(viewController, animated: true)
         }
     }
