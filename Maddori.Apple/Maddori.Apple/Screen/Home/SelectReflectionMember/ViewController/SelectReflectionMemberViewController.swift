@@ -62,6 +62,7 @@ final class SelectReflectionMemberViewController: BaseViewController {
         guard let viewModel = viewModel as? SelectReflectionMemberViewModel else { return nil }
         let input = SelectReflectionMemberViewModel.Input(
             viewDidLoad: self.rx.viewDidLoad,
+            viewWillAppear: self.rx.viewWillAppear,
             feedbackDoneButtonTapped: selectReflectionMemberView.feedbackDoneButtonTapPublisher,
             memberItemTapped: selectReflectionMemberView.memberItemTapPublisher
         )
@@ -72,12 +73,6 @@ final class SelectReflectionMemberViewController: BaseViewController {
         selectReflectionMemberView.closeButtonTapPublisher
             .subscribe { [weak self] _ in
                 self?.dismiss(animated: true)
-            }
-            .disposed(by: disposeBag)
-        
-        self.rx.viewWillAppear
-            .subscribe { [weak self] _ in
-                self?.selectReflectionMemberView.setPreviousStatus()
             }
             .disposed(by: disposeBag)
     }
@@ -103,9 +98,19 @@ extension SelectReflectionMemberViewController {
             }
             .disposed(by: disposeBag)
         
-        output.teamMembers
-            .subscribe { [weak self] teamMembers in
+        let teamMembers = output.teamMembers
+        let reflectionStateAtViewDidLoad = output.reflectionStateAtViewDidLoad
+        
+        Observable.combineLatest(teamMembers, reflectionStateAtViewDidLoad)
+            .subscribe { [weak self] teamMembers, reflectionStateAtViewDidLoad in
                 self?.selectReflectionMemberView.setTeamMembers(teamMembers: teamMembers)
+                self?.selectReflectionMemberView.setButtonText(reflectionState: reflectionStateAtViewDidLoad)
+            }
+            .disposed(by: disposeBag)
+        
+        output.reflectionStateAtViewWillAppear
+            .subscribe { [weak self] reflectionState in
+                self?.selectReflectionMemberView.setButtonText(reflectionState: reflectionState)
             }
             .disposed(by: disposeBag)
         

@@ -14,13 +14,16 @@ final class SelectReflectionMemberViewModel: ViewModelType {
     
     struct Input {
         let viewDidLoad: Observable<Void>
+        let viewWillAppear: Observable<Void>
         let feedbackDoneButtonTapped: Observable<Void>
         let memberItemTapped: Observable<MemberInfo>
     }
     
     struct Output {
         let reflectionId: Observable<Int>
+        let reflectionStateAtViewDidLoad: Observable<ReflectionState>
         let teamMembers: Observable<[MemberDetailResponse]>
+        let reflectionStateAtViewWillAppear: Observable<ReflectionState>
         let reflectionDidEnd: Observable<Void>
     }
     
@@ -42,6 +45,9 @@ final class SelectReflectionMemberViewModel: ViewModelType {
             .withUnretained(self)
             .compactMap { _ in self.reflectionId }
         
+        let reflectionStateAtViewDidLoad = input.viewDidLoad
+            .map { _ in ReflectionState(numOfSeenMember: UserDefaultStorage.seenMemberIdList.count, completedCurrentReflection: UserDefaultStorage.completedCurrentReflection) }
+        
         let teamMembers = input.viewDidLoad
             .withUnretained(self)
             .flatMap { _ in
@@ -56,6 +62,9 @@ final class SelectReflectionMemberViewModel: ViewModelType {
                 }
             }
         
+        let reflectionStateAtViewWillAppear = input.viewWillAppear
+            .map { _ in ReflectionState(numOfSeenMember: UserDefaultStorage.seenMemberIdList.count, completedCurrentReflection: UserDefaultStorage.completedCurrentReflection) }
+        
         let reflectionDidEnd = input.feedbackDoneButtonTapped
             .withUnretained(self)
             .map { _ in
@@ -64,13 +73,17 @@ final class SelectReflectionMemberViewModel: ViewModelType {
                 }
             }
         
-        let memberReflectionDidEnd = input.memberItemTapped
+        _ = input.memberItemTapped
             .withUnretained(self)
             .subscribe { _, memberInfo in
                 self.updateReflectionStatus(id: memberInfo.id)
             }
         
-        return Output(reflectionId: reflectionId, teamMembers: teamMembers, reflectionDidEnd: reflectionDidEnd)
+        return Output(reflectionId: reflectionId,
+                      reflectionStateAtViewDidLoad: reflectionStateAtViewDidLoad,
+                      teamMembers: teamMembers,
+                      reflectionStateAtViewWillAppear: reflectionStateAtViewWillAppear,
+                      reflectionDidEnd: reflectionDidEnd)
     }
     
     // MARK: - private func

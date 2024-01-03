@@ -126,6 +126,7 @@
 		52968BAE2B32EDE500D20342 /* SelectReflectionMemberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52968BAD2B32EDE500D20342 /* SelectReflectionMemberView.swift */; };
 		52968BB02B32FD5000D20342 /* SelectReflectionMemberViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52968BAF2B32FD5000D20342 /* SelectReflectionMemberViewModel.swift */; };
 		52968BC22B43E46D00D20342 /* MemberInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52968BC12B43E46D00D20342 /* MemberInfo.swift */; };
+		52968BC42B452A0C00D20342 /* ReflectionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52968BC32B452A0C00D20342 /* ReflectionState.swift */; };
 		52988B742921EAD50044A77F /* MyReflectionFeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52988B732921EAD50044A77F /* MyReflectionFeedbackViewController.swift */; };
 		52AED2DD29128532004D70B9 /* FeedbackFromMeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52AED2DC29128532004D70B9 /* FeedbackFromMeModel.swift */; };
 		52CD58BC297BE24B008567E0 /* ProfileImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52CD58BB297BE24B008567E0 /* ProfileImageButton.swift */; };
@@ -294,6 +295,7 @@
 		52968BAD2B32EDE500D20342 /* SelectReflectionMemberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectReflectionMemberView.swift; sourceTree = "<group>"; };
 		52968BAF2B32FD5000D20342 /* SelectReflectionMemberViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectReflectionMemberViewModel.swift; sourceTree = "<group>"; };
 		52968BC12B43E46D00D20342 /* MemberInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberInfo.swift; sourceTree = "<group>"; };
+		52968BC32B452A0C00D20342 /* ReflectionState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReflectionState.swift; sourceTree = "<group>"; };
 		52988B732921EAD50044A77F /* MyReflectionFeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReflectionFeedbackViewController.swift; sourceTree = "<group>"; };
 		52AED2DC29128532004D70B9 /* FeedbackFromMeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackFromMeModel.swift; sourceTree = "<group>"; };
 		52CD58BB297BE24B008567E0 /* ProfileImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageButton.swift; sourceTree = "<group>"; };
@@ -677,6 +679,7 @@
 			isa = PBXGroup;
 			children = (
 				3EB508682913560A00FB77CB /* Reflection.swift */,
+				52968BC32B452A0C00D20342 /* ReflectionState.swift */,
 			);
 			path = Reflection;
 			sourceTree = "<group>";
@@ -1496,6 +1499,7 @@
 				3EDED995293C81EC0000B4DC /* AddFeedbackKeywordViewController.swift in Sources */,
 				D79D908C2903B6B1004DDC4A /* LabelButtonView.swift in Sources */,
 				39257DEF28F937A500201E0B /* BaseTableViewCell.swift in Sources */,
+				52968BC42B452A0C00D20342 /* ReflectionState.swift in Sources */,
 				39F52C72292476AE00B19A77 /* KeywordResponse.swift in Sources */,
 				39F52C5B2923327F00B19A77 /* CurrentReflectionResponse.swift in Sources */,
 				D7A585272990DAFC00E1F4EE /* Section.swift in Sources */,
