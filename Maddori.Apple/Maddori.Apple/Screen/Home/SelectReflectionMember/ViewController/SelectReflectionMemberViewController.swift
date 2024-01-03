@@ -104,13 +104,13 @@ extension SelectReflectionMemberViewController {
         Observable.combineLatest(teamMembers, reflectionStateAtViewDidLoad)
             .subscribe { [weak self] teamMembers, reflectionStateAtViewDidLoad in
                 self?.selectReflectionMemberView.setTeamMembers(teamMembers: teamMembers)
-                self?.selectReflectionMemberView.setButtonText(reflectionState: reflectionStateAtViewDidLoad)
+                self?.selectReflectionMemberView.updateReflectionState(reflectionState: reflectionStateAtViewDidLoad)
             }
             .disposed(by: disposeBag)
         
         output.reflectionStateAtViewWillAppear
             .subscribe { [weak self] reflectionState in
-                self?.selectReflectionMemberView.setButtonText(reflectionState: reflectionState)
+                self?.selectReflectionMemberView.updateReflectionState(reflectionState: reflectionState)
             }
             .disposed(by: disposeBag)
         

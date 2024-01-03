@@ -46,7 +46,7 @@ final class SelectReflectionMemberViewModel: ViewModelType {
             .compactMap { _ in self.reflectionId }
         
         let reflectionStateAtViewDidLoad = input.viewDidLoad
-            .map { _ in ReflectionState(numOfSeenMember: UserDefaultStorage.seenMemberIdList.count, completedCurrentReflection: UserDefaultStorage.completedCurrentReflection) }
+            .map { _ in ReflectionState(seenMemberList: UserDefaultStorage.seenMemberIdList, numOfSeenMember: UserDefaultStorage.seenMemberIdList.count, completedCurrentReflection: UserDefaultStorage.completedCurrentReflection) }
         
         let teamMembers = input.viewDidLoad
             .withUnretained(self)
@@ -63,7 +63,7 @@ final class SelectReflectionMemberViewModel: ViewModelType {
             }
         
         let reflectionStateAtViewWillAppear = input.viewWillAppear
-            .map { _ in ReflectionState(numOfSeenMember: UserDefaultStorage.seenMemberIdList.count, completedCurrentReflection: UserDefaultStorage.completedCurrentReflection) }
+            .map { _ in ReflectionState(seenMemberList: UserDefaultStorage.seenMemberIdList, numOfSeenMember: UserDefaultStorage.seenMemberIdList.count, completedCurrentReflection: UserDefaultStorage.completedCurrentReflection) }
         
         let reflectionDidEnd = input.feedbackDoneButtonTapped
             .withUnretained(self)

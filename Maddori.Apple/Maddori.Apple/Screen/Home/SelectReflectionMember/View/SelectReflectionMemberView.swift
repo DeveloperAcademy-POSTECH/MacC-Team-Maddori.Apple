@@ -30,6 +30,10 @@ final class SelectReflectionMemberView: UIView {
         didSet { memberCollectionView.reloadData() }
     }
     
+    var seenMemberList: [Int] = [] {
+        didSet { memberCollectionView.reloadData() }
+    }
+    
     // MARK: - ui components
     
     private let closeButton = CloseButton()
@@ -110,9 +114,10 @@ final class SelectReflectionMemberView: UIView {
         totalMemberList = teamMembers
     }
     
-    func setButtonText(reflectionState: ReflectionState) {
+    func updateReflectionState(reflectionState: ReflectionState) {
         feedbackDoneButton.title = TextLiteral.selectReflectionMemberViewControllerDoneButtonText + "(\(reflectionState.numOfSeenMember)/\(totalMemberList.count))"
         feedbackDoneButton.isDisabled = !reflectionState.completedCurrentReflection
+        seenMemberList = reflectionState.seenMemberList
     }
 }
 
@@ -177,7 +182,7 @@ extension SelectReflectionMemberView: UICollectionViewDataSource {
         cell.roleLabel.text = totalMemberList[indexPath.item].role
                 
         if let userId = totalMemberList[indexPath.item].id {
-            if UserDefaultStorage.seenMemberIdList.contains(userId) { cell.applySelectedAttribute() }
+            if self.seenMemberList.contains(userId) { cell.applySelectedAttribute() }
         }
         
         return cell

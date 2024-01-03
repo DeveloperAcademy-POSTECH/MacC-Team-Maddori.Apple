@@ -8,6 +8,7 @@
 import Foundation
 
 struct ReflectionState {
+    let seenMemberList: [Int]
     let numOfSeenMember: Int
     let completedCurrentReflection: Bool
 }
