@@ -36,4 +36,14 @@ extension FeedbackInfo {
             .init(id: 4, type: .continueType, keyword: "a5", content: "test2", fromUser: .init(id: 9, nickname: "test3")),
         ]
     }
+    
+    static func dummySub() -> [FeedbackInfo] {
+        return [
+            .init(id: 5, type: .continueType, keyword: "testawvaweio1", content: "test2", fromUser: .init(id: 9, nickname: "test3")),
+            .init(id: 6, type: .continueType, keyword: "2", content: "test2", fromUser: .init(id: 9, nickname: "test3")),
+            .init(id: 7, type: .continueType, keyword: "afe3", content: "test2", fromUser: .init(id: 9, nickname: "test3")),
+            .init(id: 8, type: .continueType, keyword: "afr4", content: "test2", fromUser: .init(id: 9, nickname: "test3")),
+            .init(id: 9, type: .continueType, keyword: "a5", content: "test2", fromUser: .init(id: 9, nickname: "test3")),
+        ]
+    }
 }
