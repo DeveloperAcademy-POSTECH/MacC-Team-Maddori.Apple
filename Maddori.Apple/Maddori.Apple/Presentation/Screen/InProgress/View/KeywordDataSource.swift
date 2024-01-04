@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class KeywordDataSource<Section: Hashable & Sendable & CaseIterable & RawRepresentable> {
+final class KeywordDataSource {
     
     typealias DataSource = UICollectionViewDiffableDataSource<Section, FeedbackInfo>
     typealias Snapshot = NSDiffableDataSourceSnapshot<Section, FeedbackInfo>
@@ -20,17 +20,29 @@ final class KeywordDataSource<Section: Hashable & Sendable & CaseIterable & RawR
     
     // MARK: - property
     
+    enum Usage {
+        case inProgressMy
+        case inProgressOther
+        case home
+    }
+    
+    enum Section: Int, CaseIterable {
+        case main
+        case sub
+        case preview
+    }
+    
     let collectionView: UICollectionView
-    let hasHeader: Bool
+    let usage: Usage
     
     var dataSource: DataSource!
     var snapshot: Snapshot!
     
     // MARK: - init
     
-    init(collectionView: UICollectionView, hasHeader: Bool) {
+    init(collectionView: UICollectionView, usage: Usage) {
         self.collectionView = collectionView
-        self.hasHeader = hasHeader
+        self.usage = usage
         self.setupDataSource()
         self.setupSnapshot()
     }
@@ -39,14 +51,11 @@ final class KeywordDataSource<Section: Hashable & Sendable & CaseIterable & RawR
     
     private func setupDataSource() {
         self.configureCell()
-        if hasHeader { self.configureHeader() }
+        self.configureHeader()
     }
     
     private func setupSnapshot() {
         self.snapshot = Snapshot()
-        
-        let sections = Array(Section.allCases)
-        self.snapshot.appendSections(sections)
         self.dataSource.apply(self.snapshot)
     }
 }
@@ -55,9 +64,21 @@ final class KeywordDataSource<Section: Hashable & Sendable & CaseIterable & RawR
 
 extension KeywordDataSource {
     private func configureCell() {
-        let cellRegistration = CellRegistration { cell, _, feedback in
+        let cellRegistration = CellRegistration { cell, indexPath, feedback in
+            switch self.usage {
+            case .home: cell.configureUI(type: .preview)
+            case .inProgressMy, .inProgressOther:
+                guard let section = Section(rawValue: indexPath.section)
+                else { return }
+                
+                switch section {
+                case .main: cell.configureUI(type: .main)
+                case .sub: cell.configureUI(type: .sub)
+                default: return
+                }
+            }
+            
             cell.configureLabel(text: feedback.keyword)
-            cell.configureUI(type: .main)
         }
         
         self.dataSource = DataSource(collectionView: self.collectionView, cellProvider: { collectionView, indexPath, feedback in
@@ -73,8 +94,19 @@ extension KeywordDataSource {
         let headerRegistration = HeaderRegistration(
             elementKind: UICollectionView.elementKindSectionHeader
         ) { header, _, indexPath in
-            let titles = Section.allCases.map { String(describing: $0.rawValue) }
-            header.configureLabel(text: titles[indexPath.section] )
+            switch self.usage {
+            case .home: header.configureLabel(text: TextLiteral.KeywordCollection.homeHeader)
+            case .inProgressMy: header.configureLabel(text: TextLiteral.KeywordCollection.inProgressMy)
+            case .inProgressOther:
+                guard let section = Section(rawValue: indexPath.section)
+                else { return }
+                
+                switch section {
+                case .main: header.configureLabel(text: TextLiteral.KeywordCollection.inProgressOtherMain)
+                case .sub: header.configureLabel(text: TextLiteral.KeywordCollection.inProgressOtherSub)
+                default: return
+                }
+            }
         }
         
         self.dataSource.supplementaryViewProvider = { _, _, indexPath in
@@ -89,8 +121,9 @@ extension KeywordDataSource {
 // MARK: - configure snapshot
 
 extension KeywordDataSource {
-    func loadSnapshot(with feedbacks: [FeedbackInfo]) {
-        self.snapshot.appendItems(feedbacks)
+    func loadSnapshot(with feedbacks: [FeedbackInfo], to section: Section) {
+        self.snapshot.appendSections([section])
+        self.snapshot.appendItems(feedbacks, toSection: section)
         self.dataSource.apply(self.snapshot)
     }
 }
